@@ -1,6 +1,75 @@
 ﻿@{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Manage";
 }
 <div class="container body-content">
-    <h2>Login</h2>
+    <script type="text/javascript">
+    function SelectedEventChanged()
+    {
+        var eventFilter = document.getElementById("selectedEvent")
+        var event = eventFilter.options[eventFilter.selectedIndex].value;
+
+        var dateFilter = document.getElementById("dateFilter")
+        var date = dateFilter.options[dateFilter.selectedIndex].value;
+
+        var guideFilter = document.getElementById("guideFilter")
+        var guide = guideFilter.options[guideFilter.selectedIndex].value;
+
+        var languageFilter = document.getElementById("languageFilter")
+        var language = languageFilter.options[languageFilter.selectedIndex].value;
+
+        var stateObj = { chosenEvent: event, date: date, guide: guide, language: language };
+        var action = "";
+
+        if (event != "")
+        {
+            action += "?event=" + event
+        }
+
+        if (date != "")
+        {
+            action += "?date=" + date
+        }
+
+        if (guide != "")
+        {
+            action += "?guide=" + guide
+        }
+
+        if (language != "")
+        {
+            action += "?language=" + language
+        }
+
+        window.history.pushState(stateObj, "HF | Manage: " + eventFilter.innerText, "ManageEvent" + action);
+
+
+        }
+    </script>
+    <section>
+        <select id="selectedEvent" name="selectedEvent" onchange="SelectedEventChanged()">
+            <option value="">Select an event.</option>
+            <option value="Jazz@Patronaat">Jazz@Patronaat</option>
+            <option value="DinnerInHaarlem">Dinner in Haarlem</option>
+            <option value="TalkingHaarlem">Talking Haarlem</option>
+            <option value="HistoricHaarlem">Historic Haarlem</option>
+        </select>
+
+        <div id="filterSystem">
+            <select id="dateFilter" onchange="SelectedEventChanged()">
+                <option value="">-</option>
+                <option value="Thursday 26-07-2018">Thursday 26-07-2018</option>
+                <option value="Friday 27-07-2018">Friday 27-07-2018</option>
+                <option value="Saturday 28-07-2018">Saturday 28-07-2018</option>
+                <option value="Sunday 29-07-2018">Sunday 29-07-2018</option>
+            </select>
+
+            <select id="guideFilter" onchange="SelectedEventChanged()">
+                <option value=""></option>
+            </select>
+
+            <select id="languageFilter" onchange="SelectedEventChanged()">
+                <option value=""></option>
+            </select>
+        </div>
+    </section>
 </div>
