@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HaarlemFestival.Models;
+using System.Web.Security;
 
 namespace HaarlemFestival.Controllers
 {
@@ -20,13 +21,13 @@ namespace HaarlemFestival.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Account account = new Account();
+                Account account = new Account();
 
                 if (account != null) // Als het account bestaat
                 {
                     FormsAuthentication.SetAuthCookie(account.Username, false);
 
-                    //Session["loggedin_account"] = account;
+                    Session["loggedin_account"] = account;
 
                     return RedirectToAction("Overview", "Admin"); // De gebruiker naar zijn of haar contactenlijst sturen
                 }
