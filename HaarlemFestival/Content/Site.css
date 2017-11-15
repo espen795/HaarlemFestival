@@ -30,3 +30,19 @@ body {
 .navbar .navbar-nav > li > a:hover {
     background-color: #BE7C4D;
 }
+
+/* BANNER HOMEPAGE */
+.banner {
+    height: 300px;
+    background-size: cover;
+}
+.banner1 {
+    background-image: url('/images/Home/banner1.png');
+}
+.banner2 {
+    background-image: url('/images/Home/banner1.png');
+}
+.carousel-control {
+    background-image: none!important;
+    opacity:1;
+}
