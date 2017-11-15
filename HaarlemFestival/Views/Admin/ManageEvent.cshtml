@@ -5,16 +5,16 @@
     <script type="text/javascript">
     function SelectedEventChanged()
     {
-        var eventFilter = document.getElementById("selectedEvent")
+        var eventFilter = document.getElementById("selectedEvent");
         var event = eventFilter.options[eventFilter.selectedIndex].value;
 
-        var dateFilter = document.getElementById("dateFilter")
+        var dateFilter = document.getElementById("dateFilter");
         var date = dateFilter.options[dateFilter.selectedIndex].value;
 
-        var guideFilter = document.getElementById("guideFilter")
+        var guideFilter = document.getElementById("guideFilter");
         var guide = guideFilter.options[guideFilter.selectedIndex].value;
 
-        var languageFilter = document.getElementById("languageFilter")
+        var languageFilter = document.getElementById("languageFilter");
         var language = languageFilter.options[languageFilter.selectedIndex].value;
 
         var stateObj = { chosenEvent: event, date: date, guide: guide, language: language };
@@ -22,30 +22,75 @@
 
         if (event != "")
         {
-            action += "?event=" + event
+            action += "?event=" + event;
         }
 
         if (date != "")
         {
-            action += "?date=" + date
+            action += "?date=" + date;
         }
 
         if (guide != "")
         {
-            action += "?guide=" + guide
+            action += "?guide=" + guide;
         }
 
         if (language != "")
         {
-            action += "?language=" + language
+            action += "?language=" + language;
         }
 
         window.history.pushState(stateObj, "HF | Manage: " + eventFilter.innerText, "ManageEvent" + action);
+    }
+        function FilterData()
+        {
+            var filters = [];
 
 
+            // Voor elke filter
+            $('.eventFilter').each(function () {
+
+                if ($(this).val() != "") // Als de filter is geselecteerd.
+                {
+                    filters.push($(this).val()) // Filter toevoegen.
+                }
+            })
+
+
+            // TEST: Alle Filters in de console neerzetten.
+            console.log(filters);
+
+            // Alle rows van de table vinden.
+            var tr = $("#data").find("tr");
+            tr.hide(); // Alle rows van de table verbergen.
+
+            // Als er geen filter is geselecteerd.
+            if (filters.length == 0)
+            {
+                tr.show(); // Alle rijen laten zien.
+                return; // Uit de functie gaan.
+            }
+
+            // Elke rij filteren.
+            tr.filter(function ()
+            {
+                var $t = $(this);
+                for (var index = 0; index < filters.length; ++index)
+                {
+
+                    if ($t.is(":contains('" + filters[index] + "')")) // Als de rij voldoet aan de filters
+                    {
+                        return true; // Rij laten zien.
+                    }
+                }
+
+                return false; // Rij verbergen.
+            })
+                .show();
         }
     </script>
-    <section>
+    <span id="test2"></span>
+    <section id="topFilter">
         <select id="selectedEvent" name="selectedEvent" onchange="SelectedEventChanged()">
             <option value="">Select an event.</option>
             <option value="Jazz@Patronaat">Jazz@Patronaat</option>
@@ -55,7 +100,7 @@
         </select>
 
         <div id="filterSystem">
-            <select id="dateFilter" onchange="SelectedEventChanged()">
+            <select id="dateFilter" class="eventFilter" onchange="FilterData()">
                 <option value="">-</option>
                 <option value="Thursday 26-07-2018">Thursday 26-07-2018</option>
                 <option value="Friday 27-07-2018">Friday 27-07-2018</option>
@@ -63,13 +108,107 @@
                 <option value="Sunday 29-07-2018">Sunday 29-07-2018</option>
             </select>
 
-            <select id="guideFilter" onchange="SelectedEventChanged()">
-                <option value=""></option>
+            <select id="guideFilter" class="eventFilter" onchange="FilterData()">
+                <option value="">-</option>
+                <option value="Frederic">Frederic</option>
+                <option value="Jan-Willem">Jan-Willem</option>
+                <option value="Williams">Williams</option>
+                <option value="Annet">Annet</option>
+                <option value="Kim">Kim</option>
             </select>
 
-            <select id="languageFilter" onchange="SelectedEventChanged()">
-                <option value=""></option>
+            <select id="languageFilter" class="eventFilter" onchange="FilterData()">
+                <option selected="selected" value="">-</option>
+                <option value="English">English</option>
+                <option value="Dutch">Dutch</option>
+                <option value="Chinese">Chinese</option>
             </select>
         </div>
+    </section>
+
+
+    <section id="dataTable">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Language</th>
+                    <th>Guide</th>
+                    <th>Seats</th>
+                    <th>Price</th>
+                    <th>Group Ticket</th>
+                    <th>Reservation</th>
+                </tr>
+            </thead>
+            <tbody id="data">
+                <tr>
+                    <td>Thursday 26-07-2018</td>
+                    <td>10:00</td>
+                    <td>Bavo</td>
+                    <td>English</td>
+                    <td>Frederic</td>
+                    <td>12</td>
+                    <td>17.50</td>
+                    <td>60.00</td>
+                    <td>Mandatory</td>
+                </tr>
+                <tr>
+                    <td>Thursday 26-07-2018</td>
+                    <td>10:00</td>
+                    <td>Bavo</td>
+                    <td>Dutch</td>
+                    <td>Jan-Willem</td>
+                    <td>12</td>
+                    <td>17.50</td>
+                    <td>60.00</td>
+                    <td>Mandatory</td>
+                </tr>
+                <tr>
+                    <td>Thursday 26-07-2018</td>
+                    <td>13:00</td>
+                    <td>Bavo</td>
+                    <td>English</td>
+                    <td>Frederic</td>
+                    <td>12</td>
+                    <td>17.50</td>
+                    <td>60.00</td>
+                    <td>Mandatory</td>
+                </tr>
+                <tr>
+                    <td>Thursday 26-07-2018</td>
+                    <td>13:00</td>
+                    <td>Bavo</td>
+                    <td>Dutch</td>
+                    <td>Jan-Willem</td>
+                    <td>12</td>
+                    <td>17.50</td>
+                    <td>60.00</td>
+                    <td>Mandatory</td>
+                </tr>
+                <tr>
+                    <td>Thursday 26-07-2018</td>
+                    <td>16:00</td>
+                    <td>Bavo</td>
+                    <td>English</td>
+                    <td>Frederic</td>
+                    <td>12</td>
+                    <td>17.50</td>
+                    <td>60.00</td>
+                    <td>Mandatory</td>
+                </tr>
+                <tr>
+                    <td>Thursday 26-07-2018</td>
+                    <td>16:00</td>
+                    <td>Bavo</td>
+                    <td>Dutch</td>
+                    <td>Jan-Willem</td>
+                    <td>12</td>
+                    <td>17.50</td>
+                    <td>60.00</td>
+                    <td>Mandatory</td>
+                </tr>
+            </tbody>
+        </table>
     </section>
 </div>
