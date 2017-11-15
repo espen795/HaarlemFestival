@@ -1,28 +1,32 @@
 ﻿/* FONT IMPORT */
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,400i');
 
-
 body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+/* NAV BAR */
+.navbar {
+    background-color: #92140C;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.navbar .navbar-nav {
+    width: 100%;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.navbar .navbar-nav > li {
+    width: 14%;
+    text-align: center;
+}
+
+.navbar .navbar-nav > li > a {
+    font-family: 'Raleway', sans-serif;
+    color: #fff;
+    text-shadow: none;
+    font-size: 15px;
+}
+
+.navbar .navbar-nav > li > a:hover {
+    background-color: #BE7C4D;
 }
