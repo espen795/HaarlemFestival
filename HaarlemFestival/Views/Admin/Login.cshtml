@@ -1,11 +1,15 @@
 ﻿@model HaarlemFestival.Models.LoginModel
 @{
-    ViewBag.Title = "Historic Haarlem";
+    ViewBag.Title = "Login";
 }
 
 <h2>Login</h2>
-@using (Html.BeginForm())
+@using (Html.BeginForm("Login","Admin",FormMethod.Post))
 {
+    @Html.LabelFor(l => l.Username);
+    @Html.TextBoxFor(l => l.Username);
 
+    @Html.LabelFor(l => l.Password);
+    @Html.PasswordFor(l => l.Password);
 }
 
