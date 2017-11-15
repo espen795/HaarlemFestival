@@ -2,14 +2,14 @@
 @{
     ViewBag.Title = "Login";
 }
+<div class="container body-content">
+    <h2>Login</h2>
+    @using (Html.BeginForm("Login", "Admin", FormMethod.Post))
+    {
+        @Html.LabelFor(l => l.Username);
+        @Html.TextBoxFor(l => l.Username);
 
-<h2>Login</h2>
-@using (Html.BeginForm("Login","Admin",FormMethod.Post))
-{
-    @Html.LabelFor(l => l.Username);
-    @Html.TextBoxFor(l => l.Username);
-
-    @Html.LabelFor(l => l.Password);
-    @Html.PasswordFor(l => l.Password);
-}
-
+        @Html.LabelFor(l => l.Password);
+        @Html.PasswordFor(l => l.Password);
+    }
+</div>
