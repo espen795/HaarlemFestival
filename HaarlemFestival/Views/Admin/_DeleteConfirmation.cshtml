@@ -2,4 +2,8 @@
     <span>Are you sure you want to delete this event?</span>
     <hr />
     <span id="deleteDescription">By clicking yes you will permanently delete this event from the website.</span> <!-- TODO: Verander Description -->
+
+    <!-- TODO: Stijl van buttons aanpassen. -->
+    <button id="delete" onclick="@Url.Action("DeleteEvent", "Admin");">Yes, I am sure</button>
+    <button id="back" onclick="@Url.Action("ManageEvent", "Admin")";>No, take me back</button> <!-- TODO: URL Veranderen zodat alleen de PartialView sluit. -->
 </section>
