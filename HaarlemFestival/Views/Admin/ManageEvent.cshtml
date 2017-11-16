@@ -78,13 +78,13 @@
                 for (var index = 0; index < filters.length; ++index)
                 {
 
-                    if ($t.is(":contains('" + filters[index] + "')")) // Als de rij voldoet aan de filters
+                    if ($t.is(":not(:contains('" + filters[index] + "'))")) // Als de rij niet voldoet aan de filters
                     {
-                        return true; // Rij laten zien.
+                        return false; // Rij verbergen.
                     }
                 }
 
-                return false; // Rij verbergen.
+                return true; // Rij laten zien.
             })
                 .show();
         }
