@@ -55,6 +55,7 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult ManageEvent()
         {
+            // TODO: Verkrijg eventlijst - EventList events = repository.GetEvents()
             return View();
         }
 
