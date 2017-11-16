@@ -62,7 +62,7 @@ namespace HaarlemFestival.Controllers
         {
             FormsAuthentication.SignOut();
             Session["loggedin_account"] = null; // Account uit de sessie verwijderen.
-            return RedirectToAction("Login", "Account"); // Gebruiker naar de inlogpagina sturen.
+            return RedirectToAction("Login", "Admin"); // Gebruiker naar de inlogpagina sturen.
         }
 
         public ActionResult ManageEvent()
