@@ -7,12 +7,6 @@
     // Als de pagina is geladen.
     $(document).ready(function ()
     {
-        // Als er nog geen counter is aangemaakt
-        @if (Session["failedLogins"] == null)
-        {
-            Session["failedLogins"] = 0; // een counter aanmaken 
-        }
-
         var badLogins = @Session["failedLogins"];
 
         if (badLogins == 3) {

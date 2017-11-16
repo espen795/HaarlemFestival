@@ -13,6 +13,18 @@ namespace HaarlemFestival.Controllers
         // GET: Admin
         public ActionResult Login()
         {
+            // Als de sessie met het aantal verkeerde logins nog niet bestaat.
+            if(Session["failedLogins"] == null)
+            {
+                Session["failedLogins"] = 0;
+            }
+
+            DateTime now = DateTime.Now;
+
+            // Als er 3x verkeerd is ingelogd.
+            if ((int)Session["failedLogins"] == 3)
+                ModelState.AddModelError("login-block", "Some of the entered information is invalid. Please try again in 5 minutes (" + now.AddMinutes(5).ToString() + ")");
+
             return View();
         }
 
