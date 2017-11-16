@@ -10,7 +10,7 @@ namespace HaarlemFestival.Repository.Admin
     interface IAdminRepository
     {
         // Login
-        Account GetAccount();
+        Account GetAccount(string username, string password);
 
         // ManageEvent
         void UpdateEvent();
