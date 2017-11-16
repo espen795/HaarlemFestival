@@ -57,5 +57,34 @@ namespace HaarlemFestival.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult DeleteEvent()
+        {
+            // TODO: Repository aanmaken en DB Item verwijderen.
+
+            return RedirectToAction("ManageEvent","Admin");
+        }
+
+        [HttpPost]
+        public ActionResult UpdateEvent()
+        {
+            // TODO: Repository aanmaken en DB Item updaten.
+
+            return RedirectToAction("ManageEvent","Admin");
+        }
+
+
+
+        // PartialViews - W.I.P
+        public ActionResult _updateEvent()
+        {
+            return PartialView();
+        }
+
+        public ActionResult _deleteConfirm()
+        {
+            return PartialView();
+        }
     }
 }
