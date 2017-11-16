@@ -186,6 +186,7 @@
     <Content Include="Views\Historic\Reservation.cshtml" />
     <Content Include="Views\Jazz\Reservation.cshtml" />
     <Content Include="Views\Talking\Reservation.cshtml" />
+    <Content Include="Views\Admin\_DeleteConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
