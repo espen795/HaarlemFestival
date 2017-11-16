@@ -138,6 +138,7 @@
     <Compile Include="Models\Guide.cs" />
     <Compile Include="Models\Historic.cs" />
     <Compile Include="Models\InterviewGuest.cs" />
+    <Compile Include="Models\InterviewQuestion.cs" />
     <Compile Include="Models\Jazz.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\LoginModel.cs" />

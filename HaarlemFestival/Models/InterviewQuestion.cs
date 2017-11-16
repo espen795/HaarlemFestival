@@ -5,10 +5,10 @@ using System.Web;
 
 namespace HaarlemFestival.Models
 {
-    public class InterviewGuest
+    public class InterviewQuestion
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public List<InterviewQuestion> Questions { get; set; }
+        public string Question { get; set; }
+        public InterviewGuest QuestionedGuest { get; set; }
     }
 }
