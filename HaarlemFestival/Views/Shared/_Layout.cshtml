@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Haarlem Festival</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
@@ -27,6 +27,11 @@
                     <li>@Html.ActionLink("Talking Haarlem", "Index", "Talking")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Basket", "Basket", "Home")</li>
+                    
+                    @if (Session["loggedin_account"] != null)
+                    {
+                        <li>@Html.ActionLink("Log Off", "LogOff", "Admin")</li>
+                    }
                 </ul>
             </div>
         </div>
@@ -34,8 +39,6 @@
     <div class="body-content">
         @RenderBody()
     </div>
-
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
