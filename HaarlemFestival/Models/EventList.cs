@@ -7,9 +7,9 @@ namespace HaarlemFestival.Models
 {
     public class EventList
     {
-        List<Jazz> Bands;
-        List<Dinner> Restaurants;
-        List<Talking> Interviews;
-        List<Historic> Tours;
+        public List<Jazz> Bands;
+        public List<Dinner> Restaurants;
+        public List<Talking> Interviews;
+        public List<Historic> Tours;
     }
 }

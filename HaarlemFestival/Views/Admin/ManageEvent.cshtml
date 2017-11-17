@@ -1,4 +1,6 @@
-﻿@{
+﻿@using HaarlemFestival.Models;
+@model EventList
+@{
     ViewBag.Title = "Manage";
 }
 <div class="container body-content">
@@ -91,7 +93,7 @@
         }
 
     </script>
-    <span id="test2"></span>
+
     <section id="topFilter">
         <select id="selectedEvent" name="selectedEvent" onchange="SelectedEventChanged()">
             <option value="">Select an event.</option>
@@ -140,6 +142,51 @@
             </select>
         </div>
     </section>
+
+
+    <table id="jazzEvents">
+        @foreach (var evenement in Model.Bands)
+        {
+            <span class="name">@evenement.Band</span>
+            <span class="description">@evenement.Description</span>
+            <span class="date">@evenement.Date</span>
+            <span class="time">@evenement.StartTime - @evenement.EndTime</span>
+            <span class="location">@evenement.Location</span>
+            <span class="hall">@evenement.Hall</span>
+            <span class="price">@evenement.Price</span>
+            <span class="seats">@evenement.TotalSeats</span>
+        }
+    </table>
+
+    <table id="jazzEvents">
+        @foreach (var evenement in Model.Restaurants)
+        {
+            <span class="name">@evenement.Restaurant</span>
+            <span class="description">@evenement.Des</span>
+            <span class="adress"></span>
+            <span class="cuisines"></span>
+            <span class="sessions"></span>
+            <span class="firstSession"></span>
+            <span class="seats"></span>
+            <span class="duration"></span>
+            <span class="stars"></span>
+            <span class="price"></span>
+        }
+    </table>
+
+    <table id="Events">
+        @foreach (var evenement in Model.Interviews)
+        {
+
+        }
+    </table>
+
+    <table id="historicEvents">
+        @foreach (var evenement in Model.Tours)
+        {
+
+        }
+    </table>
 
 
     <section id="dataTable">
