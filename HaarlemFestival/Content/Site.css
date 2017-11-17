@@ -32,6 +32,30 @@ body {
     background-color: #BE7C4D;
 }
 
+/* FOOTER */
+footer {
+    margin-top: 20px;
+}
+footer .container {
+    background-color: #fff;
+    border: 1px solid #353237;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+footer p.title {
+    font-size: 25px
+}
+
+footer a {
+    color: #353237;
+}
+
+footer a:hover {
+    color: #666269;
+    text-decoration: none;
+}
+
 /*****************/
 /*** HOMEPAGE ****/
 /*****************/
@@ -60,7 +84,7 @@ body {
     min-height: 350px;
 }
 
-.home.container {
+.body-content .container {
     border: 1px solid #000;
     background-color: #fff;
     margin-top: -55px;
@@ -119,4 +143,70 @@ body {
     width: 100%;
     border: 1px solid;
     margin-top: 15px
+}
+
+/*****************************/
+/** EVENT PAGE STANDARD CSS **/
+/*****************************/
+
+/* Section 1 */
+.event-banner {
+    height: 300px;
+    background-image: url('/images/regular_banner.png');
+}
+
+.event-section-1 {
+    min-height: 140px;
+}
+
+.event h1.title {
+    font-size: 33px;
+}
+
+.event p.content {
+    font-size: 15px;
+    line-height: 22px;
+}
+
+.event .sfeer-image {
+    height: 150px;
+    width: 150px;
+    float: left;
+    margin-top: -35px;
+    margin-left: 24px;
+}
+
+.event .sfeer-image:first-child {
+    margin-left: 62px;
+}
+
+.event .sfeer-image img {
+    border: 1px solid #fff;
+}
+
+/* Section 2 */
+.event-header {
+    text-align: center;
+    background-image: url('/images/Jazz/jazz_standard_header.png');
+    width: 600px;
+    height: 77px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.event-section-2 {
+    margin-bottom: 20px;
+    margin-top: 11px;
+}
+
+.event-header .header_tekst {
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    font-size: 23px;
+}
+
+.event-header .overlay {
+    background: rgba(0,0,0,0.4);
+    height: 100%;
+    padding-top: 22px;
 }
