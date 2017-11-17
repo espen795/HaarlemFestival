@@ -145,6 +145,23 @@ footer a:hover {
     margin-top: 15px
 }
 
+
+/*************/
+/** CONTACT **/
+/*************/
+
+
+/************/
+/** AGENDA **/
+/************/
+
+
+/************/
+/** BASKET **/
+/************/
+
+
+
 /*****************************/
 /** EVENT PAGE STANDARD CSS **/
 /*****************************/
@@ -210,3 +227,33 @@ footer a:hover {
     height: 100%;
     padding-top: 22px;
 }
+
+
+/*****************************/
+/** EVENT PAGE SPECIFIC CSS **/
+/*****************************/
+
+/* ------------------------------Jazz@Patronaat--------------------------------*/
+
+
+/* ------------------------------Dinner in Haarlem-----------------------------*/
+
+
+/* ------------------------------Talking Haarlem-------------------------------*/
+
+
+/* ------------------------------Historic Haarlem------------------------------*/
+
+.event-header .historicLocations {
+    text-align: center;
+    background-image: url('/images/Jazz/jazz_standard_header.png');
+    width: 600px;
+    height: 77px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/*****************************/
+/** ADMIN PAGE SPECIFIC CSS **/
+/*****************************/
