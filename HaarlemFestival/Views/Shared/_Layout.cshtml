@@ -46,13 +46,20 @@
                 <div class="col-md-3">
                     <p class="title">Navigation</p>  
                         <p class="links">
-                            <a href="#">- Home</a><br />
-                            <a href="#">- Jazz@Patronaat</a><br />
-                            <a href="#">- Talking Haarlem</a><br />
-                            <a href="#">- Dinner in Haarlem</a><br />
-                            <a href="#">- Historic Haarlem</a><br />
-                            <a href="#">- Contact</a><br />
-                            <a href="#">- Admin</a> 
+                            @Html.ActionLink("- Home", "Index", "Home")<br />
+                            @Html.ActionLink("- Jazz@Patronaat", "Index", "Jazz")<br />
+                            @Html.ActionLink("- Talking Haarlem", "Index", "Talking")<br />
+                            @Html.ActionLink("- Dinner in Haarlem", "Index", "Dinner")<br />
+                            @Html.ActionLink("- Historic Haarlem", "Index", "Historic")<br />
+                            @Html.ActionLink("- Contact", "Contact", "Home")<br />
+                            @if (Session["loggedin_account"] != null)
+                            {
+                                @Html.ActionLink("- Admin", "Overview", "Admin");
+                            }
+                            @if (Session["loggedin_account"] == null)
+                            {
+                                @Html.ActionLink("- Admin", "Login", "Admin");
+                            }
                         </p>          
                 </div>
 
