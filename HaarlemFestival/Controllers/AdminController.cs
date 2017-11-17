@@ -95,7 +95,7 @@ namespace HaarlemFestival.Controllers
             return PartialView();
         }
 
-        public ActionResult _deleteConfirm()
+        public ActionResult _deleteConfirmation()
         {
             return PartialView();
         }

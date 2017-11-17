@@ -205,7 +205,7 @@
     <Content Include="Views\Historic\Reservation.cshtml" />
     <Content Include="Views\Jazz\Reservation.cshtml" />
     <Content Include="Views\Talking\Reservation.cshtml" />
-    <Content Include="Views\Admin\_DeleteConfirmation.cshtml" />
+    <Content Include="Views\Admin\_deleteConfirmation.cshtml" />
     <Content Include="Views\Admin\_UpdateEvent.cshtml" />
   </ItemGroup>
   <ItemGroup>
