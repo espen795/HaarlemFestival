@@ -7,7 +7,7 @@ namespace HaarlemFestival.Models
 {
     public class Guide
     {
-        int Id { get; set; }
-        int Name { get; set; }
+        public int Id { get; set; }
+        public int Name { get; set; }
     }
 }

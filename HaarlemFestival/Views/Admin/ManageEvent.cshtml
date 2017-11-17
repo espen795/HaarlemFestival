@@ -143,7 +143,7 @@
         </div>
     </section>
 
-
+    <!--
     <table id="jazzEvents">
         @foreach (var evenement in Model.Bands)
         {
@@ -161,33 +161,49 @@
     <table id="jazzEvents">
         @foreach (var evenement in Model.Restaurants)
         {
-            <span class="name">@evenement.Restaurant</span>
-            <span class="description">@evenement.Des</span>
-            <span class="adress"></span>
-            <span class="cuisines"></span>
-            <span class="sessions"></span>
-            <span class="firstSession"></span>
-            <span class="seats"></span>
-            <span class="duration"></span>
-            <span class="stars"></span>
-            <span class="price"></span>
+            <span class="name">@evenement.Name</span>
+            <span class="description">@evenement.Description</span>
+            <span class="adress">@evenement.Adress</span>
+            <span class="cuisines">@evenement.Cuisine</span>
+            <span class="sessions">@evenement.Sessions</span>
+            <span class="firstSession">@evenement.FirstSession</span>
+            <span class="seats">@evenement.TotalSeats</span>
+            <span class="duration">@evenement.Duration</span>
+            <span class="stars">@evenement.Stars</span>
+            <span class="price">@evenement.Price</span>
         }
     </table>
 
     <table id="Events">
         @foreach (var evenement in Model.Interviews)
         {
-
+            <span class="name">@evenement.Title</span>
+            <span class="description">@evenement.Description</span>
+            <span class="date">@evenement.Date</span>
+            <span class="time">@evenement.StartTime - @evenement.EndTime</span>
+            <span class="location">@evenement.Location</span>
+            <span class="hall">@evenement.Hall</span>
+            <span class="price">@evenement.Price</span>
+            <span class="seats">@evenement.TotalSeats</span>
+            <span class="reservation">@evenement.ReservationMandatory</span>
+            <span class="maxTickets">@evenement.MaxTickets</span>
         }
     </table>
 
     <table id="historicEvents">
         @foreach (var evenement in Model.Tours)
         {
-
+            <span class="date">@evenement.Date</span>
+            <span class="time">@evenement.Time</span>
+            <span class="location">@evenement.StartLocation</span>
+            <span class="language">@evenement.Language.LanguageName</span>
+            <span class="guide">@evenement.Guide.Name</span>
+            <span class="seats">@evenement.TotalSeats</span>
+            <span class="price">@evenement.Price</span>
+            <span class="groupPrice">@evenement.GroupPrice</span>
         }
     </table>
-
+    -->
 
     <section id="dataTable">
         <table>
