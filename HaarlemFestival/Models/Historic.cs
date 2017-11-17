@@ -8,8 +8,8 @@ namespace HaarlemFestival.Models
     public class Historic
     {
         public int Id { get; set; }
-        public DateTime Date { get; set; }
-        public TimeSpan Time { get; set; }
+        public DateTime DateReservation { get; set; }
+        public TimeSpan TimeReservation { get; set; }
         public string StartLocation { get; set; }
         public Guide Guide { get; set; }
         public Language Language { get; set; }
