@@ -3,21 +3,59 @@
 @{
     ViewBag.Title = "Manage";
 }
+
+<div class="popup">
+    <div id="deletePopup">
+        @{
+            Html.RenderPartial("_deleteConfirmation");
+        }
+    </div>
+</div>
+
 <div class="container body-content">
     <script type="text/javascript">
 
+        jQuery.fn.center = function () {
+            this.css("position", "absolute"); // Position: Absolute toevoegen
+
+            // het Item naar het midden van de pagina zetten.
+            this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) +
+                $(window).scrollTop()) + "px");
+            this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) +
+                $(window).scrollLeft()) + "px");
+            return this;
+        }
+
+        function ShowDeletePopup()
+        {
+            // Popup tonen
+            $('.popup').css("z-index", "9999");
+            $('.popup').show();
+            $('#deletePopup').center(); // DeletePopup naar het midden verplaatsen.
+        }
+
+        function HidePopup()
+        {
+            // Popup verbergen.
+            $('.popup').css("z-index", "-10");
+            $('.popup').css("display", "none");
+        }
+
         function SelectedEventChanged()
         {
+            // Alle Data Tabellen verbergen.
             $('.eventData').each(function ()
             {
                 $(this).hide();
             })
 
+            // Alle filters verbergen.
             $('.eventFilter').each(function ()
             {
                 $(this).hide();
             })
 
+            // Aan de hand van een evenement de data en filters tonen.
             switch ($('#selectedEvent').val())
             {
                 case "Jazz@Patronaat":
@@ -45,6 +83,7 @@
             }
         }
 
+        // Data uit de tabel filteren.
         function FilterData()
         {
             var filters = [];
@@ -170,7 +209,7 @@
                     <td>60.00</td>
                     <td>Mandatory</td>
                     <td>@Html.ActionLink("Edit", "_updateEvent", "Admin", new { eventId = 1 }, null)</td>
-                    <td>@Html.ActionLink("Delete", "_deleteConfirmation", "Admin", new { eventId = 1 }, null)</td>
+                    <td onclick="ShowDeletePopup()">Delete</td>
                 </tr>
                 <tr>
                     <td>Thursday 26-07-2018</td>
@@ -183,7 +222,7 @@
                     <td>60.00</td>
                     <td>Mandatory</td>
                     <td>@Html.ActionLink("Edit", "_updateEvent", "Admin", new { eventId = 2 }, null)</td>
-                    <td>@Html.ActionLink("Delete", "_deleteConfirmation", "Admin", new { eventId = 2 }, null)</td>
+                    <td onclick="ShowDeletePopup()">Delete</td>
                 </tr>
                 <tr>
                     <td>Thursday 26-07-2018</td>
@@ -196,7 +235,7 @@
                     <td>60.00</td>
                     <td>Mandatory</td>
                     <td>@Html.ActionLink("Edit", "_updateEvent", "Admin", new { eventId = 3 }, null)</td>
-                    <td>@Html.ActionLink("Delete", "_deleteConfirmation", "Admin", new { eventId = 3 }, null)</td>
+                    <td onclick="ShowDeletePopup()">Delete</td>
                 </tr>
                 <tr>
                     <td>Thursday 26-07-2018</td>
@@ -209,7 +248,7 @@
                     <td>60.00</td>
                     <td>Mandatory</td>
                     <td>@Html.ActionLink("Edit", "_updateEvent", "Admin", new { eventId = 4 }, null)</td>
-                    <td>@Html.ActionLink("Delete", "_deleteConfirmation", "Admin", new { eventId = 4 }, null)</td>
+                    <td onclick="ShowDeletePopup()">Delete</td>
                 </tr>
                 <tr>
                     <td>Thursday 26-07-2018</td>
@@ -222,7 +261,7 @@
                     <td>60.00</td>
                     <td>Mandatory</td>
                     <td>@Html.ActionLink("Edit", "_updateEvent", "Admin", new { eventId = 5 }, null)</td>
-                    <td>@Html.ActionLink("Delete", "_deleteConfirmation", "Admin", new { eventId = 5 }, null)</td>
+                    <td onclick="ShowDeletePopup()">Delete</td>
                 </tr>
                 <tr>
                     <td>Thursday 26-07-2018</td>
@@ -235,7 +274,7 @@
                     <td>60.00</td>
                     <td>Mandatory</td>
                     <td>@Html.ActionLink("Edit", "_updateEvent", "Admin", new { eventId = 6 }, null)</td>
-                    <td>@Html.ActionLink("Delete", "_deleteConfirmation", "Admin", new { eventId = 6 }, null)</td>
+                    <td onclick="ShowDeletePopup()">Delete</td>
                 </tr>
             </tbody>
         </table>
