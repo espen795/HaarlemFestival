@@ -4,6 +4,8 @@
     <br />
 
     <!-- TODO: Stijl van buttons aanpassen. -->
-    <button id="delete" onclick="location.href='@Url.Action("DeleteEvent", "Admin", new { id = Request.Params["eventId"] })'">Yes, I am sure</button>
-    <button id="back" onclick="HidePopup()">No, take me back</button> <!-- TODO: URL Veranderen zodat alleen de PartialView sluit. -->
+    <ul class="buttonBar">
+        <li><button class="yesButton" onclick="location.href='@Url.Action("DeleteEvent", "Admin", new { id = Request.Params["eventId"] })'">Yes, I am sure</button></li>
+        <li><button class="noButton" onclick="HidePopup()">No, take me back</button> <!-- TODO: URL Veranderen zodat alleen de PartialView sluit. --></li>
+    </ul>
 

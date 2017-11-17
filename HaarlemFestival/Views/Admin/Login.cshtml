@@ -19,11 +19,13 @@
     function LoginBlock()
     {
         $('#loginButton').prop('disabled', true); // loginknop disablen
-
+        $('#loginButton').css('cursor', 'not-allowed');
         // Loginknop na 300 seconden (5 minuten) enablen en de failedLogins counter resetten
+
         setTimeout(function () {
             $('#loginButton').removeProp('disabled');
-        }, 30000)
+            $('#loginButton').css('cursor', 'pointer');
+        }, 300000)
     }
 </script>
 
