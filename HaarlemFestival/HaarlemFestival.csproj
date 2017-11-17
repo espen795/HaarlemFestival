@@ -133,7 +133,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Activity.cs" />
+    <Compile Include="Models\Days.cs" />
     <Compile Include="Models\Dinner.cs" />
+    <Compile Include="Models\Event.cs" />
     <Compile Include="Models\EventList.cs" />
     <Compile Include="Models\Guide.cs" />
     <Compile Include="Models\Historic.cs" />
@@ -142,6 +145,7 @@
     <Compile Include="Models\Jazz.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\Reserveringen.cs" />
     <Compile Include="Models\Restaurant.cs" />
     <Compile Include="Models\Talking.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
