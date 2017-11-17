@@ -134,6 +134,7 @@
     </Compile>
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Activity.cs" />
+    <Compile Include="Models\BesteldeActiviteit.cs" />
     <Compile Include="Models\Days.cs" />
     <Compile Include="Models\Dinner.cs" />
     <Compile Include="Models\Event.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="Models\InterviewGuest.cs" />
     <Compile Include="Models\InterviewQuestion.cs" />
     <Compile Include="Models\Jazz.cs" />
+    <Compile Include="Models\Klant.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Reserveringen.cs" />
