@@ -234,7 +234,9 @@ footer a:hover {
 /*****************************/
 
 /* ------------------------------Jazz@Patronaat--------------------------------*/
-
+.jazz .event-section-3 {
+    overflow: hidden;
+}
 
 /* ------------------------------Dinner in Haarlem-----------------------------*/
 
@@ -282,14 +284,22 @@ footer a:hover {
 
 .event-header .historicLocations {
     text-align: center;
-    background-image: url('/images/Jazz/jazz_standard_header.png');
+    background-image: url('/images/Historic/title/locations.png');
     width: 600px;
     height: 77px;
     margin-left: auto;
     margin-right: auto;
 }
 
+.event-banner {
+    height: 300px;
+    background-image: url('/images/Historic/banner.jpg');
+}
 
 /*****************************/
 /** ADMIN PAGE SPECIFIC CSS **/
 /*****************************/
+
+#topFilterBar {
+    padding-top: 100px;
+}

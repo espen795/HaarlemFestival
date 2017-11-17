@@ -5,47 +5,47 @@
 }
 <div class="container body-content">
     <script type="text/javascript">
-    function SelectedEventChanged()
-    {
-        var eventFilter = document.getElementById("selectedEvent");
-        var event = eventFilter.options[eventFilter.selectedIndex].value;
 
-        var dateFilter = document.getElementById("dateFilter");
-        var date = dateFilter.options[dateFilter.selectedIndex].value;
-
-        var guideFilter = document.getElementById("guideFilter");
-        var guide = guideFilter.options[guideFilter.selectedIndex].value;
-
-        var languageFilter = document.getElementById("languageFilter");
-        var language = languageFilter.options[languageFilter.selectedIndex].value;
-
-        var stateObj = { chosenEvent: event, date: date, guide: guide, language: language };
-        var action = "";
-
-        if (event != "")
+        function SelectedEventChanged()
         {
-            action += "?event=" + event;
+            $('.eventData').each(function ()
+            {
+                $(this).hide();
+            })
+
+            $('.eventFilter').each(function ()
+            {
+                $(this).hide();
+            })
+
+            switch ($('#selectedEvent').val())
+            {
+                case "Jazz@Patronaat":
+                    $('#jazzEvents').show();
+                    $('#dateFilter').show();
+                    break;
+
+                case "DinnerInHaarlem":
+                    $('#dinnerEvents').show();
+                    $('#cuisineFilter').show();
+                    break;
+
+                case "TalkingHaarlem":
+                    $('#talkingEvents').show();
+                    $('#dateFilter').show();
+                    break;
+
+                case "HistoricHaarlem":
+                    $('#historicEvents').show();
+                    $('#placeholderTable').show();
+                    $('#dateFilter').show();
+                    $('#guideFilter').show();
+                    $('#languageFilter').show();
+                    break;
+            }
         }
 
-        if (date != "")
-        {
-            action += "?date=" + date;
-        }
-
-        if (guide != "")
-        {
-            action += "?guide=" + guide;
-        }
-
-        if (language != "")
-        {
-            action += "?language=" + language;
-        }
-
-        window.history.pushState(stateObj, "HF | Manage: " + eventFilter.innerText, "ManageEvent" + action);
-        } // TODO: Verander Methode
-
-    function FilterData()
+        function FilterData()
         {
             var filters = [];
 
@@ -94,7 +94,7 @@
 
     </script>
 
-    <section id="topFilter">
+    <section id="topFilterBar">
         <select id="selectedEvent" name="selectedEvent" onchange="SelectedEventChanged()">
             <option value="">Select an event.</option>
             <option value="Jazz@Patronaat">Jazz@Patronaat</option>
@@ -105,7 +105,7 @@
 
         <div id="filterSystem">
             <select id="dateFilter" class="eventFilter" onchange="FilterData()">
-                <option value="">-</option>
+                <option value="">Select a Date.</option>
                 <option value="Thursday 26-07-2018">Thursday 26-07-2018</option>
                 <option value="Friday 27-07-2018">Friday 27-07-2018</option>
                 <option value="Saturday 28-07-2018">Saturday 28-07-2018</option>
@@ -113,7 +113,7 @@
             </select>
 
             <select id="guideFilter" class="eventFilter" onchange="FilterData()">
-                <option value="">-</option>
+                <option value="">Select a Guide.</option>
                 <option value="Frederic">Frederic</option>
                 <option value="Jan-Willem">Jan-Willem</option>
                 <option value="Williams">Williams</option>
@@ -122,14 +122,14 @@
             </select>
 
             <select id="languageFilter" class="eventFilter" onchange="FilterData()">
-                <option value="">-</option>
+                <option value="">Select a Language.</option>
                 <option value="English">English</option>
                 <option value="Dutch">Dutch</option>
                 <option value="Chinese">Chinese</option>
             </select>
 
             <select id="cuisineFilter" class="eventFilter" onchange="FilterData()">
-                <option value="">-</option>
+                <option value="">Select a Cuisine.</option>
                 <option value="Argentinian">Argentinian</option>
                 <option value="Asian">Asian</option>
                 <option value="Dutch">Dutch</option>
@@ -143,70 +143,8 @@
         </div>
     </section>
 
-    <!--
-    <table id="jazzEvents">
-        @foreach (var evenement in Model.Bands)
-        {
-            <span class="name">@evenement.Band</span>
-            <span class="description">@evenement.Description</span>
-            <span class="date">@evenement.Date</span>
-            <span class="time">@evenement.StartTime - @evenement.EndTime</span>
-            <span class="location">@evenement.Location</span>
-            <span class="hall">@evenement.Hall</span>
-            <span class="price">@evenement.Price</span>
-            <span class="seats">@evenement.TotalSeats</span>
-        }
-    </table>
-
-    <table id="jazzEvents">
-        @foreach (var evenement in Model.Restaurants)
-        {
-            <span class="name">@evenement.Name</span>
-            <span class="description">@evenement.Description</span>
-            <span class="adress">@evenement.Adress</span>
-            <span class="cuisines">@evenement.Cuisine</span>
-            <span class="sessions">@evenement.Sessions</span>
-            <span class="firstSession">@evenement.FirstSession</span>
-            <span class="seats">@evenement.TotalSeats</span>
-            <span class="duration">@evenement.Duration</span>
-            <span class="stars">@evenement.Stars</span>
-            <span class="price">@evenement.Price</span>
-        }
-    </table>
-
-    <table id="Events">
-        @foreach (var evenement in Model.Interviews)
-        {
-            <span class="name">@evenement.Title</span>
-            <span class="description">@evenement.Description</span>
-            <span class="date">@evenement.Date</span>
-            <span class="time">@evenement.StartTime - @evenement.EndTime</span>
-            <span class="location">@evenement.Location</span>
-            <span class="hall">@evenement.Hall</span>
-            <span class="price">@evenement.Price</span>
-            <span class="seats">@evenement.TotalSeats</span>
-            <span class="reservation">@evenement.ReservationMandatory</span>
-            <span class="maxTickets">@evenement.MaxTickets</span>
-        }
-    </table>
-
-    <table id="historicEvents">
-        @foreach (var evenement in Model.Tours)
-        {
-            <span class="date">@evenement.Date</span>
-            <span class="time">@evenement.Time</span>
-            <span class="location">@evenement.StartLocation</span>
-            <span class="language">@evenement.Language.LanguageName</span>
-            <span class="guide">@evenement.Guide.Name</span>
-            <span class="seats">@evenement.TotalSeats</span>
-            <span class="price">@evenement.Price</span>
-            <span class="groupPrice">@evenement.GroupPrice</span>
-        }
-    </table>
-    -->
-
     <section id="dataTable">
-        <table>
+        <table id="placeholderTable" class="eventData table-striped table-responsive">
             <thead>
                 <tr>
                     <th>Date</th>
