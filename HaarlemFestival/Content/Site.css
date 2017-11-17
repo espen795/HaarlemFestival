@@ -240,7 +240,43 @@ footer a:hover {
 
 
 /* ------------------------------Talking Haarlem-------------------------------*/
+.talking_content {
+    border: solid black 1px;
+    background-color: white;
+}
 
+.talking_intro {
+    width: 400px;
+}
+
+.talking_place_time {
+    width: 200px;
+}
+
+.talking_important_info {
+    color: red;
+    width: 200px;
+}
+
+.talks {
+    margin: auto;
+    width: 1000px;
+}
+
+.talk {
+    float: left;
+    width: 300px;
+ }
+
+.talk_header {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.talk_image {
+    width: 300px;
+    height: 200px;
+}]
 
 /* ------------------------------Historic Haarlem------------------------------*/
 
