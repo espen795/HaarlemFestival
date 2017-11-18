@@ -242,20 +242,20 @@ footer a:hover {
 
 
 /* ------------------------------Talking Haarlem-------------------------------*/
-.talking_content {
+.talking-content {
     border: solid black 1px;
     background-color: white;
 }
 
-.talking_intro {
+.talking-intro {
     width: 400px;
 }
 
-.talking_place_time {
+.talking-place_time {
     width: 200px;
 }
 
-.talking_important_info {
+.talking-important_info {
     color: red;
     width: 200px;
 }
@@ -270,12 +270,12 @@ footer a:hover {
     width: 300px;
  }
 
-.talk_header {
+.talk-header {
     font-size: 16px;
     font-weight: bold;
 }
 
-.talk_image {
+.talk-image {
     width: 300px;
     height: 200px;
 }]
