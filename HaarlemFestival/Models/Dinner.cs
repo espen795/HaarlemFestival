@@ -5,8 +5,9 @@ using System.Web;
 
 namespace HaarlemFestival.Models
 {
-    public class Dinner
+    public class Dinner : Activity
     {
+        public EventType EventType = EventType.DinnerInHaarlem;
         public int Id { get; set; }
         public Restaurant Restaurant { get; set; }
         public DateTime DateReservation { get; set; }

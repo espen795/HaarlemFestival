@@ -139,6 +139,7 @@
     <Compile Include="Models\Dinner.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\EventList.cs" />
+    <Compile Include="Models\EventType.cs" />
     <Compile Include="Models\Guide.cs" />
     <Compile Include="Models\Historic.cs" />
     <Compile Include="Models\InterviewGuest.cs" />
