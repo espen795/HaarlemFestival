@@ -211,6 +211,25 @@ footer a:hover {
     margin-right: auto;
 }
 
+.title-hr {
+    position: sticky;
+    margin-bottom: auto;
+    width: 21%;
+    border-top: 1.4px solid #000;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.title-hr.title-line-left {
+    margin-top: 35px;
+    float: left;
+}
+
+.title-hr.title-line-right {
+    margin-top: -35px;
+    float: right;
+}
+
 .event-section-2 {
     margin-bottom: 20px;
     margin-top: 11px;
@@ -282,17 +301,11 @@ footer a:hover {
 
 /* ------------------------------Historic Haarlem------------------------------*/
 
-.event-header .historicLocations {
-    text-align: center;
+.event-header.historicLocations {
     background-image: url('/images/Historic/title/locations.png');
-    width: 600px;
-    height: 77px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
-.event-banner {
-    height: 300px;
+.event-banner.historic {
     background-image: url('/images/Historic/banner.jpg');
 }
 
