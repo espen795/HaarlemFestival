@@ -2,6 +2,36 @@
     ViewBag.Title = "Historic Haarlem";
 }
 
+<script type="text/javascript">
+    function switchMap() {
+        var map = document.getElementById("map-content");
+        var location = document.getElementById("location-content");
+
+        var activeButton = document.getElementById("map-button");
+        var passiveButton = document.getElementById("location-button");
+
+        map.style.display = "block";
+        location.style.display = "none";
+
+        activeButton.style.backgroundColor = "#4CAF50";
+        passiveButton.style.backgroundColor = "#d1d1d1";
+    }
+
+    function switchLocation() {
+        var location = document.getElementById("location-content");
+        var map = document.getElementById("map-content");
+
+        var activeButton = document.getElementById("location-button");
+        var passiveButton = document.getElementById("map-button");
+
+        location.style.display = "block";
+        map.style.display = "none";
+
+        activeButton.style.backgroundColor = "#4CAF50";
+        passiveButton.style.backgroundColor = "#d1d1d1";
+    }
+</script>
+
 <div class="event-banner historic"></div>
 
 <div class="event container">
@@ -40,6 +70,19 @@
         </div>
 
         <!-- Content -->
+        <div class="toggle">
+            <button class="toggle" id="location-button" onclick="switchLocation();">Location</button>
+            <button class="toggle" id="map-button" onclick="switchMap();">Map</button>
+        </div>
+
+        <div class="historic-content" id="location-content">
+            <p>location</p>
+        </div>
+
+        <div class="historic-content" id="map-content">
+            <p>Map</p>
+        </div>
+
     </div>
 </div>
 
