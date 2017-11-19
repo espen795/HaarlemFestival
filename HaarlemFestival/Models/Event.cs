@@ -1,7 +1,8 @@
-﻿namespace HaarlemFestival.Models
+﻿using System.Collections.Generic;
+namespace HaarlemFestival.Models
 {
     public class Event
     {
-        public virtual Activity Activities { get; set; }
+        public virtual List<Activity> Activities { get; set; }
     }
 }

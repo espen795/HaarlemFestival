@@ -5,8 +5,9 @@ using System.Web;
 
 namespace HaarlemFestival.Models
 {
-    public class Jazz
+    public class Jazz : Activity
     {
+        public EventType EventType = EventType.JazzPatronaat;
         public int Id { get; set; }
         public string Band { get; set; }
         public string Description { get; set; }

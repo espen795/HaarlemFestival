@@ -5,8 +5,9 @@ using System.Web;
 
 namespace HaarlemFestival.Models
 {
-    public class Historic
+    public class Historic : Activity
     {
+        public EventType EventType = EventType.HistoricHaarlem;
         public int Id { get; set; }
         public DateTime Date { get; set; }
         public TimeSpan Time { get; set; }

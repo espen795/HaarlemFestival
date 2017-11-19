@@ -117,7 +117,7 @@ footer a:hover {
 
 .section_home_1 .feature-block-content p.button a:hover {
     background-color: #736e6e;
-    color: ##fff;
+    color: #fff;
     text-decoration: none;
 }
 
@@ -211,6 +211,25 @@ footer a:hover {
     margin-right: auto;
 }
 
+.title-hr {
+    position: sticky;
+    margin-bottom: auto;
+    width: 22%;
+    border-top: 1.4px solid #000;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.title-hr.title-line-left {
+    margin-top: 35px;
+    float: left;
+}
+
+.title-hr.title-line-right {
+    margin-top: -35px;
+    float: right;
+}
+
 .event-section-2 {
     margin-bottom: 20px;
     margin-top: 11px;
@@ -278,22 +297,58 @@ footer a:hover {
 .talk-image {
     width: 300px;
     height: 200px;
-}]
+}
 
 /* ------------------------------Historic Haarlem------------------------------*/
 
-.event-header .historicLocations {
-    text-align: center;
+.event-header.historicLocations {
     background-image: url('/images/Historic/title/locations.png');
-    width: 600px;
-    height: 77px;
+}
+
+.event-banner.historic {
+    background-image: url('/images/Historic/banner.jpg');
+}
+
+.historic-content{
+    padding: 15px;
+}
+
+#location-content {
+
+}
+
+#map-content {
+    /*display: none;*/
+}
+
+.toggle{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+div.toggle{
+    width: 300px;
+    height: 30px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.event-banner {
-    height: 300px;
-    background-image: url('/images/Historic/banner.jpg');
+button.toggle{
+    float: left;
+    width: 50%;
+    height: 100%;
+    display: block;
+    transition-duration: 0.6s;
+    background-color: #d1d1d1;
+}
+
+#location-button{
+    background-color: #4CAF50;
+}
+
+button.toggle:hover {
+    background-color: #92ba93;
 }
 
 /*****************************/
@@ -302,4 +357,65 @@ footer a:hover {
 
 #topFilterBar {
     padding-top: 100px;
+}
+
+.popup {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: none;
+    z-index: -10;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+#deletePopup {
+    background-color: white;
+    font-size: 15px;
+    opacity: 1.0;
+    width: 50%;
+    height: auto;
+}
+
+#deletePopup .popupTitle {
+    width: 100%;
+    text-align: center;
+    font-size: 25px;
+}
+
+#deletePopup .popupDescription {
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+}
+
+#deletePopup button {
+    border-radius: 8px;
+    color: white;
+    font-size: 20px;
+    margin-bottom: 50px;
+}
+
+#deletePopup .yesButton {
+    background-color: forestgreen;
+    border: 2px solid green;
+}
+
+#deletePopup .noButton {
+    background-color: red;
+    border: 2px solid darkred;
+}
+
+#deletePopup .buttonBar {
+    list-style: none;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#deletePopup .buttonBar li {
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
 }

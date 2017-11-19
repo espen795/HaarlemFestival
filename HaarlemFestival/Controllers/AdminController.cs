@@ -72,7 +72,7 @@ namespace HaarlemFestival.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteEvent()
+        public ActionResult DeleteEvent(int id)
         {
             // TODO: Repository aanmaken en DB Item verwijderen.
 
@@ -95,7 +95,7 @@ namespace HaarlemFestival.Controllers
             return PartialView();
         }
 
-        public ActionResult _deleteConfirm()
+        public ActionResult _deleteConfirmation()
         {
             return PartialView();
         }
