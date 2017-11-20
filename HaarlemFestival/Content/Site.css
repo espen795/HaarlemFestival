@@ -402,46 +402,64 @@ button.toggle:hover {
     margin-top: 100px;
 }
 
+#loginArea .title {
+    text-align: center;
+    font-size: 30px;
+}
+
+#loginError {
+    max-width: 300px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 10px;
+    text-align: center;
+    opacity: 0;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+}
+
+.validationImage {
+    float: left;
+}
+
 #loginArea ul {
     list-style-type: none;
 }
 
 #loginArea ul li {
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: -4%;
     text-align: center;
-}
-
-#loginArea label {
-    font-size: 20px;
-    color: white;
-    border: 1px solid #92140c;
-    border-radius: 20px 0px 0px 20px;
-    width: 70px;
-    height: 55px;
-    background-color: #92140c;
-    margin-right: -3px;
-    margin-bottom: -22px;
-    float: none;
-}
-
-.usernameLabel {
-    /* TODO: Image Toevoegen */
-}
-
-.passwordLabel {
-/* TODO: Image Toevoegen */
+    vertical-align: middle;
 }
 
 #loginArea ul li .username, #loginArea ul li .password {
     width: 225px;
-    height: 55px;
+    height: 53px;
     margin-top: 10px;
     font-size: 15px;
+    padding-left: 70px;
+    border: 1px solid silver;
+    border-style: solid solid solid none;
+}
+
+#loginArea ul li .username {
+    background-image: url('/images/Admin/UsernameLabel.png');
+    background-repeat: no-repeat;
+}
+
+#loginArea ul li .password {
+    background-image: url('/images/Admin/PasswordLabel.png');
+    background-repeat: no-repeat;
+}
+    
+input[type='text']:focus, input[type='password']:focus {
+    color: black;
 }
 
 #loginArea input[type='submit'] {
-    background-color: black;
+    background-color: #353238;
     font-size: 15px;
     color: white;
     width: 140px;
