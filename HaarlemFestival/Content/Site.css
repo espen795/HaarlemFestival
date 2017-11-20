@@ -299,6 +299,16 @@ footer a:hover {
 
 
 /* ------------------------------Talking Haarlem-------------------------------*/
+
+img.talking-sfeer-image { /*Exclusief want andere groepsleden gebruiken images van 150 pixels*/
+    display: block;
+    max-width:150px;
+    max-height:150px;
+    width: auto;
+    height: auto;
+}
+
+
 .talking-place_time {
     width: 200px;
 }
