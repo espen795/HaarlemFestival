@@ -30,19 +30,21 @@
 </script>
 
 <div class="container body-content">
-    <section id="loginError">
-        @Html.ValidationSummary();
+
+    <section id="loginArea">
+        <section id="loginError">
+            @Html.ValidationSummary()
+        </section>
+
+        <h2>Login</h2>
+        @using (Html.BeginForm("Login", "Admin", FormMethod.Post))
+        {
+            <ul>
+                <li>@Html.LabelFor(l => l.Username, new { @class = "usernameLabel" }) @Html.TextBoxFor(l => l.Username, new { placeholder = "Username", @class = "username" })</li>
+                <li>@Html.LabelFor(l => l.Password, new { @class = "passwordLabel" }) @Html.PasswordFor(l => l.Password, new { placeholder = "Password", @class = "password" })</li>
+
+                <li><input id="loginButton" type="submit" value="Log in >>" /></li>
+            </ul>
+        }
     </section>
-
-    <h2>Login</h2>
-    @using (Html.BeginForm("Login", "Admin", FormMethod.Post))
-    {
-        @Html.LabelFor(l => l.Username);
-        @Html.TextBoxFor(l => l.Username);
-
-        @Html.LabelFor(l => l.Password);
-        @Html.PasswordFor(l => l.Password);
-
-        <input id="loginButton" type="submit" value="Log in >>" />
-    }
 </div>

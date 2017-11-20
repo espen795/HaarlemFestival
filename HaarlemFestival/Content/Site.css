@@ -393,6 +393,66 @@ button.toggle:hover {
 /** ADMIN PAGE SPECIFIC CSS **/
 /*****************************/
 
+
+
+/* Login Pagina */
+#loginArea {
+    width: 100%;
+    margin-top: 100px;
+}
+
+#loginArea ul {
+    list-style-type: none;
+}
+
+#loginArea ul li {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#loginArea label {
+    font-size: 20px;
+    color: white;
+    border: 1px solid #92140c;
+    border-radius: 20px 0px 0px 20px;
+    width: 70px;
+    height: 55px;
+    background-color: #92140c;
+    margin-right: -3px;
+    margin-bottom: -22px;
+    float: none;
+}
+
+.usernameLabel {
+    /* TODO: Image Toevoegen */
+}
+
+.passwordLabel {
+/* TODO: Image Toevoegen */
+}
+
+#loginArea ul li .username, #loginArea ul li .password {
+    width: 225px;
+    height: 55px;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+#loginArea input[type='submit'] {
+    background-color: black;
+    font-size: 15px;
+    color: white;
+    width: 140px;
+    height: 40px;
+    border-radius: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+
+
+/* Manage Event Pagina */
 #topFilterBar {
     padding-top: 100px;
 }
