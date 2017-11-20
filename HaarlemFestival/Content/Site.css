@@ -386,7 +386,7 @@ button.toggle{
 }
 
 button.toggle:hover {
-    background-color: #92ba93;
+    background-color: #92ba93!important;
 }
 
 /*****************************/
