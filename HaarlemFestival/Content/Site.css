@@ -8,6 +8,9 @@ body {
 }
 
 /* Buttons */
+.btn:focus {
+    color: #fff;
+}
 .btn-black {
     background: #353237;
     color: #fff;
@@ -516,5 +519,31 @@ button.toggle:hover {
       margin-bottom: 10px;
     }
 
-    /* EVENTS */
+    /* EVENT REGULAR */
+    .event-banner {
+      display: none;
+    }
+    .sfeer-image {
+      display: none;
+    }
+    .title-hr {
+      display: none;
+    }
+    .event-header {
+      width: 95%;
+      height: 67px;
+      background-position: center center;
+    }
+    .event-header .header_tekst {
+      font-size: 19px;
+    }
+    .event-header .overlay {
+      padding-top: 21px;
+    }
+
+
+    /* EVENT JAZZ */
+    .jazz .keuze_blok img {
+      width: 100%;
+    }
 }
