@@ -2,36 +2,6 @@
     ViewBag.Title = "Historic Haarlem";
 }
 
-<script type="text/javascript">
-    function switchMap() {
-        var map = document.getElementById("map-content");
-        var location = document.getElementById("location-content");
-
-        var activeButton = document.getElementById("map-button");
-        var passiveButton = document.getElementById("location-button");
-
-        map.style.display = "block";
-        location.style.display = "none";
-
-        activeButton.style.backgroundColor = "#4CAF50";
-        passiveButton.style.backgroundColor = "#d1d1d1";
-    }
-
-    function switchLocation() {
-        var location = document.getElementById("location-content");
-        var map = document.getElementById("map-content");
-
-        var activeButton = document.getElementById("location-button");
-        var passiveButton = document.getElementById("map-button");
-
-        location.style.display = "block";
-        map.style.display = "none";
-
-        activeButton.style.backgroundColor = "#4CAF50";
-        passiveButton.style.backgroundColor = "#d1d1d1";
-    }
-</script>
-
 <div class="event-banner historic"></div>
 
 <div class="event container">
@@ -70,19 +40,61 @@
         </div>
 
         <!-- Content -->
-        <div class="toggle">
-            <button class="toggle" id="location-button" onclick="switchLocation();">Location</button>
-            <button class="toggle" id="map-button" onclick="switchMap();">Map</button>
-        </div>
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#location-content">Locations</a></li>
+            <li><a data-toggle="tab" href="#map-content">Map</a></li>
+        </ul>
 
-        <div class="historic-content" id="location-content">
-            <p>location</p>
-        </div>
+        <div class="tab-content">
+            <div id="location-content" class="tab-pane fade in active">
+                <div class="img-map-location">
+                    <img src="/images/Historic/Locaties/moodboard.jpg" />
+                </div>
+                <div class="text-map-location">
+                    <p>
+                        In this tour you will walk through the history of Haarlem.
+                        You will visit the most important historic locations of the city, 
+                        the guide will explain what the importance of the location is for the city.
+                    </p>
+                    </br>
+                    <h3>About the tour</h3>
+                    <p>
+                        There are multiple tours per day, on the booking page you can pick preferred date and time.
+                        The tour will take approximately 2,5 hours. During the tour there will be a 15 minute break with refreshments (one drink per person).
+                        The tour will start at the 'Grote Markt', near the 'Church of St. Bavo'. The start location will be marked with a giant flag ‘Historic Haarlem, walking the ages’.
+                    </p>
+                    </br>
+                    <h3>Venues to visit are:</h3>
+                    <ul>
+                        <li>1. Church of St. Bavo</li>
+                        <li>2. Grote Markt</li>
+                        <li>3. De Hallen</li>
+                        <li>4. Proveniershof</li>
+                        <li>5. Jopenkerk (Break location)</li>
+                        <li>6. Waalse Kerk Haarlem</li>
+                        <li>7. Molen de Adriaan</li>
+                        <li>8. Amsterdamse Poort</li>
+                        <li>9. Hof van Bakenes</li>
+                    </ul>
+                </div>
+            </div>
 
-        <div class="historic-content" id="map-content">
-            <p>Map</p>
+            <div id="map-content" class="tab-pane fade">
+                <div class="img-map-location">
+                    <img src="/images/Historic/Map/map.png" />
+                </div>
+                <div class="text-map-location">
+                    <div class="map-img">
+                        <img src="/images/Historic/Locaties/Bavo.jpg" />
+                    </div>
+                    <h3>Church of St. Bavo</h3>
+                    <p>
+                        The Grote Kerk or St.-Bavokerk is a Protestant church and former Catholic cathedral located on the central market square in the Dutch city of Haarlem. 
+                        Another Haarlem church called the Cathedral of Saint Bavo now serves as the main cathedral for the Roman Catholic Diocese of Haarlem-Amsterdam.
+                    </p>
+                </div>
+            </div>
         </div>
-
     </div>
 </div>
 
