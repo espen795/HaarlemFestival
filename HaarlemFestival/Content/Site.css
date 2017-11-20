@@ -483,10 +483,50 @@ input[type='text']:focus, input[type='password']:focus {
 .introText {
 }
 
+
+
 /* Manage Event Pagina */
 #topFilterBar {
     padding-top: 100px;
+    display: inline-block;
 }
+
+#selectEvent {
+    width: auto;
+}
+
+#topFilterBar select {
+    width: 160px;
+    height: 25px;
+    border: 1px solid black;
+    border-style: none none solid none;
+    outline: none;
+}
+
+
+#filterSystem .eventFilter:focus {
+    border-color: cornflowerblue;
+}
+
+#filterSystem .eventFilter option {
+    border: 2px solid black;
+    border-style: none solid none solid;
+    height: 30px;
+    color: black;
+}
+
+#filterSystem .eventFilter option:last-child {
+    border-style: none solid solid solid;
+}
+
+    #filterSystem .eventFilter option:nth-child(even) {
+        background-color: #e0e0e0;
+    }
+
+    #filterSystem .eventFilter option:nth-child(odd) {
+        background-color: white;
+    }
+
 
 .popup {
     position: absolute;

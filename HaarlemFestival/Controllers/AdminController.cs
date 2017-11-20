@@ -68,6 +68,22 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult ManageEvent()
         {
+            string selectedEvent = this.Request.QueryString["selectedEvent"];
+
+            switch (selectedEvent)
+            {
+                case "Jazz@Patronaat":
+                case "DinnerInHaarlem":
+                case "TalkingHaarlem":
+                case "HistoricHaarlem":
+                    ViewBag.ChosenEvent = selectedEvent;
+                    break;
+
+                default:
+                    ViewBag.ChosenEvent = "";
+                    break;
+            }
+
             // TODO: Verkrijg eventlijst - EventList events = repository.GetEvents()
             return View();
         }
