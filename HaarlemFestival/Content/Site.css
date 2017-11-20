@@ -7,6 +7,19 @@ body {
     background-color: #C1B4AE;
 }
 
+/* Buttons */
+.btn-black {
+    background: #353237;
+    color: #fff;
+    border-radius: 0px;
+    transition: 300ms;
+}
+
+.btn-black:hover {
+    color: #fff;
+    background: #736e6e;
+}
+
 /* NAV BAR */
 .navbar {
     background-color: #92140C;
@@ -257,6 +270,28 @@ footer a:hover {
     overflow: hidden;
 }
 
+.jazz .event-section-3 .keuze_blok img {
+    border: 1px solid #353237;
+}
+
+.jazz .event-section-3 .keuze_blok h2 {
+     font-size: 23px;
+     margin-bottom: 5px;
+ }
+
+.jazz .event-section-3 p {
+    font-size: 15px;
+}
+
+.jazz .event-section-3 p b:first-child {
+    padding-left: 46px;
+}
+
+.jazz .event-section-3 p b:nth-child(3) {
+    padding-left: 17px;
+}
+
+
 /* ------------------------------Dinner in Haarlem-----------------------------*/
 
 
@@ -418,4 +453,68 @@ button.toggle:hover {
     display: inline-block;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+
+/********************************/
+/* MEDIA QUERYS VOOR RESPONSIVE */
+/********************************/
+
+@media (max-width: 1199px) {
+
+}
+
+@media (max-width: 991px) {
+
+}
+
+/* Start mobile navigatie/view */
+@media (max-width: 767px) {
+
+    /* NAVBAR */
+    .navbar-toggle {
+      float: left;
+      margin-left: 15px;
+      border-color: #fff !important;
+    }
+
+    .navbar .navbar-nav > li {
+      width: 100%;
+      text-align: left;
+    }
+    .navbar .navbar-nav {
+        width: auto;
+    }
+
+    /* HOMEPAGE */
+    #carousel-home {
+      display: none;
+    }
+    .body-content .container {
+      margin-top: 0;
+    }
+    .section_home_1 .feature-block-image img {
+      margin-top: 8px;
+      width: 100%;
+ 
+    }
+    .feature-block-image {
+      max-height: 160px;
+      overflow: hidden;
+
+    }
+    .section_home_1 .feature-block-content p.button a {
+      padding: 5px 20px;
+      font-size: 15px;
+    }
+
+    .section_home_2::before {
+      width: 300px;
+    }
+    
+    .maincontent_img {
+      margin-bottom: 10px;
+    }
+
+    /* EVENTS */
 }
