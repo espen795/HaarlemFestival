@@ -261,15 +261,6 @@ footer a:hover {
 
 
 /* ------------------------------Talking Haarlem-------------------------------*/
-.talking-content {
-    border: solid black 1px;
-    background-color: white;
-}
-
-.talking-intro {
-    width: 400px;
-}
-
 .talking-place_time {
     width: 200px;
 }
