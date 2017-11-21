@@ -496,13 +496,16 @@ input[type='text']:focus, input[type='password']:focus {
 }
 
 #topFilterBar select {
-    width: 160px;
+    width: 200px;
     height: 25px;
     border: 1px solid black;
     border-style: none none solid none;
     outline: none;
 }
 
+#topFilterBar select option {
+    height: 25px;
+}
 
 #filterSystem .eventFilter:focus {
     border-color: cornflowerblue;
@@ -519,14 +522,18 @@ input[type='text']:focus, input[type='password']:focus {
     border-style: none solid solid solid;
 }
 
-    #filterSystem .eventFilter option:nth-child(even) {
-        background-color: #e0e0e0;
-    }
+#filterSystem .eventFilter option:nth-child(even), .eventData tr:nth-child(even) {
+    background-color: lightgray;
+}
 
-    #filterSystem .eventFilter option:nth-child(odd) {
-        background-color: white;
-    }
+#filterSystem .eventFilter option:nth-child(odd), .eventData tr:nth-child(off) {
+    background-color: white;
+}
 
+
+.eventData tr td ,.eventData th {
+    text-align: center !important;
+}
 
 .popup {
     position: absolute;
