@@ -13,6 +13,7 @@ namespace HaarlemFestival.Repository.Admin
         Account GetAccount(string username, string password);
 
         // ManageEvent
+        void AddEvent(Activity activity);
         void UpdateEvent(Activity activity);
         void DeleteEvent(Activity activity);
         EventList GetEvents();

@@ -13,6 +13,11 @@ namespace HaarlemFestival.Repository.Admin
             throw new NotImplementedException();
         }
 
+        public void AddEvent(Activity activity)
+        {
+            throw new NotImplementedException
+        }
+
         public void UpdateEvent(Activity activity)
         {
             throw new NotImplementedException();
