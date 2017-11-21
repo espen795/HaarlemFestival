@@ -302,18 +302,29 @@ footer a:hover {
 
 img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images van 150 pixels*/
     display: block;
-    max-width:150px;
-    max-height:150px;
+    max-width: 150px;
+    max-height: 150px;
     width: auto;
     height: auto;
 }
 
+.event-banner.talking {
+    background-image: url('/images/Talking/Banner_Talking_Haarlem.jpg');
+}
 
-.talking-place_time {
+.event-header.talking-haarlem {
+    background-image: url('/images/Talking/Header_Talking_Haarlem.png');
+}
+
+.talking-info * {
+    margin-left: 15px;
+}
+
+.talking-place-time {
     width: 200px;
 }
 
-.talking-important_info {
+.talking-important-info {
     color: red;
     width: 200px;
 }
@@ -325,17 +336,28 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 
 .talk {
     float: left;
-    width: 300px;
+    width: 320px;
  }
 
 .talk-header {
     font-size: 16px;
     font-weight: bold;
+    margin-left: 15px;
+}
+
+.talk-image-header {
+    text-align: center;
+    vertical-align: middle;
 }
 
 .talk-image {
     width: 300px;
     height: 200px;
+    margin-left: 15px;
+    border: 1px solid #353237;
+}
+.talk p {
+    margin-left: 15px;
 }
 
 /* ------------------------------Historic Haarlem------------------------------*/
