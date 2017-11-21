@@ -90,6 +90,19 @@ namespace HaarlemFestival.Controllers
         }
 
         [HttpPost]
+        public ActionResult AddEvent(Activity activity)
+        {
+            if (ModelState.IsValid)
+            {
+                adminRepository.AddEvent(activity);
+                ViewBag.Status = "Deleted";
+                return RedirectToAction("ManageEvent", "Admin");
+            }
+
+            return View(activity);
+        }
+
+        [HttpPost]
         public ActionResult DeleteEvent(Activity activity)
         {
             adminRepository.DeleteEvent(activity);
