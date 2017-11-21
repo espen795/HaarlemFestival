@@ -5,11 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using HaarlemFestival.Models;
 using System.Web.Security;
-
+using HaarlemFestival.Repository.Admin;
 namespace HaarlemFestival.Controllers
 {
     public class AdminController : Controller
     {
+        IAdminRepository adminRepository = new AdminRepository();
         // GET: Admin
         public ActionResult Login()
         {
@@ -89,18 +90,18 @@ namespace HaarlemFestival.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteEvent(int id)
+        public ActionResult DeleteEvent(Activity activity)
         {
-            // TODO: Repository aanmaken en DB Item verwijderen.
-
+            adminRepository.DeleteEvent(activity);
+            ViewBag.Status = "Deleted";
             return RedirectToAction("ManageEvent","Admin");
         }
 
         [HttpPost]
-        public ActionResult UpdateEvent()
+        public ActionResult UpdateEvent(Activity activity)
         {
-            // TODO: Repository aanmaken en DB Item updaten.
-
+            adminRepository.UpdateEvent(activity);
+            ViewBag.Status = "Updated";
             return RedirectToAction("ManageEvent","Admin");
         }
 
