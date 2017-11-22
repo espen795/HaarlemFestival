@@ -1,21 +1,50 @@
 ﻿@{
     ViewBag.Title = "Overview";
 }
-<div class="container body-content">
-    <section id="ManageEvent">
-        <span class="introText">
-            <!-- TODO: Intro tekst Manage Event -->
-        </span>
-        @Html.ActionLink("Jazz@Patronaat", "ManageEvent", "Admin", new { selectedEvent = "Jazz@Patronaat" }, null);
-        @Html.ActionLink("Dinner in Haarlem", "ManageEvent", "Admin", new { selectedEvent = "DinnerInHaarlem" }, null);
-        @Html.ActionLink("Talking Haarlem", "ManageEvent", "Admin", new { selectedEvent = "TalkingHaarlem" }, null);
-        @Html.ActionLink("Historic Haarlem", "ManageEvent", "Admin", new { selectedEvent = "HistoricHaarlem" }, null);
-    </section>
+<div class="container body-content overviewPage">
 
-    <section id="TicketSalesInformation">
-        <span class="introText">
-            <!-- TODO: Intro tekst Ticket & Sales Information -->
-        </span>
-        @Html.ActionLink("Download", "Download", "Admin");
-    </section>
+        <section id="ManageEvent">
+
+            <!-- HEADER IMAGE -->
+            <hr class="title-hr title-line-left">
+            <div class="event-header">
+                <div class="overlay">
+                    <span class="header_tekst">Manage Events</span>
+                </div>
+            </div>
+            <hr class="title-hr title-line-right">
+
+            <!-- INTRO TEXT -->
+            <p class="introText">
+                By clicking on one of these buttons you will be navigated to another page where you can Add, Update and Delete data of the chosen event.
+            </p>
+
+            <!-- MANAGE EVENT -->
+            <div id="manageEventSelection">
+                <button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin", new { selectedEvent = "Jazz@Patronaat" }, null)'">Jazz@Patronaat</button>
+                <button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin", new { selectedEvent = "DinnerInHaarlem" }, null)'">Dinner In Haalrem</button>
+                <button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin", new { selectedEvent = "TalkingHaarlem" }, null)'">Talking Haarlem</button>
+                <button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin", new { selectedEvent = "HistoricHaarlem" }, null)'">Historic Haarlem</button>
+            </div>
+        </section>
+
+        <section id="TicketSalesInformation">
+
+            <!-- HEADER IMAGE -->
+            <hr class="title-hr title-line-left">
+            <div class="event-header">
+                <div class="overlay">
+                    <span class="header_tekst">Ticket & Sales information</span>
+                </div>
+            </div>
+            <hr class="title-hr title-line-right">
+
+            <!-- INTROTEXT -->
+            <p class="introText">
+                By clicking the Download button you will download an excel file which contains all information about tickets availability and sales. The information per event is distributed over different sheets.
+            </p>
+
+            <!-- BUTTON -->
+            <button class="btn btn-black" onclick="location.href='@Url.Action("Download", "Admin")'">Download</button>
+        </section>
 </div>

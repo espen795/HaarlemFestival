@@ -329,17 +329,24 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     background-image: url('/images/Talking/Header_Talking_Haarlem.png');
 }
 
+.talking-info {
+    width: 100%;
+    display: inline-block;
+}
+
 .talking-info * {
     margin-left: 15px;
 }
 
 .talking-place-time {
     width: 200px;
+    float: left;
 }
 
 .talking-important-info {
     color: red;
     width: 200px;
+    margin: auto;
 }
 
 .talks {
@@ -573,15 +580,42 @@ input[type='text']:focus, input[type='password']:focus {
 
 
 /* Overview Pagina */
-#ManageEvent {
-
+.overviewPage section {
+    margin-top: 100px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-#TicketSalesInformation  {
+#manageEventSelection {
+    margin-top: 0px;
+    width: 100%;
+    height: 100px;
+}
 
+#manageEventSelection button {
+    width: 150px;
+}
+
+#manageEventSelection button:nth-child(even) {
+    margin-left: 20%;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    float: left;
+}
+
+#manageEventSelection button:nth-child(odd) {
+    margin-right: 20%;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    float: right;
 }
 
 .introText {
+    width: 75%;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
@@ -599,9 +633,11 @@ input[type='text']:focus, input[type='password']:focus {
 #topFilterBar select {
     width: 200px;
     height: 25px;
-    border: 1px solid black;
+    border: 1px solid #000000;
     border-style: none none solid none;
     outline: none;
+    position: relative;
+    height: 100%;
 }
 
 #topFilterBar select option {
@@ -609,14 +645,14 @@ input[type='text']:focus, input[type='password']:focus {
 }
 
 #filterSystem .eventFilter:focus {
-    border-color: cornflowerblue;
+    border-color: #6495ed;
 }
 
 #filterSystem .eventFilter option {
     border: 2px solid black;
     border-style: none solid none solid;
     height: 30px;
-    color: black;
+    color: #000000;
 }
 
 #filterSystem .eventFilter option:last-child {
@@ -624,11 +660,11 @@ input[type='text']:focus, input[type='password']:focus {
 }
 
 #filterSystem .eventFilter option:nth-child(even), .eventData tr:nth-child(even) {
-    background-color: lightgray;
+    background-color: #D3D3D3;
 }
 
 #filterSystem .eventFilter option:nth-child(odd), .eventData tr:nth-child(off) {
-    background-color: white;
+    background-color: #FFFFFF;
 }
 
 
@@ -643,7 +679,7 @@ input[type='text']:focus, input[type='password']:focus {
     background-color: rgba(0,0,0,0.5);
     display: none;
     z-index: -10;
-    border: 1px solid black;
+    border: 1px solid #000000;
     border-radius: 20px;
 }
 
