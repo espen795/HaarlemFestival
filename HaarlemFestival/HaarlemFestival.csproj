@@ -208,7 +208,7 @@
     <Content Include="Views\Talking\Reservation.cshtml" />
     <Content Include="Views\Admin\_deleteConfirmation.cshtml" />
     <Content Include="Views\Admin\_UpdateEvent.cshtml" />
-    <Content Include="Views\Jazz\DagOverview.cshtml" />
+    <Content Include="Views\Jazz\DayOverview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
