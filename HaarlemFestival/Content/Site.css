@@ -187,6 +187,7 @@ footer a:hover {
 
 .event-section-1 {
     min-height: 140px;
+    overflow-wrap:break-word;
 }
 
 .event h1.title {
@@ -196,6 +197,7 @@ footer a:hover {
 .event p.content {
     font-size: 15px;
     line-height: 22px;
+    overflow: hidden;
 }
 
 .event .sfeer-image {
@@ -293,7 +295,18 @@ footer a:hover {
 
 
 /* ------------------------------Dinner in Haarlem-----------------------------*/
+.event-section-1-dinner {
+    min-height: 210px;
+    overflow-wrap: break-word;
+}
 
+.event-header.restaurantinfo {
+    background-image: url('/images/Dinner/title/title1.png');
+}
+
+.event-banner.dinner {
+    background-image: url('/images/Dinner/banner.png');
+}
 
 /* ------------------------------Talking Haarlem-------------------------------*/
 .talking-content {
