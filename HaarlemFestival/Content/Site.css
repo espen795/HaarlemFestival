@@ -329,17 +329,24 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     background-image: url('/images/Talking/Header_Talking_Haarlem.png');
 }
 
+.talking-info {
+    width: 100%;
+    display: inline-block;
+}
+
 .talking-info * {
     margin-left: 15px;
 }
 
 .talking-place-time {
     width: 200px;
+    float: left;
 }
 
 .talking-important-info {
     color: red;
     width: 200px;
+    margin: auto;
 }
 
 .talks {
