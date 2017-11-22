@@ -2,7 +2,6 @@
     ViewBag.Title = "Overview";
 }
 <div class="container body-content overviewPage">
-    <div class="row">
 
         <section id="ManageEvent">
 
@@ -14,17 +13,17 @@
             </div>
 
             <!-- INTRO TEXT -->
-            <span class="introText">
-                Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren '60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.
-            </span>
+            <p class="introText">
+                By clicking on one of these buttons you will be navigated to another page where you can Add, Update and Delete data of the chosen event.
+            </p>
 
             <!-- MANAGE EVENT -->
-            <span id="manageEventSelection">
+            <div id="manageEventSelection">
                 <button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin", new { selectedEvent = "Jazz@Patronaat" }, null)'">Jazz@Patronaat</button>
                 <button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin", new { selectedEvent = "DinnerInHaarlem" }, null)'">Dinner In Haalrem</button>
                 <button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin", new { selectedEvent = "TalkingHaarlem" }, null)'">Talking Haarlem</button>
                 <button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin", new { selectedEvent = "HistoricHaarlem" }, null)'">Historic Haarlem</button>
-            </span>
+            </div>
         </section>
 
         <section id="TicketSalesInformation">
@@ -37,12 +36,11 @@
             </div>
 
             <!-- INTROTEXT -->
-            <div class="introText">
-                Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren '60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.
-            </div>
+            <p class="introText">
+                By clicking the Download button you will download an excel file which contains all information about tickets availability and sales. The information per event is distributed over different sheets.
+            </p>
 
             <!-- BUTTON -->
-            <button class="btn btn-black" onclick="#">Download</button>
+            <button class="btn btn-black" onclick="location.href='@Url.Action("Download", "Admin")'">Download</button>
         </section>
-    </div>
 </div>

@@ -532,49 +532,42 @@ input[type='text']:focus, input[type='password']:focus {
 
 /* Overview Pagina */
 .overviewPage section {
-    display: inline-block;
     margin-top: 100px;
-    width: 45%;
+    width: 75%;
     background-color: #F5F5F5;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #manageEventSelection {
-    margin-top: 100px;
+    margin-top: 0px;
     width: 100%;
-    height: auto;
+    height: 100px;
 }
 
 #manageEventSelection button {
     width: 150px;
 }
 
-    #manageEventSelection button:nth-child(even) {
-        margin-left: 20%;
-        margin-bottom: 10px;
-        margin-top: 5px;
-        float: left;
-    }
-
-    #manageEventSelection button:nth-child(odd) {
-        margin-right: 20%;
-        margin-top: 5px;
-        margin-bottom: 10px;
-        float: right;
-    }
-
-.overviewPage .row section:first-of-type {
+#manageEventSelection button:nth-child(even) {
+    margin-left: 20%;
+    margin-bottom: 10px;
+    margin-top: 5px;
     float: left;
-    margin-left: 2.5%;
 }
 
-.overviewPage .row section:last-of-type {
+#manageEventSelection button:nth-child(odd) {
+    margin-right: 20%;
+    margin-top: 5px;
+    margin-bottom: 10px;
     float: right;
-    margin-right: 2.5%;
 }
 
 .introText {
-    width: 100%;
+    width: 75%;
     font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
