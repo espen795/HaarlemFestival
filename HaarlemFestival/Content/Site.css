@@ -402,35 +402,52 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     /*display: none;*/
 }
 
-.toggle{
-    margin: 0;
-    padding: 0;
-    border: 0;
+.nav-tabs > li, .nav-pills > li {
+    float: none;
+    display: inline-block;
+    *display: inline; /* ie7 fix */
+    zoom: 1; /* hasLayout ie7 trigger */
 }
 
-div.toggle{
-    width: 300px;
-    height: 30px;
-    margin-left: auto;
-    margin-right: auto;
+.nav-tabs, .nav-pills {
+    text-align: center;
 }
 
-button.toggle{
-    float: left;
-    width: 50%;
-    height: 100%;
-    display: block;
-    transition-duration: 0.6s;
-    background-color: #d1d1d1;
+.tab-content {
+    padding: 15px;
+    display: inline-block;
 }
 
-#location-button{
-    background-color: #4CAF50;
+.img-map-location {
+    width: 60%;
+    padding-left: 10px;
 }
 
-button.toggle:hover {
-    background-color: #92ba93!important;
+    .img-map-location img {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        float: left;
+    }
+
+.text-map-location {
+    width: 40%;
+    float: right;
+    padding-left: 20px;
 }
+
+    .text-map-location h3 {
+        margin-top: 15px;
+    }
+
+.map-img {
+    display: inline-block;
+    width: 100%;
+}
+
+    .map-img img {
+        width: 100%;
+    }
 
 /*****************************/
 /** ADMIN PAGE SPECIFIC CSS **/
@@ -514,15 +531,41 @@ input[type='text']:focus, input[type='password']:focus {
 
 
 /* Overview Pagina */
-#ManageEvent {
-
+.overviewPage section {
+    display: inline-block;
+    margin-top: 100px;
+    width: 45%;
 }
 
-#TicketSalesInformation  {
+#manageEventSelection {
+    margin-top: 50px;
+    width: 100%;
+    height: auto;
+}
 
+#manageEventSelection button:nth-child(even) {
+    margin-left: 25%;
+    float: left;
+}
+
+#manageEventSelection button:nth-child(odd) {
+    margin-right: 25%;
+    float: right;
+}
+
+.overviewPage .row section:first-of-type {
+    float: left;
+    margin-left: 2.5%;
+}
+
+.overviewPage .row section:last-of-type {
+    float: right;
+    margin-right: 2.5%;
 }
 
 .introText {
+    width: 100%;
+    font-weight: bold;
 }
 
 
@@ -540,7 +583,7 @@ input[type='text']:focus, input[type='password']:focus {
 #topFilterBar select {
     width: 200px;
     height: 25px;
-    border: 1px solid black;
+    border: 1px solid #000000;
     border-style: none none solid none;
     outline: none;
 }
@@ -550,14 +593,14 @@ input[type='text']:focus, input[type='password']:focus {
 }
 
 #filterSystem .eventFilter:focus {
-    border-color: cornflowerblue;
+    border-color: #6495ed;
 }
 
 #filterSystem .eventFilter option {
     border: 2px solid black;
     border-style: none solid none solid;
     height: 30px;
-    color: black;
+    color: #000000;
 }
 
 #filterSystem .eventFilter option:last-child {
@@ -565,11 +608,11 @@ input[type='text']:focus, input[type='password']:focus {
 }
 
 #filterSystem .eventFilter option:nth-child(even), .eventData tr:nth-child(even) {
-    background-color: lightgray;
+    background-color: #D3D3D3;
 }
 
 #filterSystem .eventFilter option:nth-child(odd), .eventData tr:nth-child(off) {
-    background-color: white;
+    background-color: #FFFFFF;
 }
 
 
@@ -584,7 +627,7 @@ input[type='text']:focus, input[type='password']:focus {
     background-color: rgba(0,0,0,0.5);
     display: none;
     z-index: -10;
-    border: 1px solid black;
+    border: 1px solid #000000;
     border-radius: 20px;
 }
 
