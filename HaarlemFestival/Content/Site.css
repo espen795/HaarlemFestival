@@ -535,23 +535,32 @@ input[type='text']:focus, input[type='password']:focus {
     display: inline-block;
     margin-top: 100px;
     width: 45%;
+    background-color: #F5F5F5;
 }
 
 #manageEventSelection {
-    margin-top: 50px;
+    margin-top: 100px;
     width: 100%;
     height: auto;
 }
 
-#manageEventSelection button:nth-child(even) {
-    margin-left: 25%;
-    float: left;
+#manageEventSelection button {
+    width: 150px;
 }
 
-#manageEventSelection button:nth-child(odd) {
-    margin-right: 25%;
-    float: right;
-}
+    #manageEventSelection button:nth-child(even) {
+        margin-left: 20%;
+        margin-bottom: 10px;
+        margin-top: 5px;
+        float: left;
+    }
+
+    #manageEventSelection button:nth-child(odd) {
+        margin-right: 20%;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        float: right;
+    }
 
 .overviewPage .row section:first-of-type {
     float: left;
@@ -586,6 +595,8 @@ input[type='text']:focus, input[type='password']:focus {
     border: 1px solid #000000;
     border-style: none none solid none;
     outline: none;
+    position: relative;
+    height: 100%;
 }
 
 #topFilterBar select option {

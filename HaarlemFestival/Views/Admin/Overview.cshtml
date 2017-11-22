@@ -9,7 +9,7 @@
             <!-- HEADER IMAGE -->
             <div class="event-header">
                 <div class="overlay">
-                    <span class="header_tekst">Jazz@Patronaat information</span>
+                    <span class="header_tekst">Manage Events</span>
                 </div>
             </div>
 
@@ -20,10 +20,10 @@
 
             <!-- MANAGE EVENT -->
             <span id="manageEventSelection">
-                <button onclick="location.href='@Url.Action("ManageEvent", "Admin", new { selectedEvent = "Jazz@Patronaat" }, null)'">Jazz@Patronaat</button>
-                <button onclick="location.href='@Url.Action("ManageEvent", "Admin", new { selectedEvent = "DinnerInHaarlem" }, null)'">Dinner In Haalrem</button>
-                <button onclick="location.href='@Url.Action("ManageEvent", "Admin", new { selectedEvent = "TalkingHaarlem" }, null)'">Talking Haarlem</button>
-                <button onclick="location.href='@Url.Action("ManageEvent", "Admin", new { selectedEvent = "HistoricHaarlem" }, null)'">Historic Haarlem</button>
+                <button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin", new { selectedEvent = "Jazz@Patronaat" }, null)'">Jazz@Patronaat</button>
+                <button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin", new { selectedEvent = "DinnerInHaarlem" }, null)'">Dinner In Haalrem</button>
+                <button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin", new { selectedEvent = "TalkingHaarlem" }, null)'">Talking Haarlem</button>
+                <button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin", new { selectedEvent = "HistoricHaarlem" }, null)'">Historic Haarlem</button>
             </span>
         </section>
 
@@ -32,17 +32,17 @@
             <!-- HEADER IMAGE -->
             <div class="event-header">
                 <div class="overlay">
-                    <span class="header_tekst">Jazz@Patronaat information</span>
+                    <span class="header_tekst">Ticket & Sales information</span>
                 </div>
             </div>
 
             <!-- INTROTEXT -->
-            <span class="introText">
+            <div class="introText">
                 Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren '60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.
-            </span>
+            </div>
 
             <!-- BUTTON -->
-            <button onclick="#">Download</button>
+            <button class="btn btn-black" onclick="#">Download</button>
         </section>
     </div>
 </div>
