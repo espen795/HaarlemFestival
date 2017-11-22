@@ -7,14 +7,15 @@ using HaarlemFestival.Models;
 
 namespace HaarlemFestival.Repository.Admin
 {
-    interface IAdminRepository
+    public interface IAdminRepository
     {
         // Login
         Account GetAccount(string username, string password);
 
         // ManageEvent
-        void UpdateEvent();
-        void DeleteEvent();
+        void AddEvent(Activity activity);
+        void UpdateEvent(Activity activity);
+        void DeleteEvent(Activity activity);
         EventList GetEvents();
     }
 }

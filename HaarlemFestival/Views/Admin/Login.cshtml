@@ -1,6 +1,7 @@
 ﻿@model HaarlemFestival.Models.LoginModel
 @{
     ViewBag.Title = "Login";
+
 }
 
 <script>
@@ -8,6 +9,7 @@
     $(document).ready(function ()
     {
         var badLogins = @Session["failedLogins"];
+        GetModelErrors("@ViewData.ModelState.IsValid", badLogins)
 
         if (badLogins == 3) {
             LoginBlock();
@@ -16,33 +18,46 @@
     });
 
 
+    function GetModelErrors(noErrors, failedLogins)
+    {
+        if ((noErrors != "True") || (failedLogins == 3)) {
+            $('#loginError').css('opacity', '1.0');
+        }
+    }
+
     function LoginBlock()
     {
+
         $('#loginButton').prop('disabled', true); // loginknop disablen
         $('#loginButton').css('cursor', 'not-allowed');
+        $('#loginButton').css('opacity', '0.5');
         // Loginknop na 300 seconden (5 minuten) enablen en de failedLogins counter resetten
 
         setTimeout(function () {
             $('#loginButton').removeProp('disabled');
             $('#loginButton').css('cursor', 'pointer');
+            $('#loginButton').css('opacity', '1');
         }, 300000)
     }
 </script>
 
 <div class="container body-content">
-    <section id="loginError">
-        @Html.ValidationSummary();
+
+    <section id="loginArea">
+        <section id="loginError">
+            <!-- Image Toevoegen met class "validationImage" -->
+            @Html.ValidationSummary()
+        </section>
+
+        <p class="title">Please enter your login information below.</p>
+        @using (Html.BeginForm("Login", "Admin", FormMethod.Post))
+        {
+            <ul>
+                <li>@Html.TextBoxFor(l => l.Username, new { placeholder = "Username", @class = "username" })</li>
+                <li>@Html.PasswordFor(l => l.Password, new { placeholder = "Password", @class = "password" })</li>
+
+                <li><input id="loginButton" type="submit" value="Log in >>" /></li>
+            </ul>
+        }
     </section>
-
-    <h2>Login</h2>
-    @using (Html.BeginForm("Login", "Admin", FormMethod.Post))
-    {
-        @Html.LabelFor(l => l.Username);
-        @Html.TextBoxFor(l => l.Username);
-
-        @Html.LabelFor(l => l.Password);
-        @Html.PasswordFor(l => l.Password);
-
-        <input id="loginButton" type="submit" value="Log in >>" />
-    }
 </div>

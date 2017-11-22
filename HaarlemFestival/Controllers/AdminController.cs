@@ -5,11 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using HaarlemFestival.Models;
 using System.Web.Security;
-
+using HaarlemFestival.Repository.Admin;
 namespace HaarlemFestival.Controllers
 {
     public class AdminController : Controller
     {
+        IAdminRepository adminRepository = new AdminRepository();
         // GET: Admin
         public ActionResult Login()
         {
@@ -20,10 +21,11 @@ namespace HaarlemFestival.Controllers
             }
 
             DateTime now = DateTime.Now;
+            Session["loginBlockCounter"] = now.AddMinutes(5);
 
             // Als er 3x verkeerd is ingelogd.
             if ((int)Session["failedLogins"] == 3)
-                ModelState.AddModelError("login-block", "Some of the entered information is invalid. Please try again in 5 minutes (" + now.AddMinutes(5).ToString() + ")");
+                ModelState.AddModelError("login-block", "Some of the entered information is invalid. Please try again in 5 minutes (" + (DateTime)Session["loginBlockCounter"] + ")");
 
             return View();
         }
@@ -67,23 +69,52 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult ManageEvent()
         {
+            string selectedEvent = this.Request.QueryString["selectedEvent"];
+
+            switch (selectedEvent)
+            {
+                case "Jazz@Patronaat":
+                case "DinnerInHaarlem":
+                case "TalkingHaarlem":
+                case "HistoricHaarlem":
+                    ViewBag.ChosenEvent = selectedEvent;
+                    break;
+
+                default:
+                    ViewBag.ChosenEvent = "";
+                    break;
+            }
+
             // TODO: Verkrijg eventlijst - EventList events = repository.GetEvents()
             return View();
         }
 
         [HttpPost]
-        public ActionResult DeleteEvent(int id)
+        public ActionResult AddEvent(Activity activity)
         {
-            // TODO: Repository aanmaken en DB Item verwijderen.
+            if (ModelState.IsValid)
+            {
+                adminRepository.AddEvent(activity);
+                ViewBag.Status = "Deleted";
+                return RedirectToAction("ManageEvent", "Admin");
+            }
 
+            return View(activity);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteEvent(Activity activity)
+        {
+            adminRepository.DeleteEvent(activity);
+            ViewBag.Status = "Deleted";
             return RedirectToAction("ManageEvent","Admin");
         }
 
         [HttpPost]
-        public ActionResult UpdateEvent()
+        public ActionResult UpdateEvent(Activity activity)
         {
-            // TODO: Repository aanmaken en DB Item updaten.
-
+            adminRepository.UpdateEvent(activity);
+            ViewBag.Status = "Updated";
             return RedirectToAction("ManageEvent","Admin");
         }
 

@@ -9,11 +9,11 @@ namespace HaarlemFestival.Models
     public class LoginModel
     {
         [Required]
-        [Display(Name = "Username: ")]
+        [Display(Name = " ")]
         public string Username { get; set; }
 
         [Required]
-        [Display(Name = "Password: ")]
+        [Display(Name = " ")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
     }
