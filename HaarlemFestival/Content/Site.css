@@ -198,6 +198,8 @@ footer i {
 .event-banner {
     height: 300px;
     background-image: url('/images/regular_banner.png');
+    background-position: center center;
+    border-bottom: 1px solid #353237;
 }
 
 .event-section-1 {
@@ -287,6 +289,10 @@ footer i {
     overflow: hidden;
 }
 
+.event-banner.jazz {
+    background-image: url('/images/Jazz/jazzbanner.png');
+}
+
 .jazz .event-section-3 .keuze_blok img {
     border: 1px solid #353237;
 }
@@ -308,6 +314,13 @@ footer i {
     padding-left: 17px;
 }
 
+.jazz-overview .event-header {
+    background-image: url('/images/jazz/jazz-overview_banner.png');
+}
+
+.jazz-overview .event-section-3{
+    overflow:hidden;
+}
 
 /* ------------------------------Dinner in Haarlem-----------------------------*/
 .event-section-1-dinner {
@@ -429,6 +442,7 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 .tab-content {
     padding: 15px;
     display: inline-block;
+    width: 100%;
 }
 
 .img-map-location {
@@ -514,14 +528,22 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     left: 392px;
 }
 
+.locations {
+    display: none;
+}
+
+#location1{
+    display: block;
+}
+
 /*****************************/
 /** ADMIN PAGE SPECIFIC CSS **/
 /*****************************/
 /* Login Pagina */
-    #loginArea {
-        width: 100%;
-        margin-top: 100px;
-    }
+#loginArea {
+    width: 100%;
+    margin-top: 100px;
+}
 
 #loginArea .title {
     text-align: center;
