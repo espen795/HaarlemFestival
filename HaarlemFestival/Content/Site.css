@@ -511,6 +511,12 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     display: block;
 }
 
+/* Historic - tickets */
+
+.event-header.historicTickets {
+    background-image: url('/images/Historic/title/basket.png');
+}
+
 /*****************************/
 /** ADMIN PAGE SPECIFIC CSS **/
 /*****************************/
