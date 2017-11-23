@@ -137,20 +137,12 @@
     <Compile Include="Models\BesteldeActiviteit.cs" />
     <Compile Include="Models\Days.cs" />
     <Compile Include="Models\Dinner.cs" />
-    <Compile Include="Models\Event.cs" />
-    <Compile Include="Models\EventList.cs" />
     <Compile Include="Models\EventType.cs" />
-    <Compile Include="Models\Guide.cs" />
-    <Compile Include="Models\Historic.cs" />
-    <Compile Include="Models\InterviewGuest.cs" />
-    <Compile Include="Models\InterviewQuestion.cs" />
-    <Compile Include="Models\Jazz.cs" />
     <Compile Include="Models\Klant.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Reserveringen.cs" />
     <Compile Include="Models\Restaurant.cs" />
-    <Compile Include="Models\Talking.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Admin\AdminRepository.cs" />
     <Compile Include="Repository\Admin\IAdminRepository.cs" />
@@ -208,7 +200,7 @@
     <Content Include="Views\Talking\Reservation.cshtml" />
     <Content Include="Views\Admin\_deleteConfirmation.cshtml" />
     <Content Include="Views\Admin\_UpdateEvent.cshtml" />
-    <Content Include="Views\Jazz\DagOverview.cshtml" />
+    <Content Include="Views\Jazz\DayOverview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

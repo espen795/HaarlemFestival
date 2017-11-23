@@ -446,21 +446,70 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     width: 100%;
 }
 
-    .map-img img {
-        width: 100%;
-    }
-
-/*****************************/
-/** ADMIN PAGE SPECIFIC CSS **/
-/*****************************/
-
-
-
-/* Login Pagina */
-#loginArea {
+.map-img img {
     width: 100%;
-    margin-top: 100px;
 }
+
+.img-map-location .number-map {
+    position: absolute;
+    display: inline-block;
+    width: 4%;
+    height: 5%;
+}
+
+.number-map.number1 {
+    bottom: 280px;
+    left: 308px;
+}
+
+.number-map.number2 {
+    bottom: 280px;
+    left: 232px;
+}
+
+.number-map.number3 {
+    bottom: 325px;
+    left: 259px;
+}
+
+.number-map.number4 {
+    bottom: 32px;
+    left: 80px;
+}
+
+.number-map.number5 {
+    bottom: 300px;
+    left: 40px;
+}
+
+.number-map.number6 {
+    bottom: 483px;
+    left: 335px;
+}
+
+.number-map.number7 {
+    bottom: 455px;
+    left: 560px;
+}
+
+.number-map.number8 {
+    bottom: 245px;
+    left: 645px;
+}
+
+.number-map.number9 {
+    bottom: 325px;
+    left: 392px;
+}
+
+    /*****************************/
+    /** ADMIN PAGE SPECIFIC CSS **/
+    /*****************************/
+    /* Login Pagina */
+    #loginArea {
+        width: 100%;
+        margin-top: 100px;
+    }
 
 #loginArea .title {
     text-align: center;
@@ -533,40 +582,41 @@ input[type='text']:focus, input[type='password']:focus {
 
 /* Overview Pagina */
 .overviewPage section {
-    display: inline-block;
     margin-top: 100px;
-    width: 45%;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #manageEventSelection {
-    margin-top: 50px;
+    margin-top: 0px;
     width: 100%;
-    height: auto;
+    height: 100px;
+}
+
+#manageEventSelection button {
+    width: 150px;
 }
 
 #manageEventSelection button:nth-child(even) {
-    margin-left: 25%;
+    margin-left: 20%;
+    margin-bottom: 10px;
+    margin-top: 5px;
     float: left;
 }
 
 #manageEventSelection button:nth-child(odd) {
-    margin-right: 25%;
+    margin-right: 20%;
+    margin-top: 5px;
+    margin-bottom: 10px;
     float: right;
-}
-
-.overviewPage .row section:first-of-type {
-    float: left;
-    margin-left: 2.5%;
-}
-
-.overviewPage .row section:last-of-type {
-    float: right;
-    margin-right: 2.5%;
 }
 
 .introText {
-    width: 100%;
+    width: 75%;
     font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
@@ -587,6 +637,8 @@ input[type='text']:focus, input[type='password']:focus {
     border: 1px solid #000000;
     border-style: none none solid none;
     outline: none;
+    position: relative;
+    height: 100%;
 }
 
 #topFilterBar select option {
