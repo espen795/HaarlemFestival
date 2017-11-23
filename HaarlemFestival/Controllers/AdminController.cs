@@ -118,6 +118,10 @@ namespace HaarlemFestival.Controllers
             return RedirectToAction("ManageEvent","Admin");
         }
 
+        public ActionResult Download()
+        {
+            return View();
+        }
 
 
         // PartialViews - W.I.P
