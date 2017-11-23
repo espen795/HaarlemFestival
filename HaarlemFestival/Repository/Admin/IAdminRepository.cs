@@ -16,6 +16,6 @@ namespace HaarlemFestival.Repository.Admin
         void AddEvent(Activity activity);
         void UpdateEvent(Activity activity);
         void DeleteEvent(Activity activity);
-        EventList GetEvents();
+        //EventList GetEvents();
     }
 }

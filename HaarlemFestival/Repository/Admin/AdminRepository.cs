@@ -28,9 +28,6 @@ namespace HaarlemFestival.Repository.Admin
             throw new NotImplementedException();
         }
 
-        public EventList GetEvents()
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

@@ -7,7 +7,7 @@ namespace HaarlemFestival.Models
 {
     public class Dinner : Activity
     {
-        public EventType EventType { set => EventType = EventType.DinnerInHaarlem; }
+        public EventType EventType { get; set; }
         public virtual Restaurant Restaurant { get; set; }
     }
 }

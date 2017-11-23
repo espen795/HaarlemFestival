@@ -12,5 +12,10 @@ namespace HaarlemFestival.Controllers
         {
             return View();
         }
+
+        public ActionResult DayOverview()
+        {
+            return View();
+        }
     }
 }
