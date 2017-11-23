@@ -186,6 +186,8 @@ footer a:hover {
 .event-banner {
     height: 300px;
     background-image: url('/images/regular_banner.png');
+    background-position: center center;
+    border-bottom: 1px solid #353237;
 }
 
 .event-section-1 {
@@ -275,6 +277,10 @@ footer a:hover {
     overflow: hidden;
 }
 
+.event-banner.jazz {
+    background-image: url('/images/Jazz/jazzbanner.png');
+}
+
 .jazz .event-section-3 .keuze_blok img {
     border: 1px solid #353237;
 }
@@ -296,6 +302,13 @@ footer a:hover {
     padding-left: 17px;
 }
 
+.jazz-overview .event-header {
+    background-image: url('/images/jazz/jazz-overview_banner.png');
+}
+
+.jazz-overview .event-section-3{
+    overflow:hidden;
+}
 
 /* ------------------------------Dinner in Haarlem-----------------------------*/
 .event-section-1-dinner {
