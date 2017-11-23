@@ -502,10 +502,10 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     left: 392px;
 }
 
-    /*****************************/
-    /** ADMIN PAGE SPECIFIC CSS **/
-    /*****************************/
-    /* Login Pagina */
+/*****************************/
+/** ADMIN PAGE SPECIFIC CSS **/
+/*****************************/
+/* Login Pagina */
     #loginArea {
         width: 100%;
         margin-top: 100px;
@@ -596,20 +596,6 @@ input[type='text']:focus, input[type='password']:focus {
 
 #manageEventSelection button {
     width: 150px;
-}
-
-#manageEventSelection button:nth-child(even) {
-    margin-left: 20%;
-    margin-bottom: 10px;
-    margin-top: 5px;
-    float: left;
-}
-
-#manageEventSelection button:nth-child(odd) {
-    margin-right: 20%;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    float: right;
 }
 
 .introText {
