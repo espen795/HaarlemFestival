@@ -5,14 +5,10 @@ using System.Web;
 
 namespace HaarlemFestival.Models
 {
-    public class Cuisine
+    public class Day
     {
-        public int CuisineId { get; set; }
+        public int DayId { get; set; }
         public string Naam { get; set; }
-
-        public Cuisine( )
-        {
-
-        }
+        public DateTime Date { get; set; }
     }
 }
