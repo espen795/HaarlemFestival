@@ -135,6 +135,7 @@
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\BesteldeActiviteit.cs" />
+    <Compile Include="Models\Cuisine.cs" />
     <Compile Include="Models\Days.cs" />
     <Compile Include="Models\Dinner.cs" />
     <Compile Include="Models\EventType.cs" />

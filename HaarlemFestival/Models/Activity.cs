@@ -16,5 +16,11 @@ namespace HaarlemFestival.Models
         public int BoughtTickets { get; set; }
         public string Phonenumber { get; set; }
         public string Address { get; set; }
+
+        //Altijd 1 lege constructor houden voor de database!
+        public Activity()
+        {
+
+        }
     }
 }
