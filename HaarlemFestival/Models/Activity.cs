@@ -8,6 +8,7 @@ namespace HaarlemFestival.Models
     public abstract class Activity
     {
         public int ActivityId { get; set; }
+        public EventType EventType { get; set; }
         public DateTime DateReservation { get; set; }
         public DateTime StartSession { get; set; }
         public DateTime EndSession { get; set; }
