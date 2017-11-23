@@ -25,7 +25,9 @@ namespace HaarlemFestival
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/font-awesome.css",
+                      "~/Content/font-awesome.min.css"));
         }
     }
 }

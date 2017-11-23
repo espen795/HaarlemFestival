@@ -551,6 +551,7 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     padding-left: 70px;
     border: 1px solid silver;
     border-style: solid solid solid none;
+    border-radius: 10px 0px 0px 10px;
 }
 
 #loginArea ul li .username {
