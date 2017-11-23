@@ -441,6 +441,7 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 .tab-content {
     padding: 15px;
     display: inline-block;
+    width: 100%;
 }
 
 .img-map-location {
@@ -526,14 +527,22 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     left: 392px;
 }
 
-    /*****************************/
-    /** ADMIN PAGE SPECIFIC CSS **/
-    /*****************************/
-    /* Login Pagina */
-    #loginArea {
-        width: 100%;
-        margin-top: 100px;
-    }
+.locations {
+    display: none;
+}
+
+#location1{
+    display: block;
+}
+
+/*****************************/
+/** ADMIN PAGE SPECIFIC CSS **/
+/*****************************/
+/* Login Pagina */
+#loginArea {
+    width: 100%;
+    margin-top: 100px;
+}
 
 #loginArea .title {
     text-align: center;
@@ -557,34 +566,17 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     float: left;
 }
 
-#loginArea ul {
-    list-style-type: none;
-}
-
-#loginArea ul li {
-    margin-left: -4%;
-    text-align: center;
-    vertical-align: middle;
-}
-
-#loginArea ul li .username, #loginArea ul li .password {
-    width: 225px;
-    height: 53px;
-    margin-top: 10px;
-    font-size: 15px;
-    padding-left: 70px;
+#loginArea .username, #loginArea .password {
+    height: 50px;
+    font-size: 20px;
     border: 1px solid silver;
-    border-style: solid solid solid none;
 }
 
-#loginArea ul li .username {
-    background-image: url('/images/Admin/UsernameLabel.png');
-    background-repeat: no-repeat;
-}
-
-#loginArea ul li .password {
-    background-image: url('/images/Admin/PasswordLabel.png');
-    background-repeat: no-repeat;
+#loginArea  {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    text-align: center;
 }
     
 input[type='text']:focus, input[type='password']:focus {
@@ -597,11 +589,16 @@ input[type='text']:focus, input[type='password']:focus {
     color: white;
     width: 140px;
     height: 40px;
-    border-radius: 20px;
-    margin-top: 50px;
     margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
+#loginArea .input-group-addon {
+    background-color: #92140C;
+    border-radius: 15px 0px 0px 15px;
+    color: white;
+}
 
 
 /* Overview Pagina */
@@ -620,20 +617,6 @@ input[type='text']:focus, input[type='password']:focus {
 
 #manageEventSelection button {
     width: 150px;
-}
-
-#manageEventSelection button:nth-child(even) {
-    margin-left: 20%;
-    margin-bottom: 10px;
-    margin-top: 5px;
-    float: left;
-}
-
-#manageEventSelection button:nth-child(odd) {
-    margin-right: 20%;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    float: right;
 }
 
 .introText {

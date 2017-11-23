@@ -7,6 +7,12 @@ namespace HaarlemFestival.Models
 {
     public class Dinner : Activity
     {
+        public int RestaurantId { get; set; }
         public virtual Restaurant Restaurant { get; set; }
+
+        public Dinner()
+        {
+
+        }
     }
 }

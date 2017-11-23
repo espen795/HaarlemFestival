@@ -2,6 +2,21 @@
     ViewBag.Title = "Historic Haarlem";
 }
 
+<script type="text/javascript">
+    function SwitchLocation(nummer)
+    {
+        var element = document.getElementById("location" + nummer);
+        var otherElements = document.getElementsByClassName("locations");
+
+        for (var i = 0; i < otherElements.length; i++)
+        {
+            otherElements[i].style.display = "none";
+        }
+
+        element.style.display = "block";
+    }
+</script>
+
 <div class="event-banner historic"></div>
 
 <div class="event container">
@@ -82,19 +97,20 @@
             <div id="map-content" class="tab-pane fade">
                 <div class="img-map-location">
                     <img src="/images/Historic/Map/mapr.png" />
-                    <img class="number-map number1" src="/images/Historic/Map/1.png" />
-                    <img class="number-map number2" src="/images/Historic/Map/2.png" />
-                    <img class="number-map number3" src="/images/Historic/Map/3.png" />
-                    <img class="number-map number4" src="/images/Historic/Map/4.png" />
-                    <img class="number-map number5" src="/images/Historic/Map/5.png" />
-                    <img class="number-map number6" src="/images/Historic/Map/6.png" />
-                    <img class="number-map number7" src="/images/Historic/Map/7.png" />
-                    <img class="number-map number8" src="/images/Historic/Map/8.png" />
-                    <img class="number-map number9" src="/images/Historic/Map/9.png" />
+                    <img class="number-map number1" src="/images/Historic/Map/1.png" onclick="SwitchLocation('1');"/>
+                    <img class="number-map number2" src="/images/Historic/Map/2.png" onclick="SwitchLocation('2');"/>
+                    <img class="number-map number3" src="/images/Historic/Map/3.png" onclick="SwitchLocation('3');"/>
+                    <img class="number-map number4" src="/images/Historic/Map/4.png" onclick="SwitchLocation('4');"/>
+                    <img class="number-map number5" src="/images/Historic/Map/5.png" onclick="SwitchLocation('5');"/>
+                    <img class="number-map number6" src="/images/Historic/Map/6.png" onclick="SwitchLocation('6');"/>
+                    <img class="number-map number7" src="/images/Historic/Map/7.png" onclick="SwitchLocation('7');"/>
+                    <img class="number-map number8" src="/images/Historic/Map/8.png" onclick="SwitchLocation('8');"/>
+                    <img class="number-map number9" src="/images/Historic/Map/9.png" onclick="SwitchLocation('9');"/>
                 </div>
-                <div class="text-map-location">
+
+                <div class="text-map-location locations" id="location1">
                     <div class="map-img">
-                        <img src="/images/Historic/Locaties/Bavo.jpg" />
+                        <img src="/images/Historic/Locaties/1.jpg" />
                     </div>
                     <h3>Church of St. Bavo</h3>
                     <p>
@@ -102,7 +118,18 @@
                         Another Haarlem church called the Cathedral of Saint Bavo now serves as the main cathedral for the Roman Catholic Diocese of Haarlem-Amsterdam.
                     </p>
                 </div>
+
+                <div class="text-map-location locations" id="location2">
+                    <div class="map-img">
+                        <img src="/images/Historic/Locaties/2.jpg" />
+                    </div>
+                    <h3>De Grote Markt</h3>
+                    <p>
+                        The Grote Markt is in the center of Haarlem, with the City Hall across from the St. Bavochurch.
+                    </p>
+                </div>
             </div>
+            @Html.ActionLink("Book the tour", "Reservation", "Historic", new { @class = "btn btn-book" })
         </div>
     </div>
 </div>
