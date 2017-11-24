@@ -5,10 +5,12 @@
 
 <!-- Modal -->
 <div class="modal fade" id="deletePopup" tabindex="-1" role="dialog" aria-labelledby="deletePopup">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
 
         <!-- CONTENT -->
         <div class="modal-content">
+
+            <!-- HEADER -->
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Delete Data</h4>
@@ -51,21 +53,6 @@
             this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) +
                 $(window).scrollLeft()) + "px");
             return this;
-        }
-
-        function ShowDeletePopup()
-        {
-            // Popup tonen
-            $('.popup').css("z-index", "9999");
-            $('.popup').show();
-            $('#deletePopup').center(); // DeletePopup naar het midden verplaatsen.
-        }
-
-        function HidePopup()
-        {
-            // Popup verbergen.
-            $('.popup').css("z-index", "-10");
-            $('.popup').css("display", "none");
         }
 
         function SelectedEventChanged()
