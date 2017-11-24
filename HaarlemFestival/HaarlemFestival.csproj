@@ -137,10 +137,13 @@
     <Compile Include="Models\BesteldeActiviteit.cs" />
     <Compile Include="Models\Cuisine.cs" />
     <Compile Include="Models\Day.cs" />
+    <Compile Include="Models\Guides.cs" />
+    <Compile Include="Models\Tour.cs" />
+    <Compile Include="Models\Historic.cs" />
     <Compile Include="Models\Dinner.cs" />
     <Compile Include="Models\EventType.cs" />
     <Compile Include="Models\Klant.cs" />
-    <Compile Include="Models\Language.cs" />
+    <Compile Include="Models\Languages.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Reservering.cs" />
     <Compile Include="Models\Restaurant.cs" />
