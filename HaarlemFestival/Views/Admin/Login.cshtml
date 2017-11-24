@@ -26,11 +26,10 @@
 
     function LoginBlock()
     {
-        var timeRemaining = 10;
+        var timeRemaining = 300;
         $('#loginButton').prop('disabled', true); // loginknop disablen
         $('#loginButton').css('cursor', 'not-allowed');
         $('#loginButton').css('opacity', '0.5');
-        // Loginknop na 300 seconden (5 minuten) enablen en de failedLogins counter resetten
 
         var timer = setInterval(function ()
         {
