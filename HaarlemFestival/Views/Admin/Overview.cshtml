@@ -21,23 +21,29 @@
     })
 </script>
 
-<div class="container body-content">
+<div class="container body-content">  
+    
+    <div id="welcomeArea" class="panel panel-primary col-md-6 col-md-offset-3">
+        <div data-toggle="collapse" data-target="#welcomeInformation" class="panel-heading">
+            Welcome, <!-- ViewBag.Account.Naam -->
+        </div>
 
-    <div id="welcomeArea" class="col-md-6 col-md-offset-3">
-        <span>Welcome, <!-- ViewBag.Account.Naam --></span><br />
-        The current time is: <span id="currentTime"></span><i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="This time is your local time." aria-hidden="true"></i>
+        <div id="welcomeInformation" class="in">
+            <div class="panel-body">
+                The current time is: <span id="currentTime"></span><i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="This time is your local time." aria-hidden="true"></i>
+            </div>
+        </div>
     </div>
+    <div class="col-md-4 col-md-offset-1 overviewContent" id="ManageEvent">
 
-    <div class="col-md-4 overviewContent" id="ManageEvent">
-
-        <!-- HEADER IMAGE -->
+        <!-- HEADER IMAGE 
         <hr class="title-hr title-line-left">
         <div class="event-header">
             <div class="overlay">
                 <span class="header_tekst">Manage Events</span>
             </div>
         </div>
-        <hr class="title-hr title-line-right">
+        <hr class="title-hr title-line-right">-->
 
         <!-- INTRO TEXT -->
         <p class="introText">
@@ -53,16 +59,16 @@
         </div>
     </div>
 
-        <div class="col-md-4 overviewContent" id="TicketSalesInformation">
+        <div class="col-md-4 col-md-offset-2 overviewContent" id="TicketSalesInformation">
 
-            <!-- HEADER IMAGE -->
+            <!-- HEADER IMAGE 
             <hr class="title-hr title-line-left">
             <div class="event-header">
                 <div class="overlay">
                     <span class="header_tekst">Ticket & Sales information</span>
                 </div>
             </div>
-            <hr class="title-hr title-line-right">
+            <hr class="title-hr title-line-right">-->
 
             <!-- INTROTEXT -->
             <p class="introText">
