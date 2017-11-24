@@ -1,7 +1,6 @@
 ﻿@model HaarlemFestival.Models.LoginModel
 @{
     ViewBag.Title = "Login";
-
 }
 
 <script>
@@ -27,18 +26,36 @@
 
     function LoginBlock()
     {
-
+        var timeRemaining = 10;
         $('#loginButton').prop('disabled', true); // loginknop disablen
         $('#loginButton').css('cursor', 'not-allowed');
         $('#loginButton').css('opacity', '0.5');
         // Loginknop na 300 seconden (5 minuten) enablen en de failedLogins counter resetten
 
-        setTimeout(function () {
-            $('#loginButton').removeProp('disabled');
-            $('#loginButton').css('cursor', 'pointer');
-            $('#loginButton').css('opacity', '1');
-        }, 300000)
+        var timer = setInterval(function ()
+        {
+            timeRemaining--;
+            $('.loginErrors').text("Some of the entered information isn't correct, please try again in " + timeRemaining + " seconds");
+
+            if (timeRemaining == 0) {
+                // Alert van danger naar info veranderen.
+                $('#bootstrapAlert').removeClass('alert-danger');
+                $('#bootstrapAlert').addClass('alert-info');
+
+                // Alert tekst veranderen.
+                $('.loginErrors').text("You can login again");
+
+                // Loginbutton enablen.
+                $('#loginButton').removeProp('disabled');
+                $('#loginButton').css('cursor', 'pointer');
+                $('#loginButton').css('opacity', '1');
+
+                // Interval van de timer weghalen.
+                clearInterval(timer);
+            }
+        }, 1000);
     }
+
 </script>
 
 <div id="carousel-home" class="carousel slide" data-ride="carousel">
@@ -67,10 +84,9 @@
     <section id="loginArea">
 
         <div id="loginError">
-            <div class="alert alert-danger alert-dismissible">
+            <div id="bootstrapAlert" class="alert alert-danger alert-dismissible">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>Error!</strong><br />
-                @Html.ValidationSummary()
+                <span class="loginErrors">@Html.ValidationSummary()</span>
             </div>
         </div>
 
