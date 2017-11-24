@@ -7,17 +7,25 @@ namespace HaarlemFestival.Models
 {
     public class Restaurant
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public int RestaurantId { get; set; }
+        public string Naam { get; set; }
+        public float Prijs { get; set; }
+        public float KinderPrijs { get; set; }
+        public int TotalTickets { get; set; }
+        public string Rating { get; set; }
         public string Description { get; set; }
-        public string Adress { get; set; }
-        public TimeSpan FirstSession { get; set; }
-        public double Duration { get; set; }
-        public int Sessions { get; set; }
-        public int Stars { get; set; }
-        public int TotalSeats { get; set; }
-        public double Price { get; set; }
-        public double ChildrenPrice { get; set; }
-        public string Cuisine { get; set; }
+        public int Cuisine1Id { get; set; }
+        public virtual Cuisine Cuisine1 { get; set; }
+        public int Cuisine2Id { get; set; }
+        public virtual Cuisine Cuisine2 { get; set; }
+        public int Cuisine3Id { get; set; }
+        public virtual Cuisine Cuisine3 { get; set; }
+        public string FoodIMG { get; set; }
+        public string LocationIMG { get; set; }
+
+        public Restaurant()
+        {
+
+        }
     }
 }

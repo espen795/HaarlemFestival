@@ -190,6 +190,7 @@ footer a:hover {
 
 .event-section-1 {
     min-height: 140px;
+    overflow-wrap:break-word;
 }
 
 .event h1.title {
@@ -199,6 +200,7 @@ footer a:hover {
 .event p.content {
     font-size: 15px;
     line-height: 22px;
+    overflow: hidden;
 }
 
 .event .sfeer-image {
@@ -296,7 +298,18 @@ footer a:hover {
 
 
 /* ------------------------------Dinner in Haarlem-----------------------------*/
+.event-section-1-dinner {
+    min-height: 210px;
+    overflow-wrap: break-word;
+}
 
+.event-header.restaurantinfo {
+    background-image: url('/images/Dinner/title/title1.png');
+}
+
+.event-banner.dinner {
+    background-image: url('/images/Dinner/banner.png');
+}
 
 /* ------------------------------Talking Haarlem-------------------------------*/
 
@@ -316,27 +329,37 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     background-image: url('/images/Talking/Header_Talking_Haarlem.png');
 }
 
-.talking-info * {
+.talking-info {
+    width: 97%;
+    display: inline-block;
+    border-bottom: solid black 1px;
     margin-left: 15px;
+}
+
+.talking-info * {
+
 }
 
 .talking-place-time {
     width: 200px;
+    float: left;
 }
 
 .talking-important-info {
     color: red;
     width: 200px;
+    margin: auto;
 }
 
 .talks {
     margin: auto;
-    width: 1000px;
+    width: 1100px;
+    display: block;
 }
 
 .talk {
     float: left;
-    width: 320px;
+    width: 360px;
  }
 
 .talk-header {
@@ -348,16 +371,38 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 .talk-image-header {
     text-align: center;
     vertical-align: middle;
+    padding: 0px;
 }
 
 .talk-image {
-    width: 300px;
+    width: 320px;
     height: 200px;
     margin-left: 15px;
     border: 1px solid #353237;
 }
 .talk p {
     margin-left: 15px;
+    height: 40px;
+}
+
+.talk-btns {
+    
+}
+
+.talk-info-btn {
+    float: left;
+    margin-left: 170px;
+}
+
+.talk-order-btn {
+    float: right;
+    margin-right: 30px;
+}
+
+.talk-date {
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
 }
 
 /* ------------------------------Historic Haarlem------------------------------*/
@@ -382,42 +427,117 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     /*display: none;*/
 }
 
-.toggle{
-    margin: 0;
-    padding: 0;
-    border: 0;
+.nav-tabs > li, .nav-pills > li {
+    float: none;
+    display: inline-block;
+    *display: inline; /* ie7 fix */
+    zoom: 1; /* hasLayout ie7 trigger */
 }
 
-div.toggle{
-    width: 300px;
-    height: 30px;
-    margin-left: auto;
-    margin-right: auto;
+.nav-tabs, .nav-pills {
+    text-align: center;
 }
 
-button.toggle{
-    float: left;
-    width: 50%;
-    height: 100%;
+.tab-content {
+    padding: 15px;
+    display: inline-block;
+    width: 100%;
+}
+
+.img-map-location {
+    width: 60%;
+    padding-left: 10px;
+}
+
+    .img-map-location img {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        float: left;
+    }
+
+.text-map-location {
+    width: 40%;
+    float: right;
+    padding-left: 20px;
+}
+
+    .text-map-location h3 {
+        margin-top: 15px;
+    }
+
+.map-img {
+    display: inline-block;
+    width: 100%;
+}
+
+.map-img img {
+    width: 100%;
+}
+
+.img-map-location .number-map {
+    position: absolute;
+    display: inline-block;
+    width: 4%;
+    height: 5%;
+}
+
+.number-map.number1 {
+    bottom: 280px;
+    left: 308px;
+}
+
+.number-map.number2 {
+    bottom: 280px;
+    left: 232px;
+}
+
+.number-map.number3 {
+    bottom: 325px;
+    left: 259px;
+}
+
+.number-map.number4 {
+    bottom: 32px;
+    left: 80px;
+}
+
+.number-map.number5 {
+    bottom: 300px;
+    left: 40px;
+}
+
+.number-map.number6 {
+    bottom: 483px;
+    left: 335px;
+}
+
+.number-map.number7 {
+    bottom: 455px;
+    left: 560px;
+}
+
+.number-map.number8 {
+    bottom: 245px;
+    left: 645px;
+}
+
+.number-map.number9 {
+    bottom: 325px;
+    left: 392px;
+}
+
+.locations {
+    display: none;
+}
+
+#location1{
     display: block;
-    transition-duration: 0.6s;
-    background-color: #d1d1d1;
-}
-
-#location-button{
-    background-color: #4CAF50;
-}
-
-button.toggle:hover {
-    background-color: #92ba93!important;
 }
 
 /*****************************/
 /** ADMIN PAGE SPECIFIC CSS **/
 /*****************************/
-
-
-
 /* Login Pagina */
 #loginArea {
     width: 100%;
@@ -446,34 +566,17 @@ button.toggle:hover {
     float: left;
 }
 
-#loginArea ul {
-    list-style-type: none;
-}
-
-#loginArea ul li {
-    margin-left: -4%;
-    text-align: center;
-    vertical-align: middle;
-}
-
-#loginArea ul li .username, #loginArea ul li .password {
-    width: 225px;
-    height: 53px;
-    margin-top: 10px;
-    font-size: 15px;
-    padding-left: 70px;
+#loginArea .username, #loginArea .password {
+    height: 50px;
+    font-size: 20px;
     border: 1px solid silver;
-    border-style: solid solid solid none;
 }
 
-#loginArea ul li .username {
-    background-image: url('/images/Admin/UsernameLabel.png');
-    background-repeat: no-repeat;
-}
-
-#loginArea ul li .password {
-    background-image: url('/images/Admin/PasswordLabel.png');
-    background-repeat: no-repeat;
+#loginArea  {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    text-align: center;
 }
     
 input[type='text']:focus, input[type='password']:focus {
@@ -486,23 +589,41 @@ input[type='text']:focus, input[type='password']:focus {
     color: white;
     width: 140px;
     height: 40px;
-    border-radius: 20px;
-    margin-top: 50px;
     margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
+#loginArea .input-group-addon {
+    background-color: #92140C;
+    border-radius: 15px 0px 0px 15px;
+    color: white;
+}
 
 
 /* Overview Pagina */
-#ManageEvent {
-
+.overviewPage section {
+    margin-top: 100px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-#TicketSalesInformation  {
+#manageEventSelection {
+    margin-top: 0px;
+    width: 100%;
+    height: 100px;
+}
 
+#manageEventSelection button {
+    width: 150px;
 }
 
 .introText {
+    width: 75%;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
@@ -520,9 +641,11 @@ input[type='text']:focus, input[type='password']:focus {
 #topFilterBar select {
     width: 200px;
     height: 25px;
-    border: 1px solid black;
+    border: 1px solid #000000;
     border-style: none none solid none;
     outline: none;
+    position: relative;
+    height: 100%;
 }
 
 #topFilterBar select option {
@@ -530,14 +653,14 @@ input[type='text']:focus, input[type='password']:focus {
 }
 
 #filterSystem .eventFilter:focus {
-    border-color: cornflowerblue;
+    border-color: #6495ed;
 }
 
 #filterSystem .eventFilter option {
     border: 2px solid black;
     border-style: none solid none solid;
     height: 30px;
-    color: black;
+    color: #000000;
 }
 
 #filterSystem .eventFilter option:last-child {
@@ -545,11 +668,11 @@ input[type='text']:focus, input[type='password']:focus {
 }
 
 #filterSystem .eventFilter option:nth-child(even), .eventData tr:nth-child(even) {
-    background-color: lightgray;
+    background-color: #D3D3D3;
 }
 
 #filterSystem .eventFilter option:nth-child(odd), .eventData tr:nth-child(off) {
-    background-color: white;
+    background-color: #FFFFFF;
 }
 
 
@@ -564,7 +687,7 @@ input[type='text']:focus, input[type='password']:focus {
     background-color: rgba(0,0,0,0.5);
     display: none;
     z-index: -10;
-    border: 1px solid black;
+    border: 1px solid #000000;
     border-radius: 20px;
 }
 

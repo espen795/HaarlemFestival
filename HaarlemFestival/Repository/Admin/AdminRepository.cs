@@ -15,7 +15,7 @@ namespace HaarlemFestival.Repository.Admin
 
         public void AddEvent(Activity activity)
         {
-            throw new NotImplementedException
+            throw new NotImplementedException();
         }
 
         public void UpdateEvent(Activity activity)
@@ -28,9 +28,6 @@ namespace HaarlemFestival.Repository.Admin
             throw new NotImplementedException();
         }
 
-        public EventList GetEvents()
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

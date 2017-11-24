@@ -15,6 +15,6 @@ namespace HaarlemFestival.Scripts
         // Manage Events
         void UpdateEvent();
         void DeleteEvent();
-        EventList GetEvents();
+        //EventList GetEvents();
     }
 }
