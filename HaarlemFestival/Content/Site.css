@@ -48,6 +48,10 @@ body {
     background-color: #BE7C4D;
 }
 
+.navbar .right {
+    float: right;
+}
+
 /* FOOTER */
 footer {
     margin-top: 20px;
