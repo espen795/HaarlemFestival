@@ -44,10 +44,14 @@
 <div class="container body-content">
 
     <section id="loginArea">
-        <section id="loginError">
-            <!-- Image Toevoegen met class "validationImage" -->
-            @Html.ValidationSummary()
-        </section>
+
+        <div id="loginError">
+            <div class="alert alert-danger alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Error!</strong><br />
+                @Html.ValidationSummary()
+            </div>
+        </div>
 
         <p class="title">Please enter your login information below.</p>
 

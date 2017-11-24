@@ -554,10 +554,7 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 }
 
 #loginError {
-    max-width: 300px;
-    height: 50px;
-    border: 1px solid black;
-    border-radius: 10px;
+    max-width: 400px;
     text-align: center;
     opacity: 0;
     text-align: center;
@@ -566,21 +563,10 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     margin-bottom: 50px;
 }
 
-.validationImage {
-    float: left;
-}
-
 #loginArea .username, #loginArea .password {
     height: 50px;
     font-size: 20px;
     border: 1px solid silver;
-}
-
-#loginArea  {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    text-align: center;
 }
     
 input[type='text']:focus, input[type='password']:focus {
@@ -671,28 +657,8 @@ input[type='text']:focus, input[type='password']:focus {
     border-style: none solid solid solid;
 }
 
-#filterSystem .eventFilter option:nth-child(even), .eventData tr:nth-child(even) {
-    background-color: #D3D3D3;
-}
-
-#filterSystem .eventFilter option:nth-child(odd), .eventData tr:nth-child(off) {
-    background-color: #FFFFFF;
-}
-
-
 .eventData tr td ,.eventData th {
     text-align: center !important;
-}
-
-.popup {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    display: none;
-    z-index: -10;
-    border: 1px solid #000000;
-    border-radius: 20px;
 }
 
 /********************************/
