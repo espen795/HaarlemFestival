@@ -423,14 +423,6 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     padding: 15px;
 }
 
-#location-content {
-
-}
-
-#map-content {
-    /*display: none;*/
-}
-
 .nav-tabs > li, .nav-pills > li {
     float: none;
     display: inline-block;
@@ -440,6 +432,7 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 
 .nav-tabs, .nav-pills {
     text-align: center;
+    font-size: 1.15em;
 }
 
 .tab-content {
@@ -537,6 +530,41 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 
 #location1{
     display: block;
+}
+
+/*----- Historic tickets -----*/
+
+.event-header.historicTickets {
+    background-image: url('/images/Historic/title/ticket.png');
+}
+
+.historic-tickets p {
+    text-align: center;
+}
+
+.ticket-table {
+}
+
+.ticket-table table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ticket-table table tr th {
+    background-color: #8bd47a;
+    font-size: 1.12em;
+    color: #fff;
+    padding-right: 35px;
+    padding-left: 10px;
+}
+
+.ticket-table table tr td {
+    padding-right: 40px;
+    padding-left: 10px;
+}
+
+tr:nth-child(even) {
+    background-color: #eee;
 }
 
 /*****************************/
