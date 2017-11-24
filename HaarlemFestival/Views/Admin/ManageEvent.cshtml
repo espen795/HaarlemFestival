@@ -55,21 +55,6 @@
             return this;
         }
 
-        function ShowDeletePopup()
-        {
-            // Popup tonen
-            $('.popup').css("z-index", "9999");
-            $('.popup').show();
-            $('#deletePopup').center(); // DeletePopup naar het midden verplaatsen.
-        }
-
-        function HidePopup()
-        {
-            // Popup verbergen.
-            $('.popup').css("z-index", "-10");
-            $('.popup').css("display", "none");
-        }
-
         function SelectedEventChanged()
         {
             // Alle Data Tabellen verbergen.
