@@ -592,17 +592,18 @@ input[type='text']:focus, input[type='password']:focus {
 
 
 /* Overview Pagina */
-.overviewPage section {
+#welcomeArea {
     margin-top: 100px;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    font-size: 15px;
 }
 
-#manageEventSelection {
-    margin-top: 0px;
-    width: 100%;
-    height: 100px;
+.overviewContent {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#manageEventSelection button {
+    margin-top: 10px;
 }
 
 #manageEventSelection button {
@@ -610,13 +611,12 @@ input[type='text']:focus, input[type='password']:focus {
 }
 
 .introText {
-    width: 75%;
+    width: 95%;
     font-weight: bold;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
 }
-
-
 
 /* Manage Event Pagina */
 #topFilterBar {
