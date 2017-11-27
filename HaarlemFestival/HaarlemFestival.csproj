@@ -139,6 +139,9 @@
     <Compile Include="Models\Cuisine.cs" />
     <Compile Include="Models\Day.cs" />
     <Compile Include="Models\Guides.cs" />
+    <Compile Include="Models\InterviewQuestion.cs" />
+    <Compile Include="Models\Talk.cs" />
+    <Compile Include="Models\Talking.cs" />
     <Compile Include="Models\Jazz.cs" />
     <Compile Include="Models\Tour.cs" />
     <Compile Include="Models\Historic.cs" />
@@ -208,6 +211,7 @@
     <Content Include="Views\Talking\Reservation.cshtml" />
     <Content Include="Views\Admin\_UpdateEvent.cshtml" />
     <Content Include="Views\Jazz\DayOverview.cshtml" />
+    <Content Include="Views\Talking\Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
