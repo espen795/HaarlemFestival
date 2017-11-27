@@ -139,7 +139,7 @@
     <Compile Include="Models\Cuisine.cs" />
     <Compile Include="Models\Day.cs" />
     <Compile Include="Models\Guides.cs" />
-    <Compile Include="Models\Interviewvraag.cs" />
+    <Compile Include="Models\InterviewQuestion.cs" />
     <Compile Include="Models\Talk.cs" />
     <Compile Include="Models\Talking.cs" />
     <Compile Include="Models\Jazz.cs" />

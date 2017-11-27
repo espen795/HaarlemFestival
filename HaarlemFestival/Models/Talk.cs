@@ -7,9 +7,9 @@ namespace HaarlemFestival.Models
 {
     public class Talk
     {
-        public string gesprekspersoon1;
-        public string gesprekspersoon2;
-        public Interviewvraag vraag;
+        public string person1;
+        public string person2;
+        public InterviewQuestion question;
         public int maxTickets;
         
         public Talk()

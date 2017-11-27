@@ -5,12 +5,12 @@ using System.Web;
 
 namespace HaarlemFestival.Models
 {
-    public class Interviewvraag
+    public class InterviewQuestion
     {
-        public string inhoud;
-        public string ontvanger;
+        public string content;
+        public string receiver;
 
-        public Interviewvraag()
+        public InterviewQuestion()
         {
 
         }
