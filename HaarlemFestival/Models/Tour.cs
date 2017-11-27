@@ -8,9 +8,8 @@ namespace HaarlemFestival.Models
     public class Tour
     {
         public int TourId { get; set; }
-        public int TotalTickets { get; set; }
-        public Languages Language { get; set; }
-        public Guides Guide { get; set; }
+        public virtual Languages Language { get; set; }
+        public virtual Guides Guide { get; set; }
 
         public Tour()
         {

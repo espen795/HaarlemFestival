@@ -5,8 +5,9 @@ using System.Web;
 
 namespace HaarlemFestival.Models
 {
-    public enum Languages
+    public class Languages
     {
-        Dutch, English, Chinese
+        public int IdLanguage { get; set; }
+        public string Language { get; set; }
     }
 }
