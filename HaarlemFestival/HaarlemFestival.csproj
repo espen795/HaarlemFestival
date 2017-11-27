@@ -135,12 +135,17 @@
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\BesteldeActiviteit.cs" />
+    <Compile Include="Models\Concert.cs" />
     <Compile Include="Models\Cuisine.cs" />
     <Compile Include="Models\Day.cs" />
+    <Compile Include="Models\Guides.cs" />
+    <Compile Include="Models\Jazz.cs" />
+    <Compile Include="Models\Tour.cs" />
+    <Compile Include="Models\Historic.cs" />
     <Compile Include="Models\Dinner.cs" />
     <Compile Include="Models\EventType.cs" />
     <Compile Include="Models\Klant.cs" />
-    <Compile Include="Models\Language.cs" />
+    <Compile Include="Models\Languages.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Reservering.cs" />
     <Compile Include="Models\Restaurant.cs" />
@@ -170,7 +175,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -199,7 +206,6 @@
     <Content Include="Views\Historic\Reservation.cshtml" />
     <Content Include="Views\Jazz\Reservation.cshtml" />
     <Content Include="Views\Talking\Reservation.cshtml" />
-    <Content Include="Views\Admin\_deleteConfirmation.cshtml" />
     <Content Include="Views\Admin\_UpdateEvent.cshtml" />
     <Content Include="Views\Jazz\DayOverview.cshtml" />
   </ItemGroup>

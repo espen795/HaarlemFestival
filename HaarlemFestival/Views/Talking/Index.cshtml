@@ -61,7 +61,7 @@
         <!-- Section 4 -->
         <section class="talks">
             <article class="talk">
-                <p class="talk-image-header">Giel Beelen</p>
+                <h4 class="talk-image-header">Giel Beelen</h4>
                 <section>
                     <img class="talk-image" src="/images/Talking/Giel_Beelen2.jpg" />
                 </section>
@@ -70,12 +70,13 @@
                     Famous DJ Giel meets TV host Rob.
                 </p>
                 <section>
-                    <p class="btn btn-black"><a href="#">More info</a></p>
-                    <p class="btn btn-black"><a href="#">Order Ticket</a></p>
+                    <a href="#"><img class="talk-info-btn" src="/images/Info_Button.png" /></a>
+                    <p >@Html.ActionLink("Order Ticket", "Index", "Talking", new { @class = "btn btn-black talk-order-btn" })</p>
                 </section>
+                <p class="talk-date">Thursday July 26th</p>
             </article>
             <article class="talk">
-                <p class="talk-image-header">Femke Halsema</p>
+                <h4 class="talk-image-header">Femke Halsema</h4>
                 <section>
                     <img class="talk-image" src="/images/Talking/Femke_Halsema2.jpg" />
                 </section>
@@ -84,23 +85,25 @@
                     Two ex-politics question each other about their career and experiences in Haarlem.
                 </p>
                 <section>
-                    <p class="btn btn-black"><a href="#">More info</a></p>
-                    <p class="btn btn-black"><a href="#">Order Ticket</a></p>
+                    <a href="#"><img class="talk-info-btn" src="/images/Info_Button.png" /></a>
+                    <p>@Html.ActionLink("Order Ticket", "Index", "Talking", new { @class = "btn btn-black talk-order-btn" })</p>
                 </section>
+                <p class="talk-date">Friday July 27th</p>
             </article>
             <article class="talk">
-                <p class="talk-image-header">Paul Witteman</p>
+                <h4 class="talk-image-header">Paul Witteman</h4>
                 <section>
-                    <img class="talk-image" src="/images/Talking/Giel_Beelen2.jpg" />
+                    <img class="talk-image" src="/images/Talking/Paul_Witteman2.jpg" />
                 </section>
                 <h3 class="talk-header">Paul Witteman meets Brigitte Kaandorp</h3>
                 <p>
                     TV host Paul meets journalist Brigitte.
                 </p>
-                <section>
-                    <p class="btn btn-black"><a href="#">More info</a></p>
-                    <p class="btn btn-black"><a href="#">Order Ticket</a></p>
+                <section class="talk-btns">
+                    <a href="#"><img class="talk-info-btn" src="/images/Info_Button.png"/></a>
+                    <p>@Html.ActionLink("Order Ticket", "Index", "Talking", new { @class="btn btn-black talk-order-btn" })</p>
                 </section>
+                <p class="talk-date">Saturday July 28th</p>
             </article>
         </section>
     </section>

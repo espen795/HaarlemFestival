@@ -20,12 +20,9 @@ namespace HaarlemFestival.Controllers
                 Session["failedLogins"] = 0;
             }
 
-            DateTime now = DateTime.Now;
-            Session["loginBlockCounter"] = now.AddMinutes(5);
-
             // Als er 3x verkeerd is ingelogd.
             if ((int)Session["failedLogins"] == 3)
-                ModelState.AddModelError("login-block", "Some of the entered information is invalid. Please try again in 5 minutes (" + (DateTime)Session["loginBlockCounter"] + ")");
+                ModelState.AddModelError("login-block", "Some of the entered information is invalid. Please try again in 300 seconds (5 minutes)");
 
             return View();
         }
@@ -121,18 +118,6 @@ namespace HaarlemFestival.Controllers
         public ActionResult Download()
         {
             return View();
-        }
-
-
-        // PartialViews - W.I.P
-        public ActionResult _updateEvent()
-        {
-            return PartialView();
-        }
-
-        public ActionResult _deleteConfirmation()
-        {
-            return PartialView();
         }
     }
 }

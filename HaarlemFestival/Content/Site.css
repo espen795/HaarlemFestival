@@ -23,10 +23,6 @@ body {
     background: #736e6e;
 }
 
-.white {
-    color: white;
-}
-
 /* NAV BAR */
 .navbar {
     background-color: #92140C;
@@ -50,6 +46,10 @@ body {
 
 .navbar .navbar-nav > li > a:hover {
     background-color: #BE7C4D;
+}
+
+.navbar .right {
+    float: right;
 }
 
 /* FOOTER */
@@ -76,18 +76,14 @@ footer a:hover {
     text-decoration: none;
 }
 
-footer .glyphicon {
-    font-size: 12px;
+.white {
+    color: white;
 }
-
-footer i {
-    margin-right: 5px;
-}
-
 
 /*****************/
 /*** HOMEPAGE ****/
 /*****************/
+
 /* BANNER HOMEPAGE */
 .banner {
     height: 300px;
@@ -198,8 +194,6 @@ footer i {
 .event-banner {
     height: 300px;
     background-image: url('/images/regular_banner.png');
-    background-position: center center;
-    border-bottom: 1px solid #353237;
 }
 
 .event-section-1 {
@@ -289,10 +283,6 @@ footer i {
     overflow: hidden;
 }
 
-.event-banner.jazz {
-    background-image: url('/images/Jazz/jazzbanner.png');
-}
-
 .jazz .event-section-3 .keuze_blok img {
     border: 1px solid #353237;
 }
@@ -314,13 +304,6 @@ footer i {
     padding-left: 17px;
 }
 
-.jazz-overview .event-header {
-    background-image: url('/images/jazz/jazz-overview_banner.png');
-}
-
-.jazz-overview .event-section-3{
-    overflow:hidden;
-}
 
 /* ------------------------------Dinner in Haarlem-----------------------------*/
 .event-section-1-dinner {
@@ -355,12 +338,14 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 }
 
 .talking-info {
-    width: 100%;
+    width: 97%;
     display: inline-block;
+    border-bottom: solid black 1px;
+    margin-left: 15px;
 }
 
 .talking-info * {
-    margin-left: 15px;
+
 }
 
 .talking-place-time {
@@ -376,12 +361,13 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 
 .talks {
     margin: auto;
-    width: 1000px;
+    width: 1100px;
+    display: block;
 }
 
 .talk {
     float: left;
-    width: 320px;
+    width: 360px;
  }
 
 .talk-header {
@@ -393,10 +379,11 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 .talk-image-header {
     text-align: center;
     vertical-align: middle;
+    padding: 0px;
 }
 
 .talk-image {
-    width: 300px;
+    width: 320px;
     height: 200px;
     margin-left: 15px;
     border: 1px solid #353237;
@@ -404,6 +391,26 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 .talk p {
     margin-left: 15px;
     height: 40px;
+}
+
+.talk-btns {
+    
+}
+
+.talk-info-btn {
+    float: left;
+    margin-left: 170px;
+}
+
+.talk-order-btn {
+    float: right;
+    margin-right: 30px;
+}
+
+.talk-date {
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
 }
 
 /* ------------------------------Historic Haarlem------------------------------*/
@@ -420,14 +427,6 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     padding: 15px;
 }
 
-#location-content {
-
-}
-
-#map-content {
-    /*display: none;*/
-}
-
 .nav-tabs > li, .nav-pills > li {
     float: none;
     display: inline-block;
@@ -437,6 +436,7 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 
 .nav-tabs, .nav-pills {
     text-align: center;
+    font-size: 1.15em;
 }
 
 .tab-content {
@@ -536,48 +536,65 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     display: block;
 }
 
+/*----- Historic tickets -----*/
+
+.event-header.historicTickets {
+    background-image: url('/images/Historic/title/ticket.png');
+}
+
+.historic-tickets p {
+    text-align: center;
+}
+
+.ticket-table {
+}
+
+.ticket-table table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ticket-table table tr th {
+    background-color: #8bd47a;
+    font-size: 1.12em;
+    color: #fff;
+    padding-right: 35px;
+    padding-left: 10px;
+}
+
+.ticket-table table tr td {
+    padding-right: 40px;
+    padding-left: 10px;
+}
+
+tr:nth-child(even) {
+    background-color: #eee;
+}
+
 /*****************************/
 /** ADMIN PAGE SPECIFIC CSS **/
 /*****************************/
 /* Login Pagina */
-#loginArea {
-    width: 100%;
-    margin-top: 100px;
-}
-
 #loginArea .title {
     text-align: center;
     font-size: 30px;
 }
 
 #loginError {
-    max-width: 300px;
-    height: 50px;
-    border: 1px solid black;
-    border-radius: 10px;
+    max-width: 400px;
     text-align: center;
     opacity: 0;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 50px;
     margin-bottom: 50px;
-}
-
-.validationImage {
-    float: left;
 }
 
 #loginArea .username, #loginArea .password {
     height: 50px;
     font-size: 20px;
     border: 1px solid silver;
-}
-
-#loginArea  {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    text-align: center;
 }
     
 input[type='text']:focus, input[type='password']:focus {
@@ -603,17 +620,20 @@ input[type='text']:focus, input[type='password']:focus {
 
 
 /* Overview Pagina */
-.overviewPage section {
+#welcomeArea {
     margin-top: 100px;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    font-size: 15px;
+    text-align: center;
+    padding: 0px;
 }
 
-#manageEventSelection {
-    margin-top: 0px;
-    width: 100%;
-    height: 100px;
+.overviewContent {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#manageEventSelection button {
+    margin-top: 10px;
 }
 
 #manageEventSelection button {
@@ -621,13 +641,12 @@ input[type='text']:focus, input[type='password']:focus {
 }
 
 .introText {
-    width: 75%;
+    width: 95%;
     font-weight: bold;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
 }
-
-
 
 /* Manage Event Pagina */
 #topFilterBar {
@@ -667,15 +686,6 @@ input[type='text']:focus, input[type='password']:focus {
 #filterSystem .eventFilter option:last-child {
     border-style: none solid solid solid;
 }
-
-#filterSystem .eventFilter option:nth-child(even), .eventData tr:nth-child(even) {
-    background-color: #D3D3D3;
-}
-
-#filterSystem .eventFilter option:nth-child(odd), .eventData tr:nth-child(off) {
-    background-color: #FFFFFF;
-}
-
 
 .eventData tr td ,.eventData th {
     text-align: center !important;
