@@ -9,6 +9,8 @@ namespace HaarlemFestival.Models
     {
         public int TourId { get; set; }
         public virtual Tour Tour { get; set; }
+        public float TicketPrice { get; set; }
+        public float GroupPrice { get; set; }
 
         public Historic()
         {

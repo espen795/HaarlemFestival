@@ -14,12 +14,7 @@ namespace HaarlemFestival.Models
         public int TotalTickets { get; set; }   // EN
         public string Rating { get; set; }
         public string Description { get; set; }
-        public int Cuisine1Id { get; set; }
-        public virtual Cuisine Cuisine1 { get; set; }
-        public int Cuisine2Id { get; set; }
-        public virtual Cuisine Cuisine2 { get; set; }
-        public int Cuisine3Id { get; set; }
-        public virtual Cuisine Cuisine3 { get; set; }
+        public List<Cuisine> Cuisines { get; set; }
         public string FoodIMG { get; set; }
         public string LocationIMG { get; set; }
 
