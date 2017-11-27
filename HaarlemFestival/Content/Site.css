@@ -321,6 +321,8 @@ footer a:hover {
 
 /* ------------------------------Talking Haarlem-------------------------------*/
 
+/* Talking Home Page */
+
 img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images van 150 pixels*/
     display: block;
     max-width: 150px;
@@ -411,6 +413,32 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     text-align: center;
     vertical-align: middle;
     font-weight: bold;
+}
+
+/* Event (activity) info page */
+
+.talk-activity {
+    margin-left: 15px;
+}
+
+.talk-activity-info-section {
+    display: inline-block;
+}
+
+.talk-activity-properties {
+    float: left;
+    width: 150px;
+    height: 200px;
+    text-align: right;
+    font-weight: bold;
+}
+
+.oneline {
+    display: block;
+}
+
+.talk-activity-info {
+    width: 600px;
 }
 
 /* ------------------------------Historic Haarlem------------------------------*/
