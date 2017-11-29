@@ -7,7 +7,6 @@ namespace HaarlemFestival.Models
 {
     public class Jazz : Activity
     {
-        public int JazzId { get; set; }
         public string ConcertLocation { get; set; }
         public string ConcertHall { get; set; }
         public float AllDayPassPartout { get; set; }
