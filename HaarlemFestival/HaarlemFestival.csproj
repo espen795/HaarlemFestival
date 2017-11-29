@@ -142,9 +142,9 @@
     <Compile Include="Migrations\201711271532174_initial.Designer.cs">
       <DependentUpon>201711271532174_initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711271614357_initial3.cs" />
-    <Compile Include="Migrations\201711271614357_initial3.Designer.cs">
-      <DependentUpon>201711271614357_initial3.cs</DependentUpon>
+    <Compile Include="Migrations\201711291305416_initial3.cs" />
+    <Compile Include="Migrations\201711291305416_initial3.Designer.cs">
+      <DependentUpon>201711291305416_initial3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
@@ -244,8 +244,8 @@
     <EmbeddedResource Include="Migrations\201711271532174_initial.resx">
       <DependentUpon>201711271532174_initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711271614357_initial3.resx">
-      <DependentUpon>201711271614357_initial3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711291305416_initial3.resx">
+      <DependentUpon>201711291305416_initial3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
