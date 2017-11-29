@@ -22,9 +22,9 @@ namespace HaarlemFestival.Models
         }
         DbModelBuilder modelBuilder = new DbModelBuilder();
         public DbSet<Account> Accounts { get; set; }
-        public DbSet<Activity> Activities { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Activity>().ToTable("Activities");
             modelBuilder.Entity<Jazz>().ToTable("Jazzs");
             modelBuilder.Entity<Dinner>().ToTable("Dinners");
             modelBuilder.Entity<Historic>().ToTable("Historics");
