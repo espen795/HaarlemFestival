@@ -93,7 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HaarlemFestival\HaarlemFestival.csproj">
-      <Project>{EB9A4E87-4B39-4E52-85C6-29A620155962}</Project>
+      <Project>{eb9a4e87-4b39-4e52-85c6-29a620155962}</Project>
       <Name>HaarlemFestival</Name>
     </ProjectReference>
   </ItemGroup>

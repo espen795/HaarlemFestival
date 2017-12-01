@@ -9,11 +9,10 @@ namespace HaarlemFestival.Models
     {
         public int ActivityId { get; set; }
         public EventType EventType { get; set; }
-        public DateTime DateReservation { get; set; }
         public DateTime StartSession { get; set; }
         public DateTime EndSession { get; set; }
-        public float Price { get; set; }
-        public float AlternativePrice { get; set; }
+        public float? Price { get; set; }
+        public float? AlternativePrice { get; set; }
         public int TotalTickets { get; set; }
         public int BoughtTickets { get; set; }
         public string Phonenumber { get; set; }

@@ -9,12 +9,11 @@ namespace HaarlemFestival.Models
 {
     public class HFDB : DbContext
     {
-        // You can add custom code to this file. Changes will not be overwritten.
-        // 
-        // If you want Entity Framework to drop and regenerate your database
-        // automatically whenever you change your model schema, please use data migrations.
-        // For more information refer to the documentation:
-        // http://msdn.microsoft.com/en-us/data/jj591621.aspx
+        /* UPDATE DATABASE
+         * enable-migrations
+         * add-migration naam
+          * update-database
+         */
     
         public HFDB() : base("name=HFDB")
         {
@@ -35,17 +34,17 @@ namespace HaarlemFestival.Models
         public DbSet<BesteldeActiviteit> BesteldeActiviteiten { get; set; }
         public DbSet<Cuisine> Cuisines { get; set; }
         public DbSet<Day> Days { get; set; }
-        //public DbSet<Dinner> Dinners { get; set; }
+        public DbSet<Dinner> Dinners { get; set; }
         public DbSet<Guide> Guides { get; set; }
-        //public DbSet<Historic> Historics { get; set; }
+        public DbSet<Historic> Historics { get; set; }
         public DbSet<InterviewQuestion> InterviewQuestions { get; set; }
-        //public DbSet<Jazz> Jazzs { get; set; }
+        public DbSet<Jazz> Jazzs { get; set; }
         public DbSet<Klant> Klanten { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<Reservering> Reserveringen { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Talk> Talks { get; set; }
-        //public DbSet<Talking> Talkings { get; set; }
+        public DbSet<Talking> Talkings { get; set; }
         public DbSet<Tour> Tours { get; set; }
     }
 }
