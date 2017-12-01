@@ -7,20 +7,25 @@
     // Als de pagina is geladen.
     $(document).ready(function ()
     {
-        var badLogins = @Session["failedLogins"];
-        GetModelErrors("@ViewData.ModelState.IsValid", badLogins)
+        if (sessionStorage.getItem("failedLogins") == null)
+        {
+            sessionStorage.setItem("failedLogins", 0);
+        }
 
-        if (badLogins == 3) {
-            LoginBlock();
-            @{Session["failedLogins"] = 0;}
+        var badLogins = sessionStorage.getItem("failedLogins");
+        GetModelErrors("@ViewData.ModelState.IsValid", badLogins)
+        
+        if (badLogins >= 3) {
+            LoginBlock();            
         }
     });
 
 
     function GetModelErrors(noErrors, failedLogins)
     {
-        if ((noErrors != "True") || (failedLogins == 3)) {
+        if ((noErrors != "True") || (failedLogins >= 3)) {
             $('#loginError').css('opacity', '1.0');
+            sessionStorage.setItem("failedLogins", sessionStorage.getItem("failedLogins") + 1);
         }
     }
 
@@ -34,7 +39,8 @@
         var timer = setInterval(function ()
         {
             timeRemaining--;
-            $('.loginErrors').text("Some of the entered information isn't correct, please try again in " + timeRemaining + " seconds");
+            $('.loginErrors').text(
+                "Some of the entered information isn't correct. \nYou can try again in " + timeRemaining + " seconds.");
 
             if (timeRemaining == 0) {
                 // Alert van danger naar info veranderen.
@@ -51,6 +57,7 @@
 
                 // Interval van de timer weghalen.
                 clearInterval(timer);
+                sessionStorage.setItem("failedLogins", 0);
             }
         }, 1000);
     }

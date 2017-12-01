@@ -9,9 +9,6 @@ namespace HaarlemFestival.Models
     {
         public int RestaurantId { get; set; }
         public string Naam { get; set; }
-        public float Prijs { get; set; }
-        public float KinderPrijs { get; set; }  // NL?
-        public int TotalTickets { get; set; }   // EN
         public string Rating { get; set; }
         public string Description { get; set; }
         public List<Cuisine> Cuisines { get; set; }

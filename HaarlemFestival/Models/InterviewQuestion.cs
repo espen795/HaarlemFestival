@@ -7,6 +7,7 @@ namespace HaarlemFestival.Models
 {
     public class InterviewQuestion
     {
+        public int InterviewQuestionId { get; set; }
         public string content;
         public string receiver;
 

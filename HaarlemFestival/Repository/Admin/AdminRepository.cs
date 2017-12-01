@@ -8,9 +8,12 @@ namespace HaarlemFestival.Repository.Admin
 {
     public class AdminRepository : IAdminRepository
     {
+        private HFDB db = new HFDB();
+
         public Account GetAccount(string username, string password)
-        {
-            throw new NotImplementedException();
+        {           
+            Account account = db.Accounts.Where(a => (a.Username == username) && (a.Password == password)).FirstOrDefault();
+            return account;
         }
 
         public void AddEvent(Activity activity)
@@ -20,12 +23,53 @@ namespace HaarlemFestival.Repository.Admin
 
         public void UpdateEvent(Activity activity)
         {
-            throw new NotImplementedException();
+            // TODO: Roep Tabellen aan
+            switch(activity.EventType)
+            {
+                case EventType.JazzPatronaat:
+                    break;
+
+                case EventType.DinnerInHaarlem:
+                    break;
+
+                case EventType.TalkingHaarlem:
+                    break;
+
+                case EventType.HistoricHaarlem:
+                    break;
+            }
+
+            db.SaveChanges();
         }
 
         public void DeleteEvent(Activity activity)
         {
-            throw new NotImplementedException();
+            db.Activities.Remove(activity);
+
+            switch (activity.EventType)
+            {
+                case EventType.JazzPatronaat:
+                    Jazz jazz = db.Jazzs.Find(activity.ActivityId);
+                    db.Jazzs.Remove(jazz);
+                    break;
+
+                case EventType.DinnerInHaarlem:
+                    Dinner dinner = db.Dinners.Find(activity.ActivityId);
+                    db.Dinners.Remove(dinner);
+                    break;
+
+                case EventType.TalkingHaarlem:
+                    Talking talking = db.Talkings.Find(activity.ActivityId);
+                    db.Talkings.Remove(talking);
+                    break;
+
+                case EventType.HistoricHaarlem:
+                    Historic historic = db.Historics.Find(activity.ActivityId);
+                    db.Historics.Remove(historic);
+                    break;
+            }
+
+            db.SaveChanges();
         }
 
        

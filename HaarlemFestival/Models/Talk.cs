@@ -7,6 +7,7 @@ namespace HaarlemFestival.Models
 {
     public class Talk
     {
+        public int TalkId { get; set; }
         public string person1;
         public string person2;
         public InterviewQuestion question;

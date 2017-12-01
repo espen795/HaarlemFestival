@@ -45,6 +45,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -123,22 +129,40 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DinnerController.cs" />
     <Compile Include="Controllers\JazzController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\DinnerController.cs" />
     <Compile Include="Controllers\TalkingController.cs" />
     <Compile Include="Controllers\HistoricController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711291315243_initial.cs" />
+    <Compile Include="Migrations\201711291315243_initial.Designer.cs">
+      <DependentUpon>201711291315243_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712011229461_mig1.cs" />
+    <Compile Include="Migrations\201712011229461_mig1.Designer.cs">
+      <DependentUpon>201712011229461_mig1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712011234008_mig2.cs" />
+    <Compile Include="Migrations\201712011234008_mig2.Designer.cs">
+      <DependentUpon>201712011234008_mig2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712011253312_mig3.cs" />
+    <Compile Include="Migrations\201712011253312_mig3.Designer.cs">
+      <DependentUpon>201712011253312_mig3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\BesteldeActiviteit.cs" />
-    <Compile Include="Models\Concert.cs" />
+    <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\Cuisine.cs" />
     <Compile Include="Models\Day.cs" />
-    <Compile Include="Models\Guides.cs" />
+    <Compile Include="Models\Guide.cs" />
+    <Compile Include="Models\HFDB.cs" />
     <Compile Include="Models\InterviewQuestion.cs" />
     <Compile Include="Models\Talk.cs" />
     <Compile Include="Models\Talking.cs" />
@@ -148,7 +172,7 @@
     <Compile Include="Models\Dinner.cs" />
     <Compile Include="Models\EventType.cs" />
     <Compile Include="Models\Klant.cs" />
-    <Compile Include="Models\Languages.cs" />
+    <Compile Include="Models\Language.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Reservering.cs" />
     <Compile Include="Models\Restaurant.cs" />
@@ -197,7 +221,6 @@
     <Content Include="Views\Admin\Login.cshtml" />
     <Content Include="Views\Admin\ManageEvent.cshtml" />
     <Content Include="Views\Admin\Overview.cshtml" />
-    <Content Include="Views\Dinner\Index.cshtml" />
     <Content Include="Views\Index.cshtml" />
     <Content Include="Views\Historic\Index.cshtml" />
     <Content Include="Views\Jazz\Index.cshtml" />
@@ -205,13 +228,14 @@
     <Content Include="Views\Home\Basket.cshtml" />
     <Content Include="Views\Home\Agenda.cshtml" />
     <Content Include="Views\Home\Reservation.cshtml" />
-    <Content Include="Views\Dinner\Reservation.cshtml" />
     <Content Include="Views\Historic\Reservation.cshtml" />
     <Content Include="Views\Jazz\Reservation.cshtml" />
     <Content Include="Views\Talking\Reservation.cshtml" />
     <Content Include="Views\Admin\_UpdateEvent.cshtml" />
     <Content Include="Views\Jazz\DayOverview.cshtml" />
     <Content Include="Views\Talking\Info.cshtml" />
+    <Content Include="Views\Dinner\Index.cshtml" />
+    <Content Include="Views\Dinner\Reservation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -223,6 +247,20 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201711291315243_initial.resx">
+      <DependentUpon>201711291315243_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712011229461_mig1.resx">
+      <DependentUpon>201712011229461_mig1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712011234008_mig2.resx">
+      <DependentUpon>201712011234008_mig2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712011253312_mig3.resx">
+      <DependentUpon>201712011253312_mig3.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

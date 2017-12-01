@@ -7,7 +7,6 @@ namespace HaarlemFestival.Models
 {
     public class Talking : Activity
     {
-        public int TalkingId { get; set; }
         public virtual Talk Talk { get; set; }
 
         public Talking() 
