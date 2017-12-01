@@ -8,6 +8,8 @@ namespace HaarlemFestival.Migrations
         public override void Up()
         {
             DropColumn("dbo.Historics", "Activity");
+
+            
         }
         
         public override void Down()
