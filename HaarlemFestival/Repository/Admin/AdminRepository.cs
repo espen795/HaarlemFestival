@@ -41,30 +41,31 @@ namespace HaarlemFestival.Repository.Admin
 
             db.SaveChanges();
         }
+        public void DeleteEvent(int id)
 
-        public void DeleteEvent(Activity activity)
         {
+            Activity activity = db.Activities.Find(id);
             db.Activities.Remove(activity);
 
             switch (activity.EventType)
             {
                 case EventType.JazzPatronaat:
-                    Jazz jazz = db.Jazzs.Find(activity.ActivityId);
+                    Jazz jazz = db.Jazzs.Find(id);
                     db.Jazzs.Remove(jazz);
                     break;
 
                 case EventType.DinnerInHaarlem:
-                    Dinner dinner = db.Dinners.Find(activity.ActivityId);
+                    Dinner dinner = db.Dinners.Find(id);
                     db.Dinners.Remove(dinner);
                     break;
 
                 case EventType.TalkingHaarlem:
-                    Talking talking = db.Talkings.Find(activity.ActivityId);
+                    Talking talking = db.Talkings.Find(id);
                     db.Talkings.Remove(talking);
                     break;
 
                 case EventType.HistoricHaarlem:
-                    Historic historic = db.Historics.Find(activity.ActivityId);
+                    Historic historic = db.Historics.Find(id);
                     db.Historics.Remove(historic);
                     break;
             }
