@@ -7,7 +7,7 @@
     // Als de pagina is geladen.
     $(document).ready(function ()
     {
-        var badLogins = @Session["failedLogins"];
+        var badLogins = @Session["failedLogins"]
         GetModelErrors("@ViewData.ModelState.IsValid", badLogins)
 
         if (badLogins == 3) {
@@ -34,7 +34,7 @@
         var timer = setInterval(function ()
         {
             timeRemaining--;
-            $('.loginErrors').text("Some of the entered information isn't correct, please try again in " + timeRemaining + " seconds");
+            $('.loginErrors').text("Some of the entered information isn't correct.<br/>You can try again in " + timeRemaining + " seconds.");
 
             if (timeRemaining == 0) {
                 // Alert van danger naar info veranderen.

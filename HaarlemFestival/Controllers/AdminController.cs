@@ -11,6 +11,7 @@ namespace HaarlemFestival.Controllers
     public class AdminController : Controller
     {
         IAdminRepository adminRepository = new AdminRepository();
+
         // GET: Admin
         public ActionResult Login()
         {
@@ -32,7 +33,7 @@ namespace HaarlemFestival.Controllers
         {
             if (ModelState.IsValid)
             {
-                Account account = new Account();
+                Account account = adminRepository.GetAccount(model.Username, model.Password);
 
                 if (account != null) // Als het account bestaat
                 {
@@ -40,13 +41,17 @@ namespace HaarlemFestival.Controllers
 
                     Session["loggedin_account"] = account;
 
-                    return RedirectToAction("Overview", "Admin"); // De gebruiker naar zijn of haar contactenlijst sturen
+                    return RedirectToAction("Overview", "Admin"); // Naar de overview pagina sturen
                 }
                 else // Als het account niet bestaat
                 {
                     ModelState.AddModelError("login-error", "Some of the entered information is invalid.");
                 }
             }
+
+            int failedLogins = (int)Session["failedLogins"];
+
+            Session["failedLogins"] = failedLogins + 1;
 
             return View(model);
         }

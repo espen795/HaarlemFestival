@@ -35,17 +35,17 @@ namespace HaarlemFestival.Models
         public DbSet<BesteldeActiviteit> BesteldeActiviteiten { get; set; }
         public DbSet<Cuisine> Cuisines { get; set; }
         public DbSet<Day> Days { get; set; }
-        //public DbSet<Dinner> Dinners { get; set; }
+        public DbSet<Dinner> Dinners { get; set; }
         public DbSet<Guide> Guides { get; set; }
-        //public DbSet<Historic> Historics { get; set; }
+        public DbSet<Historic> Historics { get; set; }
         public DbSet<InterviewQuestion> InterviewQuestions { get; set; }
-        //public DbSet<Jazz> Jazzs { get; set; }
+        public DbSet<Jazz> Jazzs { get; set; }
         public DbSet<Klant> Klanten { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<Reservering> Reserveringen { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Talk> Talks { get; set; }
-        //public DbSet<Talking> Talkings { get; set; }
+        public DbSet<Talking> Talkings { get; set; }
         public DbSet<Tour> Tours { get; set; }
     }
 }
