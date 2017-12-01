@@ -30,6 +30,7 @@ namespace HaarlemFestival.Models
             modelBuilder.Entity<Talking>().ToTable("Talkings");
         }
 
+        public DbSet<Activity> Activities { get; set; }
         public DbSet<Artist> Artists { get; set; }
         public DbSet<BesteldeActiviteit> BesteldeActiviteiten { get; set; }
         public DbSet<Cuisine> Cuisines { get; set; }
