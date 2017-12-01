@@ -42,7 +42,6 @@ namespace HaarlemFestival.Repository.Admin
             db.SaveChanges();
         }
         public void DeleteEvent(int id)
-
         {
             Activity activity = db.Activities.Find(id);
             db.Activities.Remove(activity);
@@ -71,6 +70,21 @@ namespace HaarlemFestival.Repository.Admin
             }
 
             db.SaveChanges();
+        }
+
+        public EventData GetEventData()
+        {
+            EventData data = new EventData
+            {
+                Activities = db.Activities.ToList(),
+
+                Dates = db.Days.ToList(),
+                Cuisines = db.Cuisines.ToList(),
+                Languages = db.Languages.ToList(),
+                Guides = db.Guides.ToList()
+            };
+
+            return data;
         }
 
        

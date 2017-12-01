@@ -1,4 +1,5 @@
-﻿@using HaarlemFestival.Models;
+﻿@using HaarlemFestival.Models
+@model EventData
 @{
     ViewBag.Title = "Manage";
 }
@@ -23,7 +24,7 @@
 
             <!-- FOOTER -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("DeleteEvent","Admin")'"><i class="fa fa-check"></i> Yes, I am sure</button>
+                <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("DeleteEvent","Admin", new { })'"><i class="fa fa-check"></i> Yes, I am sure</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> No, Take me back</button>
             </div>
         </div>
@@ -73,22 +74,22 @@
             switch ($('#selectedEvent').val())
             {
                 case "Jazz@Patronaat":
-                    $('#jazzEvents').show();
+                    $('#jazzTable').show();
                     $('#dateFilter').show();
                     break;
 
                 case "DinnerInHaarlem":
-                    $('#dinnerEvents').show();
+                    $('#dinnerTable').show();
                     $('#cuisineFilter').show();
                     break;
 
                 case "TalkingHaarlem":
-                    $('#talkingEvents').show();
+                    $('#talkingTable').show();
                     $('#dateFilter').show();
                     break;
 
                 case "HistoricHaarlem":
-                    $('#historicEvents').show();
+                    $('#historicTable').show();
                     $('#placeholderTable').show();
                     $('#dateFilter').show();
                     $('#guideFilter').show();
@@ -145,6 +146,11 @@
                 .show();
         }
 
+        function DeleteEvent(id)
+        {
+            $("#deletePopup").attr("activityId", id);
+        }
+
     </script>
 
     <section id="topFilterBar">
@@ -159,14 +165,16 @@
         </div>
 
         <div id="filterSystem">
+            <!-- Html.DropDownListFor(m => m.Dates, new SelectList(Model.Languages, "Naam", "Naam"), new { id = "dateFilter", class = "eventFilter" }) -->
             <select id="dateFilter" class="eventFilter" onchange="FilterData()">
                 <option value="">Select a Date.</option>
                 <option value="Thursday 26-07-2018">Thursday 26-07-2018</option>
                 <option value="Friday 27-07-2018">Friday 27-07-2018</option>
                 <option value="Saturday 28-07-2018">Saturday 28-07-2018</option>
                 <option value="Sunday 29-07-2018">Sunday 29-07-2018</option>
-            </select>
+            </select>        
 
+            <!-- Html.DropDownListFor(m => m.Guides, new SelectList(Model.Guides, "GuideName", "GuideName"), new { id = "guideFilter", class = "eventFilter" }) -->
             <select id="guideFilter" class="eventFilter" onchange="FilterData()">
                 <option value="">Select a Guide.</option>
                 <option value="Frederic">Frederic</option>
@@ -176,6 +184,7 @@
                 <option value="Kim">Kim</option>
             </select>
 
+            <!-- Html.DropDownListFor(m => m.Languages, new SelectList(Model.Languages, "LanguageName", "LanguageName"), new { id = "languageFilter", class = "eventFilter" }) -->
             <select id="languageFilter" class="eventFilter" onchange="FilterData()">
                 <option value="">Select a Language.</option>
                 <option value="English">English</option>
@@ -183,6 +192,7 @@
                 <option value="Chinese">Chinese</option>
             </select>
 
+            <!-- Html.DropDownListFor(m => m.Cuisines, new SelectList(Model.Cuisines, "LanguageName", "LanguageName"), new { id = "cuisineFilter", class = "eventFilter" }) -->
             <select id="cuisineFilter" class="eventFilter" onchange="FilterData()">
                 <option value="">Select a Cuisine.</option>
                 <option value="Argentinian">Argentinian</option>
@@ -199,100 +209,107 @@
     </section>
 
     <section class="table-responsive">
-        <table id="placeholderTable" class="eventData table table-striped table-responsive">
-            <thead>
+
+        <table id="jazzTable" class="eventData table table-striped table-responsive">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Location</th>
+                <th>Hall</th>
+                <th>Price</th>
+                <th>Seats</th>
+                <th>Image</th>
+            </tr>
+            @foreach(Jazz activity in Model.Activities.OfType<Jazz>())
+            {
                 <tr>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Start Location</th>
-                    <th>Language</th>
-                    <th>Guide</th>
-                    <th>Seats</th>
-                    <th>Price</th>
-                    <th>Group Ticket</th>
-                    <th>Reservation</th>
-                </tr>
-            </thead>
-            <tbody id="data">
-                <tr>
-                    <td>Thursday 26-07-2018</td>
-                    <td>10:00</td>
-                    <td>Bavo</td>
-                    <td>English</td>
-                    <td>Frederic</td>
-                    <td>12</td>
-                    <td>17.50</td>
-                    <td>60.00</td>
-                    <td>Mandatory</td>
+                    <td>@activity.artist.ArtistName</td>
+                    <td>@activity.artist.ArtistInformation</td>
+                    <td>@activity.StartSession</td>
+                    <td>@activity.EndSession</td>
+                    <td>@activity.ConcertLocation</td>
+                    <td>@activity.ConcertHall</td>
+                    <td>@activity.Price</td>
+                    <td>@activity.TotalTickets</td>
+                    <td><i class="glyphicon glyphicon-picture"></i></td>
                     <td><i class="glyphicon glyphicon-pencil"></i></td>
-                    <td><i data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                    <td><i onclick="DeleteEvent(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                 </tr>
-                <tr>
-                    <td>Thursday 26-07-2018</td>
-                    <td>10:00</td>
-                    <td>Bavo</td>
-                    <td>Dutch</td>
-                    <td>Jan-Willem</td>
-                    <td>12</td>
-                    <td>17.50</td>
-                    <td>60.00</td>
-                    <td>Mandatory</td>
-                    <td><i class="glyphicon glyphicon-pencil"></i></td>
-                    <td><i data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
-                </tr>
-                <tr>
-                    <td>Thursday 26-07-2018</td>
-                    <td>13:00</td>
-                    <td>Bavo</td>
-                    <td>English</td>
-                    <td>Frederic</td>
-                    <td>12</td>
-                    <td>17.50</td>
-                    <td>60.00</td>
-                    <td>Mandatory</td>
-                    <td><i class="glyphicon glyphicon-pencil"></i></td>
-                    <td><i data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
-                </tr>
-                <tr>
-                    <td>Thursday 26-07-2018</td>
-                    <td>13:00</td>
-                    <td>Bavo</td>
-                    <td>Dutch</td>
-                    <td>Jan-Willem</td>
-                    <td>12</td>
-                    <td>17.50</td>
-                    <td>60.00</td>
-                    <td>Mandatory</td>
-                    <td><i class="glyphicon glyphicon-pencil"></i></td>
-                    <td><i data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
-                </tr>
-                <tr>
-                    <td>Thursday 26-07-2018</td>
-                    <td>16:00</td>
-                    <td>Bavo</td>
-                    <td>English</td>
-                    <td>Frederic</td>
-                    <td>12</td>
-                    <td>17.50</td>
-                    <td>60.00</td>
-                    <td>Mandatory</td>
-                    <td><i class="glyphicon glyphicon-pencil"></i></td>
-                    <td><i data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
-                </tr>
-                <tr>
-                    <td>Thursday 26-07-2018</td>
-                    <td>16:00</td>
-                    <td>Bavo</td>
-                    <td>Dutch</td>
-                    <td>Jan-Willem</td>
-                    <td>12</td>
-                    <td>17.50</td>
-                    <td>60.00</td>
-                    <td>Mandatory</td>
-                    <td><i class="glyphicon glyphicon-pencil"></i></td>
-                    <td><i data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
-                </tr>
-            </tbody>
+            }
         </table>
+
+        <!-- TODO: Dinner laten zien (W.I.P) -->
+        <table id="dinnerTable" class="eventData table table-striped table-responsive">
+            <tr>
+                <th>Date & Time</th>
+                <th>Start Location</th>
+                <th>Language</th>
+                <th>Guide</th>
+                <th>Seats</th>
+                <th>Price</th>
+                <th>Group Ticket</th>
+            </tr>
+        </table>
+
+        <table id="talkingTable" class="eventData table table-striped table-responsive">
+            <tr>
+                <th>Interview</th>
+                <th>Description</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Seats</th>
+                <th>Location</th>
+                <th>Hall</th>
+                <th>Price</th>
+                <th>Maximum Tickets</th>
+                <th>Image</th>
+            </tr>
+            @foreach (Talking activity in Model.Activities.OfType<Talking>())
+            {
+                <tr>
+                    <td>@activity.Talk.person1 meets @activity.Talk.person2</td>
+                    <td>Description - Niet aangemaakt in class</td>
+                    <td>@activity.StartSession</td>
+                    <td>@activity.EndSession</td>
+                    <td>@activity.TotalTickets</td>
+                    <td>@activity.Address</td>
+                    <td>Hall - Niet aangemaakt in class</td>
+                    <td>@activity.Price</td>
+                    <td>@activity.Talk.maxTickets</td>
+                    <td><i class="glyphicon glyphicon-picture"></i></td>
+                    <td><i class="glyphicon glyphicon-pencil"></i></td>
+                    <td><i onclick="DeleteEvent(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                </tr>
+            }
+        </table>
+
+        <table id="historicTable" class="eventData table table-striped table-responsive">
+            <tr>
+                <th>Date & Time</th>
+                <th>Start Location</th>
+                <th>Language</th>
+                <th>Guide</th>
+                <th>Seats</th>
+                <th>Price</th>
+                <th>Group Ticket</th>
+            </tr>
+            @foreach (Historic activity in Model.Activities.OfType<Historic>())
+            {
+                <tr>
+                    <td>@activity.StartSession.ToString("dddd dd-MM-yy H:mm")</td>
+                    <td>@activity.Address</td>
+                    <td>@activity.Tour.Language.LanguageName</td>
+                    <td>@activity.Tour.Guide.GuideName</td>
+                    <td>@activity.TotalTickets</td>
+                    <td>@activity.Price</td>
+                    <td>@activity.AlternativePrice</td>
+                    <td><i class="glyphicon glyphicon-pencil"></i></td>
+                    <td><i onclick="DeleteEvent(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                </tr>
+            }
+        </table>
+
     </section>
 </div>

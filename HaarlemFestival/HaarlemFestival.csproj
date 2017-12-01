@@ -161,6 +161,7 @@
     <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\Cuisine.cs" />
     <Compile Include="Models\Day.cs" />
+    <Compile Include="Models\EventData.cs" />
     <Compile Include="Models\Guide.cs" />
     <Compile Include="Models\HFDB.cs" />
     <Compile Include="Models\InterviewQuestion.cs" />

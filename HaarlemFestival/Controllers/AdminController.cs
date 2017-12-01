@@ -67,6 +67,8 @@ namespace HaarlemFestival.Controllers
         [Authorize]
         public ActionResult ManageEvent()
         {
+            EventData data = new EventData();
+
             string selectedEvent = this.Request.QueryString["selectedEvent"];
 
             switch (selectedEvent)
@@ -84,7 +86,7 @@ namespace HaarlemFestival.Controllers
             }
 
             // TODO: Verkrijg eventlijst - EventList events = repository.GetEvents()
-            return View();
+            return View(data);
         }
 
         [HttpPost]
@@ -103,9 +105,9 @@ namespace HaarlemFestival.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult DeleteEvent(Activity activity)
+        public ActionResult DeleteEvent(int id)
         {
-            adminRepository.DeleteEvent(activity);
+            adminRepository.DeleteEvent(id);
             ViewBag.Status = "Deleted";
             return RedirectToAction("ManageEvent","Admin");
         }
