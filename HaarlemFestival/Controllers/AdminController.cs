@@ -21,10 +21,6 @@ namespace HaarlemFestival.Controllers
                 Session["failedLogins"] = 0;
             }
 
-            // Als er 3x verkeerd is ingelogd.
-            if ((int)Session["failedLogins"] == 3)
-                ModelState.AddModelError("login-block", "Some of the entered information is invalid. Please try again in 300 seconds (5 minutes)");
-
             return View();
         }
 
@@ -48,10 +44,6 @@ namespace HaarlemFestival.Controllers
                     ModelState.AddModelError("login-error", "Some of the entered information is invalid.");
                 }
             }
-
-            int failedLogins = (int)Session["failedLogins"];
-
-            Session["failedLogins"] = failedLogins + 1;
 
             return View(model);
         }
