@@ -564,6 +564,21 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     display: block;
 }
 
+.btn.btn-book{
+    background: #81c871;
+    color: #fff;
+    border-radius: 0px;
+    transition: 300ms;
+    right: 20px;
+    bottom: 20px;
+    position: absolute;
+}
+
+.btn-book:hover {
+    color: #fff;
+    background: #639757;
+}
+
 /*----- Historic tickets -----*/
 
 .event-header.historicTickets {
@@ -583,7 +598,7 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 }
 
 .ticket-table table tr th {
-    background-color: #8bd47a;
+    background-color: #81c871;
     font-size: 1.12em;
     color: #fff;
     padding-right: 35px;
