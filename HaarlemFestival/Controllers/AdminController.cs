@@ -67,7 +67,7 @@ namespace HaarlemFestival.Controllers
         [Authorize]
         public ActionResult ManageEvent()
         {
-            EventData data = new EventData();
+            EventData data = adminRepository.GetEventData();
 
             string selectedEvent = this.Request.QueryString["selectedEvent"];
 
