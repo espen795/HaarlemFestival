@@ -715,7 +715,7 @@ input[type='text']:focus, input[type='password']:focus {
     border-style: none solid solid solid;
 }
 
-.eventData tr td ,.eventData th {
+.eventData tr td ,.eventTable thead th {
     text-align: center !important;
 }
 

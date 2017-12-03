@@ -59,7 +59,7 @@
         function SelectedEventChanged()
         {
             // Alle Data Tabellen verbergen.
-            $('.eventData').each(function ()
+            $('.eventTable').each(function ()
             {
                 $(this).hide();
             })
@@ -165,34 +165,20 @@
         </div>
 
         <div id="filterSystem">
-            <!-- Html.DropDownListFor(m => m.Dates, new SelectList(Model.Languages, "Naam", "Naam"), new { id = "dateFilter", class = "eventFilter" }) -->
+            <!-- Html.DropDownListFor(m => m.Dates, new SelectList(Model.Dates, "Naam", "Naam"), "Select a Date.", new { id = "dateFilter", class = "eventFilter" }) -->
             <select id="dateFilter" class="eventFilter" onchange="FilterData()">
                 <option value="">Select a Date.</option>
-                <option value="Thursday 26-07-2018">Thursday 26-07-2018</option>
-                <option value="Friday 27-07-2018">Friday 27-07-2018</option>
-                <option value="Saturday 28-07-2018">Saturday 28-07-2018</option>
-                <option value="Sunday 29-07-2018">Sunday 29-07-2018</option>
+                <option value="Thursday 26-07-18">Thursday 26-07-18</option>
+                <option value="Friday 27-07-18">Friday 27-07-18</option>
+                <option value="Saturday 28-07-18">Saturday 28-07-18</option>
+                <option value="Sunday 29-07-18">Sunday 29-07-18</option>
             </select>        
 
-            <!-- Html.DropDownListFor(m => m.Guides, new SelectList(Model.Guides, "GuideName", "GuideName"), new { id = "guideFilter", class = "eventFilter" }) -->
-            <select id="guideFilter" class="eventFilter" onchange="FilterData()">
-                <option value="">Select a Guide.</option>
-                <option value="Frederic">Frederic</option>
-                <option value="Jan-Willem">Jan-Willem</option>
-                <option value="Williams">Williams</option>
-                <option value="Annet">Annet</option>
-                <option value="Kim">Kim</option>
-            </select>
+            @Html.DropDownListFor(m => m.Guides, new SelectList(Model.Guides, "GuideName", "GuideName"), "Select a Guide.", new { @id = "guideFilter", @class = "eventFilter", @onchange = "FilterData()" }) 
 
-            <!-- Html.DropDownListFor(m => m.Languages, new SelectList(Model.Languages, "LanguageName", "LanguageName"), new { id = "languageFilter", class = "eventFilter" }) -->
-            <select id="languageFilter" class="eventFilter" onchange="FilterData()">
-                <option value="">Select a Language.</option>
-                <option value="English">English</option>
-                <option value="Dutch">Dutch</option>
-                <option value="Chinese">Chinese</option>
-            </select>
+            @Html.DropDownListFor(m => m.Languages, new SelectList(Model.Languages, "LanguageName", "LanguageName"), "Select a Language.", new { @id = "languageFilter", @class = "eventFilter", @onchange = "FilterData()" })
 
-            <!-- Html.DropDownListFor(m => m.Cuisines, new SelectList(Model.Cuisines, "LanguageName", "LanguageName"), new { id = "cuisineFilter", class = "eventFilter" }) -->
+            <!-- Html.DropDownListFor(m => m.Cuisines, new SelectList(Model.Cuisines, "Naam", "Naam"), "Select a Cuisine.", new { id = "cuisineFilter", class = "eventFilter", onchange = "FilterData()" }) -->
             <select id="cuisineFilter" class="eventFilter" onchange="FilterData()">
                 <option value="">Select a Cuisine.</option>
                 <option value="Argentinian">Argentinian</option>
@@ -210,19 +196,22 @@
 
     <section class="table-responsive">
 
-        <table id="jazzTable" class="eventData table table-striped table-responsive">
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Start</th>
-                <th>End</th>
-                <th>Location</th>
-                <th>Hall</th>
-                <th>Price</th>
-                <th>Seats</th>
-                <th>Image</th>
-            </tr>
-            <tbody>
+        <table id="jazzTable" class="eventTable table table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Location</th>
+                    <th>Hall</th>
+                    <th>Price</th>
+                    <th>Seats</th>
+                    <th>Image</th>
+                    <th colspan="2"></th>
+                </tr>
+            </thead>
+            <tbody class="eventData">
                 @foreach (Jazz activity in Model.Activities.OfType<Jazz>())
                 {
                     <tr>
@@ -243,35 +232,41 @@
         </table>
 
         <!-- TODO: Dinner laten zien (W.I.P) -->
-        <table id="dinnerTable" class="eventData table table-striped table-responsive">
-            <tr>
-                <th>Date & Time</th>
-                <th>Start Location</th>
-                <th>Language</th>
-                <th>Guide</th>
-                <th>Seats</th>
-                <th>Price</th>
-                <th>Group Ticket</th>
-            </tr>
-            <tbody>
+        <table id="dinnerTable" class="eventTable table table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th>Date & Time</th>
+                    <th>Start Location</th>
+                    <th>Language</th>
+                    <th>Guide</th>
+                    <th>Seats</th>
+                    <th>Price</th>
+                    <th>Group Ticket</th>
+                    <th colspan="2"></th>
+                </tr>
+            </thead>
+            <tbody class="eventData">
                 
             </tbody>
         </table>
 
-        <table id="talkingTable" class="eventData table table-striped table-responsive">
-            <tr>
-                <th>Interview</th>
-                <th>Description</th>
-                <th>Start</th>
-                <th>End</th>
-                <th>Seats</th>
-                <th>Location</th>
-                <th>Hall</th>
-                <th>Price</th>
-                <th>Maximum Tickets</th>
-                <th>Image</th>
-            </tr>
-            <tbody>
+        <table id="talkingTable" class="eventTable table table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th>Interview</th>
+                    <th>Description</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Seats</th>
+                    <th>Location</th>
+                    <th>Hall</th>
+                    <th>Price</th>
+                    <th>Maximum Tickets</th>
+                    <th>Image</th>
+                    <th colspan="2"></th>
+                </tr>
+            </thead>
+            <tbody class="eventData">
                 @foreach (Talking activity in Model.Activities.OfType<Talking>())
                 {
                     <tr>
@@ -292,7 +287,8 @@
             </tbody>
         </table>
 
-        <table id="historicTable" class="eventData table table-striped table-responsive">
+        <table id="historicTable" class="eventTable table table-striped table-responsive">
+            <thead>
             <tr>
                 <th>Date & Time</th>
                 <th>Start Location</th>
@@ -301,8 +297,10 @@
                 <th>Seats</th>
                 <th>Price</th>
                 <th>Group Ticket</th>
+                <th colspan="2"></th>
             </tr>
-            <tbody>
+            </thead>
+            <tbody class="eventData">
                 @foreach (Historic activity in Model.Activities.OfType<Historic>())
                 {
                     <tr>
