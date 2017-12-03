@@ -118,7 +118,7 @@
             console.log(filters);
 
             // Alle rows van de table vinden.
-            var tr = $("#data").find("tr");
+            var tr = $(".eventData").find("tr");
             tr.hide(); // Alle rows van de table verbergen.
 
             // Als er geen filter is geselecteerd.
@@ -222,22 +222,24 @@
                 <th>Seats</th>
                 <th>Image</th>
             </tr>
-            @foreach(Jazz activity in Model.Activities.OfType<Jazz>())
-            {
-                <tr>
-                    <td>@activity.artist.ArtistName</td>
-                    <td>@activity.artist.ArtistInformation</td>
-                    <td>@activity.StartSession</td>
-                    <td>@activity.EndSession</td>
-                    <td>@activity.ConcertLocation</td>
-                    <td>@activity.ConcertHall</td>
-                    <td>@activity.Price</td>
-                    <td>@activity.TotalTickets</td>
-                    <td><i class="glyphicon glyphicon-picture"></i></td>
-                    <td><i class="glyphicon glyphicon-pencil"></i></td>
-                    <td><i onclick="DeleteEvent(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
-                </tr>
-            }
+            <tbody>
+                @foreach (Jazz activity in Model.Activities.OfType<Jazz>())
+                {
+                    <tr>
+                        <td>@activity.artist.ArtistName</td>
+                        <td>@activity.artist.ArtistInformation</td>
+                        <td>@activity.StartSession</td>
+                        <td>@activity.EndSession</td>
+                        <td>@activity.ConcertLocation</td>
+                        <td>@activity.ConcertHall</td>
+                        <td>@activity.Price</td>
+                        <td>@activity.TotalTickets</td>
+                        <td><i class="glyphicon glyphicon-picture"></i></td>
+                        <td><i class="glyphicon glyphicon-pencil"></i></td>
+                        <td><i onclick="DeleteEvent(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                    </tr>
+                }
+            </tbody>
         </table>
 
         <!-- TODO: Dinner laten zien (W.I.P) -->
@@ -251,6 +253,9 @@
                 <th>Price</th>
                 <th>Group Ticket</th>
             </tr>
+            <tbody>
+                
+            </tbody>
         </table>
 
         <table id="talkingTable" class="eventData table table-striped table-responsive">
@@ -266,23 +271,25 @@
                 <th>Maximum Tickets</th>
                 <th>Image</th>
             </tr>
-            @foreach (Talking activity in Model.Activities.OfType<Talking>())
-            {
-                <tr>
-                    <td>@activity.Talk.person1 meets @activity.Talk.person2</td>
-                    <td>Description - Niet aangemaakt in class</td>
-                    <td>@activity.StartSession</td>
-                    <td>@activity.EndSession</td>
-                    <td>@activity.TotalTickets</td>
-                    <td>@activity.Address</td>
-                    <td>Hall - Niet aangemaakt in class</td>
-                    <td>@activity.Price</td>
-                    <td>@activity.Talk.maxTickets</td>
-                    <td><i class="glyphicon glyphicon-picture"></i></td>
-                    <td><i class="glyphicon glyphicon-pencil"></i></td>
-                    <td><i onclick="DeleteEvent(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
-                </tr>
-            }
+            <tbody>
+                @foreach (Talking activity in Model.Activities.OfType<Talking>())
+                {
+                    <tr>
+                        <td>@activity.Talk.person1 meets @activity.Talk.person2</td>
+                        <td>Description - Niet aangemaakt in class</td>
+                        <td>@activity.StartSession</td>
+                        <td>@activity.EndSession</td>
+                        <td>@activity.TotalTickets</td>
+                        <td>@activity.Address</td>
+                        <td>Hall - Niet aangemaakt in class</td>
+                        <td>@activity.Price</td>
+                        <td>@activity.Talk.maxTickets</td>
+                        <td><i class="glyphicon glyphicon-picture"></i></td>
+                        <td><i class="glyphicon glyphicon-pencil"></i></td>
+                        <td><i onclick="DeleteEvent(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                    </tr>
+                }
+            </tbody>
         </table>
 
         <table id="historicTable" class="eventData table table-striped table-responsive">
@@ -295,20 +302,22 @@
                 <th>Price</th>
                 <th>Group Ticket</th>
             </tr>
-            @foreach (Historic activity in Model.Activities.OfType<Historic>())
-            {
-                <tr>
-                    <td>@activity.StartSession.ToString("dddd dd-MM-yy H:mm")</td>
-                    <td>@activity.Address</td>
-                    <td>@activity.Tour.Language.LanguageName</td>
-                    <td>@activity.Tour.Guide.GuideName</td>
-                    <td>@activity.TotalTickets</td>
-                    <td>@activity.Price</td>
-                    <td>@activity.AlternativePrice</td>
-                    <td><i class="glyphicon glyphicon-pencil"></i></td>
-                    <td><i onclick="DeleteEvent(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
-                </tr>
-            }
+            <tbody>
+                @foreach (Historic activity in Model.Activities.OfType<Historic>())
+                {
+                    <tr>
+                        <td>@activity.StartSession.ToString("dddd dd-MM-yy H:mm")</td>
+                        <td>@activity.Address</td>
+                        <td>@activity.Tour.Language.LanguageName</td>
+                        <td>@activity.Tour.Guide.GuideName</td>
+                        <td>@activity.TotalTickets</td>
+                        <td>@activity.Price</td>
+                        <td>@activity.AlternativePrice</td>
+                        <td><i class="glyphicon glyphicon-pencil"></i></td>
+                        <td><i onclick="DeleteEvent(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                    </tr>
+                }
+            </tbody>
         </table>
 
     </section>
