@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using HaarlemFestival.Models;
+using System.Data.Entity;
 
 namespace HaarlemFestival.Repository.Admin
 {
@@ -23,22 +24,7 @@ namespace HaarlemFestival.Repository.Admin
 
         public void UpdateEvent(Activity activity)
         {
-            // TODO: Roep Tabellen aan
-            switch(activity.EventType)
-            {
-                case EventType.JazzPatronaat:
-                    break;
-
-                case EventType.DinnerInHaarlem:
-                    break;
-
-                case EventType.TalkingHaarlem:
-                    break;
-
-                case EventType.HistoricHaarlem:
-                    break;
-            }
-
+            db.Entry(activity).State = EntityState.Modified;
             db.SaveChanges();
         }
         public void DeleteEvent(int id)
