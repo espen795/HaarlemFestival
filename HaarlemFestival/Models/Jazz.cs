@@ -10,7 +10,6 @@ namespace HaarlemFestival.Models
         public string ConcertLocation { get; set; }
         public string ConcertHall { get; set; }
         public float AllDayPassPartout { get; set; }
-
         public int ArtistId { get; set; }
         public virtual Artist artist { get; set; }
 

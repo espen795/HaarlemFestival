@@ -11,7 +11,6 @@ namespace HaarlemFestival.Models
         public string Naam { get; set; }
         public string Rating { get; set; }
         public string Description { get; set; }
-        public List<Cuisine> Cuisines { get; set; }
         public string FoodIMG { get; set; }
         public string LocationIMG { get; set; }
 
