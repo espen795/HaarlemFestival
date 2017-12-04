@@ -8,10 +8,10 @@ namespace HaarlemFestival.Models
     public class Talk
     {
         public int TalkId { get; set; }
-        public string person1;
-        public string person2;
-        public InterviewQuestion question;
-        public int maxTickets;
+        public string Person1 { get; set; }
+        public string Person2 { get; set; }
+
+        public int maxTickets { get; set; }
         
         public Talk()
         {
