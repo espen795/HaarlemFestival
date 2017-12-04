@@ -170,7 +170,6 @@
     <Compile Include="Models\Cuisine.cs" />
     <Compile Include="Models\CuisinesPerRestaurant.cs" />
     <Compile Include="Models\Day.cs" />
-    <Compile Include="Models\DBinhoud.cs" />
     <Compile Include="Models\EventData.cs" />
     <Compile Include="Models\Guide.cs" />
     <Compile Include="Models\HFDB.cs" />
