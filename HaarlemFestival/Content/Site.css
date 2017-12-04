@@ -432,6 +432,8 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 
 .talk-activity-info-section {
     display: inline-block;
+    width: 700px;
+    height: 350px;
 }
 
 .talk-activity-properties {
@@ -447,7 +449,11 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 }
 
 .talk-activity-info {
-    width: 700px;
+    margin-left: 15px;
+}
+
+.talk-activity-btns {
+
 }
 
 .talk-images {

@@ -45,20 +45,20 @@
                         </span>
                     </p>
                 </section>
+                <!-- Buttons -->
+                <section class="talk-activity-btns">
+                    <p>@Html.ActionLink("Back to Talking Haarlem", "Index", "Talking", new { @class = "btn btn-black talk-back-btn" })</p>
+
+                    <p>@Html.ActionLink("Order Ticket", "Reservation", "Talking", new { @class = "btn btn-black talk-order-btn" })</p>
+                </section>
+                <!-- Buttons -->
             </section>
             <section class="talk-images">
                 <h4 class="talk-image-header">Giel Beelen</h4>
                 <img class="talk-activity-image" src="/images/Talking/giel_beelen.jpg"/>
                 <h4 class="talk-image-header">Rob Trip</h4>
                 <img class="talk-activity-image" src="/images/Talking/rob_trip.jpg"/>
-            </section>
-        </section> <!-- Section 2 Activity Images -->
-
-        <!-- Section 3 -->
-        <section class="talk-activity-btns">
-            <p>@Html.ActionLink("Back to Talking Haarlem", "Index", "Talking", new { @class = "btn btn-black talk-back-btn" })</p>
-
-            <p>@Html.ActionLink("Order Ticket", "Reservation", "Talking", new { @class = "btn btn-black talk-order-btn" })</p>
-        </section> <!-- Section 3 Buttons -->
+            </section> <!-- Images -->
+        </section> <!-- Section 2 Activity -->
     </section> <!-- row -->
 </main>
