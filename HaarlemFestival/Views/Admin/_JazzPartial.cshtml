@@ -1,0 +1,15 @@
+﻿@using HaarlemFestival.Models
+@model Jazz
+
+@using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post))
+{
+    Html.EditorFor(j => j.artist.ArtistName);
+    Html.EditorFor(j => j.artist.ArtistInformation);
+    Html.EditorFor(j => j.StartSession);
+    Html.EditorFor(j => j.EndSession);
+    Html.EditorFor(j => j.TotalTickets);
+    Html.EditorFor(j => j.ConcertLocation);
+    Html.EditorFor(j => j.ConcertHall);
+    Html.EditorFor(j => j.Price);
+    Html.EditorFor(j => j.artist.ArtistImage);
+}
