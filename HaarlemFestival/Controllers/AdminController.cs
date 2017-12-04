@@ -48,12 +48,15 @@ namespace HaarlemFestival.Controllers
             return View(model);
         }
 
+        [Authorize]
         public ActionResult Overview()
         {
             return View();
         }
 
+
         // Uitloggen
+        [Authorize]
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
@@ -61,8 +64,11 @@ namespace HaarlemFestival.Controllers
             return RedirectToAction("Login", "Admin"); // Gebruiker naar de inlogpagina sturen.
         }
 
+        [Authorize]
         public ActionResult ManageEvent()
         {
+            EventData data = adminRepository.GetEventData();
+
             string selectedEvent = this.Request.QueryString["selectedEvent"];
 
             switch (selectedEvent)
@@ -80,10 +86,11 @@ namespace HaarlemFestival.Controllers
             }
 
             // TODO: Verkrijg eventlijst - EventList events = repository.GetEvents()
-            return View();
+            return View(data);
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult AddEvent(Activity activity)
         {
             if (ModelState.IsValid)
@@ -97,14 +104,16 @@ namespace HaarlemFestival.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteEvent(Activity activity)
+        [Authorize]
+        public ActionResult DeleteEvent(int id)
         {
-            adminRepository.DeleteEvent(activity);
+            adminRepository.DeleteEvent(id);
             ViewBag.Status = "Deleted";
             return RedirectToAction("ManageEvent","Admin");
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult UpdateEvent(Activity activity)
         {
             adminRepository.UpdateEvent(activity);
@@ -112,6 +121,7 @@ namespace HaarlemFestival.Controllers
             return RedirectToAction("ManageEvent","Admin");
         }
 
+        [Authorize]
         public ActionResult Download()
         {
             return View();

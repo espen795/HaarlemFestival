@@ -715,14 +715,17 @@ input[type='text']:focus, input[type='password']:focus {
     border-style: none solid solid solid;
 }
 
-.eventData tr td ,.eventData th {
+.eventData tr td ,.eventTable thead th {
     text-align: center !important;
+}
+
+.eventData tr td i.glyphicon-remove, .eventData tr td i.glyphicon-pencil {
+    cursor: pointer;
 }
 
 /********************************/
 /* MEDIA QUERYS VOOR RESPONSIVE */
 /********************************/
-
 @media (max-width: 1199px) {
 
 }

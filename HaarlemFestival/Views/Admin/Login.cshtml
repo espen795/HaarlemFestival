@@ -39,8 +39,8 @@
         var timer = setInterval(function ()
         {
             timeRemaining--;
-            $('.loginErrors').text(
-                "Some of the entered information isn't correct. \nYou can try again in " + timeRemaining + " seconds.");
+            var text = $('.loginErrors').text("Some of the entered information isn't correct.\nYou can try again in " + timeRemaining + " second(s).");
+            text.html(text.html().replace(/\n/g, '<br/>'));
 
             if (timeRemaining == 0) {
                 // Alert van danger naar info veranderen.
