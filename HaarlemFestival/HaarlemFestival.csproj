@@ -189,6 +189,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Admin\AdminRepository.cs" />
     <Compile Include="Repository\Admin\IAdminRepository.cs" />
+    <Compile Include="Repository\Dinner\DinnerRepository.cs" />
+    <Compile Include="Repository\Dinner\IDinnerRepository.cs" />
     <Compile Include="Scripts\IAdminRepository.cs" />
   </ItemGroup>
   <ItemGroup>

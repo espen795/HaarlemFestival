@@ -9,57 +9,88 @@
 <main class="event container talking">
     <section class="row">
         <!-- Section 1 -->
-        <section class="event-section-2">
-            <hr class="title-hr title-line-left">
-            <section class="event-header talking-haarlem">
-                <section class="overlay">
-                    <span class="header_tekst">Talks & Information</span>
-                </section>
+        <section class="talk-reservation-container">
+            <section>
+                <h1>
+                    Order your amount of tickets <span class="talk-bold">(max 2 tickets per talk)</span>
+                </h1>
             </section>
-            <hr class="title-hr title-line-right">
-        </section> <!-- Section 1 -->
-        <!-- Section 2 -->
-        <section class="talk-activity-container">
-            <section class="talk-activity">
-                <h1>Giel Beelen meets Rob Trip</h1>
-                <section class="talk-activity-info-section">
-                    <p class="talk-activity-properties">
-                        <span class="oneline">Place:</span>
-                        <span class="oneline">Time:</span>
-                        <span class="oneline">Date:</span>
-                        <span class="oneline">Interview language:</span>
-                        <span class="oneline">Reservation:</span>
-                        <span class="oneline">Price:</span>
-                        <span class="oneline">Description:</span>
-                    </p>
-                    <p class="talk-activity-info">
-                        <span class="oneline">Toneelschuur & Filmschuur, Lange Begijnestraat 9, 2011 HH Haarlem</span>
-                        <span class="oneline">20:00 - 22:00</span>
-                        <span class="oneline">Thursday July 26th, 2018</span>
-                        <span class="oneline">Dutch</span>
-                        <span class="oneline">Mandatory</span>
-                        <span class="oneline">Free</span>
-                        <span class="oneline">
-                            Have you ever wanted to question a famous DJ or a TV host?
-                            Giel Beelen (40) a famous DJ for 3FM and Rob Trip (57);
-                            another famous person will question each other, LIVE at the Toneelschuur in Haarlem.
-                        </span>
-                    </p>
-                </section>
-                <!-- Buttons -->
-                <section class="talk-activity-btns">
-                    <p>@Html.ActionLink("Back to Talking Haarlem", "Index", "Talking", new { @class = "btn btn-black talk-back-btn" })</p>
 
-                    <p>@Html.ActionLink("Order Ticket", "Reservation", "Talking", new { @class = "btn btn-black talk-order-btn" })</p>
-                </section>
-                <!-- Buttons -->
-            </section>
-            <section class="talk-images">
-                <h4 class="talk-image-header">Giel Beelen</h4>
-                <img class="talk-activity-image" src="/images/Talking/giel_beelen.jpg" />
-                <h4 class="talk-image-header">Rob Trip</h4>
-                <img class="talk-activity-image" src="/images/Talking/rob_trip.jpg" />
-            </section> <!-- Images -->
-        </section> <!-- Section 2 Activity -->
+            <section>
+                <table>
+                    <tr>
+                        <th>Ticket Amount</th>
+                        <th>Talk</th>
+                        <th>Price</th>
+                        <th>Date & Time (DD-MM-YYYY)</th>
+                        <th>Location</th>
+                    </tr>
+                    <tr>
+                        <td><input type="number" /></td>
+                        <td>Giel Beelen meets Rob Trip</td>
+                        <td>Free</td>
+                        <td>Thursday 26-07-2018 | 20:00 - 22:00</td>
+                        <td>Toneelschuur</td>
+                    </tr>
+                    <tr>
+                        <td><input type="number" /></td>
+                        <td>Femke Halsema meets Job Cohen</td>
+                        <td>Free</td>
+                        <td>Friday 27-07-2018 | 20:00 - 22:00</td>
+                        <td>Toneelschuur</td>
+                    </tr>
+                    <tr>
+                        <td><input type="number" /></td>
+                        <td>Paul Witteman meets Brigitte Kaandorp</td>
+                        <td>Free</td>
+                        <td>Saturday 28-07-2018 | 20:00 - 22:00</td>
+                        <td>Toneelschuur</td>
+                    </tr>
+                </table>
+            </section> <!-- Table -->
+            <section>
+                <p>
+                    Fill in an optional question (Dutch or English) below for one of the interviewees and it might
+                    be used for the interview <span class="talk-bold">(only if you ordered one or two tickets for that specific talk)</span>
+                </p>
+             </section> <!-- Question info-->
+             <section class="talk-questions">
+                 <section class="talk-question" id="question1">
+                     <p>Giel Beelen meets Rob Trip</p>
+                     <p>Question For: </p>
+                     <select>
+                         <option>Niemand</option>
+                         <option>Giel Beelen</option>
+                         <option>Rob Trip</option>
+                     </select>
+                     <textarea class="talk=questionbox"></textarea>
+                 </section>
+                 <section class="talk-question" id="question2">
+                     <p>Femke Halsema meets Job Cohen</p>
+                     <p>Question For: </p> 
+                     <select>
+                         <option>Niemand</option>
+                         <option>Femke Halsema</option>
+                         <option>Job Cohen</option>
+                     </select>
+                     <textarea class="talk=questionbox"></textarea>
+                 </section>
+                 <section class="talk-question" id="question3">
+                     <p>Paul Witteman meets Brigitte Kaandorp</p>
+                     <p>Question For: </p>
+                         <select>
+                             <option>Niemand</option>
+                             <option>Paul Witteman</option>
+                             <option>Brigitte Kaandorp</option>
+                         </select>
+                     <textarea class="talk=questionbox"></textarea>
+                 </section>
+             </section> <!-- Questions -->
+            <section>
+                <p>@Html.ActionLink("Back to Talking Haarlem", "Index", "Talking", new { @class = "btn btn-black talk-back-btn" })</p>
+                
+                <p>@Html.ActionLink("Add to basket", "Reservation", "Talking", new { @class = "btn btn-black talk-order-btn" })</p>
+            </section> <!-- Buttons -->
+        </section> <!-- Section 1 Reservation Container -->
     </section> <!-- row -->
 </main>
