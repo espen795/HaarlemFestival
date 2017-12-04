@@ -58,6 +58,11 @@ namespace HaarlemFestival.Repository.Admin
             db.SaveChanges();
         }
 
+        public Activity GetActivity(int id)
+        {
+            return db.Activities.Find(id);
+        }
+
         public EventData GetEventData()
         {
             EventData data = new EventData

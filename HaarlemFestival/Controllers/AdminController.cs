@@ -126,5 +126,13 @@ namespace HaarlemFestival.Controllers
         {
             return View();
         }
+
+
+        [Authorize]
+        public ActionResult _UpdateEvent(int id)
+        {
+            Activity activity = adminRepository.GetActivity(id);
+            return PartialView(activity);
+        }
     }
 }

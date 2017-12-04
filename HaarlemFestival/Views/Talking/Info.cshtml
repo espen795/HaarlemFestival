@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Info";
+    ViewBag.Title = "Talking Haarlem - Info";
 }
 <section class="event-banner talking"></section>
 
@@ -15,10 +15,10 @@
                 </section>
             </section>
             <hr class="title-hr title-line-right">
-        </section>
+        </section> <!-- Section 1 -->
 
         <!-- Section 2 -->
-        <section>
+        <section class="talk-activity-container">
             <section class="talk-activity">
                 <h1>Giel Beelen meets Rob Trip</h1>
                 <section class="talk-activity-info-section">
@@ -44,14 +44,22 @@
                             another famous person will question each other, LIVE at the Toneelschuur in Haarlem.
                         </span>
                     </p>
-                </section>
-            </section>
-            <section>
-                <p>Giel Beelen</p>
-                <img class="talk-activity-image" src=""/>
-                <p>Rob Trip</p>
-                <img class="talk-activity-image" src=""/>
-            </section>
-        </section> <!-- Section 2 -->
+                </section> <!-- Activity Info -->
+                <!-- Buttons -->
+                <section class="talk-activity-btns">
+                    <p>@Html.ActionLink("Back to Talking Haarlem", "Index", "Talking", new { @class = "btn btn-black talk-back-btn" })</p>
+
+                    <p>@Html.ActionLink("Order Ticket", "Reservation", "Talking", new { @class = "btn btn-black talk-order-btn" })</p>
+                </section> <!-- Buttons -->
+            </section> <!-- Talk Activity Block -->
+
+            <!-- Images -->
+            <section class="talk-images">
+                <h4 class="talk-image-header">Giel Beelen</h4>
+                <img class="talk-activity-image" src="/images/Talking/giel_beelen.jpg"/>
+                <h4 class="talk-image-header">Rob Trip</h4>
+                <img class="talk-activity-image" src="/images/Talking/rob_trip.jpg"/>
+            </section> <!-- Images -->
+        </section> <!-- Section 2 Activity -->
     </section> <!-- row -->
 </main>
