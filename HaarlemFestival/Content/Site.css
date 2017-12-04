@@ -331,6 +331,10 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     height: auto;
 }
 
+.talk-image, .talk-activity-image { /*Image borders*/
+    border: 1px solid #353237;
+}
+
 .event-banner.talking {
     background-image: url('/images/Talking/banner_talking_haarlem.jpg');
 }
@@ -388,15 +392,10 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     width: 320px;
     height: 200px;
     margin-left: 15px;
-    border: 1px solid #353237;
 }
 .talk p {
     margin-left: 15px;
     height: 40px;
-}
-
-.talk-btns {
-    
 }
 
 .talk-info-btn {
@@ -409,6 +408,10 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     margin-right: 30px;
 }
 
+.talk-back-btn {
+    float: left;
+}
+
 .talk-date {
     text-align: center;
     vertical-align: middle;
@@ -417,8 +420,14 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 
 /* Event (activity) info page */
 
+.talk-activity-container {
+    display: inline-block;
+}
+
 .talk-activity {
     margin-left: 15px;
+    float: left;
+    width: 800px;
 }
 
 .talk-activity-info-section {
@@ -438,7 +447,17 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 }
 
 .talk-activity-info {
-    width: 600px;
+    width: 700px;
+}
+
+.talk-images {
+    float: left;
+    margin-right: 15px;
+}
+
+.talk-activity-image {
+    width: 320px;
+    height: 200px;
 }
 
 /* ------------------------------Historic Haarlem------------------------------*/

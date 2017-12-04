@@ -28,7 +28,7 @@
                     <img class="sfeer-image-resize" src="/images/Talking/paul_witteman_squared.jpg" />
                 </section>
             </section>
-        </section>
+        </section> <!-- Section 1 -->
 
         <!-- Section 2 -->
         <section class="event-section-2">
@@ -39,7 +39,7 @@
                 </section>
             </section>
             <hr class="title-hr title-line-right">
-        </section>
+        </section> <!-- Section 2 -->
 
         <!-- Section 3 -->
         <section class="talking-info">
@@ -56,7 +56,7 @@
                 Reservation is mandatory.
                 Price: Free
             </p>
-        </section>
+        </section> <!-- Section 3 General Info -->
 
         <!-- Section 4 -->
         <section class="talks">
@@ -71,7 +71,7 @@
                 </p>
                 <section>
                     <a href="@Url.Action("Info", "Talking")"><img class="talk-info-btn" src="/images/info_button.png" /></a>
-                    <p >@Html.ActionLink("Order Ticket", "Index", "Talking", new { @class = "btn btn-black talk-order-btn" })</p>
+                    <p >@Html.ActionLink("Order Ticket", "Reservation", "Talking", new { @class = "btn btn-black talk-order-btn" })</p>
                 </section>
                 <p class="talk-date">Thursday July 26th</p>
             </article>
@@ -86,7 +86,7 @@
                 </p>
                 <section>
                     <a href="@Url.Action("Info", "Talking")"><img class="talk-info-btn" src="/images/info_button.png" /></a>
-                    <p>@Html.ActionLink("Order Ticket", "Index", "Talking", new { @class = "btn btn-black talk-order-btn" })</p>
+                    <p>@Html.ActionLink("Order Ticket", "Reservation", "Talking", new { @class = "btn btn-black talk-order-btn" })</p>
                 </section>
                 <p class="talk-date">Friday July 27th</p>
             </article>
@@ -101,7 +101,7 @@
                 </p>
                 <section class="talk-btns">
                     <a href="@Url.Action("Info", "Talking")"><img class="talk-info-btn" src="/images/info_button.png"/></a>
-                    <p>@Html.ActionLink("Order Ticket", "Index", "Talking", new { @class="btn btn-black talk-order-btn" })</p>
+                    <p>@Html.ActionLink("Order Ticket", "Reservation", "Talking", new { @class="btn btn-black talk-order-btn" })</p>
                 </section>
                 <p class="talk-date">Saturday July 28th</p>
             </article>

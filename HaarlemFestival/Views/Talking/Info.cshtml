@@ -15,21 +15,21 @@
                 </section>
             </section>
             <hr class="title-hr title-line-right">
-        </section>
+        </section> <!-- Section 1 -->
 
         <!-- Section 2 -->
-        <section>
+        <section class="talk-activity-container">
             <section class="talk-activity">
                 <h1>Giel Beelen meets Rob Trip</h1>
                 <section class="talk-activity-info-section">
                     <p class="talk-activity-properties">
-                        <span class="oneline">Place: </span>
-                        <span class="oneline">Time: </span>
-                        <span class="oneline">Date: </span>
-                        <span class="oneline">Interview language: </span>
-                        <span class="oneline">Reservation: </span>
-                        <span class="oneline">Price: </span>
-                        <span class="oneline">Description: </span>
+                        <span class="oneline">Place:</span>
+                        <span class="oneline">Time:</span>
+                        <span class="oneline">Date:</span>
+                        <span class="oneline">Interview language:</span>
+                        <span class="oneline">Reservation:</span>
+                        <span class="oneline">Price:</span>
+                        <span class="oneline">Description:</span>
                     </p>
                     <p class="talk-activity-info">
                         <span class="oneline">Toneelschuur & Filmschuur, Lange Begijnestraat 9, 2011 HH Haarlem</span>
@@ -46,12 +46,19 @@
                     </p>
                 </section>
             </section>
-            <section>
-                <p>Giel Beelen</p>
+            <section class="talk-images">
+                <h4 class="talk-image-header">Giel Beelen</h4>
                 <img class="talk-activity-image" src="/images/Talking/giel_beelen.jpg"/>
-                <p>Rob Trip</p>
+                <h4 class="talk-image-header">Rob Trip</h4>
                 <img class="talk-activity-image" src="/images/Talking/rob_trip.jpg"/>
             </section>
-        </section> <!-- Section 2 -->
+        </section> <!-- Section 2 Activity Images -->
+
+        <!-- Section 3 -->
+        <section class="talk-activity-btns">
+            <p>@Html.ActionLink("Back to Talking Haarlem", "Index", "Talking", new { @class = "btn btn-black talk-back-btn" })</p>
+
+            <p>@Html.ActionLink("Order Ticket", "Reservation", "Talking", new { @class = "btn btn-black talk-order-btn" })</p>
+        </section> <!-- Section 3 Buttons -->
     </section> <!-- row -->
 </main>
