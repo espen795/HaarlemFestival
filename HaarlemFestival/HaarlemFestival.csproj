@@ -154,12 +154,21 @@
     <Compile Include="Migrations\201712011253312_mig3.Designer.cs">
       <DependentUpon>201712011253312_mig3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712041012506_mig4.cs" />
+    <Compile Include="Migrations\201712041012506_mig4.Designer.cs">
+      <DependentUpon>201712041012506_mig4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712041036223_mig5.cs" />
+    <Compile Include="Migrations\201712041036223_mig5.Designer.cs">
+      <DependentUpon>201712041036223_mig5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\BesteldeActiviteit.cs" />
     <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\Cuisine.cs" />
+    <Compile Include="Models\CuisinesPerRestaurant.cs" />
     <Compile Include="Models\Day.cs" />
     <Compile Include="Models\EventData.cs" />
     <Compile Include="Models\Guide.cs" />
@@ -261,6 +270,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712011253312_mig3.resx">
       <DependentUpon>201712011253312_mig3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712041012506_mig4.resx">
+      <DependentUpon>201712041012506_mig4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712041036223_mig5.resx">
+      <DependentUpon>201712041036223_mig5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
