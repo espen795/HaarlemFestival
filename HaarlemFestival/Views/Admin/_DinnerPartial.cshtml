@@ -1,1 +1,13 @@
-﻿
+﻿@using HaarlemFestival.Models
+@model Dinner
+
+@using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post))
+{
+    // TODO: Add Restaurant Dropdown
+
+    Html.EditorFor(d => d.StartSession);
+    Html.EditorFor(d => d.EndSession);
+    Html.EditorFor(d => d.Price);
+    Html.EditorFor(d => d.AlternativePrice);
+    Html.EditorFor(d => d.TotalTickets);
+}

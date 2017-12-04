@@ -1,1 +1,16 @@
-﻿
+﻿@using HaarlemFestival.Models
+@model Historic
+
+@using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post))
+{
+    // DropdownList voor Days Toevoegen
+    Html.EditorFor(h => h.StartSession);
+    Html.EditorFor(h => h.Address);
+    // DropdownList voor Languages Toevoegen
+    // DropdownList voor Guides Toevoegen    
+    Html.EditorFor(h => h.TotalTickets);
+    Html.EditorFor(h => h.Price);
+    Html.EditorFor(h => h.AlternativePrice);
+
+    <input type="submit" />
+}

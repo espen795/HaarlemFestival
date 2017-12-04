@@ -32,20 +32,20 @@
 
 @using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post, new { @id = "JazzForm" }))
 {
-    // Jazz
+    Html.RenderPartial("_JazzPartial", "Admin");
 }
 
 @using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post, new { @id = "DinnerForm" }))
 {
-    // Dinner
+    Html.RenderPartial("_DinnerPartial", "Admin");
 }
 
 @using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post, new { @id = "TalkingForm" }))
 {
-    // Talking
+    Html.RenderPartial("_TalkingPartial", "Admin");
 }
 
 @using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post, new { @id = "HistoricForm" }))
 {
-    // Historic
+    Html.RenderPartial("_HistoricPartial", "Admin");
 }
