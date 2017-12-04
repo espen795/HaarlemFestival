@@ -1,0 +1,52 @@
+﻿@using HaarlemFestival.Models
+@model Activity
+
+<script type="text/javascript">
+
+    function AddEventFilter()
+    {
+        var event = $("#selectEvent").val();
+
+        switch (event) {
+            case "Jazz@Patronaat":
+                break;
+
+            case "DinnerInHaarlem":
+                break;
+
+            case "TalkingHaarlem":
+                break;
+
+            case "HistoricHaarlem":
+                break;
+        }
+    }
+
+</script>
+<select id="selectEvent" name="selectEvent" onchange="AddEventFilter()">
+    <option value="">Select an event.</option>
+    <option value="Jazz@Patronaat">Jazz@Patronaat</option>
+    <option value="DinnerInHaarlem">Dinner in Haarlem</option>
+    <option value="TalkingHaarlem">Talking Haarlem</option>
+    <option value="HistoricHaarlem">Historic Haarlem</option>
+</select>
+
+@using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post, new { @id = "JazzForm" }))
+{
+
+}
+
+@using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post, new { @id = "DinnerForm" }))
+{
+
+}
+
+@using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post, new { @id = "TalkingForm" }))
+{
+
+}
+
+@using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post, new { @id = "HistoricForm" }))
+{
+
+}

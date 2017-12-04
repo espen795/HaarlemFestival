@@ -241,11 +241,11 @@
     <Content Include="Views\Historic\Reservation.cshtml" />
     <Content Include="Views\Jazz\Reservation.cshtml" />
     <Content Include="Views\Talking\Reservation.cshtml" />
-    <Content Include="Views\Admin\_UpdateEvent.cshtml" />
     <Content Include="Views\Jazz\DayOverview.cshtml" />
     <Content Include="Views\Talking\Info.cshtml" />
     <Content Include="Views\Dinner\Index.cshtml" />
     <Content Include="Views\Dinner\Reservation.cshtml" />
+    <Content Include="Views\Admin\_AddEventView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
