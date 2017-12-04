@@ -1,1 +1,15 @@
-﻿
+﻿@using HaarlemFestival.Models
+@model Dinner
+
+@using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post))
+{
+    Html.EditorFor();
+    Html.EditorFor();
+    Html.EditorFor();
+    Html.EditorFor();
+    Html.EditorFor();
+    Html.EditorFor();
+    Html.EditorFor();
+    Html.EditorFor();
+    Html.EditorFor();
+}
