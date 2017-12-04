@@ -1,6 +1,65 @@
 ﻿@{
-    ViewBag.Title = "Talking Haarlem";
+    ViewBag.Title = "Talking Haarlem - Reservation";
 }
 
 <h2>Reservation</h2>
 
+<section class="event-banner talking"></section>
+
+<main class="event container talking">
+    <section class="row">
+        <!-- Section 1 -->
+        <section class="event-section-2">
+            <hr class="title-hr title-line-left">
+            <section class="event-header talking-haarlem">
+                <section class="overlay">
+                    <span class="header_tekst">Talks & Information</span>
+                </section>
+            </section>
+            <hr class="title-hr title-line-right">
+        </section> <!-- Section 1 -->
+        <!-- Section 2 -->
+        <section class="talk-activity-container">
+            <section class="talk-activity">
+                <h1>Giel Beelen meets Rob Trip</h1>
+                <section class="talk-activity-info-section">
+                    <p class="talk-activity-properties">
+                        <span class="oneline">Place:</span>
+                        <span class="oneline">Time:</span>
+                        <span class="oneline">Date:</span>
+                        <span class="oneline">Interview language:</span>
+                        <span class="oneline">Reservation:</span>
+                        <span class="oneline">Price:</span>
+                        <span class="oneline">Description:</span>
+                    </p>
+                    <p class="talk-activity-info">
+                        <span class="oneline">Toneelschuur & Filmschuur, Lange Begijnestraat 9, 2011 HH Haarlem</span>
+                        <span class="oneline">20:00 - 22:00</span>
+                        <span class="oneline">Thursday July 26th, 2018</span>
+                        <span class="oneline">Dutch</span>
+                        <span class="oneline">Mandatory</span>
+                        <span class="oneline">Free</span>
+                        <span class="oneline">
+                            Have you ever wanted to question a famous DJ or a TV host?
+                            Giel Beelen (40) a famous DJ for 3FM and Rob Trip (57);
+                            another famous person will question each other, LIVE at the Toneelschuur in Haarlem.
+                        </span>
+                    </p>
+                </section>
+                <!-- Buttons -->
+                <section class="talk-activity-btns">
+                    <p>@Html.ActionLink("Back to Talking Haarlem", "Index", "Talking", new { @class = "btn btn-black talk-back-btn" })</p>
+
+                    <p>@Html.ActionLink("Order Ticket", "Reservation", "Talking", new { @class = "btn btn-black talk-order-btn" })</p>
+                </section>
+                <!-- Buttons -->
+            </section>
+            <section class="talk-images">
+                <h4 class="talk-image-header">Giel Beelen</h4>
+                <img class="talk-activity-image" src="/images/Talking/giel_beelen.jpg" />
+                <h4 class="talk-image-header">Rob Trip</h4>
+                <img class="talk-activity-image" src="/images/Talking/rob_trip.jpg" />
+            </section> <!-- Images -->
+        </section> <!-- Section 2 Activity -->
+    </section> <!-- row -->
+</main>

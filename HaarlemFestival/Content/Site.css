@@ -422,6 +422,7 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 
 .talk-activity-container {
     display: inline-block;
+    height: 490px;
 }
 
 .talk-activity {
