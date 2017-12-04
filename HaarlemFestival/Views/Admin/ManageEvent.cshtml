@@ -24,7 +24,7 @@
 
             <!-- FOOTER -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("DeleteEvent","Admin", new { /* ID meesturen */ })'"><i class="fa fa-check"></i> Yes, I am sure</button>
+                <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("DeleteEvent", "Admin", new { /* ID meesturen */ })'"><i class="fa fa-check"></i> Yes, I am sure</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> No, Take me back</button>
             </div>
         </div>
@@ -51,7 +51,7 @@
             <div class="modal-body">
 
 
-                @Html.RenderPartial("_AddEventView", "Admin");
+                @{Html.RenderPartial("_AddEventView", "Admin");}
 
                 <!-- TODO: Maak tekstvakken aan om nieuw data in te lezen. -->
             </div>
