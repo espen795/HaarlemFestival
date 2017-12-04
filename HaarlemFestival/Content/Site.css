@@ -479,7 +479,7 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 .talk-question {
     float: left;
 }
-.talk=questionbox {
+.talk-questionbox {
     width: 500px;
     height: 200px;
 }
