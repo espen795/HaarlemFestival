@@ -1,4 +1,6 @@
-﻿@model List<HaarlemFestival.Models.Restaurant>
+﻿@using HaarlemFestival.Models;
+@using System.Collections.Generic;
+@model List<Restaurant>
 
 @{
     ViewBag.Title = "Dinner in Haarlem";
@@ -50,7 +52,44 @@
             <div class="cuisineselect">
                 <!--Dropdown menu voor cuisines-->
             </div>
+            <div class="restaurants">
+                @foreach (Restaurant r in Model)
+                {
+                    <div class="promo-restaurant">
+                        <img src="/images/Dinner/restaurants/@r.FoodIMG" alt="Picture not found" />
+                        <h3>@r.Naam</h3>
+                        <div class="infonames">
+                            Cuisines:<br />
+                            <br />
+                            Rating:<br />
+                            Price:<br />
+                        </div>
+                        <div class="info-info">
+                            @foreach (Cuisine c in r.Cuisines)
+                            {
+                                if (c.Naam.ToLower() == "fish and seafood")
+                                {
+                                    @c.Naam<span>,&nbsp;</span> <br />
 
+
+                                }
+                            }
+                            @foreach (Cuisine c in r.Cuisines)
+                            {
+                                if (c.Naam.ToLower() != "fish and seafood")
+                                {
+                                    @c.Naam<span>,&nbsp;</span>
+                                }
+                            }
+                            <br />
+                            @r.Rating<br />
+                            PRIJS MOET NOG!!
+                        </div>
+                        <button class="reservationbutton" type="button">Make reservation</button>
+                        <button class="infobutton" type="button"><i class="fa fa-info" aria-hidden="true"></i></button>
+                    </div>
+                }
+            </div>
         </div>
     </div>
 </div>

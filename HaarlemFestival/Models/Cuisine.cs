@@ -10,6 +10,7 @@ namespace HaarlemFestival.Models
         public int CuisineId { get; set; }
         public string Naam { get; set; }
         public virtual List<Restaurant> Restaurants { get; set; }
+
         public Cuisine( )
         {
 
