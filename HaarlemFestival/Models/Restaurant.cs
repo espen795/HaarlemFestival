@@ -13,7 +13,7 @@ namespace HaarlemFestival.Models
         public string Description { get; set; }
         public string FoodIMG { get; set; }
         public string LocationIMG { get; set; }
-
+        public virtual List<Cuisine> Cuisines { get; set; }
         public Restaurant()
         {
 

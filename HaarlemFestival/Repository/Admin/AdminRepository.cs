@@ -40,7 +40,7 @@ namespace HaarlemFestival.Repository.Admin
                     break;
 
                 case EventType.DinnerInHaarlem:
-                    Dinner dinner = db.Dinners.Find(id);
+                    Models.Dinner dinner = db.Dinners.Find(id);
                     db.Dinners.Remove(dinner);
                     break;
 
