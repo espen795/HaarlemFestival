@@ -246,7 +246,6 @@
     <Content Include="Views\Talking\Info.cshtml" />
     <Content Include="Views\Dinner\Index.cshtml" />
     <Content Include="Views\Dinner\Reservation.cshtml" />
-    <Content Include="Views\Admin\_UpdatePartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -204,6 +204,11 @@
             $("#deletePopup").attr("activityId", id);
         }
 
+        function UpdateEvent(id)
+        {
+            $("#updatePopup .modal-body").load('@Url.Action("_UpdateEvent","Admin", new { /* ID meesturen */ })');
+        }
+
     </script>
 
     <section id="topFilterBar">
@@ -267,7 +272,7 @@
                         <td>@activity.Price</td>
                         <td>@activity.TotalTickets</td>
                         <td><i class="glyphicon glyphicon-picture" data-toggle="tooltip" data-placement="top" title="Image" aria-hidden="true"></i></td>
-                        <td><i class="glyphicon glyphicon-pencil"  data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
+                        <td><i class="glyphicon glyphicon-pencil" onclick="UpdateEvent(@activity.ActivityId)" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="DeleteEvent(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
                 }
