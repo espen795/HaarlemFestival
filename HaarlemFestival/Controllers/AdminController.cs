@@ -134,5 +134,25 @@ namespace HaarlemFestival.Controllers
             Activity activity = adminRepository.GetActivity(id);
             return PartialView(activity);
         }
+
+        public ActionResult _JazzPartial()
+        {
+            return PartialView();
+        }
+
+        public ActionResult _DinnerPartial()
+        {
+            return PartialView();
+        }
+
+        public ActionResult _TalkingPartial()
+        {
+            return PartialView();
+        }
+
+        public ActionResult _HistoricPartial()
+        {
+            return PartialView();
+        }
     }
 }

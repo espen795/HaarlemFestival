@@ -1,5 +1,4 @@
 ﻿@using HaarlemFestival.Models
-@model Activity
 
 <script type="text/javascript">
 
@@ -9,15 +8,31 @@
 
         switch (event) {
             case "Jazz@Patronaat":
+                $("JazzForm").show();
+                $("DinnerForm").hide();
+                $("TalkingForm").hide();
+                $("HistoricForm").hide();
                 break;
 
             case "DinnerInHaarlem":
+                $("JazzForm").hide();
+                $("DinnerForm").show();
+                $("TalkingForm").hide();
+                $("HistoricForm").hide();
                 break;
 
             case "TalkingHaarlem":
+                $("JazzForm").hide();
+                $("DinnerForm").hide();
+                $("TalkingForm").show();
+                $("HistoricForm").hide();
                 break;
 
             case "HistoricHaarlem":
+                $("JazzForm").hide();
+                $("DinnerForm").hide();
+                $("TalkingForm").hide();
+                $("HistoricForm").show();
                 break;
         }
     }
@@ -30,22 +45,9 @@
     <option value="HistoricHaarlem">Historic Haarlem</option>
 </select>
 
-@using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post, new { @id = "JazzForm" }))
-{
-    Html.RenderPartial("_JazzPartial", "Admin");
-}
 
-@using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post, new { @id = "DinnerForm" }))
-{
-    Html.RenderPartial("_DinnerPartial", "Admin");
-}
+@{Html.RenderPartial("_JazzPartial", new Jazz());}
+@{Html.RenderPartial("_DinnerPartial", new Dinner());}
+@{Html.RenderPartial("_TalkingPartial", new Talking());}
+@{Html.RenderPartial("_HistoricPartial", new Historic());}
 
-@using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post, new { @id = "TalkingForm" }))
-{
-    Html.RenderPartial("_TalkingPartial", "Admin");
-}
-
-@using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post, new { @id = "HistoricForm" }))
-{
-    Html.RenderPartial("_HistoricPartial", "Admin");
-}

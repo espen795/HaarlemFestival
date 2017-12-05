@@ -1,7 +1,7 @@
 ﻿@using HaarlemFestival.Models
 @model Dinner
 
-@using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post))
+@using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post, new { @id = "DinnerForm" }))
 {
     // TODO: Add Restaurant Dropdown
 

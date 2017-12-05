@@ -1,15 +1,14 @@
 ﻿@using HaarlemFestival.Models
-@model Dinner
+@model Talking
 
-@using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post))
+@using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post, new { @id = "TalkingForm" }))
 {
-    Html.EditorFor();
-    Html.EditorFor();
-    Html.EditorFor();
-    Html.EditorFor();
-    Html.EditorFor();
-    Html.EditorFor();
-    Html.EditorFor();
-    Html.EditorFor();
-    Html.EditorFor();
+    Html.EditorFor(t => t.Talk.Naam);
+    Html.EditorFor(t => t.Talk.Description);
+    Html.EditorFor(t => t.Address);
+    Html.EditorFor(t => t.Talk.Person1);
+    Html.EditorFor(t => t.Talk.Person2);
+    Html.EditorFor(t => t.Price);
+    Html.EditorFor(t => t.Phonenumber);
+    Html.EditorFor(t => t.Talk.MaxTickets);
 }
