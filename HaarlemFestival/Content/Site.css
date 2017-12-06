@@ -363,10 +363,18 @@ footer a:hover {
     margin-right: 3px;
 }
 
+.info-infocuisine {
+    float: left;
+    min-height: 40px;
+    max-width: 150px;
+    min-width: 100px;
+    text-align:left;
+}
 .info-info {
     float: left;
     max-width: 160px;
-    text-align:left;
+    min-width: 100px;
+    text-align: left;
 }
 
 /* ------------------------------Talking Haarlem-------------------------------*/

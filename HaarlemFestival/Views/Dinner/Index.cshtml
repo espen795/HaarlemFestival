@@ -64,17 +64,22 @@
                             Rating:<br />
                             Price:<br />
                         </div>
-                        <div class="info-info">
+                        <div class="info-infocuisine">
                             @foreach (Cuisine c in r.Cuisines)
                             {
-                                @c.Naam if (r.Cuisines.Last() != c)
+                                if (r.Cuisines.Last() != c)
                                 {
-                                    <span>,&nbsp;</span>
+                                    @c.Naam<span>,</span>
+                                }
+                                else
+                                {
+                                    @c.Naam
                                 }
                             }
-                            <br />
+                        </div>
+                        <div class="info-info">
                             @r.Rating<br />
-                            PRIJS MOET NOG!!
+                            €@r.DisplayPrice.ToString("0.00")
                         </div>
                         <button class="reservationbutton" type="button">Make reservation</button>
                         <button class="infobutton" type="button"><i class="fa fa-info" aria-hidden="true"></i></button>
