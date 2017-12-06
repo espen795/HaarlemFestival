@@ -70,6 +70,11 @@ namespace HaarlemFestival.Controllers
             EventData data = adminRepository.GetEventData();
 
             string selectedEvent = this.Request.QueryString["selectedEvent"];
+            ViewData["Restaurants"] = data.Restaurants;
+            ViewData["Guides"] = data.Guides;
+            ViewData["Languages"] = data.Languages;
+            ViewData["Cuisines"] = data.Cuisines;
+            ViewData["Dates"] = data.Dates;
 
             switch (selectedEvent)
             {
@@ -91,12 +96,17 @@ namespace HaarlemFestival.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult AddEvent(Activity activity)
+        public ActionResult AddEvent(Activity activity, HttpPostedFileBase image)
         {
+            
+            if(image != null)
+            {
+                // Image toevoegen aan Activity -- Image Name = Path.GetFileName(image.FileName);
+            }
+
             if (ModelState.IsValid)
             {
                 adminRepository.AddEvent(activity);
-                ViewBag.Status = "Deleted";
                 return RedirectToAction("ManageEvent", "Admin");
             }
 
