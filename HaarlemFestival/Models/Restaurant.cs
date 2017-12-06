@@ -25,6 +25,8 @@ namespace HaarlemFestival.Models
         [Display(Name = "Location Image")]
         public string LocationIMG { get; set; }
         public virtual List<Cuisine> Cuisines { get; set; }
+        public float DisplayPrice { get; set; }
+
         public Restaurant()
         {
 
