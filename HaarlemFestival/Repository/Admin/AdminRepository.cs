@@ -45,7 +45,7 @@ namespace HaarlemFestival.Repository.Admin
                     break;
 
                 case EventType.TalkingHaarlem:
-                    Talking talking = db.Talkings.Find(id);
+                    Models.Talking talking = db.Talkings.Find(id);
                     db.Talkings.Remove(talking);
                     break;
 
