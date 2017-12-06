@@ -64,15 +64,20 @@
                             Rating:<br />
                             Price:<br />
                         </div>
-                        <div class="info-info">
+                        <div class="info-infocuisine">
                             @foreach (Cuisine c in r.Cuisines)
                             {
                                 if (r.Cuisines.Last() != c)
                                 {
-                                    <span>,&nbsp;</span>
+                                    @c.Naam<span>,</span>
+                                }
+                                else
+                                {
+                                    @c.Naam
                                 }
                             }
-                            <br />
+                        </div>
+                        <div class="info-info">
                             @r.Rating<br />
                             €@r.DisplayPrice.ToString("0.00")
                         </div>
