@@ -551,6 +551,9 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     width: 150px;
     height: 100px;
 }
+.talk-bold {
+    font-weight: bold;
+}
 
 /* ------------------------------Historic Haarlem------------------------------*/
 
