@@ -170,6 +170,8 @@
     <Compile Include="Repository\Admin\IAdminRepository.cs" />
     <Compile Include="Repository\Dinner\DinnerRepository.cs" />
     <Compile Include="Repository\Dinner\IDinnerRepository.cs" />
+    <Compile Include="Repository\Talking\ITalkingRepository.cs" />
+    <Compile Include="Repository\Talking\TalkingRepository.cs" />
     <Compile Include="Scripts\IAdminRepository.cs" />
   </ItemGroup>
   <ItemGroup>

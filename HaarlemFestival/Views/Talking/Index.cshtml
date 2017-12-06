@@ -1,4 +1,8 @@
-﻿@{
+﻿@using HaarlemFestival.Models;
+@using System.Collections.Generic;
+@model List<Talk>
+
+@{
     ViewBag.Title = "Talking Haarlem";
 }
 <section class="event-banner talking"></section>
@@ -70,11 +74,12 @@
                     Famous DJ Giel meets TV host Rob.
                 </p>
                 <section>
-                    <a href="@Url.Action("Info", "Talking")"><img class="talk-info-btn" src="/images/info_button.png" /></a>
-                    <p >@Html.ActionLink("Order Ticket", "Reservation", "Talking", new { @class = "btn btn-black talk-order-btn" })</p>
+                    <a href="@Url.Action("Info")"><img class="talk-info-btn" src="/images/info_button.png" /></a>
+                    <p>@Html.ActionLink("Order Ticket", "Reservation", "Talking", new { @class = "btn btn-black talk-order-btn" })</p>
                 </section>
                 <p class="talk-date">Thursday July 26th</p>
             </article>
+
             <article class="talk">
                 <h4 class="talk-image-header">Femke Halsema</h4>
                 <section>
@@ -85,7 +90,7 @@
                     Two ex-politics question each other about their career and experiences in Haarlem.
                 </p>
                 <section>
-                    <a href="@Url.Action("Info", "Talking")"><img class="talk-info-btn" src="/images/info_button.png" /></a>
+                    <a href="@Url.Action("Info")"><img class="talk-info-btn" src="/images/info_button.png" /></a>
                     <p>@Html.ActionLink("Order Ticket", "Reservation", "Talking", new { @class = "btn btn-black talk-order-btn" })</p>
                 </section>
                 <p class="talk-date">Friday July 27th</p>
@@ -100,7 +105,7 @@
                     TV host Paul meets journalist Brigitte.
                 </p>
                 <section class="talk-btns">
-                    <a href="@Url.Action("Info", "Talking")"><img class="talk-info-btn" src="/images/info_button.png"/></a>
+                    <a href="@Url.Action("Info")"><img class="talk-info-btn" src="/images/info_button.png"/></a>
                     <p>@Html.ActionLink("Order Ticket", "Reservation", "Talking", new { @class="btn btn-black talk-order-btn" })</p>
                 </section>
                 <p class="talk-date">Saturday July 28th</p>
