@@ -14,5 +14,10 @@ namespace HaarlemFestival.Repository.Talking
         {
             return db.Talks.ToList();
         }
+
+        public Talk GetTalkById(int id)
+        {
+            return db.Talks.FirstOrDefault(t => t.TalkId == id);
+        }
     }
 }

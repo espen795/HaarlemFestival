@@ -64,12 +64,14 @@
 
         <!-- Section 4 -->
         <section class="talks">
+        @foreach (Talk talk in Model)
+        {
             <article class="talk">
-                <h4 class="talk-image-header">Giel Beelen</h4>
+                <h4 class="talk-image-header">@talk.Person1</h4>
                 <section>
-                    <img class="talk-image" src="/images/Talking/giel_beelen2.jpg" />
+                    <img class="talk-image" src="/images/Talking/@talk.Person1AltIMG" />
                 </section>
-                <h3 class="talk-header">Giel Beelen meets Rob Trip</h3>
+                <h3 class="talk-header">@talk.Naam</h3>
                 <p class="talk-description">
                     Famous DJ Giel meets TV host Rob.
                 </p>
@@ -79,38 +81,7 @@
                 </section>
                 <p class="talk-date">Thursday July 26th</p>
             </article>
-
-            <article class="talk">
-                <h4 class="talk-image-header">Femke Halsema</h4>
-                <section>
-                    <img class="talk-image" src="/images/Talking/femke_halsema2.jpg" />
-                </section>
-                <h3 class="talk-header">Femke Halsema meets Job Cohen</h3>
-                <p class="talk-description">
-                    Two ex-politics question each other about their career and experiences in Haarlem.
-                </p>
-                <section class="talk-btns">
-                    <a href="@Url.Action("Info")"><img class="talk-info-btn" src="/images/info_button.png" /></a>
-                    @Html.ActionLink("Order Ticket", "Reservation", "Talking", new { @class = "btn btn-black talk-order-btn" })
-                </section>
-                <p class="talk-date">Friday July 27th</p>
-            </article>
-
-            <article class="talk">
-                <h4 class="talk-image-header">Paul Witteman</h4>
-                <section>
-                    <img class="talk-image" src="/images/Talking/paul_witteman2.jpg" />
-                </section>
-                <h3 class="talk-header">Paul Witteman meets Brigitte Kaandorp</h3>
-                <p class="talk-description">
-                    TV host Paul meets journalist Brigitte.
-                </p>
-                <section class="talk-btns">
-                    <a href="@Url.Action("Info")"><img class="talk-info-btn" src="/images/info_button.png"/></a>
-                    @Html.ActionLink("Order Ticket", "Reservation", "Talking", new { @class="btn btn-black talk-order-btn" })
-                </section>
-                <p class="talk-date">Saturday July 28th</p>
-            </article>
+        }
         </section> <!-- Section 4 Talks -->
     </section> <!-- row -->
 </main>

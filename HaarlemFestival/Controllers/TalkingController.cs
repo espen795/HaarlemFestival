@@ -22,7 +22,9 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Info()
         {
-            return View();
+            Talk talk = talkingRepository.GetTalkById(1);
+
+            return View(talk);
         }
 
         public ActionResult Reservation()
