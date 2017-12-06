@@ -1,0 +1,69 @@
+﻿@using HaarlemFestival.Models
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#selectEvent").val("Jazz@Patronaat");
+        $("#JazzForm").show();
+        $("#DinnerForm").hide();
+        $("#TalkingForm").hide();
+        $("#HistoricForm").hide();
+
+    });
+
+    function AddEventFilter()
+    {
+        var event = $("#selectEvent").val();
+
+        $('.addDataForm').each(function () {
+            $(this).hide();
+        })
+
+        switch (event) {
+            case "Jazz@Patronaat":
+                $("#JazzForm").show();
+                break;
+
+            case "DinnerInHaarlem":
+                $("#DinnerForm").show();
+                break;
+
+            case "TalkingHaarlem":
+                $("#TalkingForm").show();
+                break;
+
+            case "HistoricHaarlem":
+                $("#HistoricForm").show();
+                break;
+        }
+    }
+
+</script>
+<select id="selectEvent" name="selectEvent" onchange="AddEventFilter()">
+    <option value="Jazz@Patronaat">Jazz@Patronaat</option>
+    <option value="DinnerInHaarlem">Dinner in Haarlem</option>
+    <option value="TalkingHaarlem">Talking Haarlem</option>
+    <option value="HistoricHaarlem">Historic Haarlem</option>
+</select>
+
+
+<div id="JazzForm" class="addDataForm">
+    @{Html.RenderPartial("_JazzPartial", new Jazz());}
+</div>
+    
+<div id="DinnerForm" class="addDataForm">
+    @{Html.RenderPartial("_DinnerPartial", new Dinner());}
+</div>
+
+<div id="TalkingForm" class="addDataForm">
+    @{Html.RenderPartial("_TalkingPartial", new Talking());}
+</div>
+
+<div id="HistoricForm" class="addDataForm">
+    @{Html.RenderPartial("_HistoricPartial", new Historic());}
+</div>
+
+
+
+

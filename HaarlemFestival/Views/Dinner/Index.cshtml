@@ -1,4 +1,8 @@
-﻿@{
+﻿@using HaarlemFestival.Models;
+@using System.Collections.Generic;
+@model List<Restaurant>
+
+@{
     ViewBag.Title = "Dinner in Haarlem";
 }
 
@@ -41,6 +45,42 @@
                 </div>
             </div>
             <hr class="title-hr title-line-right">
+        </div>
+
+        <!-- Section 3-->
+        <div class="event-section-3-dinner">
+            <div class="cuisineselect">
+                <!--Dropdown menu voor cuisines-->
+            </div>
+            <div class="restaurants">
+                @foreach (Restaurant r in Model)
+                {
+                    <div class="promo-restaurant">
+                        <img src="/images/Dinner/restaurants/@r.FoodIMG" alt="Picture not found" />
+                        <h3>@r.Naam</h3>
+                        <div class="infonames">
+                            Cuisines:<br />
+                            <br />
+                            Rating:<br />
+                            Price:<br />
+                        </div>
+                        <div class="info-info">
+                            @foreach (Cuisine c in r.Cuisines)
+                            {
+                                @c.Naam if (r.Cuisines.Last() != c)
+                                {
+                                    <span>,&nbsp;</span>
+                                }
+                            }
+                            <br />
+                            @r.Rating<br />
+                            PRIJS MOET NOG!!
+                        </div>
+                        <button class="reservationbutton" type="button">Make reservation</button>
+                        <button class="infobutton" type="button"><i class="fa fa-info" aria-hidden="true"></i></button>
+                    </div>
+                }
+            </div>
         </div>
     </div>
 </div>

@@ -40,7 +40,7 @@ namespace HaarlemFestival.Repository.Admin
                     break;
 
                 case EventType.DinnerInHaarlem:
-                    Dinner dinner = db.Dinners.Find(id);
+                    Models.Dinner dinner = db.Dinners.Find(id);
                     db.Dinners.Remove(dinner);
                     break;
 
@@ -70,9 +70,10 @@ namespace HaarlemFestival.Repository.Admin
                 Activities = db.Activities.ToList(),
 
                 Dates = db.Days.ToList(),
-                Cuisines = db.Cuisines.ToList().GroupBy(c => c.Naam).Select(g => g.First()),
+                Cuisines = db.Cuisines.ToList(),
                 Languages = db.Languages.ToList(),
-                Guides = db.Guides.ToList().GroupBy(g => g.GuideName).Select(g => g.First())
+                Guides = db.Guides.ToList(),
+                Restaurants = db.Restaurants.ToList()
             };
 
             return data;
