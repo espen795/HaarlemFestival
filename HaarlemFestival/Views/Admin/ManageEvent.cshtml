@@ -1,9 +1,10 @@
 ﻿@using HaarlemFestival.Models
 @using System.Text.RegularExpressions
-
+@using System.Text;
 @model EventData
 @{
     ViewBag.Title = "Manage";
+    StringBuilder stringBuilder = new StringBuilder();
 }
 
 <!-- Modal Delete Data -->
@@ -287,7 +288,6 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Description</th>
                     <th>Adress</th>
                     <th>Session</th>
                     <th>Rating</th>
@@ -303,14 +303,18 @@
             <tbody class="eventData">
                 @foreach(Dinner activity in Model.Activities.OfType<Dinner>())
                 {
+                    stringBuilder.Clear();
+                    foreach (Cuisine c in activity.Restaurant.Cuisines)
+                    {
+                        stringBuilder.Append(c.Naam).Append(", ");
+                    }
                     <tr>
                         <td>@activity.Restaurant.Naam</td>
-                        <td>@activity.Restaurant.Description</td>
                         <td>@activity.Address</td>
                         <td>@activity.StartSession.ToString("dddd dd-MM-yy H:mm") - @activity.EndSession.ToString("H:mm")</td>
                         <td>@activity.Restaurant.Rating</td>
                         <td>@activity.TotalTickets</td>
-                        <td>Cuisines</td>
+                        <td>@stringBuilder.ToString().Substring(0,stringBuilder.Length - 1)</td>
                         <td>@activity.Price</td>
                         <td>@activity.AlternativePrice</td>
                         <td><i onclick='ShowEventImage("Dinner/restaurants/@activity.Restaurant.FoodIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
