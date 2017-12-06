@@ -156,7 +156,6 @@
     <Compile Include="Models\Talk.cs" />
     <Compile Include="Models\Talking.cs" />
     <Compile Include="Models\Jazz.cs" />
-    <Compile Include="Models\Tour.cs" />
     <Compile Include="Models\Historic.cs" />
     <Compile Include="Models\Dinner.cs" />
     <Compile Include="Models\EventType.cs" />

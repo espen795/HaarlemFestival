@@ -45,6 +45,5 @@ namespace HaarlemFestival.Models
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Talk> Talks { get; set; }
         public DbSet<Talking> Talkings { get; set; }
-        public DbSet<Tour> Tours { get; set; }
     }
 }
