@@ -67,18 +67,9 @@
                         <div class="info-info">
                             @foreach (Cuisine c in r.Cuisines)
                             {
-                                if (c.Naam.ToLower() == "fish and seafood")
+                                @c.Naam if (r.Cuisines.Last() != c)
                                 {
-                                    @c.Naam<span>,&nbsp;</span> <br />
-
-
-                                }
-                            }
-                            @foreach (Cuisine c in r.Cuisines)
-                            {
-                                if (c.Naam.ToLower() != "fish and seafood")
-                                {
-                                    @c.Naam<span>,&nbsp;</span>
+                                    <span>,&nbsp;</span>
                                 }
                             }
                             <br />
