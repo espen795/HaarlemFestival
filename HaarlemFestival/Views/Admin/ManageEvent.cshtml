@@ -319,12 +319,12 @@
                 {
                     <tr>
                         <td>@activity.Talk.Person1 meets @activity.Talk.Person2</td>
-                        <td>Description - Niet aangemaakt in class</td>
+                        <td>@activity.Talk.Description</td>
                         <td>@activity.StartSession.ToString("dddd dd-MM-yy H:mm") - @activity.EndSession.ToString("H:mm")</td>
                         <td>@activity.TotalTickets</td>
                         <td>@activity.Address</td>
                         <td>Hall - Niet aangemaakt in class</td>
-                        <td>@activity.Price</td>
+                        <td>@activity.ToString()</td>
                         <td>@activity.Talk.MaxTickets</td>
                         <td><i class="glyphicon glyphicon-picture" data-toggle="tooltip" data-placement="top" title="Image" aria-hidden="true"></i></td>
                         <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>

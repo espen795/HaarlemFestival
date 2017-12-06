@@ -3,15 +3,69 @@
 
 @using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post))
 {
-    Html.EditorFor(j => j.artist.ArtistName);
-    Html.TextAreaFor(j => j.artist.ArtistInformation);
-    Html.EditorFor(j => j.StartSession);
-    Html.EditorFor(j => j.EndSession);
-    Html.EditorFor(j => j.TotalTickets);
-    Html.EditorFor(j => j.ConcertLocation);
-    Html.EditorFor(j => j.ConcertHall);
-    Html.EditorFor(j => j.Price);
-    Html.EditorFor(j => j.artist.ArtistImage);
+    <div class="form-group">
+        <div class="input-group">
+            @Html.LabelFor(j => j.artist.ArtistName)
+            @Html.EditorFor(j => j.artist.ArtistName, new { @placeholder = "Name" })
+        </div>
+    </div>
 
-    <input type="submit" value="Add Jazz" />
-}
+    <div class="form-group">
+        <div class="input-group">
+            @Html.LabelFor(j => j.artist.ArtistInformation)
+            @Html.TextAreaFor(j => j.artist.ArtistInformation, new { @placeholder = "Description" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.LabelFor(j => j.StartSession)
+            @Html.EditorFor(j => j.StartSession, new { @placeholder = "1 Jan 0001 00:00:00" })
+            @Html.LabelFor(j => j.EndSession)
+            @Html.EditorFor(j => j.EndSession, new { @placeholder = "1 Jan 0001 00:00:00" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.LabelFor(j => j.TotalTickets)
+            @Html.EditorFor(j => j.TotalTickets, new { @placeholder = "Total Tickets" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.LabelFor(j => j.ConcertLocation)
+            @Html.EditorFor(j => j.ConcertLocation, new { @placeholder = "Concert Location" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.LabelFor(j => j.ConcertHall)
+            @Html.EditorFor(j => j.ConcertHall, new { @placeholder = "Concert Hall" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.LabelFor(j => j.Price)
+            @Html.EditorFor(j => j.Price, new { @placeholder = "Price" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.LabelFor(j => j.AlternativePrice)
+            @Html.EditorFor(j => j.AlternativePrice, new { @placeholder = "Alternative Price" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.LabelFor(j => j.artist.ArtistImage)
+            @Html.EditorFor(j => j.artist.ArtistImage, new { @placeholder = "Image" })
+        </div>
+    </div>
+            <input type="submit" value="Add Jazz" />
+ }
