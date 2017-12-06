@@ -435,7 +435,7 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 .talk-header {
     font-size: 16px;
     font-weight: bold;
-    margin-left: 15px;
+    padding-left: 15px;
 }
 
 .talk-image-header {
@@ -449,9 +449,14 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     height: 200px;
     margin-left: 15px;
 }
-.talk p {
-    margin-left: 15px;
+.talk-description {
+    padding-left: 15px;
     height: 40px;
+}
+
+.talk-btns {
+    display: inline-block;
+    width: 100%;
 }
 
 .talk-info-btn {
@@ -461,7 +466,7 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 
 .talk-order-btn {
     float: right;
-    margin-right: 30px;
+    margin-right: 25px;
 }
 
 .talk-back-btn {
@@ -472,6 +477,7 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     text-align: center;
     vertical-align: middle;
     font-weight: bold;
+    margin-bottom: 15px;
 }
 
 /* Event (activity) info page */
