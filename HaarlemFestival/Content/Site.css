@@ -468,20 +468,34 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 }
 
 /* Reservation */
-.talk-reservation-container * {
+.talk-reservation-container {
     padding-left: 15px;
 }
 
 .talk-questions {
     display: inline-block;
+    border: red solid 1px;
+    width: 100%;
 }
 
 .talk-question {
     float: left;
+    width: 300px;
+    border: black solid 1px;
 }
+
+.talk-question-receiver {
+    display: inline-block;
+}
+
+.talk-question-receiver p {
+    float: left;
+}
+
 .talk-questionbox {
-    width: 500px;
-    height: 200px;
+    display: block;
+    width: 150px;
+    height: 100px;
 }
 
 /* ------------------------------Historic Haarlem------------------------------*/
