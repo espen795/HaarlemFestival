@@ -81,8 +81,8 @@
                             @r.Rating<br />
                             €@r.DisplayPrice.ToString("0.00")
                         </div>
-                        <button class="reservationbutton" type="button">Make reservation</button>
-                        <button class="infobutton" type="button"><i class="fa fa-info" aria-hidden="true"></i></button>
+                        <button class="reservationbutton" type="button" onclick="location.href='@Url.Action("Reservation","Dinner", new { id = r.RestaurantId})'">Make reservation</button>
+                        <button class="infobutton" type="button" onclick="location.href='@Url.Action("Info", "Dinner", new { id = r.RestaurantId })'"><i class="fa fa-info" aria-hidden="true"></i></button>
                     </div>
                 }
             </div>

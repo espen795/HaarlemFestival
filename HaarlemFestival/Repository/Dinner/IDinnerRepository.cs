@@ -10,5 +10,6 @@ namespace HaarlemFestival.Repository.Dinner
     interface IDinnerRepository
     {
         List<Restaurant> GetAllRestaurants();
+        List<Models.Dinner> DinnersPerRestaurant(int id);
     }
 }
