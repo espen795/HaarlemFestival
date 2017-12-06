@@ -35,7 +35,6 @@
 
 
 
-
 <!-- Modal New Data -->
 <div class="modal fade" id="newPopup" tabindex="-1" role="dialog" aria-labelledby="newPopup">
     <div class="modal-dialog modal-lg" role="document">
@@ -69,7 +68,12 @@
 
 
 
-
+<!-- Modal Image -->
+<div class="modal fade" id="imagePopup" tabindex="-1" role="dialog" aria-labelledby="imagePopup">
+        <span id="closeImage" class="close">&times;</span>
+        <!-- CONTENT -->
+       <img id="eventImage" class="modal-content showEventImage" src=""/>
+</div>
 
 <div class="container">
     <script type="text/javascript">
@@ -94,6 +98,25 @@
             this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) +
                 $(window).scrollLeft()) + "px");
             return this;
+        }
+
+        function ShowEventImage(path)
+        {
+            var modal = document.getElementById('imagePopup');
+
+            var modalImg = document.getElementById("eventImage");
+
+            modal.style.display = "block";
+            modalImg.src = "../images/" + path;
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementById("closeImage");
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function () {
+                $('#imagePopup').modal('hide');
+                $('.modal-backdrop').remove();
+            }
         }
 
         function SelectedEventChanged()
@@ -251,7 +274,7 @@
                         <td>@activity.ConcertHall</td>
                         <td>@activity.Price</td>
                         <td>@activity.TotalTickets</td>
-                        <td><i class="glyphicon glyphicon-picture" data-toggle="tooltip" data-placement="top" title="Image" aria-hidden="true"></i></td>
+                        <td><i onclick='ShowEventImage("Jazz/@activity.artist.ArtistImage")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="DeleteConfirm(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
@@ -290,8 +313,8 @@
                         <td>Cuisines</td>
                         <td>@activity.Price</td>
                         <td>@activity.AlternativePrice</td>
-                        <td><i class="glyphicon glyphicon-picture" data-toggle="tooltip" data-placement="top" title="Image Food" aria-hidden="true"></i></td>
-                        <td><i class="glyphicon glyphicon-picture" data-toggle="tooltip" data-placement="top" title="Image Restaurant" aria-hidden="true"></i></td>
+                        <td><i onclick='ShowEventImage("Dinner/restaurants/@activity.Restaurant.FoodIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
+                        <td><i onclick='ShowEventImage("Dinner/restaurants/@activity.Restaurant.LocationIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="DeleteConfirm(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
@@ -326,7 +349,7 @@
                         <td>Hall - Niet aangemaakt in class</td>
                         <td>@activity.Price.ToString()</td>
                         <td>@activity.Talk.MaxTickets</td>
-                        <td><i class="glyphicon glyphicon-picture" data-toggle="tooltip" data-placement="top" title="Image" aria-hidden="true"></i></td>
+                        <td><i onclick='ShowEventImage("Talking/@activity.Talk.Person1")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="DeleteConfirm(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>

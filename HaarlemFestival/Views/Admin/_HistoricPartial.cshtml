@@ -22,14 +22,14 @@
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Language")
-            <!--Html.DropDownListFor(h => h.Tour.Language, new SelectList((SelectList)ViewData["Languages"]));-->
+            @Html.DropDownListFor(m => m.Language, new SelectList((List<Language>)ViewData["Languages"], "LanguageId", "LanguageName"))
         </div>
     </div>
 
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Guide")
-            <!--Html.DropDownListFor(h => h.Tour.Guide, new SelectList((SelectList)ViewData["Guides"]));-->
+            @Html.DropDownListFor(m => m.Guide, new SelectList((List<Guide>)ViewData["Guides"], "GuideId", "GuideName"))
         </div>
     </div>
 
