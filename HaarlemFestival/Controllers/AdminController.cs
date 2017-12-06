@@ -135,24 +135,24 @@ namespace HaarlemFestival.Controllers
             return PartialView(activity);
         }
 
-        public ActionResult _JazzPartial()
+        public ActionResult _JazzPartial(Jazz model)
         {
-            return PartialView();
+            return PartialView(model);
         }
 
-        public ActionResult _DinnerPartial()
+        public ActionResult _DinnerPartial(Dinner model)
         {
-            return PartialView();
+            return PartialView(model);
         }
 
-        public ActionResult _TalkingPartial()
+        public ActionResult _TalkingPartial(Talking model)
         {
-            return PartialView();
+            return PartialView(model);
         }
 
-        public ActionResult _HistoricPartial()
+        public ActionResult _HistoricPartial(Historic model)
         {
-            return PartialView();
+            return PartialView(model);
         }
     }
 }

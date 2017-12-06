@@ -1,4 +1,6 @@
 ﻿@using HaarlemFestival.Models
+@using System.Text.RegularExpressions
+
 @model EventData
 @{
     ViewBag.Title = "Manage";
@@ -77,6 +79,9 @@
 
             $('#selectedEvent').val(chosenEvent);
             SelectedEventChanged();
+
+            // Tooltips maken.
+            $('[data-toggle="tooltip"]').tooltip(); 
         })
 
         // Nieuwe Functie aanmaken om iets te centreren.
@@ -114,13 +119,15 @@
                     break;
 
                 case "DinnerInHaarlem":
+                    $('#dateFilter').show();
                     $('#dinnerTable').show();
                     $('#cuisineFilter').show();
+                    $('#restaurantFilter').show();
                     break;
 
                 case "TalkingHaarlem":
-                    $('#talkingTable').show();
                     $('#dateFilter').show();
+                    $('#talkingTable').show();
                     break;
 
                 case "HistoricHaarlem":
@@ -209,10 +216,10 @@
             </select>        
 
             @Html.DropDownListFor(m => m.Guides, new SelectList(Model.Guides, "GuideName", "GuideName"), "Select a Guide.", new { @id = "guideFilter", @class = "eventFilter", @onchange = "FilterData()" }) 
-
             @Html.DropDownListFor(m => m.Languages, new SelectList(Model.Languages, "LanguageName", "LanguageName"), "Select a Language.", new { @id = "languageFilter", @class = "eventFilter", @onchange = "FilterData()" })
-
-            @Html.DropDownListFor(m => m.Cuisines, new SelectList(Model.Cuisines, "Naam", "Naam"), "Select a Cuisine.", new { id = "cuisineFilter", @class = "eventFilter", @onchange = "FilterData()" })
+            @Html.DropDownListFor(m => m.Restaurants, new SelectList(Model.Restaurants, "Naam", "Naam"), "Select a Restaurant", new { @id = "restaurantFilter", @class = "eventFilter", @onchange = "FilterData()" })
+            @Html.DropDownListFor(m => m.Cuisines, new SelectList(Model.Cuisines, "Naam", "Naam"), "Select a Cuisine.", new { @id = "cuisineFilter", @class = "eventFilter", @onchange = "FilterData()" })
+            
             
         </div>
     </section>
@@ -224,8 +231,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
-                    <th>Start</th>
-                    <th>End</th>
+                    <th>Date & Time</th>
                     <th>Location</th>
                     <th>Hall</th>
                     <th>Price</th>
@@ -239,9 +245,8 @@
                 {
                     <tr>
                         <td>@activity.artist.ArtistName</td>
-                        <td>@activity.artist.ArtistInformation</td>
-                        <td>@activity.StartSession</td>
-                        <td>@activity.EndSession</td>
+                        <td>@Regex.Replace(activity.artist.ArtistInformation, @"<(.|\n)*?>", string.Empty)</td>
+                        <td>@activity.StartSession.ToString("dddd dd-MM-yy H:mm") - @activity.EndSession.ToString("H:mm")</td>
                         <td>@activity.ConcertLocation</td>
                         <td>@activity.ConcertHall</td>
                         <td>@activity.Price</td>

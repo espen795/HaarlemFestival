@@ -2,37 +2,39 @@
 
 <script type="text/javascript">
 
+    $(document).ready(function () {
+
+        $("#selectEvent").val("Jazz@Patronaat");
+        $("#JazzForm").show();
+        $("#DinnerForm").hide();
+        $("#TalkingForm").hide();
+        $("#HistoricForm").hide();
+
+    });
+
     function AddEventFilter()
     {
         var event = $("#selectEvent").val();
 
+        $('.addDataForm').each(function () {
+            $(this).hide();
+        })
+
         switch (event) {
             case "Jazz@Patronaat":
-                $("JazzForm").show();
-                $("DinnerForm").hide();
-                $("TalkingForm").hide();
-                $("HistoricForm").hide();
+                $("#JazzForm").show();
                 break;
 
             case "DinnerInHaarlem":
-                $("JazzForm").hide();
-                $("DinnerForm").show();
-                $("TalkingForm").hide();
-                $("HistoricForm").hide();
+                $("#DinnerForm").show();
                 break;
 
             case "TalkingHaarlem":
-                $("JazzForm").hide();
-                $("DinnerForm").hide();
-                $("TalkingForm").show();
-                $("HistoricForm").hide();
+                $("#TalkingForm").show();
                 break;
 
             case "HistoricHaarlem":
-                $("JazzForm").hide();
-                $("DinnerForm").hide();
-                $("TalkingForm").hide();
-                $("HistoricForm").show();
+                $("#HistoricForm").show();
                 break;
         }
     }
@@ -46,8 +48,22 @@
 </select>
 
 
-@{Html.RenderPartial("_JazzPartial", new Jazz());}
-@{Html.RenderPartial("_DinnerPartial", new Dinner());}
-@{Html.RenderPartial("_TalkingPartial", new Talking());}
-@{Html.RenderPartial("_HistoricPartial", new Historic());}
+<div id="JazzForm" class="addDataForm">
+    @{Html.RenderPartial("_JazzPartial", new Jazz());}
+</div>
+    
+<div id="DinnerForm" class="addDataForm">
+    @{Html.RenderPartial("_DinnerPartial", new Dinner());}
+</div>
+
+<div id="TalkingForm" class="addDataForm">
+    @{Html.RenderPartial("_TalkingPartial", new Talking());}
+</div>
+
+<div id="HistoricForm" class="addDataForm">
+    @{Html.RenderPartial("_HistoricPartial", new Historic());}
+</div>
+
+
+
 

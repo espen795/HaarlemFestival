@@ -1,7 +1,7 @@
 ﻿@using HaarlemFestival.Models
 @model Dinner
 
-@using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post, new { @id = "DinnerForm" }))
+@using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post))
 {
     // TODO: Add Restaurant Dropdown
 
@@ -10,4 +10,6 @@
     Html.EditorFor(d => d.Price);
     Html.EditorFor(d => d.AlternativePrice);
     Html.EditorFor(d => d.TotalTickets);
+
+    <input type="submit" value="Add Dinner" />
 }

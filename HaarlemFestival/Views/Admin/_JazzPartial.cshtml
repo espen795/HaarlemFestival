@@ -1,7 +1,7 @@
 ﻿@using HaarlemFestival.Models
 @model Jazz
 
-@using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post, new { @id = "JazzForm" }))
+@using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post))
 {
     Html.EditorFor(j => j.artist.ArtistName);
     Html.TextAreaFor(j => j.artist.ArtistInformation);
@@ -12,4 +12,6 @@
     Html.EditorFor(j => j.ConcertHall);
     Html.EditorFor(j => j.Price);
     Html.EditorFor(j => j.artist.ArtistImage);
+
+    <input type="submit" value="Add Jazz" />
 }
