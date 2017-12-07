@@ -96,17 +96,60 @@ namespace HaarlemFestival.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult AddEvent(Activity activity, HttpPostedFileBase image)
+        public ActionResult AddJazz(HaarlemFestival.Models.Jazz activity, FormCollection collector, HttpPostedFileBase file)
         {
-            
-            if(image != null)
-            {
-                // Image toevoegen aan Activity -- Image Name = Path.GetFileName(image.FileName);
-            }
-
             if (ModelState.IsValid)
             {
+
+                if (file != null)
+                {
+                    activity.artist.ArtistImage = System.IO.Path.GetFileName(file.FileName);
+                    string path = System.IO.Path.Combine(Server.MapPath("~/images/jazz"), activity.artist.ArtistImage);
+                    // file is uploaded
+                    file.SaveAs(path);
+                }
+
+                activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
+                activity.EndSession = DateTime.Parse(collector["Date"] + " " + collector["EndSession"]);
+
                 adminRepository.AddEvent(activity);
+
+                return RedirectToAction("ManageEvent", "Admin");
+            }
+
+            return RedirectToAction("ManageEvent", "Admin");
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddDinner(HaarlemFestival.Models.Dinner activity, FormCollection collector, HttpPostedFileBase files)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("ManageEvent", "Admin");
+            }
+
+            return View(activity);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddTalking(HaarlemFestival.Models.Talking activity, FormCollection collector, HttpPostedFileBase files)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("ManageEvent", "Admin");
+            }
+
+            return View(activity);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddHistoric(HaarlemFestival.Models.Historic activity, FormCollection collector, HttpPostedFileBase files)
+        {
+            if (ModelState.IsValid)
+            {
                 return RedirectToAction("ManageEvent", "Admin");
             }
 

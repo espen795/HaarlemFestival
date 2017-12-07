@@ -19,7 +19,25 @@ namespace HaarlemFestival.Repository.Admin
 
         public void AddEvent(Activity activity)
         {
-            throw new NotImplementedException();
+            if (activity.GetType() == typeof(HaarlemFestival.Models.Jazz))
+            {
+                HaarlemFestival.Models.Jazz jazz = activity as HaarlemFestival.Models.Jazz;
+                db.Artists.Add(jazz.artist);
+            }
+            else if (activity.GetType() == typeof(HaarlemFestival.Models.Dinner))
+            {
+                HaarlemFestival.Models.Dinner dinner = activity as HaarlemFestival.Models.Dinner;
+            }
+            else if (activity.GetType() == typeof(HaarlemFestival.Models.Talking))
+            {
+                HaarlemFestival.Models.Talking talking = activity as HaarlemFestival.Models.Talking;
+            }
+            else if (activity.GetType() == typeof(HaarlemFestival.Models.Historic))
+            {
+                HaarlemFestival.Models.Historic historic = activity as HaarlemFestival.Models.Historic;
+            }
+
+            db.Activities.Add(activity);
         }
 
         public void UpdateEvent(Activity activity)
@@ -27,6 +45,7 @@ namespace HaarlemFestival.Repository.Admin
             db.Entry(activity).State = EntityState.Modified;
             db.SaveChanges();
         }
+
         public void DeleteEvent(int id)
         {
             Activity activity = db.Activities.Find(id);

@@ -1,7 +1,7 @@
 ﻿@using HaarlemFestival.Models
 @model Talking
 
-@using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post))
+@using (Html.BeginForm("AddTalking", "Admin", FormMethod.Post))
 {
     Html.EditorFor(t => t.Talk.Naam);
     Html.EditorFor(t => t.Talk.Description);
