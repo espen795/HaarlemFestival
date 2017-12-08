@@ -3,10 +3,14 @@
 
 @using (Html.BeginForm("AddJazz", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <div id="bootstrapAlert" class="alert alert-danger alert-dismissible">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <span class="loginErrors">@Html.ValidationSummary()</span>
-    </div>
+
+    if (ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Count() > 0)
+    {
+        <div id="bootstrapAlert" class="alert alert-danger alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <span class="loginErrors">@Html.ValidationSummary()</span>
+        </div>
+    }
 
     <div class="form-group">
         <div class="input-group">
