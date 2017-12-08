@@ -11,7 +11,9 @@ namespace HaarlemFestival.Models
         [Display(Name = "Guide Id")]
         public int GuideId { get; set; }
 
+        [Required(ErrorMessage = "Please enter the guide's name.")]
         [Display(Name = "Guide Name")]
+
         public string GuideName { get; set; }
 
         public Guide()

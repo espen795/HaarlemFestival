@@ -8,6 +8,7 @@ namespace HaarlemFestival.Models
 {
     public class Jazz : Activity
     {
+        [Required]
         [Display(Name = "Concert Location")]
         public string ConcertLocation { get; set; }
 
@@ -15,6 +16,8 @@ namespace HaarlemFestival.Models
         public string ConcertHall { get; set; }
 
         [Display(Name = "PassPartout Price")]
+        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:C2}")]
         public float AllDayPassPartout { get; set; }
 
         [Display(Name = "Artist ID")]

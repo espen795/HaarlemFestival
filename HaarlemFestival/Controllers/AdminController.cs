@@ -98,6 +98,10 @@ namespace HaarlemFestival.Controllers
         [Authorize]
         public ActionResult AddJazz(HaarlemFestival.Models.Jazz activity, FormCollection collector, HttpPostedFileBase file)
         {
+            // Model geeft error maar veld mag ook null zijn, daarom clear ik de errors.
+            ModelState["Price"].Errors.Clear();
+            ModelState["AlternativePrice"].Errors.Clear();
+
             if (ModelState.IsValid)
             {
 
@@ -108,6 +112,14 @@ namespace HaarlemFestival.Controllers
                     // file is uploaded
                     file.SaveAs(path);
                 }
+
+                // Price omzetten naar een float.
+                float price, alternativePrice;
+
+                if (float.TryParse(collector["Price"], out price))
+                    activity.Price = price;
+                if (float.TryParse(collector["AlternativePrice"], out alternativePrice))
+                    activity.AlternativePrice = alternativePrice;
 
                 activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
                 activity.EndSession = DateTime.Parse(collector["Date"] + " " + collector["EndSession"]);
