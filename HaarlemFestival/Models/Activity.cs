@@ -19,10 +19,12 @@ namespace HaarlemFestival.Models
 
         [Required(ErrorMessage = "Please enter the price of the event.")]
         [Display(Name = "Price")]
+        [DataType(DataType.Currency)]
         [RegularExpression("([0-9]*[.,]\\d\\d*)", ErrorMessage = "Please fill in a valid price")]
         public float? Price { get; set; }
 
         [Display(Name = "Alternative Price")]
+        [DataType(DataType.Currency)]
         [RegularExpression("([0-9]*[.,]\\d\\d*)", ErrorMessage = "Please fill in a valid price")]
         public float? AlternativePrice { get; set; }
 
