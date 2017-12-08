@@ -109,7 +109,7 @@ namespace HaarlemFestival.Controllers
             if (ModelState.IsValid)
             {
                 HttpPostedFileBase file = Request.Files[0];
-                if (file != null)
+                if (file.ContentLength > 0)
                 {
                     activity.artist.ArtistImage = System.IO.Path.GetFileName(file.FileName);
                     string path = System.IO.Path.Combine(Server.MapPath("~/images/jazz"), activity.artist.ArtistImage);
