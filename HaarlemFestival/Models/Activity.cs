@@ -39,7 +39,6 @@ namespace HaarlemFestival.Models
 
         [Required(ErrorMessage = "Please enter a phone number.")]
         [Display(Name = "Phone number")]
-        [RegularExpression("\\(?([0-9]{3})\\)?([ .-]?)([0-9]{3})\\2([0-9]{4})", ErrorMessage = "Please fill in a valid phone number")]
         public string Phonenumber { get; set; }
 
         [Required(ErrorMessage = "Please enter an address.")]

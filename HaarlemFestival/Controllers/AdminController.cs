@@ -96,15 +96,16 @@ namespace HaarlemFestival.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult AddJazz(HaarlemFestival.Models.Jazz activity, FormCollection collector, HttpPostedFileBase file)
+        public ActionResult AddJazz(HaarlemFestival.Models.Jazz activity, FormCollection collector)
         {
+            activity.EventType = (int)EventType.JazzPatronaat;
             // Model geeft error maar veld mag ook null zijn, daarom clear ik de errors.
             ModelState["Price"].Errors.Clear();
             ModelState["AlternativePrice"].Errors.Clear();
 
             if (ModelState.IsValid)
             {
-
+                HttpPostedFileBase file = Request.Files[0];
                 if (file != null)
                 {
                     activity.artist.ArtistImage = System.IO.Path.GetFileName(file.FileName);
@@ -116,17 +117,23 @@ namespace HaarlemFestival.Controllers
                 // Price omzetten naar een float.
                 float price, alternativePrice;
 
-                if (float.TryParse(collector["Price"], out price))
+                if (float.TryParse(collector["Price"].Replace(".", ","), out price))
                     activity.Price = price;
-                if (float.TryParse(collector["AlternativePrice"], out alternativePrice))
-                    activity.AlternativePrice = alternativePrice;
+                else
+                    ModelState.AddModelError("InvalidPrice", "Please enter a valid price");
+
+                if (collector["AlternativePrice"].ToString() != "")
+                {
+                    if (float.TryParse(collector["AlternativePrice"].Replace(".", ","), out alternativePrice))
+                        activity.AlternativePrice = alternativePrice;
+                    else
+                        ModelState.AddModelError("InvalidAlternativePrice", "Please enter a valid price");
+                }
 
                 activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
                 activity.EndSession = DateTime.Parse(collector["Date"] + " " + collector["EndSession"]);
 
                 adminRepository.AddEvent(activity);
-
-                return RedirectToAction("ManageEvent", "Admin");
             }
 
             return RedirectToAction("ManageEvent", "Admin");

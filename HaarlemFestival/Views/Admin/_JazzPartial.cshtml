@@ -1,8 +1,13 @@
 ﻿@using HaarlemFestival.Models
 @model Jazz
 
-@using (Html.BeginForm("AddJazz", "Admin", FormMethod.Post))
+@using (Html.BeginForm("AddJazz", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    <div id="bootstrapAlert" class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <span class="loginErrors">@Html.ValidationSummary()</span>
+    </div>
+
     <div class="form-group">
         <div class="input-group">
             @Html.LabelFor(j => j.artist.ArtistName)
@@ -68,9 +73,17 @@
 
     <div class="form-group">
         <div class="input-group">
-            @Html.LabelFor(j => j.artist.ArtistImage)
-            <input type="file" name="ArtistImage"/>
+            @Html.LabelFor(j => j.Phonenumber)
+            @Html.TextBoxFor(j => j.Phonenumber, new { @Value = "+31 023 - 5175850" })
         </div>
     </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.LabelFor(j => j.artist.ArtistImage)
+            <input type="file" name="ArtistImage" />
+        </div>
+    </div>
+
             <input type="submit" value="Add Jazz" />
  }
