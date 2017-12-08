@@ -7,12 +7,12 @@ namespace HaarlemFestival.Migrations
     {
         public override void Up()
         {
-            //AddColumn("dbo.Historics", "HistoricId", c => c.Int(nullable: false));
+            AddColumn("dbo.Historics", "HistoricId", c => c.Int(nullable: false));
         }
         
         public override void Down()
         {
-            //DropColumn("dbo.Historics", "HistoricId");
+            DropColumn("dbo.Historics", "HistoricId");
         }
     }
 }
