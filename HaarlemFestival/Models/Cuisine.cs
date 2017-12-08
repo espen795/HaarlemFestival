@@ -10,8 +10,10 @@ namespace HaarlemFestival.Models
         [Display(Name = "Cuisine Id")]
         public int CuisineId { get; set; }
 
+        [Required(ErrorMessage = "Please enter the name of the cuisine.")]
         [Display(Name = "Cuisine Naam")]
         public string Naam { get; set; }
+
         public virtual List<Restaurant> Restaurants { get; set; }
 
         public Cuisine( )

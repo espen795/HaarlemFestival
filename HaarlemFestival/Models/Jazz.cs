@@ -8,6 +8,7 @@ namespace HaarlemFestival.Models
 {
     public class Jazz : Activity
     {
+        [Required]
         [Display(Name = "Concert Location")]
         public string ConcertLocation { get; set; }
 
