@@ -1,0 +1,48 @@
+﻿@using HaarlemFestival.Models
+@model Dinner
+
+<script type="text/javascript">
+
+</script>
+
+@using (Html.BeginForm("AddDinner", "Admin", FormMethod.Post))
+{
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Restaurant:")
+            @Html.DropDownListFor(d => d.Restaurant, new SelectList((List<Restaurant>)ViewData["Restaurants"], "RestaurantId", "Naam"))
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Start:")
+            <input type="date" id="StartDate" /> @Html.Label("Time:") <input type="time" id="StartSession" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("End:")
+            <input type="date" id="EndDate" /> @Html.Label("Time:") <input type="time" id="EndSession" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Price:")
+            @Html.EditorFor(d => d.Price)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Price (12-):")
+            @Html.EditorFor(d => d.AlternativePrice)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            @Html.EditorFor(d => d.TotalTickets)
+        </div>
+    </div>  
+
+    <input type="submit" value="Add Dinner" />
+ }

@@ -7,11 +7,11 @@ namespace HaarlemFestival.Models
 {
     public class EventData
     {
-        public IEnumerable<Day> Dates;
-        public IEnumerable<Guide> Guides;
-        public IEnumerable<Language> Languages;
-        public IEnumerable<Cuisine> Cuisines;
-        public IEnumerable<Restaurant> Restaurants;
+        public List<Day> Dates;
+        public List<Guide> Guides;
+        public List<Language> Languages;
+        public List<Cuisine> Cuisines;
+        public List<Restaurant> Restaurants;
 
         public List<Activity> Activities;
     }

@@ -67,9 +67,14 @@ namespace HaarlemFestival.Controllers
         [Authorize]
         public ActionResult ManageEvent()
         {
-            EventData data = new EventData();
+            EventData data = adminRepository.GetEventData();
 
             string selectedEvent = this.Request.QueryString["selectedEvent"];
+            ViewData["Restaurants"] = data.Restaurants;
+            ViewData["Guides"] = data.Guides;
+            ViewData["Languages"] = data.Languages;
+            ViewData["Cuisines"] = data.Cuisines;
+            ViewData["Dates"] = data.Dates;
 
             switch (selectedEvent)
             {
@@ -91,12 +96,60 @@ namespace HaarlemFestival.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult AddEvent(Activity activity)
+        public ActionResult AddJazz(HaarlemFestival.Models.Jazz activity, FormCollection collector, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+
+                if (file != null)
+                {
+                    activity.artist.ArtistImage = System.IO.Path.GetFileName(file.FileName);
+                    string path = System.IO.Path.Combine(Server.MapPath("~/images/jazz"), activity.artist.ArtistImage);
+                    // file is uploaded
+                    file.SaveAs(path);
+                }
+
+                activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
+                activity.EndSession = DateTime.Parse(collector["Date"] + " " + collector["EndSession"]);
+
                 adminRepository.AddEvent(activity);
-                ViewBag.Status = "Deleted";
+
+                return RedirectToAction("ManageEvent", "Admin");
+            }
+
+            return RedirectToAction("ManageEvent", "Admin");
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddDinner(HaarlemFestival.Models.Dinner activity, FormCollection collector, HttpPostedFileBase files)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("ManageEvent", "Admin");
+            }
+
+            return View(activity);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddTalking(HaarlemFestival.Models.Talking activity, FormCollection collector, HttpPostedFileBase files)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("ManageEvent", "Admin");
+            }
+
+            return View(activity);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddHistoric(HaarlemFestival.Models.Historic activity, FormCollection collector, HttpPostedFileBase files)
+        {
+            if (ModelState.IsValid)
+            {
                 return RedirectToAction("ManageEvent", "Admin");
             }
 
@@ -125,6 +178,34 @@ namespace HaarlemFestival.Controllers
         public ActionResult Download()
         {
             return View();
+        }
+
+
+        [Authorize]
+        public ActionResult _UpdateEvent(int id)
+        {
+            Activity activity = adminRepository.GetActivity(id);
+            return PartialView(activity);
+        }
+
+        public ActionResult _JazzPartial(Jazz model)
+        {
+            return PartialView(model);
+        }
+
+        public ActionResult _DinnerPartial(Dinner model)
+        {
+            return PartialView(model);
+        }
+
+        public ActionResult _TalkingPartial(Talking model)
+        {
+            return PartialView(model);
+        }
+
+        public ActionResult _HistoricPartial(Historic model)
+        {
+            return PartialView(model);
         }
     }
 }

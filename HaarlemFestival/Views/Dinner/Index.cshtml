@@ -1,4 +1,8 @@
-﻿@{
+﻿@using HaarlemFestival.Models;
+@using System.Collections.Generic;
+@model List<Restaurant>
+
+@{
     ViewBag.Title = "Dinner in Haarlem";
 }
 
@@ -41,6 +45,47 @@
                 </div>
             </div>
             <hr class="title-hr title-line-right">
+        </div>
+
+        <!-- Section 3-->
+        <div class="event-section-3-dinner">
+            <div class="cuisineselect">
+                <!--Dropdown menu voor cuisines-->
+            </div>
+            <div class="restaurants">
+                @foreach (Restaurant r in Model)
+                {
+                    <div class="promo-restaurant">
+                        <img src="/images/Dinner/restaurants/@r.FoodIMG" alt="Picture not found" />
+                        <h3>@r.Naam</h3>
+                        <div class="infonames">
+                            Cuisines:<br />
+                            <br />
+                            Rating:<br />
+                            Price:<br />
+                        </div>
+                        <div class="info-infocuisine">
+                            @foreach (Cuisine c in r.Cuisines)
+                            {
+                                if (r.Cuisines.Last() != c)
+                                {
+                                    @c.Naam<span>,</span>
+                                }
+                                else
+                                {
+                                    @c.Naam
+                                }
+                            }
+                        </div>
+                        <div class="info-info">
+                            @r.Rating<br />
+                            €@r.DisplayPrice.ToString("0.00")
+                        </div>
+                        <button class="reservationbutton" type="button" onclick="location.href='@Url.Action("Reservation","Dinner", new { id = r.RestaurantId})'">Make reservation</button>
+                        <button class="infobutton" type="button" onclick="location.href='@Url.Action("Info", "Dinner", new { id = r.RestaurantId })'"><i class="fa fa-info" aria-hidden="true"></i></button>
+                    </div>
+                }
+            </div>
         </div>
     </div>
 </div>

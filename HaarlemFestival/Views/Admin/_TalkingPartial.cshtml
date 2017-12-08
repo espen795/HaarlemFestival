@@ -1,0 +1,16 @@
+﻿@using HaarlemFestival.Models
+@model Talking
+
+@using (Html.BeginForm("AddTalking", "Admin", FormMethod.Post))
+{
+    Html.EditorFor(t => t.Talk.Naam);
+    Html.EditorFor(t => t.Talk.Description);
+    Html.EditorFor(t => t.Address);
+    Html.EditorFor(t => t.Talk.Person1);
+    Html.EditorFor(t => t.Talk.Person2);
+    Html.EditorFor(t => t.Price);
+    Html.EditorFor(t => t.Phonenumber);
+    Html.EditorFor(t => t.Talk.MaxTickets);
+
+    <input type="submit" value="Add Interview" />
+}

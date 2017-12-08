@@ -1,6 +1,104 @@
 ﻿@{
-    ViewBag.Title = "Talking Haarlem";
+    ViewBag.Title = "Talking Haarlem - Reservation";
 }
 
 <h2>Reservation</h2>
 
+<section class="event-banner talking"></section>
+
+<main class="event container talking">
+    <section class="row">
+        <!-- Section 1 -->
+        <section class="talk-reservation-container">
+            <section>
+                <h1>
+                    Order your amount of tickets <span class="talk-bold">(max 2 tickets per talk)</span>
+                </h1>
+            </section>
+
+            <section>
+                <table>
+                    <tr>
+                        <th>Ticket Amount</th>
+                        <th>Talk</th>
+                        <th>Price</th>
+                        <th>Date & Time (DD-MM-YYYY)</th>
+                        <th>Location</th>
+                    </tr>
+                    <tr>
+                        <td><input type="number" /></td>
+                        <td>Giel Beelen meets Rob Trip</td>
+                        <td>Free</td>
+                        <td>Thursday 26-07-2018 | 20:00 - 22:00</td>
+                        <td>Toneelschuur</td>
+                    </tr>
+                    <tr>
+                        <td><input type="number" /></td>
+                        <td>Femke Halsema meets Job Cohen</td>
+                        <td>Free</td>
+                        <td>Friday 27-07-2018 | 20:00 - 22:00</td>
+                        <td>Toneelschuur</td>
+                    </tr>
+                    <tr>
+                        <td><input type="number" /></td>
+                        <td>Paul Witteman meets Brigitte Kaandorp</td>
+                        <td>Free</td>
+                        <td>Saturday 28-07-2018 | 20:00 - 22:00</td>
+                        <td>Toneelschuur</td>
+                    </tr>
+                </table>
+            </section> <!-- Table -->
+
+            <section>
+                <p>
+                    Fill in an optional question (Dutch or English) below for one of the interviewees and it might
+                    be used for the interview <span class="talk-bold">(only if you ordered one or two tickets for that specific talk)</span>
+                </p>
+             </section> <!-- Question info-->
+
+             <section class="talk-questions">
+                <section class="talk-question" id="question1">
+                     <p>Giel Beelen meets Rob Trip</p>
+                     <section class="talk-question-receiver">
+                         <p>Question For: </p>
+                         <select>
+                             <option>Niemand</option>
+                             <option>Giel Beelen</option>
+                             <option>Rob Trip</option>
+                         </select>
+                      </section>
+                      <textarea class="talk-questionbox"></textarea>
+                 </section>
+                 <section class="talk-question" id="question2">
+                     <p>Femke Halsema meets Job Cohen</p>
+                     <section class="talk-question-receiver">
+                         <p>Question For: </p>
+                         <select>
+                             <option>Niemand</option>
+                             <option>Femke Halsema</option>
+                             <option>Job Cohen</option>
+                         </select>
+                     </section>
+                     <textarea class="talk-questionbox"></textarea>
+                 </section>
+                 <section class="talk-question" id="question3">
+                     <p>Paul Witteman meets Brigitte Kaandorp</p>
+                     <section class="talk-question-receiver">
+                         <p>Question For: </p>
+                         <select>
+                             <option>Niemand</option>
+                             <option>Paul Witteman</option>
+                             <option>Brigitte Kaandorp</option>
+                         </select>
+                      </section>
+                      <textarea class="talk-questionbox"></textarea>
+                  </section>
+            </section> <!-- Questions -->
+            <section>
+                <p>@Html.ActionLink("Back to Talking Haarlem", "Index", "Talking", new { @class = "btn btn-black talk-back-btn" })</p>
+                
+                <p>@Html.ActionLink("Add to basket", "Reservation", "Talking", new { @class = "btn btn-black talk-order-btn" })</p>
+            </section> <!-- Buttons -->
+        </section> <!-- Section 1 Reservation Container -->
+    </section> <!-- row -->
+</main>

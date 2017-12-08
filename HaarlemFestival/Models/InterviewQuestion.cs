@@ -8,8 +8,8 @@ namespace HaarlemFestival.Models
     public class InterviewQuestion
     {
         public int InterviewQuestionId { get; set; }
-        public string content;
-        public string receiver;
+        public string Content { get; set; }
+        public string Receiver { get; set; }
 
         public InterviewQuestion()
         {

@@ -1,0 +1,76 @@
+﻿@using HaarlemFestival.Models
+@model Jazz
+
+@using (Html.BeginForm("AddJazz", "Admin", FormMethod.Post))
+{
+    <div class="form-group">
+        <div class="input-group">
+            @Html.LabelFor(j => j.artist.ArtistName)
+            @Html.TextBoxFor(j => j.artist.ArtistName, new { @placeholder = "Name" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.LabelFor(j => j.artist.ArtistInformation)
+            @Html.TextAreaFor(j => j.artist.ArtistInformation, new { @placeholder = "Description" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.LabelFor(j => j.StartSession)
+            <input type="date" name="Date"/> @Html.Label("Time") <input type="time" name="StartSession"/>  -  <input type="time" name="EndSession"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.LabelFor(j => j.TotalTickets)
+            @Html.EditorFor(j => j.TotalTickets, new { @placeholder = "Total Tickets" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.LabelFor(j => j.Address)
+            @Html.TextBoxFor(j => j.Address, new { @placeholder = "Address" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.LabelFor(j => j.ConcertLocation)
+            @Html.TextBoxFor(j => j.ConcertLocation, new { @placeholder = "Concert Location" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.LabelFor(j => j.ConcertHall)
+            @Html.TextBoxFor(j => j.ConcertHall, new { @placeholder = "Concert Hall" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.LabelFor(j => j.Price)
+            @Html.TextBoxFor(j => j.Price, new { @placeholder = "0.00" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.LabelFor(j => j.AlternativePrice)
+            @Html.TextBoxFor(j => j.AlternativePrice, new { @placeholder = "0.00" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.LabelFor(j => j.artist.ArtistImage)
+            <input type="file" name="ArtistImage"/>
+        </div>
+    </div>
+            <input type="submit" value="Add Jazz" />
+ }

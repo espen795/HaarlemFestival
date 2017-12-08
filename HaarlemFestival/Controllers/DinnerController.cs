@@ -1,16 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using HaarlemFestival.Models;
+using HaarlemFestival.Repository.Dinner;
 
 namespace HaarlemFestival.Controllers
 {
     public class DinnerController : Controller
     {
+        private IDinnerRepository dinnerRepository = new DinnerRepository();
         public ActionResult Index()
         {
-            return View();
+            List<Restaurant> allRestaurants = dinnerRepository.GetAllRestaurants();
+
+            return View(allRestaurants);
+        }
+
+        public ActionResult Info(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            List<Dinner> OptionsPerRestaurant = dinnerRepository.DinnersPerRestaurant((int)id);
+
+            return View(OptionsPerRestaurant);
+        }
+
+        public ActionResult Reservation(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            List<Dinner> OptionsPerRestaurant = dinnerRepository.DinnersPerRestaurant((int)id);
+
+            return View(OptionsPerRestaurant);
         }
     }
 }
