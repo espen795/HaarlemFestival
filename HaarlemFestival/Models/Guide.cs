@@ -14,7 +14,6 @@ namespace HaarlemFestival.Models
         [Required(ErrorMessage = "Please enter the name of the guide.")]
         [Display(Name = "Guide Name")]
         public string GuideName { get; set; }
-        public DateTime WorksOn { get; set; }
 
         public Guide()
         {

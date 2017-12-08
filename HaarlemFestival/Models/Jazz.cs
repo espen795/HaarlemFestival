@@ -17,6 +17,7 @@ namespace HaarlemFestival.Models
 
         [Display(Name = "PassPartout Price")]
         [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:C2}")]
         public float AllDayPassPartout { get; set; }
 
         [Display(Name = "Artist ID")]
