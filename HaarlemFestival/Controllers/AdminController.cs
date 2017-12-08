@@ -103,6 +103,9 @@ namespace HaarlemFestival.Controllers
             ModelState["Price"].Errors.Clear();
             ModelState["AlternativePrice"].Errors.Clear();
 
+            // Standaard informatie van activity
+            activity.AllDayPassPartout = 80;
+
             if (ModelState.IsValid)
             {
                 HttpPostedFileBase file = Request.Files[0];
@@ -121,7 +124,7 @@ namespace HaarlemFestival.Controllers
                     activity.Price = price;
                 else
                     ModelState.AddModelError("InvalidPrice", "Please enter a valid price");
-
+                
                 if (collector["AlternativePrice"].ToString() != "")
                 {
                     if (float.TryParse(collector["AlternativePrice"].Replace(".", ","), out alternativePrice))

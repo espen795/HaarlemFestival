@@ -73,8 +73,10 @@
 <div class="modal fade" id="imagePopup" tabindex="-1" role="dialog" aria-labelledby="imagePopup">
         <span id="closeImage" class="close">&times;</span>
         <!-- CONTENT -->
-       <img id="eventImage" class="modal-content showEventImage" src=""/>
+       <img id="eventImage" class="modal-content showEventImage" src="" onError="this.src = '../images/no_image.jpg'"/>
 </div>
+
+
 
 <div class="container">
     <script type="text/javascript">
@@ -104,11 +106,10 @@
         function ShowEventImage(path)
         {
             var modal = document.getElementById('imagePopup');
-
             var modalImg = document.getElementById("eventImage");
 
             modal.style.display = "block";
-            modalImg.src = "../images/" + path;
+            modalImg.src = "../images/" + path;      
 
             // Get the <span> element that closes the modal
             var span = document.getElementById("closeImage");
