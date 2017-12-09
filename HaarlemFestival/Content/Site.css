@@ -679,10 +679,11 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 }
 
 .btn.btn-book{
-    background: #81c871;
+    background: #639757;
+    font-size: 16px;
     color: #fff;
     border-radius: 0px;
-    transition: 300ms;
+    transition: 400ms;
     right: 20px;
     bottom: 20px;
     position: absolute;
@@ -690,7 +691,7 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 
 .btn-book:hover {
     color: #fff;
-    background: #639757;
+    background: #81c871;
 }
 
 /*----- Historic tickets -----*/

@@ -69,7 +69,7 @@ namespace HaarlemFestival.Repository.Admin
                     break;
 
                 case EventType.HistoricHaarlem:
-                    Historic historic = db.Historics.Find(id);
+                    Models.Historic historic = db.Historics.Find(id);
                     db.Historics.Remove(historic);
                     break;
             }
