@@ -128,22 +128,20 @@ footer a:hover {
     margin-bottom: 0;
 }
 
-.section_home_1 .feature-block-content p.button {
-    margin-top: 15px
-}
-.section_home_1 .feature-block-content p.button a {
+.button {
+    float: right;
+    margin: 8px;
+    color: #FFFFFF;
     background-color: #353238;
-    color: #fff;
-    font-size: 16px;
-    padding: 8px 25px;
-    transition: 300ms;
+    height: 32px;
+    min-width: 32px;
 }
 
 .section_home_1 .feature-block-content p.button a:hover {
     background-color: #736e6e;
     color: #fff;
     text-decoration: none;
-}
+} 
 
 /* SECTION 2 - MAIN CONTENT */
 .section_home_2::before {
@@ -686,6 +684,22 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     display: block;
 }
 
+.btn.btn-book{
+    background: #639757;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 0px;
+    transition: 400ms;
+    right: 20px;
+    bottom: 20px;
+    position: absolute;
+}
+
+.btn-book:hover {
+    color: #fff;
+    background: #81c871;
+}
+
 /*----- Historic tickets -----*/
 
 .event-header.historicTickets {
@@ -705,7 +719,7 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 }
 
 .ticket-table table tr th {
-    background-color: #8bd47a;
+    background-color: #81c871;
     font-size: 1.12em;
     color: #fff;
     padding-right: 35px;
@@ -844,6 +858,82 @@ input[type='text']:focus, input[type='password']:focus {
 .eventData tr td i.glyphicon-remove, .eventData tr td i.glyphicon-pencil {
     cursor: pointer;
 }
+
+/* MODAL VOOR IMAGE POPUP */
+/* The Modal (background) */
+#imagePopup {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 9999; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+#imagePopup .modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+    }
+
+@-webkit-keyframes zoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+/* The Close Button */
+#imagePopup .close {
+    position: absolute;
+    top: 110px;
+    right: 50px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    z-index: 9999;
+    color: white;
+}
+
+#imagePopup .close:hover,
+#imagePopup .close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px) {
+#imagePopup .modal-content {
+    width: 100%;
+}
+}
+
 
 /********************************/
 /* MEDIA QUERYS VOOR RESPONSIVE */

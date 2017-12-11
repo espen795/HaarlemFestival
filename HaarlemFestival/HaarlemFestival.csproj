@@ -150,6 +150,22 @@
     <Compile Include="Migrations\201712061425234_mig2.Designer.cs">
       <DependentUpon>201712061425234_mig2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712081622267_mig3.cs" />
+    <Compile Include="Migrations\201712081622267_mig3.Designer.cs">
+      <DependentUpon>201712081622267_mig3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712081636256_mig4.cs" />
+    <Compile Include="Migrations\201712081636256_mig4.Designer.cs">
+      <DependentUpon>201712081636256_mig4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712091046120_mig5.cs" />
+    <Compile Include="Migrations\201712091046120_mig5.Designer.cs">
+      <DependentUpon>201712091046120_mig5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712091049394_mig6.cs" />
+    <Compile Include="Migrations\201712091049394_mig6.Designer.cs">
+      <DependentUpon>201712091049394_mig6.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -161,6 +177,7 @@
     <Compile Include="Models\Guide.cs" />
     <Compile Include="Models\HFDB.cs" />
     <Compile Include="Models\InterviewQuestion.cs" />
+    <Compile Include="Models\Locations.cs" />
     <Compile Include="Models\Talk.cs" />
     <Compile Include="Models\Talking.cs" />
     <Compile Include="Models\Jazz.cs" />
@@ -177,6 +194,8 @@
     <Compile Include="Repository\Admin\IAdminRepository.cs" />
     <Compile Include="Repository\Dinner\DinnerRepository.cs" />
     <Compile Include="Repository\Dinner\IDinnerRepository.cs" />
+    <Compile Include="Repository\Historic\HistoricRepository.cs" />
+    <Compile Include="Repository\Historic\IHistoricRepository.cs" />
     <Compile Include="Repository\Talking\ITalkingRepository.cs" />
     <Compile Include="Repository\Talking\TalkingRepository.cs" />
     <Compile Include="Scripts\IAdminRepository.cs" />
@@ -261,6 +280,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712061425234_mig2.resx">
       <DependentUpon>201712061425234_mig2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712081622267_mig3.resx">
+      <DependentUpon>201712081622267_mig3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712081636256_mig4.resx">
+      <DependentUpon>201712081636256_mig4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712091046120_mig5.resx">
+      <DependentUpon>201712091046120_mig5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712091049394_mig6.resx">
+      <DependentUpon>201712091049394_mig6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

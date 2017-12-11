@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HaarlemFestival.Models;
@@ -17,9 +20,29 @@ namespace HaarlemFestival.Controllers
 
             return View(allRestaurants);
         }
-        public ActionResult Reservation()
+
+        public ActionResult Info(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            List<Dinner> OptionsPerRestaurant = dinnerRepository.DinnersPerRestaurant((int)id);
+
+            return View(OptionsPerRestaurant);
+        }
+
+        public ActionResult Reservation(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            List<Dinner> OptionsPerRestaurant = dinnerRepository.DinnersPerRestaurant((int)id);
+
+            return View(OptionsPerRestaurant);
         }
     }
 }
