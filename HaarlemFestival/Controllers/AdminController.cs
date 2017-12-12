@@ -146,7 +146,7 @@ namespace HaarlemFestival.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult AddDinner(HaarlemFestival.Models.Dinner activity, FormCollection collector, HttpPostedFileBase files)
+        public ActionResult AddDinner(Models.Dinner activity, FormCollection collector, HttpPostedFileBase files)
         {
             if (ModelState.IsValid)
             {
@@ -158,7 +158,7 @@ namespace HaarlemFestival.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult AddTalking(HaarlemFestival.Models.Talking activity, FormCollection collector, HttpPostedFileBase files)
+        public ActionResult AddTalking(Models.Talking activity, FormCollection collector, HttpPostedFileBase files)
         {
             if (ModelState.IsValid)
             {
@@ -170,7 +170,7 @@ namespace HaarlemFestival.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult AddHistoric(HaarlemFestival.Models.Historic activity, FormCollection collector)
+        public ActionResult AddHistoric(Models.Historic activity, FormCollection collector)
         {
             activity.EventType = EventType.HistoricHaarlem;
             activity.BoughtTickets = 0;
