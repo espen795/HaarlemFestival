@@ -22,7 +22,7 @@ namespace HaarlemFestival.Repository.Admin
             if (activity.GetType() == typeof(HaarlemFestival.Models.Jazz))
             {
                 HaarlemFestival.Models.Jazz jazz = activity as HaarlemFestival.Models.Jazz;
-                db.Artists.Add(jazz.artist);
+                db.Jazzs.Add(jazz);
             }
             else if (activity.GetType() == typeof(HaarlemFestival.Models.Dinner))
             {
@@ -37,7 +37,7 @@ namespace HaarlemFestival.Repository.Admin
                 HaarlemFestival.Models.Historic historic = activity as HaarlemFestival.Models.Historic;
             }
 
-            db.Activities.Add(activity);
+            db.SaveChanges();
         }
 
         public void UpdateEvent(Activity activity)
@@ -49,31 +49,30 @@ namespace HaarlemFestival.Repository.Admin
         public void DeleteEvent(int id)
         {
             Activity activity = db.Activities.Find(id);
-            db.Activities.Remove(activity);
 
             switch (activity.EventType)
             {
                 case EventType.JazzPatronaat:
-                    Jazz jazz = db.Jazzs.Find(id);
-                    db.Jazzs.Remove(jazz);
+                    Models.Jazz jazz = activity as Models.Jazz;
+                    db.Artists.Remove(jazz.artist);
                     break;
 
                 case EventType.DinnerInHaarlem:
-                    Models.Dinner dinner = db.Dinners.Find(id);
-                    db.Dinners.Remove(dinner);
+                    Models.Dinner dinner = activity as Models.Dinner;
                     break;
 
                 case EventType.TalkingHaarlem:
-                    Models.Talking talking = db.Talkings.Find(id);
-                    db.Talkings.Remove(talking);
+                    Models.Talking talking = activity as Models.Talking;
+                    db.Talks.Remove(talking.Talk);
+                    db.InterviewQuestions.RemoveRange(db.InterviewQuestions.Where(t => t.InterviewQuestionId == talking.TalkId));
                     break;
 
                 case EventType.HistoricHaarlem:
-                    Models.Historic historic = db.Historics.Find(id);
+                    Models.Historic historic = activity as Models.Historic;
                     db.Historics.Remove(historic);
                     break;
             }
-
+            db.Activities.Remove(activity);
             db.SaveChanges();
         }
 

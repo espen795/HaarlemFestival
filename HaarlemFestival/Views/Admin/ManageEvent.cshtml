@@ -27,7 +27,7 @@
 
             <!-- FOOTER -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("DeleteEvent", "Admin", new { /* ID meesturen */ })'"><i class="fa fa-check"></i> Yes, I am sure</button>
+                <button type="button" class="btn btn-success" onclick="DeleteConfirmed()"><i class="fa fa-check"></i> Yes, I am sure</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> No, Take me back</button>
             </div>
         </div>
@@ -60,7 +60,7 @@
 
             <!-- FOOTER -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("AddEvent", "Admin", new { /* ACTIVITY meesturen */ })'"><i class="fa fa-check"></i> Yes, I am sure</button>
+                <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("AddEvent", "Admin")'"><i class="fa fa-check"></i> Yes, I am sure</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> No, Take me back</button>
             </div>
         </div>
@@ -88,7 +88,7 @@
             SelectedEventChanged();
 
             // Tooltips maken.
-            $('[data-toggle="tooltip"]').tooltip(); 
+            $('[data-toggle="tooltip"]').tooltip();
         })
 
         // Nieuwe Functie aanmaken om iets te centreren.
@@ -109,7 +109,7 @@
             var modalImg = document.getElementById("eventImage");
 
             modal.style.display = "block";
-            modalImg.src = "../images/" + path;      
+            modalImg.src = "../images/" + path;
 
             // Get the <span> element that closes the modal
             var span = document.getElementById("closeImage");
@@ -211,9 +211,18 @@
             })
                 .show();
         }
-        function DeleteConfirm(id)
+
+        function OpenDeleteConfirm(id)
         {
             $("#deletePopup").attr("activityId", id);
+        }
+
+        function DeleteConfirmed()
+        {
+            var activityId = $("#deletePopup").attr("activityId");
+            var url = '@Url.Action("DeleteEvent", "Admin")';
+
+            $.post(url, { id: activityId });
         }
 
     </script>
@@ -278,7 +287,7 @@
                         <td>@activity.TotalTickets</td>
                         <td><i onclick='ShowEventImage("Jazz/@activity.artist.ArtistImage")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
-                        <td><i onclick="DeleteConfirm(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                        <td><i onclick="OpenDeleteConfirm(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
                 }
             </tbody>
@@ -321,7 +330,7 @@
                         <td><i onclick='ShowEventImage("Dinner/restaurants/@activity.Restaurant.FoodIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick='ShowEventImage("Dinner/restaurants/@activity.Restaurant.LocationIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
-                        <td><i onclick="DeleteConfirm(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                        <td><i onclick="OpenDeleteConfirm(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
                 }
             </tbody>
@@ -356,7 +365,7 @@
                         <td>@activity.Talk.MaxTickets</td>
                         <td><i onclick='ShowEventImage("Talking/@activity.Talk.Person1")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
-                        <td><i onclick="DeleteConfirm(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                        <td><i onclick="OpenDeleteConfirm(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
                 }
             </tbody>
@@ -387,7 +396,7 @@
                         <td>@activity.Price</td>
                         <td>@activity.AlternativePrice</td>
                         <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
-                        <td><i onclick="DeleteConfirm(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                        <td><i onclick="OpenDeleteConfirm(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
                 }
             </tbody>
