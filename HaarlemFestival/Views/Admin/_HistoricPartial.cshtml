@@ -15,41 +15,41 @@
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Start Location")
-            @Html.EditorFor(h => h.Address)
+            @Html.TextBoxFor(h => h.Address, new { @Value = "Grote Markt (At the giant \"walking the ages\" flag)" })
         </div>
     </div>
 
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Language")
-            @Html.DropDownListFor(m => m.Language, new SelectList((List<Language>)ViewData["Languages"], "LanguageId", "LanguageName"))
+            @Html.DropDownListFor(m => m.Language.LanguageId, new SelectList((List<Language>)ViewData["Languages"], "LanguageId", "LanguageName"))
         </div>
     </div>
 
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Guide")
-            @Html.DropDownListFor(m => m.Guide, new SelectList((List<Guide>)ViewData["Guides"], "GuideId", "GuideName"))
+            @Html.DropDownListFor(m => m.Guide.GuideId, new SelectList((List<Guide>)ViewData["Guides"], "GuideId", "GuideName"))
         </div>
     </div>
 
     <div class="form-group">
         <div class="input-group">
-            @Html.Label("Total Tickets")
+            @Html.Label("Total Tickets:")
             @Html.EditorFor(h => h.TotalTickets)
         </div>
     </div>
 
     <div class="form-group">
         <div class="input-group">
-            @Html.LabelFor(h => h.Price)
+            @Html.Label("Price:")
             @Html.EditorFor(h => h.Price)
         </div>
     </div>
 
     <div class="form-group">
         <div class="input-group">
-            @Html.Label("Group Ticket")
+            @Html.Label("Group Ticket Price:")
             @Html.EditorFor(h => h.AlternativePrice)
         </div>
     </div>

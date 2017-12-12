@@ -98,7 +98,9 @@ namespace HaarlemFestival.Controllers
         [Authorize]
         public ActionResult AddJazz(HaarlemFestival.Models.Jazz activity, FormCollection collector)
         {
-            activity.EventType = (int)EventType.JazzPatronaat;
+            activity.EventType = EventType.JazzPatronaat;
+            activity.BoughtTickets = 0;
+
             // Model geeft error maar veld mag ook null zijn, daarom clear ik de errors.
             ModelState["Price"].Errors.Clear();
             ModelState["AlternativePrice"].Errors.Clear();
@@ -168,14 +170,38 @@ namespace HaarlemFestival.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult AddHistoric(HaarlemFestival.Models.Historic activity, FormCollection collector, HttpPostedFileBase files)
+        public ActionResult AddHistoric(HaarlemFestival.Models.Historic activity, FormCollection collector)
         {
+            activity.EventType = EventType.HistoricHaarlem;
+            activity.BoughtTickets = 0;
+            ModelState["Price"].Errors.Clear();
+            ModelState["AlternativePrice"].Errors.Clear();
+
             if (ModelState.IsValid)
             {
-                return RedirectToAction("ManageEvent", "Admin");
+                // Price omzetten naar een float.
+                float price, groupPrice;
+
+                if (float.TryParse(collector["Price"].Replace(".", ","), out price))
+                    activity.Price = price;
+                else
+                    ModelState.AddModelError("InvalidPrice", "Please enter a valid price");
+
+                if (collector["AlternativePrice"].ToString() != "")
+                {
+                    if (float.TryParse(collector["AlternativePrice"].Replace(".", ","), out groupPrice))
+                        activity.AlternativePrice = groupPrice;
+                    else
+                        ModelState.AddModelError("InvalidAlternativePrice", "Please enter a valid price");
+                }
+
+                activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
+                activity.EndSession = activity.StartSession.AddHours(2.5);
+
+                adminRepository.AddEvent(activity);
             }
 
-            return View(activity);
+            return RedirectToAction("ManageEvent", "Admin");
         }
 
         [HttpPost]

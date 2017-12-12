@@ -17,13 +17,7 @@
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Start:")
-            <input type="date" id="StartDate" /> @Html.Label("Time:") <input type="time" id="StartSession" />
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="input-group">
-            @Html.Label("End:")
-            <input type="date" id="EndDate" /> @Html.Label("Time:") <input type="time" id="EndSession" />
+            <input type="date" id="Date" /> @Html.Label("") <input type="time" id="StartSession" /> - <input type="time" id="EndSession" />
         </div>
     </div>
     <div class="form-group">
@@ -40,9 +34,22 @@
     </div>
     <div class="form-group">
         <div class="input-group">
+            @Html.Label("Seats: ")
             @Html.EditorFor(d => d.TotalTickets)
         </div>
-    </div>  
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Phonenumber: ")
+            @Html.EditorFor(d => d.Phonenumber)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Address: ")
+            @Html.EditorFor(d => d.Address)
+        </div>
+    </div>
 
     <input type="submit" value="Add Dinner" />
  }
