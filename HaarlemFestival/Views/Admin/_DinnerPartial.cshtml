@@ -10,14 +10,14 @@
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Restaurant:")
-            @Html.DropDownListFor(d => d.Restaurant, new SelectList((List<Restaurant>)ViewData["Restaurants"], "RestaurantId", "Naam"))
+            @Html.DropDownListFor(d => d.RestaurantId, new SelectList((List<Restaurant>)ViewData["Restaurants"], "RestaurantId", "Naam"), new { @name="RestaurantId" })
         </div>
     </div>
 
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Start:")
-            <input type="date" id="Date" /> @Html.Label("") <input type="time" id="StartSession" /> - <input type="time" id="EndSession" />
+            <input type="date" name="Date" /> @Html.Label("") <input type="time" name="StartSession" /> - <input type="time" name="EndSession" />
         </div>
     </div>
     <div class="form-group">

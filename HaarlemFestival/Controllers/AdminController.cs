@@ -148,8 +148,35 @@ namespace HaarlemFestival.Controllers
         [Authorize]
         public ActionResult AddDinner(Models.Dinner activity, FormCollection collector, HttpPostedFileBase files)
         {
+            activity.EventType = EventType.DinnerInHaarlem;
+            ModelState["Price"].Errors.Clear();
+            ModelState["AlternativePrice"].Errors.Clear();
+
             if (ModelState.IsValid)
             {
+                activity.RestaurantId = Convert.ToInt32(collector["RestaurantId"]);
+
+                // Price omzetten naar een float.
+                float price, groupPrice;
+
+                if (float.TryParse(collector["Price"].Replace(".", ","), out price))
+                    activity.Price = price;
+                else
+                    ModelState.AddModelError("InvalidPrice", "Please enter a valid price");
+
+                if (collector["AlternativePrice"].ToString() != "")
+                {
+                    if (float.TryParse(collector["AlternativePrice"].Replace(".", ","), out groupPrice))
+                        activity.AlternativePrice = groupPrice;
+                    else
+                        ModelState.AddModelError("InvalidAlternativePrice", "Please enter a valid price");
+                }
+
+                activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
+                activity.EndSession = DateTime.Parse(collector["Date"] + " " + collector["EndSession"]);
+
+                adminRepository.AddEvent(activity);
+
                 return RedirectToAction("ManageEvent", "Admin");
             }
 
@@ -174,11 +201,14 @@ namespace HaarlemFestival.Controllers
         {
             activity.EventType = EventType.HistoricHaarlem;
             activity.BoughtTickets = 0;
+            ModelState["Guide.GuideName"].Errors.Clear();
             ModelState["Price"].Errors.Clear();
             ModelState["AlternativePrice"].Errors.Clear();
 
             if (ModelState.IsValid)
             {
+                activity.GuideId = Convert.ToInt32(collector["GuideId"]);
+
                 // Price omzetten naar een float.
                 float price, groupPrice;
 
@@ -209,7 +239,6 @@ namespace HaarlemFestival.Controllers
         public ActionResult DeleteEvent(int id)
         {
             adminRepository.DeleteEvent(id);
-            ViewBag.Status = "Deleted";
             return RedirectToAction("ManageEvent","Admin");
         }
 

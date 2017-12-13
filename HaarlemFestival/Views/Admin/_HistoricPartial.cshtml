@@ -8,7 +8,7 @@
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Date:")
-            <input type="date" id="Date" /> @Html.Label("Time:") <input type="time" id="StartSession" />
+            <input type="date" name="Date" /> @Html.Label("Time:") <input type="time" name="StartSession" />
         </div>
     </div>
 
@@ -21,15 +21,8 @@
 
     <div class="form-group">
         <div class="input-group">
-            @Html.Label("Language")
-            @Html.DropDownListFor(m => m.Language.LanguageId, new SelectList((List<Language>)ViewData["Languages"], "LanguageId", "LanguageName"))
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="input-group">
             @Html.Label("Guide")
-            @Html.DropDownListFor(m => m.Guide.GuideId, new SelectList((List<Guide>)ViewData["Guides"], "GuideId", "GuideName"))
+            @Html.DropDownListFor(m => m.Guide.GuideId, new SelectList((List<Guide>)ViewData["Guides"], "GuideId", "GuideName"), new { @name = "GuideId" })
         </div>
     </div>
 
@@ -51,6 +44,13 @@
         <div class="input-group">
             @Html.Label("Group Ticket Price:")
             @Html.EditorFor(h => h.AlternativePrice)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Phonenumber:")
+            @Html.TextBoxFor(h => h.Phonenumber, new { @Value = "+31 023 - 5241020" })
         </div>
     </div>
 

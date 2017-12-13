@@ -27,14 +27,17 @@ namespace HaarlemFestival.Repository.Admin
             else if (activity.GetType() == typeof(HaarlemFestival.Models.Dinner))
             {
                 HaarlemFestival.Models.Dinner dinner = activity as HaarlemFestival.Models.Dinner;
+                db.Dinners.Add(dinner);
             }
             else if (activity.GetType() == typeof(HaarlemFestival.Models.Talking))
             {
                 HaarlemFestival.Models.Talking talking = activity as HaarlemFestival.Models.Talking;
+                db.Talkings.Add(talking);
             }
             else if (activity.GetType() == typeof(HaarlemFestival.Models.Historic))
             {
                 HaarlemFestival.Models.Historic historic = activity as HaarlemFestival.Models.Historic;
+                db.Historics.Add(historic);
             }
 
             db.SaveChanges();
