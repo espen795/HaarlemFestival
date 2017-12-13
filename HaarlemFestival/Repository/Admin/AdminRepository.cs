@@ -89,7 +89,7 @@ namespace HaarlemFestival.Repository.Admin
 
                 Dates = db.Days.ToList(),
                 Cuisines = db.Cuisines.ToList(),
-                Languages = db.Languages.ToList(),
+                //Languages = db.Languages.ToList(),
                 Guides = db.Guides.ToList(),
                 Restaurants = db.Restaurants.ToList()
             };

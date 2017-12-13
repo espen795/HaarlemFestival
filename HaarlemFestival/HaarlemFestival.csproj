@@ -170,6 +170,34 @@
     <Compile Include="Migrations\201712121304153_mig7.Designer.cs">
       <DependentUpon>201712121304153_mig7.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712131255028_mig8.cs" />
+    <Compile Include="Migrations\201712131255028_mig8.Designer.cs">
+      <DependentUpon>201712131255028_mig8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712131256014_mig9.cs" />
+    <Compile Include="Migrations\201712131256014_mig9.Designer.cs">
+      <DependentUpon>201712131256014_mig9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712131258207_mig10.cs" />
+    <Compile Include="Migrations\201712131258207_mig10.Designer.cs">
+      <DependentUpon>201712131258207_mig10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712131302593_mig11.cs" />
+    <Compile Include="Migrations\201712131302593_mig11.Designer.cs">
+      <DependentUpon>201712131302593_mig11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712131309449_mig12.cs" />
+    <Compile Include="Migrations\201712131309449_mig12.Designer.cs">
+      <DependentUpon>201712131309449_mig12.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712131350027_mig13.cs" />
+    <Compile Include="Migrations\201712131350027_mig13.Designer.cs">
+      <DependentUpon>201712131350027_mig13.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712131403244_mig14.cs" />
+    <Compile Include="Migrations\201712131403244_mig14.Designer.cs">
+      <DependentUpon>201712131403244_mig14.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -299,6 +327,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712121304153_mig7.resx">
       <DependentUpon>201712121304153_mig7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712131255028_mig8.resx">
+      <DependentUpon>201712131255028_mig8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712131256014_mig9.resx">
+      <DependentUpon>201712131256014_mig9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712131258207_mig10.resx">
+      <DependentUpon>201712131258207_mig10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712131302593_mig11.resx">
+      <DependentUpon>201712131302593_mig11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712131309449_mig12.resx">
+      <DependentUpon>201712131309449_mig12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712131350027_mig13.resx">
+      <DependentUpon>201712131350027_mig13.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712131403244_mig14.resx">
+      <DependentUpon>201712131403244_mig14.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

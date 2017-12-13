@@ -13,8 +13,13 @@ namespace HaarlemFestival.Models
 
         [Required(ErrorMessage = "Please enter the guide's name.")]
         [Display(Name = "Guide Name")]
-
         public string GuideName { get; set; }
+
+        [Display(Name = "Language Name")]
+        public string LanguageName { get; set; }
+
+        [Display(Name = "Language Abbreviation")]
+        public string LanguageAbbr { get; set; }
 
         public Guide()
         {

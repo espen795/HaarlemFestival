@@ -40,7 +40,7 @@ namespace HaarlemFestival.Models
         public DbSet<InterviewQuestion> InterviewQuestions { get; set; }
         public DbSet<Jazz> Jazzs { get; set; }
         public DbSet<Klant> Klanten { get; set; }
-        public DbSet<Language> Languages { get; set; }
+        //public DbSet<Language> Languages { get; set; }
         public DbSet<Reservering> Reserveringen { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Talk> Talks { get; set; }

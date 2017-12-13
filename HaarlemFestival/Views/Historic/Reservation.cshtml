@@ -59,6 +59,7 @@
                             <th>Tickets</th>
                             <th>Group ticket</th>
                             <th>Language</th>
+                            <th>Guide</th>
                             <th>Time</th>
                             <th>Total price</th>
                         </tr>
@@ -69,7 +70,8 @@
                                 <tr>
                                     <td></td>
                                     <td></td> @*<td>@Html.TextBoxFor(m => m)</td>*@
-                                    <td>@tour.Language.LanguageName</td>
+                                    <td>@tour.Guide.LanguageName</td>
+                                    <td></td>
                                     <td>@tour.StartSession.TimeOfDay</td>
                                     <td></td>
                                 </tr>
