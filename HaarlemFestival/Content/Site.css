@@ -751,7 +751,7 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     padding-left: 10px;
 }
 
-tr:nth-child(even) {
+.ticket-table tr:nth-child(even) {
     background-color: #eee;
 }
 
