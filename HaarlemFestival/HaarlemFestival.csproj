@@ -232,6 +232,8 @@
     <Compile Include="Repository\Dinner\IDinnerRepository.cs" />
     <Compile Include="Repository\Historic\HistoricRepository.cs" />
     <Compile Include="Repository\Historic\IHistoricRepository.cs" />
+    <Compile Include="Repository\Jazz\IJazzRepository.cs" />
+    <Compile Include="Repository\Jazz\JazzRepository.cs" />
     <Compile Include="Repository\Talking\ITalkingRepository.cs" />
     <Compile Include="Repository\Talking\TalkingRepository.cs" />
     <Compile Include="Scripts\IAdminRepository.cs" />
