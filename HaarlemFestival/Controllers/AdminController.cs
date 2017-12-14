@@ -189,6 +189,7 @@ namespace HaarlemFestival.Controllers
         public ActionResult AddTalking(Models.Talking activity, FormCollection collector)
         {
             activity.EventType = EventType.TalkingHaarlem;
+            activity.AlternativePrice = null;
 
             // Price omzetten naar een float.
             float price;
@@ -196,10 +197,12 @@ namespace HaarlemFestival.Controllers
             if (float.TryParse(collector["Price"].Replace(".", ","), out price))
             {
                 ModelState["Price"].Errors.Clear();
-                activity.Price = price;
+                activity.Price =float.Parse(collector["Price"].Replace(".",","));
             }
             else
                 ModelState.AddModelError("InvalidPrice", "Please enter a valid price");
+
+
 
             if (ModelState.IsValid)
             {
@@ -211,7 +214,7 @@ namespace HaarlemFestival.Controllers
                     Request.Files[0].SaveAs(path);
                 }
 
-                if (Request.Files[1] != null)
+                if (Request.Files[1] != null && Request.Files[1].ContentLength > 0)
                 {
                     activity.Talk.Person1AltIMG = System.IO.Path.GetFileName(Request.Files[1].FileName);
                     string path = System.IO.Path.Combine(Server.MapPath("~/images/talking"), activity.Talk.Person1AltIMG);
@@ -219,7 +222,7 @@ namespace HaarlemFestival.Controllers
                     Request.Files[1].SaveAs(path);
                 }
 
-                if (Request.Files[2] != null)
+                if (Request.Files[2] != null && Request.Files[2].ContentLength > 0)
                 {
                     activity.Talk.Person2IMG = System.IO.Path.GetFileName(Request.Files[2].FileName);
                     string path = System.IO.Path.Combine(Server.MapPath("~/images/talking"), activity.Talk.Person2IMG);
@@ -228,7 +231,7 @@ namespace HaarlemFestival.Controllers
                 }
 
                 
-                if (Request.Files[3] != null)
+                if (Request.Files[3] != null && Request.Files[3].ContentLength > 0)
                 {
                     activity.Talk.Person2AltIMG = System.IO.Path.GetFileName(Request.Files[3].FileName);
                     string path = System.IO.Path.Combine(Server.MapPath("~/images/talking"), activity.Talk.Person2AltIMG);
@@ -238,6 +241,8 @@ namespace HaarlemFestival.Controllers
 
                 activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
                 activity.EndSession = DateTime.Parse(collector["Date"] + " " + collector["EndSession"]);
+
+                adminRepository.AddEvent(activity);
 
                 return RedirectToAction("ManageEvent", "Admin");
             }

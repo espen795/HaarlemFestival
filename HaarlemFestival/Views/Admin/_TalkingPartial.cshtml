@@ -18,7 +18,7 @@
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Date:")
-            <input type="date" id="Date" /> @Html.Label("Time:") <input type="time" id="StartSession" /> <input type="time" id="EndSession" />
+            <input type="date" name="Date" /> @Html.Label("Time:") <input type="time" name="StartSession" /> <input type="time" name="EndSession" />
         </div>
     </div>
     <div class="form-group">
@@ -44,7 +44,7 @@
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Total Seats:")
-            @Html.TextBoxFor(t => t.TotalTickets, new { @placeholder = "0" })
+            @Html.EditorFor(t => t.TotalTickets, new { @placeholder = "0" })
         </div>
     </div>
     <div class="form-group">
