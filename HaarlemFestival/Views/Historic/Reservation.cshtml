@@ -46,9 +46,9 @@
         <!-- Content -->
 
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#day1">On thursday</a></li>
-            <li><a data-toggle="tab" href="#day2">On friday</a></li>
-            <li><a data-toggle="tab" href="#day3">On saturday</a></li>
+            <li class="active"><a data-toggle="tab" href="#day1">On Thursday</a></li>
+            <li><a data-toggle="tab" href="#day2">On Friday</a></li>
+            <li><a data-toggle="tab" href="#day3">On Saturday</a></li>
         </ul>
 
         <div class="tab-content">
@@ -68,20 +68,19 @@
                             if (tour.StartSession.Date == new DateTime(2018, 7, 26))
                             {
                                 <tr>
-                                    <td></td>
-                                    <td></td> @*<td>@Html.TextBoxFor(m => m)</td>*@
+                                    <td>@Html.TextBoxFor(m => tour.BoughtTickets)</td>
+                                    <td>@Html.TextBoxFor(m => tour.BoughtTickets)</td>
                                     <td>@tour.Guide.LanguageName</td>
-                                    <td></td>
+                                    <td>@tour.Guide.GuideName</td>
                                     <td>@tour.StartSession.TimeOfDay</td>
                                     <td></td>
                                 </tr>
                             }
-
                         }
                     </table>
-
+                    
                     <br/>
-                    <p>These are the available tours on thursday (26-07-2018)</p>
+                    <p>These are the available tours on Thursday (26-07-2018)</p>
                 </div>
 
                 <div class="historic extra-info">
@@ -89,10 +88,10 @@
                     <p>The group will consist of 12 participants and one guide. Participants must at least be 12 years old and must be able to walk the entire route (no strollers are allowed).</p>
                     </br>
                     <h4>Ticket price</h4>
-                    <p>€ 17,50 per ticket per person</p>
+                    <p>€ @Model[0].Price per ticket per person</p>
                     </br>
                     <h4>Group ticket:</h4>
-                    <p>A group ticket gets you 4 tickets for only € 60,- instead of € 70,-</p>
+                    <p>A group ticket gets you 4 tickets for only € @Model[0].AlternativePrice instead of € @{ float? groupticket = 4 * Model[0].Price; }</p>
                 </div>
             </div>
 

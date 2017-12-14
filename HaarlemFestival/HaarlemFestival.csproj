@@ -213,6 +213,7 @@
     <Compile Include="Models\Guide.cs" />
     <Compile Include="Models\HFDB.cs" />
     <Compile Include="Models\InterviewQuestion.cs" />
+    <Compile Include="Models\JazzViewModels.cs" />
     <Compile Include="Models\Locations.cs" />
     <Compile Include="Models\Talk.cs" />
     <Compile Include="Models\Talking.cs" />
