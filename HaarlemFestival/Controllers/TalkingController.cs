@@ -20,16 +20,18 @@ namespace HaarlemFestival.Controllers
             //return View();
         }
 
-        public ActionResult Info()
+        public ActionResult Info(int? id)
         {
-            Talk talk = talkingRepository.GetTalkById(1);
+            Talk talk = talkingRepository.GetTalkById((int)id);
 
             return View(talk);
         }
 
-        public ActionResult Reservation()
+        public ActionResult Reservation(int? id)
         {
-            return View();
+            List<Talk> allTalks = talkingRepository.GetAllTalks();
+
+            return View(allTalks);
         }
     }
 }
