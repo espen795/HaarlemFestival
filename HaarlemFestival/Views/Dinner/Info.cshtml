@@ -58,7 +58,15 @@
                     </tr>
                     <tr class="dinnertable">
                         <td class="restaurant-info-names">Start times:</td>
-                        <td class="restaurant-info-info"></td>
+                        <td class="restaurant-info-info">
+                            @foreach (Dinner d in Model)
+                            {
+                                if (d.Day == Model[0].Day)
+                                {
+                                    @d.StartSession
+                                }
+                            }
+                        </td>
                     </tr>
                     <tr class="dinnertable">
                         <td class="restaurant-info-names">Description:</td>

@@ -10,8 +10,6 @@ namespace HaarlemFestival.Models
     {
         public int ActivityId { get; set; }
         public EventType EventType { get; set; }
-
-        public int DayId { get; set; }
         public virtual Day Day { get; set; }
 
         [Display(Name = "Start Session")]
