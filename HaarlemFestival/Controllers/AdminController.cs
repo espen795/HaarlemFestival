@@ -143,7 +143,7 @@ namespace HaarlemFestival.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult AddDinner(Models.Dinner activity, FormCollection collector, HttpPostedFileBase files)
+        public ActionResult AddDinner(Models.Dinner activity, FormCollection collector)
         {
             activity.EventType = EventType.DinnerInHaarlem;
 
@@ -186,12 +186,12 @@ namespace HaarlemFestival.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult AddTalking(Models.Talking activity, FormCollection collector, HttpPostedFileBase files)
+        public ActionResult AddTalking(Models.Talking activity, FormCollection collector)
         {
             activity.EventType = EventType.TalkingHaarlem;
 
             // Price omzetten naar een float.
-            float price, alternativePrice;
+            float price;
 
             if (float.TryParse(collector["Price"].Replace(".", ","), out price))
             {
@@ -201,20 +201,40 @@ namespace HaarlemFestival.Controllers
             else
                 ModelState.AddModelError("InvalidPrice", "Please enter a valid price");
 
-            if (collector["AlternativePrice"].ToString() != "")
-            {
-                if (float.TryParse(collector["AlternativePrice"].Replace(".", ","), out alternativePrice))
-                {
-                    activity.AlternativePrice = alternativePrice;
-                    ModelState["AlternativePrice"].Errors.Clear();
-                }
-                else
-                    ModelState.AddModelError("InvalidAlternativePrice", "Please enter a valid price");
-            }
-
             if (ModelState.IsValid)
             {
+                if (Request.Files[0] != null && Request.Files[0].ContentLength > 0)
+                {
+                    activity.Talk.Person1IMG = System.IO.Path.GetFileName(Request.Files[0].FileName);
+                    string path = System.IO.Path.Combine(Server.MapPath("~/images/talking"), activity.Talk.Person1IMG);
+                    // file is uploaded
+                    Request.Files[0].SaveAs(path);
+                }
 
+                if (Request.Files[1] != null)
+                {
+                    activity.Talk.Person1AltIMG = System.IO.Path.GetFileName(Request.Files[1].FileName);
+                    string path = System.IO.Path.Combine(Server.MapPath("~/images/talking"), activity.Talk.Person1AltIMG);
+                    // file is uploaded
+                    Request.Files[1].SaveAs(path);
+                }
+
+                if (Request.Files[2] != null)
+                {
+                    activity.Talk.Person2IMG = System.IO.Path.GetFileName(Request.Files[2].FileName);
+                    string path = System.IO.Path.Combine(Server.MapPath("~/images/talking"), activity.Talk.Person2IMG);
+                    // file is uploaded
+                    Request.Files[2].SaveAs(path);
+                }
+
+                
+                if (Request.Files[3] != null)
+                {
+                    activity.Talk.Person2AltIMG = System.IO.Path.GetFileName(Request.Files[3].FileName);
+                    string path = System.IO.Path.Combine(Server.MapPath("~/images/talking"), activity.Talk.Person2AltIMG);
+                    // file is uploaded
+                    Request.Files[3].SaveAs(path);
+                }
 
                 activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
                 activity.EndSession = DateTime.Parse(collector["Date"] + " " + collector["EndSession"]);
