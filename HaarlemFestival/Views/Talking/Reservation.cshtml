@@ -1,6 +1,29 @@
-﻿@{
+﻿@using HaarlemFestival.Models;
+@using System.Collections.Generic;
+@model List<Talk>
+
+@{
     ViewBag.Title = "Talking Haarlem - Reservation";
 }
+
+<script type="text/javascript">
+    function UpdateQuestions()
+    {
+        var question1 = document.getElementById("question1");
+        var question2 = document.getElementById("question2");
+        var question3 = document.getElementById("question3");
+        var questions = document.getElementsByClassName("talk-question");
+
+        /*question1.style.display = 'none';
+        question2.style.display = 'none';
+        question3.style.display = 'none';*/
+
+        for (var i = 0; i < questions.length; i++) {
+            if (questions[i].value > 0)
+                questions[i].style.display = 'block';
+        }
+    }
+</script>
 
 <h2>Reservation</h2>
 
@@ -25,27 +48,16 @@
                         <th>Date & Time (DD-MM-YYYY)</th>
                         <th>Location</th>
                     </tr>
+                    @foreach (Talk talk in Model)
+                    {
                     <tr>
-                        <td><input class="talking-ticket-amount" min="0" max="2" type="number" /></td>
-                        <td>Giel Beelen meets Rob Trip</td>
+                        <td><input onchange="UpdateQuestions()" id="ticket-amount@talk.TalkId" class="talking-ticket-amount" min="0" max="2" type="number" /></td>
+                        <td>@talk.Naam</td>
                         <td>Free</td>
                         <td>Thursday 26-07-2018 | 20:00 - 22:00</td>
                         <td>Toneelschuur</td>
                     </tr>
-                    <tr>
-                        <td><input class="talking-ticket-amount" min="0" max="2" type="number" /></td>
-                        <td>Femke Halsema meets Job Cohen</td>
-                        <td>Free</td>
-                        <td>Friday 27-07-2018 | 20:00 - 22:00</td>
-                        <td>Toneelschuur</td>
-                    </tr>
-                    <tr>
-                        <td><input class="talking-ticket-amount" min="0" max="2" type="number" /></td>
-                        <td>Paul Witteman meets Brigitte Kaandorp</td>
-                        <td>Free</td>
-                        <td>Saturday 28-07-2018 | 20:00 - 22:00</td>
-                        <td>Toneelschuur</td>
-                    </tr>
+                    }
                 </table>
             </section> <!-- Table -->
 
@@ -62,7 +74,7 @@
                      <section class="talk-question-receiver">
                          <p>Question For: </p>
                          <select>
-                             <option>Niemand</option>
+                             <option>Nobody</option>
                              <option>Giel Beelen</option>
                              <option>Rob Trip</option>
                          </select>
@@ -74,7 +86,7 @@
                      <section class="talk-question-receiver">
                          <p>Question For: </p>
                          <select>
-                             <option>Niemand</option>
+                             <option>Nobody</option>
                              <option>Femke Halsema</option>
                              <option>Job Cohen</option>
                          </select>
@@ -86,7 +98,7 @@
                      <section class="talk-question-receiver">
                          <p>Question For: </p>
                          <select>
-                             <option>Niemand</option>
+                             <option>Nobody</option>
                              <option>Paul Witteman</option>
                              <option>Brigitte Kaandorp</option>
                          </select>

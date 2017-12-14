@@ -68,15 +68,18 @@
         {
             <article class="talk">
                 <h4 class="talk-image-header">@talk.Person1</h4>
+
                 <section>
                     <img class="talk-image" src="/images/Talking/@talk.Person1AltIMG" />
                 </section>
+
                 <h3 class="talk-header">@talk.Naam</h3>
                 <p class="talk-description">
                     @talk.Person1 and @talk.Person2 interview each other.
                 </p>
+
                 <section class="talk-btns">
-                    <a href="@Url.Action("Info")"><img class="talk-info-btn" src="/images/info_button.png" /></a>
+                    <a href="@Url.Action("Info", new { id = talk.TalkId })"><img class="talk-info-btn" src="/images/info_button.png" /></a>
                     @Html.ActionLink("Order Ticket", "Reservation", "Talking", new { @class = "btn btn-black talk-order-btn" })
                 </section>
                 <p class="talk-date">Thursday July 26th</p>
