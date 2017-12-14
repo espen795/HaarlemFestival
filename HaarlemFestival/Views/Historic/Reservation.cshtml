@@ -6,6 +6,18 @@
     ViewBag.Title = "Historic Haarlem - Reservation";
 }
 
+<script type="text/javascript">
+    function CalcPrice(nummer)
+    {
+        var tickets = document.getElementById("location" + nummer);
+        var grouptickets = document.getElementById("locations" + nummer);
+
+        otherElements[i].style.display = "none";
+
+        element.style.display = "block";
+    }
+</script>
+
 <div class="event-banner historic"></div>
 
 <div class="event container">
@@ -65,33 +77,27 @@
                         </tr>
                         @foreach (Historic tour in Model)
                         {
-                            if (tour.StartSession.Date == new DateTime(2018, 7, 26))
+                        int i = 1;
+                        if (tour.StartSession.Date == new DateTime(2018, 7, 26))
                             {
+                        string idtickets = String.Format("ticket{0}", i);
+                        string idgrouptickets = String.Format("groupticket{0}", i);
+
                                 <tr>
-                                    <td>@Html.TextBoxFor(m => tour.BoughtTickets)</td>
-                                    <td>@Html.TextBoxFor(m => tour.BoughtTickets)</td>
+                                    <td class="ticketsInput">@Html.TextBoxFor(m => tour.BoughtTickets, new { @type = "number", @min = 0}, @id = idtickets)</td>
+                                    <td class="ticketsInput">@Html.TextBoxFor(m => tour.BoughtTickets, new { @type = "number", @min = 0}, @id = idgrouptickets)</td>
                                     <td>@tour.Guide.LanguageName</td>
                                     <td>@tour.Guide.GuideName</td>
                                     <td>@tour.StartSession.TimeOfDay</td>
                                     <td></td>
                                 </tr>
                             }
+                        i++;
                         }
                     </table>
                     
                     <br/>
                     <p>These are the available tours on Thursday (26-07-2018)</p>
-                </div>
-
-                <div class="historic extra-info">
-                    <h3>Ticket information</h3>
-                    <p>The group will consist of 12 participants and one guide. Participants must at least be 12 years old and must be able to walk the entire route (no strollers are allowed).</p>
-                    </br>
-                    <h4>Ticket price</h4>
-                    <p>€ @Model[0].Price per ticket per person</p>
-                    </br>
-                    <h4>Group ticket:</h4>
-                    <p>A group ticket gets you 4 tickets for only € @Model[0].AlternativePrice instead of € @{ float? groupticket = 4 * Model[0].Price; }</p>
                 </div>
             </div>
 
@@ -101,6 +107,19 @@
 
             <div id="day3" class="tab-pane fade historic-tickets">
                 <!-- Rest -->
+            </div>
+
+            <br /><br />
+            <div class="historic extra-info">
+                <h3>Ticket information</h3>
+                <p>The group will consist of 12 participants and one guide. Participants must at least be 12 years old and must be able to walk the entire route (no strollers are allowed).</p>
+                </br>
+                <h4>Ticket price</h4>
+                <p>€ @Model[0].Price per ticket per person</p>
+                </br>
+                <h4>Group ticket:</h4>
+                @{ float? groupticket = (4f * Model[0].Price); }
+                <p>A group ticket gets you 4 tickets for only € @Model[0].AlternativePrice instead of € @groupticket </p>
             </div>
         </div>
 

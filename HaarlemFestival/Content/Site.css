@@ -751,6 +751,16 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     background-color: #eee;
 }
 
+    .ticket-table .ticketsInput input {
+        width: 40px;
+        text-align: center;
+    }
+
+.ticket-table .ticketsInput {
+        width: 110px;
+}
+
+
 /*****************************/
 /** ADMIN PAGE SPECIFIC CSS **/
 /*****************************/
