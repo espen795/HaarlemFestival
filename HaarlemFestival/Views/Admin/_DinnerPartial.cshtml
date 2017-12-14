@@ -5,41 +5,51 @@
 
 </script>
 
-@using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post))
+@using (Html.BeginForm("AddDinner", "Admin", FormMethod.Post))
 {
-    // TODO: Add Restaurant Dropdown
-
     <div class="form-group">
         <div class="input-group">
-            @Html.EditorFor(d => d.Restaurant);
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="input-group">
-            @Html.EditorFor(d => d.Restaurant.Naam, new { @readonly = "readonly" });
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="input-group">
-            @Html.EditorFor(d => d.Restaurant.Description, new { @readonly = "readonly" });
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="input-group">
-            
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="input-group">
-
+            @Html.Label("Restaurant:")
+            @Html.DropDownListFor(d => d.RestaurantId, new SelectList((List<Restaurant>)ViewData["Restaurants"], "RestaurantId", "Naam"), new { @name="RestaurantId" })
         </div>
     </div>
 
-    Html.EditorFor(d => d.StartSession);
-    Html.EditorFor(d => d.EndSession);
-    Html.EditorFor(d => d.Price);
-    Html.EditorFor(d => d.AlternativePrice);
-    Html.EditorFor(d => d.TotalTickets);
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Start:")
+            <input type="date" name="Date" /> @Html.Label("") <input type="time" name="StartSession" /> - <input type="time" name="EndSession" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Price:")
+            @Html.EditorFor(d => d.Price)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Price (12-):")
+            @Html.EditorFor(d => d.AlternativePrice)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Seats: ")
+            @Html.EditorFor(d => d.TotalTickets)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Phonenumber: ")
+            @Html.EditorFor(d => d.Phonenumber)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Address: ")
+            @Html.EditorFor(d => d.Address)
+        </div>
+    </div>
 
-        <input type="submit" value="Add Dinner" />
-        }
+    <input type="submit" value="Add Dinner" />
+ }

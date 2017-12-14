@@ -10,5 +10,6 @@ namespace HaarlemFestival.Repository.Talking
     interface ITalkingRepository
     {
         List<Talk> GetAllTalks();
+        Talk GetTalkById(int id);
     }
 }

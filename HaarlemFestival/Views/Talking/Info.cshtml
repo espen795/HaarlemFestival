@@ -1,4 +1,7 @@
-﻿
+﻿@using HaarlemFestival.Models;
+@using System.Collections.Generic;
+@model Talk
+
 @{
     ViewBag.Title = "Talking Haarlem - Info";
 }
@@ -39,26 +42,24 @@
                         <span class="oneline">Mandatory</span>
                         <span class="oneline">Free</span>
                         <span class="oneline">
-                            Have you ever wanted to question a famous DJ or a TV host?
-                            Giel Beelen (40) a famous DJ for 3FM and Rob Trip (57);
-                            another famous person will question each other, LIVE at the Toneelschuur in Haarlem.
+                            @Html.DisplayFor(model => model.Description)
                         </span>
                     </p>
                 </section> <!-- Activity Info -->
                 <!-- Buttons -->
                 <section class="talk-activity-btns">
-                    <p>@Html.ActionLink("Back to Talking Haarlem", "Index", "Talking", new { @class = "btn btn-black talk-back-btn" })</p>
+                    @Html.ActionLink("Back to Talking Haarlem", "Index", "Talking", new { @class = "btn btn-black talk-back-btn" })
 
-                    <p>@Html.ActionLink("Order Ticket", "Reservation", "Talking", new { @class = "btn btn-black talk-order-btn" })</p>
+                    @Html.ActionLink("Order Ticket", "Reservation", "Talking", new { @class = "btn btn-black talk-order-btn" })
                 </section> <!-- Buttons -->
             </section> <!-- Talk Activity Block -->
 
             <!-- Images -->
             <section class="talk-images">
-                <h4 class="talk-image-header">Giel Beelen</h4>
-                <img class="talk-activity-image" src="/images/Talking/giel_beelen.jpg"/>
-                <h4 class="talk-image-header">Rob Trip</h4>
-                <img class="talk-activity-image" src="/images/Talking/rob_trip.jpg"/>
+                <h4 class="talk-image-header">@Html.DisplayFor(model => model.Person1)</h4>
+                <img class="talk-activity-image" src="/images/Talking/@Html.DisplayFor(model => model.Person1IMG)"/>
+                <h4 class="talk-image-header">@Html.DisplayFor(model => model.Person2)</h4>
+                <img class="talk-activity-image" src="/images/Talking/@Html.DisplayFor(model => model.Person2IMG)"/>
             </section> <!-- Images -->
         </section> <!-- Section 2 Activity -->
     </section> <!-- row -->

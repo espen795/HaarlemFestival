@@ -14,15 +14,17 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Index()
         {
-            //List<Talk> allTalks = talkingRepository.GetAllTalks();
+            List<Talk> allTalks = talkingRepository.GetAllTalks();
 
-            //return View(allTalks);
-            return View();
+            return View(allTalks);
+            //return View();
         }
 
         public ActionResult Info()
         {
-            return View();
+            Talk talk = talkingRepository.GetTalkById(1);
+
+            return View(talk);
         }
 
         public ActionResult Reservation()

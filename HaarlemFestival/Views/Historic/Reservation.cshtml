@@ -1,4 +1,8 @@
-﻿@{
+﻿@using HaarlemFestival.Models;
+@using System.Collections.Generic;
+@model List<Historic>
+
+@{
     ViewBag.Title = "Historic Haarlem - Reservation";
 }
 
@@ -55,34 +59,40 @@
                             <th>Tickets</th>
                             <th>Group ticket</th>
                             <th>Language</th>
+                            <th>Guide</th>
                             <th>Time</th>
                             <th>Total price</th>
                         </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>10:00</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>13:00</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>16:00</td>
-                            <td></td>
-                        </tr>
+                        @foreach (Historic tour in Model)
+                        {
+                            if (tour.StartSession.Date == new DateTime(2018, 7, 26))
+                            {
+                                <tr>
+                                    <td></td>
+                                    <td></td> @*<td>@Html.TextBoxFor(m => m)</td>*@
+                                    <td>@tour.Guide.LanguageName</td>
+                                    <td></td>
+                                    <td>@tour.StartSession.TimeOfDay</td>
+                                    <td></td>
+                                </tr>
+                            }
+
+                        }
                     </table>
 
                     <br/>
                     <p>These are the available tours on thursday (26-07-2018)</p>
+                </div>
+
+                <div class="historic extra-info">
+                    <h3>Ticket information</h3>
+                    <p>The group will consist of 12 participants and one guide. Participants must at least be 12 years old and must be able to walk the entire route (no strollers are allowed).</p>
+                    </br>
+                    <h4>Ticket price</h4>
+                    <p>€ 17,50 per ticket per person</p>
+                    </br>
+                    <h4>Group ticket:</h4>
+                    <p>A group ticket gets you 4 tickets for only € 60,- instead of € 70,-</p>
                 </div>
             </div>
 

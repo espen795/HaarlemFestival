@@ -19,7 +19,28 @@ namespace HaarlemFestival.Repository.Admin
 
         public void AddEvent(Activity activity)
         {
-            throw new NotImplementedException();
+            if (activity.GetType() == typeof(HaarlemFestival.Models.Jazz))
+            {
+                HaarlemFestival.Models.Jazz jazz = activity as HaarlemFestival.Models.Jazz;
+                db.Jazzs.Add(jazz);
+            }
+            else if (activity.GetType() == typeof(HaarlemFestival.Models.Dinner))
+            {
+                HaarlemFestival.Models.Dinner dinner = activity as HaarlemFestival.Models.Dinner;
+                db.Dinners.Add(dinner);
+            }
+            else if (activity.GetType() == typeof(HaarlemFestival.Models.Talking))
+            {
+                HaarlemFestival.Models.Talking talking = activity as HaarlemFestival.Models.Talking;
+                db.Talkings.Add(talking);
+            }
+            else if (activity.GetType() == typeof(HaarlemFestival.Models.Historic))
+            {
+                HaarlemFestival.Models.Historic historic = activity as HaarlemFestival.Models.Historic;
+                db.Historics.Add(historic);
+            }
+
+            db.SaveChanges();
         }
 
         public void UpdateEvent(Activity activity)
@@ -27,34 +48,34 @@ namespace HaarlemFestival.Repository.Admin
             db.Entry(activity).State = EntityState.Modified;
             db.SaveChanges();
         }
+
         public void DeleteEvent(int id)
         {
             Activity activity = db.Activities.Find(id);
-            db.Activities.Remove(activity);
 
             switch (activity.EventType)
             {
                 case EventType.JazzPatronaat:
-                    Jazz jazz = db.Jazzs.Find(id);
-                    db.Jazzs.Remove(jazz);
+                    Models.Jazz jazz = activity as Models.Jazz;
+                    db.Artists.Remove(jazz.artist);
                     break;
 
                 case EventType.DinnerInHaarlem:
-                    Models.Dinner dinner = db.Dinners.Find(id);
-                    db.Dinners.Remove(dinner);
+                    Models.Dinner dinner = activity as Models.Dinner;
                     break;
 
                 case EventType.TalkingHaarlem:
-                    Models.Talking talking = db.Talkings.Find(id);
-                    db.Talkings.Remove(talking);
+                    Models.Talking talking = activity as Models.Talking;
+                    db.Talks.Remove(talking.Talk);
+                    db.InterviewQuestions.RemoveRange(db.InterviewQuestions.Where(t => t.InterviewQuestionId == talking.TalkId));
                     break;
 
                 case EventType.HistoricHaarlem:
-                    Historic historic = db.Historics.Find(id);
+                    Models.Historic historic = activity as Models.Historic;
                     db.Historics.Remove(historic);
                     break;
             }
-
+            db.Activities.Remove(activity);
             db.SaveChanges();
         }
 
@@ -71,7 +92,7 @@ namespace HaarlemFestival.Repository.Admin
 
                 Dates = db.Days.ToList(),
                 Cuisines = db.Cuisines.ToList(),
-                Languages = db.Languages.ToList(),
+                //Languages = db.Languages.ToList(),
                 Guides = db.Guides.ToList(),
                 Restaurants = db.Restaurants.ToList()
             };

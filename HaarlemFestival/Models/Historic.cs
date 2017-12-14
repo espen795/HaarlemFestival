@@ -7,7 +7,8 @@ namespace HaarlemFestival.Models
 {
     public class Historic : Activity
     {
-        public virtual Language Language { get; set; }
+        public int HistoricId { get; set; }
+        public int GuideId { get; set; }
         public virtual Guide Guide { get; set; }
 
         public Historic()

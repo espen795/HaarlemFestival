@@ -26,5 +26,26 @@ namespace HaarlemFestival.Controllers
 
             return View();
         }
+
+        public ActionResult Basket()
+        {
+            ViewBag.Message = "Your shopping basket.";
+
+            return View();
+        }
+
+        public ActionResult Agenda()
+        {
+            ViewBag.Message = "Your personal agenda.";
+
+            return View();
+        }
+
+        public ActionResult Reservation()
+        {
+            ViewBag.Message = "Your reservation.";
+
+            return View();
+        }
     }
 }

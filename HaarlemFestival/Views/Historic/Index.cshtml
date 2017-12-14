@@ -1,4 +1,8 @@
-﻿@{
+﻿@using HaarlemFestival.Models;
+@using System.Collections.Generic;
+@model List<Location>
+
+@{
     ViewBag.Title = "Historic Haarlem";
 }
 
@@ -80,54 +84,48 @@
                     </p>
                     </br>
                     <h3>Venues to visit are:</h3>
-                    <ul>
-                        <li>1. Church of St. Bavo</li>
-                        <li>2. Grote Markt</li>
-                        <li>3. De Hallen</li>
-                        <li>4. Proveniershof</li>
-                        <li>5. Jopenkerk (Break location)</li>
-                        <li>6. Waalse Kerk Haarlem</li>
-                        <li>7. Molen de Adriaan</li>
-                        <li>8. Amsterdamse Poort</li>
-                        <li>9. Hof van Bakenes</li>
-                    </ul>
+                    <ol>
+                        @foreach (Location location in Model)
+                        {
+                            <li>@location.LocationName</li>
+                        }
+                    </ol>
                 </div>
             </div>
 
             <div id="map-content" class="tab-pane fade">
                 <div class="img-map-location">
                     <img src="/images/Historic/Map/mapr.png" />
-                    <img class="number-map number1" src="/images/Historic/Map/1.png" onclick="SwitchLocation('1');"/>
-                    <img class="number-map number2" src="/images/Historic/Map/2.png" onclick="SwitchLocation('2');"/>
-                    <img class="number-map number3" src="/images/Historic/Map/3.png" onclick="SwitchLocation('3');"/>
-                    <img class="number-map number4" src="/images/Historic/Map/4.png" onclick="SwitchLocation('4');"/>
-                    <img class="number-map number5" src="/images/Historic/Map/5.png" onclick="SwitchLocation('5');"/>
-                    <img class="number-map number6" src="/images/Historic/Map/6.png" onclick="SwitchLocation('6');"/>
-                    <img class="number-map number7" src="/images/Historic/Map/7.png" onclick="SwitchLocation('7');"/>
-                    <img class="number-map number8" src="/images/Historic/Map/8.png" onclick="SwitchLocation('8');"/>
-                    <img class="number-map number9" src="/images/Historic/Map/9.png" onclick="SwitchLocation('9');"/>
-                </div>
+                    @{int y = 1; }
+                    @foreach (Location location in Model)
+                    {
+                        string url = String.Format("{0}.png", y);
+                        string className = String.Format("number{0}", y);
 
-                <div class="text-map-location locations" id="location1">
-                    <div class="map-img">
-                        <img src="/images/Historic/Locaties/1.jpg" />
-                    </div>
-                    <h3>Church of St. Bavo</h3>
-                    <p>
-                        The Grote Kerk or St.-Bavokerk is a Protestant church and former Catholic cathedral located on the central market square in the Dutch city of Haarlem. 
-                        Another Haarlem church called the Cathedral of Saint Bavo now serves as the main cathedral for the Roman Catholic Diocese of Haarlem-Amsterdam.
-                    </p>
-                </div>
+                        <img class="number-map @className" src="/images/Historic/Map/@url.ToString()" onclick="SwitchLocation(@y);" />
 
-                <div class="text-map-location locations" id="location2">
-                    <div class="map-img">
-                        <img src="/images/Historic/Locaties/2.jpg" />
-                    </div>
-                    <h3>De Grote Markt</h3>
-                    <p>
-                        The Grote Markt is in the center of Haarlem, with the City Hall across from the St. Bavochurch.
-                    </p>
+                        y++;
+                    }
                 </div>
+                
+                @{int i = 1; }
+                @foreach (Location location in Model)
+                {
+                    string url = String.Format("{0}.jpg", i);
+                    string id = String.Format("location{0}", i);
+
+                    <div class="text-map-location locations" id=@id>
+                        <div class="map-img">
+                            <img src="/images/Historic/Locaties/@url.ToString()" />
+                        </div>
+                        <h3>@location.LocationName</h3>
+                        <p>
+                            @location.LocationDescription
+                        </p>
+                    </div>
+
+                    i++;
+                }
             </div>
             @Html.ActionLink("Book the tour", "Reservation", "Historic", new { @class = "btn btn-book" })
         </div>

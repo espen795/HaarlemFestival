@@ -70,6 +70,11 @@ namespace HaarlemFestival.Controllers
             EventData data = adminRepository.GetEventData();
 
             string selectedEvent = this.Request.QueryString["selectedEvent"];
+            ViewData["Restaurants"] = data.Restaurants;
+            ViewData["Guides"] = data.Guides;
+            ViewData["Languages"] = data.Languages;
+            ViewData["Cuisines"] = data.Cuisines;
+            ViewData["Dates"] = data.Dates;
 
             switch (selectedEvent)
             {
@@ -91,12 +96,87 @@ namespace HaarlemFestival.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult AddEvent(Activity activity)
+        public ActionResult AddJazz(HaarlemFestival.Models.Jazz activity, FormCollection collector)
         {
+            activity.EventType = EventType.JazzPatronaat;
+            activity.BoughtTickets = 0;
+
+            // Model geeft error maar veld mag ook null zijn, daarom clear ik de errors.
+            ModelState["Price"].Errors.Clear();
+            ModelState["AlternativePrice"].Errors.Clear();
+
+            // Standaard informatie van activity
+            activity.AllDayPassPartout = 80;
+
             if (ModelState.IsValid)
             {
+                HttpPostedFileBase file = Request.Files[0];
+                if (file.ContentLength > 0)
+                {
+                    activity.artist.ArtistImage = System.IO.Path.GetFileName(file.FileName);
+                    string path = System.IO.Path.Combine(Server.MapPath("~/images/jazz"), activity.artist.ArtistImage);
+                    // file is uploaded
+                    file.SaveAs(path);
+                }
+
+                // Price omzetten naar een float.
+                float price, alternativePrice;
+
+                if (float.TryParse(collector["Price"].Replace(".", ","), out price))
+                    activity.Price = price;
+                else
+                    ModelState.AddModelError("InvalidPrice", "Please enter a valid price");
+                
+                if (collector["AlternativePrice"].ToString() != "")
+                {
+                    if (float.TryParse(collector["AlternativePrice"].Replace(".", ","), out alternativePrice))
+                        activity.AlternativePrice = alternativePrice;
+                    else
+                        ModelState.AddModelError("InvalidAlternativePrice", "Please enter a valid price");
+                }
+
+                activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
+                activity.EndSession = DateTime.Parse(collector["Date"] + " " + collector["EndSession"]);
+
                 adminRepository.AddEvent(activity);
-                ViewBag.Status = "Deleted";
+            }
+
+            return RedirectToAction("ManageEvent", "Admin");
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddDinner(Models.Dinner activity, FormCollection collector, HttpPostedFileBase files)
+        {
+            activity.EventType = EventType.DinnerInHaarlem;
+            ModelState["Price"].Errors.Clear();
+            ModelState["AlternativePrice"].Errors.Clear();
+
+            if (ModelState.IsValid)
+            {
+                activity.RestaurantId = Convert.ToInt32(collector["RestaurantId"]);
+
+                // Price omzetten naar een float.
+                float price, groupPrice;
+
+                if (float.TryParse(collector["Price"].Replace(".", ","), out price))
+                    activity.Price = price;
+                else
+                    ModelState.AddModelError("InvalidPrice", "Please enter a valid price");
+
+                if (collector["AlternativePrice"].ToString() != "")
+                {
+                    if (float.TryParse(collector["AlternativePrice"].Replace(".", ","), out groupPrice))
+                        activity.AlternativePrice = groupPrice;
+                    else
+                        ModelState.AddModelError("InvalidAlternativePrice", "Please enter a valid price");
+                }
+
+                activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
+                activity.EndSession = DateTime.Parse(collector["Date"] + " " + collector["EndSession"]);
+
+                adminRepository.AddEvent(activity);
+
                 return RedirectToAction("ManageEvent", "Admin");
             }
 
@@ -105,10 +185,60 @@ namespace HaarlemFestival.Controllers
 
         [HttpPost]
         [Authorize]
+        public ActionResult AddTalking(Models.Talking activity, FormCollection collector, HttpPostedFileBase files)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("ManageEvent", "Admin");
+            }
+
+            return View(activity);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddHistoric(Models.Historic activity, FormCollection collector)
+        {
+            activity.EventType = EventType.HistoricHaarlem;
+            activity.BoughtTickets = 0;
+            ModelState["Guide.GuideName"].Errors.Clear();
+            ModelState["Price"].Errors.Clear();
+            ModelState["AlternativePrice"].Errors.Clear();
+
+            if (ModelState.IsValid)
+            {
+                activity.GuideId = Convert.ToInt32(collector["GuideId"]);
+
+                // Price omzetten naar een float.
+                float price, groupPrice;
+
+                if (float.TryParse(collector["Price"].Replace(".", ","), out price))
+                    activity.Price = price;
+                else
+                    ModelState.AddModelError("InvalidPrice", "Please enter a valid price");
+
+                if (collector["AlternativePrice"].ToString() != "")
+                {
+                    if (float.TryParse(collector["AlternativePrice"].Replace(".", ","), out groupPrice))
+                        activity.AlternativePrice = groupPrice;
+                    else
+                        ModelState.AddModelError("InvalidAlternativePrice", "Please enter a valid price");
+                }
+
+                activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
+                activity.EndSession = activity.StartSession.AddHours(2.5);
+
+                adminRepository.AddEvent(activity);
+            }
+
+            return RedirectToAction("ManageEvent", "Admin");
+        }
+
+        [HttpPost]
+        [Authorize]
         public ActionResult DeleteEvent(int id)
         {
             adminRepository.DeleteEvent(id);
-            ViewBag.Status = "Deleted";
             return RedirectToAction("ManageEvent","Admin");
         }
 

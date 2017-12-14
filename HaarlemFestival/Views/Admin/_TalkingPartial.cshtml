@@ -1,16 +1,72 @@
 ﻿@using HaarlemFestival.Models
 @model Talking
 
-@using (Html.BeginForm("AddEvent", "Admin", FormMethod.Post))
+@using (Html.BeginForm("AddTalking", "Admin", FormMethod.Post))
 {
-    Html.EditorFor(t => t.Talk.Naam);
-    Html.EditorFor(t => t.Talk.Description);
-    Html.EditorFor(t => t.Address);
-    Html.EditorFor(t => t.Talk.Person1);
-    Html.EditorFor(t => t.Talk.Person2);
-    Html.EditorFor(t => t.Price);
-    Html.EditorFor(t => t.Phonenumber);
-    Html.EditorFor(t => t.Talk.MaxTickets);
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Name")
+            @Html.TextBoxFor(t => t.Talk.Naam)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Description")
+            @Html.EditorFor(t => t.Talk.Description)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Address")
+            @Html.TextBoxFor(t => t.Address, new { @Value = "Lange Begijnestraat 9, 2011 HH Haarlem" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            @Html.EditorFor(t => t.Talk.Person1)
+            @Html.Label("Images Person 1")
+            <input type="file" name="Person1"/>
+            <input type="file" name="Person1Alt" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            @Html.EditorFor(t => t.Talk.Person2)
+            @Html.Label("Images Person 2")
+            <input type="file" name="Person2" />
+            <input type="file" name="Person2Alt" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Date:")
+            <input type="date" id="Date" /> @Html.Label("Time:") <input type="time" id="StartSession" /> <input type="time" id="EndSession" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Total Seats:")
+            @Html.EditorFor(t => t.TotalTickets)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Price")
+            @Html.EditorFor(t => t.Price)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Phonenumber")
+            @Html.EditorFor(t => t.Phonenumber)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Maximum Tickets per reservation")
+            @Html.EditorFor(t => t.Talk.MaxTickets)
+        </div>
+    </div>
 
     <input type="submit" value="Add Interview" />
 }
