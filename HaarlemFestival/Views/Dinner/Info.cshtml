@@ -13,7 +13,7 @@
         <div class="event-section-1-dinner">
             <div class="col-md-6">
                 <h1 class="title">@Model[0].Restaurant.Naam</h1>
-                <div class="info-infonames">
+                <!--<div class="info-infonames">
                     Cuisines:<br />
                     Rating:<br />
                     Price:<br />
@@ -37,7 +37,34 @@
                     €@Model[0].Price.ToString() (or €@Model[0].AlternativePrice.ToString() for children under 12)<br />
                     DURATION<br />
                     START TIMES<br />
-                    <p>@Model[0].Restaurant.Description</p>
+                    <p>@Model[0].Restaurant.Description</p>-->
+
+                <table class="restaurant-info">
+                    <tr class="dinnertable">
+                        <td class="restaurant-info-names">Cuisines:</td>
+                        <td class="restaurant-info-info"></td>
+                    </tr>
+                    <tr class="dinnertable">
+                        <td class="restaurant-info-names">Rating:</td>
+                        <td class="restaurant-info-info">@Model[0].Restaurant.Rating</td>
+                    </tr>
+                    <tr class="dinnertable">
+                        <td class="restaurant-info-names">Price:</td>
+                        <td class="restaurant-info-info">€@Model[0].Price.ToString() (or €@Model[0].AlternativePrice.ToString() for children under 12)</td>
+                    </tr>
+                    <tr class="dinnertable">
+                        <td class="restaurant-info-names">Duration:</td>
+                        <td class="restaurant-info-info"></td>
+                    </tr>
+                    <tr class="dinnertable">
+                        <td class="restaurant-info-names">Start times:</td>
+                        <td class="restaurant-info-info"></td>
+                    </tr>
+                    <tr class="dinnertable">
+                        <td class="restaurant-info-names">Description:</td>
+                        <td class="restaurant-info-info">@Model[0].Restaurant.Description</td>
+                    </tr>
+                </table>
                 </div>
             </div>
         </div>

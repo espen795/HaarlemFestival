@@ -52,40 +52,6 @@
             <div class="cuisineselect">
                 <!--Dropdown menu voor cuisines-->
             </div>
-            <!--<div class="restaurants">
-                @foreach (Restaurant r in Model)
-                {
-                    <div class="promo-restaurant">
-                        <img src="/images/Dinner/restaurants/@r.FoodIMG" alt="Picture not found" />
-                        <h3>@r.Naam</h3>
-                        <div class="infonames">
-                            Cuisines:<br />
-                            <br />
-                            Rating:<br />
-                            Price:<br />
-                        </div>
-                        <div class="info-infocuisine">
-                            @foreach (Cuisine c in r.Cuisines)
-                            {
-                                if (r.Cuisines.Last() != c)
-                                {
-                                    @c.Naam<span>,</span>
-                                }
-                                else
-                                {
-                                    @c.Naam
-                                }
-                            }
-                        </div>
-                        <div class="info-info">
-                            @r.Rating<br />
-                            €@r.DisplayPrice.ToString("0.00")
-                        </div>
-                        <button class="reservationbutton" type="button" onclick="location.href='@Url.Action("Reservation","Dinner", new { id = r.RestaurantId})'">Make reservation</button>
-                        <button class="infobutton" type="button" onclick="location.href='@Url.Action("Info", "Dinner", new { id = r.RestaurantId })'"><i class="fa fa-info" aria-hidden="true"></i></button>
-                    </div>
-                }
-            </div>-->
             <div class="restaurants">
                     @foreach (Restaurant r in Model)
                     {
@@ -94,10 +60,10 @@
                         <img src="/images/Dinner/restaurants/@r.FoodIMG" alt="Picture not found" />
                         <h3>@r.Naam</h3>
                     </div>
-                    <table class="restaurant-info">
-                        <tr>
-                            <td class="restaurant-info-names"> Cuisines:</td>
-                            <td class="restaurant-info-info">
+                    <table class="restaurant-index">
+                        <tr class="dinnertable">
+                            <td class="restaurant-index-names"> Cuisines:</td>
+                            <td class="restaurant-index-info">
                                 @foreach (Cuisine c in r.Cuisines)
                                 {
                                     if (r.Cuisines.Last() != c)
@@ -112,20 +78,21 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="restaurant-info-names"> Rating:</td>
-                            <td class="restaurant-info-info"> @r.Rating</td>
+                            <td class="restaurant-index-names"> Rating:</td>
+                            <td class="restaurant-index-info"> @r.Rating</td>
                         </tr>
                         <tr>
-                            <td class="restaurant-info-names"> Price:</td>
-                            <td class="restaurant-info-info">€@r.DisplayPrice.ToString("0.00")</td>
+                            <td class="restaurant-index-names"> Price:</td>
+                            <td class="restaurant-index-info">€@r.DisplayPrice.ToString("0.00")</td>
                         </tr>
                     </table>
                     <button class="reservationbutton" type="button" onclick="location.href='@Url.Action("Reservation", "Dinner", new { id = r.RestaurantId })'">Make reservation</button>
                     <button class="infobutton" type="button" onclick="location.href='@Url.Action("Info", "Dinner", new { id = r.RestaurantId })'"><i class="fa fa-info" aria-hidden="true"></i></button>
-                </div>
+                    </div>
                     }
             </div>
+        </div>
     </div>
 </div>
-    </div>
+
 

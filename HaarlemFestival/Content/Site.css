@@ -330,8 +330,9 @@ footer a:hover {
     margin-bottom: 10px;
 }
 
-.promo-restaurant {
-
+.promo-restaurant h3{
+    margin: 0;
+    text-align: center;
 }
 
 .promo-restaurant img {
@@ -340,23 +341,26 @@ footer a:hover {
     border-color: #353238;
 }
 
-table {
+.restaurant {
     border: none;
 }
 
-tr, td {
+.restaurant tr, .restaurant td {
     background-color: #FFFFFF;
 }
 
+.dinnertable:nth-child(even) {
+    background-color: #FFFFFF ;
+}
 
-.restaurant-info-names {
+.restaurant-index-names {
     background-color: #FFFFFF;
     float: right;
     font-weight: bold;
     text-align: right;
 }
 
-.restaurant-info-info {
+.restaurant-index-info {
     max-width: 150px;
     min-width: 100px;
     text-align: left;
@@ -513,6 +517,7 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 
 .talk-activity-info {
     margin-left: 15px;
+    padding-left : 15px;
 }
 
 .talk-activity-btns {
@@ -538,8 +543,9 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     margin-bottom: 10px;
 }
 
-.talking-reservation-table, .talking-reservation-table td, .talking-reservation-table th {
+table.talking-reservation-table, .talking-reservation-table td, .talking-reservation-table th {
     border: 1px solid silver;
+    background-color: white;
 }
 
 .talking-reservation-table td, .talking-reservation-table th {
@@ -558,6 +564,7 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 .talk-question {
     float: left;
     width: 300px;
+    display: none;
 }
 
 .talk-question-receiver {
