@@ -22,7 +22,7 @@ namespace HaarlemFestival.Controllers
         public ActionResult Reservation()
         {
             List<Historic> allTours = historicRepository.GetAllTours();
-
+            
             return View(allTours);
         }
     }
