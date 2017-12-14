@@ -86,8 +86,8 @@
                             <td class="restaurant-index-info">€@r.DisplayPrice.ToString("0.00")</td>
                         </tr>
                     </table>
-                    <button class="reservationbutton" type="button" onclick="location.href='@Url.Action("Reservation", "Dinner", new { id = r.RestaurantId })'">Make reservation</button>
-                    <button class="infobutton" type="button" onclick="location.href='@Url.Action("Info", "Dinner", new { id = r.RestaurantId })'"><i class="fa fa-info" aria-hidden="true"></i></button>
+                    <button class="restaurant-index-button-reservation" type="button" onclick="location.href='@Url.Action("Reservation", "Dinner", new { id = r.RestaurantId })'">Make reservation</button>
+                    <button class="restaurant-index-button-info" type="button" onclick="location.href='@Url.Action("Info", "Dinner", new { id = r.RestaurantId })'"><i class="fa fa-info" aria-hidden="true"></i></button>
                     </div>
                     }
             </div>
