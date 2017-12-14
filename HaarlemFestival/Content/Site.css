@@ -340,12 +340,16 @@ footer a:hover {
     border-color: #353238;
 }
 
-table {
+.restaurant {
     border: none;
 }
 
-tr, td {
+.restaurant tr, .restaurant td {
     background-color: #FFFFFF;
+}
+
+.dinnertable:nth-child(even) {
+    background-color: #FFFFFF ;
 }
 
 
