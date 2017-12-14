@@ -213,6 +213,7 @@
     <Compile Include="Models\Guide.cs" />
     <Compile Include="Models\HFDB.cs" />
     <Compile Include="Models\InterviewQuestion.cs" />
+    <Compile Include="Models\JazzViewModels.cs" />
     <Compile Include="Models\Locations.cs" />
     <Compile Include="Models\Talk.cs" />
     <Compile Include="Models\Talking.cs" />
@@ -232,6 +233,8 @@
     <Compile Include="Repository\Dinner\IDinnerRepository.cs" />
     <Compile Include="Repository\Historic\HistoricRepository.cs" />
     <Compile Include="Repository\Historic\IHistoricRepository.cs" />
+    <Compile Include="Repository\Jazz\IJazzRepository.cs" />
+    <Compile Include="Repository\Jazz\JazzRepository.cs" />
     <Compile Include="Repository\Talking\ITalkingRepository.cs" />
     <Compile Include="Repository\Talking\TalkingRepository.cs" />
     <Compile Include="Scripts\IAdminRepository.cs" />

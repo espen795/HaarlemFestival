@@ -22,7 +22,7 @@
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Guide")
-            @Html.DropDownListFor(m => m.Guide.GuideId, new SelectList((List<Guide>)ViewData["Guides"], "GuideId", "GuideName"), new { @name = "GuideId" })
+            @Html.DropDownListFor(m => m.GuideId, new SelectList((List<Guide>)ViewData["Guides"], "GuideId", "GuideName"), new { @name = "GuideId" })
         </div>
     </div>
 

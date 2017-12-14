@@ -16,11 +16,6 @@ namespace HaarlemFestival.Controllers
         public ActionResult Login()
         {
             // Als de sessie met het aantal verkeerde logins nog niet bestaat.
-            if(Session["failedLogins"] == null)
-            {
-                Session["failedLogins"] = 0;
-            }
-
             return View();
         }
 
@@ -101,9 +96,27 @@ namespace HaarlemFestival.Controllers
             activity.EventType = EventType.JazzPatronaat;
             activity.BoughtTickets = 0;
 
-            // Model geeft error maar veld mag ook null zijn, daarom clear ik de errors.
-            ModelState["Price"].Errors.Clear();
-            ModelState["AlternativePrice"].Errors.Clear();
+            // Price omzetten naar een float.
+            float price, alternativePrice;
+
+            if (float.TryParse(collector["Price"].Replace(".", ","), out price))
+            {
+                ModelState["Price"].Errors.Clear();
+                activity.Price = price;
+            }
+            else
+                ModelState.AddModelError("InvalidPrice", "Please enter a valid price");
+
+            if (collector["AlternativePrice"].ToString() != "")
+            {
+                if (float.TryParse(collector["AlternativePrice"].Replace(".", ","), out alternativePrice))
+                {
+                    activity.AlternativePrice = alternativePrice;
+                    ModelState["AlternativePrice"].Errors.Clear();
+                }
+                else
+                    ModelState.AddModelError("InvalidAlternativePrice", "Please enter a valid price");
+            }
 
             // Standaard informatie van activity
             activity.AllDayPassPartout = 80;
@@ -119,22 +132,6 @@ namespace HaarlemFestival.Controllers
                     file.SaveAs(path);
                 }
 
-                // Price omzetten naar een float.
-                float price, alternativePrice;
-
-                if (float.TryParse(collector["Price"].Replace(".", ","), out price))
-                    activity.Price = price;
-                else
-                    ModelState.AddModelError("InvalidPrice", "Please enter a valid price");
-                
-                if (collector["AlternativePrice"].ToString() != "")
-                {
-                    if (float.TryParse(collector["AlternativePrice"].Replace(".", ","), out alternativePrice))
-                        activity.AlternativePrice = alternativePrice;
-                    else
-                        ModelState.AddModelError("InvalidAlternativePrice", "Please enter a valid price");
-                }
-
                 activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
                 activity.EndSession = DateTime.Parse(collector["Date"] + " " + collector["EndSession"]);
 
@@ -146,31 +143,35 @@ namespace HaarlemFestival.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult AddDinner(Models.Dinner activity, FormCollection collector, HttpPostedFileBase files)
+        public ActionResult AddDinner(Models.Dinner activity, FormCollection collector)
         {
             activity.EventType = EventType.DinnerInHaarlem;
-            ModelState["Price"].Errors.Clear();
-            ModelState["AlternativePrice"].Errors.Clear();
+
+            // Price omzetten naar een float.
+            float price, childPrice;
+
+            if (float.TryParse(collector["Price"].Replace(".", ","), out price))
+            {
+                ModelState["Price"].Errors.Clear();
+                activity.Price = price;
+            }
+            else
+                ModelState.AddModelError("InvalidPrice", "Please enter a valid price");
+
+            if (collector["AlternativePrice"].ToString() != "")
+            {
+                if (float.TryParse(collector["AlternativePrice"].Replace(".", ","), out childPrice))
+                {
+                    activity.AlternativePrice = childPrice;
+                    ModelState["AlternativePrice"].Errors.Clear();
+                }
+                else
+                    ModelState.AddModelError("InvalidAlternativePrice", "Please enter a valid price");
+            }
 
             if (ModelState.IsValid)
             {
                 activity.RestaurantId = Convert.ToInt32(collector["RestaurantId"]);
-
-                // Price omzetten naar een float.
-                float price, groupPrice;
-
-                if (float.TryParse(collector["Price"].Replace(".", ","), out price))
-                    activity.Price = price;
-                else
-                    ModelState.AddModelError("InvalidPrice", "Please enter a valid price");
-
-                if (collector["AlternativePrice"].ToString() != "")
-                {
-                    if (float.TryParse(collector["AlternativePrice"].Replace(".", ","), out groupPrice))
-                        activity.AlternativePrice = groupPrice;
-                    else
-                        ModelState.AddModelError("InvalidAlternativePrice", "Please enter a valid price");
-                }
 
                 activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
                 activity.EndSession = DateTime.Parse(collector["Date"] + " " + collector["EndSession"]);
@@ -185,10 +186,59 @@ namespace HaarlemFestival.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult AddTalking(Models.Talking activity, FormCollection collector, HttpPostedFileBase files)
+        public ActionResult AddTalking(Models.Talking activity, FormCollection collector)
         {
+            activity.EventType = EventType.TalkingHaarlem;
+
+            // Price omzetten naar een float.
+            float price;
+
+            if (float.TryParse(collector["Price"].Replace(".", ","), out price))
+            {
+                ModelState["Price"].Errors.Clear();
+                activity.Price = price;
+            }
+            else
+                ModelState.AddModelError("InvalidPrice", "Please enter a valid price");
+
             if (ModelState.IsValid)
             {
+                if (Request.Files[0] != null && Request.Files[0].ContentLength > 0)
+                {
+                    activity.Talk.Person1IMG = System.IO.Path.GetFileName(Request.Files[0].FileName);
+                    string path = System.IO.Path.Combine(Server.MapPath("~/images/talking"), activity.Talk.Person1IMG);
+                    // file is uploaded
+                    Request.Files[0].SaveAs(path);
+                }
+
+                if (Request.Files[1] != null)
+                {
+                    activity.Talk.Person1AltIMG = System.IO.Path.GetFileName(Request.Files[1].FileName);
+                    string path = System.IO.Path.Combine(Server.MapPath("~/images/talking"), activity.Talk.Person1AltIMG);
+                    // file is uploaded
+                    Request.Files[1].SaveAs(path);
+                }
+
+                if (Request.Files[2] != null)
+                {
+                    activity.Talk.Person2IMG = System.IO.Path.GetFileName(Request.Files[2].FileName);
+                    string path = System.IO.Path.Combine(Server.MapPath("~/images/talking"), activity.Talk.Person2IMG);
+                    // file is uploaded
+                    Request.Files[2].SaveAs(path);
+                }
+
+                
+                if (Request.Files[3] != null)
+                {
+                    activity.Talk.Person2AltIMG = System.IO.Path.GetFileName(Request.Files[3].FileName);
+                    string path = System.IO.Path.Combine(Server.MapPath("~/images/talking"), activity.Talk.Person2AltIMG);
+                    // file is uploaded
+                    Request.Files[3].SaveAs(path);
+                }
+
+                activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
+                activity.EndSession = DateTime.Parse(collector["Date"] + " " + collector["EndSession"]);
+
                 return RedirectToAction("ManageEvent", "Admin");
             }
 
@@ -201,29 +251,32 @@ namespace HaarlemFestival.Controllers
         {
             activity.EventType = EventType.HistoricHaarlem;
             activity.BoughtTickets = 0;
-            ModelState["Guide.GuideName"].Errors.Clear();
-            ModelState["Price"].Errors.Clear();
-            ModelState["AlternativePrice"].Errors.Clear();
+
+            // Price omzetten naar een float.
+            float price, groupPrice;
+
+            if (float.TryParse(collector["Price"].Replace(".", ","), out price))
+            {
+                ModelState["Price"].Errors.Clear();
+                activity.Price = price;
+            }
+            else
+                ModelState.AddModelError("InvalidPrice", "Please enter a valid price");
+
+            if (collector["AlternativePrice"].ToString() != "")
+            {
+                if (float.TryParse(collector["AlternativePrice"].Replace(".", ","), out groupPrice))
+                {
+                    activity.AlternativePrice = groupPrice;
+                    ModelState["AlternativePrice"].Errors.Clear();
+                }
+                else
+                    ModelState.AddModelError("InvalidAlternativePrice", "Please enter a valid price");
+            }
 
             if (ModelState.IsValid)
             {
                 activity.GuideId = Convert.ToInt32(collector["GuideId"]);
-
-                // Price omzetten naar een float.
-                float price, groupPrice;
-
-                if (float.TryParse(collector["Price"].Replace(".", ","), out price))
-                    activity.Price = price;
-                else
-                    ModelState.AddModelError("InvalidPrice", "Please enter a valid price");
-
-                if (collector["AlternativePrice"].ToString() != "")
-                {
-                    if (float.TryParse(collector["AlternativePrice"].Replace(".", ","), out groupPrice))
-                        activity.AlternativePrice = groupPrice;
-                    else
-                        ModelState.AddModelError("InvalidAlternativePrice", "Please enter a valid price");
-                }
 
                 activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
                 activity.EndSession = activity.StartSession.AddHours(2.5);
