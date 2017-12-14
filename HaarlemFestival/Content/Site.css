@@ -518,6 +518,7 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 
 .talk-activity-info {
     margin-left: 15px;
+    padding-left : 15px;
 }
 
 .talk-activity-btns {
@@ -543,8 +544,9 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     margin-bottom: 10px;
 }
 
-.talking-reservation-table, .talking-reservation-table td, .talking-reservation-table th {
+table.talking-reservation-table, .talking-reservation-table td, .talking-reservation-table th {
     border: 1px solid silver;
+    background-color: white;
 }
 
 .talking-reservation-table td, .talking-reservation-table th {
@@ -563,6 +565,7 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 .talk-question {
     float: left;
     width: 300px;
+    display: none;
 }
 
 .talk-question-receiver {

@@ -27,9 +27,11 @@ namespace HaarlemFestival.Controllers
             return View(talk);
         }
 
-        public ActionResult Reservation()
+        public ActionResult Reservation(int? id)
         {
-            return View();
+            List<Talk> allTalks = talkingRepository.GetAllTalks();
+
+            return View(allTalks);
         }
     }
 }
