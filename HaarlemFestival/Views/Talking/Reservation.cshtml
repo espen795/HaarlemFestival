@@ -9,18 +9,15 @@
 <script type="text/javascript">
     function UpdateQuestions()
     {
-        var question1 = document.getElementById("question1");
-        var question2 = document.getElementById("question2");
-        var question3 = document.getElementById("question3");
+        var ticketAmounts = document.getElementsByClassName("talk-ticket-amount");
         var questions = document.getElementsByClassName("talk-question");
 
-        /*question1.style.display = 'none';
-        question2.style.display = 'none';
-        question3.style.display = 'none';*/
-
-        for (var i = 0; i < questions.length; i++) {
-            if (questions[i].value > 0)
-                questions[i].style.display = 'block';
+        for (var i = 0; i < ticketAmounts.length; i++)
+        {
+            if (ticketAmounts[i].value > 0)
+                questions[i].style.display = "block";
+            else
+                questions[i].style.display = "none";
         }
     }
 </script>
@@ -51,7 +48,7 @@
                     @foreach (Talk talk in Model)
                     {
                     <tr>
-                        <td><input onchange="UpdateQuestions()" id="ticket-amount@talk.TalkId" class="talking-ticket-amount" min="0" max="2" type="number" /></td>
+                        <td><input onchange="UpdateQuestions()" id="ticket-amount@(talk.TalkId)" class="talk-ticket-amount" min="0" max="2" type="number" /></td>
                         <td>@talk.Naam</td>
                         <td>Free</td>
                         <td>Thursday 26-07-2018 | 20:00 - 22:00</td>
