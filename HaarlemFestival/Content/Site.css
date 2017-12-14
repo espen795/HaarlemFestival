@@ -377,13 +377,51 @@ footer a:hover {
     text-align: center;
 }
 
-.restaurant .infobutton {
+.restaurant .restaurant-index-button-info {
     font-size: 20px;
+}
+
+.restaurant-info {
+    display: inline-block;
+    float: left;
+    font-size: 17px;
+    max-width: 550px;
+}
+
+.restaurant-info-names {
+    background-color: #FFFFFF;
+    float: right;
+    font-weight: bold;
+    text-align: right;
+}
+
+.restaurant-info-info {
+    text-align: left;
+}
+
+.restaurant-info-img img{
+    margin: 10px;
+    max-width: 550px;
+    float: right;
+}
+
+.restaurant-info-button-reservation, .restaurant-info-button-back {
+    margin: 10px;
+    color: #FFFFFF;
+    background-color: #353238;
+    height: 32px;
+    min-width: 32px;
+    font-size: 17.5px;
+    text-align: center;
+}
+
+.restaurant-info-button-reservation {
+    float: right;
 }
 
 /* ------------------------------Talking Haarlem-------------------------------*/
 /* Talking Home Page */
-img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images van 150 pixels*/
+img .sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images van 150 pixels*/
     display: block;
     max-width: 150px;
     max-height: 150px;
