@@ -1,0 +1,46 @@
+﻿@using HaarlemFestival.Models;
+@using System.Collections.Generic;
+@model List<Dinner>
+@{
+    ViewBag.Title = "Info";
+}
+
+<div class="event-banner dinner"></div>
+
+<div class="event container">
+    <div class="row">
+        <!-- Section 1 -->
+        <div class="event-section-1-dinner">
+            <div class="col-md-6">
+                <h1 class="title">@Model[0].Restaurant.Naam</h1>
+                <div class="info-infonames">
+                    Cuisines:<br />
+                    Rating:<br />
+                    Price:<br />
+                    Duration:<br />
+                    Start times:<br />
+                    Description:<br />
+                </div>
+                <div class="infi-info-info">
+                    @foreach (Cuisine c in Model[0].Restaurant.Cuisines)
+                    {
+                        if (Model[0].Restaurant.Cuisines.Last() != c)
+                        {
+                            @c.Naam<span>,</span>
+                        }
+                        else
+                        {
+                            @c.Naam <br />
+                        }
+                    }
+                    @Model[0].Restaurant.Rating<br />
+                    €@Model[0].Price.ToString() (or €@Model[0].AlternativePrice.ToString() for children under 12)<br />
+                    DURATION<br />
+                    START TIMES<br />
+                    <p>@Model[0].Restaurant.Description</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
