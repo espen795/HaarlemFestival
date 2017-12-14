@@ -198,6 +198,10 @@
     <Compile Include="Migrations\201712131403244_mig14.Designer.cs">
       <DependentUpon>201712131403244_mig14.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712141107383_mig15.cs" />
+    <Compile Include="Migrations\201712141107383_mig15.Designer.cs">
+      <DependentUpon>201712141107383_mig15.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -291,6 +295,7 @@
     <Content Include="Views\Admin\_DinnerPartial.cshtml" />
     <Content Include="Views\Admin\_TalkingPartial.cshtml" />
     <Content Include="Views\Admin\_HistoricPartial.cshtml" />
+    <Content Include="Views\Dinner\Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -348,6 +353,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712131403244_mig14.resx">
       <DependentUpon>201712131403244_mig14.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712141107383_mig15.resx">
+      <DependentUpon>201712141107383_mig15.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
