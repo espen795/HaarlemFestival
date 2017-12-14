@@ -12,9 +12,10 @@
         var tickets = document.getElementById("location" + nummer);
         var grouptickets = document.getElementById("locations" + nummer);
 
-        otherElements[i].style.display = "none";
+        var totalprice = (tickets * @Model[0].Price) + (grouptickets * @Model[0].AlternativePrice);
 
-        element.style.display = "block";
+        //document.getElementById("totalprice" + nummer).innerHTML = totalprice;
+        $("#totalprice" + nummer).val(totalprice);
     }
 </script>
 
@@ -75,24 +76,25 @@
                             <th>Time</th>
                             <th>Total price</th>
                         </tr>
+                        @{int i = 1;}
                         @foreach (Historic tour in Model)
                         {
-                        int i = 1;
                         if (tour.StartSession.Date == new DateTime(2018, 7, 26))
                             {
                         string idtickets = String.Format("ticket{0}", i);
                         string idgrouptickets = String.Format("groupticket{0}", i);
-
+                        string totalprice = String.Format("totalprice{0}", i);
+                        
                                 <tr>
-                                    <td class="ticketsInput">@Html.TextBoxFor(m => tour.BoughtTickets, new { @type = "number", @min = 0}, @id = idtickets)</td>
-                                    <td class="ticketsInput">@Html.TextBoxFor(m => tour.BoughtTickets, new { @type = "number", @min = 0}, @id = idgrouptickets)</td>
+                                    <td class="ticketsInput">@Html.TextBoxFor(m => tour.BoughtTickets, new { @type = "number", @min = 0, @id = idtickets, @onkeyup = "CalcPrice(@i);"})</td>
+                                    <td class="ticketsInput">@Html.TextBoxFor(m => tour.BoughtTickets, new { @type = "number", @min = 0, @id = idgrouptickets, @onkeyup = "CalcPrice(@i);"})</td>
                                     <td>@tour.Guide.LanguageName</td>
                                     <td>@tour.Guide.GuideName</td>
                                     <td>@tour.StartSession.TimeOfDay</td>
-                                    <td></td>
+                                    <td><p id=@totalprice></p></td>
                                 </tr>
-                            }
                         i++;
+                            }
                         }
                     </table>
                     
