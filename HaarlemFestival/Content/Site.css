@@ -532,16 +532,30 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     padding-left: 15px;
 }
 
+.talk-reservation-container > section {
+    margin-bottom: 10px;
+}
+
+.talking-reservation-table, .talking-reservation-table td, .talking-reservation-table th {
+    border: 1px solid silver;
+}
+
+.talking-reservation-table td, .talking-reservation-table th{
+    padding-right: 50px;
+}
+
+.talking-ticket-amount {
+    width: 40%;
+}
+
 .talk-questions {
     display: inline-block;
-    border: red solid 1px;
     width: 100%;
 }
 
 .talk-question {
     float: left;
     width: 300px;
-    border: black solid 1px;
 }
 
 .talk-question-receiver {
@@ -554,7 +568,7 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
 
 .talk-questionbox {
     display: block;
-    width: 150px;
+    width: 200px;
     height: 100px;
 }
 .talk-bold {
