@@ -30,14 +30,14 @@
                         }
                         else
                         {
-                            @c.Naam
+                            @c.Naam <br />
                         }
                     }
-                    @Model[0].Restaurant.Rating
-                    €@Model[0].Price.ToString() (or €@Model[0].AlternativePrice.ToString() for children under 12)
-                    DURATION
-                    START TIMES
-                    @Model[0].Restaurant.Description
+                    @Model[0].Restaurant.Rating<br />
+                    €@Model[0].Price.ToString() (or €@Model[0].AlternativePrice.ToString() for children under 12)<br />
+                    DURATION<br />
+                    START TIMES<br />
+                    <p>@Model[0].Restaurant.Description</p>
                 </div>
             </div>
         </div>

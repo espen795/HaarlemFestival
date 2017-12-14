@@ -52,7 +52,7 @@
             <div class="cuisineselect">
                 <!--Dropdown menu voor cuisines-->
             </div>
-            <div class="restaurants">
+            <!--<div class="restaurants">
                 @foreach (Restaurant r in Model)
                 {
                     <div class="promo-restaurant">
@@ -85,8 +85,47 @@
                         <button class="infobutton" type="button" onclick="location.href='@Url.Action("Info", "Dinner", new { id = r.RestaurantId })'"><i class="fa fa-info" aria-hidden="true"></i></button>
                     </div>
                 }
+            </div>-->
+            <div class="restaurants">
+                    @foreach (Restaurant r in Model)
+                    {
+                <div class="restaurant">
+                    <div class="promo-restaurant">
+                        <img src="/images/Dinner/restaurants/@r.FoodIMG" alt="Picture not found" />
+                        <h3>@r.Naam</h3>
+                    </div>
+                    <table class="restaurant-info">
+                        <tr>
+                            <td class="restaurant-info-names"> Cuisines:</td>
+                            <td class="restaurant-info-info">
+                                @foreach (Cuisine c in r.Cuisines)
+                                {
+                                    if (r.Cuisines.Last() != c)
+                                    {
+                        @c.Naam<span>,</span>
+                                    }
+                                    else
+                                    {
+                @c.Naam
+                                    }
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="restaurant-info-names"> Rating:</td>
+                            <td class="restaurant-info-info"> @r.Rating</td>
+                        </tr>
+                        <tr>
+                            <td class="restaurant-info-names"> Price:</td>
+                            <td class="restaurant-info-info">€@r.DisplayPrice.ToString("0.00")</td>
+                        </tr>
+                    </table>
+                    <button class="reservationbutton" type="button" onclick="location.href='@Url.Action("Reservation", "Dinner", new { id = r.RestaurantId })'">Make reservation</button>
+                    <button class="infobutton" type="button" onclick="location.href='@Url.Action("Info", "Dinner", new { id = r.RestaurantId })'"><i class="fa fa-info" aria-hidden="true"></i></button>
+                </div>
+                    }
             </div>
-        </div>
     </div>
 </div>
+    </div>
 
