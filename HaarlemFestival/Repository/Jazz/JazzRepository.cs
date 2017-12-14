@@ -22,8 +22,6 @@ namespace HaarlemFestival.Repository.Jazz
         {
             List<Models.Jazz> jazzs = db.Jazzs.ToList();
 
-
-            //List<Models.Jazz> jazzs = db.Jazzs.GroupBy(x => x.StartSession.Date).Distinct();
             return jazzs;
         }
 
