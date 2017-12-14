@@ -354,10 +354,17 @@ footer a:hover {
     text-align:center;
 }
 
-.infonames {
-    float:left;
+.info-infonames {
+    float: left;
     font-weight: bold;
-    text-align:right;
+    text-align: right;
+    margin-right: 3px;
+}
+
+.infonames {
+    float: left;
+    font-weight: bold;
+    text-align: right;
     margin-right: 3px;
 }
 
