@@ -12,29 +12,7 @@
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Description")
-            @Html.EditorFor(t => t.Talk.Description)
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="input-group">
-            @Html.Label("Address")
-            @Html.TextBoxFor(t => t.Address, new { @Value = "Lange Begijnestraat 9, 2011 HH Haarlem" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="input-group">
-            @Html.EditorFor(t => t.Talk.Person1)
-            @Html.Label("Images Person 1")
-            <input type="file" name="Person1"/>
-            <input type="file" name="Person1Alt" />
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="input-group">
-            @Html.EditorFor(t => t.Talk.Person2)
-            @Html.Label("Images Person 2")
-            <input type="file" name="Person2" />
-            <input type="file" name="Person2Alt" />
+            @Html.TextAreaFor(t => t.Talk.Description, new { @placeholder = "Description" })
         </div>
     </div>
     <div class="form-group">
@@ -45,20 +23,34 @@
     </div>
     <div class="form-group">
         <div class="input-group">
+            @Html.Label("Name Person 1: ")
+            @Html.EditorFor(t => t.Talk.Person1)
+            <br />
+            @Html.Label("Images Person 1")
+            <input type="file" name="Person1"/>
+            <input type="file" name="Person1Alt" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Name Person 1: ")
+            @Html.EditorFor(t => t.Talk.Person2)
+            <br />
+            @Html.Label("Images Person 2")
+            <input type="file" name="Person2" />
+            <input type="file" name="Person2Alt" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
             @Html.Label("Total Seats:")
-            @Html.EditorFor(t => t.TotalTickets)
+            @Html.TextBoxFor(t => t.TotalTickets, new { @placeholder = "0" })
         </div>
     </div>
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Price")
-            @Html.EditorFor(t => t.Price)
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="input-group">
-            @Html.Label("Phonenumber")
-            @Html.EditorFor(t => t.Phonenumber)
+            @Html.TextBoxFor(t => t.Price, new { @placeholder ="0.00" })
         </div>
     </div>
     <div class="form-group">
@@ -67,6 +59,17 @@
             @Html.EditorFor(t => t.Talk.MaxTickets)
         </div>
     </div>
-
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Phonenumber")
+            @Html.TextBoxFor(t => t.Phonenumber, new { @Value = "+31 023 - 5241020", @readonly = "readonly" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Address")
+            @Html.TextBoxFor(t => t.Address, new { @Value = "Lange Begijnestraat 9, 2011 HH Haarlem", @readonly = "readonly" })
+        </div>
+    </div>
     <input type="submit" value="Add Interview" />
 }
