@@ -18,5 +18,14 @@ namespace HaarlemFestival.Repository.Jazz
             return artists;
         }
 
+        public List<Models.Jazz> GetAllJazzs()
+        {
+            List<Models.Jazz> jazzs = db.Jazzs.ToList();
+
+
+            //List<Models.Jazz> jazzs = db.Jazzs.GroupBy(x => x.StartSession.Date).Distinct();
+            return jazzs;
+        }
+
     }
 }

@@ -10,5 +10,6 @@ namespace HaarlemFestival.Repository.Jazz
     interface IJazzRepository
     {
         List<Artist> GetAllArtists();
+        List<Models.Jazz> GetAllJazzs();
     }
 }
