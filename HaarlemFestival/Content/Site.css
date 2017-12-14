@@ -330,8 +330,9 @@ footer a:hover {
     margin-bottom: 10px;
 }
 
-.promo-restaurant {
-
+.promo-restaurant h3{
+    margin: 0;
+    text-align: center;
 }
 
 .promo-restaurant img {
@@ -352,15 +353,14 @@ footer a:hover {
     background-color: #FFFFFF ;
 }
 
-
-.restaurant-info-names {
+.restaurant-index-names {
     background-color: #FFFFFF;
     float: right;
     font-weight: bold;
     text-align: right;
 }
 
-.restaurant-info-info {
+.restaurant-index-info {
     max-width: 150px;
     min-width: 100px;
     text-align: left;
