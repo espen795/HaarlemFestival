@@ -19,24 +19,24 @@ namespace HaarlemFestival.Repository.Admin
 
         public void AddEvent(Activity activity)
         {
-            if (activity.GetType() == typeof(HaarlemFestival.Models.Jazz))
+            if (activity.GetType() == typeof(Models.Jazz))
             {
-                HaarlemFestival.Models.Jazz jazz = activity as HaarlemFestival.Models.Jazz;
+                Models.Jazz jazz = activity as Models.Jazz;
                 db.Jazzs.Add(jazz);
             }
-            else if (activity.GetType() == typeof(HaarlemFestival.Models.Dinner))
+            else if (activity.GetType() == typeof(Models.Dinner))
             {
-                HaarlemFestival.Models.Dinner dinner = activity as HaarlemFestival.Models.Dinner;
+                Models.Dinner dinner = activity as Models.Dinner;
                 db.Dinners.Add(dinner);
             }
-            else if (activity.GetType() == typeof(HaarlemFestival.Models.Talking))
+            else if (activity.GetType() == typeof(Models.Talking))
             {
-                HaarlemFestival.Models.Talking talking = activity as HaarlemFestival.Models.Talking;
+                Models.Talking talking = activity as Models.Talking;
                 db.Talkings.Add(talking);
             }
-            else if (activity.GetType() == typeof(HaarlemFestival.Models.Historic))
+            else if (activity.GetType() == typeof(Models.Historic))
             {
-                HaarlemFestival.Models.Historic historic = activity as HaarlemFestival.Models.Historic;
+                Models.Historic historic = activity as Models.Historic;
                 db.Historics.Add(historic);
             }
 
@@ -92,7 +92,6 @@ namespace HaarlemFestival.Repository.Admin
 
                 Dates = db.Days.ToList(),
                 Cuisines = db.Cuisines.ToList(),
-                //Languages = db.Languages.ToList(),
                 Guides = db.Guides.ToList(),
                 Restaurants = db.Restaurants.ToList()
             };

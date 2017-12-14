@@ -16,11 +16,6 @@ namespace HaarlemFestival.Controllers
         public ActionResult Login()
         {
             // Als de sessie met het aantal verkeerde logins nog niet bestaat.
-            if(Session["failedLogins"] == null)
-            {
-                Session["failedLogins"] = 0;
-            }
-
             return View();
         }
 
@@ -101,9 +96,27 @@ namespace HaarlemFestival.Controllers
             activity.EventType = EventType.JazzPatronaat;
             activity.BoughtTickets = 0;
 
-            // Model geeft error maar veld mag ook null zijn, daarom clear ik de errors.
-            ModelState["Price"].Errors.Clear();
-            ModelState["AlternativePrice"].Errors.Clear();
+            // Price omzetten naar een float.
+            float price, alternativePrice;
+
+            if (float.TryParse(collector["Price"].Replace(".", ","), out price))
+            {
+                ModelState["Price"].Errors.Clear();
+                activity.Price = price;
+            }
+            else
+                ModelState.AddModelError("InvalidPrice", "Please enter a valid price");
+
+            if (collector["AlternativePrice"].ToString() != "")
+            {
+                if (float.TryParse(collector["AlternativePrice"].Replace(".", ","), out alternativePrice))
+                {
+                    activity.AlternativePrice = alternativePrice;
+                    ModelState["AlternativePrice"].Errors.Clear();
+                }
+                else
+                    ModelState.AddModelError("InvalidAlternativePrice", "Please enter a valid price");
+            }
 
             // Standaard informatie van activity
             activity.AllDayPassPartout = 80;
@@ -117,22 +130,6 @@ namespace HaarlemFestival.Controllers
                     string path = System.IO.Path.Combine(Server.MapPath("~/images/jazz"), activity.artist.ArtistImage);
                     // file is uploaded
                     file.SaveAs(path);
-                }
-
-                // Price omzetten naar een float.
-                float price, alternativePrice;
-
-                if (float.TryParse(collector["Price"].Replace(".", ","), out price))
-                    activity.Price = price;
-                else
-                    ModelState.AddModelError("InvalidPrice", "Please enter a valid price");
-                
-                if (collector["AlternativePrice"].ToString() != "")
-                {
-                    if (float.TryParse(collector["AlternativePrice"].Replace(".", ","), out alternativePrice))
-                        activity.AlternativePrice = alternativePrice;
-                    else
-                        ModelState.AddModelError("InvalidAlternativePrice", "Please enter a valid price");
                 }
 
                 activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
@@ -149,28 +146,32 @@ namespace HaarlemFestival.Controllers
         public ActionResult AddDinner(Models.Dinner activity, FormCollection collector, HttpPostedFileBase files)
         {
             activity.EventType = EventType.DinnerInHaarlem;
-            ModelState["Price"].Errors.Clear();
-            ModelState["AlternativePrice"].Errors.Clear();
+
+            // Price omzetten naar een float.
+            float price, childPrice;
+
+            if (float.TryParse(collector["Price"].Replace(".", ","), out price))
+            {
+                ModelState["Price"].Errors.Clear();
+                activity.Price = price;
+            }
+            else
+                ModelState.AddModelError("InvalidPrice", "Please enter a valid price");
+
+            if (collector["AlternativePrice"].ToString() != "")
+            {
+                if (float.TryParse(collector["AlternativePrice"].Replace(".", ","), out childPrice))
+                {
+                    activity.AlternativePrice = childPrice;
+                    ModelState["AlternativePrice"].Errors.Clear();
+                }
+                else
+                    ModelState.AddModelError("InvalidAlternativePrice", "Please enter a valid price");
+            }
 
             if (ModelState.IsValid)
             {
                 activity.RestaurantId = Convert.ToInt32(collector["RestaurantId"]);
-
-                // Price omzetten naar een float.
-                float price, groupPrice;
-
-                if (float.TryParse(collector["Price"].Replace(".", ","), out price))
-                    activity.Price = price;
-                else
-                    ModelState.AddModelError("InvalidPrice", "Please enter a valid price");
-
-                if (collector["AlternativePrice"].ToString() != "")
-                {
-                    if (float.TryParse(collector["AlternativePrice"].Replace(".", ","), out groupPrice))
-                        activity.AlternativePrice = groupPrice;
-                    else
-                        ModelState.AddModelError("InvalidAlternativePrice", "Please enter a valid price");
-                }
 
                 activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
                 activity.EndSession = DateTime.Parse(collector["Date"] + " " + collector["EndSession"]);
@@ -187,8 +188,37 @@ namespace HaarlemFestival.Controllers
         [Authorize]
         public ActionResult AddTalking(Models.Talking activity, FormCollection collector, HttpPostedFileBase files)
         {
+            activity.EventType = EventType.TalkingHaarlem;
+
+            // Price omzetten naar een float.
+            float price, alternativePrice;
+
+            if (float.TryParse(collector["Price"].Replace(".", ","), out price))
+            {
+                ModelState["Price"].Errors.Clear();
+                activity.Price = price;
+            }
+            else
+                ModelState.AddModelError("InvalidPrice", "Please enter a valid price");
+
+            if (collector["AlternativePrice"].ToString() != "")
+            {
+                if (float.TryParse(collector["AlternativePrice"].Replace(".", ","), out alternativePrice))
+                {
+                    activity.AlternativePrice = alternativePrice;
+                    ModelState["AlternativePrice"].Errors.Clear();
+                }
+                else
+                    ModelState.AddModelError("InvalidAlternativePrice", "Please enter a valid price");
+            }
+
             if (ModelState.IsValid)
             {
+
+
+                activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
+                activity.EndSession = DateTime.Parse(collector["Date"] + " " + collector["EndSession"]);
+
                 return RedirectToAction("ManageEvent", "Admin");
             }
 
@@ -201,29 +231,32 @@ namespace HaarlemFestival.Controllers
         {
             activity.EventType = EventType.HistoricHaarlem;
             activity.BoughtTickets = 0;
-            ModelState["Guide.GuideName"].Errors.Clear();
-            ModelState["Price"].Errors.Clear();
-            ModelState["AlternativePrice"].Errors.Clear();
+
+            // Price omzetten naar een float.
+            float price, groupPrice;
+
+            if (float.TryParse(collector["Price"].Replace(".", ","), out price))
+            {
+                ModelState["Price"].Errors.Clear();
+                activity.Price = price;
+            }
+            else
+                ModelState.AddModelError("InvalidPrice", "Please enter a valid price");
+
+            if (collector["AlternativePrice"].ToString() != "")
+            {
+                if (float.TryParse(collector["AlternativePrice"].Replace(".", ","), out groupPrice))
+                {
+                    activity.AlternativePrice = groupPrice;
+                    ModelState["AlternativePrice"].Errors.Clear();
+                }
+                else
+                    ModelState.AddModelError("InvalidAlternativePrice", "Please enter a valid price");
+            }
 
             if (ModelState.IsValid)
             {
                 activity.GuideId = Convert.ToInt32(collector["GuideId"]);
-
-                // Price omzetten naar een float.
-                float price, groupPrice;
-
-                if (float.TryParse(collector["Price"].Replace(".", ","), out price))
-                    activity.Price = price;
-                else
-                    ModelState.AddModelError("InvalidPrice", "Please enter a valid price");
-
-                if (collector["AlternativePrice"].ToString() != "")
-                {
-                    if (float.TryParse(collector["AlternativePrice"].Replace(".", ","), out groupPrice))
-                        activity.AlternativePrice = groupPrice;
-                    else
-                        ModelState.AddModelError("InvalidAlternativePrice", "Please enter a valid price");
-                }
 
                 activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
                 activity.EndSession = activity.StartSession.AddHours(2.5);
