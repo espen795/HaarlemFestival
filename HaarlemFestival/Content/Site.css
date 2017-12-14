@@ -322,11 +322,16 @@ footer a:hover {
 
 }
 
-.promo-restaurant {
-    float:left;
+.restaurant {
+    float: left;
     max-width: 275px;
-    margin-left: 19px; 
+    margin: 0;
+    margin-left: 19px;
     margin-bottom: 10px;
+}
+
+.promo-restaurant {
+
 }
 
 .promo-restaurant img {
@@ -335,7 +340,29 @@ footer a:hover {
     border-color: #353238;
 }
 
-.promo-restaurant button {
+table {
+    border: none;
+}
+
+tr, td {
+    background-color: #FFFFFF;
+}
+
+
+.restaurant-info-names {
+    background-color: #FFFFFF;
+    float: right;
+    font-weight: bold;
+    text-align: right;
+}
+
+.restaurant-info-info {
+    max-width: 150px;
+    min-width: 100px;
+    text-align: left;
+}
+
+.restaurant button {
     float: right;
     margin: 5px;
     color: #FFFFFF;
@@ -346,40 +373,8 @@ footer a:hover {
     text-align: center;
 }
 
-.promo-restaurant .infobutton {
+.restaurant .infobutton {
     font-size: 20px;
-}
-
-.restaurants h3{
-    text-align:center;
-}
-
-.info-infonames {
-    float: left;
-    font-weight: bold;
-    text-align: right;
-    margin-right: 3px;
-}
-
-.infonames {
-    float: left;
-    font-weight: bold;
-    text-align: right;
-    margin-right: 3px;
-}
-
-.info-infocuisine {
-    float: left;
-    min-height: 40px;
-    max-width: 150px;
-    min-width: 100px;
-    text-align:left;
-}
-.info-info {
-    float: left;
-    max-width: 160px;
-    min-width: 100px;
-    text-align: left;
 }
 
 /* ------------------------------Talking Haarlem-------------------------------*/
