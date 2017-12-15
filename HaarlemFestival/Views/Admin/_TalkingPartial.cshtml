@@ -77,5 +77,8 @@
             @Html.TextBoxFor(t => t.Address, new { @Value = "Lange Begijnestraat 9, 2011 HH Haarlem", @readonly = "readonly" })
         </div>
     </div>
-    <input type="submit" value="Add Interview" />
 
+    <div class="modal-footer">
+        <input type="submit" class="btn btn-success" value="Save Interview" />
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+    </div>

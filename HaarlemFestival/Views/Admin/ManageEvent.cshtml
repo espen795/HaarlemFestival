@@ -343,7 +343,7 @@
                         <td>@activity.Price</td>
                         <td>@activity.TotalTickets</td>
                         <td><i onclick='ShowEventImage("Jazz/@activity.artist.ArtistImage")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
-                        <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
+                        <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Jazz')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
                 }
@@ -377,7 +377,7 @@
                         <td>@stringBuilder.ToString().Substring(0, stringBuilder.Length - 1)</td>
                         <td><i onclick='ShowEventImage("Dinner/restaurants/@r.FoodIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick='ShowEventImage("Dinner/restaurants/@r.LocationIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
-                        <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
+                        <td><i onclick="OpenUpdateForm(@r.RestaurantId, 'Restaurant')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@r.RestaurantId, 'Restaurant')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
                 }
@@ -414,7 +414,7 @@
                         <td>@stringBuilder.ToString().Substring(0,stringBuilder.Length - 1)</td>
                         <td>@activity.Price</td>
                         <td>@activity.AlternativePrice</td>                       
-                        <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
+                        <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Dinner')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
                 }
@@ -449,7 +449,7 @@
                         <td>@activity.Price.ToString()</td>
                         <td>@activity.Talk.MaxTickets</td>
                         <td><i onclick='ShowEventImage("Talking/@activity.Talk.Person1")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
-                        <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
+                        <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Talking')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
                 }
@@ -472,7 +472,7 @@
                     <td>@g.GuideName</td>
                     <td>@g.LanguageName</td>
                     <td>@g.LanguageAbbr</td>
-                    <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
+                    <td><i onclick="OpenUpdateForm(@g.GuideId, 'Guide')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                     <td><i onclick="OpenDeleteConfirm(@g.GuideId, 'Guide')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                 </tr>
                 }
@@ -503,7 +503,7 @@
                         <td>@activity.TotalTickets</td>
                         <td>@activity.Price</td>
                         <td>@activity.AlternativePrice</td>
-                        <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
+                        <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Historic')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
                 }
