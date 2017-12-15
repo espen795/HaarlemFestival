@@ -144,7 +144,7 @@ namespace HaarlemFestival.Controllers
         [Authorize]
         public ActionResult AddRestaurant(Models.Restaurant restaurant, FormCollection collector)
         {
-            restaurant.Rating = collector["Rating"] + "/5";
+            restaurant.Rating = restaurant.Rating + "/5";
             if (ModelState.IsValid)
             {
                 if (Request.Files[0] != null && Request.Files[0].ContentLength > 0)
@@ -400,6 +400,7 @@ namespace HaarlemFestival.Controllers
             if(id != null)
             {
                 restaurant = adminRepository.GetRestaurant((int)id);
+                restaurant.Rating = restaurant.Rating.Substring(0, 1);
             }
             else
             {

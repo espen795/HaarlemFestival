@@ -26,7 +26,7 @@
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Rating: ")
-            <input type="number" name="rating" min="0" max="5"/> / 5
+            @Html.TextBoxFor(r => r.Rating, new { @min = 0, @max = 5, @type = "number" }) / 5
         </div>
     </div>
 
