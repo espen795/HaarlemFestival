@@ -303,6 +303,8 @@
     <Content Include="Views\Admin\_TalkingPartial.cshtml" />
     <Content Include="Views\Admin\_HistoricPartial.cshtml" />
     <Content Include="Views\Dinner\Info.cshtml" />
+    <Content Include="Views\Admin\_RestaurantPartial.cshtml" />
+    <Content Include="Views\Admin\_GuidePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

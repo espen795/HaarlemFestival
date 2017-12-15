@@ -3,7 +3,6 @@
 
 @using (Html.BeginForm("AddJazz", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-
     if (ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Count() > 0)
     {
         <div id="bootstrapAlert" class="alert alert-danger alert-dismissible">

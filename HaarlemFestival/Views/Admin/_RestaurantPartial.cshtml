@@ -1,0 +1,61 @@
+﻿@using HaarlemFestival.Models
+@model Restaurant
+
+@using (Html.BeginForm("AddRestaurant", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    if (ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Count() > 0)
+    {
+        <div id="bootstrapAlert" class="alert alert-danger alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <span class="loginErrors">@Html.ValidationSummary()</span>
+        </div>
+    }
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Name: ")
+            @Html.TextBoxFor(r => r.Naam)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Description: ")
+            @Html.TextBoxFor(r => r.Description)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Rating: ")
+            <input type="number" name="rating" min="0" max="5"/> / 5
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Cuisines")
+            @Html.DropDownList("Cuisine1", new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam"), new { @name = "CuisineId1" })
+            @Html.DropDownList("Cuisine2", new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam"), new { @name = "CuisineId2" })
+            @Html.DropDownList("Cuisine3", new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam"), new { @name = "CuisineId3" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Food Image:")
+            <input type="file" name="foodIamge" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Restaurant Image:")
+            <input type="file" name="restaurantIamge" />
+        </div>
+    </div>
+
+    <input type="submit" value="Add Restaurant" />
+}
+
+

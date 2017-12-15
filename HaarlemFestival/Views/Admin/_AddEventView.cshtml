@@ -5,11 +5,12 @@
     $(document).ready(function () {
 
         $("#selectEvent").val("Jazz@Patronaat");
-        $("#JazzForm").show();
-        $("#DinnerForm").hide();
-        $("#TalkingForm").hide();
-        $("#HistoricForm").hide();
 
+        $('.addDataForm').each(function () {
+            $(this).hide();
+        })
+
+        $("#JazzForm").show();
     });
 
     function AddEventFilter()
@@ -23,6 +24,10 @@
         switch (event) {
             case "Jazz@Patronaat":
                 $("#JazzForm").show();
+                break;
+
+            case "Restaurant":
+                $("#RestaurantForm").show();
                 break;
 
             case "DinnerInHaarlem":
@@ -44,6 +49,7 @@
 @Html.Label("Select an event:")
 <select id="selectEvent" name="selectEvent" onchange="AddEventFilter()">
     <option value="Jazz@Patronaat">Jazz@Patronaat</option>
+    <option value="Restaurant">Restaurant</option>
     <option value="DinnerInHaarlem">Dinner in Haarlem</option>
     <option value="TalkingHaarlem">Talking Haarlem</option>
     <option value="HistoricHaarlem">Historic Haarlem</option>
@@ -52,6 +58,10 @@
 
 <div id="JazzForm" class="addDataForm">
     @{Html.RenderPartial("_JazzPartial", new Jazz());}
+</div>
+
+<div id="RestaurantForm" class="addDataForm">
+    @{Html.RenderPartial("_RestaurantPartial", new Restaurant());}
 </div>
     
 <div id="DinnerForm" class="addDataForm">

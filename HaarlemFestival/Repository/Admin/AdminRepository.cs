@@ -43,6 +43,18 @@ namespace HaarlemFestival.Repository.Admin
             db.SaveChanges();
         }
 
+        public void AddRestaurant(Restaurant restaurant)
+        {
+            db.Restaurants.Add(restaurant);
+            db.SaveChanges();
+        }
+
+        public void AddGuide(Guide guide)
+        {
+            db.Guides.Add(guide);
+            db.SaveChanges();
+        }
+
         public void UpdateEvent(Activity activity)
         {
             db.Entry(activity).State = EntityState.Modified;
@@ -76,6 +88,25 @@ namespace HaarlemFestival.Repository.Admin
                     break;
             }
             db.Activities.Remove(activity);
+            db.SaveChanges();
+        }
+
+        public void AddRestaurantCuisine(int id)
+        {
+            
+        }
+
+        public void DeleteRestaurant(int id)
+        {
+            db.Dinners.RemoveRange(db.Dinners.Where(d => d.RestaurantId == id));
+            db.Restaurants.RemoveRange(db.Restaurants.Where(r => r.RestaurantId == id));
+            db.SaveChanges();
+        }
+
+        public void DeleteGuide(int id)
+        {
+            db.Historics.RemoveRange(db.Historics.Where(h => h.GuideId == id));
+            db.Guides.RemoveRange(db.Guides.Where(g => g.GuideId == id));
             db.SaveChanges();
         }
 

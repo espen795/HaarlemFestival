@@ -146,6 +146,7 @@
                 case "DinnerInHaarlem":
                     $('#dateFilter').show();
                     $('#dinnerTable').show();
+                    $('#restaurantTable').show();
                     $('#cuisineFilter').show();
                     $('#restaurantFilter').show();
                     break;
@@ -212,17 +213,33 @@
                 .show();
         }
 
-        function OpenDeleteConfirm(id)
+        function OpenDeleteConfirm(id, type)
         {
+            sessionStorage.setItem("type", type);
             $("#deletePopup").attr("activityId", id);
         }
 
-        function DeleteConfirmed()
-        {
+        function DeleteConfirmed() {
+            var type = sessionStorage.getItem("type");
+
+            if (type == "Restaurant")
+            {
+                var url = "@Url.Action("DeleteRestaurant", "Admin")";
+            }
+            else if (type = "Guide")
+            {
+                var url = "@Url.Action("DeleteGuide", "Admin")";
+            }
+            else
+            {
+                var url = "@Url.Action("DeleteEvent", "Admin")";
+            }
+
             var activityId = $("#deletePopup").attr("activityId");
-            var url = '@Url.Action("DeleteEvent", "Admin")';
+
 
             $.post(url, { id: activityId });
+            location.reload();
         }
 
     </script>
@@ -286,26 +303,57 @@
                         <td>@activity.TotalTickets</td>
                         <td><i onclick='ShowEventImage("Jazz/@activity.artist.ArtistImage")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
-                        <td><i onclick="OpenDeleteConfirm(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                        <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
                 }
             </tbody>
         </table>
 
-        <!-- TODO: Dinner laten zien (W.I.P) -->
+        <table id="restaurantTable" class="eventTable table table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Rating</th>
+                    <th>Cuisines</th>
+                    <th>Food Image</th>
+                    <th>Restaurant Image</th>
+                    <th colspan="2"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(Restaurant r in Model.Restaurants)
+                {
+                    stringBuilder.Clear();
+                    foreach (Cuisine c in r.Cuisines)
+                    {
+                        stringBuilder.Append(c.Naam).Append(", ");
+                    }
+                    <tr>
+                        <td>@r.Naam</td>
+                        <td>@r.Description</td>
+                        <td>@r.Rating</td>
+                        <td>@stringBuilder.ToString().Substring(0, stringBuilder.Length - 1)</td>
+                        <td><i onclick='ShowEventImage("Dinner/restaurants/@r.FoodIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
+                        <td><i onclick='ShowEventImage("Dinner/restaurants/@r.LocationIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
+                        <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
+                        <td><i onclick="OpenDeleteConfirm(@r.RestaurantId, 'Restaurant')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
         <table id="dinnerTable" class="eventTable table table-striped table-responsive">
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Adress</th>
                     <th>Session</th>
-                    <th>Rating</th>
                     <th>Seats</th>
                     <th>Cuisines</th>
                     <th>Price</th>
                     <th>Price (12-)</th>
-                    <th>Food Image</th>
-                    <th>Restaurant Image</th>
                     <th colspan="2"></th>
                 </tr>
             </thead>
@@ -321,15 +369,12 @@
                         <td>@activity.Restaurant.Naam</td>
                         <td>@activity.Address</td>
                         <td>@activity.StartSession.ToString("dddd dd-MM-yy H:mm") - @activity.EndSession.ToString("H:mm")</td>
-                        <td>@activity.Restaurant.Rating</td>
                         <td>@activity.TotalTickets</td>
                         <td>@stringBuilder.ToString().Substring(0,stringBuilder.Length - 1)</td>
                         <td>@activity.Price</td>
-                        <td>@activity.AlternativePrice</td>
-                        <td><i onclick='ShowEventImage("Dinner/restaurants/@activity.Restaurant.FoodIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
-                        <td><i onclick='ShowEventImage("Dinner/restaurants/@activity.Restaurant.LocationIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
+                        <td>@activity.AlternativePrice</td>                       
                         <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
-                        <td><i onclick="OpenDeleteConfirm(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                        <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
                 }
             </tbody>
@@ -364,7 +409,7 @@
                         <td>@activity.Talk.MaxTickets</td>
                         <td><i onclick='ShowEventImage("Talking/@activity.Talk.Person1")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
-                        <td><i onclick="OpenDeleteConfirm(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                        <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
                 }
             </tbody>
@@ -395,7 +440,7 @@
                         <td>@activity.Price</td>
                         <td>@activity.AlternativePrice</td>
                         <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
-                        <td><i onclick="OpenDeleteConfirm(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                        <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
                 }
             </tbody>

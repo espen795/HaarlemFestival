@@ -143,6 +143,50 @@ namespace HaarlemFestival.Controllers
 
         [HttpPost]
         [Authorize]
+        public ActionResult AddRestaurant(Models.Restaurant restaurant, FormCollection collector)
+        {
+            restaurant.Rating = collector["Rating"] + "/5";
+            if (ModelState.IsValid)
+            {
+                if (Request.Files[0] != null && Request.Files[0].ContentLength > 0)
+                {
+                    restaurant.FoodIMG = System.IO.Path.GetFileName(Request.Files[0].FileName);
+                    string path = System.IO.Path.Combine(Server.MapPath("~/images/dinner"), restaurant.FoodIMG);
+                    // file is uploaded
+                    Request.Files[0].SaveAs(path);
+                }
+
+                if (Request.Files[1] != null && Request.Files[1].ContentLength > 0)
+                {
+                    restaurant.LocationIMG = System.IO.Path.GetFileName(Request.Files[1].FileName);
+                    string path = System.IO.Path.Combine(Server.MapPath("~/images/dinner"), restaurant.LocationIMG);
+                    // file is uploaded
+                    Request.Files[1].SaveAs(path);
+                }
+
+                adminRepository.AddRestaurant(restaurant);
+                adminRepository.AddRestaurantCuisine(Convert.ToInt32(collector["CuisineId1"]));
+                adminRepository.AddRestaurantCuisine(Convert.ToInt32(collector["CuisineId2"]));
+                adminRepository.AddRestaurantCuisine(Convert.ToInt32(collector["CuisineId3"]));
+            }
+
+            return RedirectToAction("ManageEvent", "Admin");
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddGuide(Models.Guide guide, FormCollection collector)
+        {
+            if(ModelState.IsValid)
+            {
+                adminRepository.AddGuide(guide);
+            }
+
+            return RedirectToAction("ManageEvent", "Admin");
+        }
+
+        [HttpPost]
+        [Authorize]
         public ActionResult AddDinner(Models.Dinner activity, FormCollection collector)
         {
             activity.EventType = EventType.DinnerInHaarlem;
@@ -244,10 +288,8 @@ namespace HaarlemFestival.Controllers
 
                 adminRepository.AddEvent(activity);
 
-                return RedirectToAction("ManageEvent", "Admin");
             }
-
-            return View(activity);
+            return RedirectToAction("ManageEvent", "Admin");
         }
 
         [HttpPost]
@@ -297,7 +339,23 @@ namespace HaarlemFestival.Controllers
         public ActionResult DeleteEvent(int id)
         {
             adminRepository.DeleteEvent(id);
-            return RedirectToAction("ManageEvent","Admin");
+            return RedirectToAction("ManageEvent", "Admin");
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult DeleteRestaurant(int id)
+        {
+            adminRepository.DeleteRestaurant(id);
+            return RedirectToAction("ManageEvent", "Admin");
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult DeleteGuide(int id)
+        {
+            adminRepository.DeleteGuide(id);
+            return RedirectToAction("ManageEvent", "Admin");
         }
 
         [HttpPost]

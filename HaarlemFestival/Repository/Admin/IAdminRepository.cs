@@ -14,8 +14,13 @@ namespace HaarlemFestival.Repository.Admin
 
         // ManageEvent
         void AddEvent(Activity activity);
+        void AddRestaurant(Restaurant restaurant);
+        void AddGuide(Guide guide);
         void UpdateEvent(Activity activity);
         void DeleteEvent(int id);
+        void DeleteRestaurant(int id);
+        void DeleteGuide(int id);
+        void AddRestaurantCuisine(int id);
         Activity GetActivity(int id);
         EventData GetEventData();
     }
