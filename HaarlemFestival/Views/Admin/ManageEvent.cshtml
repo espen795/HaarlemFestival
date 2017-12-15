@@ -51,22 +51,32 @@
 
             <!-- BODY -->
             <div class="modal-body">
-
-
                 @{Html.RenderPartial("_AddEventView", "Admin");}
-
-                <!-- TODO: Maak tekstvakken aan om nieuw data in te lezen. -->
-            </div>
-
-            <!-- FOOTER -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("AddEvent", "Admin")'"><i class="fa fa-check"></i> Yes, I am sure</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> No, Take me back</button>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Modal Update Data -->
+<div class="modal fade" id="updatePopup" tabindex="-1" role="dialog" aria-labelledby="newPopup">
+    <div class="modal-dialog modal-lg" role="document">
+
+        <!-- CONTENT -->
+        <div class="modal-content">
+
+            <!-- HEADER -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Update Data</h4>
+            </div>
+
+            <!-- BODY -->
+            <div class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!-- Modal Image -->
