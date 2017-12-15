@@ -67,7 +67,6 @@ namespace HaarlemFestival.Controllers
             string selectedEvent = this.Request.QueryString["selectedEvent"];
             ViewData["Restaurants"] = data.Restaurants;
             ViewData["Guides"] = data.Guides;
-            ViewData["Languages"] = data.Languages;
             ViewData["Cuisines"] = data.Cuisines;
             ViewData["Dates"] = data.Dates;
 
@@ -373,32 +372,110 @@ namespace HaarlemFestival.Controllers
             return View();
         }
 
+        [Authorize]
+        public ActionResult _JazzPartial(int? id)
+        {
+            ViewData["Dates"] = adminRepository.GetDates();
+
+            Jazz jazz;
+            if(id != null)
+            {
+                jazz = adminRepository.GetActivity((int)id) as Jazz;
+            }
+            else
+            {
+                jazz = new Jazz();
+            }
+
+            return PartialView(jazz);
+        }
 
         [Authorize]
-        public ActionResult _UpdateEvent(int id)
+        public ActionResult _RestaurantPartial(int? id)
         {
-            Activity activity = adminRepository.GetActivity(id);
-            return PartialView(activity);
+            ViewData["Cuisines"] = adminRepository.GetCuisines();
+            ViewData["Dates"] = adminRepository.GetDates();
+
+            Restaurant restaurant;
+            if(id != null)
+            {
+                restaurant = adminRepository.GetRestaurant((int)id);
+            }
+            else
+            {
+                restaurant = new Restaurant();
+            }
+
+            return PartialView(restaurant);
         }
 
-        public ActionResult _JazzPartial(Jazz model)
+        [Authorize]
+        public ActionResult _DinnerPartial(int? id)
         {
-            return PartialView(model);
+            ViewData["Restaurants"] = adminRepository.GetRestaurants();
+            ViewData["Dates"] = adminRepository.GetDates();
+
+            Dinner dinner;
+            if (id != null)
+            {
+                dinner = adminRepository.GetActivity((int)id) as Dinner;
+            }
+            else
+            {
+                dinner = new Dinner();
+            }
+
+            return PartialView(dinner);
         }
 
-        public ActionResult _DinnerPartial(Dinner model)
+        [Authorize]
+        public ActionResult _TalkingPartial(int? id)
         {
-            return PartialView(model);
+            Talking talking;
+            if (id != null)
+            {
+                talking = adminRepository.GetActivity((int)id) as Talking;
+            }
+            else
+            {
+                talking = new Talking();
+            }
+
+            return PartialView(talking);
         }
 
-        public ActionResult _TalkingPartial(Talking model)
+        [Authorize]
+        public ActionResult _GuidePartial(int? id)
         {
-            return PartialView(model);
+            Guide guide;
+            if(id != null)
+            {
+                guide = adminRepository.GetGuide((int)id);
+            }
+            else
+            {
+                guide = new Guide();
+            }
+
+            return PartialView(guide);
         }
 
-        public ActionResult _HistoricPartial(Historic model)
+        [Authorize]
+        public ActionResult _HistoricPartial(int? id)
         {
-            return PartialView(model);
+            ViewData["Guides"] = adminRepository.GetGuides();
+
+            Historic historic;
+            if (id != null)
+            {
+                historic = adminRepository.GetActivity((int)id) as Historic;
+            }
+            else
+            {
+                historic = new Historic();
+            }
+
+            return PartialView(historic);
         }
     }
 }

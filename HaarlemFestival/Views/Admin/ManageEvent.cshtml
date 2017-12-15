@@ -224,6 +224,37 @@
                 .show();
         }
 
+        function OpenUpdateForm(id, type)
+        {
+            switch (type)
+            {
+                case "Jazz":
+                    $('#updatePopup .modal-body').load('/Admin/_JazzPartial/' + id);
+                    break;
+
+                case "Restaurant":
+                    $('#updatePopup .modal-body').load('/Admin/_RestaurantPartial/' + id);
+                    break;
+
+                case "Dinner":
+                    $('#updatePopup .modal-body').load('/Admin/_DinnerPartial/' + id);
+                    break;
+
+                case "Talking":
+                    $('#updatePopup .modal-body').load('/Admin/_TalkingPartial/' + id);
+                    break; 
+
+                case "Guide":
+                    $('#updatePopup .modal-body').load('/Admin/_GuidePartial/' + id);
+                    break;
+
+                case "Historic":
+                    $('#updatePopup .modal-body').load('/Admin/_HistoricPartial/' + id);
+                    break;
+            }          
+        }
+
+
         function OpenDeleteConfirm(id, type)
         {
             sessionStorage.setItem("type", type);

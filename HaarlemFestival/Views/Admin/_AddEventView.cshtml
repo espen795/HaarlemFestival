@@ -64,35 +64,35 @@
 <div id="JazzForm" class="addDataForm">
 @using (Html.BeginForm("AddJazz", "Admin", FormMethod.Post))
 {
-    Html.RenderPartial("_JazzPartial", new Jazz() );
+    Html.RenderAction("_JazzPartial", "Admin");
 }
 </div>
 
 <div id="RestaurantForm" class="addDataForm">
 @using (Html.BeginForm("AddRestaurant", "Admin", FormMethod.Post))
 {
-    Html.RenderPartial("_RestaurantPartial", new Restaurant() );
+    Html.RenderAction("_RestaurantPartial", "Admin");
 }
 </div>
     
 <div id="DinnerForm" class="addDataForm">
 @using (Html.BeginForm("AddDinner", "Admin", FormMethod.Post))
 {
-    Html.RenderPartial("_DinnerPartial", new Dinner() );
+    Html.RenderAction("_DinnerPartial", "Admin");
 }
 </div>
 
 <div id="TalkingForm" class="addDataForm">
 @using (Html.BeginForm("AddTalking", "Admin", FormMethod.Post))
 {
-    Html.RenderPartial("_TalkingPartial", new Talking() );
+    Html.RenderAction("_TalkingPartial", "Admin");
 }
 </div>
 
 <div id="GuideForm" class="addDataForm">
 @using (Html.BeginForm("AddGuide", "Admin", FormMethod.Post))
 {
-    Html.RenderPartial("_GuidePartial", new Guide() );
+    Html.RenderAction("_GuidePartial", "Admin");
 }
 </div>
 
@@ -100,7 +100,7 @@
 
 @using (Html.BeginForm("AddHistoric", "Admin", FormMethod.Post))
 {
-    Html.RenderPartial("_HistoricPartial", new Historic() );
+    Html.RenderAction("_HistoricPartial", "Admin");
 }
 </div>
 
