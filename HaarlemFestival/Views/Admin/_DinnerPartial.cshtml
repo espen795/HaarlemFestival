@@ -1,12 +1,14 @@
 ﻿@using HaarlemFestival.Models
 @model Dinner
 
-<script type="text/javascript">
+    @if (ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Count() > 0)
+    {
+        <div id="bootstrapAlert" class="alert alert-danger alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <span class="loginErrors">@Html.ValidationSummary()</span>
+        </div>
+    }
 
-</script>
-
-@using (Html.BeginForm("AddDinner", "Admin", FormMethod.Post))
-{
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Restaurant:")
@@ -52,4 +54,3 @@
     </div>
 
     <input type="submit" value="Add Dinner" />
- }

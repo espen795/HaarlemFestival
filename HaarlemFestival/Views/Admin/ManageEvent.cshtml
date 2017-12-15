@@ -157,6 +157,7 @@
                     break;
 
                 case "HistoricHaarlem":
+                    $('#guideTable').show();
                     $('#historicTable').show();
                     $('#dateFilter').show();
                     $('#guideFilter').show();
@@ -236,7 +237,6 @@
             }
 
             var activityId = $("#deletePopup").attr("activityId");
-
 
             $.post(url, { id: activityId });
             location.reload();
@@ -321,7 +321,7 @@
                     <th colspan="2"></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="eventData">
                 @foreach(Restaurant r in Model.Restaurants)
                 {
                     stringBuilder.Clear();
@@ -411,6 +411,29 @@
                         <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
+                }
+            </tbody>
+        </table>
+
+        <table id="guideTable" class="eventTable table table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th>Guide Name</th>
+                    <th>Language</th>
+                    <th>Language Abbreviation</th>
+                    <th colspan="2"></th>
+                </tr>
+            </thead>
+            <tbody class="eventData">
+                @foreach (Guide g in Model.Guides)
+                {
+                <tr>
+                    <td>@g.GuideName</td>
+                    <td>@g.LanguageName</td>
+                    <td>@g.LanguageAbbr</td>
+                    <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
+                    <td><i onclick="OpenDeleteConfirm(@g.GuideId, 'Guide')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                </tr>
                 }
             </tbody>
         </table>

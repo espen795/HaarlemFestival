@@ -38,6 +38,10 @@
                 $("#TalkingForm").show();
                 break;
 
+            case "Guide":
+                $("#GuideForm").show();
+                break;
+
             case "HistoricHaarlem":
                 $("#HistoricForm").show();
                 break;
@@ -52,28 +56,52 @@
     <option value="Restaurant">Restaurant</option>
     <option value="DinnerInHaarlem">Dinner in Haarlem</option>
     <option value="TalkingHaarlem">Talking Haarlem</option>
+    <option value="Guide">Guide</option>
     <option value="HistoricHaarlem">Historic Haarlem</option>
 </select>
 
 
 <div id="JazzForm" class="addDataForm">
-    @{Html.RenderPartial("_JazzPartial", new Jazz());}
+@using (Html.BeginForm("AddJazz", "Admin", FormMethod.Post))
+{
+    Html.RenderPartial("_JazzPartial", new Jazz() );
+}
 </div>
 
 <div id="RestaurantForm" class="addDataForm">
-    @{Html.RenderPartial("_RestaurantPartial", new Restaurant());}
+@using (Html.BeginForm("AddRestaurant", "Admin", FormMethod.Post))
+{
+    Html.RenderPartial("_RestaurantPartial", new Restaurant() );
+}
 </div>
     
 <div id="DinnerForm" class="addDataForm">
-    @{Html.RenderPartial("_DinnerPartial", new Dinner());}
+@using (Html.BeginForm("AddDinner", "Admin", FormMethod.Post))
+{
+    Html.RenderPartial("_DinnerPartial", new Dinner() );
+}
 </div>
 
 <div id="TalkingForm" class="addDataForm">
-    @{Html.RenderPartial("_TalkingPartial", new Talking());}
+@using (Html.BeginForm("AddTalking", "Admin", FormMethod.Post))
+{
+    Html.RenderPartial("_TalkingPartial", new Talking() );
+}
+</div>
+
+<div id="GuideForm" class="addDataForm">
+@using (Html.BeginForm("AddGuide", "Admin", FormMethod.Post))
+{
+    Html.RenderPartial("_GuidePartial", new Guide() );
+}
 </div>
 
 <div id="HistoricForm" class="addDataForm">
-    @{Html.RenderPartial("_HistoricPartial", new Historic());}
+
+@using (Html.BeginForm("AddHistoric", "Admin", FormMethod.Post))
+{
+    Html.RenderPartial("_HistoricPartial", new Historic() );
+}
 </div>
 
 

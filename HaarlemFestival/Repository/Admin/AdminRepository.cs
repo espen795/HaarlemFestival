@@ -105,8 +105,9 @@ namespace HaarlemFestival.Repository.Admin
 
         public void DeleteGuide(int id)
         {
-            db.Historics.RemoveRange(db.Historics.Where(h => h.GuideId == id));
-            db.Guides.RemoveRange(db.Guides.Where(g => g.GuideId == id));
+            Guide guide = db.Guides.Find(id);
+            db.Historics.RemoveRange(db.Historics.Where(h => h.GuideId == guide.GuideId));
+            db.Guides.Remove(guide);
             db.SaveChanges();
         }
 
