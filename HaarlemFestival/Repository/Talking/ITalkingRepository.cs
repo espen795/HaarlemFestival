@@ -9,7 +9,7 @@ namespace HaarlemFestival.Repository.Talking
 {
     interface ITalkingRepository
     {
-        List<Talk> GetAllTalks();
-        Talk GetTalkById(int id);
+        List<Models.Talking> GetAllTalks();
+        Models.Talking GetTalkById(int id);
     }
 }

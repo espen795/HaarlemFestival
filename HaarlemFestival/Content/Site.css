@@ -547,6 +547,7 @@ footer a:hover {
     height: 200px;
     text-align: right;
     font-weight: bold;
+    margin-right: 5px;
 }
 
 .oneline {
