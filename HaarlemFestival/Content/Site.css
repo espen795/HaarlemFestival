@@ -421,7 +421,7 @@ footer a:hover {
 
 /* ------------------------------Talking Haarlem-------------------------------*/
 /* Talking Home Page */
-img .sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images van 150 pixels*/
+.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images van 150x150 pixels*/
     display: block;
     max-width: 150px;
     max-height: 150px;
@@ -611,6 +611,7 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
 
 .talk-question-receiver p {
     float: left;
+    margin-right: 5px;
 }
 
 .talk-questionbox {
