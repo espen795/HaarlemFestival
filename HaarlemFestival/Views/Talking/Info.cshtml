@@ -23,7 +23,7 @@
         <!-- Section 2 -->
         <section class="talk-activity-container">
             <section class="talk-activity">
-                <h1>@Html.DisplayFor(model => model.Talk.Naam)</h1>
+                <h1>@Model.Talk.Naam</h1>
                 <section class="talk-activity-info-section">
                     <p class="talk-activity-properties">
                         <span class="oneline">Place:</span>
@@ -35,31 +35,31 @@
                         <span class="oneline">Description:</span>
                     </p>
                     <p class="talk-activity-info">
-                        <span class="oneline">Toneelschuur & Filmschuur, Lange Begijnestraat 9, 2011 HH Haarlem</span>
+                        <span class="oneline">@Model.Address</span>
                         <span class="oneline">20:00 - 22:00</span>
                         <span class="oneline">Thursday July 26th, 2018</span>
                         <span class="oneline">Dutch</span>
                         <span class="oneline">Mandatory</span>
                         <span class="oneline">Free</span>
                         <span class="oneline">
-                            @Html.DisplayFor(model => model.Talk.Description)
+                            @Model.Talk.Description
                         </span>
                     </p>
                 </section> <!-- Activity Info -->
                 <!-- Buttons -->
                 <section class="talk-activity-btns">
-                    @Html.ActionLink("Back to Talking Haarlem", "Index", "Talking", new { @class = "btn btn-black talk-back-btn" })
+                    @Html.ActionLink("Back to Talking Haarlem", "Index", "Talking", new { }, new { @class = "btn btn-black talk-back-btn" })
 
-                    @Html.ActionLink("Order Ticket", "Reservation", "Talking", new { @class = "btn btn-black talk-order-btn" })
+                    @Html.ActionLink("Order Ticket", "Reservation", "Talking", new { id = Model.TalkId }, new { @class = "btn btn-black talk-order-btn"})
                 </section> <!-- Buttons -->
             </section> <!-- Talk Activity Block -->
 
             <!-- Images -->
             <section class="talk-images">
-                <h4 class="talk-image-header">@Html.DisplayFor(model => model.Talk.Person1)</h4>
-                <img class="talk-activity-image" src="/images/Talking/@Html.DisplayFor(model => model.Talk.Person1IMG)"/>
-                <h4 class="talk-image-header">@Html.DisplayFor(model => model.Talk.Person2)</h4>
-                <img class="talk-activity-image" src="/images/Talking/@Html.DisplayFor(model => model.Talk.Person2IMG)"/>
+                <h4 class="talk-image-header">@Model.Talk.Person1</h4>
+                <img class="talk-activity-image" src="/images/Talking/@Model.Talk.Person1IMG"/>
+                <h4 class="talk-image-header">@Model.Talk.Person2</h4>
+                <img class="talk-activity-image" src="/images/Talking/@Model.Talk.Person2IMG"/>
             </section> <!-- Images -->
         </section> <!-- Section 2 Activity -->
     </section> <!-- row -->
