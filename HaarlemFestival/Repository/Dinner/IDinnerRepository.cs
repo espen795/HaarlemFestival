@@ -11,5 +11,6 @@ namespace HaarlemFestival.Repository.Dinner
     {
         List<Restaurant> GetAllRestaurants();
         List<Models.Dinner> DinnersPerRestaurant(int id);
+        List<Models.Cuisine> GetAllCuisines();
     }
 }
