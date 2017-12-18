@@ -23,5 +23,12 @@ namespace HaarlemFestival.Repository.Dinner
 
             return Dinners;
         }
+
+        public List<Models.Cuisine> GetAllCuisines()
+        {
+            List<Models.Cuisine> cuisines = db.Cuisines.ToList();
+
+            return cuisines;
+        }
     }
 }
