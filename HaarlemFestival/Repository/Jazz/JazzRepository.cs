@@ -25,5 +25,11 @@ namespace HaarlemFestival.Repository.Jazz
             return jazzs;
         }
 
+        public List<Models.Jazz> GetUniqueJazzs()
+        {
+            List<Models.Jazz> jazzs = new List<Models.Jazz>();
+
+            return jazzs;
+        }
     }
 }

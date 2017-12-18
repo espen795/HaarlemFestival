@@ -1,6 +1,6 @@
 ﻿@using HaarlemFestival.Models;
 @using System.Collections.Generic;
-@model List<Restaurant>
+@model List<Cuisine>
 
 @{
     ViewBag.Title = "Dinner in Haarlem";
@@ -15,10 +15,10 @@
             <div class="col-md-6">
                 <h1 class="title">Dinner in Haarlem</h1>
                 <p class="content">
-                    Dinner in Haarlem makes it easy for you to find a restaurant in the centrum of Haarlem. 
-                    On this page you will find all the participating restaurants and a little bit of information about them. 
-                    For each restaurant there are three timeslots, which can be found by pressing the information button of your desired restaurant. 
-                    The price shown on this page is the normal price, for children under 12 years there is a reduced price. 
+                    Dinner in Haarlem makes it easy for you to find a restaurant in the centrum of Haarlem.
+                    On this page you will find all the participating restaurants and a little bit of information about them.
+                    For each restaurant there are three timeslots, which can be found by pressing the information button of your desired restaurant.
+                    The price shown on this page is the normal price, for children under 12 years there is a reduced price.
                     This price can also be found by pressing the information button.
                 </p>
             </div>
@@ -50,10 +50,10 @@
         <!-- Section 3-->
         <div class="event-section-3-dinner">
             <div class="restaurant-index-select">
-                <!--Dropdown menu voor cuisines-->
+                @Html.DropDownList("Cuisines", new SelectList(Model,"", "Naam"))
             </div>
             <div class="restaurant-index-restaurants">
-                    @foreach (Restaurant r in Model)
+                    @foreach (Restaurant r in Model[0].Restaurants)
                     {
                 <div class="restaurant-index-restaurants-restaurant">
                     <div class="restaurant-index-restaurant-fotonaam">

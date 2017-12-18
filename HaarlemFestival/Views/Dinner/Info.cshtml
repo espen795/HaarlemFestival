@@ -19,16 +19,16 @@
                         <td class="restaurant-info-names">Cuisines:</td>
                         <td class="restaurant-info-info">
                             @foreach (Cuisine c in Model[0].Restaurant.Cuisines)
-                {
-                    if (Model[0].Restaurant.Cuisines.Last() != c)
-                    {
-                        @c.Naam<span>,</span>
-        }
-        else
-        {
-            @c.Naam <br />
-}
-}
+                            {
+                                if (Model[0].Restaurant.Cuisines.Last() != c)
+                                {
+                                    @c.Naam<span>,</span>
+                                }
+                                else
+                                {
+                                    @c.Naam
+                                }
+                            }
                         </td>
                     </tr>
                     <tr class="dinnertable">
@@ -50,12 +50,12 @@
                         <td class="restaurant-info-names">Start times:</td>
                         <td class="restaurant-info-info">
                             @foreach (Dinner d in Model)
-                {
-                    if (d.Day == Model[0].Day)
-                    {
-                        @d.StartSession.ToString("HH:mm")<span>,</span>
-        }
-    }
+                            {
+                                if (d.Day == Model[0].Day)
+                                {
+                                    @d.StartSession.ToString("HH:mm")<span>,</span>
+                                }
+                            }
                         </td>
                     </tr>
                     <tr class="dinnertable">
