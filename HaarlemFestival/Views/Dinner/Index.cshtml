@@ -49,18 +49,18 @@
 
         <!-- Section 3-->
         <div class="event-section-3-dinner">
-            <div class="cuisineselect">
+            <div class="restaurant-index-select">
                 <!--Dropdown menu voor cuisines-->
             </div>
-            <div class="restaurants">
+            <div class="restaurant-index-restaurants">
                     @foreach (Restaurant r in Model)
                     {
-                <div class="restaurant">
-                    <div class="promo-restaurant">
+                <div class="restaurant-index-restaurants-restaurant">
+                    <div class="restaurant-index-restaurant-fotonaam">
                         <img src="/images/Dinner/restaurants/@r.FoodIMG" alt="Picture not found" />
                         <h3>@r.Naam</h3>
                     </div>
-                    <table class="restaurant-index">
+                    <table class="restaurant-index-restaurant-info">
                         <tr class="dinnertable">
                             <td class="restaurant-index-names"> Cuisines:</td>
                             <td class="restaurant-index-info">
