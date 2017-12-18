@@ -421,7 +421,7 @@ footer a:hover {
 
 /* ------------------------------Talking Haarlem-------------------------------*/
 /* Talking Home Page */
-img .sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images van 150 pixels*/
+.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images van 150x150 pixels*/
     display: block;
     max-width: 150px;
     max-height: 150px;
@@ -547,6 +547,7 @@ img .sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images v
     height: 200px;
     text-align: right;
     font-weight: bold;
+    margin-right: 5px;
 }
 
 .oneline {
@@ -590,7 +591,7 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
     padding-right: 50px;
 }
 
-.talking-ticket-amount {
+.talk-ticket-amount {
     width: 40%;
 }
 
@@ -611,6 +612,7 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
 
 .talk-question-receiver p {
     float: left;
+    margin-right: 5px;
 }
 
 .talk-questionbox {
@@ -799,10 +801,23 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
     .ticket-table .ticketsInput input {
         width: 40px;
         text-align: center;
+        margin-left: 5%;
+        margin-right: auto;
     }
 
 .ticket-table .ticketsInput {
-        width: 110px;
+        width: 138px;
+}
+
+.ticket-table .ticketsInput:first-child {
+        width: 105px;
+}
+
+.btn.btn-book.btn-reservation{
+    right: 235px;
+    bottom: 10px;
+    position: relative;
+    float: right;
 }
 
 

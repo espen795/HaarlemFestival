@@ -51,22 +51,32 @@
 
             <!-- BODY -->
             <div class="modal-body">
-
-
                 @{Html.RenderPartial("_AddEventView", "Admin");}
-
-                <!-- TODO: Maak tekstvakken aan om nieuw data in te lezen. -->
-            </div>
-
-            <!-- FOOTER -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("AddEvent", "Admin")'"><i class="fa fa-check"></i> Yes, I am sure</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> No, Take me back</button>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Modal Update Data -->
+<div class="modal fade" id="updatePopup" tabindex="-1" role="dialog" aria-labelledby="newPopup">
+    <div class="modal-dialog modal-lg" role="document">
+
+        <!-- CONTENT -->
+        <div class="modal-content">
+
+            <!-- HEADER -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Update Data</h4>
+            </div>
+
+            <!-- BODY -->
+            <div class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!-- Modal Image -->
@@ -146,6 +156,7 @@
                 case "DinnerInHaarlem":
                     $('#dateFilter').show();
                     $('#dinnerTable').show();
+                    $('#restaurantTable').show();
                     $('#cuisineFilter').show();
                     $('#restaurantFilter').show();
                     break;
@@ -156,6 +167,7 @@
                     break;
 
                 case "HistoricHaarlem":
+                    $('#guideTable').show();
                     $('#historicTable').show();
                     $('#dateFilter').show();
                     $('#guideFilter').show();
@@ -212,17 +224,63 @@
                 .show();
         }
 
-        function OpenDeleteConfirm(id)
+        function OpenUpdateForm(id, type)
         {
+            switch (type)
+            {
+                case "Jazz":
+                    $('#updatePopup .modal-body').load('/Admin/_JazzPartial/' + id);
+                    break;
+
+                case "Restaurant":
+                    $('#updatePopup .modal-body').load('/Admin/_RestaurantPartial/' + id);
+                    break;
+
+                case "Dinner":
+                    $('#updatePopup .modal-body').load('/Admin/_DinnerPartial/' + id);
+                    break;
+
+                case "Talking":
+                    $('#updatePopup .modal-body').load('/Admin/_TalkingPartial/' + id);
+                    break; 
+
+                case "Guide":
+                    $('#updatePopup .modal-body').load('/Admin/_GuidePartial/' + id);
+                    break;
+
+                case "Historic":
+                    $('#updatePopup .modal-body').load('/Admin/_HistoricPartial/' + id);
+                    break;
+            }          
+        }
+
+
+        function OpenDeleteConfirm(id, type)
+        {
+            sessionStorage.setItem("type", type);
             $("#deletePopup").attr("activityId", id);
         }
 
-        function DeleteConfirmed()
-        {
+        function DeleteConfirmed() {
+            var type = sessionStorage.getItem("type");
+
+            if (type == "Restaurant")
+            {
+                var url = "@Url.Action("DeleteRestaurant", "Admin")";
+            }
+            else if (type = "Guide")
+            {
+                var url = "@Url.Action("DeleteGuide", "Admin")";
+            }
+            else
+            {
+                var url = "@Url.Action("DeleteEvent", "Admin")";
+            }
+
             var activityId = $("#deletePopup").attr("activityId");
-            var url = '@Url.Action("DeleteEvent", "Admin")';
 
             $.post(url, { id: activityId });
+            location.reload();
         }
 
     </script>
@@ -285,27 +343,58 @@
                         <td>@activity.Price</td>
                         <td>@activity.TotalTickets</td>
                         <td><i onclick='ShowEventImage("Jazz/@activity.artist.ArtistImage")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
-                        <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
-                        <td><i onclick="OpenDeleteConfirm(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                        <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Jazz')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
+                        <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
                 }
             </tbody>
         </table>
 
-        <!-- TODO: Dinner laten zien (W.I.P) -->
+        <table id="restaurantTable" class="eventTable table table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Rating</th>
+                    <th>Cuisines</th>
+                    <th>Food Image</th>
+                    <th>Restaurant Image</th>
+                    <th colspan="2"></th>
+                </tr>
+            </thead>
+            <tbody class="eventData">
+                @foreach(Restaurant r in Model.Restaurants)
+                {
+                    stringBuilder.Clear();
+                    foreach (Cuisine c in r.Cuisines)
+                    {
+                        stringBuilder.Append(c.Naam).Append(", ");
+                    }
+                    <tr>
+                        <td>@r.Naam</td>
+                        <td>@r.Description</td>
+                        <td>@r.Rating</td>
+                        <td>@stringBuilder.ToString().Substring(0, stringBuilder.Length - 1)</td>
+                        <td><i onclick='ShowEventImage("Dinner/restaurants/@r.FoodIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
+                        <td><i onclick='ShowEventImage("Dinner/restaurants/@r.LocationIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
+                        <td><i onclick="OpenUpdateForm(@r.RestaurantId, 'Restaurant')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
+                        <td><i onclick="OpenDeleteConfirm(@r.RestaurantId, 'Restaurant')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
         <table id="dinnerTable" class="eventTable table table-striped table-responsive">
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Adress</th>
                     <th>Session</th>
-                    <th>Rating</th>
                     <th>Seats</th>
                     <th>Cuisines</th>
                     <th>Price</th>
                     <th>Price (12-)</th>
-                    <th>Food Image</th>
-                    <th>Restaurant Image</th>
                     <th colspan="2"></th>
                 </tr>
             </thead>
@@ -321,15 +410,12 @@
                         <td>@activity.Restaurant.Naam</td>
                         <td>@activity.Address</td>
                         <td>@activity.StartSession.ToString("dddd dd-MM-yy H:mm") - @activity.EndSession.ToString("H:mm")</td>
-                        <td>@activity.Restaurant.Rating</td>
                         <td>@activity.TotalTickets</td>
                         <td>@stringBuilder.ToString().Substring(0,stringBuilder.Length - 1)</td>
                         <td>@activity.Price</td>
-                        <td>@activity.AlternativePrice</td>
-                        <td><i onclick='ShowEventImage("Dinner/restaurants/@activity.Restaurant.FoodIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
-                        <td><i onclick='ShowEventImage("Dinner/restaurants/@activity.Restaurant.LocationIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
-                        <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
-                        <td><i onclick="OpenDeleteConfirm(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                        <td>@activity.AlternativePrice</td>                       
+                        <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Dinner')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
+                        <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
                 }
             </tbody>
@@ -363,9 +449,32 @@
                         <td>@activity.Price.ToString()</td>
                         <td>@activity.Talk.MaxTickets</td>
                         <td><i onclick='ShowEventImage("Talking/@activity.Talk.Person1")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
-                        <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
-                        <td><i onclick="OpenDeleteConfirm(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                        <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Talking')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
+                        <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
+                }
+            </tbody>
+        </table>
+
+        <table id="guideTable" class="eventTable table table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th>Guide Name</th>
+                    <th>Language</th>
+                    <th>Language Abbreviation</th>
+                    <th colspan="2"></th>
+                </tr>
+            </thead>
+            <tbody class="eventData">
+                @foreach (Guide g in Model.Guides)
+                {
+                <tr>
+                    <td>@g.GuideName</td>
+                    <td>@g.LanguageName</td>
+                    <td>@g.LanguageAbbr</td>
+                    <td><i onclick="OpenUpdateForm(@g.GuideId, 'Guide')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
+                    <td><i onclick="OpenDeleteConfirm(@g.GuideId, 'Guide')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                </tr>
                 }
             </tbody>
         </table>
@@ -394,8 +503,8 @@
                         <td>@activity.TotalTickets</td>
                         <td>@activity.Price</td>
                         <td>@activity.AlternativePrice</td>
-                        <td><i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
-                        <td><i onclick="OpenDeleteConfirm(@activity.ActivityId)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                        <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Historic')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
+                        <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
                 }
             </tbody>

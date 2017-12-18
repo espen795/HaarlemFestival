@@ -1,6 +1,7 @@
 ﻿@using HaarlemFestival.Models;
 @using System.Collections.Generic;
-@model List<Talk>
+@using System.Globalization;
+@model List<Talking>
 
 @{
     ViewBag.Title = "Talking Haarlem";
@@ -64,25 +65,25 @@
 
         <!-- Section 4 -->
         <section class="talks">
-        @foreach (Talk talk in Model)
+        @foreach (Talking talk in Model)
         {
             <article class="talk">
-                <h4 class="talk-image-header">@talk.Person1</h4>
+                <h4 class="talk-image-header">@talk.Talk.Person1</h4>
 
                 <section>
-                    <img class="talk-image" src="/images/Talking/@talk.Person1AltIMG" />
+                    <img class="talk-image" src="/images/Talking/@talk.Talk.Person1AltIMG" />
                 </section>
 
-                <h3 class="talk-header">@talk.Naam</h3>
+                <h3 class="talk-header">@talk.Talk.Naam</h3>
                 <p class="talk-description">
-                    @talk.Person1 and @talk.Person2 interview each other.
+                    @talk.Talk.Person1 and @talk.Talk.Person2 interview each other.
                 </p>
 
                 <section class="talk-btns">
                     <a href="@Url.Action("Info", new { id = talk.TalkId })"><img class="talk-info-btn" src="/images/info_button.png" /></a>
-                    @Html.ActionLink("Order Ticket", "Reservation", "Talking", new { @class = "btn btn-black talk-order-btn" })
+                    @Html.ActionLink("Order Ticket", "Reservation", "Talking", new { id = talk.TalkId }, new { @class = "btn btn-black talk-order-btn" })
                 </section>
-                <p class="talk-date">Thursday July 26th</p>
+                <p class="talk-date">@talk.StartSession.ToString("D", new CultureInfo("en-US"))</p> 
             </article>
         }
         </section> <!-- Section 4 Talks -->

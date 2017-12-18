@@ -67,7 +67,6 @@ namespace HaarlemFestival.Controllers
             string selectedEvent = this.Request.QueryString["selectedEvent"];
             ViewData["Restaurants"] = data.Restaurants;
             ViewData["Guides"] = data.Guides;
-            ViewData["Languages"] = data.Languages;
             ViewData["Cuisines"] = data.Cuisines;
             ViewData["Dates"] = data.Dates;
 
@@ -136,6 +135,50 @@ namespace HaarlemFestival.Controllers
                 activity.EndSession = DateTime.Parse(collector["Date"] + " " + collector["EndSession"]);
 
                 adminRepository.AddEvent(activity);
+            }
+
+            return RedirectToAction("ManageEvent", "Admin");
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddRestaurant(Models.Restaurant restaurant, FormCollection collector)
+        {
+            restaurant.Rating = restaurant.Rating + "/5";
+            if (ModelState.IsValid)
+            {
+                if (Request.Files[0] != null && Request.Files[0].ContentLength > 0)
+                {
+                    restaurant.FoodIMG = System.IO.Path.GetFileName(Request.Files[0].FileName);
+                    string path = System.IO.Path.Combine(Server.MapPath("~/images/dinner"), restaurant.FoodIMG);
+                    // file is uploaded
+                    Request.Files[0].SaveAs(path);
+                }
+
+                if (Request.Files[1] != null && Request.Files[1].ContentLength > 0)
+                {
+                    restaurant.LocationIMG = System.IO.Path.GetFileName(Request.Files[1].FileName);
+                    string path = System.IO.Path.Combine(Server.MapPath("~/images/dinner"), restaurant.LocationIMG);
+                    // file is uploaded
+                    Request.Files[1].SaveAs(path);
+                }
+
+                adminRepository.AddRestaurant(restaurant);
+                adminRepository.AddRestaurantCuisine(Convert.ToInt32(collector["CuisineId1"]));
+                adminRepository.AddRestaurantCuisine(Convert.ToInt32(collector["CuisineId2"]));
+                adminRepository.AddRestaurantCuisine(Convert.ToInt32(collector["CuisineId3"]));
+            }
+
+            return RedirectToAction("ManageEvent", "Admin");
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddGuide(Models.Guide guide, FormCollection collector)
+        {
+            if(ModelState.IsValid)
+            {
+                adminRepository.AddGuide(guide);
             }
 
             return RedirectToAction("ManageEvent", "Admin");
@@ -244,10 +287,8 @@ namespace HaarlemFestival.Controllers
 
                 adminRepository.AddEvent(activity);
 
-                return RedirectToAction("ManageEvent", "Admin");
             }
-
-            return View(activity);
+            return RedirectToAction("ManageEvent", "Admin");
         }
 
         [HttpPost]
@@ -297,7 +338,23 @@ namespace HaarlemFestival.Controllers
         public ActionResult DeleteEvent(int id)
         {
             adminRepository.DeleteEvent(id);
-            return RedirectToAction("ManageEvent","Admin");
+            return RedirectToAction("ManageEvent", "Admin");
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult DeleteRestaurant(int id)
+        {
+            adminRepository.DeleteRestaurant(id);
+            return RedirectToAction("ManageEvent", "Admin");
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult DeleteGuide(int id)
+        {
+            adminRepository.DeleteGuide(id);
+            return RedirectToAction("ManageEvent", "Admin");
         }
 
         [HttpPost]
@@ -315,32 +372,111 @@ namespace HaarlemFestival.Controllers
             return View();
         }
 
+        [Authorize]
+        public ActionResult _JazzPartial(int? id)
+        {
+            ViewData["Dates"] = adminRepository.GetDates();
+
+            Jazz jazz;
+            if(id != null)
+            {
+                jazz = adminRepository.GetActivity((int)id) as Jazz;
+            }
+            else
+            {
+                jazz = new Jazz();
+            }
+
+            return PartialView(jazz);
+        }
 
         [Authorize]
-        public ActionResult _UpdateEvent(int id)
+        public ActionResult _RestaurantPartial(int? id)
         {
-            Activity activity = adminRepository.GetActivity(id);
-            return PartialView(activity);
+            ViewData["Cuisines"] = adminRepository.GetCuisines();
+            ViewData["Dates"] = adminRepository.GetDates();
+
+            Restaurant restaurant;
+            if(id != null)
+            {
+                restaurant = adminRepository.GetRestaurant((int)id);
+                restaurant.Rating = restaurant.Rating.Substring(0, 1);
+            }
+            else
+            {
+                restaurant = new Restaurant();
+            }
+
+            return PartialView(restaurant);
         }
 
-        public ActionResult _JazzPartial(Jazz model)
+        [Authorize]
+        public ActionResult _DinnerPartial(int? id)
         {
-            return PartialView(model);
+            ViewData["Restaurants"] = adminRepository.GetRestaurants();
+            ViewData["Dates"] = adminRepository.GetDates();
+
+            Dinner dinner;
+            if (id != null)
+            {
+                dinner = adminRepository.GetActivity((int)id) as Dinner;
+            }
+            else
+            {
+                dinner = new Dinner();
+            }
+
+            return PartialView(dinner);
         }
 
-        public ActionResult _DinnerPartial(Dinner model)
+        [Authorize]
+        public ActionResult _TalkingPartial(int? id)
         {
-            return PartialView(model);
+            Talking talking;
+            if (id != null)
+            {
+                talking = adminRepository.GetActivity((int)id) as Talking;
+            }
+            else
+            {
+                talking = new Talking();
+            }
+
+            return PartialView(talking);
         }
 
-        public ActionResult _TalkingPartial(Talking model)
+        [Authorize]
+        public ActionResult _GuidePartial(int? id)
         {
-            return PartialView(model);
+            Guide guide;
+            if(id != null)
+            {
+                guide = adminRepository.GetGuide((int)id);
+            }
+            else
+            {
+                guide = new Guide();
+            }
+
+            return PartialView(guide);
         }
 
-        public ActionResult _HistoricPartial(Historic model)
+        [Authorize]
+        public ActionResult _HistoricPartial(int? id)
         {
-            return PartialView(model);
+            ViewData["Guides"] = adminRepository.GetGuides();
+
+            Historic historic;
+            if (id != null)
+            {
+                historic = adminRepository.GetActivity((int)id) as Historic;
+            }
+            else
+            {
+                historic = new Historic();
+            }
+
+            return PartialView(historic);
         }
     }
 }
