@@ -10,14 +10,14 @@ namespace HaarlemFestival.Repository.Talking
     {
         private HFDB db = new HFDB();
 
-        public List<Talk> GetAllTalks()
+        public List<Models.Talking> GetAllTalks()
         {
-            return db.Talks.ToList();
+            return db.Talkings.ToList();
         }
 
-        public Talk GetTalkById(int id)
+        public Models.Talking GetTalkById(int id)
         {
-            return db.Talks.FirstOrDefault(t => t.TalkId == id);
+            return db.Talkings.FirstOrDefault(t => t.TalkId == id);
         }
     }
 }

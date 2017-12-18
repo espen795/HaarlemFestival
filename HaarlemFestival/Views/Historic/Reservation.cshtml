@@ -9,13 +9,19 @@
 <script type="text/javascript">
     function CalcPrice(nummer)
     {
-        var tickets = document.getElementById("location" + nummer);
-        var grouptickets = document.getElementById("locations" + nummer);
+        // Krijg de waardes van de input boxes
+        var tickets = document.getElementById("ticket" + nummer).value;
+        var grouptickets = document.getElementById("groupticket" + nummer).value;
 
-        var totalprice = (tickets * @Model[0].Price) + (grouptickets * @Model[0].AlternativePrice);
+        // De prijs ophalen uit het model en omzetten naar een JS format
+        var price = parseFloat("@Model[0].Price".replace(",", "."));
+        var groupprice = parseFloat("@Model[0].AlternativePrice".replace(",", "."));
 
-        //document.getElementById("totalprice" + nummer).innerHTML = totalprice;
-        $("#totalprice" + nummer).val(totalprice);
+        // Nieuwe totaal prijs berekenen
+        var totalprice = ((tickets * price) + (grouptickets * groupprice));
+
+        // De waarde in de totalprice kolom vervangen door de berekende waarde
+        document.getElementById("totalprice" + nummer).innerHTML = ("€ " + (totalprice.toFixed(2)).replace(".", ","));
     }
 </script>
 
@@ -64,6 +70,7 @@
             <li><a data-toggle="tab" href="#day3">On Saturday</a></li>
         </ul>
 
+        @{int i = 1;}
         <div class="tab-content">
             <div id="day1" class="tab-pane fade in active historic-tickets">
                 <div class="table table-hover table-responsive ticket-table">
@@ -76,49 +83,146 @@
                             <th>Time</th>
                             <th>Total price</th>
                         </tr>
-                        @{int i = 1;}
+                        
                         @foreach (Historic tour in Model)
                         {
-                        if (tour.StartSession.Date == new DateTime(2018, 7, 26))
+                            if (tour.Day.DayId == 1)
                             {
-                        string idtickets = String.Format("ticket{0}", i);
-                        string idgrouptickets = String.Format("groupticket{0}", i);
-                        string totalprice = String.Format("totalprice{0}", i);
-                        
+                                // De unieke id's aanmaken per rij
+                                string idtickets = String.Format("ticket{0}", i);
+                                string idgrouptickets = String.Format("groupticket{0}", i);
+                                string totalprice = String.Format("totalprice{0}", i);
+
+                                // De tabel aanmaken
                                 <tr>
-                                    <td class="ticketsInput">@Html.TextBoxFor(m => tour.BoughtTickets, new { @type = "number", @min = 0, @id = idtickets, @onkeyup = "CalcPrice(@i)"})</td>
-                                    <td class="ticketsInput">@Html.TextBoxFor(m => tour.BoughtTickets, new { @type = "number", @min = 0, @id = idgrouptickets, @onkeyup = "CalcPrice(@i)"})</td>
+                                    <td class="ticketsInput" onchange = "CalcPrice(@i);">@Html.TextBoxFor(m => tour.BoughtTickets, new { @type = "number", @min = 0, @id = idtickets})</td>
+                                    <td class="ticketsInput" onchange = "CalcPrice(@i);">@Html.TextBoxFor(m => tour.BoughtTickets, new { @type = "number", @min = 0, @id = idgrouptickets})</td>
                                     <td>@tour.Guide.LanguageName</td>
                                     <td>@tour.Guide.GuideName</td>
                                     <td>@tour.StartSession.TimeOfDay</td>
-                                    <td><p id=@totalprice></p></td>
+                                    <td><p id=@totalprice>€ -</p></td>
                                 </tr>
-                        i++;
+                                i++;
                             }
                         }
                     </table>
                     
                     <br/>
-                    <p>These are the available tours on Thursday (26-07-2018)</p>
+                    @foreach (Historic tour in Model)
+                    {
+                        if (tour.Day.DayId == 1)
+                        {
+                            <p>These are the available tours on @tour.Day.Naam (@tour.Day.Date.ToString("dd/MM/yyyy"))</p>
+                            break;
+                        }
+                    }
                 </div>
             </div>
 
-            <div id="day2" class="tab-pane fade historic-tickets">
-                <!-- Rest -->
+            <div id="day2" class="tab-pane fade in historic-tickets">
+                <div class="table table-hover table-responsive ticket-table">
+                    <table>
+                        <tr>
+                            <th>Tickets</th>
+                            <th>Group ticket</th>
+                            <th>Language</th>
+                            <th>Guide</th>
+                            <th>Time</th>
+                            <th>Total price</th>
+                        </tr>
+
+                        @foreach (Historic tour in Model)
+                        {
+                            if (tour.Day.DayId == 2)
+                            {
+                                // De unieke id's aanmaken per rij
+                                string idtickets = String.Format("ticket{0}", i);
+                                string idgrouptickets = String.Format("groupticket{0}", i);
+                                string totalprice = String.Format("totalprice{0}", i);
+
+                                // De tabel aanmaken
+                                <tr>
+                                    <td class="ticketsInput" onchange="CalcPrice(@i);">@Html.TextBoxFor(m => tour.BoughtTickets, new { @type = "number", @min = 0, @id = idtickets })</td>
+                                    <td class="ticketsInput" onchange="CalcPrice(@i);">@Html.TextBoxFor(m => tour.BoughtTickets, new { @type = "number", @min = 0, @id = idgrouptickets })</td>
+                                    <td>@tour.Guide.LanguageName</td>
+                                    <td>@tour.Guide.GuideName</td>
+                                    <td>@tour.StartSession.TimeOfDay</td>
+                                    <td><p id=@totalprice>€ -</p></td>
+                                </tr>
+                                i++;
+                            }
+                        }
+                    </table>
+
+                    <br />
+                    @foreach (Historic tour in Model)
+                    {
+                        if (tour.Day.DayId == 2)
+                        {
+                            <p>These are the available tours on @tour.Day.Naam (@tour.Day.Date.ToString("dd/MM/yyyy"))</p>
+                            break;
+                        }
+                    }
+                </div>
             </div>
 
             <div id="day3" class="tab-pane fade historic-tickets">
-                <!-- Rest -->
+                <div class="table table-hover table-responsive ticket-table">
+                    <table>
+                        <tr>
+                            <th>Tickets</th>
+                            <th>Group ticket</th>
+                            <th>Language</th>
+                            <th>Guide</th>
+                            <th>Time</th>
+                            <th>Total price</th>
+                        </tr>
+
+                        @foreach (Historic tour in Model)
+                        {
+                            if (tour.Day.DayId == 3)
+                            {
+                                // De unieke id's aanmaken per rij
+                                string idtickets = String.Format("ticket{0}", i);
+                                string idgrouptickets = String.Format("groupticket{0}", i);
+                                string totalprice = String.Format("totalprice{0}", i);
+
+                                // De tabel aanmaken
+                                <tr>
+                                    <td class="ticketsInput" onchange="CalcPrice(@i);">@Html.TextBoxFor(m => tour.BoughtTickets, new { @type = "number", @min = 0, @id = idtickets })</td>
+                                    <td class="ticketsInput" onchange="CalcPrice(@i);">@Html.TextBoxFor(m => tour.BoughtTickets, new { @type = "number", @min = 0, @id = idgrouptickets })</td>
+                                    <td>@tour.Guide.LanguageName</td>
+                                    <td>@tour.Guide.GuideName</td>
+                                    <td>@tour.StartSession.TimeOfDay</td>
+                                    <td><p id=@totalprice>€ -</p></td>
+                                </tr>
+                                i++;
+                            }
+                        }
+                    </table>
+
+                    <br />
+                    @foreach (Historic tour in Model)
+                    {
+                        if (tour.Day.DayId == 3)
+                        {
+                            <p>These are the available tours on @tour.Day.Naam (@tour.Day.Date.ToString("dd/MM/yyyy"))</p>
+                            break;
+                        }
+                    }
+                </div>
             </div>
+
+            @Html.ActionLink("Order your tickets", "Basket", "Home", new { @class = "btn btn-book btn-reservation" })
 
             <br /><br />
             <div class="historic extra-info">
                 <h3>Ticket information</h3>
                 <p>The group will consist of 12 participants and one guide. Participants must at least be 12 years old and must be able to walk the entire route (no strollers are allowed).</p>
-                </br>
+                <br/>
                 <h4>Ticket price</h4>
                 <p>€ @Model[0].Price per ticket per person</p>
-                </br>
+                <br/>
                 <h4>Group ticket:</h4>
                 @{ float? groupticket = (4f * Model[0].Price); }
                 <p>A group ticket gets you 4 tickets for only € @Model[0].AlternativePrice instead of € @groupticket </p>

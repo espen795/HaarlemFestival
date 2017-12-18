@@ -43,9 +43,33 @@ namespace HaarlemFestival.Repository.Admin
             db.SaveChanges();
         }
 
+        public void AddRestaurant(Restaurant restaurant)
+        {
+            db.Restaurants.Add(restaurant);
+            db.SaveChanges();
+        }
+
+        public void AddGuide(Guide guide)
+        {
+            db.Guides.Add(guide);
+            db.SaveChanges();
+        }
+
         public void UpdateEvent(Activity activity)
         {
             db.Entry(activity).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+
+        public void UpdateRestaurant(Restaurant restaurant)
+        {
+            db.Entry(restaurant).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+
+        public void UpdateGuide(Guide guide)
+        {
+            db.Entry(guide).State = EntityState.Modified;
             db.SaveChanges();
         }
 
@@ -79,9 +103,39 @@ namespace HaarlemFestival.Repository.Admin
             db.SaveChanges();
         }
 
+        public void AddRestaurantCuisine(int id)
+        {
+            
+        }
+
+        public void DeleteRestaurant(int id)
+        {
+            db.Dinners.RemoveRange(db.Dinners.Where(d => d.RestaurantId == id));
+            db.Restaurants.RemoveRange(db.Restaurants.Where(r => r.RestaurantId == id));
+            db.SaveChanges();
+        }
+
+        public void DeleteGuide(int id)
+        {
+            Guide guide = db.Guides.Find(id);
+            db.Historics.RemoveRange(db.Historics.Where(h => h.GuideId == guide.GuideId));
+            db.Guides.Remove(guide);
+            db.SaveChanges();
+        }
+
         public Activity GetActivity(int id)
         {
             return db.Activities.Find(id);
+        }
+
+        public Restaurant GetRestaurant(int id)
+        {
+            return db.Restaurants.Find(id);
+        }
+
+        public Guide GetGuide(int id)
+        {
+            return db.Guides.Find(id);
         }
 
         public EventData GetEventData()
@@ -99,6 +153,25 @@ namespace HaarlemFestival.Repository.Admin
             return data;
         }
 
+        public List<Restaurant> GetRestaurants()
+        {
+            return db.Restaurants.ToList();
+        }
+
+        public List<Guide> GetGuides()
+        {
+            return db.Guides.ToList();
+        }
+
+        public List<Cuisine> GetCuisines()
+        {
+            return db.Cuisines.ToList();
+        }
+
+        public List<Day> GetDates()
+        {
+            return db.Days.ToList();
+        }
        
     }
 }

@@ -322,7 +322,7 @@ footer a:hover {
 
 }
 
-.restaurant {
+.restaurant-index-restaurants-restaurant {
     float: left;
     max-width: 275px;
     margin: 0;
@@ -330,23 +330,23 @@ footer a:hover {
     margin-bottom: 10px;
 }
 
-.promo-restaurant h3{
+.restaurant-index-restaurant-fotonaam h3 {
     margin: 0;
     text-align: center;
 }
 
-.promo-restaurant img {
+.restaurant-index-restaurant-fotonaam img {
     border-style: solid;
     border-width: 2px;
     border-color: #353238;
 }
 
-.restaurant {
+.restaurant-index-restaurants-restaurant {
     border: none;
 }
 
-.restaurant tr, .restaurant td {
-    background-color: #FFFFFF;
+.restaurant-index-restaurants-restaurant tr, .restaurant-index-restaurants-restaurant td {
+        background-color: #FFFFFF;
 }
 
 .dinnertable:nth-child(even) {
@@ -366,7 +366,7 @@ footer a:hover {
     text-align: left;
 }
 
-.restaurant button {
+.restaurant-index-restaurants-restaurant button {
     float: right;
     margin: 5px;
     color: #FFFFFF;
@@ -377,13 +377,51 @@ footer a:hover {
     text-align: center;
 }
 
-.restaurant .infobutton {
+.restaurant-index-restaurants-restaurant .restaurant-index-button-info {
     font-size: 20px;
+}
+
+.restaurant-info {
+    display: inline-block;
+    float: left;
+    font-size: 17px;
+    max-width: 550px;
+}
+
+.restaurant-info-names {
+    background-color: #FFFFFF;
+    float: right;
+    font-weight: bold;
+    text-align: right;
+}
+
+.restaurant-info-info {
+    text-align: left;
+}
+
+.restaurant-info-img img{
+    margin: 10px;
+    max-width: 550px;
+    float: right;
+}
+
+.restaurant-info-button-reservation, .restaurant-info-button-back {
+    margin: 10px;
+    color: #FFFFFF;
+    background-color: #353238;
+    height: 32px;
+    min-width: 32px;
+    font-size: 17.5px;
+    text-align: center;
+}
+
+.restaurant-info-button-reservation {
+    float: right;
 }
 
 /* ------------------------------Talking Haarlem-------------------------------*/
 /* Talking Home Page */
-img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images van 150 pixels*/
+.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images van 150x150 pixels*/
     display: block;
     max-width: 150px;
     max-height: 150px;
@@ -509,6 +547,7 @@ img.sfeer-image-resize { /*Exclusief want andere groepsleden gebruiken images va
     height: 200px;
     text-align: right;
     font-weight: bold;
+    margin-right: 5px;
 }
 
 .oneline {
@@ -552,7 +591,7 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
     padding-right: 50px;
 }
 
-.talking-ticket-amount {
+.talk-ticket-amount {
     width: 40%;
 }
 
@@ -573,6 +612,7 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
 
 .talk-question-receiver p {
     float: left;
+    margin-right: 5px;
 }
 
 .talk-questionbox {
@@ -761,10 +801,23 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
     .ticket-table .ticketsInput input {
         width: 40px;
         text-align: center;
+        margin-left: 5%;
+        margin-right: auto;
     }
 
 .ticket-table .ticketsInput {
-        width: 110px;
+        width: 138px;
+}
+
+.ticket-table .ticketsInput:first-child {
+        width: 105px;
+}
+
+.btn.btn-book.btn-reservation{
+    right: 235px;
+    bottom: 10px;
+    position: relative;
+    float: right;
 }
 
 
