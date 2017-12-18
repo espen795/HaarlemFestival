@@ -6,7 +6,6 @@
     ViewBag.Title = "Dinner in Haarlem";
 }
 
-
 <div class="event-banner dinner"></div>
 
 <div class="event container">
@@ -47,31 +46,16 @@
             </div>
             <hr class="title-hr title-line-right">
         </div>
-        <script>
-            function selectChange() {
-                $('.restaurant-index-restaurants-restaurant').each(function () {
-                    $(this).hide();
-                })
 
-                @foreach ()
-                {
-
-                }
-            }
-        </script>
         <!-- Section 3-->
         <div class="event-section-3-dinner">
             <div class="restaurant-index-select">
-                @Html.DropDownList("Cuisine", new SelectList(Model, "", "Naam"))
+                @Html.DropDownList("Cuisines", new SelectList(Model,"", "Naam"))
             </div>
             <div class="restaurant-index-restaurants">
-                @foreach (Restaurant r in Model[0].Restaurants)
-            {
-                @{ string s;
-                foreach (Cuisine c in r.Cuisines)
-                    @{ s += c.CuisineId + " "};
-                }
-                <div class="restaurant-index-restaurants-restaurant" id="@r.RestaurantId">
+                    @foreach (Restaurant r in Model[0].Restaurants)
+                    {
+                <div class="restaurant-index-restaurants-restaurant">
                     <div class="restaurant-index-restaurant-fotonaam">
                         <img src="/images/Dinner/restaurants/@r.FoodIMG" alt="Picture not found" />
                         <h3>@r.Naam</h3>
@@ -81,16 +65,16 @@
                             <td class="restaurant-index-names"> Cuisines:</td>
                             <td class="restaurant-index-info">
                                 @foreach (Cuisine c in r.Cuisines)
-                            {
-                                if (r.Cuisines.Last() != c)
                                 {
-                                    @c.Naam<span>,</span>
-                            }
-                            else
-                            {
-                                @c.Naam
-                        }
-                    }
+                                    if (r.Cuisines.Last() != c)
+                                    {
+                        @c.Naam<span>,</span>
+                                    }
+                                    else
+                                    {
+                @c.Naam
+                                    }
+                                }
                             </td>
                         </tr>
                         <tr>
@@ -104,8 +88,8 @@
                     </table>
                     <button class="restaurant-index-button-reservation" type="button" onclick="location.href='@Url.Action("Reservation", "Dinner", new { id = r.RestaurantId })'">Make reservation</button>
                     <button class="restaurant-index-button-info" type="button" onclick="location.href='@Url.Action("Info", "Dinner", new { id = r.RestaurantId })'"><i class="fa fa-info" aria-hidden="true"></i></button>
-                </div>
-        }
+                    </div>
+                    }
             </div>
         </div>
     </div>
