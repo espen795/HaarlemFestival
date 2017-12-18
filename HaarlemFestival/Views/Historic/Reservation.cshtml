@@ -219,13 +219,9 @@
             <div class="historic extra-info">
                 <h3>Ticket information</h3>
                 <p>The group will consist of 12 participants and one guide. Participants must at least be 12 years old and must be able to walk the entire route (no strollers are allowed).</p>
-                <br/>
-                <h4>Ticket price</h4>
-                <p>€ @Model[0].Price per ticket per person</p>
-                <br/>
-                <h4>Group ticket:</h4>
                 @{ float? groupticket = (4f * Model[0].Price); }
-                <p>A group ticket gets you 4 tickets for only € @Model[0].AlternativePrice instead of € @groupticket </p>
+                <p>A tickets costs € @Model[0].Price per person, and a group ticket gets you 4 tickets for only € @Model[0].AlternativePrice instead of € @groupticket </p>
+                <br/>
             </div>
         </div>
 

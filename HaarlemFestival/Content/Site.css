@@ -763,6 +763,33 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
     background: #81c871;
 }
 
+
+@media (max-width: 767px) {
+    .img-map-location img {
+        /*display: none;*/
+    }
+    
+    .img-map-location {
+        width: 100%;
+    }
+
+    .text-map-location {
+        width: 100%;
+        position: relative;
+        margin-top: 10px;
+        margin-bottom: 50px;
+    }
+
+    .img-map-location .number-map {
+        position: relative;
+        float: left;
+        top: initial;
+        bottom: initial;
+        left: initial;
+        margin-right: 12px;
+    }
+}
+
 /*----- Historic tickets -----*/
 
 .event-header.historicTickets {
@@ -814,297 +841,309 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
 }
 
 .btn.btn-book.btn-reservation{
-    right: 235px;
+    right: 20%;
     bottom: 10px;
     position: relative;
     float: right;
 }
 
-
-/*****************************/
-/** ADMIN PAGE SPECIFIC CSS **/
-/*****************************/
-/* Login Pagina */
-#loginArea .title {
-    text-align: center;
-    font-size: 30px;
-}
-
-#loginError {
-    max-width: 400px;
-    text-align: center;
-    opacity: 0;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
-
-#loginArea .username, #loginArea .password {
-    height: 50px;
-    font-size: 20px;
-    border: 1px solid silver;
-}
-    
-input[type='text']:focus, input[type='password']:focus {
-    color: black;
-}
-
-#loginArea input[type='submit'] {
-    background-color: #353238;
-    font-size: 15px;
-    color: white;
-    width: 140px;
-    height: 40px;
-    margin-bottom: 50px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#loginArea .input-group-addon {
-    background-color: #92140C;
-    border-radius: 15px 0px 0px 15px;
-    color: white;
-}
-
-
-/* Overview Pagina */
-#welcomeArea {
-    margin-top: 100px;
-    font-size: 15px;
-    text-align: center;
-    padding: 0px;
-}
-
-.overviewContent {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-#manageEventSelection button {
-    margin-top: 10px;
-}
-
-#manageEventSelection button {
-    width: 150px;
-}
-
-.introText {
-    width: 95%;
-    font-weight: bold;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-
-/* Manage Event Pagina */
-#topFilterBar {
-    padding-top: 100px;
-    display: inline-block;
-}
-
-#selectEvent {
-    width: auto;
-}
-
-#topFilterBar select {
-    width: 200px;
-    height: 25px;
-    border: 1px solid #000000;
-    border-style: none none solid none;
-    outline: none;
-    position: relative;
-    height: 100%;
-}
-
-#topFilterBar select option {
-    height: 25px;
-}
-
-#filterSystem .eventFilter:focus {
-    border-color: #6495ed;
-}
-
-#filterSystem .eventFilter option {
-    border: 2px solid black;
-    border-style: none solid none solid;
-    height: 30px;
-    color: #000000;
-}
-
-#filterSystem .eventFilter option:last-child {
-    border-style: none solid solid solid;
-}
-
-.eventData tr td ,.eventTable thead th {
-    text-align: center !important;
-}
-
-.eventData tr td i.glyphicon-remove, .eventData tr td i.glyphicon-pencil {
-    cursor: pointer;
-}
-
-/* MODAL VOOR IMAGE POPUP */
-/* The Modal (background) */
-#imagePopup {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 9999; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
-}
-
-/* Modal Content (Image) */
-#imagePopup .modal-content {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-    -webkit-animation-name: zoom;
-    -webkit-animation-duration: 0.6s;
-    animation-name: zoom;
-    animation-duration: 0.6s;
-    }
-
-@-webkit-keyframes zoom {
-    from {
-        -webkit-transform: scale(0)
-    }
-
-    to {
-        -webkit-transform: scale(1)
-    }
-}
-
-@keyframes zoom {
-    from {
-        transform: scale(0)
-    }
-
-    to {
-        transform: scale(1)
-    }
-}
-
-/* The Close Button */
-#imagePopup .close {
-    position: absolute;
-    top: 110px;
-    right: 50px;
-    color: #f1f1f1;
-    font-size: 40px;
-    font-weight: bold;
-    transition: 0.3s;
-    z-index: 9999;
-    color: white;
-}
-
-#imagePopup .close:hover,
-#imagePopup .close:focus {
-    color: #bbb;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* 100% Image Width on Smaller Screens */
-@media only screen and (max-width: 700px) {
-#imagePopup .modal-content {
-    width: 100%;
-}
-}
-
-
-/********************************/
-/* MEDIA QUERYS VOOR RESPONSIVE */
-/********************************/
-@media (max-width: 1199px) {
-
-}
-
-@media (max-width: 991px) {
-
-}
-
-/* Start mobile navigatie/view */
 @media (max-width: 767px) {
+    .btn.btn-book.btn-reservation {
+        right: 0%;
+    }
+}
 
-    /* NAVBAR */
-    .navbar-toggle {
-      float: left;
-      margin-left: 15px;
-      border-color: #fff !important;
+
+    /*****************************/
+    /** ADMIN PAGE SPECIFIC CSS **/
+    /*****************************/
+    /* Login Pagina */
+    #loginArea .title {
+        text-align: center;
+        font-size: 30px;
     }
 
-    .navbar .navbar-nav > li {
-      width: 100%;
-      text-align: left;
+    #loginError {
+        max-width: 400px;
+        text-align: center;
+        opacity: 0;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+        margin-bottom: 50px;
     }
-    .navbar .navbar-nav {
+
+    #loginArea .username, #loginArea .password {
+        height: 50px;
+        font-size: 20px;
+        border: 1px solid silver;
+    }
+
+    input[type='text']:focus, input[type='password']:focus {
+        color: black;
+    }
+
+    #loginArea input[type='submit'] {
+        background-color: #353238;
+        font-size: 15px;
+        color: white;
+        width: 140px;
+        height: 40px;
+        margin-bottom: 50px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #loginArea .input-group-addon {
+        background-color: #92140C;
+        border-radius: 15px 0px 0px 15px;
+        color: white;
+    }
+
+
+    /* Overview Pagina */
+    #welcomeArea {
+        margin-top: 100px;
+        font-size: 15px;
+        text-align: center;
+        padding: 0px;
+    }
+
+    .overviewContent {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    #manageEventSelection button {
+        margin-top: 10px;
+    }
+
+    #manageEventSelection button {
+        width: 150px;
+    }
+
+    .introText {
+        width: 95%;
+        font-weight: bold;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    /* Manage Event Pagina */
+    #topFilterBar {
+        padding-top: 100px;
+        display: inline-block;
+    }
+
+    #selectEvent {
         width: auto;
     }
 
-    /* HOMEPAGE */
-    #carousel-home {
-      display: none;
-    }
-    .body-content .container {
-      margin-top: 0;
-    }
-    .section_home_1 .feature-block-image img {
-      margin-top: 8px;
-      width: 100%;
- 
-    }
-    .feature-block-image {
-      max-height: 160px;
-      overflow: hidden;
-
-    }
-    .section_home_1 .feature-block-content p.button a {
-      padding: 5px 20px;
-      font-size: 15px;
+    #topFilterBar select {
+        width: 200px;
+        height: 25px;
+        border: 1px solid #000000;
+        border-style: none none solid none;
+        outline: none;
+        position: relative;
+        height: 100%;
     }
 
-    .section_home_2::before {
-      width: 300px;
-    }
-    
-    .maincontent_img {
-      margin-bottom: 10px;
+        #topFilterBar select option {
+            height: 25px;
+        }
+
+    #filterSystem .eventFilter:focus {
+        border-color: #6495ed;
     }
 
-    /* EVENT REGULAR */
-    .event-banner {
-      display: none;
+    #filterSystem .eventFilter option {
+        border: 2px solid black;
+        border-style: none solid none solid;
+        height: 30px;
+        color: #000000;
     }
-    .sfeer-image {
-      display: none;
+
+        #filterSystem .eventFilter option:last-child {
+            border-style: none solid solid solid;
+        }
+
+    .eventData tr td, .eventTable thead th {
+        text-align: center !important;
     }
-    .title-hr {
-      display: none;
+
+        .eventData tr td i.glyphicon-remove, .eventData tr td i.glyphicon-pencil {
+            cursor: pointer;
+        }
+
+    /* MODAL VOOR IMAGE POPUP */
+    /* The Modal (background) */
+    #imagePopup {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 9999; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
     }
-    .event-header {
-      width: 95%;
-      height: 67px;
-      background-position: center center;
+
+        /* Modal Content (Image) */
+        #imagePopup .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            -webkit-animation-name: zoom;
+            -webkit-animation-duration: 0.6s;
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+
+    @-webkit-keyframes zoom {
+        from {
+            -webkit-transform: scale(0)
+        }
+
+        to {
+            -webkit-transform: scale(1)
+        }
     }
-    .event-header .header_tekst {
-      font-size: 19px;
+
+    @keyframes zoom {
+        from {
+            transform: scale(0)
+        }
+
+        to {
+            transform: scale(1)
+        }
     }
-    .event-header .overlay {
-      padding-top: 21px;
+
+    /* The Close Button */
+    #imagePopup .close {
+        position: absolute;
+        top: 110px;
+        right: 50px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+        z-index: 9999;
+        color: white;
+    }
+
+        #imagePopup .close:hover,
+        #imagePopup .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    /* 100% Image Width on Smaller Screens */
+    @media only screen and (max-width: 700px) {
+        #imagePopup .modal-content {
+            width: 100%;
+        }
     }
 
 
-    /* EVENT JAZZ */
-    .jazz .keuze_blok img {
-      width: 100%;
+    /********************************/
+    /* MEDIA QUERYS VOOR RESPONSIVE */
+    /********************************/
+    @media (max-width: 1199px) {
     }
-}
+
+    @media (max-width: 991px) {
+    }
+
+    /* Start mobile navigatie/view */
+    @media (max-width: 767px) {
+
+        /* NAVBAR */
+        .navbar-toggle {
+            float: left;
+            margin-left: 15px;
+            border-color: #fff !important;
+        }
+
+        .navbar .navbar-nav > li {
+            width: 100%;
+            text-align: left;
+        }
+
+        .navbar .navbar-nav {
+            width: auto;
+        }
+
+        /* HOMEPAGE */
+        #carousel-home {
+            display: none;
+        }
+
+        .body-content .container {
+            margin-top: 0;
+        }
+
+        .section_home_1 .feature-block-image img {
+            margin-top: 8px;
+            width: 100%;
+        }
+
+        .feature-block-image {
+            max-height: 160px;
+            overflow: hidden;
+        }
+
+        .section_home_1 .feature-block-content p.button a {
+            padding: 5px 20px;
+            font-size: 15px;
+        }
+
+        .section_home_2::before {
+            width: 300px;
+        }
+
+        .maincontent_img {
+            margin-bottom: 10px;
+        }
+
+        /* EVENT REGULAR */
+        .event-banner {
+            display: none;
+        }
+
+        .sfeer-image {
+            display: none;
+        }
+
+        .title-hr {
+            display: none;
+        }
+
+        .event-header {
+            width: 95%;
+            height: 67px;
+            background-position: center center;
+        }
+
+            .event-header .header_tekst {
+                font-size: 19px;
+            }
+
+            .event-header .overlay {
+                padding-top: 21px;
+            }
+
+
+        /* EVENT JAZZ */
+        .jazz .keuze_blok img {
+            width: 100%;
+        }
+    }
