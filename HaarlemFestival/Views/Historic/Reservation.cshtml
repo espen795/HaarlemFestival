@@ -86,8 +86,8 @@
                         string totalprice = String.Format("totalprice{0}", i);
                         
                                 <tr>
-                                    <td class="ticketsInput">@Html.TextBoxFor(m => tour.BoughtTickets, new { @type = "number", @min = 0, @id = idtickets, @onkeyup = "CalcPrice(@i);"})</td>
-                                    <td class="ticketsInput">@Html.TextBoxFor(m => tour.BoughtTickets, new { @type = "number", @min = 0, @id = idgrouptickets, @onkeyup = "CalcPrice(@i);"})</td>
+                                    <td class="ticketsInput">@Html.TextBoxFor(m => tour.BoughtTickets, new { @type = "number", @min = 0, @id = idtickets, @onkeyup = "CalcPrice(@i)"})</td>
+                                    <td class="ticketsInput">@Html.TextBoxFor(m => tour.BoughtTickets, new { @type = "number", @min = 0, @id = idgrouptickets, @onkeyup = "CalcPrice(@i)"})</td>
                                     <td>@tour.Guide.LanguageName</td>
                                     <td>@tour.Guide.GuideName</td>
                                     <td>@tour.StartSession.TimeOfDay</td>

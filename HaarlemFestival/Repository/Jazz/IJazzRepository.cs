@@ -11,5 +11,7 @@ namespace HaarlemFestival.Repository.Jazz
     {
         List<Artist> GetAllArtists();
         List<Models.Jazz> GetAllJazzs();
+
+        List<Models.Jazz> GetUniqueJazzs();
     }
 }
