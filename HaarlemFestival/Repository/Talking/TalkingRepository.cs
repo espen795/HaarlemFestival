@@ -19,5 +19,11 @@ namespace HaarlemFestival.Repository.Talking
         {
             return db.Talkings.FirstOrDefault(t => t.TalkId == id);
         }
+
+        public void SaveQuestionToDB(InterviewQuestion question)
+        {
+            db.InterviewQuestions.Add(question);
+            db.SaveChanges();
+        }
     }
 }
