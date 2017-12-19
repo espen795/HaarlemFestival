@@ -109,9 +109,6 @@ namespace HaarlemFestival.Controllers
                 }
                 catch (Exception) { }
 
-                activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
-                activity.EndSession = DateTime.Parse(collector["Date"] + " " + collector["EndSession"]);
-
                 adminRepository.AddEvent(activity);
             }
 
@@ -159,10 +156,6 @@ namespace HaarlemFestival.Controllers
             if (ModelState.IsValid)
             {
                 activity.RestaurantId = Convert.ToInt32(collector["RestaurantId"]);
-
-                activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
-                activity.EndSession = DateTime.Parse(collector["Date"] + " " + collector["EndSession"]);
-
                 adminRepository.AddEvent(activity);
 
                 return RedirectToAction("ManageEvent", "Admin");
@@ -209,9 +202,6 @@ namespace HaarlemFestival.Controllers
                 }
                 catch (Exception) { }
 
-                activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
-                activity.EndSession = DateTime.Parse(collector["Date"] + " " + collector["EndSession"]);
-
                 adminRepository.AddEvent(activity);
 
             }
@@ -243,8 +233,6 @@ namespace HaarlemFestival.Controllers
             if (ModelState.IsValid)
             {
                 activity.GuideId = Convert.ToInt32(collector["GuideId"]);
-
-                activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
                 activity.EndSession = activity.StartSession.AddHours(2.5);
 
                 adminRepository.AddEvent(activity);
@@ -440,10 +428,6 @@ namespace HaarlemFestival.Controllers
                     UploadImage(Request.Files[0], "Jazz");
                 }
                 catch (Exception) { }
-
-                activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
-                activity.EndSession = DateTime.Parse(collector["Date"] + " " + collector["EndSession"]);
-
                 adminRepository.AddEvent(activity);
             }
 
@@ -488,10 +472,6 @@ namespace HaarlemFestival.Controllers
             if (ModelState.IsValid)
             {
                 activity.RestaurantId = Convert.ToInt32(collector["RestaurantId"]);
-
-                activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
-                activity.EndSession = DateTime.Parse(collector["Date"] + " " + collector["EndSession"]);
-
                 adminRepository.AddEvent(activity);
             }
             return RedirectToAction("ManageEvent", "Admin");
@@ -531,9 +511,6 @@ namespace HaarlemFestival.Controllers
                 }
                 catch (Exception) { }
 
-                activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
-                activity.EndSession = DateTime.Parse(collector["Date"] + " " + collector["EndSession"]);
-
                 adminRepository.UpdateEvent(activity);
             }
 
@@ -558,8 +535,6 @@ namespace HaarlemFestival.Controllers
             if (ModelState.IsValid)
             {
                 activity.GuideId = Convert.ToInt32(collector["GuideId"]);
-
-                activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
                 activity.EndSession = activity.StartSession.AddHours(2.5);
 
                 adminRepository.UpdateEvent(activity);

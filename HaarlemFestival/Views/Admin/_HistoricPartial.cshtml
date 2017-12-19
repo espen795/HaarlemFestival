@@ -11,8 +11,8 @@
 
     <div class="form-group">
         <div class="input-group">
-            @Html.Label("Date:")
-            <input type="date" name="Date" /> @Html.Label("Time:") <input type="time" name="StartSession" />
+            @Html.Label("Start:")
+            @Html.TextBoxFor(d => d.StartSession, new { @Value = Model.StartSession.ToString("yyyy-MM-ddTHH:mm"), @type = "datetime-local" })
         </div>
     </div>
 
