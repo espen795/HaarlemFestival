@@ -149,7 +149,7 @@ namespace HaarlemFestival.Repository.Admin
             {
                 Activities = db.Activities.ToList(),
 
-                Dates = db.Days.ToList(),
+                Days = db.Days.ToList(),
                 Cuisines = db.Cuisines.ToList(),
                 Guides = db.Guides.ToList(),
                 Restaurants = db.Restaurants.ToList()

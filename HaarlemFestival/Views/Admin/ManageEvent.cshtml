@@ -276,20 +276,10 @@
         </div>
 
         <div id="filterSystem">
-            <!-- Html.DropDownListFor(m => m.Dates, new SelectList(Model.Dates, "Naam", "Naam"), "Select a Date.", new { id = "dateFilter", class = "eventFilter", onchange = "FilterData()" }) -->
-            <select id="dateFilter" class="eventFilter" onchange="FilterData()">
-                <option value="">Select a Date.</option>
-                <option value="Thursday 26-07-18">Thursday 26-07-18</option>
-                <option value="Friday 27-07-18">Friday 27-07-18</option>
-                <option value="Saturday 28-07-18">Saturday 28-07-18</option>
-                <option value="Sunday 29-07-18">Sunday 29-07-18</option>
-            </select>        
-
+            @Html.DropDownListFor(m => m.Dates, new SelectList(Model.Dates, "DateDisplay", "DateDisplay"), "Select a Date.", new { @id = "dateFilter", @class = "eventFilter", @onchange = "FilterData()" })
             @Html.DropDownListFor(m => m.Guides, new SelectList(Model.Guides, "GuideName", "GuideName"), "Select a Guide.", new { @id = "guideFilter", @class = "eventFilter", @onchange = "FilterData()" }) 
             @Html.DropDownListFor(m => m.Restaurants, new SelectList(Model.Restaurants, "Naam", "Naam"), "Select a Restaurant", new { @id = "restaurantFilter", @class = "eventFilter", @onchange = "FilterData()" })
-            @Html.DropDownListFor(m => m.Cuisines, new SelectList(Model.Cuisines, "Naam", "Naam"), "Select a Cuisine.", new { @id = "cuisineFilter", @class = "eventFilter", @onchange = "FilterData()" })
-            
-            
+            @Html.DropDownListFor(m => m.Cuisines, new SelectList(Model.Cuisines, "Naam", "Naam"), "Select a Cuisine.", new { @id = "cuisineFilter", @class = "eventFilter", @onchange = "FilterData()" })       
         </div>
     </section>
 

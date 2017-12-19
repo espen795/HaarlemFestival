@@ -63,12 +63,13 @@ namespace HaarlemFestival.Controllers
         public ActionResult ManageEvent()
         {
             EventData data = adminRepository.GetEventData();
+            data.Dates = GetDateModel(data.Days);
 
             string selectedEvent = this.Request.QueryString["selectedEvent"];
             ViewData["Restaurants"] = data.Restaurants;
             ViewData["Guides"] = data.Guides;
             ViewData["Cuisines"] = data.Cuisines;
-            ViewData["Dates"] = GetDateModel(data.Dates);
+            ViewData["Dates"] = data.Dates;
 
             switch (selectedEvent)
             {
@@ -108,6 +109,10 @@ namespace HaarlemFestival.Controllers
                     UploadImage(Request.Files[0], "Jazz");
                 }
                 catch (Exception) { }
+
+                activity.Day = adminRepository.GetDay(activity.Day.DayId);
+                activity.StartSession = activity.Day.Date.Add(TimeSpan.Parse(collector["StartSession"]));
+                activity.EndSession = activity.Day.Date.Add(TimeSpan.Parse(collector["EndSession"]));
 
                 adminRepository.AddEvent(activity);
             }
@@ -153,16 +158,17 @@ namespace HaarlemFestival.Controllers
         public ActionResult AddDinner(Models.Dinner activity, FormCollection collector)
         {
             activity.EventType = EventType.DinnerInHaarlem;
-            activity.Day = adminRepository.GetDay(activity.Day.DayId);
-            activity.StartSession = Convert.ToDateTime(activity.Day.Date + collector["startTime"]);
-            activity.EndSession = Convert.ToDateTime(activity.Day.Date + collector["endTime"]);
-
+            
             UpdatePrice(activity, collector);
             UpdateAlternativePrice(activity, collector);
 
             if (ModelState.IsValid)
             {
                 activity.RestaurantId = Convert.ToInt32(collector["RestaurantId"]);
+                activity.Day = adminRepository.GetDay(activity.Day.DayId);
+                activity.StartSession = activity.Day.Date.Add(TimeSpan.Parse(collector["StartSession"]));
+                activity.EndSession = activity.Day.Date.Add(TimeSpan.Parse(collector["EndSession"]));
+
                 adminRepository.AddEvent(activity);
 
                 return RedirectToAction("ManageEvent", "Admin");
@@ -178,6 +184,8 @@ namespace HaarlemFestival.Controllers
             activity.EventType = EventType.TalkingHaarlem;
             activity.AlternativePrice = null;
             UpdatePrice(activity, collector);
+
+
 
             if (ModelState.IsValid)
             {
@@ -208,6 +216,11 @@ namespace HaarlemFestival.Controllers
                     UploadImage(Request.Files[3], "Talking");
                 }
                 catch (Exception) { }
+
+                activity.Day = adminRepository.GetDay(activity.Day.DayId);
+                activity.StartSession = activity.Day.Date.Add(TimeSpan.Parse(collector["StartSession"]));
+                activity.EndSession = activity.Day.Date.Add(TimeSpan.Parse(collector["EndSession"]));
+
 
                 adminRepository.AddEvent(activity);
 
@@ -240,6 +253,8 @@ namespace HaarlemFestival.Controllers
             if (ModelState.IsValid)
             {
                 activity.GuideId = Convert.ToInt32(collector["GuideId"]);
+                activity.Day = adminRepository.GetDay(activity.Day.DayId);
+                activity.StartSession = activity.Day.Date.Add(TimeSpan.Parse(collector["StartSession"]));
                 activity.EndSession = activity.StartSession.AddHours(2.5);
 
                 adminRepository.AddEvent(activity);
@@ -347,8 +362,9 @@ namespace HaarlemFestival.Controllers
         [Authorize]
         public ActionResult _TalkingPartial(int? id)
         {
-            Talking talking;
             ViewData["Dates"] = GetDateModel(adminRepository.GetDates());
+
+            Talking talking;
             if (id != null)
             {
                 talking = adminRepository.GetActivity((int)id) as Talking;
@@ -381,6 +397,7 @@ namespace HaarlemFestival.Controllers
         public ActionResult _HistoricPartial(int? id)
         {
             ViewData["Guides"] = adminRepository.GetGuides();
+            ViewData["Dates"] = GetDateModel(adminRepository.GetDates());
 
             Historic historic;
             if (id != null)
@@ -436,6 +453,11 @@ namespace HaarlemFestival.Controllers
                     UploadImage(Request.Files[0], "Jazz");
                 }
                 catch (Exception) { }
+
+                activity.Day = adminRepository.GetDay(activity.Day.DayId);
+                activity.StartSession = activity.Day.Date.Add(TimeSpan.Parse(collector["StartSession"]));
+                activity.EndSession = activity.Day.Date.Add(TimeSpan.Parse(collector["EndSession"]));
+
                 adminRepository.AddEvent(activity);
             }
 
@@ -478,13 +500,14 @@ namespace HaarlemFestival.Controllers
         {
             UpdatePrice(activity, collector);
             UpdateAlternativePrice(activity, collector);
-            activity.Day = adminRepository.GetDay(activity.Day.DayId);
-            activity.StartSession = activity.Day.Date.Add(TimeSpan.Parse(collector["StartSession"]));
-            activity.EndSession = activity.Day.Date.Add(TimeSpan.Parse(collector["EndSession"]));
+
 
             if (ModelState.IsValid)
             {
-                activity.RestaurantId = Convert.ToInt32(collector["RestaurantId"]);
+                activity.Day = adminRepository.GetDay(activity.Day.DayId);
+                activity.StartSession = activity.Day.Date.Add(TimeSpan.Parse(collector["StartSession"]));
+                activity.EndSession = activity.Day.Date.Add(TimeSpan.Parse(collector["EndSession"]));
+
                 adminRepository.UpdateEvent(activity);
             }
             return RedirectToAction("ManageEvent", "Admin");
@@ -524,6 +547,10 @@ namespace HaarlemFestival.Controllers
                 }
                 catch (Exception) { }
 
+                activity.Day = adminRepository.GetDay(activity.Day.DayId);
+                activity.StartSession = activity.Day.Date.Add(TimeSpan.Parse(collector["StartSession"]));
+                activity.EndSession = activity.Day.Date.Add(TimeSpan.Parse(collector["EndSession"]));
+
                 adminRepository.UpdateEvent(activity);
             }
 
@@ -548,6 +575,8 @@ namespace HaarlemFestival.Controllers
             if (ModelState.IsValid)
             {
                 activity.GuideId = Convert.ToInt32(collector["GuideId"]);
+                activity.Day = adminRepository.GetDay(activity.Day.DayId);
+                activity.StartSession = activity.Day.Date.Add(TimeSpan.Parse(collector["StartSession"]));
                 activity.EndSession = activity.StartSession.AddHours(2.5);
 
                 adminRepository.UpdateEvent(activity);
@@ -617,7 +646,7 @@ namespace HaarlemFestival.Controllers
             List<DateModel> dates = new List<DateModel>();
             foreach(Day day in days)
             {
-                dates.Add(new DateModel { DayId = day.DayId, DateDisplay = day.Date.ToString("dddd dd/MM/yyyy") });
+                dates.Add(new DateModel { DayId = day.DayId, DateDisplay = day.Date.ToString("dddd dd-MM-yy") });
             }
 
             return dates;

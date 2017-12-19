@@ -11,8 +11,10 @@
 
     <div class="form-group">
         <div class="input-group">
+            @Html.Label("Day:")
+            @Html.DropDownListFor(d => d.Day.DayId, new SelectList((List<DateModel>)ViewData["Dates"], "DayId", "DateDisplay"), new { @name = "Day" })
             @Html.Label("Start:")
-            @Html.TextBoxFor(d => d.StartSession, new { @Value = Model.StartSession.ToString("yyyy-MM-ddTHH:mm"), @type = "datetime-local" })
+            @Html.TextBoxFor(d => d.StartSession, new { @Value = Model.StartSession.ToString("HH:mm"), @name = "startTime", @type = "time" })
         </div>
     </div>
 
