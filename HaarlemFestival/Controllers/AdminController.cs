@@ -400,6 +400,39 @@ namespace HaarlemFestival.Controllers
         }
 
 
+
+        public ActionResult _UpdateData(int id)
+        {
+            string type = this.Request["type"].ToLower();
+
+            switch (type)
+            {
+                case "jazz":
+                    return PartialView("_UpdateJazzPartial", id);
+
+                case "restaurant":
+                    return PartialView("_UpdateRestaurantPartial", id);
+
+                case "dinner":
+                    return PartialView("_UpdateDinnerPartial", id);
+
+                case "talking":
+                    return PartialView("_UpdateTalkingPartial", id);
+
+                case "guide":
+                    return PartialView("_UpdateGuidePartial", id);
+
+                case "historic":
+                    return PartialView("_UpdateHistoricPartial", id);
+
+                default:
+                    return RedirectToAction("ManageEvent", "Admin");
+            }
+        }
+
+
+
+        // Methoden voor meergebruikte functies.
         private void UploadImage(HttpPostedFileBase file, string type)
         {
             string fileName = System.IO.Path.GetFileName(file.FileName);

@@ -1,0 +1,7 @@
+﻿@using HaarlemFestival.Models;
+@model int
+
+@using (Html.BeginForm("UpdateHistoric", "Admin", FormMethod.Post))
+{
+    Html.RenderAction("_HistoricPartial", "Admin", new { id = Model });
+}

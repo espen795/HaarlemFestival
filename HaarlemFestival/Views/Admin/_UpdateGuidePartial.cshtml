@@ -1,0 +1,9 @@
+﻿@using HaarlemFestival.Models;
+@model int
+
+@using (Html.BeginForm("UpdateGuide", "Admin", FormMethod.Post))
+{
+    Html.RenderAction("_GuidePartial", "Admin", new { id = Model });
+}
+
+

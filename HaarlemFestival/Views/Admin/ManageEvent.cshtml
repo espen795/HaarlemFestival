@@ -226,32 +226,10 @@
 
         function OpenUpdateForm(id, type)
         {
-            switch (type)
-            {
-                case "Jazz":
-                    $('#updatePopup .modal-body').load('/Admin/_JazzPartial/' + id);
-                    break;
-
-                case "Restaurant":
-                    $('#updatePopup .modal-body').load('/Admin/_RestaurantPartial/' + id);
-                    break;
-
-                case "Dinner":
-                    $('#updatePopup .modal-body').load('/Admin/_DinnerPartial/' + id);
-                    break;
-
-                case "Talking":
-                    $('#updatePopup .modal-body').load('/Admin/_TalkingPartial/' + id);
-                    break; 
-
-                case "Guide":
-                    $('#updatePopup .modal-body').load('/Admin/_GuidePartial/' + id);
-                    break;
-
-                case "Historic":
-                    $('#updatePopup .modal-body').load('/Admin/_HistoricPartial/' + id);
-                    break;
-            }          
+            $.get('@Url.Action("_UpdateData", "Admin")', { id: id, type: type }, function (form) {
+                console.log(form);
+                $("#updatePopup .modal-body").html(form);
+    });
         }
 
 
