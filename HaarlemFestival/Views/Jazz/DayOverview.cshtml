@@ -1,4 +1,9 @@
-﻿@{
+﻿@using HaarlemFestival.Models;
+@using System.Collections.Generic;
+
+@model List<Jazz>
+
+@{
     ViewBag.Title = "Jazz@Patronaat";
 }
 
@@ -9,7 +14,7 @@
         <!-- Section 1 -->
         <div class="event-section-1">
             <div class="col-md-6">
-                <h1 class="title">Jazz@Patronaat - DAY</h1>
+                <h1 class="title">Jazz@Patronaat - @Url.RequestContext.RouteData.Values["id"]</h1>
                 <p class="content">
                     Do you like some Jazz music? Then Jazz@Patronaat is the perfect event to go to! With over 18 bands performing in 4 days there must be something for you!
                 </p>
@@ -39,15 +44,49 @@
             <hr class="title-hr title-line-right">
         </div>
 
-        <!-- Section 3-->
-        <div class="event-section-3">
-            <div class="col-md-6 artist-info">
-                s
-            </div>
+        <!-- Section 3-->                   
+            @foreach (Jazz j in Model)
+            {
+                int i = ViewBag.Id;
 
-            <div class="col-md-6 artist-info">
-                s
-            </div>
+                if (j.Day.DayId == i)
+                {
+                <div class="col-md-6">
+
+                    <div class="artist-info">
+                        <div class="artist-image">
+                            <img src="/images/Jazz/artiesten/@j.artist.ArtistImage"/>
+                        </div>
+
+                        <div class="artist-content">
+                            <h2>@j.artist.ArtistName</h2>
+                            @Html.Raw(j.artist.ArtistInformation)
+                            
+                            <p>
+                                <b>Time: </b> @j.StartSession.ToShortTimeString() - @j.EndSession.ToShortTimeString()<br />
+                                <b>Price: </b> @if (j.Price != 0)
+                                {
+                                    @j.Price
+                                } else
+                                {
+                                    <span>Free!</span>
+                                }
+
+                            </p>
+                            <p>
+                                @Html.ActionLink("Book now", "Reservation", "Jazz", new { @class = "btn btn-black" })
+                            </p>
+                            
+                        </div>
+                    </div>
+                            
+                </div>
+                    
+                }
+            }
+
+
+
         </div>
         
     </div>
