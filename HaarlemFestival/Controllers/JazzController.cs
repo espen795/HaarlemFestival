@@ -14,19 +14,16 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Index()
         {
-            List<Artist> allArtist = jazzRepository.GetAllArtists();
             List<Jazz> allJazz = jazzRepository.GetAllJazzs();
-
-            JazzViewModels viewModel = new JazzViewModels();
-            viewModel.Artists = allArtist;
-            viewModel.Jazz = allJazz;
-
-            return View();
+        
+            return View(allJazz);
         }
 
         public ActionResult DayOverview()
         {
-            return View();
+            List<Jazz> allJazz = jazzRepository.GetAllJazzs();
+
+            return View(allJazz);
         }
     }
 }
