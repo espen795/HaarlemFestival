@@ -149,18 +149,6 @@ namespace HaarlemFestival.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult AddGuide(Models.Guide guide, FormCollection collector)
-        {
-            if(ModelState.IsValid)
-            {
-                adminRepository.AddGuide(guide);
-            }
-
-            return RedirectToAction("ManageEvent", "Admin");
-        }
-
-        [HttpPost]
-        [Authorize]
         public ActionResult AddDinner(Models.Dinner activity, FormCollection collector)
         {
             activity.EventType = EventType.DinnerInHaarlem;
@@ -196,28 +184,28 @@ namespace HaarlemFestival.Controllers
                 try
                 {
                     activity.Talk.Person1IMG = System.IO.Path.GetFileName(Request.Files[0].FileName);
-                    UploadImage(Request.Files[0], "Restaurant");
+                    UploadImage(Request.Files[0], "Talking");
                 }
                 catch (Exception) { }
 
                 try
                 {
                     activity.Talk.Person1AltIMG = System.IO.Path.GetFileName(Request.Files[1].FileName);
-                    UploadImage(Request.Files[1], "Restaurant");
+                    UploadImage(Request.Files[1], "Talking");
                 }
                 catch (Exception) { }
 
                 try
                 {
                     activity.Talk.Person2IMG = System.IO.Path.GetFileName(Request.Files[2].FileName);
-                    UploadImage(Request.Files[2], "Restaurant");
+                    UploadImage(Request.Files[2], "Talking");
                 }
                 catch (Exception) { }
 
                 try
                 {
                     activity.Talk.Person2AltIMG = System.IO.Path.GetFileName(Request.Files[3].FileName);
-                    UploadImage(Request.Files[3], "Restaurant");
+                    UploadImage(Request.Files[3], "Talking");
                 }
                 catch (Exception) { }
 
@@ -227,6 +215,18 @@ namespace HaarlemFestival.Controllers
                 adminRepository.AddEvent(activity);
 
             }
+            return RedirectToAction("ManageEvent", "Admin");
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddGuide(Models.Guide guide, FormCollection collector)
+        {
+            if (ModelState.IsValid)
+            {
+                adminRepository.AddGuide(guide);
+            }
+
             return RedirectToAction("ManageEvent", "Admin");
         }
 
@@ -399,8 +399,6 @@ namespace HaarlemFestival.Controllers
             return PartialView(historic);
         }
 
-
-
         public ActionResult _UpdateData(int id)
         {
             string type = this.Request["type"].ToLower();
@@ -429,8 +427,146 @@ namespace HaarlemFestival.Controllers
                     return RedirectToAction("ManageEvent", "Admin");
             }
         }
+        public ActionResult UpdateJazz(Models.Jazz activity, FormCollection collector)
+        {
+            UpdatePrice(activity, collector);
+            UpdateAlternativePrice(activity, collector);
 
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    activity.artist.ArtistImage = System.IO.Path.GetFileName(Request.Files[0].FileName);
+                    UploadImage(Request.Files[0], "Jazz");
+                }
+                catch (Exception) { }
 
+                activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
+                activity.EndSession = DateTime.Parse(collector["Date"] + " " + collector["EndSession"]);
+
+                adminRepository.AddEvent(activity);
+            }
+
+            return RedirectToAction("ManageEvent", "Admin");
+        }
+
+        public ActionResult UpdateRestaurant(Models.Restaurant restaurant, FormCollection collector)
+        {
+            restaurant.Rating = restaurant.Rating + "/5";
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    restaurant.FoodIMG = System.IO.Path.GetFileName(Request.Files[0].FileName);
+                    UploadImage(Request.Files[0], "Restaurant");
+                }
+                catch (Exception) { }
+
+                try
+                {
+                    restaurant.LocationIMG = System.IO.Path.GetFileName(Request.Files[1].FileName);
+                    UploadImage(Request.Files[1], "Restaurant");
+                }
+                catch (Exception) { }
+
+                restaurant.Cuisines.Clear();
+
+                restaurant.Cuisines.Add(adminRepository.GetCuisine(Convert.ToInt32(collector["Cuisine1"])));
+                restaurant.Cuisines.Add(adminRepository.GetCuisine(Convert.ToInt32(collector["Cuisine2"])));
+                restaurant.Cuisines.Add(adminRepository.GetCuisine(Convert.ToInt32(collector["Cuisine3"])));
+                adminRepository.AddRestaurant(restaurant);
+            }
+
+            return RedirectToAction("ManageEvent", "Admin");
+        }
+
+        public ActionResult UpdateDinner(Models.Dinner activity, FormCollection collector)
+        {
+            UpdatePrice(activity, collector);
+            UpdateAlternativePrice(activity, collector);
+
+            if (ModelState.IsValid)
+            {
+                activity.RestaurantId = Convert.ToInt32(collector["RestaurantId"]);
+
+                activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
+                activity.EndSession = DateTime.Parse(collector["Date"] + " " + collector["EndSession"]);
+
+                adminRepository.AddEvent(activity);
+            }
+            return RedirectToAction("ManageEvent", "Admin");
+        }
+
+        public ActionResult UpdateTalking(Models.Talking activity, FormCollection collector)
+        {
+            UpdatePrice(activity, collector);
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    activity.Talk.Person1IMG = System.IO.Path.GetFileName(Request.Files[0].FileName);
+                    UploadImage(Request.Files[0], "Talking");
+                }
+                catch (Exception) { }
+
+                try
+                {
+                    activity.Talk.Person1AltIMG = System.IO.Path.GetFileName(Request.Files[1].FileName);
+                    UploadImage(Request.Files[1], "Talking");
+                }
+                catch (Exception) { }
+
+                try
+                {
+                    activity.Talk.Person2IMG = System.IO.Path.GetFileName(Request.Files[2].FileName);
+                    UploadImage(Request.Files[2], "Talking");
+                }
+                catch (Exception) { }
+
+                try
+                {
+                    activity.Talk.Person2AltIMG = System.IO.Path.GetFileName(Request.Files[3].FileName);
+                    UploadImage(Request.Files[3], "Talking");
+                }
+                catch (Exception) { }
+
+                activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
+                activity.EndSession = DateTime.Parse(collector["Date"] + " " + collector["EndSession"]);
+
+                adminRepository.UpdateEvent(activity);
+            }
+
+            return RedirectToAction("ManageEvent", "Admin");
+        }
+
+        public ActionResult UpdateGuide(Models.Guide guide, FormCollection collector)
+        {
+            if (ModelState.IsValid)
+            {
+                adminRepository.AddGuide(guide);
+            }
+
+            return RedirectToAction("ManageEvent", "Admin");
+        }
+
+        public ActionResult UpdateHistoric(Models.Historic activity, FormCollection collector)
+        {
+            UpdatePrice(activity, collector);
+            UpdateAlternativePrice(activity, collector);
+
+            if (ModelState.IsValid)
+            {
+                activity.GuideId = Convert.ToInt32(collector["GuideId"]);
+
+                activity.StartSession = DateTime.Parse(collector["Date"] + " " + collector["StartSession"]);
+                activity.EndSession = activity.StartSession.AddHours(2.5);
+
+                adminRepository.UpdateEvent(activity);
+            }
+
+            return RedirectToAction("ManageEvent", "Admin");
+        }
 
         // Methoden voor meergebruikte functies.
         private void UploadImage(HttpPostedFileBase file, string type)
