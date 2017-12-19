@@ -68,7 +68,7 @@ namespace HaarlemFestival.Controllers
             ViewData["Restaurants"] = data.Restaurants;
             ViewData["Guides"] = data.Guides;
             ViewData["Cuisines"] = data.Cuisines;
-            ViewData["Dates"] = data.Dates;
+            ViewData["Dates"] = GetDateModel(data.Dates);
 
             switch (selectedEvent)
             {
@@ -135,9 +135,13 @@ namespace HaarlemFestival.Controllers
                 catch (Exception) { }
 
                 restaurant.Cuisines = new List<Cuisine>();
-                restaurant.Cuisines.Add(adminRepository.GetCuisine(Convert.ToInt32(collector["Cuisine1"])));
-                restaurant.Cuisines.Add(adminRepository.GetCuisine(Convert.ToInt32(collector["Cuisine2"])));
-                restaurant.Cuisines.Add(adminRepository.GetCuisine(Convert.ToInt32(collector["Cuisine3"])));
+                string[] cuisineIds = collector["Cuisines"].Split(',');
+                cuisineIds = cuisineIds.Distinct().ToArray();
+
+                foreach (string cuisine in cuisineIds)
+                    restaurant.Cuisines.Add(adminRepository.GetCuisine(Convert.ToInt32(cuisine)));
+
+
                 adminRepository.AddRestaurant(restaurant);
             }
 
@@ -149,6 +153,9 @@ namespace HaarlemFestival.Controllers
         public ActionResult AddDinner(Models.Dinner activity, FormCollection collector)
         {
             activity.EventType = EventType.DinnerInHaarlem;
+            activity.Day = adminRepository.GetDay(activity.Day.DayId);
+            activity.StartSession = Convert.ToDateTime(activity.Day.Date + collector["startTime"]);
+            activity.EndSession = Convert.ToDateTime(activity.Day.Date + collector["endTime"]);
 
             UpdatePrice(activity, collector);
             UpdateAlternativePrice(activity, collector);
@@ -283,7 +290,7 @@ namespace HaarlemFestival.Controllers
         [Authorize]
         public ActionResult _JazzPartial(int? id)
         {
-            ViewData["Dates"] = adminRepository.GetDates();
+            ViewData["Dates"] = GetDateModel(adminRepository.GetDates());
 
             Jazz jazz;
             if(id != null)
@@ -302,7 +309,7 @@ namespace HaarlemFestival.Controllers
         public ActionResult _RestaurantPartial(int? id)
         {
             ViewData["Cuisines"] = adminRepository.GetCuisines();
-            ViewData["Dates"] = adminRepository.GetDates();
+            ViewData["Dates"] = GetDateModel(adminRepository.GetDates());
 
             Restaurant restaurant;
             if(id != null)
@@ -322,7 +329,7 @@ namespace HaarlemFestival.Controllers
         public ActionResult _DinnerPartial(int? id)
         {
             ViewData["Restaurants"] = adminRepository.GetRestaurants();
-            ViewData["Dates"] = adminRepository.GetDates();
+            ViewData["Dates"] = GetDateModel(adminRepository.GetDates());
 
             Dinner dinner;
             if (id != null)
@@ -341,6 +348,7 @@ namespace HaarlemFestival.Controllers
         public ActionResult _TalkingPartial(int? id)
         {
             Talking talking;
+            ViewData["Dates"] = GetDateModel(adminRepository.GetDates());
             if (id != null)
             {
                 talking = adminRepository.GetActivity((int)id) as Talking;
@@ -453,12 +461,14 @@ namespace HaarlemFestival.Controllers
                 }
                 catch (Exception) { }
 
-                restaurant.Cuisines.Clear();
+                restaurant.Cuisines = new List<Cuisine>();
+                string[] cuisineIds = collector["Cuisines"].Split(',');
+                cuisineIds = cuisineIds.Distinct().ToArray();
 
-                restaurant.Cuisines.Add(adminRepository.GetCuisine(Convert.ToInt32(collector["Cuisine1"])));
-                restaurant.Cuisines.Add(adminRepository.GetCuisine(Convert.ToInt32(collector["Cuisine2"])));
-                restaurant.Cuisines.Add(adminRepository.GetCuisine(Convert.ToInt32(collector["Cuisine3"])));
-                adminRepository.AddRestaurant(restaurant);
+                foreach (string cuisine in cuisineIds)
+                    restaurant.Cuisines.Add(adminRepository.GetCuisine(Convert.ToInt32(cuisine)));
+
+                adminRepository.UpdateRestaurant(restaurant);
             }
 
             return RedirectToAction("ManageEvent", "Admin");
@@ -468,11 +478,14 @@ namespace HaarlemFestival.Controllers
         {
             UpdatePrice(activity, collector);
             UpdateAlternativePrice(activity, collector);
+            activity.Day = adminRepository.GetDay(activity.Day.DayId);
+            activity.StartSession = activity.Day.Date.Add(TimeSpan.Parse(collector["StartSession"]));
+            activity.EndSession = activity.Day.Date.Add(TimeSpan.Parse(collector["EndSession"]));
 
             if (ModelState.IsValid)
             {
                 activity.RestaurantId = Convert.ToInt32(collector["RestaurantId"]);
-                adminRepository.AddEvent(activity);
+                adminRepository.UpdateEvent(activity);
             }
             return RedirectToAction("ManageEvent", "Admin");
         }
@@ -521,7 +534,7 @@ namespace HaarlemFestival.Controllers
         {
             if (ModelState.IsValid)
             {
-                adminRepository.AddGuide(guide);
+                adminRepository.UpdateGuide(guide);
             }
 
             return RedirectToAction("ManageEvent", "Admin");
@@ -597,6 +610,17 @@ namespace HaarlemFestival.Controllers
                 else
                     ModelState.AddModelError("InvalidAlternativePrice", "Please enter a valid price");
             }
+        }
+
+        private List<DateModel> GetDateModel(List<Day> days)
+        {
+            List<DateModel> dates = new List<DateModel>();
+            foreach(Day day in days)
+            {
+                dates.Add(new DateModel { DayId = day.DayId, DateDisplay = day.Date.ToString("dddd dd/MM/yyyy") });
+            }
+
+            return dates;
         }
     }
 }

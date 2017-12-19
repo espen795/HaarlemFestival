@@ -138,6 +138,11 @@ namespace HaarlemFestival.Repository.Admin
             return db.Cuisines.Where(c => c.CuisineId == id).FirstOrDefault();
         }
 
+        public Day GetDay(int id)
+        {
+            return db.Days.Where(d => d.DayId == id).FirstOrDefault();
+        }
+
         public EventData GetEventData()
         {
             EventData data = new EventData

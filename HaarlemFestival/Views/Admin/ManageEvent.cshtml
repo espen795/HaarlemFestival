@@ -318,7 +318,7 @@
                         <td>@activity.StartSession.ToString("dddd dd-MM-yy H:mm") - @activity.EndSession.ToString("H:mm")</td>
                         <td>@activity.ConcertLocation</td>
                         <td>@activity.ConcertHall</td>
-                        <td>@activity.Price</td>
+                        <td>@String.Format("{0:0.00}", activity.Price)</td>
                         <td>@activity.TotalTickets</td>
                         <td><i onclick='ShowEventImage("Jazz/@activity.artist.ArtistImage")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Jazz')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
@@ -390,8 +390,8 @@
                         <td>@activity.StartSession.ToString("dddd dd-MM-yy H:mm") - @activity.EndSession.ToString("H:mm")</td>
                         <td>@activity.TotalTickets</td>
                         <td>@stringBuilder.ToString().Substring(0,stringBuilder.Length - 1)</td>
-                        <td>@activity.Price</td>
-                        <td>@activity.AlternativePrice</td>                       
+                        <td>@String.Format("{0:0.00}", activity.Price)</td>
+                        <td>@String.Format("{0:0.00}", activity.AlternativePrice)</td>                       
                         <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Dinner')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
@@ -407,7 +407,6 @@
                     <th>Date & Time</th>
                     <th>Seats</th>
                     <th>Location</th>
-                    <th>Hall</th>
                     <th>Price</th>
                     <th>Maximum Tickets</th>
                     <th>Image</th>
@@ -418,13 +417,12 @@
                 @foreach (Talking activity in Model.Activities.OfType<Talking>())
                 {
                     <tr>
-                        <td>@activity.Talk.Person1 meets @activity.Talk.Person2</td>
+                        <td>@activity.Talk.Naam</td>
                         <td>@activity.Talk.Description</td>
                         <td>@activity.StartSession.ToString("dddd dd-MM-yy H:mm") - @activity.EndSession.ToString("H:mm")</td>
                         <td>@activity.TotalTickets</td>
                         <td>@activity.Address</td>
-                        <td>Hall - Niet aangemaakt in class</td>
-                        <td>@activity.Price.ToString()</td>
+                        <td>@String.Format("{0:0.00}", activity.Price)</td>
                         <td>@activity.Talk.MaxTickets</td>
                         <td><i onclick='ShowEventImage("Talking/@activity.Talk.Person1")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Talking')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
@@ -479,8 +477,8 @@
                         <td>@activity.Guide.LanguageName</td>
                         <td>@activity.Guide.GuideName</td>
                         <td>@activity.TotalTickets</td>
-                        <td>@activity.Price</td>
-                        <td>@activity.AlternativePrice</td>
+                        <td>@String.Format("{0:0.00}", activity.Price)</td>
+                        <td>@String.Format("{0:0.00}", activity.AlternativePrice)</td>
                         <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Historic')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>

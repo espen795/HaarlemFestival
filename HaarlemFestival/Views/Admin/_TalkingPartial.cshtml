@@ -58,7 +58,7 @@
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Price")
-            @Html.TextBoxFor(t => t.Price, new { @placeholder ="0.00" })
+            @Html.TextBoxFor(t => t.Price, new { @placeholder ="0.00", @Value = String.Format("{0:0.00}", Model.Price) })
         </div>
     </div>
     <div class="form-group">
