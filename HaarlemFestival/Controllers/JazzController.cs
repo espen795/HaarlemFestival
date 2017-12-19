@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using HaarlemFestival.Models;
 using HaarlemFestival.Repository.Jazz;
+using System.Net;
 
 namespace HaarlemFestival.Controllers
 {
@@ -14,19 +15,24 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Index()
         {
-            List<Artist> allArtist = jazzRepository.GetAllArtists();
             List<Jazz> allJazz = jazzRepository.GetAllJazzs();
-
-            JazzViewModels viewModel = new JazzViewModels();
-            viewModel.Artists = allArtist;
-            viewModel.Jazz = allJazz;
-
-            return View();
+        
+            return View(allJazz);
         }
 
-        public ActionResult DayOverview()
+        public ActionResult DayOverview(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            } else
+            {
+                ViewBag.Id = id;
+            }
+
+            List<Jazz> allJazz = jazzRepository.GetAllJazzs();
+
+            return View(allJazz);
         }
     }
 }
