@@ -38,7 +38,36 @@ namespace HaarlemFestival.Controllers
 
             List<Talking> allTalks = talkingRepository.GetAllTalks();
 
-            return View(allTalks);
+            ViewBag.OrderId = id;
+
+            TalkViewModel allTalksAndQuestion = new TalkViewModel();
+
+            allTalksAndQuestion.Talkings = allTalks;
+
+            return View(allTalksAndQuestion);
+        }
+
+        [HttpPost]
+        public ActionResult Reservation(TalkViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                InterviewQuestion question = new InterviewQuestion();
+                question.Content = viewModel.Question.Content;
+                question.Receiver = viewModel.Question.Receiver;
+                talkingRepository.SaveQuestionToDB(question);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        private bool CheckInterviewQuestion(InterviewQuestion question)
+        {
+            if (question.Content == null)
+                return false;
+            else if (question.Receiver == null)
+                return false;
+            return true;
         }
     }
 }

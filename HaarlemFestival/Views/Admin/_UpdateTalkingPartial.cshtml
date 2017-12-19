@@ -1,0 +1,7 @@
+﻿@using HaarlemFestival.Models;
+@model int
+
+@using (Html.BeginForm("UpdateTalking", "Admin", FormMethod.Post))
+{
+    Html.RenderAction("_TalkingPartial", "Admin", new { id = Model });
+}

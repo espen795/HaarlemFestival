@@ -103,11 +103,6 @@ namespace HaarlemFestival.Repository.Admin
             db.SaveChanges();
         }
 
-        public void AddRestaurantCuisine(int id)
-        {
-            
-        }
-
         public void DeleteRestaurant(int id)
         {
             db.Dinners.RemoveRange(db.Dinners.Where(d => d.RestaurantId == id));
@@ -136,6 +131,11 @@ namespace HaarlemFestival.Repository.Admin
         public Guide GetGuide(int id)
         {
             return db.Guides.Find(id);
+        }
+
+        public Cuisine GetCuisine(int id)
+        {
+            return db.Cuisines.Where(c => c.CuisineId == id).FirstOrDefault();
         }
 
         public EventData GetEventData()

@@ -1,0 +1,98 @@
+﻿@using HaarlemFestival.Models;
+@using System.Collections.Generic;
+@model List<Cuisine>
+
+@{
+    ViewBag.Title = "Dinner in Haarlem";
+}
+
+<div class="event-banner dinner"></div>
+
+<div class="event container">
+    <div class="row">
+        <!-- Section 1 -->
+        <div class="event-section-1-dinner">
+            <div class="col-md-6">
+                <h1 class="title">Dinner in Haarlem</h1>
+                <p class="content">
+                    Dinner in Haarlem makes it easy for you to find a restaurant in the centrum of Haarlem.
+                    On this page you will find all the participating restaurants and a little bit of information about them.
+                    For each restaurant there are three timeslots, which can be found by pressing the information button of your desired restaurant.
+                    The price shown on this page is the normal price, for children under 12 years there is a reduced price.
+                    This price can also be found by pressing the information button.
+                </p>
+            </div>
+
+            <div class="col-md-6">
+                <div class="sfeer-image">
+                    <img src="/images/Dinner/sfeer/sfeer1.png" />
+                </div>
+                <div class="sfeer-image">
+                    <img src="/images/Dinner/sfeer/sfeer2.png" />
+                </div>
+                <div class="sfeer-image">
+                    <img src="/images/Dinner/sfeer/sfeer3.png" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="event-section-2">
+            <hr class="title-hr title-line-left">
+            <div class="event-header restaurantinfo">
+                <div class="overlay">
+                    <span class="header_tekst">Restaurant information</span>
+                </div>
+            </div>
+            <hr class="title-hr title-line-right">
+        </div>
+
+        <!-- Section 3-->
+        <div class="event-section-3-dinner">
+            <div class="restaurant-index-select">
+                @Html.DropDownList("Cuisines", new SelectList(Model,"", "Naam"))
+            </div>
+            <div class="restaurant-index-restaurants">
+                    @foreach (Restaurant r in Model[0].Restaurants)
+                    {
+                <div class="restaurant-index-restaurants-restaurant">
+                    <div class="restaurant-index-restaurant-fotonaam">
+                        <img src="/images/Dinner/restaurants/@r.FoodIMG" alt="Picture not found" />
+                        <h3>@r.Naam</h3>
+                    </div>
+                    <table class="restaurant-index-restaurant-info">
+                        <tr class="dinnertable">
+                            <td class="restaurant-index-names"> Cuisines:</td>
+                            <td class="restaurant-index-info">
+                                @foreach (Cuisine c in r.Cuisines)
+                                {
+                                    if (r.Cuisines.Last() != c)
+                                    {
+                        @c.Naam<span>,</span>
+                                    }
+                                    else
+                                    {
+                @c.Naam
+                                    }
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="restaurant-index-names"> Rating:</td>
+                            <td class="restaurant-index-info"> @r.Rating</td>
+                        </tr>
+                        <tr>
+                            <td class="restaurant-index-names"> Price:</td>
+                            <td class="restaurant-index-info">€@r.DisplayPrice.ToString("0.00")</td>
+                        </tr>
+                    </table>
+                    <button class="restaurant-index-button-reservation" type="button" onclick="location.href='@Url.Action("Reservation", "Dinner", new { id = r.RestaurantId })'">Make reservation</button>
+                    <button class="restaurant-index-button-info" type="button" onclick="location.href='@Url.Action("Info", "Dinner", new { id = r.RestaurantId })'"><i class="fa fa-info" aria-hidden="true"></i></button>
+                    </div>
+                    }
+            </div>
+        </div>
+    </div>
+</div>
+
+

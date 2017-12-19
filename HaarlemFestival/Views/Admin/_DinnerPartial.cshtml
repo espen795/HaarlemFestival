@@ -19,7 +19,9 @@
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Start:")
-            <input type="date" name="Date" /> @Html.Label("") <input type="time" name="StartSession" /> - <input type="time" name="EndSession" />
+            @Html.TextBoxFor(d => d.StartSession, new { @Value = Model.StartSession.ToString("yyyy-MM-ddTHH:mm"), @type = "datetime-local" })
+            @Html.Label("End:")
+            @Html.TextBoxFor(d => d.EndSession, new { @Value = Model.EndSession.ToString("yyyy-MM-ddTHH:mm"), @type = "datetime-local" })
         </div>
     </div>
     <div class="form-group">

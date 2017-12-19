@@ -230,6 +230,7 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Reservering.cs" />
     <Compile Include="Models\Restaurant.cs" />
+    <Compile Include="Models\TalkViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Admin\AdminRepository.cs" />
     <Compile Include="Repository\Admin\IAdminRepository.cs" />
@@ -305,6 +306,13 @@
     <Content Include="Views\Dinner\Info.cshtml" />
     <Content Include="Views\Admin\_RestaurantPartial.cshtml" />
     <Content Include="Views\Admin\_GuidePartial.cshtml" />
+    <Content Include="Views\Dinner\Index2.cshtml" />
+    <Content Include="Views\Admin\_UpdateHistoricPartial.cshtml" />
+    <Content Include="Views\Admin\_UpdateTalkingPartial.cshtml" />
+    <Content Include="Views\Admin\_UpdateDinnerPartial.cshtml" />
+    <Content Include="Views\Admin\_UpdateJazzPartial.cshtml" />
+    <Content Include="Views\Admin\_UpdateRestaurantPartial.cshtml" />
+    <Content Include="Views\Admin\_UpdateGuidePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
