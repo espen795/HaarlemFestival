@@ -14,6 +14,19 @@
         @Html.HiddenFor(r => r.RestaurantId, new { @Value = Model.RestaurantId})
     }
 
+    @try
+    {
+        @Html.HiddenFor(r => r.LocationIMG, new { @Value = Model.LocationIMG })
+    }
+    catch (Exception) { }
+
+    @try
+    {
+        @Html.HiddenFor(r => r.FoodIMG, new { @Value = Model.FoodIMG })
+    }
+    catch (Exception) { }    
+    
+
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Name: ")

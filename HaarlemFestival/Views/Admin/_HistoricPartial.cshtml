@@ -10,7 +10,8 @@
     }
 
     @Html.HiddenFor(h => h.ActivityId)
-   
+    @Html.HiddenFor(h => h.EventType, new { @Value = EventType.HistoricHaarlem })
+
     @if (Model.GuideId != 0)
     {
         @Html.HiddenFor(h => h.GuideId, new { @Value = Model.GuideId })

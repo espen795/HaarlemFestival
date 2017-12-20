@@ -10,12 +10,37 @@
     }
 
     @Html.HiddenFor(t => t.ActivityId)
+    @Html.HiddenFor(h => h.EventType, new { @Value = EventType.TalkingHaarlem })
 
     @if(Model.TalkId != 0)
     {
         @Html.HiddenFor(t => t.TalkId, new { @Value = Model.TalkId })
         @Html.HiddenFor(t => t.Talk.TalkId, new { @Value = Model.Talk.TalkId })
     }
+
+    @try
+    {
+        @Html.HiddenFor(t => t.Talk.Person1IMG)
+    }
+    catch (Exception) { }
+
+    @try
+    {
+        @Html.HiddenFor(t => t.Talk.Person1AltIMG)
+    }
+    catch (Exception) { }
+
+    @try
+    {
+        @Html.HiddenFor(t => t.Talk.Person2IMG)
+    }
+    catch (Exception) { }
+
+    @try
+    {
+        @Html.HiddenFor(t => t.Talk.Person2AltIMG)
+    }
+    catch (Exception) { }
 
     <div class="form-group">
         <div class="input-group">
@@ -51,7 +76,7 @@
     </div>
     <div class="form-group">
         <div class="input-group">
-            @Html.Label("Name Person 1: ")
+            @Html.Label("Name Person 2: ")
             @Html.EditorFor(t => t.Talk.Person2)
             <br />
             @Html.Label("Images Person 2")

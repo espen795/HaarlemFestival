@@ -10,12 +10,19 @@
     }
 
     @Html.HiddenFor(j => j.ActivityId)
+    @Html.HiddenFor(h => h.EventType, new { @Value = EventType.JazzPatronaat })
 
     @if (Model.ArtistId != 0)
     {
         @Html.HiddenFor(j => j.ArtistId, new { @Value = Model.ArtistId });
         @Html.HiddenFor(j => j.artist.ArtistId, new { @Value = Model.artist.ArtistId });
     }
+
+    @try
+    {
+        @Html.HiddenFor(j => j.artist.ArtistImage, new { @Value = Model.artist.ArtistImage })
+    }
+    catch (Exception) { }
 
     <div class="form-group">
         <div class="input-group">

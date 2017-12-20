@@ -4,7 +4,6 @@
 @model EventData
 @{
     ViewBag.Title = "Manage";
-    StringBuilder stringBuilder = new StringBuilder();
 }
 
 <!-- Modal Delete Data -->
@@ -338,16 +337,11 @@
             <tbody class="eventData">
                 @foreach(Restaurant r in Model.Restaurants)
                 {
-                    stringBuilder.Clear();
-                    foreach (Cuisine c in r.Cuisines)
-                    {
-                        stringBuilder.Append(c.Naam).Append(", ");
-                    }
                     <tr>
                         <td>@r.Naam</td>
                         <td>@r.Description</td>
                         <td>@r.Rating</td>
-                        <td>@stringBuilder.ToString().Substring(0, stringBuilder.Length - 1)</td>
+                        <td>@string.Join(", ", r.Cuisines);</td>
                         <td><i onclick='ShowEventImage("Dinner/restaurants/@r.FoodIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick='ShowEventImage("Dinner/restaurants/@r.LocationIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick="OpenUpdateForm(@r.RestaurantId, 'Restaurant')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
@@ -374,17 +368,12 @@
             <tbody class="eventData">
                 @foreach(Dinner activity in Model.Activities.OfType<Dinner>())
                 {
-                    stringBuilder.Clear();
-                    foreach (Cuisine c in activity.Restaurant.Cuisines)
-                    {
-                        stringBuilder.Append(c.Naam).Append(", ");
-                    }
                     <tr>
                         <td>@activity.Restaurant.Naam</td>
                         <td>@activity.Address</td>
                         <td>@activity.StartSession.ToString("dddd dd-MM-yy H:mm") - @activity.EndSession.ToString("H:mm")</td>
                         <td>@activity.TotalTickets</td>
-                        <td>@stringBuilder.ToString().Substring(0,stringBuilder.Length - 1)</td>
+                        <td>@string.Join(", ", myObjects);</td>
                         <td>@String.Format("{0:0.00}", activity.Price)</td>
                         <td>@String.Format("{0:0.00}", activity.AlternativePrice)</td>                       
                         <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Dinner')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
