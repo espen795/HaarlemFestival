@@ -53,10 +53,10 @@
 
         <!-- Section 3-->
         <div class="event-section-3-dinner">
-            <div class="form-inline">
+            <div class="form-inline restaurant-index-select">
                 <div class="form-group">
                     <label>Cuisine:</label>
-                    <select class="form-control">
+                    <select class="form-control" id="cuisineselect" onchange="change()">
                         @foreach (Cuisine c in Model)
                         {
                             if (c.CuisineId == (int)ViewBag.CuisineId)

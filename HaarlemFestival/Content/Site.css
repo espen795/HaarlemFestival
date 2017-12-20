@@ -319,6 +319,7 @@ footer a:hover {
 
 .event-section-3-dinner{
     display:inline-block;
+    width: 100%;
 
 }
 
@@ -336,6 +337,8 @@ footer a:hover {
 }
 
 .restaurant-index-restaurant-fotonaam img {
+    width: 275px;
+    height: 200px;
     border-style: solid;
     border-width: 2px;
     border-color: #353238;
@@ -346,7 +349,7 @@ footer a:hover {
 }
 
 .restaurant-index-restaurants-restaurant tr, .restaurant-index-restaurants-restaurant td {
-        background-color: #FFFFFF;
+    background-color: #FFFFFF;
 }
 
 .dinnertable:nth-child(even) {
@@ -371,11 +374,12 @@ footer a:hover {
 }
 
 .restaurant-index-select {
-    display: inline;
-    width: 175px;
-    min-height: 25px;
-    margin-left: 5px;
-    margin-bottom: 5px;
+    text-align: center;]
+}
+
+.restaurant-index-select label{
+    display: inline-block;
+    float: left;
 }
 
 .restaurant-index-info {
@@ -420,8 +424,6 @@ footer a:hover {
 
 .restaurant-info-img img{
     margin: 10px;
-    width: 275px;
-    height:200;
     float: right;
 }
 
