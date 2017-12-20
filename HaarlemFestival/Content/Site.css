@@ -360,7 +360,26 @@ footer a:hover {
     text-align: right;
 }
 
+.restaurant-index-select {
+    margin: auto;
+    width: 100%;
+}
+
+.restaurant-index-select-label {
+    float: left;
+    font-weight: bold;
+}
+
+.restaurant-index-select {
+    display: inline;
+    width: 175px;
+    min-height: 25px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
 .restaurant-index-info {
+    text-align: center;
     max-width: 150px;
     min-width: 100px;
     text-align: left;
