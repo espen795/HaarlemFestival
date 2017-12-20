@@ -7,7 +7,8 @@ namespace HaarlemFestival.Models
 {
     public class EventData
     {
-        public List<Day> Dates;
+        public List<Day> Days;
+        public List<DateModel> Dates;
         public List<Guide> Guides;
         public List<Cuisine> Cuisines;
         public List<Restaurant> Restaurants;

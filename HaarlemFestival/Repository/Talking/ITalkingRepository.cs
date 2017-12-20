@@ -11,5 +11,6 @@ namespace HaarlemFestival.Repository.Talking
     {
         List<Models.Talking> GetAllTalks();
         Models.Talking GetTalkById(int id);
+        void SaveQuestionToDB(InterviewQuestion question);
     }
 }

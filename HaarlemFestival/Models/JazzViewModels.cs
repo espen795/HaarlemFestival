@@ -9,5 +9,6 @@ namespace HaarlemFestival.Models
     {
         public List<Artist> Artists { get; set; }
         public List<Jazz> Jazz { get; set; }
+        public List<Day> Days { get; set; }
     }
 }

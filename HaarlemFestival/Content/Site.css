@@ -291,7 +291,7 @@ footer a:hover {
  }
 
 .jazz .event-section-3 p {
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .jazz .event-section-3 p b:first-child {
@@ -617,7 +617,7 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
 
 .talk-questionbox {
     display: block;
-    width: 200px;
+    width: 230px;
     height: 100px;
 }
 .talk-bold {

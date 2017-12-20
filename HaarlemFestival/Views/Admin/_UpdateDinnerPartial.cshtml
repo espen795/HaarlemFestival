@@ -1,0 +1,8 @@
+﻿@using HaarlemFestival.Models;
+@model int
+
+@using (Html.BeginForm("UpdateDinner", "Admin", FormMethod.Post))
+{
+    Html.RenderAction("_DinnerPartial", "Admin", new { id = Model });
+}
+

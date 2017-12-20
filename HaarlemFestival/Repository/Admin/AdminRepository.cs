@@ -103,11 +103,6 @@ namespace HaarlemFestival.Repository.Admin
             db.SaveChanges();
         }
 
-        public void AddRestaurantCuisine(int id)
-        {
-            
-        }
-
         public void DeleteRestaurant(int id)
         {
             db.Dinners.RemoveRange(db.Dinners.Where(d => d.RestaurantId == id));
@@ -138,13 +133,23 @@ namespace HaarlemFestival.Repository.Admin
             return db.Guides.Find(id);
         }
 
+        public Cuisine GetCuisine(int id)
+        {
+            return db.Cuisines.Where(c => c.CuisineId == id).FirstOrDefault();
+        }
+
+        public Day GetDay(int id)
+        {
+            return db.Days.Where(d => d.DayId == id).FirstOrDefault();
+        }
+
         public EventData GetEventData()
         {
             EventData data = new EventData
             {
                 Activities = db.Activities.ToList(),
 
-                Dates = db.Days.ToList(),
+                Days = db.Days.ToList(),
                 Cuisines = db.Cuisines.ToList(),
                 Guides = db.Guides.ToList(),
                 Restaurants = db.Restaurants.ToList()

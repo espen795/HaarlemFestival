@@ -16,7 +16,6 @@ namespace HaarlemFestival.Repository.Admin
         void AddEvent(Activity activity);
         void AddRestaurant(Restaurant restaurant);
         void AddGuide(Guide guide);
-        void AddRestaurantCuisine(int id);
 
         void UpdateEvent(Activity activity);
         void UpdateRestaurant(Restaurant restaurant);
@@ -29,6 +28,8 @@ namespace HaarlemFestival.Repository.Admin
         Activity GetActivity(int id);
         Restaurant GetRestaurant(int id);
         Guide GetGuide(int id);
+        Cuisine GetCuisine(int id);
+        Day GetDay(int id);
 
         EventData GetEventData();
         List<Restaurant> GetRestaurants();

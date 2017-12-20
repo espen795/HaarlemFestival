@@ -9,6 +9,17 @@
         </div>
     }
 
+
+    @if (Model.RestaurantId != 0)
+    {
+    <div class="form-group">
+        <div class="input-group">
+            @Html.Label("Id:")
+            @Html.TextBoxFor(r => r.RestaurantId, new { @readonly = "readonly" })
+        </div>
+    </div>
+    }
+
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Name: ")
@@ -19,7 +30,7 @@
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Description: ")
-            @Html.TextBoxFor(r => r.Description)
+            @Html.TextAreaFor(r => r.Description)
         </div>
     </div>
 
@@ -33,9 +44,18 @@
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Cuisines:") <br />
-            @Html.DropDownList("Cuisine1", new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam"), new { @name = "CuisineId1" }) <br />
-            @Html.DropDownList("Cuisine2", new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam"), new { @name = "CuisineId2" }) <br />
-            @Html.DropDownList("Cuisine3", new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam"), new { @name = "CuisineId3" })
+
+            @if (Model.Cuisines != null)
+            {
+
+                foreach (Cuisine c in Model.Cuisines)
+                {
+                    @Html.DropDownList("Cuisines", new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam", c.CuisineId), "[Select a Cuisine]", new { @Value = c.CuisineId , @class = "Cuisines"}) <br />
+                }
+            }
+
+            @Html.DropDownList("Cuisines", new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam"), "[Select a Cuisine]", new { @class = "Cuisines" }) <br />
+            
         </div>
     </div>
 
