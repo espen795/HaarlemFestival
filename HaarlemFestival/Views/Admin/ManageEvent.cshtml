@@ -236,23 +236,28 @@
         function OpenDeleteConfirm(id, type)
         {
             sessionStorage.setItem("type", type);
+            console.log("Type set to: ", type);
             $("#deletePopup").attr("activityId", id);
         }
 
         function DeleteConfirmed() {
             var type = sessionStorage.getItem("type");
+            var url;
+            console.log(type);
 
-            if (type == "Restaurant")
+            switch (type)
             {
-                var url = "@Url.Action("DeleteRestaurant", "Admin")";
-            }
-            else if (type = "Guide")
-            {
-                var url = "@Url.Action("DeleteGuide", "Admin")";
-            }
-            else
-            {
-                var url = "@Url.Action("DeleteEvent", "Admin")";
+                case "Restaurant":
+                    url = "@Url.Action("DeleteRestaurant", "Admin")";
+                    break;
+
+                case "Guide":
+                    url = "@Url.Action("DeleteGuide", "Admin")";
+                    break;
+
+                case "Activity":
+                    url = "@Url.Action("DeleteEvent", "Admin")";
+                    break;
             }
 
             var activityId = $("#deletePopup").attr("activityId");
