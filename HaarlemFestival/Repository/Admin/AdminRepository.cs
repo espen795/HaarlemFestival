@@ -58,6 +58,15 @@ namespace HaarlemFestival.Repository.Admin
         public void UpdateEvent(Activity activity)
         {
             db.Entry(activity).State = EntityState.Modified;
+
+            switch (activity.EventType)
+            {
+                case EventType.TalkingHaarlem:
+                    Models.Talking talk = activity as Models.Talking;
+                    db.Entry(talk.Talk).State = EntityState.Modified;
+                    break;
+            }
+
             db.SaveChanges();
         }
 
