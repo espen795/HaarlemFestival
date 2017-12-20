@@ -373,7 +373,7 @@
                         <td>@activity.Address</td>
                         <td>@activity.StartSession.ToString("dddd dd-MM-yy H:mm") - @activity.EndSession.ToString("H:mm")</td>
                         <td>@activity.TotalTickets</td>
-                        <td>@string.Join(", ", myObjects);</td>
+                        <td>@string.Join(", ", activity.Restaurant.Cuisines);</td>
                         <td>@String.Format("{0:0.00}", activity.Price)</td>
                         <td>@String.Format("{0:0.00}", activity.AlternativePrice)</td>                       
                         <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Dinner')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
