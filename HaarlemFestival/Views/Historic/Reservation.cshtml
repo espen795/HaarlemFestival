@@ -70,7 +70,8 @@
             <li><a data-toggle="tab" href="#day3">On Saturday</a></li>
         </ul>
 
-        @{int i = 1;}
+        @{ int i = 1;
+            }
         <div class="tab-content">
             <div id="day1" class="tab-pane fade in active historic-tickets">
                 <div class="table table-hover table-responsive ticket-table">
@@ -78,7 +79,7 @@
                         <tr>
                             <th>Tickets</th>
                             <th>Group ticket</th>
-                            <th>Available tickets</th>
+                            <th>Available</th>
                             <th>Language</th>
                             <th>Guide</th>
                             <th>Time</th>
@@ -100,10 +101,10 @@
                                 <tr>
                                     <td class="ticketsInput" onchange = "CalcPrice(@i);">@Html.TextBoxFor(m => tour.BoughtTickets, new { @type = "number", @min = 0, @id = idtickets})</td>
                                     <td class="ticketsInput" onchange = "CalcPrice(@i);">@Html.TextBoxFor(m => tour.BoughtTickets, new { @type = "number", @min = 0, @id = idgrouptickets})</td>
-                                    <td>@availableTickets</td>
+                                    <td>@availableTickets tickets</td>
                                     <td>@tour.Guide.LanguageName</td>
                                     <td>@tour.Guide.GuideName</td>
-                                    <td>@tour.StartSession.TimeOfDay</td>
+                                    <td>@tour.StartSession.TimeOfDay.ToString(@"hh\:mm")</td>
                                     <td><p id=@totalprice>€ -</p></td>
                                 </tr>
                                 i++;
