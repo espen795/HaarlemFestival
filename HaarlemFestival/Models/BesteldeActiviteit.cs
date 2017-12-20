@@ -11,8 +11,8 @@ namespace HaarlemFestival.Models
         public int ReserveringId { get; set; }
         public virtual Reservering Reservering { get; set; }
         public int Aantal { get; set; }
+        public int AantalAlternatief { get; set; }
         public string Opmerking { get; set; }
-        public int ActiviteitId { get; set; }
         public virtual Activity Activiteit { get; set; }
     }
 }
