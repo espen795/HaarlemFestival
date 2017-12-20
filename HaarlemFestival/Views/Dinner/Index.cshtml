@@ -53,22 +53,25 @@
 
         <!-- Section 3-->
         <div class="event-section-3-dinner">
-            <div class="restaurant-index-select">
-                <div class="restaurant-index-select-label">Cuisine: </div>
-                <select name="Cuisineselect" id="cuisineselect" onchange="change()">
-                    @foreach (Cuisine c in Model)
-                    {
-                        if (c.CuisineId == (int)ViewBag.CuisineId)
+            <div class="form-inline">
+                <div class="form-group">
+                    <label>Cuisine:</label>
+                    <select class="form-control">
+                        @foreach (Cuisine c in Model)
                         {
-                            <option value="@Url.Action("index", "dinner", new { id = c.CuisineId })" , selected>@c.Naam</option>
+                            if (c.CuisineId == (int)ViewBag.CuisineId)
+                            {
+                                <option value="@Url.Action("index", "dinner", new { id = c.CuisineId })" , selected>@c.Naam</option>
+                            }
+                            else
+                            {
+                                <option value="@Url.Action("index", "dinner", new { id = c.CuisineId })">@c.Naam</option>
+                            }
                         }
-                        else
-                        {
-                            <option value="@Url.Action("index", "dinner", new { id = c.CuisineId })">@c.Naam</option>
-                        }
-                    }
                     </select>
+                </div>
             </div>
+
             <div class="restaurant-index-restaurants">
                 @foreach (Cuisine cuisine in Model)
                 {
