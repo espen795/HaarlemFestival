@@ -124,7 +124,11 @@ namespace HaarlemFestival.Controllers
         [Authorize]
         public ActionResult AddRestaurant(Models.Restaurant restaurant, FormCollection collector)
         {
-            restaurant.Rating = restaurant.Rating + "/5";
+            if (restaurant.Rating.Length != 0)
+                restaurant.Rating = restaurant.Rating + "/5";
+            else
+                ModelState.AddModelError("NoRating", "Please enter a valid rating");
+
             if (ModelState.IsValid)
             {
                 try {
@@ -468,7 +472,10 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult UpdateRestaurant(Models.Restaurant restaurant, FormCollection collector)
         {
-            restaurant.Rating = restaurant.Rating + "/5";
+            if (restaurant.Rating != null)
+                restaurant.Rating = restaurant.Rating + "/5";
+            else
+                ModelState.AddModelError("NoRating", "Please enter a valid rating");
 
             restaurant.Cuisines = new List<Cuisine>();
             string[] cuisineIds = collector["Cuisine"].Split(',');

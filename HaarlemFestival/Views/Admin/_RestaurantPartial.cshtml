@@ -1,6 +1,15 @@
 ﻿@using HaarlemFestival.Models
 @model Restaurant
 
+<script>
+    $(document).ready(function () {
+        $("[type='number']").keypress(function (key)
+        {
+            key.preventDefault();
+        });
+    });
+</script>
+
     @if (ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Count() > 0)
     {
         <div id="bootstrapAlert" class="alert alert-danger alert-dismissible">
