@@ -26,7 +26,6 @@ namespace HaarlemFestival.Controllers
             List<Cuisine> Cuisines = new List<Cuisine>();
             Cuisine c = new Cuisine
             {
-                CuisineId = 99999,
                 Naam = "[Select an option]",
                 Restaurants = dinnerRepository.GetAllRestaurants()
             };

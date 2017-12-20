@@ -15,8 +15,7 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Index()
         {
-            List<Jazz> allJazz = jazzRepository.GetAllJazzs();
-        
+            List<Jazz> allJazz = jazzRepository.GetAllJazzs();     
             return View(allJazz);
         }
 
@@ -30,6 +29,13 @@ namespace HaarlemFestival.Controllers
                 ViewBag.Id = id;
             }
 
+            List<Jazz> allJazz = jazzRepository.GetAllJazzs();
+
+            return View(allJazz);
+        }
+
+        public ActionResult Reservation()
+        {
             List<Jazz> allJazz = jazzRepository.GetAllJazzs();
 
             return View(allJazz);
