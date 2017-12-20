@@ -1,5 +1,6 @@
 ﻿@using HaarlemFestival.Models;
 @using System.Collections.Generic;
+@using System.Globalization;
 @model TalkViewModel
 
 @{
@@ -61,7 +62,7 @@
                         }                     
                         <td>@talk.Talk.Naam</td>
                         <td>Free</td>
-                        <td>Thursday 26-07-2018 | 20:00 - 22:00</td>
+                        <td>@talk.Day.Date.ToShortDateString() Thursday 26-07-2018 | 20:00 - 22:00</td>
                         <td>Toneelschuur</td>
                     </tr>
                     }
@@ -83,12 +84,12 @@
                      <section class="talk-question-receiver">
                          <p>Question For: </p>
                          @Html.DropDownListFor(
-             m => m.Question.Receiver, new SelectList(new List<Object> { talk.Talk.Person1, talk.Talk.Person2 }),
-             "[Select a person..]"
-             )
+                         m => m.Question.Receiver, new SelectList(new List<Object> { talk.Talk.Person1, talk.Talk.Person2 }),
+                         "[Select a person..]"
+                         )
                       </section> <!-- Receiver -->
                       
-                        @Html.TextAreaFor(m => m.Question.Content, new { @class = "talk-questionbox", placeholder = "You can type your question here." });
+                      @Html.TextAreaFor(m => m.Question.Content, new { @class = "talk-questionbox", placeholder = "You can type your question here." });
 
                  </section> <!-- Talk question -->
              }
