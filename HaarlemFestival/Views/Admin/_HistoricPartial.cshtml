@@ -9,12 +9,20 @@
         </div>
     }
 
+    @Html.HiddenFor(h => h.ActivityId)
+   
+    @if (Model.GuideId != 0)
+    {
+        @Html.HiddenFor(h => h.GuideId, new { @Value = Model.GuideId })
+        @Html.HiddenFor(h => h.Guide.GuideId, new { @Value = Model.Guide.GuideId })
+    }
+
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Day:")
-            @Html.DropDownListFor(d => d.Day.DayId, new SelectList((List<DateModel>)ViewData["Dates"], "DayId", "DateDisplay"), new { @name = "Day" })
+            @Html.DropDownListFor(h => h.Day.DayId, new SelectList((List<DateModel>)ViewData["Dates"], "DayId", "DateDisplay"), new { @name = "Day" })
             @Html.Label("Start:")
-            @Html.TextBoxFor(d => d.StartSession, new { @Value = Model.StartSession.ToString("HH:mm"), @name = "startTime", @type = "time" })
+            @Html.TextBoxFor(h => h.StartSession, new { @Value = Model.StartSession.ToString("HH:mm"), @name = "startTime", @type = "time" })
         </div>
     </div>
 
@@ -28,7 +36,7 @@
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Guide")
-            @Html.DropDownListFor(m => m.GuideId, new SelectList((List<Guide>)ViewData["Guides"], "GuideId", "GuideName"), new { @name = "GuideId" })
+            @Html.DropDownListFor(h => h.GuideId, new SelectList((List<Guide>)ViewData["Guides"], "GuideId", "GuideName"), new { @name = "GuideId" })
         </div>
     </div>
 

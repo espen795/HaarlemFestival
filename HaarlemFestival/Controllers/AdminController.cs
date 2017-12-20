@@ -444,7 +444,7 @@ namespace HaarlemFestival.Controllers
         {
             UpdatePrice(activity, collector);
             UpdateAlternativePrice(activity, collector);
-
+            activity.artist.ArtistId = activity.ArtistId;
             if (ModelState.IsValid)
             {
                 try
@@ -458,7 +458,7 @@ namespace HaarlemFestival.Controllers
                 activity.StartSession = activity.Day.Date.Add(TimeSpan.Parse(collector["StartSession"]));
                 activity.EndSession = activity.Day.Date.Add(TimeSpan.Parse(collector["EndSession"]));
 
-                adminRepository.AddEvent(activity);
+                adminRepository.UpdateEvent(activity);
             }
 
             return RedirectToAction("ManageEvent", "Admin");
@@ -467,6 +467,17 @@ namespace HaarlemFestival.Controllers
         public ActionResult UpdateRestaurant(Models.Restaurant restaurant, FormCollection collector)
         {
             restaurant.Rating = restaurant.Rating + "/5";
+
+            restaurant.Cuisines = new List<Cuisine>();
+            string[] cuisineIds = collector["Cuisine"].Split(',');
+            cuisineIds = cuisineIds.Distinct().ToArray();
+
+            foreach (string cuisine in cuisineIds)
+            {
+                if (cuisine.Length > 0)
+                    restaurant.Cuisines.Add(adminRepository.GetCuisine(Convert.ToInt32(cuisine)));
+            }
+            
             if (ModelState.IsValid)
             {
                 try
@@ -483,13 +494,6 @@ namespace HaarlemFestival.Controllers
                 }
                 catch (Exception) { }
 
-                restaurant.Cuisines = new List<Cuisine>();
-                string[] cuisineIds = collector["Cuisines"].Split(',');
-                cuisineIds = cuisineIds.Distinct().ToArray();
-
-                foreach (string cuisine in cuisineIds)
-                    restaurant.Cuisines.Add(adminRepository.GetCuisine(Convert.ToInt32(cuisine)));
-
                 adminRepository.UpdateRestaurant(restaurant);
             }
 
@@ -501,13 +505,11 @@ namespace HaarlemFestival.Controllers
             UpdatePrice(activity, collector);
             UpdateAlternativePrice(activity, collector);
 
-
             if (ModelState.IsValid)
             {
                 activity.Day = adminRepository.GetDay(activity.Day.DayId);
                 activity.StartSession = activity.Day.Date.Add(TimeSpan.Parse(collector["StartSession"]));
                 activity.EndSession = activity.Day.Date.Add(TimeSpan.Parse(collector["EndSession"]));
-
                 adminRepository.UpdateEvent(activity);
             }
             return RedirectToAction("ManageEvent", "Admin");
