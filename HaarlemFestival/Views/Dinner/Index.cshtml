@@ -55,7 +55,7 @@
         <div class="event-section-3-dinner">
             <div class="restaurant-index-select">
                 <div class="restaurant-index-select-label">Cuisine: </div>
-                <select name="Cuisineselect" class="restaurant-index-select" id="cuisineselect" onchange="change()">
+                <select name="Cuisineselect" id="cuisineselect" onchange="change()">
                     @foreach (Cuisine c in Model)
                     {
                         if (c.CuisineId == (int)ViewBag.CuisineId)
