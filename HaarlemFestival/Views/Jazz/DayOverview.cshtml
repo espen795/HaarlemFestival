@@ -14,7 +14,7 @@
         <!-- Section 1 -->
         <div class="event-section-1">
             <div class="col-md-6">
-                <h1 class="title">Jazz@Patronaat - @Url.RequestContext.RouteData.Values["id"]</h1>
+                <h1 class="title">Jazz@Patronaat</h1>
                 <p class="content">
                     Do you like some Jazz music? Then Jazz@Patronaat is the perfect event to go to! With over 18 bands performing in 4 days there must be something for you!
                 </p>
@@ -67,7 +67,8 @@
                                 <b>Price: </b> @if (j.Price != 0)
                                 {
                                     @j.Price
-                                } else
+                                }
+                                else
                                 {
                                     <span>Free!</span>
                                 }
@@ -81,7 +82,7 @@
                     </div>
                             
                 </div>
-                    
+
                 }
             }
 
