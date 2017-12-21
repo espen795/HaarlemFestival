@@ -21,9 +21,34 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Reservation()
         {
-            List<Historic> allTours = historicRepository.GetAllTours();
-            
-            return View(allTours);
+            HistoricView historicView = historicRepository.GetAllTours();
+
+            return View(historicView);
+        }
+
+        [HttpPost]
+        public ActionResult Book(HistoricView activiteit)
+        {
+            List<BesteldeActiviteit> b = new List<BesteldeActiviteit>();
+            // Session existing?
+            if (Session["current_order"] != null)
+            {
+                b.AddRange((List<BesteldeActiviteit>)Session["current_order"]);
+            }
+      
+            // In the session
+            foreach (BesteldeActiviteit act in activiteit.Reservering)
+            {
+                if(act.Aantal != 0 || act.AantalAlternatief != 0)
+                {
+                    act.Activiteit = historicRepository.GetTourForId(act.Activiteit.ActivityId);
+                    b.Add(act);
+                }
+            }
+
+            Session["current_order"] = b;
+            // Partial view continue or basket
+            return RedirectToAction("Reservation", "Historic");
         }
     }
 }

@@ -1,5 +1,14 @@
-﻿@{
+﻿@using HaarlemFestival.Models;
+@using System.Collections.Generic;
+@model List<BesteldeActiviteit>
+
+@{
     ViewBag.Title = "Basket";
 }
 
 <h2>Basket</h2>
+
+@foreach (BesteldeActiviteit act in Model)
+{
+    <p>@act.Activiteit.ActivityId</p>
+}
