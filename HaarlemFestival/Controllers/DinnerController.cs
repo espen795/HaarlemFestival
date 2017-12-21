@@ -14,15 +14,13 @@ namespace HaarlemFestival.Controllers
     public class DinnerController : Controller
     {
         private IDinnerRepository dinnerRepository = new DinnerRepository();
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            List<Restaurant> allRestaurants = dinnerRepository.GetAllRestaurants();
+            if (id == null)
+            {
+                id = 0;
+            }
 
-            return View(allRestaurants);
-        }
-
-        public ActionResult Index2()
-        {
             List<Cuisine> Cuisines = new List<Cuisine>();
             Cuisine c = new Cuisine
             {
@@ -31,7 +29,7 @@ namespace HaarlemFestival.Controllers
             };
             Cuisines.Add(c);
             Cuisines.AddRange(dinnerRepository.GetAllCuisines());
-
+            ViewBag.CuisineId = id;
             return View(Cuisines);
         }
 

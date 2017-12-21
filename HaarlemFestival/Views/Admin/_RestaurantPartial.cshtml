@@ -1,6 +1,15 @@
 ﻿@using HaarlemFestival.Models
 @model Restaurant
 
+<script>
+    $(document).ready(function () {
+        $("[type='number']").keypress(function (key)
+        {
+            key.preventDefault();
+        });
+    });
+</script>
+
     @if (ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Count() > 0)
     {
         <div id="bootstrapAlert" class="alert alert-danger alert-dismissible">
@@ -9,16 +18,23 @@
         </div>
     }
 
-
     @if (Model.RestaurantId != 0)
     {
-    <div class="form-group">
-        <div class="input-group">
-            @Html.Label("Id:")
-            @Html.TextBoxFor(r => r.RestaurantId, new { @readonly = "readonly" })
-        </div>
-    </div>
+        @Html.HiddenFor(r => r.RestaurantId, new { @Value = Model.RestaurantId})
     }
+
+    @try
+    {
+        @Html.HiddenFor(r => r.LocationIMG, new { @Value = Model.LocationIMG })
+    }
+    catch (Exception) { }
+
+    @try
+    {
+        @Html.HiddenFor(r => r.FoodIMG, new { @Value = Model.FoodIMG })
+    }
+    catch (Exception) { }    
+    
 
     <div class="form-group">
         <div class="input-group">
@@ -50,11 +66,11 @@
 
                 foreach (Cuisine c in Model.Cuisines)
                 {
-                    @Html.DropDownList("Cuisines", new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam", c.CuisineId), "[Select a Cuisine]", new { @Value = c.CuisineId , @class = "Cuisines"}) <br />
+                    @Html.DropDownList("Cuisine", new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam", c.CuisineId), "[Select a Cuisine]", new { @Value = c.CuisineId , @class = "Cuisines"}) <br />
                 }
             }
 
-            @Html.DropDownList("Cuisines", new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam"), "[Select a Cuisine]", new { @class = "Cuisines" }) <br />
+            @Html.DropDownList("Cuisine", new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam"), "[Select a Cuisine]", new { @class = "Cuisines" }) <br />
             
         </div>
     </div>
