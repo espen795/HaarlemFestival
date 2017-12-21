@@ -13,8 +13,7 @@
         $("#JazzForm").show();
     });
 
-    function AddEventFilter()
-    {
+    function AddEventFilter() {
         var event = $("#selectEvent").val();
 
         $('.addDataForm').each(function () {
@@ -48,6 +47,47 @@
         }
     }
 
+    function AddEvent(type) {
+        switch (type) {
+            case "jazz":
+                url = "@Url.Action("AddJazz", "Admin")";
+                break;
+
+            case "restaurant":
+                url = "@Url.Action("AddRestaurant", "Admin")";
+                break;
+
+            case "dinner":
+                url = "@Url.Action("AddDinner", "Admin")";
+                break;
+
+            case "talking":
+                url = "@Url.Action("AddTalking", "Admin")";
+                break;
+
+            case "guide":
+                url = "@Url.Action("AddGuide", "Admin")";
+                break;
+
+            case "historic":
+                url = "@Url.Action("AddHistoric", "Admin")";
+                break;
+        }
+
+        $.ajax({
+            type: 'post',
+            url: url,
+            data: $(this).serialize(),
+            success: function () {
+                window.location.reload();
+            },
+            failure: function () {
+                alert("test");
+            }
+        });
+    }
+
+
 </script>
 
 @Html.Label("Select an event:")
@@ -60,13 +100,25 @@
     <option value="HistoricHaarlem">Historic Haarlem</option>
 </select>
 
+<div id="errors">
+    <div id="bootstrapAlert" class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <span class="loginErrors"></span>
+    </div>
+</div>
+
 
 <div id="JazzForm" class="addDataForm">
-@using (Html.BeginForm("AddJazz", "Admin", FormMethod.Post))
+@using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "POST", OnSuccess = "console.log('success')", OnFailure = "console.log('failure')" } ))
 {
     Html.RenderAction("_JazzPartial", "Admin");
 }
 </div>
+<!--using (Html.BeginForm("AddJazz", "Admin", FormMethod.Post))
+{
+    Html.RenderAction("_JazzPartial", "Admin");
+}
+</div>-->
 
 <div id="RestaurantForm" class="addDataForm">
 @using (Html.BeginForm("AddRestaurant", "Admin", FormMethod.Post))

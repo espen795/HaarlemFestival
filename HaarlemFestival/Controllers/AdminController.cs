@@ -91,7 +91,7 @@ namespace HaarlemFestival.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult AddJazz(HaarlemFestival.Models.Jazz activity, FormCollection collector)
+        public void AddJazz(HaarlemFestival.Models.Jazz activity, FormCollection collector)
         {
             activity.EventType = EventType.JazzPatronaat;
             activity.BoughtTickets = 0;
@@ -116,8 +116,6 @@ namespace HaarlemFestival.Controllers
 
                 adminRepository.AddEvent(activity);
             }
-
-            return RedirectToAction("ManageEvent", "Admin");
         }
 
         [HttpPost]
