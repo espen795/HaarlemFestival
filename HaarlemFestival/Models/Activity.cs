@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HaarlemFestival.Models
 {
-    public abstract class Activity
+    public class Activity
     {
         public int ActivityId { get; set; }
         public EventType EventType { get; set; }

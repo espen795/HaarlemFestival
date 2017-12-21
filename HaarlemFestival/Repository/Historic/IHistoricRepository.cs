@@ -9,8 +9,10 @@ namespace HaarlemFestival.Repository.Historic
 {
     interface IHistoricRepository
     {
-        List<Models.Historic> GetAllTours();
+        HistoricView GetAllTours();
 
-        List<Models.Location> GetAllLocations();
+        List<Location> GetAllLocations();
+
+        Models.Historic GetTourForId(int id);
     }
 }
