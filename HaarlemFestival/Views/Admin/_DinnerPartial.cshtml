@@ -9,6 +9,9 @@
         </div>
     }
 
+    @Html.HiddenFor(d => d.ActivityId)
+    @Html.HiddenFor(h => h.EventType, new { @Value = EventType.DinnerInHaarlem })
+
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Restaurant:")
