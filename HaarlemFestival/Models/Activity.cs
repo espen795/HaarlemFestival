@@ -21,18 +21,17 @@ namespace HaarlemFestival.Models
         [Required(ErrorMessage = "Please enter the price of the event.")]
         [Display(Name = "Price")]
         [DataType(DataType.Currency)]
-        [RegularExpression("([0-9]*[.,]\\d\\d*)", ErrorMessage = "Please fill in a valid price")]
         [DisplayFormat(DataFormatString = "{0:C2}")]
         public float? Price { get; set; }
 
         [Display(Name = "Alternative Price")]
         [DataType(DataType.Currency)]
-        [RegularExpression("([0-9]*[.,]\\d\\d*)", ErrorMessage = "Please fill in a valid price")]
         [DisplayFormat(DataFormatString = "{0:C2}")]
         public float? AlternativePrice { get; set; }
 
         [Required(ErrorMessage = "Please enter the total amount of tickets.")]
         [Display(Name = "Total Tickets")]
+        [Range(1, Int32.MaxValue, ErrorMessage = "There has to be atleast 1 ticket")]
         public int TotalTickets { get; set; }
 
         [Display(Name = "Bought Tickets")]

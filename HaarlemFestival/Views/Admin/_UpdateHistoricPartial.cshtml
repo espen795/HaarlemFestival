@@ -1,7 +1,7 @@
 ﻿@using HaarlemFestival.Models;
 @model int
 
-@using (Html.BeginForm("UpdateHistoric", "Admin", FormMethod.Post))
+@using (Ajax.BeginForm("UpdateHistoric", "Admin", new AjaxOptions { HttpMethod = "POST" }))
 {
     Html.RenderAction("_HistoricPartial", "Admin", new { id = Model });
 }

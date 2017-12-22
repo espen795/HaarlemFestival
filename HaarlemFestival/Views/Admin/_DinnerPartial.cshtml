@@ -32,31 +32,31 @@
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Price:")
-            @Html.TextBoxFor(d => d.Price, new { @Value = String.Format("{0:0.00}", Model.Price) })
+            @Html.TextBoxFor(d => d.Price, new { @placeholder = "0.00", @Value = String.Format("{0:0.00}", Model.Price) })
         </div>
     </div>
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Price (12-):")
-            @Html.TextBoxFor(d => d.AlternativePrice, new { @Value = String.Format("{0:0.00}", Model.AlternativePrice) })
+            @Html.TextBoxFor(d => d.AlternativePrice, new { @placeholder = "0.00", @Value = String.Format("{0:0.00}", Model.AlternativePrice) })
         </div>
     </div>
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Seats: ")
-            @Html.EditorFor(d => d.TotalTickets)
+            @Html.TextBoxFor(d => d.TotalTickets, new { @type = "number", @placeholder = 0, @min = 0 })
         </div>
     </div>
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Phonenumber: ")
-            @Html.EditorFor(d => d.Phonenumber)
+            @Html.TextBoxFor(d => d.Phonenumber, new { @placeholder = "Phonenumber" })
         </div>
     </div>
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Address: ")
-            @Html.EditorFor(d => d.Address)
+            @Html.TextBoxFor(d => d.Address, new { @placeholder = "Address" })
         </div>
     </div>
 

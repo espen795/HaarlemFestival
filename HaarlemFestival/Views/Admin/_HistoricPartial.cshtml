@@ -44,7 +44,7 @@
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Total Tickets:")
-            @Html.EditorFor(h => h.TotalTickets)
+            @Html.EditorFor(h => h.TotalTickets, new { @placeholder = 0, @min = 0 })
         </div>
     </div>
 

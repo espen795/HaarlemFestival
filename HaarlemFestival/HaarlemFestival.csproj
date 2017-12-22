@@ -323,6 +323,7 @@
     <Content Include="Views\Admin\_UpdateJazzPartial.cshtml" />
     <Content Include="Views\Admin\_UpdateRestaurantPartial.cshtml" />
     <Content Include="Views\Admin\_UpdateGuidePartial.cshtml" />
+    <Content Include="Views\Admin\_ModelErrors.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

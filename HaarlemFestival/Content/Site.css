@@ -883,16 +883,16 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
         font-size: 30px;
     }
 
-    #loginError {
-        max-width: 400px;
-        text-align: center;
-        opacity: 0;
-        text-align: center;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 50px;
-        margin-bottom: 50px;
-    }
+#loginError {
+    max-width: 400px;
+    text-align: center;
+    opacity: 0;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
 
     #loginArea .username, #loginArea .password {
         height: 50px;
@@ -959,6 +959,16 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
 
     #selectEvent {
         width: auto;
+    }
+
+    div.errorAlert {
+        text-align: center;
+        display: none;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
     #topFilterBar select {

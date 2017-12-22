@@ -3,7 +3,7 @@
 
 <script>
     $(document).ready(function () {
-        $("[type='number']").keypress(function (key)
+        $("#Rating").keypress(function (key)
         {
             key.preventDefault();
         });
@@ -39,21 +39,21 @@
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Name: ")
-            @Html.TextBoxFor(r => r.Naam)
+            @Html.TextBoxFor(r => r.Naam, new { @placeholder = "Restaurant Name" })
         </div>
     </div>
 
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Description: ")
-            @Html.TextAreaFor(r => r.Description)
+            @Html.TextAreaFor(r => r.Description, new { @placeholder = "Restaurant Description" })
         </div>
     </div>
 
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Rating: ")
-            @Html.TextBoxFor(r => r.Rating, new { @min = 0, @max = 5, @type = "number" }) / 5
+            @Html.TextBoxFor(r => r.Rating, new { @placeholder = 0, @min = 0, @max = 5, @type = "number" }) / 5
         </div>
     </div>
 
