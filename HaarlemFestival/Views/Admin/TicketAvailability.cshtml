@@ -111,17 +111,19 @@
 
         <div class="col-md-12" id="@activity.ActivityId">
             <div class="row">
-                <h3><strong>Tour Date: </strong>@activity.StartSession.ToString("dddd dd-MM-yyyy H:mm") - @activity.EndSession.ToString("H:mm")</h3>
-                <br />
-                <strong>Startlocation: </strong>@activity.Address
-                <br />
-                <strong>Guide: </strong>@activity.Guide.GuideName
-                <br />
-                <strong>Language: </strong>@activity.Guide.LanguageName (@activity.Guide.LanguageAbbr)
-                <br />
-                <strong>Price: </strong>€ @String.Format("{0:0.00}", activity.Price)
-                <br />
-                <strong>Group Price (Atleast 4 people): </strong>€ @String.Format("{0:0.00}", activity.AlternativePrice)
+                <div class="col-sm-12">
+                    <h3><strong>Tour Date: </strong>@activity.StartSession.ToString("dddd dd-MM-yyyy H:mm") - @activity.EndSession.ToString("H:mm")</h3>
+                    <br />
+                    <strong>Startlocation: </strong>@activity.Address
+                    <br />
+                    <strong>Guide: </strong>@activity.Guide.GuideName
+                    <br />
+                    <strong>Language: </strong>@activity.Guide.LanguageName (@activity.Guide.LanguageAbbr)
+                    <br />
+                    <strong>Price: </strong>€ @String.Format("{0:0.00}", activity.Price)
+                    <br />
+                    <strong>Group Price (Atleast 4 people): </strong>€ @String.Format("{0:0.00}", activity.AlternativePrice)
+                </div>
             </div>
             <div class="progress">
                 <div class="progress-bar progress-bar-danger" role="progressbar" style="width:@(boughtPercentage)%">

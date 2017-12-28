@@ -981,9 +981,9 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
         height: 100%;
     }
 
-        #topFilterBar select option {
-            height: 25px;
-        }
+    #topFilterBar select option {
+        height: 25px;
+    }
 
     #filterSystem .eventFilter:focus {
         border-color: #6495ed;
@@ -1004,9 +1004,9 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
         text-align: center !important;
     }
 
-        .eventData tr td i.glyphicon-remove, .eventData tr td i.glyphicon-pencil {
-            cursor: pointer;
-        }
+    .eventData tr td i.glyphicon-remove, .eventData tr td i.glyphicon-pencil {
+        cursor: pointer;
+    }
 
     /* MODAL VOOR IMAGE POPUP */
     /* The Modal (background) */
