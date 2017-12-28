@@ -348,9 +348,10 @@ namespace HaarlemFestival.Controllers
         }
 
         [Authorize]
-        public ActionResult Download()
+        public ActionResult TicketAvailability()
         {
-            return View();
+            List<Activity> activities = adminRepository.GetActivities();
+            return View(activities);
         }
 
         [Authorize]

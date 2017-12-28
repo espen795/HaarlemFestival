@@ -1,0 +1,74 @@
+﻿@using HaarlemFestival.Models
+@model List<Activity>
+
+<div class="container">
+
+    @foreach (Jazz activity in Model.OfType<Jazz>())
+    {
+        decimal boughtPercentage = Math.Round((decimal)activity.BoughtTickets,2) / Math.Round((decimal)activity.TotalTickets,2) * 100;
+        boughtPercentage = Math.Floor(boughtPercentage);
+
+        <div class="col-md-12" id="@activity.ActivityId">
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" role="progressbar" style="width:@(boughtPercentage)%">
+                    Bought Tickets: @activity.BoughtTickets
+                </div>
+                <div class="progress-bar progress-bar-success" role="progressbar" style="width:@(100 - boughtPercentage)%">
+                    Available Tickets: @(activity.TotalTickets - activity.BoughtTickets)
+                </div>
+            </div>
+        </div>
+    }
+
+    @foreach (Dinner activity in Model.OfType<Dinner>())
+    {
+        decimal boughtPercentage = Math.Round((decimal)activity.BoughtTickets, 2) / Math.Round((decimal)activity.TotalTickets, 2) * 100;
+        boughtPercentage = Math.Floor(boughtPercentage);
+
+        <div class="col-md-12" id="@activity.ActivityId">
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" role="progressbar" style="width:@(boughtPercentage)%">
+                    Bought Tickets: @activity.BoughtTickets
+                </div>
+                <div class="progress-bar progress-bar-success" role="progressbar" style="width:@(100 - boughtPercentage)%">
+                    Available Tickets: @(activity.TotalTickets - activity.BoughtTickets)
+                </div>
+            </div>
+        </div>
+    }
+
+    @foreach (Talking activity in Model.OfType<Talking>())
+    {
+        decimal boughtPercentage = Math.Round((decimal)activity.BoughtTickets, 2) / Math.Round((decimal)activity.TotalTickets, 2) * 100;
+        boughtPercentage = Math.Floor(boughtPercentage);
+
+        <div class="col-md-12" id="@activity.ActivityId">
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" role="progressbar" style="width:@(boughtPercentage)%">
+                    Bought Tickets: @activity.BoughtTickets
+                </div>
+                <div class="progress-bar progress-bar-success" role="progressbar" style="width:@(100 - boughtPercentage)%">
+                    Available Tickets: @(activity.TotalTickets - activity.BoughtTickets)
+                </div>
+            </div>
+        </div>
+    }
+
+    @foreach (Historic activity in Model.OfType<Historic>())
+    {
+        decimal boughtPercentage = Math.Round((decimal)activity.BoughtTickets, 2) / Math.Round((decimal)activity.TotalTickets, 2) * 100;
+        boughtPercentage = Math.Floor(boughtPercentage);
+
+        <div class="col-md-12" id="@activity.ActivityId">
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" role="progressbar" style="width:@(boughtPercentage)%">
+                    Bought Tickets: @activity.BoughtTickets
+                </div>
+                <div class="progress-bar progress-bar-success" role="progressbar" style="width:@(100 - boughtPercentage)%">
+                    Available Tickets: @(activity.TotalTickets - activity.BoughtTickets)
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

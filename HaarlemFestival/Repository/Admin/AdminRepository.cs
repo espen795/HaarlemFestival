@@ -167,6 +167,11 @@ namespace HaarlemFestival.Repository.Admin
             return data;
         }
 
+        public List<Activity> GetActivities()
+        {
+            return db.Activities.ToList();
+        }
+
         public List<Restaurant> GetRestaurants()
         {
             return db.Restaurants.ToList();

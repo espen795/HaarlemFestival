@@ -32,6 +32,7 @@ namespace HaarlemFestival.Repository.Admin
         Day GetDay(int id);
 
         EventData GetEventData();
+        List<Activity> GetActivities();
         List<Restaurant> GetRestaurants();
         List<Guide> GetGuides();
         List<Cuisine> GetCuisines();
