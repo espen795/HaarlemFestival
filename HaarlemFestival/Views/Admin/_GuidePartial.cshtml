@@ -9,24 +9,26 @@
         </div>
     }
 
+    @Html.HiddenFor(g => g.GuideId)
+
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Name:")
-            @Html.TextBoxFor(g => g.GuideName)
+            @Html.TextBoxFor(g => g.GuideName, new { @placeholder = "Guide Name" })
         </div>
     </div>
 
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Language")
-            @Html.TextBoxFor(g => g.LanguageName);
+            @Html.TextBoxFor(g => g.LanguageName, new { @placeholder = "Language" });
         </div>
     </div>
 
     <div class="form-group">
         <div class="input-group">
             @Html.Label("Language Abbreviation")
-            @Html.TextBoxFor(g => g.LanguageAbbr);
+            @Html.TextBoxFor(g => g.LanguageAbbr, new { @placeholder = "Language Abbreviation" });
         </div>
     </div>
 

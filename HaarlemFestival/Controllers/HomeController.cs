@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using HaarlemFestival.Models;
 
 namespace HaarlemFestival.Controllers
 {
@@ -29,9 +30,11 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Basket()
         {
+            List<BesteldeActiviteit> act = (List<BesteldeActiviteit>)Session["current_order"];
+
             ViewBag.Message = "Your shopping basket.";
 
-            return View();
+            return View(act);
         }
 
         public ActionResult Agenda()

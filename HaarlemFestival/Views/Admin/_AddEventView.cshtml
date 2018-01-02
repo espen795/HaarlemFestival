@@ -13,8 +13,7 @@
         $("#JazzForm").show();
     });
 
-    function AddEventFilter()
-    {
+    function AddEventFilter() {
         var event = $("#selectEvent").val();
 
         $('.addDataForm').each(function () {
@@ -60,37 +59,48 @@
     <option value="HistoricHaarlem">Historic Haarlem</option>
 </select>
 
+<div class="errorAlert">
+    <div id="bootstrapAlert" class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <span class="errorList"></span>
+    </div>
+</div>
 
 <div id="JazzForm" class="addDataForm">
-@using (Html.BeginForm("AddJazz", "Admin", FormMethod.Post))
+@using (Ajax.BeginForm("AddJazz", "Admin", new AjaxOptions { HttpMethod = "POST" }))
 {
     Html.RenderAction("_JazzPartial", "Admin");
 }
 </div>
+<!--using (Html.BeginForm("AddJazz", "Admin", FormMethod.Post))
+{
+    Html.RenderAction("_JazzPartial", "Admin");
+}
+</div>-->
 
 <div id="RestaurantForm" class="addDataForm">
-@using (Html.BeginForm("AddRestaurant", "Admin", FormMethod.Post))
+@using (Ajax.BeginForm("AddRestaurant", "Admin", new AjaxOptions { HttpMethod = "POST" }))
 {
     Html.RenderAction("_RestaurantPartial", "Admin");
 }
 </div>
     
 <div id="DinnerForm" class="addDataForm">
-@using (Html.BeginForm("AddDinner", "Admin", FormMethod.Post))
+@using (Ajax.BeginForm("AddDinner", "Admin", new AjaxOptions { HttpMethod = "POST" }))
 {
     Html.RenderAction("_DinnerPartial", "Admin");
 }
 </div>
 
 <div id="TalkingForm" class="addDataForm">
-@using (Html.BeginForm("AddTalking", "Admin", FormMethod.Post))
+@using (Ajax.BeginForm("AddTalking", "Admin", new AjaxOptions { HttpMethod = "POST" }))
 {
     Html.RenderAction("_TalkingPartial", "Admin");
 }
 </div>
 
 <div id="GuideForm" class="addDataForm">
-@using (Html.BeginForm("AddGuide", "Admin", FormMethod.Post))
+@using (Ajax.BeginForm("AddGuide", "Admin", new AjaxOptions { HttpMethod = "POST" }))
 {
     Html.RenderAction("_GuidePartial", "Admin");
 }
@@ -98,7 +108,7 @@
 
 <div id="HistoricForm" class="addDataForm">
 
-@using (Html.BeginForm("AddHistoric", "Admin", FormMethod.Post))
+@using (Ajax.BeginForm("AddHistoric", "Admin", new AjaxOptions { HttpMethod = "POST" }))
 {
     Html.RenderAction("_HistoricPartial", "Admin");
 }

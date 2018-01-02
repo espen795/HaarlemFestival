@@ -885,16 +885,16 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
         font-size: 30px;
     }
 
-    #loginError {
-        max-width: 400px;
-        text-align: center;
-        opacity: 0;
-        text-align: center;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 50px;
-        margin-bottom: 50px;
-    }
+#loginError {
+    max-width: 400px;
+    text-align: center;
+    opacity: 0;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
 
     #loginArea .username, #loginArea .password {
         height: 50px;
@@ -963,6 +963,16 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
         width: auto;
     }
 
+    div.errorAlert {
+        text-align: center;
+        display: none;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
     #topFilterBar select {
         width: 200px;
         height: 25px;
@@ -973,9 +983,9 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
         height: 100%;
     }
 
-        #topFilterBar select option {
-            height: 25px;
-        }
+    #topFilterBar select option {
+        height: 25px;
+    }
 
     #filterSystem .eventFilter:focus {
         border-color: #6495ed;
@@ -996,9 +1006,9 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
         text-align: center !important;
     }
 
-        .eventData tr td i.glyphicon-remove, .eventData tr td i.glyphicon-pencil {
-            cursor: pointer;
-        }
+    .eventData tr td i.glyphicon-remove, .eventData tr td i.glyphicon-pencil {
+        cursor: pointer;
+    }
 
     /* MODAL VOOR IMAGE POPUP */
     /* The Modal (background) */

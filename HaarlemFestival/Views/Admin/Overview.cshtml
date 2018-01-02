@@ -35,16 +35,6 @@
         </div>
     </div>
     <div class="col-md-4 col-md-offset-1 overviewContent" id="ManageEvent">
-
-        <!-- HEADER IMAGE 
-        <hr class="title-hr title-line-left">
-        <div class="event-header overviewHeader">
-            <div class="overlay">
-                <span class="header_tekst">Manage Events</span>
-            </div>
-        </div>
-        <hr class="title-hr title-line-right">-->
-
         <!-- INTRO TEXT -->
         <p class="introText">
             By clicking on one of these buttons you will be navigated to another page where you can Add, Update and Delete data of the chosen event.
@@ -60,23 +50,13 @@
     </div>
 
         <div class="col-md-4 col-md-offset-2 overviewContent" id="TicketSalesInformation">
-
-            <!-- HEADER IMAGE 
-            <hr class="title-hr title-line-left">
-            <div class="event-header">
-                <div class="overlay">
-                    <span class="header_tekst">Ticket & Sales information</span>
-                </div>
-            </div>
-            <hr class="title-hr title-line-right">-->
-
             <!-- INTROTEXT -->
             <p class="introText">
                 By clicking the Download button you will download an excel file which contains all information about tickets availability and sales. The information per event is distributed over different sheets.
             </p>
 
             <!-- BUTTON -->           
-            <div class="col-sm-3 col-sm-offset-4"><button class="btn btn-black" onclick="location.href='@Url.Action("Download", "Admin")'">Download</button></div>
+            <div class="col-sm-3 col-sm-offset-4"><button class="btn btn-black" onclick="location.href='@Url.Action("TicketAvailability", "Admin")'">Check Ticket Availability</button></div>
             
         </div>
 </div>

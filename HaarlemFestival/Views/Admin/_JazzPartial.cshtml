@@ -1,21 +1,20 @@
 ﻿@using HaarlemFestival.Models
 @model Jazz
 
-    @if (ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Count() > 0)
-    {
-        <div id="bootstrapAlert" class="alert alert-danger alert-dismissible">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <span class="loginErrors">@Html.ValidationSummary()</span>
-        </div>
-    }
-
     @Html.HiddenFor(j => j.ActivityId)
+    @Html.HiddenFor(h => h.EventType, new { @Value = EventType.JazzPatronaat })
 
     @if (Model.ArtistId != 0)
     {
         @Html.HiddenFor(j => j.ArtistId, new { @Value = Model.ArtistId });
         @Html.HiddenFor(j => j.artist.ArtistId, new { @Value = Model.artist.ArtistId });
     }
+
+    @try
+    {
+        @Html.HiddenFor(j => j.artist.ArtistImage, new { @Value = Model.artist.ArtistImage })
+    }
+    catch (Exception) { }
 
     <div class="form-group">
         <div class="input-group">
@@ -45,7 +44,7 @@
     <div class="form-group">
         <div class="input-group">
             @Html.LabelFor(j => j.TotalTickets)
-            @Html.EditorFor(j => j.TotalTickets, new { @placeholder = "Total Tickets" })
+            @Html.TextBoxFor(j => j.TotalTickets, new { @type = "number", @placeholder = "Total Tickets", @min = 0 })
         </div>
     </div>
 

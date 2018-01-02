@@ -4,7 +4,7 @@
 @model EventData
 @{
     ViewBag.Title = "Manage";
-    StringBuilder stringBuilder = new StringBuilder();
+    StringBuilder builder = new StringBuilder();
 }
 
 <!-- Modal Delete Data -->
@@ -70,6 +70,12 @@
                 <h4 class="modal-title" id="myModalLabel">Update Data</h4>
             </div>
 
+            <div class="errorAlert">
+                <div id="bootstrapAlert" class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <span class="errorList"></span>
+                </div>
+            </div>
             <!-- BODY -->
             <div class="modal-body">
 
@@ -99,9 +105,23 @@
 
             // Tooltips maken.
             $('[data-toggle="tooltip"]').tooltip();
+
+            SetFormOptions();
         })
 
-        // Nieuwe Functie aanmaken om iets te centreren.
+        function SetFormOptions()
+        {
+            // Ervoor zorgen dat de form niet de actie uitvoerd.
+            $("form").on("submit", function (form) {
+                form.preventDefault();
+            })
+
+            // Als een form gesubmit wordt
+            $("form").submit(function () {
+                SubmitForm(this);
+            });
+        }
+
         jQuery.fn.center = function () {
             this.css("position", "absolute"); // Position: Absolute toevoegen
 
@@ -227,8 +247,9 @@
         function OpenUpdateForm(id, type)
         {
             $.get('@Url.Action("_UpdateData", "Admin")', { id: id, type: type }, function (form) {
-                console.log(form);
                 $("#updatePopup .modal-body").html(form);
+                $(".errorAlert").css("display", "none");
+                SetFormOptions();
     });
         }
 
@@ -264,6 +285,27 @@
 
             $.post(url, { id: activityId });
             location.reload();
+        }
+
+        function SubmitForm(form) {
+            $.ajax({
+                type: 'post',
+                url: $(form).attr("action"),
+                data: $(form).serialize(),
+                complete: function (data) {
+                    console.log(data);
+                    console.log();
+
+                    if (data.responseJSON.success == true) {
+                        console.log("Successful");
+                        window.location.reload();
+                    }
+                    else {
+                        $(".errorAlert").css("display", "block");
+                        $(".errorList").html(data.responseJSON.errorList);
+                    }
+                }
+            });
         }
 
     </script>
@@ -336,18 +378,18 @@
                 </tr>
             </thead>
             <tbody class="eventData">
-                @foreach(Restaurant r in Model.Restaurants)
+                @foreach (Restaurant r in Model.Restaurants)
                 {
-                    stringBuilder.Clear();
+                    builder.Clear();
                     foreach (Cuisine c in r.Cuisines)
                     {
-                        stringBuilder.Append(c.Naam).Append(", ");
+                        builder.Append(c.Naam + ", ");
                     }
                     <tr>
                         <td>@r.Naam</td>
                         <td>@r.Description</td>
                         <td>@r.Rating</td>
-                        <td>@stringBuilder.ToString().Substring(0, stringBuilder.Length - 1)</td>
+                        <td>@builder</td>
                         <td><i onclick='ShowEventImage("Dinner/restaurants/@r.FoodIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick='ShowEventImage("Dinner/restaurants/@r.LocationIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick="OpenUpdateForm(@r.RestaurantId, 'Restaurant')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
@@ -372,19 +414,20 @@
                 </tr>
             </thead>
             <tbody class="eventData">
-                @foreach(Dinner activity in Model.Activities.OfType<Dinner>())
+                @foreach (Dinner activity in Model.Activities.OfType<Dinner>())
                 {
-                    stringBuilder.Clear();
+                    builder.Clear();
                     foreach (Cuisine c in activity.Restaurant.Cuisines)
                     {
-                        stringBuilder.Append(c.Naam).Append(", ");
+                        builder.Append(c.Naam + ", ");
                     }
+
                     <tr>
                         <td>@activity.Restaurant.Naam</td>
                         <td>@activity.Address</td>
                         <td>@activity.StartSession.ToString("dddd dd-MM-yy H:mm") - @activity.EndSession.ToString("H:mm")</td>
                         <td>@activity.TotalTickets</td>
-                        <td>@stringBuilder.ToString().Substring(0,stringBuilder.Length - 1)</td>
+                        <td>@builder</td>
                         <td>@String.Format("{0:0.00}", activity.Price)</td>
                         <td>@String.Format("{0:0.00}", activity.AlternativePrice)</td>                       
                         <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Dinner')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
@@ -404,7 +447,8 @@
                     <th>Location</th>
                     <th>Price</th>
                     <th>Maximum Tickets</th>
-                    <th>Image</th>
+                    <th>First Person</th>
+                    <th>Second Person</th>
                     <th colspan="2"></th>
                 </tr>
             </thead>
@@ -420,6 +464,7 @@
                         <td>@String.Format("{0:0.00}", activity.Price)</td>
                         <td>@activity.Talk.MaxTickets</td>
                         <td><i onclick='ShowEventImage("Talking/@activity.Talk.Person1")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
+                        <td><i onclick='ShowEventImage("Talking/@activity.Talk.Person2")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Talking')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>

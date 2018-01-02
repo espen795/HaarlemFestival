@@ -58,6 +58,15 @@ namespace HaarlemFestival.Repository.Admin
         public void UpdateEvent(Activity activity)
         {
             db.Entry(activity).State = EntityState.Modified;
+
+            switch (activity.EventType)
+            {
+                case EventType.TalkingHaarlem:
+                    Models.Talking talk = activity as Models.Talking;
+                    db.Entry(talk.Talk).State = EntityState.Modified;
+                    break;
+            }
+
             db.SaveChanges();
         }
 
@@ -156,6 +165,11 @@ namespace HaarlemFestival.Repository.Admin
             };
 
             return data;
+        }
+
+        public List<Activity> GetActivities()
+        {
+            return db.Activities.ToList();
         }
 
         public List<Restaurant> GetRestaurants()
