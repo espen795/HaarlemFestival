@@ -109,11 +109,10 @@
         decimal boughtPercentage = Math.Round((decimal)activity.BoughtTickets, 2) / Math.Round((decimal)activity.TotalTickets, 2) * 100;
         boughtPercentage = Math.Floor(boughtPercentage);
 
-        <div class="col-md-12" id="@activity.ActivityId">
+        <div class="col-md-6" id="@activity.ActivityId">
             <div class="row">
                 <div class="col-sm-12">
-                    <h3><strong>Tour Date: </strong>@activity.StartSession.ToString("dddd dd-MM-yyyy H:mm") - @activity.EndSession.ToString("H:mm")</h3>
-                    <br />
+                    <h4><strong>Tour Date: </strong>@activity.StartSession.ToString("dddd dd-MM-yyyy H:mm") - @activity.EndSession.ToString("H:mm")</h4>
                     <strong>Startlocation: </strong>@activity.Address
                     <br />
                     <strong>Guide: </strong>@activity.Guide.GuideName
