@@ -55,7 +55,7 @@
         <div class="event-section-3-dinner">
             <div class="form-inline restaurant-index-select">
                 <div class="form-group">
-                    <label>Cuisine:</label>
+                    <label class="restaurant-index-select-label">Cuisine:</label>
                     <select class="form-control" id="cuisineselect" onchange="change()">
                         @foreach (Cuisine c in Model)
                         {
@@ -96,7 +96,7 @@
                                                 }
                                                 else
                                                 {
-                                                    @c.Naam
+                                                    <br /> @c.Naam
                                                 }
                                             }
                                         </td>

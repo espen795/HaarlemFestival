@@ -52,9 +52,11 @@ namespace HaarlemFestival.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            List<Dinner> OptionsPerRestaurant = dinnerRepository.DinnersPerRestaurant((int)id);
+            DinnerView dinnerView = new DinnerView();
 
-            return View(OptionsPerRestaurant);
+            dinnerView.Dinners = dinnerRepository.DinnersPerRestaurant((int)id);
+
+            return View(dinnerView);
         }
     }
 }

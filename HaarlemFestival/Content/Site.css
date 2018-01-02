@@ -323,6 +323,16 @@ footer a:hover {
 
 }
 
+.restaurant-index-select-label {
+    margin-right: 5px;
+    margin-top: 7px;
+}
+
+#cuisineselect {
+    width: 213px;
+    margin-bottom: 5px;
+}
+
 .restaurant-index-restaurants-restaurant {
     float: left;
     max-width: 275px;
@@ -344,8 +354,9 @@ footer a:hover {
     border-color: #353238;
 }
 
-.restaurant-index-restaurants-restaurant {
+.restaurant-index-restaurant-info {
     border: none;
+    width: 275px;
 }
 
 .restaurant-index-restaurants-restaurant tr, .restaurant-index-restaurants-restaurant td {
@@ -366,20 +377,19 @@ footer a:hover {
 .restaurant-index-select {
     margin: auto;
     width: 100%;
+    margin-bottom: 10px;
 }
 
 .restaurant-index-select-label {
     float: left;
     font-weight: bold;
+    display: inline-block;
+    float: left;
 }
 
 .restaurant-index-select {
-    text-align: center;]
-}
+    text-align: center;
 
-.restaurant-index-select label{
-    display: inline-block;
-    float: left;
 }
 
 .restaurant-index-info {
@@ -404,11 +414,16 @@ footer a:hover {
     font-size: 20px;
 }
 
-.restaurant-info {
+.restaurant-info-title, .restaurant-reservation-title {
+    margin-left: 10px;
+}
+
+.restaurant-info-table {
     display: inline-block;
     float: left;
     font-size: 17px;
-    max-width: 550px;
+    max-width: 540px;
+    margin-left: 10px;
 }
 
 .restaurant-info-names {
@@ -422,12 +437,17 @@ footer a:hover {
     text-align: left;
 }
 
-.restaurant-info-img img{
+.restaurant-info-img img, .restaurant-reservation-img img{
     margin: 10px;
     float: right;
 }
 
-.restaurant-info-button-reservation, .restaurant-info-button-back {
+.restaurant-info-buttons, .restaurant-reservation-buttons {
+    margin-top: 5px;
+    max-width: 575px;
+}
+
+.restaurant-info-button-reservation, .restaurant-info-button-back, .restaurant-reservation-button-back, .restaurant-reservation-button-reservation {
     margin: 10px;
     color: #FFFFFF;
     background-color: #353238;
@@ -437,8 +457,14 @@ footer a:hover {
     text-align: center;
 }
 
-.restaurant-info-button-reservation {
+.restaurant-info-button-reservation, restaurant-reservation-button-reservation {
     float: right;
+}
+
+
+.restaurant-reservation-intro {
+    margin-left: 10px;
+
 }
 
 /* ------------------------------Talking Haarlem-------------------------------*/

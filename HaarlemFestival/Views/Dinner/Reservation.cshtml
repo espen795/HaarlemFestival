@@ -1,5 +1,40 @@
-﻿@{
-    ViewBag.Title = "Dinner in Haarlem";
+﻿@using HaarlemFestival.Models;
+@using System.Collections.Generic;
+@using System.Data.Entity;
+@model DinnerView
+@{
+    ViewBag.Title = "Reservation";
 }
 
-<h2>Reservation</h2>
+<div class="event-banner dinner"></div>
+
+<div class="event container">
+    <div class="row">
+        <!-- Section 1 -->
+        <div class="event-section-1-dinner">
+            <div class="restaurant-reservation-img">
+                <img src="/images/Dinner/restaurants/@Model.Dinners[0].Restaurant.LocationIMG" alt="Picture not found" />
+            </div>
+            <h1 class="restaurant-reservation-title">@Model.Dinners[0].Restaurant.Naam</h1>
+            <p class="restaurant-reservation-intro">Order your tickets for @Model.Dinners[0].Restaurant.Naam below. The price for people over 12 years old is €@Model.Dinners[0].Price.ToString() and for childeren under 12 years it is €@Model.Dinners[0].AlternativePrice.ToString()</p>
+            @using (Html.BeginForm())
+            {
+                <label for="BesteldeActiviteit_Aantal">Amount of tickets (&gt;12 Y/O)</label>
+                @Html.TextBoxFor(m => Model.BesteldeActiviteit.Aantal, new { @type = "number", @min = 0, @value = "0"})<br />
+                <label for="BesteldeActiviteit_AantalAlternatief">Amount of tickets (&lt;12 Y/O)</label>
+                @Html.TextBoxFor(m => Model.BesteldeActiviteit.AantalAlternatief, new { @type = "number", @min = 0, @value = "0"})
+                @Html.DropDownListFor(m => Model.Dinners)
+
+                <label for="">Please tell us anything we might need to know (I.e. allergies)</label>
+                @Html.TextAreaFor(m => Model.BesteldeActiviteit.Opmerking)
+
+
+                <div class="restaurant-reservation-buttons">
+                    <button class="restaurant-reservation-button-back" type="button" onclick="location.href='@Url.Action("Index", "Dinner")'">Back to overview</button>
+                    <button class="restaurant-reservation-button-reservation" type="submit"> Add to basket</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
