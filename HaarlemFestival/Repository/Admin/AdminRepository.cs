@@ -73,6 +73,7 @@ namespace HaarlemFestival.Repository.Admin
         public void UpdateRestaurant(Restaurant restaurant)
         {
             db.Entry(restaurant).State = EntityState.Modified;
+            restaurant.Cuisines.ForEach(c => db.Entry(c).State = EntityState.Modified);
             db.SaveChanges();
         }
 
