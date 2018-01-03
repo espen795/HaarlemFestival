@@ -20,13 +20,16 @@
             @using (Html.BeginForm())
             {
                 <label for="BesteldeActiviteit_Aantal">Amount of tickets (&gt;12 Y/O)</label>
-                @Html.TextBoxFor(m => Model.BesteldeActiviteit.Aantal, new { @type = "number", @min = 0, @value = "0"})<br />
+                @Html.TextBoxFor(m => Model.BesteldeActiviteit.Aantal, new { @type = "number", @min = 0, @value = "0" })<br />
                 <label for="BesteldeActiviteit_AantalAlternatief">Amount of tickets (&lt;12 Y/O)</label>
-                @Html.TextBoxFor(m => Model.BesteldeActiviteit.AantalAlternatief, new { @type = "number", @min = 0, @value = "0"})
-                @Html.DropDownListFor(m => Model.Dinners)
+                @Html.TextBoxFor(m => Model.BesteldeActiviteit.AantalAlternatief, new { @type = "number", @min = 0, @value = "0" })<br />
+                <label for="dinnerdatefilter">Select your day</label>
+                @Html.DropDownListFor(m => Model.daystring, new SelectList(Model.Days, "", "Naam"), "Select a Date.", new { @id = "dinnerdatefilter", @onchange = "FilterData()" })<br />
+                <label for="dinnertimefilter">Select your time</label>
+                @Html.DropDownListFor(m => Model.timestring, new SelectList(Model.Days, "", "Naam"), "Select a Date.", new { @id = "dinnerdatefilter", @onchange = "FilterData()" })<br />
 
                 <label for="">Please tell us anything we might need to know (I.e. allergies)</label>
-                @Html.TextAreaFor(m => Model.BesteldeActiviteit.Opmerking)
+                @Html.TextAreaFor(m => Model.BesteldeActiviteit.Opmerking)<br />
 
 
                 <div class="restaurant-reservation-buttons">

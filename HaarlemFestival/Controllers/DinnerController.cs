@@ -55,6 +55,23 @@ namespace HaarlemFestival.Controllers
             DinnerView dinnerView = new DinnerView();
 
             dinnerView.Dinners = dinnerRepository.DinnersPerRestaurant((int)id);
+            List<Day> days = new List<Day>();
+            for (int i = 0; i < dinnerView.Dinners.Count; i++)
+            {
+                if (i == 0)
+                {
+                    days.Add(dinnerView.Dinners[i].Day);
+                }
+                else
+                {
+                    if (dinnerView.Dinners[i].Day != dinnerView.Dinners[i - 1].Day)
+                    {
+                        days.Add(dinnerView.Dinners[i].Day);
+                    }
+                }
+            }
+
+            dinnerView.Days = days;
 
             return View(dinnerView);
         }

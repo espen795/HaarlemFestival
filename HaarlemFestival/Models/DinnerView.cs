@@ -9,5 +9,7 @@ namespace HaarlemFestival.Models
     {
         public List<Dinner> Dinners { get; set; }
         public BesteldeActiviteit BesteldeActiviteit { get; set; }
+        public List<Day> Days { get; set; }
+        public string daystring { get; set; }
     }
 }
