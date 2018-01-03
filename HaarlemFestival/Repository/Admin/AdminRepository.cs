@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using HaarlemFestival.Models;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 
 namespace HaarlemFestival.Repository.Admin
 {
