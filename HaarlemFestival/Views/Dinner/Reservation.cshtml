@@ -5,9 +5,11 @@
 @{
     ViewBag.Title = "Reservation";
 }
+
 <script>
-    function FilterDate() {
+    function FilterData() {
         $('#dinnertimefilter').show();
+        @Model.DayString = document.getElementById("dinnerdatefilter").value;
         @{
             foreach (Dinner dinner in Model.Dinners)
             {
@@ -19,6 +21,7 @@
         }
     }
 </script>
+
 <div class="event-banner dinner"></div>
 
 <div class="event container">
@@ -37,9 +40,9 @@
                 <label for="BesteldeActiviteit_AantalAlternatief">Amount of tickets (&lt;12 Y/O)</label>
                 @Html.TextBoxFor(m => Model.BesteldeActiviteit.AantalAlternatief, new { @type = "number", @min = 0, @value = "0" })<br />
                 <label for="dinnerdatefilter">Select your day</label>
-                @Html.DropDownListFor(m => Model.DayString, new SelectList(Model.Days, "", "Naam"), "Select a Date.", new { @id = "dinnerdatefilter", @onchange = "FilterDate()" })<br />
+                @Html.DropDownListFor(m => Model.DayString, new SelectList(Model.Days, "", "Naam"), "Select a Date", new { @id = "dinnerdatefilter", @onchange = "FilterData()" })<br />
                 <label for="dinnertimefilter">Select your starttime</label>
-                @Html.DropDownListFor(m => Model.TimeString, new SelectList(Model.DinnersOnDay, "", "TimeString"), "Select a Date.", new { @id = "dinnertimefilter", @onchange = "FilterData()" })<br />
+                @Html.DropDownListFor(m => Model.TimeString, new SelectList(Model.DinnersOnDay, "", "TimeString"), "Select a Date.", new { @id = "dinnertimefilter", @onchange = "Filter()" })<br />
                 <label for="">Please tell us anything we might need to know (I.e. allergies)</label>
                 @Html.TextAreaFor(m => Model.BesteldeActiviteit.Opmerking)<br />
 
