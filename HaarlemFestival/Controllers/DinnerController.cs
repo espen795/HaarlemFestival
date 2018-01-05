@@ -72,8 +72,15 @@ namespace HaarlemFestival.Controllers
             }
 
             dinnerView.Days = days;
-            dinnerView.DinnersOnDay = new List<Dinner>();
             return View(dinnerView);
+        }
+
+        [HttpPost]
+        public ActionResult AddReservation(DinnerView dinnerView, FormCollection collection)
+        {
+            dinnerView.BesteldeActiviteit.BesteldeActiviteitId = Convert.ToInt32(collection["Activity"]);
+
+            return RedirectToAction("Index");
         }
     }
 }
