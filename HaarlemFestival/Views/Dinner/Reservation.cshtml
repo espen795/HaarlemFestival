@@ -27,7 +27,7 @@
             </div>
             <h1 class="restaurant-reservation-title">@Model.Dinners[0].Restaurant.Naam</h1>
             <p class="restaurant-reservation-intro">Order your tickets for @Model.Dinners[0].Restaurant.Naam below. The price for people over 12 years old is €@Model.Dinners[0].Price.ToString() and for childeren under 12 years it is €@Model.Dinners[0].AlternativePrice.ToString()</p>
-            @using (Html.BeginForm())
+            @using (Html.BeginForm("AddReservation", "Dinner"))
             {
                 <label for="BesteldeActiviteit_Aantal">Amount of tickets (&gt;12 Y/O)</label>
                 @Html.TextBoxFor(m => Model.BesteldeActiviteit.Aantal, new { @type = "number", @min = 0, @value = "0" })<br />
@@ -48,7 +48,7 @@
 
                 <div class="restaurant-reservation-buttons">
                     <button class="restaurant-reservation-button-back" type="button" onclick="location.href='@Url.Action("Index", "Dinner")'">Back to overview</button>
-                    <button class="restaurant-reservation-button-reservation" type="submit" onclick="location.href='@Url.Action("AddReservation", "Dinner")'"> Add to basket</button>
+                    <button class="restaurant-reservation-button-reservation" type="submit")> Add to basket</button>
                 </div>
             }
         </div>

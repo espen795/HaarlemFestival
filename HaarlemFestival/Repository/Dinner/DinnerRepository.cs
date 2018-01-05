@@ -30,5 +30,10 @@ namespace HaarlemFestival.Repository.Dinner
 
             return cuisines;
         }
+
+        public Models.Dinner GetDinnerById(int id)
+        {
+            return db.Dinners.Where(d => d.ActivityId == id).FirstOrDefault();
+        }
     }
 }

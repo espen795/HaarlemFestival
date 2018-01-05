@@ -70,7 +70,7 @@ namespace HaarlemFestival.Controllers
                     }
                 }
             }
-
+            dinnerView.BesteldeActiviteit = new BesteldeActiviteit();
             dinnerView.Days = days;
             return View(dinnerView);
         }
@@ -78,8 +78,28 @@ namespace HaarlemFestival.Controllers
         [HttpPost]
         public ActionResult AddReservation(DinnerView dinnerView, FormCollection collection)
         {
-            dinnerView.BesteldeActiviteit.BesteldeActiviteitId = Convert.ToInt32(collection["Activity"]);
+            BesteldeActiviteit besteldeActiviteit = dinnerView.BesteldeActiviteit;
+            besteldeActiviteit.Activiteit = dinnerRepository.GetDinnerById(Convert.ToInt32(collection["Activity"]));
 
+            besteldeActiviteit.Price = besteldeActiviteit.Aantal * (float)besteldeActiviteit.Activiteit.Price + besteldeActiviteit.AantalAlternatief * (float)besteldeActiviteit.Activiteit.AlternativePrice;
+
+            int TotalTickets = besteldeActiviteit.Aantal + besteldeActiviteit.AantalAlternatief;
+
+            if(TotalTickets > (besteldeActiviteit.Activiteit.TotalTickets- besteldeActiviteit.Activiteit.BoughtTickets))
+            {
+                //geef melding uitverkocht
+            }
+
+            List<BesteldeActiviteit> Bestelling = new List<BesteldeActiviteit>();
+
+            if (Session["current_order"] != null)
+            {
+                Bestelling.AddRange((List<BesteldeActiviteit>)Session["current_order"]);
+            }
+
+            Bestelling.Add(besteldeActiviteit);
+
+            Session["current_order"] = Bestelling;
             return RedirectToAction("Index");
         }
     }
