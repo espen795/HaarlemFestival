@@ -7,10 +7,11 @@
 }
 <script>
     function FilterDate() {
-        @{ 
-            foreach(Dinner dinner in Model.Dinners)
+        $('#dinnertimefilter').show();
+        @{
+            foreach (Dinner dinner in Model.Dinners)
             {
-                if(dinner.Day.Naam == Model.DayString)
+                if (dinner.Day.Naam == Model.DayString)
                 {
                     Model.DinnersOnDay.Add(dinner);
                 }
@@ -38,7 +39,7 @@
                 <label for="dinnerdatefilter">Select your day</label>
                 @Html.DropDownListFor(m => Model.DayString, new SelectList(Model.Days, "", "Naam"), "Select a Date.", new { @id = "dinnerdatefilter", @onchange = "FilterDate()" })<br />
                 <label for="dinnertimefilter">Select your starttime</label>
-                @Html.DropDownListFor(m => Model.TimeString, new SelectList(Model.DinnersOnDay, "", "Naam"), "Select a Date.", new { @id = "dinnertimefilter", @onchange = "FilterData()" })<br />
+                @Html.DropDownListFor(m => Model.TimeString, new SelectList(Model.DinnersOnDay, "", "TimeString"), "Select a Date.", new { @id = "dinnertimefilter", @onchange = "FilterData()" })<br />
                 <label for="">Please tell us anything we might need to know (I.e. allergies)</label>
                 @Html.TextAreaFor(m => Model.BesteldeActiviteit.Opmerking)<br />
 

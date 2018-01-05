@@ -72,7 +72,8 @@ namespace HaarlemFestival.Controllers
             }
 
             dinnerView.Days = days;
-
+            dinnerView.DayString = dinnerView.Dinners[0].Day.Naam;
+            dinnerView.DinnersOnDay = new List<Dinner>();
             return View(dinnerView);
         }
     }
