@@ -8,17 +8,10 @@
 
 <script>
     function FilterData() {
+        var date = document.getElementById('dinnerdatefilter').value;
+        console.log(date);
+        $().hide();
         $('#dinnertimefilter').show();
-        @Model.DayString = document.getElementById("dinnerdatefilter").value;
-        @{
-            foreach (Dinner dinner in Model.Dinners)
-            {
-                if (dinner.Day.Naam == Model.DayString)
-                {
-                    Model.DinnersOnDay.Add(dinner);
-                }
-            }
-        }
     }
 </script>
 
@@ -40,9 +33,16 @@
                 <label for="BesteldeActiviteit_AantalAlternatief">Amount of tickets (&lt;12 Y/O)</label>
                 @Html.TextBoxFor(m => Model.BesteldeActiviteit.AantalAlternatief, new { @type = "number", @min = 0, @value = "0" })<br />
                 <label for="dinnerdatefilter">Select your day</label>
-                @Html.DropDownListFor(m => Model.DayString, new SelectList(Model.Days, "", "Naam"), "Select a Date", new { @id = "dinnerdatefilter", @onchange = "FilterData()" })<br />
+                //@Html.DropDownListFor(m => Model.DayString, new SelectList(Model.Days, "", "Naam"), "Select a Date", new { @id = "dinnerdatefilter", @onchange = "FilterData()" })<br />
+                <select id="dinnertimefilter">
+                    @foreach (Dinner dinner in Model.Dinners)
+                    {
+                        <option class="@dinner.Day.Naam" value="@dinner.ActivityId">@dinner.TimeString</option>
+                    }
+                </select>
+                
                 <label for="dinnertimefilter">Select your starttime</label>
-                @Html.DropDownListFor(m => Model.TimeString, new SelectList(Model.DinnersOnDay, "", "TimeString"), "Select a Date.", new { @id = "dinnertimefilter", @onchange = "Filter()" })<br />
+                @Html.DropDownListFor(m => Model.TimeString, new SelectList(Model.DinnersOnDay, "", "TimeString"), "Select a Date", new { @id = "dinnertimefilter", @onchange = "Filter()" })<br />
                 <label for="">Please tell us anything we might need to know (I.e. allergies)</label>
                 @Html.TextAreaFor(m => Model.BesteldeActiviteit.Opmerking)<br />
 
