@@ -9,7 +9,7 @@ namespace HaarlemFestival.Models
     {
         public int RestaurantId { get; set; }
         public virtual Restaurant Restaurant { get; set; }
-        public string timestring { get; set; }
+        public string TimeString { get; set; }
         public Dinner()
         {
 
