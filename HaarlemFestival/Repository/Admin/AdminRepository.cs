@@ -74,7 +74,17 @@ namespace HaarlemFestival.Repository.Admin
         public void UpdateRestaurant(Restaurant restaurant)
         {
             db.Entry(restaurant).State = EntityState.Modified;
+
+            db.Database.ExecuteSqlCommand("DELETE FROM CuisineRestaurants WHERE Restaurant_RestaurantId = {0}", restaurant.RestaurantId);
+            foreach (Cuisine cuisine in restaurant.Cuisines)
+                UpdateRestaurantCuisine(restaurant.RestaurantId, cuisine.CuisineId);
+
             db.SaveChanges();
+        }
+
+        public void UpdateRestaurantCuisine(int restaurantId, int cuisineId)
+        {
+            db.Database.ExecuteSqlCommand("INSERT INTO CuisineRestaurants (Cuisine_CuisineId, Restaurant_RestaurantId) values ({0}, {1})", cuisineId, restaurantId);
         }
 
         public void UpdateGuide(Guide guide)
