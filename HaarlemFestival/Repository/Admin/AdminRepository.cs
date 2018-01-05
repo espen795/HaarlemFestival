@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using HaarlemFestival.Models;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 
 namespace HaarlemFestival.Repository.Admin
 {
@@ -12,7 +13,7 @@ namespace HaarlemFestival.Repository.Admin
         private HFDB db = new HFDB();
 
         public Account GetAccount(string username, string password)
-        {           
+        {
             Account account = db.Accounts.Where(a => (a.Username == username) && (a.Password == password)).FirstOrDefault();
             return account;
         }
@@ -191,6 +192,6 @@ namespace HaarlemFestival.Repository.Admin
         {
             return db.Days.ToList();
         }
-       
+
     }
 }

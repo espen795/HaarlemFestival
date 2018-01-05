@@ -147,6 +147,9 @@ namespace HaarlemFestival.Controllers
                 ModelState.AddModelError("NoRating", "Please enter a rating.");
             }
 
+            UpdateDisplayPrice(restaurant, collector);
+            GetCuisines(restaurant, collector);
+
             if (ModelState.IsValid)
             {
                 // Images ophalen en uploaden
@@ -163,15 +166,6 @@ namespace HaarlemFestival.Controllers
                     UploadImage(Request.Files[1], "Restaurant");
                 }
                 catch (Exception) { }
-
-                // Lijst met cuisines aanmaken.
-                restaurant.Cuisines = new List<Cuisine>();
-                string[] cuisineIds = collector["Cuisines"].Split(',');
-                cuisineIds = cuisineIds.Distinct().ToArray();
-
-                // Cuisines ophalen
-                foreach (string cuisine in cuisineIds)
-                    restaurant.Cuisines.Add(adminRepository.GetCuisine(Convert.ToInt32(cuisine)));
 
                 // Restaurant toevoegen
                 adminRepository.AddRestaurant(restaurant);
@@ -202,6 +196,7 @@ namespace HaarlemFestival.Controllers
                 activity.Day = adminRepository.GetDay(activity.Day.DayId);
                 activity.StartSession = activity.Day.Date.Add(TimeSpan.Parse(collector["StartSession"]));
                 activity.EndSession = activity.Day.Date.Add(TimeSpan.Parse(collector["EndSession"]));
+                activity.timestring = activity.StartSession.ToString("H:mm") + " - " + activity.EndSession.ToString("H:mm");
 
                 // Dinner evenement toevoegen
                 adminRepository.AddEvent(activity);
@@ -550,16 +545,8 @@ namespace HaarlemFestival.Controllers
             else
                 ModelState.AddModelError("NoRating", "Please enter a valid rating");
 
-            // Lijst voor Cuisines ophalen.
-            restaurant.Cuisines = new List<Cuisine>();
-            string[] cuisineIds = collector["Cuisine"].Split(',');
-            cuisineIds = cuisineIds.Distinct().ToArray();
-
-            foreach (string cuisine in cuisineIds)
-            {
-                if (cuisine.Length > 0)
-                    restaurant.Cuisines.Add(adminRepository.GetCuisine(Convert.ToInt32(cuisine))); // Cuisine toevoegen aan de cuisinelijst
-            }
+            UpdateDisplayPrice(restaurant, collector);
+            GetCuisines(restaurant, collector);
 
             if (ModelState.IsValid)
             {
@@ -607,6 +594,7 @@ namespace HaarlemFestival.Controllers
                 activity.Day = adminRepository.GetDay(activity.Day.DayId);
                 activity.StartSession = activity.Day.Date.Add(TimeSpan.Parse(collector["StartSession"]));
                 activity.EndSession = activity.Day.Date.Add(TimeSpan.Parse(collector["EndSession"]));
+                activity.timestring = activity.StartSession.ToString("H:mm") + " - " + activity.EndSession.ToString("H:mm");
 
                 // Dinner data ophalen.
                 adminRepository.UpdateEvent(activity);
@@ -765,6 +753,20 @@ namespace HaarlemFestival.Controllers
             file.SaveAs(path);
         }
 
+        private void UpdateDisplayPrice(Models.Restaurant restaurant, FormCollection collector)
+        {
+            float price;
+            if (float.TryParse(collector["DisplayPrice"].Replace(".", ","), out price))
+            {
+                ModelState["DisplayPrice"].Errors.Clear();
+                restaurant.DisplayPrice = price;
+            }
+            else if (collector["DisplayPrice"].ToString().Length > 0)
+                ModelState.AddModelError("InvalidDisplayPrice", "Please enter a valid Displayprice.");
+            else if (collector["DisplayPrice"].ToString().Length == 0)
+                ModelState.AddModelError("NoDisplayPrice", "Please enter a Standard Price");
+        }
+
         private void UpdatePrice(Activity activity, FormCollection collector)
         {
             float price;
@@ -789,6 +791,20 @@ namespace HaarlemFestival.Controllers
                 }
                 else // Als de alternatieve prijs niet omgezet kan worden naar een float.
                     ModelState.AddModelError("InvalidAlternativePrice", "Please enter a valid price");
+            }
+        }
+
+        private void GetCuisines(Restaurant restaurant, FormCollection collector)
+        {
+            // Lijst voor Cuisines ophalen.
+            restaurant.Cuisines = new List<Cuisine>();
+            string[] cuisineIds = collector["Cuisine"].Split(',');
+            cuisineIds = cuisineIds.Distinct().ToArray();
+
+            foreach (string cuisine in cuisineIds)
+            {
+                if (cuisine.Length > 0)
+                    restaurant.Cuisines.Add(adminRepository.GetCuisine(Convert.ToInt32(cuisine))); // Cuisine toevoegen aan de cuisinelijst
             }
         }
 

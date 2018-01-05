@@ -284,7 +284,9 @@
             var activityId = $("#deletePopup").attr("activityId");
 
             $.post(url, { id: activityId });
-            location.reload();
+
+            var selectedEvent = $('#selectedEvent').val();
+            window.location.href = '@Url.Action("ManageEvent", "Admin")?selectedEvent=' + selectedEvent;
         }
 
         function SubmitForm(form) {
@@ -298,7 +300,8 @@
 
                     if (data.responseJSON.success == true) {
                         console.log("Successful");
-                        window.location.reload();
+                        var selectedEvent = $('#selectedEvent').val();
+                        window.location.href = '@Url.Action("ManageEvent", "Admin")?selectedEvent=' + selectedEvent;
                     }
                     else {
                         $(".errorAlert").css("display", "block");
@@ -372,6 +375,7 @@
                     <th>Description</th>
                     <th>Rating</th>
                     <th>Cuisines</th>
+                    <th>Standard Price</th>
                     <th>Food Image</th>
                     <th>Restaurant Image</th>
                     <th colspan="2"></th>
@@ -390,6 +394,7 @@
                         <td>@r.Description</td>
                         <td>@r.Rating</td>
                         <td>@builder</td>
+                        <td>@String.Format("{0:0.00}", r.DisplayPrice)</td>
                         <td><i onclick='ShowEventImage("Dinner/restaurants/@r.FoodIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick='ShowEventImage("Dinner/restaurants/@r.LocationIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick="OpenUpdateForm(@r.RestaurantId, 'Restaurant')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
