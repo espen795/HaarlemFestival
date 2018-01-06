@@ -261,7 +261,6 @@
     <Compile Include="Repository\Jazz\JazzRepository.cs" />
     <Compile Include="Repository\Talking\ITalkingRepository.cs" />
     <Compile Include="Repository\Talking\TalkingRepository.cs" />
-    <Compile Include="Scripts\IAdminRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />

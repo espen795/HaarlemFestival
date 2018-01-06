@@ -384,7 +384,6 @@ footer a:hover {
     float: left;
     font-weight: bold;
     display: inline-block;
-    float: left;
 }
 
 .restaurant-index-select {
@@ -535,7 +534,7 @@ footer a:hover {
 .talk-image-header {
     text-align: center;
     vertical-align: middle;
-    padding: 0px;
+    padding: 0;
 }
 
 .talk-image {
@@ -803,7 +802,7 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
     background: #639757;
     font-size: 16px;
     color: #fff;
-    border-radius: 0px;
+    border-radius: 0;
     transition: 400ms;
     right: 20px;
     bottom: 20px;
@@ -901,7 +900,7 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
 
 @media (max-width: 767px) {
     .btn.btn-book.btn-reservation {
-        right: 0%;
+        right: 0;
     }
 }
 
@@ -919,7 +918,6 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
     max-width: 400px;
     text-align: center;
     opacity: 0;
-    text-align: center;
     margin-left: auto;
     margin-right: auto;
     margin-top: 50px;
@@ -949,7 +947,7 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
 
     #loginArea .input-group-addon {
         background-color: #92140C;
-        border-radius: 15px 0px 0px 15px;
+        border-radius: 15px 0 0 15px;
         color: white;
     }
 
@@ -959,7 +957,7 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
         margin-top: 100px;
         font-size: 15px;
         text-align: center;
-        padding: 0px;
+        padding: 0;
     }
 
     .overviewContent {
@@ -993,10 +991,9 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
         width: auto;
     }
 
-    div.errorAlert {
+    .errorAlert {
         text-align: center;
         display: none;
-        text-align: center;
         margin-left: auto;
         margin-right: auto;
         margin-top: 10px;
@@ -1010,7 +1007,6 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
         border-style: none none solid none;
         outline: none;
         position: relative;
-        height: 100%;
     }
 
     #topFilterBar select option {
@@ -1028,20 +1024,20 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
         color: #000000;
     }
 
-        #filterSystem .eventFilter option:last-child {
-            border-style: none solid solid solid;
-        }
-
-    .eventData tr td, .eventTable thead th {
-        text-align: center !important;
+    #filterSystem .eventFilter option:last-child {
+        border-style: none solid solid solid;
     }
 
-    .eventData tr td i.glyphicon-remove, .eventData tr td i.glyphicon-pencil {
+    .eventData tr td, .eventTable thead th {
+        text-align: center;
+    }
+
+    .eventData tr td .glyphicon-remove, .eventData tr td .glyphicon-pencil {
         cursor: pointer;
     }
 
     /* MODAL VOOR IMAGE POPUP */
-    /* The Modal (background) */
+    /* De Modal (Achtergrond) */
     #imagePopup {
         display: none; /* Hidden by default */
         position: fixed; /* Stay in place */
@@ -1088,7 +1084,7 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
         }
     }
 
-    /* The Close Button */
+    /* De Close Knop */
     #imagePopup .close {
         position: absolute;
         top: 110px;
@@ -1098,7 +1094,6 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
         font-weight: bold;
         transition: 0.3s;
         z-index: 9999;
-        color: white;
     }
 
         #imagePopup .close:hover,
@@ -1115,6 +1110,13 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
         }
     }
 
+    /* Ticket Availability Pagina */
+    div.eventData {
+        border: 1px solid black;
+        border-radius: 5px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
 
     /********************************/
     /* MEDIA QUERYS VOOR RESPONSIVE */
