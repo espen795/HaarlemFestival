@@ -345,6 +345,9 @@ namespace HaarlemFestival.Controllers
         [Authorize]
         public ActionResult TicketAvailability()
         {
+            ViewData["Restaurants"] = adminRepository.GetRestaurants();
+            ViewData["Dates"] = GetDateModel(adminRepository.GetDates());
+
             List<Activity> activities = adminRepository.GetActivities();
             return View(activities);
         }
@@ -813,7 +816,7 @@ namespace HaarlemFestival.Controllers
             List<DateModel> dates = new List<DateModel>();
             foreach (Day day in days) // Voor elke opgehaalde dag.
             {
-                dates.Add(new DateModel { DayId = day.DayId, DateDisplay = day.Date.ToString("dddd dd-MM-yy") }); // Nieuwe DatumModel toevoegen aan de lijst.
+                dates.Add(new DateModel { DayId = day.DayId, DateDisplay = day.Date.ToString("dddd dd-MM-yyyy") }); // Nieuwe DatumModel toevoegen aan de lijst.
             }
 
             return dates;

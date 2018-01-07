@@ -11,7 +11,6 @@ body {
 .btn:focus {
     color: #fff;
 }
-
 .btn-black {
     background: #353237;
     color: #fff;
@@ -19,64 +18,63 @@ body {
     transition: 300ms;
 }
 
-    .btn-black:hover {
-        color: #fff;
-        background: #736e6e;
-    }
+.btn-black:hover {
+    color: #fff;
+    background: #736e6e;
+}
 
 /* NAV BAR */
 .navbar {
     background-color: #92140C;
 }
 
-    .navbar .navbar-nav {
-        width: 100%;
-    }
+.navbar .navbar-nav {
+    width: 100%;
+}
 
-        .navbar .navbar-nav > li {
-            width: 14%;
-            text-align: center;
-        }
+.navbar .navbar-nav > li {
+    width: 14%;
+    text-align: center;
+}
 
-            .navbar .navbar-nav > li > a {
-                font-family: 'Arial', sans-serif;
-                color: #fff;
-                text-shadow: none;
-                font-size: 15px;
-            }
+.navbar .navbar-nav > li > a {
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    text-shadow: none;
+    font-size: 15px;
+}
 
-                .navbar .navbar-nav > li > a:hover {
-                    background-color: #BE7C4D;
-                }
+.navbar .navbar-nav > li > a:hover {
+    background-color: #BE7C4D;
+}
 
-    .navbar .right {
-        float: right;
-    }
+.navbar .right {
+    float: right;
+}
 
 /* FOOTER */
 footer {
     margin-top: 20px;
 }
+footer .container {
+    background-color: #fff;
+    border: 1px solid #353237;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 
-    footer .container {
-        background-color: #fff;
-        border: 1px solid #353237;
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
+footer p.title {
+    font-size: 25px
+}
 
-    footer p.title {
-        font-size: 25px
-    }
+footer a {
+    color: #353237;
+}
 
-    footer a {
-        color: #353237;
-    }
-
-        footer a:hover {
-            color: #666269;
-            text-decoration: none;
-        }
+footer a:hover {
+    color: #666269;
+    text-decoration: none;
+}
 
 .white {
     color: white;
@@ -91,20 +89,16 @@ footer {
     height: 300px;
     background-size: cover;
 }
-
 .banner1 {
     background-image: url('/images/Home/banner1.png');
 }
-
 .banner2 {
     background-image: url('/images/Home/banner1.png');
 }
-
 .carousel-control {
-    background-image: none !important;
-    opacity: 1;
+    background-image: none!important;
+    opacity:1;
 }
-
 #carousel-home {
     border-bottom: 1px solid #353237;
 }
@@ -147,13 +141,13 @@ footer {
     background-color: #736e6e;
     color: #fff;
     text-decoration: none;
-}
+} 
 
 /* SECTION 2 - MAIN CONTENT */
 .section_home_2::before {
-    border-top: 1px solid #353237;
+    border-top:  1px solid #353237;
     padding-left: 10px;
-    display: block;
+    display:  block;
     content: '';
     width: 1168px;
     margin: 0 auto;
@@ -164,10 +158,9 @@ footer {
     font-size: 27px;
 }
 
-.section_home_2 p {
+.section_home_2 p{
     font-size: 15px;
 }
-
 .maincontent_img {
     width: 100%;
     border: 1px solid;
@@ -203,7 +196,7 @@ footer {
 
 .event-section-1 {
     min-height: 140px;
-    overflow-wrap: break-word;
+    overflow-wrap:break-word;
 }
 
 .event h1.title {
@@ -224,13 +217,13 @@ footer {
     margin-left: 24px;
 }
 
-    .event .sfeer-image:first-child {
-        margin-left: 62px;
-    }
+.event .sfeer-image:first-child {
+    margin-left: 62px;
+}
 
-    .event .sfeer-image img {
-        border: 1px solid #fff;
-    }
+.event .sfeer-image img {
+    border: 1px solid #fff;
+}
 
 /* Section 2 */
 .event-header {
@@ -251,15 +244,15 @@ footer {
     margin-right: 15px;
 }
 
-    .title-hr.title-line-left {
-        margin-top: 35px;
-        float: left;
-    }
+.title-hr.title-line-left {
+    margin-top: 35px;
+    float: left;
+}
 
-    .title-hr.title-line-right {
-        margin-top: -35px;
-        float: right;
-    }
+.title-hr.title-line-right {
+    margin-top: -35px;
+    float: right;
+}
 
 .event-section-2 {
     margin-bottom: 20px;
@@ -288,26 +281,26 @@ footer {
     overflow: hidden;
 }
 
-    .jazz .event-section-3 .keuze_blok img {
-        border: 1px solid #353237;
-    }
+.jazz .event-section-3 .keuze_blok img {
+    border: 1px solid #353237;
+}
 
-    .jazz .event-section-3 .keuze_blok h2 {
-        font-size: 23px;
-        margin-bottom: 5px;
-    }
+.jazz .event-section-3 .keuze_blok h2 {
+     font-size: 23px;
+     margin-bottom: 5px;
+ }
 
-    .jazz .event-section-3 p {
-        font-size: 14px;
-    }
+.jazz .event-section-3 p {
+    font-size: 14px;
+}
 
-        .jazz .event-section-3 p b:first-child {
-            padding-left: 46px;
-        }
+.jazz .event-section-3 p b:first-child {
+    padding-left: 46px;
+}
 
-        .jazz .event-section-3 p b:nth-child(3) {
-            padding-left: 17px;
-        }
+.jazz .event-section-3 p b:nth-child(3) {
+    padding-left: 17px;
+}
 
 
 /* ------------------------------Dinner in Haarlem-----------------------------*/
@@ -324,9 +317,10 @@ footer {
     background-image: url('/images/Dinner/banner.png');
 }
 
-.event-section-3-dinner {
-    display: inline-block;
+.event-section-3-dinner{
+    display:inline-block;
     width: 100%;
+
 }
 
 .restaurant-index-select-label {
@@ -370,7 +364,7 @@ footer {
 }
 
 .dinnertable:nth-child(even) {
-    background-color: #FFFFFF;
+    background-color: #FFFFFF ;
 }
 
 .restaurant-index-names {
@@ -390,11 +384,11 @@ footer {
     float: left;
     font-weight: bold;
     display: inline-block;
-    float: left;
 }
 
 .restaurant-index-select {
     text-align: center;
+
 }
 
 .restaurant-index-info {
@@ -442,7 +436,7 @@ footer {
     text-align: left;
 }
 
-.restaurant-info-img img, .restaurant-reservation-img img {
+.restaurant-info-img img, .restaurant-reservation-img img{
     margin: 10px;
     float: right;
 }
@@ -466,44 +460,14 @@ footer {
     float: right;
 }
 
+
 .restaurant-reservation-intro {
-    margin-left: 20px;
+    margin-left: 10px;
+
 }
 
-.restaurant-reservation-form {
-    margin-left: 20px;
-}
-
-.restaurant-reservation-form label {
-    display: block;
-}
-
-.restaurant-reservation-tickets label, .restaurant-reservation-alternativetickets label {
-    width: 115px;
-}
-
-.restaurant-reservation-tickets input, .restaurant-reservation-alternativetickets input {
-    width: 115px;
-    text-align: right;
-}
-
-.restaurant-reservation-day select, .restaurant-reservation-time select {
-    height: 26px;
-}
-
-.restaurant-reservation-tickets, .restaurant-reservation-alternativetickets, .restaurant-reservation-day, .restaurant-reservation-time {
-    float: left;
-    margin-right: 15px; 
-    margin-bottom: 10px;
-}
-
-.restaurant-reservation-comment {
-    display: block;
-}
-
-.restaurant-reservation-comment textarea {
-    width: 535px;
-    height: 100px;
+#dinnertimefilter {
+    display: none;
 }
 
 /* ------------------------------Talking Haarlem-------------------------------*/
@@ -535,8 +499,9 @@ footer {
     margin-left: 15px;
 }
 
-    .talking-info * {
-    }
+.talking-info * {
+
+}
 
 .talking-place-time {
     width: 200px;
@@ -558,7 +523,7 @@ footer {
 .talk {
     float: left;
     width: 360px;
-}
+ }
 
 .talk-header {
     font-size: 16px;
@@ -569,7 +534,7 @@ footer {
 .talk-image-header {
     text-align: center;
     vertical-align: middle;
-    padding: 0px;
+    padding: 0;
 }
 
 .talk-image {
@@ -577,7 +542,6 @@ footer {
     height: 200px;
     margin-left: 15px;
 }
-
 .talk-description {
     padding-left: 15px;
     height: 40px;
@@ -643,10 +607,11 @@ footer {
 
 .talk-activity-info {
     margin-left: 15px;
-    padding-left: 15px;
+    padding-left : 15px;
 }
 
 .talk-activity-btns {
+
 }
 
 .talk-images {
@@ -664,9 +629,9 @@ footer {
     padding-left: 15px;
 }
 
-    .talk-reservation-container > section {
-        margin-bottom: 10px;
-    }
+.talk-reservation-container > section {
+    margin-bottom: 10px;
+}
 
 table.talking-reservation-table, .talking-reservation-table td, .talking-reservation-table th {
     border: 1px solid silver;
@@ -696,17 +661,16 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
     display: inline-block;
 }
 
-    .talk-question-receiver p {
-        float: left;
-        margin-right: 5px;
-    }
+.talk-question-receiver p {
+    float: left;
+    margin-right: 5px;
+}
 
 .talk-questionbox {
     display: block;
     width: 230px;
     height: 100px;
 }
-
 .talk-bold {
     font-weight: bold;
 }
@@ -721,7 +685,7 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
     background-image: url('/images/Historic/banner.jpg');
 }
 
-.historic-content {
+.historic-content{
     padding: 15px;
 }
 
@@ -770,9 +734,9 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
     width: 100%;
 }
 
-    .map-img img {
-        width: 100%;
-    }
+.map-img img {
+    width: 100%;
+}
 
 .img-map-location .number-map {
     position: absolute;
@@ -830,15 +794,15 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
     display: none;
 }
 
-#location1 {
+#location1{
     display: block;
 }
 
-.btn.btn-book {
+.btn.btn-book{
     background: #639757;
     font-size: 16px;
     color: #fff;
-    border-radius: 0px;
+    border-radius: 0;
     transition: 400ms;
     right: 20px;
     bottom: 20px;
@@ -855,7 +819,7 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
     .img-map-location img {
         /*display: none;*/
     }
-
+    
     .img-map-location {
         width: 100%;
     }
@@ -890,27 +854,27 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
 .ticket-table {
 }
 
-    .ticket-table table {
-        margin-left: auto;
-        margin-right: auto;
-    }
+.ticket-table table {
+    margin-left: auto;
+    margin-right: auto;
+}
 
-        .ticket-table table tr th {
-            background-color: #be7c4d;
-            font-size: 1.12em;
-            color: #fff;
-            padding-right: 35px;
-            padding-left: 10px;
-        }
+.ticket-table table tr th {
+    background-color: #be7c4d;
+    font-size: 1.12em;
+    color: #fff;
+    padding-right: 35px;
+    padding-left: 10px;
+}
 
-        .ticket-table table tr td {
-            padding-right: 40px;
-            padding-left: 10px;
-        }
+.ticket-table table tr td {
+    padding-right: 40px;
+    padding-left: 10px;
+}
 
-    .ticket-table tr:nth-child(even) {
-        background-color: #eee;
-    }
+.ticket-table tr:nth-child(even) {
+    background-color: #eee;
+}
 
     .ticket-table .ticketsInput input {
         width: 40px;
@@ -919,15 +883,15 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
         margin-right: auto;
     }
 
-    .ticket-table .ticketsInput {
+.ticket-table .ticketsInput {
         width: 138px;
-    }
+}
 
-        .ticket-table .ticketsInput:first-child {
-            width: 105px;
-        }
+.ticket-table .ticketsInput:first-child {
+        width: 105px;
+}
 
-.btn.btn-book.btn-reservation {
+.btn.btn-book.btn-reservation{
     right: 20%;
     bottom: 10px;
     position: relative;
@@ -936,311 +900,314 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
 
 @media (max-width: 767px) {
     .btn.btn-book.btn-reservation {
-        right: 0%;
+        right: 0;
     }
 }
 
 
-/*****************************/
-/** ADMIN PAGE SPECIFIC CSS **/
-/*****************************/
-/* Login Pagina */
-#loginArea .title {
-    text-align: center;
-    font-size: 30px;
-}
+    /*****************************/
+    /** ADMIN PAGE SPECIFIC CSS **/
+    /*****************************/
+    /* Login Pagina */
+    #loginArea .title {
+        text-align: center;
+        font-size: 30px;
+    }
 
 #loginError {
     max-width: 400px;
     text-align: center;
     opacity: 0;
-    text-align: center;
     margin-left: auto;
     margin-right: auto;
     margin-top: 50px;
     margin-bottom: 50px;
 }
 
-#loginArea .username, #loginArea .password {
-    height: 50px;
-    font-size: 20px;
-    border: 1px solid silver;
-}
+    #loginArea .username, #loginArea .password {
+        height: 50px;
+        font-size: 20px;
+        border: 1px solid silver;
+    }
 
-input[type='text']:focus, input[type='password']:focus {
-    color: black;
-}
+    input[type='text']:focus, input[type='password']:focus {
+        color: black;
+    }
 
-#loginArea input[type='submit'] {
-    background-color: #353238;
-    font-size: 15px;
-    color: white;
-    width: 140px;
-    height: 40px;
-    margin-bottom: 50px;
-    margin-left: auto;
-    margin-right: auto;
-}
+    #loginArea input[type='submit'] {
+        background-color: #353238;
+        font-size: 15px;
+        color: white;
+        width: 140px;
+        height: 40px;
+        margin-bottom: 50px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
-#loginArea .input-group-addon {
-    background-color: #92140C;
-    border-radius: 15px 0px 0px 15px;
-    color: white;
-}
+    #loginArea .input-group-addon {
+        background-color: #92140C;
+        border-radius: 15px 0 0 15px;
+        color: white;
+    }
 
 
-/* Overview Pagina */
-#welcomeArea {
-    margin-top: 100px;
-    font-size: 15px;
-    text-align: center;
-    padding: 0px;
-}
+    /* Overview Pagina */
+    #welcomeArea {
+        margin-top: 100px;
+        font-size: 15px;
+        text-align: center;
+        padding: 0;
+    }
 
-.overviewContent {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
+    .overviewContent {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
 
-#manageEventSelection button {
-    margin-top: 10px;
-}
+    #manageEventSelection button {
+        margin-top: 10px;
+    }
 
-#manageEventSelection button {
-    width: 150px;
-}
+    #manageEventSelection button {
+        width: 150px;
+    }
 
-.introText {
-    width: 95%;
-    font-weight: bold;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
+    .introText {
+        width: 95%;
+        font-weight: bold;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
 
-/* Manage Event Pagina */
-#topFilterBar {
-    padding-top: 100px;
-    display: inline-block;
-}
+    /* Manage Event Pagina */
+    #topFilterBar {
+        padding-top: 100px;
+        display: inline-block;
+    }
 
-#selectEvent {
-    width: auto;
-}
+    #selectEvent {
+        width: auto;
+    }
 
-div.errorAlert {
-    text-align: center;
-    display: none;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
+    .errorAlert {
+        text-align: center;
+        display: none;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
 
-#topFilterBar select {
-    width: 200px;
-    height: 25px;
-    border: 1px solid #000000;
-    border-style: none none solid none;
-    outline: none;
-    position: relative;
-    height: 100%;
-}
+    #topFilterBar select {
+        width: 200px;
+        height: 25px;
+        border: 1px solid #000000;
+        border-style: none none solid none;
+        outline: none;
+        position: relative;
+    }
 
     #topFilterBar select option {
         height: 25px;
     }
 
-#filterSystem .eventFilter:focus {
-    border-color: #6495ed;
-}
+    #filterSystem .eventFilter:focus {
+        border-color: #6495ed;
+    }
 
-#filterSystem .eventFilter option {
-    border: 2px solid black;
-    border-style: none solid none solid;
-    height: 30px;
-    color: #000000;
-}
+    #filterSystem .eventFilter option {
+        border: 2px solid black;
+        border-style: none solid none solid;
+        height: 30px;
+        color: #000000;
+    }
 
     #filterSystem .eventFilter option:last-child {
         border-style: none solid solid solid;
     }
 
-.eventData tr td, .eventTable thead th {
-    text-align: center !important;
-}
+    .eventData tr td, .eventTable thead th {
+        text-align: center;
+    }
 
-    .eventData tr td i.glyphicon-remove, .eventData tr td i.glyphicon-pencil {
+    .eventData tr td .glyphicon-remove, .eventData tr td .glyphicon-pencil {
         cursor: pointer;
     }
 
-/* MODAL VOOR IMAGE POPUP */
-/* The Modal (background) */
-#imagePopup {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 9999; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
-}
-
-    /* Modal Content (Image) */
-    #imagePopup .modal-content {
-        margin: auto;
-        display: block;
-        width: 80%;
-        max-width: 700px;
-        -webkit-animation-name: zoom;
-        -webkit-animation-duration: 0.6s;
-        animation-name: zoom;
-        animation-duration: 0.6s;
+    /* MODAL VOOR IMAGE POPUP */
+    /* De Modal (Achtergrond) */
+    #imagePopup {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 9999; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
     }
 
-@-webkit-keyframes zoom {
-    from {
-        -webkit-transform: scale(0)
-    }
-
-    to {
-        -webkit-transform: scale(1)
-    }
-}
-
-@keyframes zoom {
-    from {
-        transform: scale(0)
-    }
-
-    to {
-        transform: scale(1)
-    }
-}
-
-/* The Close Button */
-#imagePopup .close {
-    position: absolute;
-    top: 110px;
-    right: 50px;
-    color: #f1f1f1;
-    font-size: 40px;
-    font-weight: bold;
-    transition: 0.3s;
-    z-index: 9999;
-    color: white;
-}
-
-    #imagePopup .close:hover,
-    #imagePopup .close:focus {
-        color: #bbb;
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-/* 100% Image Width on Smaller Screens */
-@media only screen and (max-width: 700px) {
-    #imagePopup .modal-content {
-        width: 100%;
-    }
-}
-
-
-/********************************/
-/* MEDIA QUERYS VOOR RESPONSIVE */
-/********************************/
-@media (max-width: 1199px) {
-}
-
-@media (max-width: 991px) {
-}
-
-/* Start mobile navigatie/view */
-@media (max-width: 767px) {
-
-    /* NAVBAR */
-    .navbar-toggle {
-        float: left;
-        margin-left: 15px;
-        border-color: #fff !important;
-    }
-
-    .navbar .navbar-nav > li {
-        width: 100%;
-        text-align: left;
-    }
-
-    .navbar .navbar-nav {
-        width: auto;
-    }
-
-    /* HOMEPAGE */
-    #carousel-home {
-        display: none;
-    }
-
-    .body-content .container {
-        margin-top: 0;
-    }
-
-    .section_home_1 .feature-block-image img {
-        margin-top: 8px;
-        width: 100%;
-    }
-
-    .feature-block-image {
-        max-height: 160px;
-        overflow: hidden;
-    }
-
-    .section_home_1 .feature-block-content p.button a {
-        padding: 5px 20px;
-        font-size: 15px;
-    }
-
-    .section_home_2::before {
-        width: 300px;
-    }
-
-    .maincontent_img {
-        margin-bottom: 10px;
-    }
-
-    /* EVENT REGULAR */
-    .event-banner {
-        display: none;
-    }
-
-    .sfeer-image {
-        display: none;
-    }
-
-    .title-hr {
-        display: none;
-    }
-
-    .event-header {
-        width: 95%;
-        height: 67px;
-        background-position: center center;
-    }
-
-        .event-header .header_tekst {
-            font-size: 19px;
+        /* Modal Content (Image) */
+        #imagePopup .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            -webkit-animation-name: zoom;
+            -webkit-animation-duration: 0.6s;
+            animation-name: zoom;
+            animation-duration: 0.6s;
         }
 
-        .event-header .overlay {
-            padding-top: 21px;
+    @-webkit-keyframes zoom {
+        from {
+            -webkit-transform: scale(0)
         }
 
-
-    /* EVENT JAZZ */
-    .jazz .keuze_blok img {
-        width: 100%;
+        to {
+            -webkit-transform: scale(1)
+        }
     }
-}
+
+    @keyframes zoom {
+        from {
+            transform: scale(0)
+        }
+
+        to {
+            transform: scale(1)
+        }
+    }
+
+    /* De Close Knop */
+    #imagePopup .close {
+        position: absolute;
+        top: 110px;
+        right: 50px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+        z-index: 9999;
+    }
+
+        #imagePopup .close:hover,
+        #imagePopup .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    /* 100% Image Width on Smaller Screens */
+    @media only screen and (max-width: 700px) {
+        #imagePopup .modal-content {
+            width: 100%;
+        }
+    }
+
+    /* Ticket Availability Pagina */
+    div.eventData {
+        border: 1px solid black;
+        border-radius: 5px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    /********************************/
+    /* MEDIA QUERYS VOOR RESPONSIVE */
+    /********************************/
+    @media (max-width: 1199px) {
+    }
+
+    @media (max-width: 991px) {
+    }
+
+    /* Start mobile navigatie/view */
+    @media (max-width: 767px) {
+
+        /* NAVBAR */
+        .navbar-toggle {
+            float: left;
+            margin-left: 15px;
+            border-color: #fff !important;
+        }
+
+        .navbar .navbar-nav > li {
+            width: 100%;
+            text-align: left;
+        }
+
+        .navbar .navbar-nav {
+            width: auto;
+        }
+
+        /* HOMEPAGE */
+        #carousel-home {
+            display: none;
+        }
+
+        .body-content .container {
+            margin-top: 0;
+        }
+
+        .section_home_1 .feature-block-image img {
+            margin-top: 8px;
+            width: 100%;
+        }
+
+        .feature-block-image {
+            max-height: 160px;
+            overflow: hidden;
+        }
+
+        .section_home_1 .feature-block-content p.button a {
+            padding: 5px 20px;
+            font-size: 15px;
+        }
+
+        .section_home_2::before {
+            width: 300px;
+        }
+
+        .maincontent_img {
+            margin-bottom: 10px;
+        }
+
+        /* EVENT REGULAR */
+        .event-banner {
+            display: none;
+        }
+
+        .sfeer-image {
+            display: none;
+        }
+
+        .title-hr {
+            display: none;
+        }
+
+        .event-header {
+            width: 95%;
+            height: 67px;
+            background-position: center center;
+        }
+
+            .event-header .header_tekst {
+                font-size: 19px;
+            }
+
+            .event-header .overlay {
+                padding-top: 21px;
+            }
+
+
+        /* EVENT JAZZ */
+        .jazz .keuze_blok img {
+            width: 100%;
+        }
+    }

@@ -355,7 +355,7 @@
                     <tr>
                         <td>@activity.artist.ArtistName</td>
                         <td>@Regex.Replace(activity.artist.ArtistInformation, @"<(.|\n)*?>", string.Empty)</td>
-                        <td>@activity.StartSession.ToString("dddd dd-MM-yy H:mm") - @activity.EndSession.ToString("H:mm")</td>
+                        <td>@activity.StartSession.ToString("dddd dd-MM-yyyy H:mm") - @activity.EndSession.ToString("H:mm")</td>
                         <td>@activity.ConcertLocation</td>
                         <td>@activity.ConcertHall</td>
                         <td>@String.Format("{0:0.00}", activity.Price)</td>
