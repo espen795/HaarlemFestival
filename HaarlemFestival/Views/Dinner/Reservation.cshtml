@@ -9,10 +9,10 @@
 <script>
     function FilterData() {
         var date = document.getElementById('dinnerdatefilter').value;
-        console.log(date);
         $('.dinnertimeselect').hide();
+        $('#standard').show();
+        document.getElementById("standard").selected = true;
         $(document.getElementsByClassName(date)).show();
-        $('#dinnertimefilter').show();
     }
 </script>
 
@@ -27,28 +27,43 @@
             </div>
             <h1 class="restaurant-reservation-title">@Model.Dinners[0].Restaurant.Naam</h1>
             <p class="restaurant-reservation-intro">Order your tickets for @Model.Dinners[0].Restaurant.Naam below. The price for people over 12 years old is €@Model.Dinners[0].Price.ToString() and for childeren under 12 years it is €@Model.Dinners[0].AlternativePrice.ToString()</p>
-            @using (Html.BeginForm("AddReservation", "Dinner"))
+            @using (Html.BeginForm("AddReservation", "Dinner", FormMethod.Post, new { @class = "restaurant-reservation-form" }))
             {
-                <label for="BesteldeActiviteit_Aantal">Amount of tickets (&gt;12 Y/O)</label>
-                @Html.TextBoxFor(m => Model.BesteldeActiviteit.Aantal, new { @type = "number", @min = 0, @value = "0" })<br />
-                <label for="BesteldeActiviteit_AantalAlternatief">Amount of tickets (&lt;12 Y/O)</label>
-                @Html.TextBoxFor(m => Model.BesteldeActiviteit.AantalAlternatief, new { @type = "number", @min = 0, @value = "0" })<br />
-                <label for="dinnerdatefilter">Select your day</label>
-                @Html.DropDownList("Date", new SelectList(Model.Days, "", "Naam"), "Select a Date", new { @id = "dinnerdatefilter", @onchange = "FilterData()" })<br />
-                <label for="dinnertimefilter">Select your starttime</label>
-                <select id="dinnertimefilter" name="Activity" >
-                    @foreach (Dinner dinner in Model.Dinners)
-                    {
-                        <option class="@dinner.Day.Naam dinnertimeselect" value="@dinner.ActivityId">@dinner.TimeString</option>
-                    }
-                </select><br />
-                <label for="">Please tell us anything we might need to know (I.e. allergies)</label>
-                @Html.TextAreaFor(m => Model.BesteldeActiviteit.Opmerking)<br />
+                <div class="restaurant-reservation-tickets">
+                    <label for="BesteldeActiviteit_Aantal">Tickets (&gt;12 Y/O)</label>
+                    @Html.TextBoxFor(m => Model.BesteldeActiviteit.Aantal, new { @type = "number", @min = 0, @value = "0" })
+                </div>
 
+                <div class="restaurant-reservation-alternativetickets">
+                    <label for="BesteldeActiviteit_AantalAlternatief">Tickets (&lt;12 Y/O)</label>
+                    @Html.TextBoxFor(m => Model.BesteldeActiviteit.AantalAlternatief, new { @type = "number", @min = 0, @value = "0" })
+                </div>
+
+                <div class="restaurant-reservation-day">
+                    <label for="dinnerdatefilter">Select your day</label>
+                    @Html.DropDownList("Date", new SelectList(Model.Days, "", "Naam"), "Select a date", new { @id = "dinnerdatefilter", @onchange = "FilterData()" })
+                </div>
+
+                <div class="restaurant-reservation-time">
+                    <label for="dinnertimefilter">Select your starttime</label>
+                    <select id="dinnertimefilter" name="Activity">
+                        <option class="dinnertimeselect">Select a date first</option>
+                        <option class="dinnertimeselect" id="standard" hidden>Select a time</option>
+                        @foreach (Dinner dinner in Model.Dinners)
+                        {
+                            <option class="@dinner.Day.Naam dinnertimeselect" value="@dinner.ActivityId" hidden>@dinner.TimeString</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="restaurant-reservation-comment">
+                    <label for="">Please tell us anything we might need to know (I.e. allergies)</label>
+                    @Html.TextAreaFor(m => Model.BesteldeActiviteit.Opmerking)
+                </div>
 
                 <div class="restaurant-reservation-buttons">
                     <button class="restaurant-reservation-button-back" type="button" onclick="location.href='@Url.Action("Index", "Dinner")'">Back to overview</button>
-                    <button class="restaurant-reservation-button-reservation" type="submit")> Add to basket</button>
+                    <button class="restaurant-reservation-button-reservation" type="submit" )> Add to basket</button>
                 </div>
             }
         </div>
