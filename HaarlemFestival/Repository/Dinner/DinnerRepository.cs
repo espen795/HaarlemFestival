@@ -19,7 +19,8 @@ namespace HaarlemFestival.Repository.Dinner
 
         public List<Models.Dinner> DinnersPerRestaurant( int id)
         {
-            List<Models.Dinner> Dinners = db.Dinners.Where(d => d.RestaurantId == id).ToList();
+            List<Models.Dinner> Dinners = new List<Models.Dinner>();
+            Dinners.AddRange(db.Dinners.Where(d => d.RestaurantId == id).ToList());
 
             return Dinners;
         }

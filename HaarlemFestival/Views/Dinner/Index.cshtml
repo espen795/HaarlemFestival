@@ -7,7 +7,16 @@
 }
 <script>
     function change() {
-        window.location.href = document.getElementById("cuisineselect").value;
+        var cuisineid = document.getElementById('cuisineselect').value;
+
+        $('.restaurant-index-restaurants-restaurant').hide();
+        if (cuisineid == 0) {
+            $('.restaurant-index-restaurants-restaurant').show();
+        }
+        else {
+            $('.' + cuisineid).show();
+        }
+
     }
 </script>
 <div class="event-banner dinner"></div>
@@ -59,66 +68,59 @@
                     <select class="form-control" id="cuisineselect" onchange="change()">
                         @foreach (Cuisine c in Model)
                         {
-                            if (c.CuisineId == (int)ViewBag.CuisineId)
-                            {
-                                <option value="@Url.Action("index", "dinner", new { id = c.CuisineId })" , selected>@c.Naam</option>
-                            }
-                            else
-                            {
-                                <option value="@Url.Action("index", "dinner", new { id = c.CuisineId })">@c.Naam</option>
-                            }
+                            <option value="@c.CuisineId">@c.Naam</option>
                         }
                     </select>
                 </div>
             </div>
 
             <div class="restaurant-index-restaurants">
-                @foreach (Cuisine cuisine in Model)
-                {
-                    if (cuisine.CuisineId == (int)ViewBag.CuisineId)
+                @{
+                    foreach (Restaurant restaurant in Model[0].Restaurants)
                     {
-                        foreach (Restaurant r in cuisine.Restaurants)
+                        string s = "";
+                        foreach (Cuisine c in restaurant.Cuisines)
                         {
-                            <div class="restaurant-index-restaurants-restaurant">
-                                <div class="restaurant-index-restaurant-fotonaam">
-                                    <img src="/images/Dinner/restaurants/@r.FoodIMG" alt="Picture not found" />
-                                    <h3>@r.Naam</h3>
-                                </div>
-                                <table class="restaurant-index-restaurant-info">
-                                    <tr class="dinnertable">
-                                        <td class="restaurant-index-names"> Cuisines:</td>
-                                        <td class="restaurant-index-info">
-                                            @foreach (Cuisine c in r.Cuisines)
-                                            {
-                                                if (r.Cuisines.Last() != c)
-                                                {
-                                                    @c.Naam<span>,</span>
-                                                }
-                                                else
-                                                {
-                                                    <br /> @c.Naam
-                                                }
-                                            }
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="restaurant-index-names"> Rating:</td>
-                                        <td class="restaurant-index-info"> @r.Rating</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="restaurant-index-names"> Price:</td>
-                                        <td class="restaurant-index-info">€@r.DisplayPrice.ToString("0.00")</td>
-                                    </tr>
-                                </table>
-                                <button class="restaurant-index-button-reservation" type="button" onclick="location.href='@Url.Action("Reservation", "Dinner", new { id = r.RestaurantId })'">Make reservation</button>
-                                <button class="restaurant-index-button-info" type="button" onclick="location.href='@Url.Action("Info", "Dinner", new { id = r.RestaurantId })'"><i class="fa fa-info" aria-hidden="true"></i></button>
-                            </div>
+                            s += c.CuisineId + " ";
                         }
+
+                        <div class="restaurant-index-restaurants-restaurant @s">
+                            <div class="restaurant-index-restaurant-fotonaam">
+                                <img src="/images/Dinner/restaurants/@restaurant.FoodIMG" alt="Picture not found" />
+                                <h3>@restaurant.Naam</h3>
+                            </div>
+                            <table class="restaurant-index-restaurant-info">
+                                <tr class="dinnertable">
+                                    <td class="restaurant-index-names"> Cuisines:</td>
+                                    <td class="restaurant-index-info">
+                                        @foreach (Cuisine c in restaurant.Cuisines)
+                                        {
+                                            if (restaurant.Cuisines.Last() != c)
+                                            {
+                                                @c.Naam<span>,</span>
+                                            }
+                                            else
+                                            {
+                                                <br /> @c.Naam
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="restaurant-index-names"> Rating:</td>
+                                    <td class="restaurant-index-info"> @restaurant.Rating</td>
+                                </tr>
+                                <tr>
+                                    <td class="restaurant-index-names"> Price:</td>
+                                    <td class="restaurant-index-info">€@restaurant.DisplayPrice.ToString("0.00")</td>
+                                </tr>
+                            </table>
+                            <button class="restaurant-index-button-reservation" type="button" onclick="location.href='@Url.Action("Reservation", "Dinner", new { id = restaurant.RestaurantId })'">Make reservation</button>
+                            <button class="restaurant-index-button-info" type="button" onclick="location.href='@Url.Action("Info", "Dinner", new { id = restaurant.RestaurantId })'"><i class="fa fa-info" aria-hidden="true"></i></button>
+                        </div>
                     }
                 }
             </div>
         </div>
     </div>
 </div>
-
-

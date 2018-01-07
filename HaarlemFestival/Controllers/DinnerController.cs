@@ -14,26 +14,8 @@ namespace HaarlemFestival.Controllers
     public class DinnerController : Controller
     {
         private IDinnerRepository dinnerRepository = new DinnerRepository();
-        public ActionResult Index(int? id)
-        {
-            if (id == null)
-            {
-                id = 0;
-            }
 
-            List<Cuisine> Cuisines = new List<Cuisine>();
-            Cuisine c = new Cuisine
-            {
-                Naam = "[Select an option]",
-                Restaurants = dinnerRepository.GetAllRestaurants()
-            };
-            Cuisines.Add(c);
-            Cuisines.AddRange(dinnerRepository.GetAllCuisines());
-            ViewBag.CuisineId = id;
-            return View(Cuisines);
-        }
-
-        public ActionResult Index2()
+        public ActionResult Index()
         {
             List<Cuisine> Cuisines = new List<Cuisine>();
             Cuisine c = new Cuisine
@@ -53,9 +35,14 @@ namespace HaarlemFestival.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            List<Dinner> OptionsPerRestaurant = dinnerRepository.DinnersPerRestaurant((int)id);
+            List<Dinner> DinnersPerRestaurant = dinnerRepository.DinnersPerRestaurant((int)id);
 
-            return View(OptionsPerRestaurant);
+            if (DinnersPerRestaurant.Count == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            return View(DinnersPerRestaurant);
         }
 
         public ActionResult Reservation(int? id)
@@ -68,6 +55,12 @@ namespace HaarlemFestival.Controllers
             DinnerView dinnerView = new DinnerView();
 
             dinnerView.Dinners = dinnerRepository.DinnersPerRestaurant((int)id);
+
+            if (dinnerView.Dinners.Count == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             List<Day> days = new List<Day>();
             for (int i = 0; i < dinnerView.Dinners.Count; i++)
             {
