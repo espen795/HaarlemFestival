@@ -33,6 +33,19 @@ namespace HaarlemFestival.Controllers
             return View(Cuisines);
         }
 
+        public ActionResult Index2()
+        {
+            List<Cuisine> Cuisines = new List<Cuisine>();
+            Cuisine c = new Cuisine
+            {
+                Naam = "[Select an option]",
+                Restaurants = dinnerRepository.GetAllRestaurants()
+            };
+            Cuisines.Add(c);
+            Cuisines.AddRange(dinnerRepository.GetAllCuisines());
+            return View(Cuisines);
+        }
+
         public ActionResult Info(int? id)
         {
             if (id == null)

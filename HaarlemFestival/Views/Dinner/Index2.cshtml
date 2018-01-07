@@ -1,0 +1,128 @@
+﻿@using HaarlemFestival.Models;
+@using System.Collections.Generic;
+@model List<Cuisine>
+
+@{
+    ViewBag.Title = "Dinner in Haarlem";
+}
+<script>
+    function change() {
+        $('.restaurant-index-restaurants-restaurant').hide();
+        var cuisineId = document.getElementById("cuisineselect").value
+        console.log(cuisineId);
+        if (cuisineId = 0) {
+            $('.restaurant-index-restaurants-restaurant').show();
+        }
+        else {
+            $(document.getElementsByClassName(cuisineId)).show();
+        }
+
+    }
+</script>
+<div class="event-banner dinner"></div>
+
+<div class="event container">
+    <div class="row">
+        <!-- Section 1 -->
+        <div class="event-section-1-dinner">
+            <div class="col-md-6">
+                <h1 class="title">Dinner in Haarlem</h1>
+                <p class="content">
+                    Dinner in Haarlem makes it easy for you to find a restaurant in the centrum of Haarlem.
+                    On this page you will find all the participating restaurants and a little bit of information about them.
+                    For each restaurant there are three timeslots, which can be found by pressing the information button of your desired restaurant.
+                    The price shown on this page is the normal price, for children under 12 years there is a reduced price.
+                    This price can also be found by pressing the information button.
+                </p>
+            </div>
+
+            <div class="col-md-6">
+                <div class="sfeer-image">
+                    <img src="/images/Dinner/sfeer/sfeer1.png" />
+                </div>
+                <div class="sfeer-image">
+                    <img src="/images/Dinner/sfeer/sfeer2.png" />
+                </div>
+                <div class="sfeer-image">
+                    <img src="/images/Dinner/sfeer/sfeer3.png" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="event-section-2">
+            <hr class="title-hr title-line-left">
+            <div class="event-header restaurantinfo">
+                <div class="overlay">
+                    <span class="header_tekst">Restaurant information</span>
+                </div>
+            </div>
+            <hr class="title-hr title-line-right">
+        </div>
+
+        <!-- Section 3-->
+        <div class="event-section-3-dinner">
+            <div class="form-inline restaurant-index-select">
+                <div class="form-group">
+                    <label class="restaurant-index-select-label">Cuisine:</label>
+                    <select class="form-control" id="cuisineselect" onchange="change()">
+                        @foreach (Cuisine c in Model)
+                        {
+                            <option value="@c.CuisineId">@c.Naam</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="restaurant-index-restaurants">
+                @{
+                    foreach (Restaurant restaurant in Model[0].Restaurants)
+                    {
+                        string s ="";
+                        foreach (Cuisine c in restaurant.Cuisines)
+                        {
+                            s += c.CuisineId + " ";
+                        }
+
+                        <div class="restaurant-index-restaurants-restaurant @s">
+                            <div class="restaurant-index-restaurant-fotonaam">
+                                <img src="/images/Dinner/restaurants/@restaurant.FoodIMG" alt="Picture not found" />
+                                <h3>@restaurant.Naam</h3>
+                            </div>
+                            <table class="restaurant-index-restaurant-info">
+                                <tr class="dinnertable">
+                                    <td class="restaurant-index-names"> Cuisines:</td>
+                                    <td class="restaurant-index-info">
+                                        @foreach (Cuisine c in restaurant.Cuisines)
+                                        {
+                                            if (restaurant.Cuisines.Last() != c)
+                                            {
+                                                @c.Naam<span>,</span>
+                                            }
+                                            else
+                                            {
+                                                <br /> @c.Naam
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="restaurant-index-names"> Rating:</td>
+                                    <td class="restaurant-index-info"> @restaurant.Rating</td>
+                                </tr>
+                                <tr>
+                                    <td class="restaurant-index-names"> Price:</td>
+                                    <td class="restaurant-index-info">€@restaurant.DisplayPrice.ToString("0.00")</td>
+                                </tr>
+                            </table>
+                            <button class="restaurant-index-button-reservation" type="button" onclick="location.href='@Url.Action("Reservation", "Dinner", new { id = restaurant.RestaurantId })'">Make reservation</button>
+                            <button class="restaurant-index-button-info" type="button" onclick="location.href='@Url.Action("Info", "Dinner", new { id = restaurant.RestaurantId })'"><i class="fa fa-info" aria-hidden="true"></i></button>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
