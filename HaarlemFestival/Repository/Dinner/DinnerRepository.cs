@@ -36,5 +36,10 @@ namespace HaarlemFestival.Repository.Dinner
         {
             return db.Dinners.Where(d => d.ActivityId == id).FirstOrDefault();
         }
+
+        public List<Models.Dinner> GetAllDinners()
+        {
+            return db.Dinners.ToList();
+        }
     }
 }

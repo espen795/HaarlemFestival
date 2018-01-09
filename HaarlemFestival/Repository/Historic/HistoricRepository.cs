@@ -11,16 +11,11 @@ namespace HaarlemFestival.Repository.Historic
     {
         private HFDB db = new HFDB();
 
-        public HistoricView GetAllTours()
+        public List<Models.Historic> GetAllTours()
         {
             List<Models.Historic> tours = db.Historics.ToList();
-            HistoricView toursview = new HistoricView();
 
-
-            toursview.Tours = tours;
-            toursview.Reservering = new List<BesteldeActiviteit>();
-
-            return toursview;
+            return tours;
         }
 
         public List<Models.Location> GetAllLocations()

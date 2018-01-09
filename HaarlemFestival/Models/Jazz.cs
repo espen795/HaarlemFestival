@@ -15,13 +15,8 @@ namespace HaarlemFestival.Models
         [Display(Name = "Concert Hall")]
         public string ConcertHall { get; set; }
 
-        [Display(Name = "PassPartout Price")]
-        [DataType(DataType.Currency)]
-        [DisplayFormat(DataFormatString = "{0:C2}")]
-        public float AllDayPassPartout { get; set; }
-
         [Display(Name = "Artist ID")]
-        public int ArtistId { get; set; }
+        public int? ArtistId { get; set; }
         public virtual Artist artist { get; set; }
 
         public Jazz()

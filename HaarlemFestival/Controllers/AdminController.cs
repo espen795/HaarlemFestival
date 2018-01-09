@@ -99,7 +99,6 @@ namespace HaarlemFestival.Controllers
             // Standaard informatie van activity
             activity.EventType = EventType.JazzPatronaat;
             activity.BoughtTickets = 0;
-            activity.AllDayPassPartout = 80;
 
             // Prijs en Alternatieve prijs ophalen.
             UpdatePrice(activity, collector);
@@ -510,7 +509,7 @@ namespace HaarlemFestival.Controllers
             // Prijs en Alternatieve prijs ophalen.
             UpdatePrice(activity, collector);
             UpdateAlternativePrice(activity, collector);
-            activity.artist.ArtistId = activity.ArtistId;
+            activity.artist.ArtistId = (int)activity.ArtistId;
             if (ModelState.IsValid)
             {
                 // Image ophalen en uploaden.
