@@ -1,5 +1,8 @@
 ﻿@using HaarlemFestival.Models;
 @using System.Collections.Generic;
+@using System.Globalization;
+@using System;
+@using System.Linq;
 @model BasketModel
 
 @{
@@ -42,70 +45,198 @@
         </div>
 
         <div class="event-section-3">
-            @if (Model.Order == null)
+            <!--////////////////////
+            ////Hier nog naar kijken
+            ////////////////////////-->
+            @if (Model.Order == null || Model == null)
             {
                 <h3 class="basket-emptybasket">Please add items to your basket</h3>
             }
 
             else
             {
-                <table>
-                    <tr>
-                        <th>Tickets</th>
-                        <th>Event</th>
-                        <th>Date and time</th>
-                        <th>Price</th>
-                        <th>Remove</th>
-                    </tr>
-                    @foreach (BesteldeActiviteit ordered in Model.Order)
-                    {
+                <div class="basket-content">
+                    <table class="table table-hover table-responsive basket-table">
                         <tr>
-                            <td>@ordered.TotalBoughtTickets</td>
-                            @if (ordered.Activiteit.EventType == EventType.JazzPatronaat)
-                            {
-                                foreach (Jazz jazz in Model.Jazzs)
-                                {
-                                    if (jazz.ActivityId == ordered.Activiteit.ActivityId)
-                                    {
-                                        <td>@jazz.artist.ArtistName</td>
-                                        break;
-                                    }
-                                }
-                            }
-                            else if (ordered.Activiteit.EventType == EventType.DinnerInHaarlem)
-                            {
-                                foreach (Dinner dinner in Model.Dinners)
-                                {
-                                    if (dinner.ActivityId == ordered.Activiteit.ActivityId)
-                                    {
-                                        <td>@dinner.Restaurant.Naam</td>
-                                        break;
-                                    }
-                                }
-                            }
-                            else if (ordered.Activiteit.EventType == EventType.TalkingHaarlem)
-                            {
-                                foreach (Talking talk in Model.Talks)
-                                {
-                                    if (talk.ActivityId == ordered.Activiteit.ActivityId)
-                                    {
-                                        <td>@talk.Talk.Naam</td>
-                                        break;
-                                    }
-                                }
-                            }
-                            else if (ordered.Activiteit.EventType == EventType.HistoricHaarlem)
-                            {
-                                //nog fixen
-                                <td>Historic Tour</td>
-                            }
-
-                            <td>@ordered.Activiteit.StartSession - @ordered.Activiteit.EndSession</td>
-                            <td>@ordered.Price</td>
-                            <td><<a href=@Url.Action("RemoveFromBasketById", "Home", new { id = ordered.Activiteit.ActivityId })><i class="fa fa-trash-o" aria-hidden="true" /></a></td>
+                            <th class="basket-table-tickets-head">Tickets</th>
+                            <th class="basket-table-name-head">Event</th>
+                            <th class="basket-table-time-head">Date and time</th>
+                            <th class="basket-table-price-head">Price</th>
+                            <th class="basket-table-remove-head">Remove</th>
                         </tr>
-                    }
-                </table>
+                        @foreach (BesteldeActiviteit ordered in Model.Order)
+                        {
+                            <tr>
+                                <td class="basket-table-tickets">@ordered.TotalBoughtTickets</td>
+                                @if (ordered.Activiteit.EventType == EventType.JazzPatronaat)
+                                {
+                                    foreach (Jazz jazz in Model.Jazzs)
+                                    {
+                                        if (jazz.ActivityId == ordered.Activiteit.ActivityId)
+                                        {
+                                            <td class="basket-table-name">@jazz.artist.ArtistName</td>
+                                            break;
+                                        }
+                                    }
+                                }
+                                else if (ordered.Activiteit.EventType == EventType.DinnerInHaarlem)
+                                {
+                                    foreach (Dinner dinner in Model.Dinners)
+                                    {
+                                        if (dinner.ActivityId == ordered.Activiteit.ActivityId)
+                                        {
+                                            <td class="basket-table-name">@dinner.Restaurant.Naam</td>
+                                            break;
+                                        }
+                                    }
+                                }
+                                else if (ordered.Activiteit.EventType == EventType.TalkingHaarlem)
+                                {
+                                    foreach (Talking talk in Model.Talks)
+                                    {
+                                        if (talk.ActivityId == ordered.Activiteit.ActivityId)
+                                        {
+                                            <td class="basket-table-name">@talk.Talk.Naam</td>
+                                            break;
+                                        }
+                                    }
+                                }
+                                else if (ordered.Activiteit.EventType == EventType.HistoricHaarlem)
+                                {
+                                    //nog fixen
+                                    <td class="basket-table-name">Historic Tour</td>
+                                }
+
+                                <td class="basket-table-time">@ordered.Activiteit.StartSession.ToString("ddd dd/MM/yyyy HH:mm") - @ordered.Activiteit.EndSession.ToString("ddd dd/MM/yyyy HH:mm")</td>
+                                <td class="basket-table-price">€@ordered.Price.ToString("0.00")</td>
+                                <td class="basket-table-remove"><a href=@Url.Action("RemoveFromBasketById", "Home", new { id = ordered.Activiteit.ActivityId })><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                            </tr>
+                        }
+                    </table>
+                    <button class="basket-button" type="button" onclick="location.href='@Url.Action("Method", "Controller")'">Next step</button>
+                </div>
+            }
+        </div>
+        <div class="event-section-4">
+            <h3>You could also:</h3>
+            @{
+                List<Activity> AllActivities = new List<Activity>();
+                AllActivities.AddRange(Model.Jazzs);
+                AllActivities.AddRange(Model.Dinners);
+                AllActivities.AddRange(Model.Talks);
+                AllActivities.AddRange(Model.Jazzs);
+
+                Random rnd = new Random();
+
+                for (int i = 0; i < 3; i++)
+                {
+                    int random = rnd.Next(1, AllActivities.Count);
+
+                    <div class="col-md-4">
+                        @if (AllActivities[random].EventType == EventType.JazzPatronaat)
+                        {
+                            Jazz jazz = Model.Jazzs.Find(x => x.ActivityId == AllActivities[random].ActivityId);
+                            <h4>Go to a concert</h4>
+                            <a href="@Url.Action("Reservation", "Jazz")"><img src="/images/Jazz/artiesten/@jazz.artist.ArtistImage" /></a>
+                            <table>
+                                <tr>
+                                    <td>Bands:</td>
+                                    <td>@jazz.artist.ArtistName</td>
+                                </tr>
+                                <tr>
+                                    <td>Price:</td>
+                                    <td>@jazz.Price</td>
+                                </tr>
+                                <tr>
+                                    <td>Start:</td>
+                                    <td>@jazz.StartSession.ToString("HH:mm")</td>
+                                </tr>
+                                <tr>
+                                    <td>Location:</td>
+                                    <td>@jazz.Address</td>
+                                </tr>
+                            </table>
+                            AllActivities.RemoveAll(x => x.EventType == EventType.JazzPatronaat);
+                        }
+                        else if (AllActivities[random].EventType == EventType.DinnerInHaarlem)
+                        {
+                            Dinner dinner = Model.Dinners.Find(x => x.ActivityId == AllActivities[random].ActivityId);
+                            <h4>Get dinner</h4>
+                            <a href="@Url.Action("Reservation", "Dinner", new { id = dinner.Restaurant.RestaurantId})"><img src="/images/Dinner/restaurants/@dinner.Restaurant.FoodIMG" alt="Picture not found" /></a>
+                            <table>
+                                <tr>
+                                    <td>Restaurant:</td>
+                                    <td>@dinner.Restaurant.Naam</td>
+                                </tr>
+                                <tr>
+                                    <td>Price:</td>
+                                    <td>@dinner.Restaurant.DisplayPrice</td>
+                                </tr>
+                                <tr>
+                                    <td>Start:</td>
+                                    <td>@dinner.StartSession.ToString("HH:mm")</td>
+                                </tr>
+                                <tr>
+                                    <td>Location:</td>
+                                    <td>@dinner.Address</td>
+                                </tr>
+                            </table>
+                            AllActivities.RemoveAll(x => x.EventType == EventType.DinnerInHaarlem);
+                        }
+                        else if (AllActivities[random].EventType == EventType.TalkingHaarlem)
+                        {
+                            Talking talking = Model.Talks.Find(x => x.ActivityId == AllActivities[random].ActivityId);
+                            <h4>Get dinner</h4>
+                            <a href="@Url.Action("Reservation", "Talking", new { id = talking.Talk.TalkId })"><img src="/images/Talking/@talking.Talk.Person1AltIMG" /></a>
+                            <table>
+                                <tr>
+                                    <td>Talk:</td>
+                                    <td>@talking.Talk.Naam</td>
+                                </tr>
+                                <tr>
+                                    <td>Price:</td>
+                                    <td>Free</td>
+                                </tr>
+                                <tr>
+                                    <td>Start:</td>
+                                    <td>@talking.StartSession.ToString("HH:mm")</td>
+                                </tr>
+                                <tr>
+                                    <td>Location:</td>
+                                    <td>@talking.Address</td>
+                                </tr>
+                            </table>
+
+                            AllActivities.RemoveAll(x => x.EventType == EventType.TalkingHaarlem);
+                        }
+                        else if (AllActivities[random].EventType == EventType.HistoricHaarlem)
+                        {
+                            Historic historic = Model.Historics.Find(x => x.ActivityId == AllActivities[random].ActivityId);
+                            <h4>Go on a walk</h4>
+                            <a><img src="/images/Historic/Locaties/3.jpg" /></a>
+                            <table>
+                                <tr>
+                                    <td>Language:</td>
+                                    <td>@historic.Guide.LanguageName</td>
+                                </tr>
+                                <tr>
+                                    <td>Price:</td>
+                                    <td>@historic.Price</td>
+                                </tr>
+                                <tr>
+                                    <td>Start:</td>
+                                    <td>@historic.StartSession.ToString("HH:mm")</td>
+                                </tr>
+                                <tr>
+                                    <td>Start point:</td>
+                                    <td>@historic.Address</td>
+                                </tr>
+                            </table>
+
+                            AllActivities.RemoveAll(x => x.EventType == EventType.JazzPatronaat);
+                        }
+                    </div>
+                }
             }
         </div>
     </div>

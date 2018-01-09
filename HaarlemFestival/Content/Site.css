@@ -203,10 +203,10 @@ footer {
     margin-right: 10px;
 }
 
-.contact-form-name input, .contact-form-email input, .contact-form-subject input, .contact-form-regarding select{
-    width: 100%;
-    height: 32px;
-}
+    .contact-form-name input, .contact-form-email input, .contact-form-subject input, .contact-form-regarding select {
+        width: 100%;
+        height: 32px;
+    }
 
 .contact-form-question textarea {
     width: 98%;
@@ -245,6 +245,82 @@ footer {
 }
 
 .basket-emptybasket {
+    text-align: center;
+}
+
+.basket-content {
+    margin: auto;
+    width: 800px;
+}
+
+.basket-table {
+    border: solid;
+    border-width: 1px;
+    border-color: #000000;
+}
+
+.basket-table th {
+    background-color: #CCCCCC;
+    border: solid !important;
+    border-width: 2px;
+    border-color: #000000;
+}
+
+.basket-table tr {
+    border: solid;
+    border-width: 1px;
+    border-color: #000000;
+}
+
+.basket-table tr:nth-child(odd) {
+    background-color: #CCCCCC !important;    
+}
+
+.basket-table-tickets-head{
+    max-width: 40px;
+}
+
+.basket-table-tickets {
+    max-width: 40px;
+    text-align: right;
+}
+
+.basket-table-name {
+    max-width: 140px;
+}
+
+.basket-table-time {
+    max-width: 200px;
+}
+
+
+.basket-table-price {
+    max-width: 35px;
+    text-align: right;
+}
+
+.basket-table-remove, .basket-table-remove-head {
+    max-width: 50px;
+}
+
+.basket-table-remove {
+    text-align: center;
+}
+
+.basket-table-remove a {
+    font-size: 17px;
+    color: #92140C;
+}
+
+.basket-button {
+    float: right;
+    margin: 10px;
+    margin-left: 0px;
+    color: #FFFFFF;
+    background-color: #353238;
+    height: 32px;
+    min-width: 32px;
+    font-size: 17.5px;
     text-align: center;
 }
 
@@ -557,11 +633,11 @@ footer {
     display: block;
 }
 
-.restaurant-reservation-comment textarea {
-    width: 545px;
-    height: 100px;
-    resize: none;
-}
+    .restaurant-reservation-comment textarea {
+        width: 545px;
+        height: 100px;
+        resize: none;
+    }
 
 /* ------------------------------Talking Haarlem-------------------------------*/
 /* Talking Home Page */

@@ -82,7 +82,7 @@ namespace HaarlemFestival.Controllers
 
             Session["current_order"] = Bestelling;
 
-            return View("Basket", "Home");
+            return View("Basket");
         }
 
         public ActionResult Agenda()
