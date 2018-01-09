@@ -21,9 +21,11 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Reservation()
         {
-            HistoricView historicView = historicRepository.GetAllTours();
-
-            return View(historicView);
+            HistoricView toursview = new HistoricView();
+            toursview.Tours = historicRepository.GetAllTours();
+            toursview.Reservering = new List<BesteldeActiviteit>();
+            
+            return View(toursview);
         }
 
         [HttpPost]
