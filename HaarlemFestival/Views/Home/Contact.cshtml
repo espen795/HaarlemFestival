@@ -1,17 +1,97 @@
-﻿@{
+﻿@using HaarlemFestival.Models;
+@using System.Collections.Generic;
+@using System.Data.Entity;
+@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<div class="event-banner"></div>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<div class="event container">
+    <div class="row">
+        <!-- Section 1 -->
+        <div class="event-section-1">
+            <div class="col-md-6">
+                <h1 class="title">Contact</h1>
+                <p class="content">
+                    Fill in the form below to contact us, one of our staff members will answer your question as fast as possible.
+                </p>
+            </div>
+            <div class="col-md-6">
+                <div class="sfeer-image">
+                    <img src="/images/Jazz/sfeer_3.png" />
+                </div>
+                <div class="sfeer-image">
+                    <img src="/images/Dinner/sfeer/sfeer2.png" />
+                </div>
+                <div class="sfeer-image">
+                    <img src="/images/Historic/sfeer/sfeer2.jpg" />
+                </div>
+            </div>
+        </div>
+
+        <div class=" event-section-2">
+            <hr class="title-hr title-line-left">
+            <div class="event-header contact-header">
+                <div class="overlay">
+                    <span class="header_tekst">Get in touch</span>
+                </div>
+            </div>
+            <hr class="title-hr title-line-right">
+        </div>
+
+        <div class="event-section-3">
+            <div class="col-md-6 contact-line">
+                <h3 class="contact-form-title">Contact form</h3>
+                <p class="content">
+                    Please fill in the fields below. The fields with a * are required. These fields are required so we can get in contact with you to answer your question.
+                </p>
+                @using (Html.BeginForm("SendContactForm", "Home", FormMethod.Post, new { @class = "contact-form" }))
+                {
+                    <div class="contact-form-name">
+                        <label for="name">Name: *</label>
+                        @Html.TextBox("name")
+                    </div>
+                    <div class="contact-form-email">
+                        <label for="email">E-mail: *</label>
+                        @Html.TextBox("email")
+                    </div>
+                    <div class="contact-form-subject">
+                        <label for="subject">Subject:</label>
+                        @Html.TextBox("subject")
+                    </div>
+
+                    <div class="contact-form-regarding">
+                        <label for="regarding">Regarding: *</label>
+                        <select name="regarding" required>
+                            <option value="">[Select an option]</option>
+                            <option value="jazz">Jazz@Patronaat</option>
+                            <option value="dinner">Dinner in Haarlem</option>
+                            <option value="talking">Talking Haarlem</option>
+                            <option value="historic">Historic Haarlem</option>
+                            <option value="other">Others</option>
+                        </select>
+                    </div>
+
+                    <div class="contact-form-question">
+                        <label for="question">Question: *</label>
+                        @Html.TextArea("question", new { @required = "required" })
+                    </div>
+
+                    <button class="contact-form-button" type="submit" )> Send</button>
+                }
+            </div>
+            <div class="col-md-6">
+                <h3 class="contact-form-title">Contact information</h3>
+                <p>
+                    info@haarlemfestival.nl<br />
+                    +31 (0)23 - 524 1020<br />
+                    <br />
+                    Head Office<br />
+                    Zijlweg 7<br />
+                    1234 AA Haarlem<br />
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

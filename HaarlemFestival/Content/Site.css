@@ -178,7 +178,53 @@ footer {
 /*************/
 /** CONTACT **/
 /*************/
+.event-header.contact-header {
+    background-image: url('/images/Contact/title1.png');
+}
 
+.contact-line {
+    padding-right: 20px;
+    border-right: 1.4px solid #000;
+    margin-bottom: 25px;
+}
+
+.contact-form-title {
+    margin-top: 0px;
+}
+
+.contact-form label {
+    display: block;
+}
+
+.contact-form-name, .contact-form-email, .contact-form-subject, .contact-form-regarding {
+    float: left;
+    width: 48%;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.contact-form-name input, .contact-form-email input, .contact-form-subject input, .contact-form-regarding select{
+    width: 100%;
+    height: 32px;
+}
+
+.contact-form-question textarea {
+    width: 98%;
+    height: 100px;
+    margin-bottom: 10px;
+    resize: none;
+}
+
+.contact-form-button {
+    float: right;
+    margin-right: 10px;
+    color: #FFFFFF;
+    background-color: #353238;
+    height: 32px;
+    min-width: 100px;
+    font-size: 17.5px;
+    text-align: center;
+}
 
 /************/
 /** AGENDA **/
@@ -189,12 +235,22 @@ footer {
 /** BASKET **/
 /************/
 
+.event-section-1-basket {
+    min-height: 140px;
+    overflow-wrap: break-word;
+}
 
+.event-header.basket-header {
+    background-image: url('/images/Basket/title1.png');
+}
+
+.basket-emptybasket {
+    text-align: center;
+}
 
 /*****************************/
 /** EVENT PAGE STANDARD CSS **/
 /*****************************/
-
 /* Section 1 */
 .event-banner {
     height: 300px;
@@ -504,6 +560,7 @@ footer {
 .restaurant-reservation-comment textarea {
     width: 545px;
     height: 100px;
+    resize: none;
 }
 
 /* ------------------------------Talking Haarlem-------------------------------*/

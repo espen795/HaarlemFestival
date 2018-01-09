@@ -23,18 +23,21 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult SendContactForm()
+        {
+            return PartialView("_ContactSent");
         }
 
         public ActionResult Basket()
         {
-            List<BesteldeActiviteit> act = (List<BesteldeActiviteit>)Session["current_order"];
-
-            ViewBag.Message = "Your shopping basket.";
-
-            return View(act);
+            List<BesteldeActiviteit> Bestelling = new List<BesteldeActiviteit>();
+            Bestelling = (List<BesteldeActiviteit>)Session["current_order"];
+            
+            return View(Bestelling);
         }
 
         public ActionResult Agenda()

@@ -222,6 +222,10 @@
     <Compile Include="Migrations\201801051151188_mig20.Designer.cs">
       <DependentUpon>201801051151188_mig20.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801091800359_mig21.cs" />
+    <Compile Include="Migrations\201801091800359_mig21.Designer.cs">
+      <DependentUpon>201801091800359_mig21.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -332,6 +336,7 @@
     <Content Include="Views\Admin\_UpdateGuidePartial.cshtml" />
     <Content Include="Views\Admin\_ModelErrors.cshtml" />
     <Content Include="Views\Admin\TicketAvailability.cshtml" />
+    <Content Include="Views\Home\_ContactSent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -407,6 +412,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801051151188_mig20.resx">
       <DependentUpon>201801051151188_mig20.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801091800359_mig21.resx">
+      <DependentUpon>201801091800359_mig21.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

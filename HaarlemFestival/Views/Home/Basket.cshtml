@@ -6,9 +6,65 @@
     ViewBag.Title = "Basket";
 }
 
-<h2>Basket</h2>
+<div class="event-banner"></div>
 
-@foreach (BesteldeActiviteit act in Model)
-{
-    <p>@act.Activiteit.ActivityId</p>
-}
+<div class="event container">
+    <div class="row">
+        <!-- Section 1 -->
+        <div class="event-section-1">
+            <div class="col-md-6">
+                <h1 class="title">Basket</h1>
+                <p class="content">
+                    On this page you can view and edit the items in your basket.
+                </p>
+            </div>
+            <div class="col-md-6">
+                <div class="sfeer-image">
+                    <img src="/images/Jazz/sfeer_3.png" />
+                </div>
+                <div class="sfeer-image">
+                    <img src="/images/Dinner/sfeer/sfeer2.png" />
+                </div>
+                <div class="sfeer-image">
+                    <img src="/images/Historic/sfeer/sfeer2.jpg" />
+                </div>
+            </div>
+        </div>
+
+        <div class="event-section-2">
+            <hr class="title-hr title-line-left">
+            <div class="event-header basket-header">
+                <div class="overlay">
+                    <span class="header_tekst">Your basket</span>
+                </div>
+            </div>
+            <hr class="title-hr title-line-right">
+        </div>
+
+        <div class="event-section-3">
+            @if(Model == null)
+            {
+                <h3 class="basket-emptybasket">Please add items to your basket</h3>
+            }
+
+            else
+            {
+                <table>
+                    <tr>
+                        <th>Tickets</th>
+                        <th>Event</th>
+                        <th>Date and time</th>
+                        <th>Price</th>
+                        <th>Remove</th>
+                    </tr>
+                    @foreach(BesteldeActiviteit ordered in Model)
+                    {
+                        <tr>
+                            <
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+    </div>
+</div>

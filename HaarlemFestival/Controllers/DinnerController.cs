@@ -89,9 +89,9 @@ namespace HaarlemFestival.Controllers
 
             besteldeActiviteit.Price = besteldeActiviteit.Aantal * (float)besteldeActiviteit.Activiteit.Price + besteldeActiviteit.AantalAlternatief * (float)besteldeActiviteit.Activiteit.AlternativePrice;
 
-            int TotalTickets = besteldeActiviteit.Aantal + besteldeActiviteit.AantalAlternatief;
+            besteldeActiviteit.TotalBoughtTickets = besteldeActiviteit.Aantal + besteldeActiviteit.AantalAlternatief;
 
-            if(TotalTickets > (besteldeActiviteit.Activiteit.TotalTickets- besteldeActiviteit.Activiteit.BoughtTickets))
+            if(besteldeActiviteit.TotalBoughtTickets > (besteldeActiviteit.Activiteit.TotalTickets- besteldeActiviteit.Activiteit.BoughtTickets))
             {
                 //geef melding uitverkocht
             }
