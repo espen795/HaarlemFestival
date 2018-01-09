@@ -61,7 +61,7 @@ namespace HaarlemFestival.Controllers
             return View(basketModel);
         }
 
-        public ActionResult RemoveFromBasket(int? id)
+        public ActionResult RemoveFromBasketById(int? id)
         {
             if (id == null)
             {

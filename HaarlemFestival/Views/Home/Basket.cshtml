@@ -102,7 +102,7 @@
 
                             <td>@ordered.Activiteit.StartSession - @ordered.Activiteit.EndSession</td>
                             <td>@ordered.Price</td>
-                            <td><a href="@Url.Action("Reservation", "Dinner", new { id = restaurant.RestaurantId }"><i class="fa fa-trash-o" aria-hidden="true" /></a></td></a>
+                            <td><<a href=@Url.Action("RemoveFromBasketById", "Home", new { id = ordered.Activiteit.ActivityId })><i class="fa fa-trash-o" aria-hidden="true" /></a></td>
                         </tr>
                     }
                 </table>
