@@ -337,15 +337,17 @@ namespace HaarlemFestival.Controllers
         }
 
         [Authorize]
-        public ActionResult TicketAvailability()
+        public ActionResult TicketSalesInformation()
         {
             Filters filters = adminRepository.GetFilters();
             filters.dateFilter = GetDateModel(filters.days);
 
-            TicketSalesViewModel viewModel = new TicketSalesViewModel();
-            viewModel.Activities = adminRepository.GetActivities();
-            viewModel.BesteldeActiviteiten = adminRepository.GetBesteldeActivities();
-            viewModel.Filters = filters;
+            TicketSalesViewModel viewModel = new TicketSalesViewModel()
+            {
+                Activities = adminRepository.GetActivities(),
+                BesteldeActiviteiten = adminRepository.GetBesteldeActivities(),
+                Filters = filters
+            };
 
             List<Activity> activities = adminRepository.GetActivities();
             return View(viewModel);

@@ -342,7 +342,7 @@
     <Content Include="Views\Admin\_UpdateRestaurantPartial.cshtml" />
     <Content Include="Views\Admin\_UpdateGuidePartial.cshtml" />
     <Content Include="Views\Admin\_ModelErrors.cshtml" />
-    <Content Include="Views\Admin\TicketAvailability.cshtml" />
+    <Content Include="Views\Admin\TicketSalesInformation.cshtml" />
     <Content Include="Views\Home\_ContactSent.cshtml" />
   </ItemGroup>
   <ItemGroup>
