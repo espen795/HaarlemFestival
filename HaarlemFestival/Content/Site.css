@@ -1292,6 +1292,10 @@ div.eventData {
     margin-bottom: 10px;
 }
 
+.priceMargin {
+    margin-top: 10px;
+}
+
 /********************************/
 /* MEDIA QUERYS VOOR RESPONSIVE */
 /********************************/
