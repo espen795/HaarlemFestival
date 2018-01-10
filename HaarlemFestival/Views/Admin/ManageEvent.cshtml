@@ -326,10 +326,10 @@
         </div>
 
         <div id="filterSystem">
-            @Html.DropDownListFor(m => m.Dates, new SelectList(Model.Dates, "DateDisplay", "DateDisplay"), "Select a Date.", new { @id = "dateFilter", @class = "eventFilter", @onchange = "FilterData()" })
-            @Html.DropDownListFor(m => m.Guides, new SelectList(Model.Guides, "GuideName", "GuideName"), "Select a Guide.", new { @id = "guideFilter", @class = "eventFilter", @onchange = "FilterData()" }) 
-            @Html.DropDownListFor(m => m.Restaurants, new SelectList(Model.Restaurants, "Naam", "Naam"), "Select a Restaurant", new { @id = "restaurantFilter", @class = "eventFilter", @onchange = "FilterData()" })
-            @Html.DropDownListFor(m => m.Cuisines, new SelectList(Model.Cuisines, "Naam", "Naam"), "Select a Cuisine.", new { @id = "cuisineFilter", @class = "eventFilter", @onchange = "FilterData()" })       
+            @Html.DropDownListFor(m => m.Filters.dateFilter, new SelectList(Model.Filters.dateFilter, "DateDisplay", "DateDisplay"), "Select a Date.", new { @id = "dateFilter", @class = "eventFilter", @onchange = "FilterData()" })
+            @Html.DropDownListFor(m => m.Filters.guideFilter, new SelectList(Model.Filters.guideFilter, "GuideName", "GuideName"), "Select a Guide.", new { @id = "guideFilter", @class = "eventFilter", @onchange = "FilterData()" }) 
+            @Html.DropDownListFor(m => m.Filters.restaurantFilter, new SelectList(Model.Filters.restaurantFilter, "Naam", "Naam"), "Select a Restaurant", new { @id = "restaurantFilter", @class = "eventFilter", @onchange = "FilterData()" })
+            @Html.DropDownListFor(m => m.Filters.cuisineFilter, new SelectList(Model.Filters.cuisineFilter, "Naam", "Naam"), "Select a Cuisine.", new { @id = "cuisineFilter", @class = "eventFilter", @onchange = "FilterData()" })       
         </div>
     </section>
 
@@ -360,7 +360,7 @@
                         <td>@activity.ConcertHall</td>
                         <td>@String.Format("{0:0.00}", activity.Price)</td>
                         <td>@activity.TotalTickets</td>
-                        <td><i onclick='ShowEventImage("Jazz/@activity.artist.ArtistImage")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
+                        <td><i onclick='ShowEventImage("Jazz/Artiesten/@activity.artist.ArtistImage")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Jazz')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
@@ -430,7 +430,7 @@
                     <tr>
                         <td>@activity.Restaurant.Naam</td>
                         <td>@activity.Address</td>
-                        <td>@activity.StartSession.ToString("dddd dd-MM-yy H:mm") - @activity.EndSession.ToString("H:mm")</td>
+                        <td>@activity.StartSession.ToString("dddd dd-MM-yyyy H:mm") - @activity.EndSession.ToString("H:mm")</td>
                         <td>@activity.TotalTickets</td>
                         <td>@builder</td>
                         <td>@String.Format("{0:0.00}", activity.Price)</td>
@@ -463,7 +463,7 @@
                     <tr>
                         <td>@activity.Talk.Naam</td>
                         <td>@activity.Talk.Description</td>
-                        <td>@activity.StartSession.ToString("dddd dd-MM-yy H:mm") - @activity.EndSession.ToString("H:mm")</td>
+                        <td>@activity.StartSession.ToString("dddd dd-MM-yyyy H:mm") - @activity.EndSession.ToString("H:mm")</td>
                         <td>@activity.TotalTickets</td>
                         <td>@activity.Address</td>
                         <td>@String.Format("{0:0.00}", activity.Price)</td>
@@ -517,7 +517,7 @@
                 @foreach (Historic activity in Model.Activities.OfType<Historic>())
                 {
                     <tr>
-                        <td>@activity.StartSession.ToString("dddd dd-MM-yy H:mm")</td>
+                        <td>@activity.StartSession.ToString("dddd dd-MM-yyyy H:mm")</td>
                         <td>@activity.Address</td>
                         <td>@activity.Guide.LanguageName</td>
                         <td>@activity.Guide.GuideName</td>

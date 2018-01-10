@@ -31,12 +31,14 @@ namespace HaarlemFestival.Repository.Admin
         Cuisine GetCuisine(int id);
         Day GetDay(int id);
 
+        Filters GetFilters();
+
         EventData GetEventData();
         List<Activity> GetActivities();
         List<Restaurant> GetRestaurants();
         List<Guide> GetGuides();
         List<Cuisine> GetCuisines();
         List<Day> GetDates();
-
+        List<BesteldeActiviteit> GetBesteldeActivities();
     }
 }

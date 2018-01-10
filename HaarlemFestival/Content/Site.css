@@ -1287,13 +1287,20 @@ div.eventData {
     margin-bottom: 5px;
 }
 
+.progressMargin {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 /********************************/
 /* MEDIA QUERYS VOOR RESPONSIVE */
 /********************************/
 @media (max-width: 1199px) {
+
 }
 
 @media (max-width: 991px) {
+
 }
 
 /* Start mobile navigatie/view */

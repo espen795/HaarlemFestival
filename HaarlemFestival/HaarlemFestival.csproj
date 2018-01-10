@@ -241,6 +241,7 @@
     <Compile Include="Models\Day.cs" />
     <Compile Include="Models\DinnerView.cs" />
     <Compile Include="Models\EventData.cs" />
+    <Compile Include="Models\Filters.cs" />
     <Compile Include="Models\Guide.cs" />
     <Compile Include="Models\HFDB.cs" />
     <Compile Include="Models\HistoricView.cs" />
@@ -259,6 +260,7 @@
     <Compile Include="Models\Reservering.cs" />
     <Compile Include="Models\Restaurant.cs" />
     <Compile Include="Models\TalkViewModel.cs" />
+    <Compile Include="Models\TicketSalesViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Admin\AdminRepository.cs" />
     <Compile Include="Repository\Admin\IAdminRepository.cs" />

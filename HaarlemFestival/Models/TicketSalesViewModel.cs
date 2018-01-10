@@ -5,11 +5,10 @@ using System.Web;
 
 namespace HaarlemFestival.Models
 {
-    public class EventData
+    public class TicketSalesViewModel
     {
         public List<Activity> Activities;
-        public List<Guide> Guides;
-        public List<Restaurant> Restaurants;
+        public List<BesteldeActiviteit> BesteldeActiviteiten;
         public Filters Filters;
     }
 }

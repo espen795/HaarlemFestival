@@ -72,11 +72,6 @@
     Html.RenderAction("_JazzPartial", "Admin");
 }
 </div>
-<!--using (Html.BeginForm("AddJazz", "Admin", FormMethod.Post))
-{
-    Html.RenderAction("_JazzPartial", "Admin");
-}
-</div>-->
 
 <div id="RestaurantForm" class="addDataForm">
 @using (Ajax.BeginForm("AddRestaurant", "Admin", new AjaxOptions { HttpMethod = "POST" }))

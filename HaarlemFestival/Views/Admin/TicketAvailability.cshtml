@@ -1,6 +1,6 @@
 ﻿@using HaarlemFestival.Models
 @using System.Text.RegularExpressions
-@model List<Activity>
+@model TicketSalesViewModel
 
 <div class="container">
     <script type="text/javascript">
@@ -107,15 +107,22 @@
         </div>
 
         <div id="filterSystem">
-            @Html.DropDownList("Dates", new SelectList((List<DateModel>)ViewData["Dates"], "DateDisplay", "DateDisplay"), "Select a Date.", new { @id = "dateFilter", @class = "eventFilter", @onchange = "FilterData()" })
-            @Html.DropDownList("Restaurants", new SelectList((List<Restaurant>)ViewData["Restaurants"], "Naam", "Naam"), "Select a Restaurant", new { @id = "restaurantFilter", @class = "eventFilter", @onchange = "FilterData()" })
+            @Html.DropDownList("Dates", new SelectList(Model.Filters.dateFilter, "DateDisplay", "DateDisplay"), "Select a Date.", new { @id = "dateFilter", @class = "eventFilter", @onchange = "FilterData()" })
+            @Html.DropDownList("Restaurants", new SelectList(Model.Filters.restaurantFilter, "Naam", "Naam"), "Select a Restaurant", new { @id = "restaurantFilter", @class = "eventFilter", @onchange = "FilterData()" })
         </div>
     </section>
 
     <div id="jazzData" class="eventView">
-        @foreach (Jazz activity in Model.OfType<Jazz>())
+        @foreach (Jazz activity in Model.Activities.OfType<Jazz>())
         {
-            decimal boughtPercentage = Math.Round((decimal)activity.BoughtTickets, 2) / Math.Round((decimal)activity.TotalTickets, 2) * 100;
+            if (activity.TotalTickets == 0)
+            {
+                continue;
+            }
+
+            decimal boughtPercentage;
+
+            boughtPercentage = Math.Round((decimal)activity.BoughtTickets, 2) / Math.Round((decimal)activity.TotalTickets, 2) * 100;
             boughtPercentage = Math.Floor(boughtPercentage);
 
             <div class="col-md-12 eventData" id="@activity.ActivityId">
@@ -132,14 +139,19 @@
                         <strong>Hall: </strong> @activity.ConcertHall
                         <br />
                         <strong>Price: </strong>€ @String.Format("{0:0.00}", activity.Price)
+                        
                     </div>
-                    <div class="col-sm-6"><img src="../images/Jazz/Artiesten/@activity.artist.ArtistImage" style="max-width:100%" onError="this.src = '../images/no_image.jpg'" /></div>
+                    <div class="col-sm-6">
+                        <img src="../images/Jazz/Artiesten/@activity.artist.ArtistImage" style="max-width:100%" onError="this.src = '../images/no_image.jpg'" />
+                        <br />
+                        <strong>Total Income:</strong>@Model.BesteldeActiviteiten.Where(a => a.Activiteit.ActivityId == activity.ActivityId).Sum(a => a.Price)
+                    </div>
                 </div>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-danger" role="progressbar" style="width:@(boughtPercentage)%">
+                <div class="progress progressMargin">
+                    <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" style="width:@(boughtPercentage)%">
                         Bought Tickets: @activity.BoughtTickets
                     </div>
-                    <div class="progress-bar progress-bar-success" role="progressbar" style="width:@(100 - boughtPercentage)%">
+                    <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:@(100 - boughtPercentage)%">
                         Available Tickets: @(activity.TotalTickets - activity.BoughtTickets)
                     </div>
                 </div>
@@ -148,12 +160,12 @@
     </div>
 
     <div id="dinnerData" class="eventView">
-        @foreach (Dinner activity in Model.OfType<Dinner>())
+        @foreach (Dinner activity in Model.Activities.OfType<Dinner>())
         {
             decimal boughtPercentage = Math.Round((decimal)activity.BoughtTickets, 2) / Math.Round((decimal)activity.TotalTickets, 2) * 100;
             boughtPercentage = Math.Floor(boughtPercentage);
 
-            <div class="col-md-12" id="@activity.ActivityId">
+            <div class="col-md-12 eventData" id="@activity.ActivityId">
                 <div class="row">
                     <div class="col-sm-6">
                         <h3>@activity.Restaurant.Naam</h3>
@@ -168,13 +180,17 @@
                         <br />
                         <strong>Children Price:</strong>€ @String.Format("{0:0.00}", activity.AlternativePrice)
                     </div>
-                    <div class="col-sm-6"><img src="../images/Dinner/restaurants/@activity.Restaurant.LocationIMG" style="max-width:100%" onError="this.src = '../images/no_image.jpg'" /></div>
+                    <div class="col-sm-6">
+                        <img src="../images/Dinner/restaurants/@activity.Restaurant.LocationIMG" style="max-width:100%" onError="this.src = '../images/no_image.jpg'" />
+                        <br />
+                        <strong>Total Income:</strong>@Model.BesteldeActiviteiten.Where(a => a.Activiteit.ActivityId == activity.ActivityId).Sum(a => a.Price)
+                    </div>
                 </div>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-danger" role="progressbar" style="width:@(boughtPercentage)%">
+                <div class="progress progressMargin">
+                    <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" style="width:@(boughtPercentage)%">
                         Bought Seats: @activity.BoughtTickets
                     </div>
-                    <div class="progress-bar progress-bar-success" role="progressbar" style="width:@(100 - boughtPercentage)%">
+                    <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:@(100 - boughtPercentage)%">
                         Available Seats: @(activity.TotalTickets - activity.BoughtTickets)
                     </div>
                 </div>
@@ -183,12 +199,12 @@
     </div>
 
     <div id="talkingData" class="eventView">
-        @foreach (Talking activity in Model.OfType<Talking>())
+        @foreach (Talking activity in Model.Activities.OfType<Talking>())
         {
             decimal boughtPercentage = Math.Round((decimal)activity.BoughtTickets, 2) / Math.Round((decimal)activity.TotalTickets, 2) * 100;
             boughtPercentage = Math.Floor(boughtPercentage);
 
-            <div class="col-md-12" id="@activity.ActivityId">
+            <div class="col-md-12 eventData" id="@activity.ActivityId">
                 <div class="row">
                     <div class="col-sm-6">
                         <h3>@activity.Talk.Naam</h3>
@@ -202,14 +218,18 @@
                         <strong>Price: </strong>€ @String.Format("{0:0.00}", activity.Price)
                         <br />
                     </div>
-                    <div class="col-sm-3"><img src="../images/Talking/@activity.Talk.Person1IMG" style="max-width:100%" onError="this.src = '../images/no_image.jpg'" /></div>
-                    <div class="col-sm-3"><img src="../images/Talking/@activity.Talk.Person2IMG" style="max-width:100%" onError="this.src = '../images/no_image.jpg'" /></div>
+                    <div class="col-sm-6">
+                        <div class="col-sm-6 desktopPicture"><img src="../images/Talking/@activity.Talk.Person1IMG" style="max-width:100%" onError="this.src = '../images/no_image.jpg'" /></div>
+                        <div class="col-sm-6 desktopPicture"><img src="../images/Talking/@activity.Talk.Person2IMG" style="max-width:100%" onError="this.src = '../images/no_image.jpg'" /></div>
+                        <br />
+                        <strong>Total Income:</strong>@Model.BesteldeActiviteiten.Where(a => a.Activiteit.ActivityId == activity.ActivityId).Sum(a => a.Price)
+                    </div>
                 </div>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-danger" role="progressbar" style="width:@(boughtPercentage)%">
+                <div class="progress progressMargin">
+                    <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" style="width:@(boughtPercentage)%">
                         Bought Tickets: @activity.BoughtTickets
                     </div>
-                    <div class="progress-bar progress-bar-success" role="progressbar" style="width:@(100 - boughtPercentage)%">
+                    <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:@(100 - boughtPercentage)%">
                         Available Tickets: @(activity.TotalTickets - activity.BoughtTickets)
                     </div>
                 </div>
@@ -218,12 +238,12 @@
     </div>
 
     <div id="historicData" class="eventView">
-        @foreach (Historic activity in Model.OfType<Historic>())
+        @foreach (Historic activity in Model.Activities.OfType<Historic>())
         {
             decimal boughtPercentage = Math.Round((decimal)activity.BoughtTickets, 2) / Math.Round((decimal)activity.TotalTickets, 2) * 100;
             boughtPercentage = Math.Floor(boughtPercentage);
 
-            <div class="col-md-6" id="@activity.ActivityId">
+            <div class="col-md-6 eventData" id="@activity.ActivityId">
                 <div class="row">
                     <div class="col-sm-12">
                         <h4><strong>Tour Date: </strong>@activity.StartSession.ToString("dddd dd-MM-yyyy H:mm") - @activity.EndSession.ToString("H:mm")</h4>
@@ -236,13 +256,15 @@
                         <strong>Price: </strong>€ @String.Format("{0:0.00}", activity.Price)
                         <br />
                         <strong>Group Price (Atleast 4 people): </strong>€ @String.Format("{0:0.00}", activity.AlternativePrice)
+                        <br />
+                        <strong>Total Income:</strong>@Model.BesteldeActiviteiten.Where(a => a.Activiteit.ActivityId == activity.ActivityId).Sum(a => a.Price)
                     </div>
                 </div>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-danger" role="progressbar" style="width:@(boughtPercentage)%">
+                <div class="progress progressMargin">
+                    <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" style="width:@(boughtPercentage)%">
                         Bought Seats: @activity.BoughtTickets
                     </div>
-                    <div class="progress-bar progress-bar-success" role="progressbar" style="width:@(100 - boughtPercentage)%">
+                    <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:@(100 - boughtPercentage)%">
                         Available Seats: @(activity.TotalTickets - activity.BoughtTickets)
                     </div>
                 </div>

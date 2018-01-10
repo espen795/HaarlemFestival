@@ -65,14 +65,9 @@ namespace HaarlemFestival.Controllers
         public ActionResult ManageEvent()
         {
             EventData data = adminRepository.GetEventData();
-            data.Dates = GetDateModel(data.Days); // DateTime omzetten naar een string om data goed weer te geven.
-
+            data.Filters.dateFilter = GetDateModel(data.Filters.days);            
+            
             string selectedEvent = this.Request.QueryString["selectedEvent"]; // Geselecteerde evenement uit de URL halen
-
-            ViewData["Restaurants"] = data.Restaurants;
-            ViewData["Guides"] = data.Guides;
-            ViewData["Cuisines"] = data.Cuisines;
-            ViewData["Dates"] = data.Dates;
 
             switch (selectedEvent)
             {
@@ -344,11 +339,16 @@ namespace HaarlemFestival.Controllers
         [Authorize]
         public ActionResult TicketAvailability()
         {
-            ViewData["Restaurants"] = adminRepository.GetRestaurants();
-            ViewData["Dates"] = GetDateModel(adminRepository.GetDates());
+            Filters filters = adminRepository.GetFilters();
+            filters.dateFilter = GetDateModel(filters.days);
+
+            TicketSalesViewModel viewModel = new TicketSalesViewModel();
+            viewModel.Activities = adminRepository.GetActivities();
+            viewModel.BesteldeActiviteiten = adminRepository.GetBesteldeActivities();
+            viewModel.Filters = filters;
 
             List<Activity> activities = adminRepository.GetActivities();
-            return View(activities);
+            return View(viewModel);
         }
 
         [Authorize]
@@ -732,7 +732,7 @@ namespace HaarlemFestival.Controllers
             switch (type)
             {
                 case "Jazz":
-                    path = System.IO.Path.Combine(Server.MapPath("~/images/jazz"), fileName);
+                    path = System.IO.Path.Combine(Server.MapPath("~/images/jazz/artiesten"), fileName);
                     break;
                 case "Restaurant":
                     path = System.IO.Path.Combine(Server.MapPath("~/images/dinner/restaurants"), fileName);

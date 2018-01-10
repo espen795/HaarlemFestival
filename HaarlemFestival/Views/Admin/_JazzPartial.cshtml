@@ -4,7 +4,7 @@
     @Html.HiddenFor(j => j.ActivityId)
     @Html.HiddenFor(h => h.EventType, new { @Value = EventType.JazzPatronaat })
 
-    @if (Model.ArtistId != 0)
+    @if (Model.ArtistId != 0 && Model.ArtistId != null)
     {
         @Html.HiddenFor(j => j.ArtistId, new { @Value = Model.ArtistId });
         @Html.HiddenFor(j => j.artist.ArtistId, new { @Value = Model.artist.ArtistId });
