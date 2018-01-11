@@ -7,6 +7,8 @@ using HaarlemFestival.Models;
 using System.Web.Security;
 using HaarlemFestival.Repository.Admin;
 using System.Text.RegularExpressions;
+using Microsoft.Office.Interop.Excel;
+using System.Drawing;
 
 namespace HaarlemFestival.Controllers
 {
@@ -339,7 +341,7 @@ namespace HaarlemFestival.Controllers
         [Authorize]
         public ActionResult TicketSalesInformation()
         {
-            Filters filters = adminRepository.GetFilters();
+            Models.Filters filters = adminRepository.GetFilters();
             filters.dateFilter = GetDateModel(filters.days);
 
             TicketSalesViewModel viewModel = new TicketSalesViewModel()
@@ -835,6 +837,273 @@ namespace HaarlemFestival.Controllers
             }
 
             return errors; // String met errors terugsturen.
+        }
+
+        public JsonResult DownloadTicketSalesInformation()
+        {
+            string saveLocation = CreateExcelFile();
+
+            return Json(new { location = saveLocation });
+        }
+
+        private string CreateExcelFile()
+        {
+            // Lijst met activities ophalen.
+            List<Activity> activities = adminRepository.GetActivities();
+
+            Application excel = new Application
+            {
+                // for making Excel visible
+                Visible = false,
+                DisplayAlerts = false
+            };
+
+            // Nieuwe Workbook aan het excel bestand toevoegen.
+            Workbook data = excel.Workbooks.Add(Type.Missing);
+
+            // Nieuwe Sheets ophalen en toevoegen
+            data = GetGeneralWorksheet(data, activities);
+            data = GetJazzWorksheet(data, activities);
+            data = GetDinnerWorksheet(data, activities);
+            data = GetTalkingWorksheet(data, activities);
+            data = GetHistoricWorksheet(data, activities);
+
+            // Bestand Opslaan.
+            
+            data.SaveAs("Ticket_Sales_Information.xlsx");
+
+            string saveLocation = data.FullNameURLEncoded;
+            // Bestand sluiten.
+            data.Close();
+
+            return saveLocation;
+        }
+
+        private Workbook GetGeneralWorksheet(Workbook data, List<Activity> activities)
+        {
+            Worksheet generalSheet = (Worksheet)data.Worksheets.Add();
+            generalSheet.Name = "General Information";
+
+            var heading = generalSheet.Range[generalSheet.Cells[1, 1], generalSheet.Cells[1, 5]];
+            heading.Interior.Color = Color.Red;
+            heading.Font.Color = Color.White;
+
+            generalSheet.Cells[1, 1] = "Event";
+            generalSheet.Cells[1, 2] = "Total Tickets/Seats";
+            generalSheet.Cells[1, 3] = "Available Tickets/Seats";
+            generalSheet.Cells[1, 4] = "Percentage of Tickets Sold";
+            generalSheet.Cells[1, 5] = "Income";
+
+            var enums = Enum.GetValues(typeof(EventType)).Cast<EventType>();
+
+            int rowCount = 2;
+            foreach (EventType type in enums)
+            {
+                string eventType = "";
+                switch(type)
+                {
+                    case EventType.JazzPatronaat:
+                        eventType = "Jazz@Patronaat";
+                        break;
+
+                    case EventType.DinnerInHaarlem:
+                        eventType = "Dinner In Haarlem";
+                        break;
+
+                    case EventType.TalkingHaarlem:
+                        eventType = "Talking Haarlem";
+                        break;
+
+                    case EventType.HistoricHaarlem:
+                        eventType = "Historic Haarlem";
+                        break;
+                }
+
+                // EvenementType weergeven.
+                generalSheet.Cells[rowCount, 1] = eventType;
+
+                // Totale aantal tickets ophalen en weergeven.
+                int totalTickets = activities.Where(a => a.EventType == type).Sum(a => a.TotalTickets);
+                generalSheet.Cells[rowCount, 2] = totalTickets;
+
+                // Gekochte aantal tickets ophalen en weergeven.
+                int soldTickets = activities.Where(a => a.EventType == type).Sum(a => a.TotalTickets - a.BoughtTickets);
+                generalSheet.Cells[rowCount, 3] = soldTickets;
+
+                // Percentage van gekochte tickets uitrekenen en weergeven.
+                decimal availablePercentage = Math.Round((decimal)soldTickets, 2) / Math.Round((decimal)totalTickets, 2) * 100;
+                decimal boughtPercentage = 100 - availablePercentage;
+                generalSheet.Cells[rowCount, 4] = boughtPercentage;
+
+                // Achtergrondkleur van Percentage gekochte tickets neerzetten.
+                if (boughtPercentage > 80)
+                    generalSheet.Cells[rowCount, 4].Interior.Color = Color.Green;
+                else if (boughtPercentage > 60)
+                    generalSheet.Cells[rowCount, 4].Interior.Color = Color.Yellow;
+                else
+                    generalSheet.Cells[rowCount, 4].Interior.Color = Color.OrangeRed;
+
+                // Totale Inkomen weergeven.
+                generalSheet.Cells[rowCount, 5] = adminRepository.GetIncomeByType(type).ToString("0.00");
+
+                rowCount++;
+            }
+
+            generalSheet.Columns.AutoFit();
+
+            return data;
+        }
+
+        private Workbook GetJazzWorksheet(Workbook data, List<Activity> activities)
+        {
+            Worksheet jazzSheet = (Worksheet)data.Worksheets.Add();
+            jazzSheet.Name = "Jazz@Patronaat";
+
+            var heading = jazzSheet.Range[jazzSheet.Cells[1, 1], jazzSheet.Cells[1, 8]];
+            heading.Interior.Color = Color.Red;
+            heading.Font.Color = Color.White;
+
+            jazzSheet.Cells[1, 1] = "Band Name";
+            jazzSheet.Cells[1, 2] = "Date";
+            jazzSheet.Cells[1, 3] = "Time";
+            jazzSheet.Cells[1, 4] = "Total Seats";
+            jazzSheet.Cells[1, 5] = "Tickets Sold";
+            jazzSheet.Cells[1, 6] = "Available Tickets";
+            jazzSheet.Cells[1, 7] = "Price";
+            jazzSheet.Cells[1, 8] = "Income";
+
+            int rowCount = 2;
+            foreach (Jazz activity in activities.OfType<Jazz>())
+            {
+                jazzSheet.Cells[rowCount, 1] = activity.artist.ArtistName;
+                jazzSheet.Cells[rowCount, 2] = activity.StartSession.ToString("dddd dd-MM-yyyy");
+                jazzSheet.Cells[rowCount, 3] = activity.StartSession.ToString("H:mm") + " - " + activity.EndSession.ToString("H:mm");
+                jazzSheet.Cells[rowCount, 4] = activity.TotalTickets;
+                jazzSheet.Cells[rowCount, 5] = activity.BoughtTickets;
+                jazzSheet.Cells[rowCount, 6] = activity.TotalTickets - activity.BoughtTickets;
+                jazzSheet.Cells[rowCount, 7] = activity.Price;
+                jazzSheet.Cells[rowCount, 8] = adminRepository.GetIncomeById(activity.ActivityId).ToString("0.00");
+                rowCount++;
+            }
+
+            jazzSheet.Columns.AutoFit();
+
+            return data;
+        }
+
+        private Workbook GetDinnerWorksheet(Workbook data, List<Activity> activities)
+        {
+            Worksheet dinnerSheet = (Worksheet)data.Worksheets.Add();
+            dinnerSheet.Name = "Dinner in Haarlem";
+
+            var heading = dinnerSheet.Range[dinnerSheet.Cells[1, 1], dinnerSheet.Cells[1, 8]];
+            heading.Interior.Color = Color.Red;
+            heading.Font.Color = Color.White;
+
+            dinnerSheet.Cells[1, 1] = "Restaurant";
+            dinnerSheet.Cells[1, 2] = "Date";
+            dinnerSheet.Cells[1, 3] = "Time";
+            dinnerSheet.Cells[1, 4] = "Total Seats";
+            dinnerSheet.Cells[1, 5] = "Seats Sold";
+            dinnerSheet.Cells[1, 6] = "Available Seats";
+            dinnerSheet.Cells[1, 7] = "Price";
+            dinnerSheet.Cells[1, 8] = "Income";
+
+            int rowCount = 2;
+            foreach (Dinner activity in activities.OfType<Dinner>())
+            {
+                dinnerSheet.Cells[rowCount, 1] = activity.Restaurant.Naam;
+                dinnerSheet.Cells[rowCount, 2] = activity.StartSession.ToString("dddd dd-MM-yyyy");
+                dinnerSheet.Cells[rowCount, 3] = activity.StartSession.ToString("H:mm") + " - " + activity.EndSession.ToString("H:mm");
+                dinnerSheet.Cells[rowCount, 4] = activity.TotalTickets;
+                dinnerSheet.Cells[rowCount, 5] = activity.BoughtTickets;
+                dinnerSheet.Cells[rowCount, 6] = activity.TotalTickets - activity.BoughtTickets;
+                dinnerSheet.Cells[rowCount, 7] = activity.Price;
+                dinnerSheet.Cells[rowCount, 8] = adminRepository.GetIncomeById(activity.ActivityId).ToString("0.00");
+                rowCount++;
+            }
+
+            dinnerSheet.Columns.AutoFit();
+
+            return data;
+        }
+
+        private Workbook GetTalkingWorksheet(Workbook data, List<Activity> activities)
+        {
+            Worksheet talkingSheet = (Worksheet)data.Worksheets.Add();
+            talkingSheet.Name = "Talking Haarlem";
+
+            var heading = talkingSheet.Range[talkingSheet.Cells[1, 1], talkingSheet.Cells[1, 8]];
+            heading.Interior.Color = Color.Red;
+            heading.Font.Color = Color.White;
+
+            talkingSheet.Cells[1, 1] = "Name";
+            talkingSheet.Cells[1, 2] = "Date";
+            talkingSheet.Cells[1, 3] = "Time";
+            talkingSheet.Cells[1, 4] = "Total Seats";
+            talkingSheet.Cells[1, 5] = "Tickets Sold";
+            talkingSheet.Cells[1, 6] = "Available Tickets";
+            talkingSheet.Cells[1, 7] = "Price";
+            talkingSheet.Cells[1, 8] = "Income";
+
+            int rowCount = 2;
+            foreach (Talking activity in activities.OfType<Talking>())
+            {
+                talkingSheet.Cells[rowCount, 1] = activity.Talk.Naam;
+                talkingSheet.Cells[rowCount, 2] = activity.StartSession.ToString("dddd dd-MM-yyyy");
+                talkingSheet.Cells[rowCount, 3] = activity.StartSession.ToString("H:mm") + " - " + activity.EndSession.ToString("H:mm");
+                talkingSheet.Cells[rowCount, 4] = activity.TotalTickets;
+                talkingSheet.Cells[rowCount, 5] = activity.BoughtTickets;
+                talkingSheet.Cells[rowCount, 6] = activity.TotalTickets - activity.BoughtTickets;
+                talkingSheet.Cells[rowCount, 7] = activity.Price;
+                talkingSheet.Cells[rowCount, 8] = adminRepository.GetIncomeById(activity.ActivityId).ToString("0.00");
+                rowCount++;
+            }
+
+            talkingSheet.Columns.AutoFit();
+
+            return data;
+        }
+
+        private Workbook GetHistoricWorksheet(Workbook data, List<Activity> activities)
+        {
+            Worksheet historicSheet = (Worksheet)data.Worksheets.Add();
+            historicSheet.Name = "Historic Haarlem";
+
+            var heading = historicSheet.Range[historicSheet.Cells[1, 1], historicSheet.Cells[1, 10]];
+            heading.Interior.Color = Color.Red;
+            heading.Font.Color = Color.White;
+
+            historicSheet.Cells[1, 1] = "Date";
+            historicSheet.Cells[1, 2] = "Time";
+            historicSheet.Cells[1, 3] = "Guide";
+            historicSheet.Cells[1, 4] = "Language";
+            historicSheet.Cells[1, 5] = "Total Seats";
+            historicSheet.Cells[1, 6] = "Tickets Sold";
+            historicSheet.Cells[1, 7] = "Available Tickets";
+            historicSheet.Cells[1, 8] = "Price";
+            historicSheet.Cells[1, 9] = "Group Price";
+            historicSheet.Cells[1, 10] = "Income";
+
+            int rowCount = 2;
+            foreach (Historic activity in activities.OfType<Historic>())
+            {
+                historicSheet.Cells[rowCount, 1] = activity.StartSession.ToString("dddd dd-MM-yyyy");
+                historicSheet.Cells[rowCount, 2] = activity.StartSession.ToString("H:mm") + " - " + activity.EndSession.ToString("H:mm");
+                historicSheet.Cells[rowCount, 3] = activity.Guide.GuideName;
+                historicSheet.Cells[rowCount, 4] = activity.Guide.LanguageName;
+                historicSheet.Cells[rowCount, 5] = activity.TotalTickets;
+                historicSheet.Cells[rowCount, 6] = activity.BoughtTickets;
+                historicSheet.Cells[rowCount, 7] = activity.TotalTickets - activity.BoughtTickets;
+                historicSheet.Cells[rowCount, 8] = activity.Price;
+                historicSheet.Cells[rowCount, 9] = activity.AlternativePrice;
+                historicSheet.Cells[rowCount, 10] = adminRepository.GetIncomeById(activity.ActivityId).ToString("0.00");
+                rowCount++;
+            }
+
+            historicSheet.Columns.AutoFit();
+
+            return data;
         }
     }
 }

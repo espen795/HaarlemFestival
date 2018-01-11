@@ -4,25 +4,66 @@
     ViewBag.Account = (Account)Session["loggedin_account"];
 }
 
-<script>
-    
+<script type="text/javascript">
+
     $(document).ready(function () {
 
         // Elke seconde de locale tijd opnieuw ophalen en neerzetten.
-        setInterval(function ()
-        {
+        setInterval(function () {
             dateTime = new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString() + " ";
             $("#currentTime").text(dateTime);
         }, 1000
         );
 
+
+        $("#downloadComplete").on('hide', function () {
+            $("$downloadComplete .modal-title").text("Download in progress...");
+            $("#downloadLocation").text("Please wait while the file is being downloaded.");
+            $("#closeDownloadButton").attr("disabled", true);
+        })
+
         // Tooltips maken.
-        $('[data-toggle="tooltip"]').tooltip(); 
-    })
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    function DownloadInformation()
+    {
+        $.ajax({
+                type: 'post',
+                url: '@Url.Action("DownloadTicketSalesInformation", "Admin")',
+                complete: function (data) {
+                    $("#downloadComplete").show();
+                    $("#downloadComplete .modal-title").text("Download Complete!");
+                    $("#downloadLocation").html("The File has been saved to: <strong>" + data.responseJSON.location + "</strong>");
+                    $("#closeDownloadButton").removeAttr("disabled");
+                }
+            });
+
+    }
 </script>
 
-<div class="container body-content">  
-    
+<div id="downloadComplete" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Download in progress...</h4>
+            </div>
+            <div class="modal-body">
+                <p id="downloadLocation">Please wait while the file is being downloaded.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeDownloadButton" class="btn btn-default" disabled data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container body-content">
+
     <div id="welcomeArea" class="panel panel-primary col-md-6 col-md-offset-3">
         <div data-toggle="collapse" data-target="#welcomeInformation" class="panel-heading">
             Welcome, @ViewBag.Account.Naam
@@ -42,22 +83,22 @@
 
         <!-- MANAGE EVENT BUTTONS -->
         <div id="manageEventSelection">
-            <div class="col-sm-5"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin", new { selectedEvent = "Jazz@Patronaat" }, null)'">Jazz@Patronaat</button></div>
-            <div class="col-sm-5 col-md-offset-1"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin", new { selectedEvent = "DinnerInHaarlem" }, null)'">Dinner In Haalrem</button></div>
-            <div class="col-sm-5"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin", new { selectedEvent = "TalkingHaarlem" }, null)'">Talking Haarlem</button></div>
-            <div class="col-sm-5 col-md-offset-1"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin", new { selectedEvent = "HistoricHaarlem" }, null)'">Historic Haarlem</button></div>
+            <div class="col-sm-5"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin" , new { selectedEvent="Jazz@Patronaat" }, null)'">Jazz@Patronaat</button></div>
+            <div class="col-sm-5 col-md-offset-1"><button class="btn btn-black" onclick="location.href='@Url.Action(" ManageEvent", "Admin" , new { selectedEvent="DinnerInHaarlem" }, null)'">Dinner In Haalrem</button></div>
+            <div class="col-sm-5"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin" , new { selectedEvent="TalkingHaarlem" }, null)'">Talking Haarlem</button></div>
+            <div class="col-sm-5 col-md-offset-1"><button class="btn btn-black" onclick="location.href='@Url.Action(" ManageEvent", "Admin" , new { selectedEvent="HistoricHaarlem" }, null)'">Historic Haarlem</button></div>
         </div>
     </div>
 
-        <div class="col-md-4 col-md-offset-2 overviewContent" id="TicketSalesInformation">
-            <!-- INTROTEXT -->
-            <p class="introText">
-                By clicking the Download button you will download an excel file which contains all information about tickets availability and sales. The information per event is distributed over different sheets.
-            </p>
+    <div class="col-md-4 col-md-offset-2 overviewContent" id="TicketSalesInformation">
+        <!-- INTROTEXT -->
+        <p class="introText">
+            By clicking the Download button you will download an excel file which contains all information about tickets availability and sales. The information per event is distributed over different sheets.
+        </p>
 
-            <!-- BUTTON -->           
-            <div class="col-sm-3 col-sm-offset-4"><button class="btn btn-black" onclick="location.href='@Url.Action("TicketSalesInformation", "Admin")'">Check Ticket & Sales Information</button></div>
-            <div class="col-sm-3 col-sm-offset-4"><button class="btn btn-black" onclick="location.href='@Url.Action("ExportData", "Admin")'">Download Ticket & Sales Information (TEST - W.I.P)</button></div>
-            
-        </div>
+        <!-- BUTTON -->
+        <div class="col-sm-3 col-sm-offset-4"><button class="btn btn-black" onclick="location.href='@Url.Action(" TicketSalesInformation", "Admin" )'">Check Ticket & Sales Information</button></div>
+        <div class="col-sm-3 col-sm-offset-4"><button class="btn btn-black" onclick="DownloadInformation()" data-toggle="modal" data-target="#downloadComplete">Download Ticket & Sales Information</button></div>
+
+    </div>
 </div>
