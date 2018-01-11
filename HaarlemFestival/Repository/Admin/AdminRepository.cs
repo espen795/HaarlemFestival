@@ -219,5 +219,11 @@ namespace HaarlemFestival.Repository.Admin
             return db.BesteldeActiviteiten.ToList();
         }
 
+        public float GetIncomeWithId(int activityId)
+        {
+            List<BesteldeActiviteit> activities = db.BesteldeActiviteiten.Where(b => b.Activiteit.ActivityId == activityId).ToList();
+            return activities.Sum(a => a.Price);
+        }
+
     }
 }

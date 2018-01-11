@@ -40,5 +40,7 @@ namespace HaarlemFestival.Repository.Admin
         List<Cuisine> GetCuisines();
         List<Day> GetDates();
         List<BesteldeActiviteit> GetBesteldeActivities();
+
+        float GetIncomeWithId(int id);
     }
 }
