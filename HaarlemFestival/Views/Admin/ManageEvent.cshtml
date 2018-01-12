@@ -165,12 +165,19 @@
                 $(this).hide();
             })
 
+			// Alle Event Headers verbergen.
+			$('.eventImage').each(function ()
+			{
+				$(this).hide();
+			})
+
             // Aan de hand van een evenement de data en filters tonen.
             switch ($('#selectedEvent').val())
             {
                 case "Jazz@Patronaat":
                     $('#jazzTable').show();
                     $('#dateFilter').show();
+					$('#jazzImage').show();
                     break;
 
                 case "DinnerInHaarlem":
@@ -179,11 +186,14 @@
                     $('#restaurantTable').show();
                     $('#cuisineFilter').show();
                     $('#restaurantFilter').show();
+					$('#restaurantImage').show();
+					$('#dinnerImage').show();
                     break;
 
                 case "TalkingHaarlem":
                     $('#dateFilter').show();
                     $('#talkingTable').show();
+					$('#talkingImage').show();
                     break;
 
                 case "HistoricHaarlem":
@@ -192,6 +202,8 @@
                     $('#dateFilter').show();
                     $('#guideFilter').show();
                     $('#languageFilter').show();
+					$('#guideImage').show();
+					$('#historicImage').show();
                     break;
             }
         }
@@ -335,6 +347,17 @@
 
     <section>
         <button data-toggle="modal" data-target="#newPopup" href="#">Add new data.</button>
+
+		<div class="event-section-2 eventImage" id="jazzImage">
+            <hr class="title-hr title-line-left">
+            <div class="event-header">
+                <div class="overlay">
+                    <span class="header_tekst">Jazz@Patronaat</span>
+                </div>
+            </div>
+            <hr class="title-hr title-line-right">
+        </div>
+
         <table id="jazzTable" class="eventTable table table-striped table-responsive">
             <thead>
                 <tr>
@@ -367,6 +390,16 @@
                 }
             </tbody>
         </table>
+
+		<div class="event-section-2 eventImage" id="restaurantImage">
+            <hr class="title-hr title-line-left">
+            <div class="event-header restaurantinfo">
+                <div class="overlay">
+                    <span class="header_tekst">Restaurants</span>
+                </div>
+            </div>
+            <hr class="title-hr title-line-right">
+        </div>
 
         <table id="restaurantTable" class="eventTable table table-striped table-responsive">
             <thead>
@@ -404,6 +437,15 @@
             </tbody>
         </table>
 
+		<div class="event-section-2 eventImage" id="dinnerImage">
+            <hr class="title-hr title-line-left">
+            <div class="event-header restaurantinfo">
+                <div class="overlay">
+                    <span class="header_tekst">Dinner in Haarlem</span>
+                </div>
+            </div>
+            <hr class="title-hr title-line-right">
+        </div>
 
         <table id="dinnerTable" class="eventTable table table-striped table-responsive">
             <thead>
@@ -442,6 +484,16 @@
             </tbody>
         </table>
 
+		<section class="event-section-2 eventImage" id="talkingImage">
+            <hr class="title-hr title-line-left">
+            <section class="event-header talking-haarlem">
+                <section class="overlay">
+                    <span class="header_tekst">Talking Haarlem</span>
+                </section>
+            </section>
+            <hr class="title-hr title-line-right">
+        </section> <!-- Section 2 -->
+
         <table id="talkingTable" class="eventTable table table-striped table-responsive">
             <thead>
                 <tr>
@@ -477,6 +529,16 @@
             </tbody>
         </table>
 
+        <div class="event-section-2 eventImage" id="guideImage">
+            <hr class="title-hr title-line-left">
+            <div class="event-header historicLocations">
+                <div class="overlay">
+                    <span class="header_tekst">Guides</span>
+                </div>
+            </div>
+            <hr class="title-hr title-line-right">
+        </div>
+
         <table id="guideTable" class="eventTable table table-striped table-responsive">
             <thead>
                 <tr>
@@ -499,6 +561,16 @@
                 }
             </tbody>
         </table>
+
+        <div class="event-section-2 eventImage" id="historicImage">
+            <hr class="title-hr title-line-left">
+            <div class="event-header historicLocations">
+                <div class="overlay">
+                    <span class="header_tekst">Tours</span>
+                </div>
+            </div>
+            <hr class="title-hr title-line-right">
+        </div>
 
         <table id="historicTable" class="eventTable table table-striped table-responsive">
             <thead>
