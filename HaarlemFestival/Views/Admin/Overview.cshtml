@@ -18,7 +18,7 @@
 
         $("#downloadComplete").on('hide', function () {
             $("$downloadComplete .modal-title").text("Download in progress...");
-            $("#downloadLocation").text("Please wait while the file is being downloaded.");
+            $("#downloadLocation").text("Please be patient while the file is being created.");
             $("#closeDownloadButton").attr("disabled", true);
         })
 
@@ -52,10 +52,10 @@
                 <h4 class="modal-title">Download in progress...</h4>
             </div>
             <div class="modal-body">
-                <p id="downloadLocation">Please wait while the file is being downloaded.</p>
+                <p id="downloadLocation">Please be patient while the file is being created.</p>
             </div>
             <div class="modal-footer">
-                <button type="button" id="closeDownloadButton" class="btn btn-default" disabled data-dismiss="modal">Close</button>
+                <button type="button" id="closeDownloadButton" class="btn btn-primary" disabled data-dismiss="modal">Close</button>
             </div>
         </div>
 
@@ -84,9 +84,9 @@
         <!-- MANAGE EVENT BUTTONS -->
         <div id="manageEventSelection">
             <div class="col-sm-5"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin" , new { selectedEvent="Jazz@Patronaat" }, null)'">Jazz@Patronaat</button></div>
-            <div class="col-sm-5 col-md-offset-1"><button class="btn btn-black" onclick="location.href='@Url.Action(" ManageEvent", "Admin" , new { selectedEvent="DinnerInHaarlem" }, null)'">Dinner In Haalrem</button></div>
+            <div class="col-sm-5 col-md-offset-1"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin" , new { selectedEvent="DinnerInHaarlem" }, null)'">Dinner In Haalrem</button></div>
             <div class="col-sm-5"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin" , new { selectedEvent="TalkingHaarlem" }, null)'">Talking Haarlem</button></div>
-            <div class="col-sm-5 col-md-offset-1"><button class="btn btn-black" onclick="location.href='@Url.Action(" ManageEvent", "Admin" , new { selectedEvent="HistoricHaarlem" }, null)'">Historic Haarlem</button></div>
+            <div class="col-sm-5 col-md-offset-1"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin" , new { selectedEvent="HistoricHaarlem" }, null)'">Historic Haarlem</button></div>
         </div>
     </div>
 
@@ -97,7 +97,7 @@
         </p>
 
         <!-- BUTTON -->
-        <div class="col-sm-3 col-sm-offset-4"><button class="btn btn-black" onclick="location.href='@Url.Action(" TicketSalesInformation", "Admin" )'">Check Ticket & Sales Information</button></div>
+        <div class="col-sm-3 col-sm-offset-4"><button class="btn btn-black" onclick="location.href='@Url.Action("TicketSalesInformation", "Admin" )'">Check Ticket & Sales Information</button></div>
         <div class="col-sm-3 col-sm-offset-4"><button class="btn btn-black" onclick="DownloadInformation()" data-toggle="modal" data-target="#downloadComplete">Download Ticket & Sales Information</button></div>
 
     </div>
