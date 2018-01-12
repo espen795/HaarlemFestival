@@ -26,22 +26,26 @@
                     <li>@Html.ActionLink("Historic Haarlem", "Index", "Historic")</li>
                     <li>@Html.ActionLink("Talking Haarlem", "Index", "Talking")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Basket", "Basket", "Home")</li>
 
-                    @if (Session["loggedin_account"] != null)
-                    {
-                        <li class="dropdown right">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                Admin
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Overview", "Overview", "Admin")</li>
-                                <li>@Html.ActionLink("Manage Event", "ManageEvent", "Admin")</li>
-                                <li>@Html.ActionLink("Log off", "LogOff", "Admin")</li>
-                            </ul>
-                        </li>
-                    }
+					@if (Session["loggedin_account"] != null)
+					{
+						<li class="dropdown right adminDropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							Admin
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li>@Html.ActionLink("Overview", "Overview", "Admin")</li>
+							<li>@Html.ActionLink("Manage Event", "ManageEvent", "Admin")</li>
+							<li>@Html.ActionLink("Ticket & Sales Information", "TicketSalesInformation", "Admin")</li>
+							<li>@Html.ActionLink("Log off", "LogOff", "Admin")</li>
+						</ul>
+						</li>
+				   }
+				   else
+				   {
+				        <li>@Html.ActionLink("Basket", "Basket", "Home")</li>
+				   }
                 </ul>
             </div>
         </div>
