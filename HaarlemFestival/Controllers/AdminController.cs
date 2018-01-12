@@ -71,6 +71,14 @@ namespace HaarlemFestival.Controllers
             List<Activity> activities = adminRepository.GetActivities();
             return View(viewModel);
         }
+
+        [Authorize]
+        public ActionResult AnswerContactmessage()
+        {
+            //List<ContactMessage> messages = adminrepository.GetContactMessages();
+
+            return View(/*messages*/);
+        }
         #endregion
 
         #region Login/Logout
