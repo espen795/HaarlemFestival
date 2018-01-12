@@ -16,52 +16,18 @@ namespace HaarlemFestival.Controllers
     {
         IAdminRepository adminRepository = new AdminRepository();
 
-        // GET: Admin
+        #region Views
         public ActionResult Login()
         {
             // Als de sessie met het aantal verkeerde logins nog niet bestaat.
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Login([Bind(Include = "Username,Password")] LoginModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                Account account = adminRepository.GetAccount(model.Username, model.Password);
-
-                if (account != null) // Als het account bestaat.
-                {
-                    FormsAuthentication.SetAuthCookie(account.Username, false);
-
-                    Session["loggedin_account"] = account; // Account toevoegen aan de session.
-
-                    return RedirectToAction("Overview", "Admin"); // Naar de overview pagina sturen.
-                }
-                else // Als het account niet bestaat.
-                {
-                    ModelState.AddModelError("login-error", "Some of the entered information is invalid.");
-                }
-            }
-
-            return View(model);
-        }
-
         [Authorize]
         public ActionResult Overview()
         {
             return View();
-        }
-
-
-        // Uitloggen
-        [Authorize]
-        public ActionResult LogOff()
-        {
-            FormsAuthentication.SignOut();
-            Session["loggedin_account"] = null; // Account uit de sessie verwijderen.
-            return RedirectToAction("Login", "Admin"); // Gebruiker naar de inlogpagina sturen.
-        }
+        } 
 
         [Authorize]
         public ActionResult ManageEvent()
@@ -89,6 +55,63 @@ namespace HaarlemFestival.Controllers
             return View(data);
         }
 
+        [Authorize]
+        public ActionResult TicketSalesInformation()
+        {
+            Models.Filters filters = adminRepository.GetFilters();
+            filters.dateFilter = GetDateModel(filters.days);
+
+            TicketSalesViewModel viewModel = new TicketSalesViewModel()
+            {
+                Activities = adminRepository.GetActivities(),
+                BesteldeActiviteiten = adminRepository.GetBesteldeActivities(),
+                Filters = filters
+            };
+
+            List<Activity> activities = adminRepository.GetActivities();
+            return View(viewModel);
+        }
+        #endregion
+
+        #region Login/Logout
+        [HttpPost]
+        public ActionResult Login([Bind(Include = "Username,Password")] LoginModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Account account = adminRepository.GetAccount(model.Username, model.Password);
+
+                if (account != null) // Als het account bestaat.
+                {
+                    FormsAuthentication.SetAuthCookie(account.Username, false);
+
+                    Session["loggedin_account"] = account; // Account toevoegen aan de session.
+
+                    return RedirectToAction("Overview", "Admin"); // Naar de overview pagina sturen.
+                }
+                else // Als het account niet bestaat.
+                {
+                    ModelState.AddModelError("login-error", "Some of the entered information is invalid.");
+                }
+            }
+
+            return View(model);
+        }
+
+
+
+
+        // Uitloggen
+        [Authorize]
+        public ActionResult LogOff()
+        {
+            FormsAuthentication.SignOut();
+            Session["loggedin_account"] = null; // Account uit de sessie verwijderen.
+            return RedirectToAction("Login", "Admin"); // Gebruiker naar de inlogpagina sturen.
+        }
+        #endregion
+
+        #region AddRegion
         [HttpPost]
         [Authorize]
         public JsonResult AddJazz(HaarlemFestival.Models.Jazz activity, FormCollection collector)
@@ -100,7 +123,7 @@ namespace HaarlemFestival.Controllers
             // Prijs en Alternatieve prijs ophalen.
             UpdatePrice(activity, collector);
             UpdateAlternativePrice(activity, collector);
-            
+
 
             if (ModelState.IsValid)
             {
@@ -281,7 +304,7 @@ namespace HaarlemFestival.Controllers
             // Standaard informatie van activity
             activity.EventType = EventType.HistoricHaarlem;
             activity.BoughtTickets = 0;
-            
+
             // Prijs en Alternatieve prijs ophalen.
             UpdatePrice(activity, collector);
             UpdateAlternativePrice(activity, collector);
@@ -301,33 +324,9 @@ namespace HaarlemFestival.Controllers
             var errors = GetModelErrors(); // ModelState errors ophalen.
             return Json(new { success = false, errorList = errors }, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
-        [HttpPost]
-        [Authorize]
-        public ActionResult DeleteEvent(int id)
-        {
-            // Evenement verwijderen.
-            adminRepository.DeleteEvent(id);
-            return RedirectToAction("ManageEvent", "Admin");
-        }
-
-        [HttpPost]
-        [Authorize]
-        public ActionResult DeleteRestaurant(int id)
-        {
-            // Restaurant verwijderen.
-            adminRepository.DeleteRestaurant(id);
-            return RedirectToAction("ManageEvent", "Admin");
-        }
-
-        [HttpPost]
-        [Authorize]
-        public ActionResult DeleteGuide(int id)
-        {
-            // Guide verwijderen.
-            adminRepository.DeleteGuide(id);
-            return RedirectToAction("ManageEvent", "Admin");
-        }
+        #region UpdateRegion
 
         [HttpPost]
         [Authorize]
@@ -336,143 +335,6 @@ namespace HaarlemFestival.Controllers
             // Evenement updaten.
             adminRepository.UpdateEvent(activity);
             return RedirectToAction("ManageEvent", "Admin");
-        }
-
-        [Authorize]
-        public ActionResult TicketSalesInformation()
-        {
-            Models.Filters filters = adminRepository.GetFilters();
-            filters.dateFilter = GetDateModel(filters.days);
-
-            TicketSalesViewModel viewModel = new TicketSalesViewModel()
-            {
-                Activities = adminRepository.GetActivities(),
-                BesteldeActiviteiten = adminRepository.GetBesteldeActivities(),
-                Filters = filters
-            };
-
-            List<Activity> activities = adminRepository.GetActivities();
-            return View(viewModel);
-        }
-
-        [Authorize]
-        public ActionResult _JazzPartial(int? id)
-        {
-            ViewData["Dates"] = GetDateModel(adminRepository.GetDates()); // Datums ophalen.
-
-            Jazz jazz;
-            if (id != null) // Als er een id is meegegeven.
-            {
-                // Jazz Evenement ophalen.
-                jazz = adminRepository.GetActivity((int)id) as Jazz;
-                jazz.artist.ArtistInformation = Regex.Replace(jazz.artist.ArtistInformation, @"<(.|\n)*?>", string.Empty); // HTML Tags uit de description halen.
-            }
-            else // Als er geen id is meegegeven.
-            {
-                jazz = new Jazz(); // Nieuwe jazz data aanmaken.
-            }
-
-            return PartialView(jazz); // Jazz data terugsturen.
-        }
-
-        [Authorize]
-        public ActionResult _RestaurantPartial(int? id)
-        {
-            // Cuisines ophalen.
-            ViewData["Cuisines"] = adminRepository.GetCuisines();
-
-            Restaurant restaurant;
-            if (id != null) // Als er een id is meegegeven.
-            {
-                // Restaurant data ophalen.
-                restaurant = adminRepository.GetRestaurant((int)id);
-                restaurant.Rating = restaurant.Rating.Substring(0, 1);
-            }
-            else // Als er geen id is meegegeven.
-            {
-                restaurant = new Restaurant(); // Nieuwe Restaurant data aanmaken
-            }
-
-            return PartialView(restaurant); // Restaurant data terugsturen.
-        }
-
-        [Authorize]
-        public ActionResult _DinnerPartial(int? id)
-        {
-            // Restaurants en Datums ophalen.
-            ViewData["Restaurants"] = adminRepository.GetRestaurants();
-            ViewData["Dates"] = GetDateModel(adminRepository.GetDates());
-
-            Dinner dinner;
-            if (id != null) // Als er een id is meegegeven.
-            {
-                // Dinner evenement ophalen.
-                dinner = adminRepository.GetActivity((int)id) as Dinner;
-            }
-            else // Als er geen id een meegegeven.
-            {
-                dinner = new Dinner(); // Nieuwe Dinner data aanmaken
-            }
-
-            return PartialView(dinner); // Dinner Data terugsturen
-        }
-
-        [Authorize]
-        public ActionResult _TalkingPartial(int? id)
-        {
-            // Datums ophalen.
-            ViewData["Dates"] = GetDateModel(adminRepository.GetDates());
-
-            Talking talking;
-            if (id != null) // Als er een id is meegegeven.
-            {
-                // Talking data ophalen.
-                talking = adminRepository.GetActivity((int)id) as Talking;
-            }
-            else // Als er geen id is meegegeven.
-            {
-                talking = new Talking(); // Nieuwe Talking data aanmaken.
-            }
-
-            return PartialView(talking); // Talking data terugsturen.
-        }
-
-        [Authorize]
-        public ActionResult _GuidePartial(int? id)
-        {
-            Guide guide;
-            if (id != null) // Als er een id is meegegeven.
-            {
-                // Guide data ophalen.
-                guide = adminRepository.GetGuide((int)id);
-            }
-            else // Als er geen id is meegegeven
-            {
-                guide = new Guide(); // Nieuwe Guide data aanmaken.
-            }
-
-            return PartialView(guide); // Guide data terugsturen.
-        }
-
-        [Authorize]
-        public ActionResult _HistoricPartial(int? id)
-        {
-            // Guides en Datums ophalen.
-            ViewData["Guides"] = adminRepository.GetGuides();
-            ViewData["Dates"] = GetDateModel(adminRepository.GetDates());
-
-            Historic historic;
-            if (id != null) // Als er een id is meegegeven.
-            {
-                // Historic data ophalen.
-                historic = adminRepository.GetActivity((int)id) as Historic;
-            }
-            else // ALs er geen id is meegegeven.
-            {
-                historic = new Historic(); // Nieuwe Historic data aanmaken.
-            }
-
-            return PartialView(historic); // Historic data terugsturen.
         }
 
         [Authorize]
@@ -505,7 +367,7 @@ namespace HaarlemFestival.Controllers
                     return RedirectToAction("ManageEvent", "Admin");
             }
         }
-        
+
         [HttpPost]
         [Authorize]
         public JsonResult UpdateJazz(Models.Jazz activity, FormCollection collector)
@@ -716,7 +578,7 @@ namespace HaarlemFestival.Controllers
                 activity.Day = adminRepository.GetDay(activity.Day.DayId);
                 activity.StartSession = activity.Day.Date.Add(TimeSpan.Parse(collector["StartSession"]));
                 activity.EndSession = activity.StartSession.AddHours(2.5);
-                
+
                 // Historic data updaten.
                 adminRepository.UpdateEvent(activity);
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
@@ -781,7 +643,7 @@ namespace HaarlemFestival.Controllers
                 ModelState["Price"].Errors.Clear();
                 activity.Price = price;
             }
-            else if(collector["Price"].ToString().Length > 0) // Als er een prijs is ingevoerd maar niet omgezet kan worden.
+            else if (collector["Price"].ToString().Length > 0) // Als er een prijs is ingevoerd maar niet omgezet kan worden.
                 ModelState.AddModelError("InvalidPrice", "Please enter a valid price.");
         }
 
@@ -799,45 +661,160 @@ namespace HaarlemFestival.Controllers
                     ModelState.AddModelError("InvalidAlternativePrice", "Please enter a valid price");
             }
         }
+        #endregion
 
-        private void GetCuisines(Restaurant restaurant, FormCollection collector)
+        #region DeleteRegion
+        [HttpPost]
+        [Authorize]
+        public ActionResult DeleteEvent(int id)
         {
-            // Lijst voor Cuisines ophalen.
-            restaurant.Cuisines = new List<Cuisine>();
-            string[] cuisineIds = collector["Cuisine"].Split(',');
-            cuisineIds = cuisineIds.Distinct().ToArray();
-
-            foreach (string cuisine in cuisineIds)
-            {
-                if (cuisine.Length > 0)
-                    restaurant.Cuisines.Add(adminRepository.GetCuisine(Convert.ToInt32(cuisine))); // Cuisine toevoegen aan de cuisinelijst
-            }
+            // Evenement verwijderen.
+            adminRepository.DeleteEvent(id);
+            return RedirectToAction("ManageEvent", "Admin");
         }
 
-        private List<DateModel> GetDateModel(List<Day> days)
+        [HttpPost]
+        [Authorize]
+        public ActionResult DeleteRestaurant(int id)
         {
-            List<DateModel> dates = new List<DateModel>();
-            foreach (Day day in days) // Voor elke opgehaalde dag.
-            {
-                dates.Add(new DateModel { DayId = day.DayId, DateDisplay = day.Date.ToString("dddd dd-MM-yyyy") }); // Nieuwe DatumModel toevoegen aan de lijst.
-            }
-
-            return dates;
+            // Restaurant verwijderen.
+            adminRepository.DeleteRestaurant(id);
+            return RedirectToAction("ManageEvent", "Admin");
         }
 
-        private string GetModelErrors()
+        [HttpPost]
+        [Authorize]
+        public ActionResult DeleteGuide(int id)
         {
-            string errors = "";
-            foreach (ModelState modelstate in ViewData.ModelState.Values) // Voor elke modelstate.
+            // Guide verwijderen.
+            adminRepository.DeleteGuide(id);
+            return RedirectToAction("ManageEvent", "Admin");
+        }
+        #endregion
+
+        #region PartialViews
+        [Authorize]
+        public ActionResult _JazzPartial(int? id)
+        {
+            ViewData["Dates"] = GetDateModel(adminRepository.GetDates()); // Datums ophalen.
+
+            Jazz jazz;
+            if (id != null) // Als er een id is meegegeven.
             {
-                foreach (ModelError error in modelstate.Errors) // Voor elke error in de modelstate
-                {
-                    errors += error.ErrorMessage + "<br />"; // Error Bericht toevoegen aan de string.
-                }
+                // Jazz Evenement ophalen.
+                jazz = adminRepository.GetActivity((int)id) as Jazz;
+                jazz.artist.ArtistInformation = Regex.Replace(jazz.artist.ArtistInformation, @"<(.|\n)*?>", string.Empty); // HTML Tags uit de description halen.
+            }
+            else // Als er geen id is meegegeven.
+            {
+                jazz = new Jazz(); // Nieuwe jazz data aanmaken.
             }
 
-            return errors; // String met errors terugsturen.
+            return PartialView(jazz); // Jazz data terugsturen.
         }
+
+        [Authorize]
+        public ActionResult _RestaurantPartial(int? id)
+        {
+            // Cuisines ophalen.
+            ViewData["Cuisines"] = adminRepository.GetCuisines();
+
+            Restaurant restaurant;
+            if (id != null) // Als er een id is meegegeven.
+            {
+                // Restaurant data ophalen.
+                restaurant = adminRepository.GetRestaurant((int)id);
+                restaurant.Rating = restaurant.Rating.Substring(0, 1);
+            }
+            else // Als er geen id is meegegeven.
+            {
+                restaurant = new Restaurant(); // Nieuwe Restaurant data aanmaken
+            }
+
+            return PartialView(restaurant); // Restaurant data terugsturen.
+        }
+
+        [Authorize]
+        public ActionResult _DinnerPartial(int? id)
+        {
+            // Restaurants en Datums ophalen.
+            ViewData["Restaurants"] = adminRepository.GetRestaurants();
+            ViewData["Dates"] = GetDateModel(adminRepository.GetDates());
+
+            Dinner dinner;
+            if (id != null) // Als er een id is meegegeven.
+            {
+                // Dinner evenement ophalen.
+                dinner = adminRepository.GetActivity((int)id) as Dinner;
+            }
+            else // Als er geen id een meegegeven.
+            {
+                dinner = new Dinner(); // Nieuwe Dinner data aanmaken
+            }
+
+            return PartialView(dinner); // Dinner Data terugsturen
+        }
+
+        [Authorize]
+        public ActionResult _TalkingPartial(int? id)
+        {
+            // Datums ophalen.
+            ViewData["Dates"] = GetDateModel(adminRepository.GetDates());
+
+            Talking talking;
+            if (id != null) // Als er een id is meegegeven.
+            {
+                // Talking data ophalen.
+                talking = adminRepository.GetActivity((int)id) as Talking;
+            }
+            else // Als er geen id is meegegeven.
+            {
+                talking = new Talking(); // Nieuwe Talking data aanmaken.
+            }
+
+            return PartialView(talking); // Talking data terugsturen.
+        }
+
+        [Authorize]
+        public ActionResult _GuidePartial(int? id)
+        {
+            Guide guide;
+            if (id != null) // Als er een id is meegegeven.
+            {
+                // Guide data ophalen.
+                guide = adminRepository.GetGuide((int)id);
+            }
+            else // Als er geen id is meegegeven
+            {
+                guide = new Guide(); // Nieuwe Guide data aanmaken.
+            }
+
+            return PartialView(guide); // Guide data terugsturen.
+        }
+
+        [Authorize]
+        public ActionResult _HistoricPartial(int? id)
+        {
+            // Guides en Datums ophalen.
+            ViewData["Guides"] = adminRepository.GetGuides();
+            ViewData["Dates"] = GetDateModel(adminRepository.GetDates());
+
+            Historic historic;
+            if (id != null) // Als er een id is meegegeven.
+            {
+                // Historic data ophalen.
+                historic = adminRepository.GetActivity((int)id) as Historic;
+            }
+            else // ALs er geen id is meegegeven.
+            {
+                historic = new Historic(); // Nieuwe Historic data aanmaken.
+            }
+
+            return PartialView(historic); // Historic data terugsturen.
+        }
+        #endregion
+
+        #region ExcelBestand
 
         public JsonResult DownloadTicketSalesInformation()
         {
@@ -1105,5 +1082,47 @@ namespace HaarlemFestival.Controllers
 
             return data;
         }
+        #endregion
+
+        #region Overige Functies
+        private void GetCuisines(Restaurant restaurant, FormCollection collector)
+        {
+            // Lijst voor Cuisines ophalen.
+            restaurant.Cuisines = new List<Cuisine>();
+            string[] cuisineIds = collector["Cuisine"].Split(',');
+            cuisineIds = cuisineIds.Distinct().ToArray();
+
+            foreach (string cuisine in cuisineIds)
+            {
+                if (cuisine.Length > 0)
+                    restaurant.Cuisines.Add(adminRepository.GetCuisine(Convert.ToInt32(cuisine))); // Cuisine toevoegen aan de cuisinelijst
+            }
+        }
+
+        private List<DateModel> GetDateModel(List<Day> days)
+        {
+            List<DateModel> dates = new List<DateModel>();
+            foreach (Day day in days) // Voor elke opgehaalde dag.
+            {
+                dates.Add(new DateModel { DayId = day.DayId, DateDisplay = day.Date.ToString("dddd dd-MM-yyyy") }); // Nieuwe DatumModel toevoegen aan de lijst.
+            }
+
+            return dates;
+        }
+
+        private string GetModelErrors()
+        {
+            string errors = "";
+            foreach (ModelState modelstate in ViewData.ModelState.Values) // Voor elke modelstate.
+            {
+                foreach (ModelError error in modelstate.Errors) // Voor elke error in de modelstate
+                {
+                    errors += error.ErrorMessage + "<br />"; // Error Bericht toevoegen aan de string.
+                }
+            }
+
+            return errors; // String met errors terugsturen.
+        }
+        #endregion
     }
 }
