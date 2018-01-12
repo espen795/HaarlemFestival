@@ -1132,10 +1132,11 @@ input[type='text']:focus, input[type='password']:focus {
 .overviewContent {
     margin-top: 10px;
     margin-bottom: 10px;
+    border: 1px solid black;
 }
-
-#manageEventSelection button {
-    margin-top: 10px;
+#manageEventSelection {
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 #manageEventSelection button {
@@ -1152,6 +1153,15 @@ input[type='text']:focus, input[type='password']:focus {
 
 #downloadComplete {
     display: none;
+}
+
+.middle {
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Manage Event Pagina */
@@ -1205,9 +1215,9 @@ input[type='text']:focus, input[type='password']:focus {
     text-align: center;
 }
 
-    .eventData tr td .glyphicon-remove, .eventData tr td .glyphicon-pencil {
-        cursor: pointer;
-    }
+.eventData tr td .glyphicon-remove, .eventData tr td .glyphicon-pencil {
+    cursor: pointer;
+}
 
 /* MODAL VOOR IMAGE POPUP */
 /* De Modal (Achtergrond) */

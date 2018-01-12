@@ -75,7 +75,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4 col-md-offset-1 overviewContent" id="ManageEvent">
+    <div class="col-md-3 col-md-offset-1 overviewContent" id="ManageEvent">
         <!-- INTRO TEXT -->
         <p class="introText">
             By clicking on one of these buttons you will be navigated to another page where you can Add, Update and Delete data of the chosen event.
@@ -83,22 +83,23 @@
 
         <!-- MANAGE EVENT BUTTONS -->
         <div id="manageEventSelection">
-            <div class="col-sm-5"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin" , new { selectedEvent="Jazz@Patronaat" }, null)'">Jazz@Patronaat</button></div>
-            <div class="col-sm-5 col-md-offset-1"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin" , new { selectedEvent="DinnerInHaarlem" }, null)'">Dinner In Haalrem</button></div>
-            <div class="col-sm-5"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin" , new { selectedEvent="TalkingHaarlem" }, null)'">Talking Haarlem</button></div>
-            <div class="col-sm-5 col-md-offset-1"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin" , new { selectedEvent="HistoricHaarlem" }, null)'">Historic Haarlem</button></div>
+            <div class="col-sm-12 middle"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin" , new { selectedEvent="Jazz@Patronaat" }, null)'">Jazz@Patronaat</button></div>
+            <div class="col-sm-12 middle"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin" , new { selectedEvent="DinnerInHaarlem" }, null)'">Dinner In Haalrem</button></div>
+            <div class="col-sm-12 middle"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin" , new { selectedEvent="TalkingHaarlem" }, null)'">Talking Haarlem</button></div>
+            <div class="col-sm-12 middle"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin" , new { selectedEvent="HistoricHaarlem" }, null)'">Historic Haarlem</button></div>
         </div>
     </div>
 
-    <div class="col-md-4 col-md-offset-2 overviewContent" id="TicketSalesInformation">
+    <div class="col-md-3 col-md-offset-1 overviewContent" id="TicketSalesInformation">
         <!-- INTROTEXT -->
         <p class="introText">
             By clicking the Download button you will download an excel file which contains all information about tickets availability and sales. The information per event is distributed over different sheets.
+			You can also check the Information on the website.
         </p>
 
         <!-- BUTTON -->
-        <div class="col-sm-3 col-sm-offset-4"><button class="btn btn-black" onclick="location.href='@Url.Action("TicketSalesInformation", "Admin" )'">Check Ticket & Sales Information</button></div>
-        <div class="col-sm-3 col-sm-offset-4"><button class="btn btn-black" onclick="DownloadInformation()" data-toggle="modal" data-target="#downloadComplete">Download Ticket & Sales Information</button></div>
+        <div class="col-sm-12 middle"><button class="btn btn-black" onclick="location.href='@Url.Action("TicketSalesInformation", "Admin" )'">Show Information</button></div>
+        <div class="col-sm-12 middle"><button class="btn btn-black" onclick="DownloadInformation()" data-toggle="modal" data-target="#downloadComplete">Download Excel File</button></div>
 
     </div>
 </div>
