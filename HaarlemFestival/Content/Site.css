@@ -1145,6 +1145,10 @@ input[type='text']:focus, input[type='password']:focus {
     width: 150px;
 }
 
+.red {
+    color: red;
+}
+
 .introText {
     width: 95%;
     font-weight: bold;
@@ -1198,9 +1202,17 @@ input[type='text']:focus, input[type='password']:focus {
     position: relative;
 }
 
-    #topFilterBar select option {
-        height: 25px;
-    }
+#topFilterBar select option {
+    height: 25px;
+}
+
+#newDataDiv {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #000000;
+    background-color: #F0FFF0;
+    padding: 5px 0;
+}
 
 #filterSystem .eventFilter:focus {
     border-color: #6495ed;
