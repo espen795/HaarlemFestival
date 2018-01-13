@@ -66,7 +66,7 @@
 
     <div id="welcomeArea" class="panel panel-primary col-md-6 col-md-offset-3">
         <div data-toggle="collapse" data-target="#welcomeInformation" class="panel-heading">
-            Welcome, @ViewBag.Account.Naam
+            Welcome, <!-- ViewBag.Account.Naam -->
         </div>
 
         <div id="welcomeInformation" class="in">
@@ -83,10 +83,10 @@
 
         <!-- MANAGE EVENT BUTTONS -->
         <div id="manageEventSelection">
-            <div class="col-sm-12 middle"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin" , new { selectedEvent="Jazz@Patronaat" }, null)'">Jazz@Patronaat</button></div>
-            <div class="col-sm-12 middle"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin" , new { selectedEvent="DinnerInHaarlem" }, null)'">Dinner In Haalrem</button></div>
-            <div class="col-sm-12 middle"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin" , new { selectedEvent="TalkingHaarlem" }, null)'">Talking Haarlem</button></div>
-            <div class="col-sm-12 middle"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin" , new { selectedEvent="HistoricHaarlem" }, null)'">Historic Haarlem</button></div>
+            <div class="col-sm-12 middle"><button class="btn btn-black">@Html.ActionLink("Jazz@Patronaat", "ManageEvent", "Admin", new { selectedEvent = "Jazz@Patronaat" }, new { @class = "white" })</button></div>
+            <div class="col-sm-12 middle"><button class="btn btn-black">@Html.ActionLink("Dinner in Haarlem", "ManageEvent", "Admin", new { selectedEvent = "DinnerInHaarlem" }, new { @class = "white" })</button></div>
+            <div class="col-sm-12 middle"><button class="btn btn-black">@Html.ActionLink("Talking Haarlem", "ManageEvent", "Admin", new { selectedEvent = "TalkingHaarlem" }, new { @class = "white" })</button></div>
+            <div class="col-sm-12 middle"><button class="btn btn-black">@Html.ActionLink("Historic Haarlem", "ManageEvent", "Admin", new { selectedEvent = "HistoricHaarlem" }, new { @class = "white" })</button></div>
         </div>
     </div>
 
@@ -98,8 +98,12 @@
         </p>
 
         <!-- BUTTON -->
-        <div class="col-sm-12 middle"><button class="btn btn-black" onclick="location.href='@Url.Action("TicketSalesInformation", "Admin" )'">Show Information</button></div>
+        <div class="col-sm-12 middle"><button class="btn btn-black">@Html.ActionLink("Show Information", "TicketSalesInformation", "AdminController", null, new { @class = "white" })</button></div>
         <div class="col-sm-12 middle"><button class="btn btn-black" onclick="DownloadInformation()" data-toggle="modal" data-target="#downloadComplete">Download Excel File</button></div>
+    </div>
 
+    <div class="col-md-3 col-md-offset-1 overviewContent" id="ContactMessages">
+        [Introduction Contact Messages]
+        <div class="col-sm-12 middle"><button class="btn btn-black">@Html.ActionLink("Contact Messages", "AnswerContactmessage", "AdminController", null, new { @class="white" })</button></div>
     </div>
 </div>
