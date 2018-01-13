@@ -24,31 +24,42 @@ namespace HaarlemFestival.Controllers
             HistoricView toursview = new HistoricView();
             toursview.Tours = historicRepository.GetAllTours();
             toursview.Reservering = new List<BesteldeActiviteit>();
-            
+
             return View(toursview);
         }
 
         [HttpPost]
         public ActionResult Book(HistoricView activiteit)
         {
-            List<BesteldeActiviteit> b = new List<BesteldeActiviteit>();
+            List<BesteldeActiviteit> orderedActivity = new List<BesteldeActiviteit>();
+
             // Session existing?
             if (Session["current_order"] != null)
             {
-                b.AddRange((List<BesteldeActiviteit>)Session["current_order"]);
+                orderedActivity.AddRange((List<BesteldeActiviteit>)Session["current_order"]);
             }
-      
+
+            int i = 0;
             // In the session
-            foreach (BesteldeActiviteit act in activiteit.Reservering)
+            foreach (BesteldeActiviteit activity in activiteit.Reservering)
             {
-                if(act.Aantal != 0 || act.AantalAlternatief != 0)
+                if (activity.Aantal != 0 || activity.AantalAlternatief != 0)
                 {
-                    act.Activiteit = historicRepository.GetTourForId(act.Activiteit.ActivityId);
-                    b.Add(act);
+                    // Totaal aantal tickets berekenen (alternatief telt voor 4 plekken in een tour)
+                    activity.TotalBoughtTickets = activity.Aantal + (activity.AantalAlternatief * 4);
+
+                    // Tour ophalen gebaseerd op het id
+                    activity.Activiteit = historicRepository.GetTourForId(activity.Activiteit.ActivityId);
+
+                    // Prijs berekenen voor in het basket model
+                    activity.Price = activity.Aantal * (float)activity.Activiteit.Price + activity.AantalAlternatief * (float)activity.Activiteit.AlternativePrice;
+
+                    orderedActivity.Add(activity);
                 }
             }
 
-            Session["current_order"] = b;
+            Session["current_order"] = orderedActivity;
+
             // Partial view continue or basket
             return RedirectToAction("Reservation", "Historic");
         }

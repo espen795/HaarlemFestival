@@ -55,9 +55,8 @@ namespace HaarlemFestival.Controllers
             basketModel.Jazzs = jazzRepository.GetAllJazzs();
             basketModel.Dinners = dinnerRepository.GetAllDinners();
             basketModel.Talks = talkingRepository.GetAllTalks();
-            //basketModel.Historics = historicRepository.GetAllTours()
-
-            
+            basketModel.Historics = historicRepository.GetAllTours();
+                
             return View(basketModel);
         }
 
