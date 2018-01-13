@@ -103,8 +103,15 @@
                                 }
                                 else if (ordered.Activiteit.EventType == EventType.HistoricHaarlem)
                                 {
-                                    //nog fixen
-                                    <td class="basket-table-name">Historic Tour</td>
+                                    foreach (Historic historic in Model.Historics)
+                                    {
+                                        if (historic.ActivityId == ordered.Activiteit.ActivityId)
+                                        {
+                                            // Moet nog checken en weergeven of het een groepsticket is
+                                            <td class="basket-table-name">Historic Tour in @historic.Guide.LanguageName by @historic.Guide.GuideName</td>
+                                            break;
+                                        }
+                                    }
                                 }
 
                                 <td class="basket-table-time">@ordered.Activiteit.StartSession.ToString("ddd dd/MM/yyyy HH:mm") - @ordered.Activiteit.EndSession.ToString("ddd dd/MM/yyyy HH:mm")</td>
