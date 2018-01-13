@@ -13,21 +13,21 @@
 
     <div class="form-group">
         <div class="input-group">
-            @Html.Label("Name:")
+            @Html.Label("Name")<i class="required red">*</i>
             @Html.TextBoxFor(g => g.GuideName, new { @placeholder = "Guide Name" })
         </div>
     </div>
 
     <div class="form-group">
         <div class="input-group">
-            @Html.Label("Language")
+            @Html.Label("Language")<i class="required red">*</i>
             @Html.TextBoxFor(g => g.LanguageName, new { @placeholder = "Language" });
         </div>
     </div>
 
     <div class="form-group">
         <div class="input-group">
-            @Html.Label("Language Abbreviation")
+            @Html.Label("Language Abbreviation")<i class="required red">*</i>
             @Html.TextBoxFor(g => g.LanguageAbbr, new { @placeholder = "Language Abbreviation" });
         </div>
     </div>
