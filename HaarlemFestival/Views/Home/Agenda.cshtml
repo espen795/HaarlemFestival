@@ -86,55 +86,30 @@
                                                     {
                                                         if (besteldeactiviteit.Activiteit.EventType == EventType.JazzPatronaat)
                                                         {
-                                                            foreach (Jazz jazz in Model.Jazzs)
-                                                            {
-                                                                if (jazz.ActivityId == besteldeactiviteit.Activiteit.ActivityId)
-                                                                {
-                                                                    <div class="agenda-activity @besteldeactiviteit.Activiteit.EventType">@jazz.artist.ArtistName</div>
-                                                                    break;
-                                                                }
-                                                            }
-                                                        }
+                                                            Jazz jazz = Model.Jazzs.Find(x => x.ActivityId == besteldeactiviteit.Activiteit.ActivityId);
 
-                                                        else if (besteldeactiviteit.Activiteit.EventType == EventType.DinnerInHaarlem)
-                                                        {
-                                                            foreach (Dinner dinner in Model.Dinners)
-                                                            {
-                                                                if (dinner.ActivityId == besteldeactiviteit.Activiteit.ActivityId)
-                                                                {
-                                                                    <div class="agenda-activity @besteldeactiviteit.Activiteit.EventType">@dinner.Restaurant.Naam</div>
-                                                                    break;
-                                                                }
-                                                            }
-                                                        }
-                                                        else if (besteldeactiviteit.Activiteit.EventType == EventType.TalkingHaarlem)
-                                                        {
-                                                            foreach (Talking talk in Model.Talks)
-                                                            {
-                                                                if (talk.ActivityId == besteldeactiviteit.Activiteit.ActivityId)
-                                                                {
-                                                                    <div class="agenda-activity @besteldeactiviteit.Activiteit.EventType">@talk.Talk.Naam</div>
-                                                                    break;
-                                                                }
-                                                            }
-                                                        }
-                                                        else if (besteldeactiviteit.Activiteit.EventType == EventType.HistoricHaarlem)
-                                                        {
-                                                            foreach (Historic historic in Model.Historics)
-                                                            {
-                                                                if (historic.ActivityId == besteldeactiviteit.Activiteit.ActivityId)
-                                                                {
-                                                                    <div class="agenda-activity @historic.EventType" onclick="SwitchActivity(@historic.ActivityId)">Historic Tour in @historic.Guide.LanguageName by @historic.Guide.GuideName</div>
-                                                                    break;
-                                                                }
-                                                            }
+                                                            <div class="agenda-activity @besteldeactiviteit.Activiteit.EventType">@jazz.artist.ArtistName</div>
                                                         }
                                                     }
-                                                    else
+
+                                                    else if (besteldeactiviteit.Activiteit.EventType == EventType.DinnerInHaarlem)
                                                     {
+                                                        Dinner dinner = Model.Dinners.Find(x => x.ActivityId == besteldeactiviteit.Activiteit.ActivityId);
 
+                                                        <div class="agenda-activity @besteldeactiviteit.Activiteit.EventType">@dinner.Restaurant.Naam</div>
                                                     }
+                                                    else if (besteldeactiviteit.Activiteit.EventType == EventType.TalkingHaarlem)
+                                                    {
+                                                        Talking talk = Model.Talks.Find(x => x.ActivityId == besteldeactiviteit.Activiteit.ActivityId);
 
+                                                        <div class="agenda-activity @besteldeactiviteit.Activiteit.EventType">@talk.Talk.Naam</div>
+                                                    }
+                                                    else if (besteldeactiviteit.Activiteit.EventType == EventType.HistoricHaarlem)
+                                                    {
+                                                        Historic historic = Model.Historics.Find(x => x.ActivityId == besteldeactiviteit.Activiteit.ActivityId);
+
+                                                        <div class="agenda-activity @historic.EventType" onclick="SwitchActivity(@historic.ActivityId)">Historic Tour in @historic.Guide.LanguageName by @historic.Guide.GuideName</div>
+                                                    }
                                                 }
                                             </td>
                                         </tr>
@@ -155,25 +130,18 @@
                         {
                             if (besteldeactiviteit.Activiteit.EventType == EventType.JazzPatronaat)
                             {
-                                foreach (Jazz jazz in Model.Jazzs)
-                                {
-                                    if (jazz.ActivityId == besteldeactiviteit.Activiteit.ActivityId)
-                                    {
-                                        <div class="activities" id="@besteldeactiviteit.Activiteit.ActivityId" hidden>
-                                            
-                                        </div>
-                                        break;
-                                    }
-                                }
+                                Jazz jazz = Model.Jazzs.Find(x => x.ActivityId == besteldeactiviteit.Activiteit.ActivityId);
+
+                                <div class="activities" id="@besteldeactiviteit.Activiteit.ActivityId" hidden>
+
+                                </div>
                             }
 
                             else if (besteldeactiviteit.Activiteit.EventType == EventType.DinnerInHaarlem)
                             {
-                                foreach (Dinner Dinner in Model.Dinners)
-                                {
-                                    if (Dinner.ActivityId == besteldeactiviteit.Activiteit.ActivityId)
-                                    {
-                                        <div class="activities" id="@Dinner.ActivityId" hidden>
+                                Dinner Dinner = Model.Dinners.Find(x => x.ActivityId == besteldeactiviteit.Activiteit.ActivityId);
+
+                                <div class="activities" id="@Dinner.ActivityId" hidden>
                                             <img src="/images/Dinner/restaurants/@Dinner.Restaurant.LocationIMG" />
                                             <h4>@Dinner.Restaurant.Naam</h4>
                                             <table>
@@ -195,30 +163,21 @@
                                                 </tr>
                                             </table>
                                         </div>
-                                        break;
-                                    }
-                                }
                             }
                             else if (besteldeactiviteit.Activiteit.EventType == EventType.TalkingHaarlem)
                             {
-                                foreach (Talking talk in Model.Talks)
-                                {
-                                    if (talk.ActivityId == besteldeactiviteit.Activiteit.ActivityId)
-                                    {
-                                        <div class="activities" id="@besteldeactiviteit.Activiteit.ActivityId" hidden>
+
+                                Talking talk = Model.Talks.Find(x => x.ActivityId == besteldeactiviteit.Activiteit.ActivityId);
+
+                                <div class="activities" id="@besteldeactiviteit.Activiteit.ActivityId" hidden>
 
                                         </div>
-                                        break;
-                                    }
-                                }
                             }
                             else if (besteldeactiviteit.Activiteit.EventType == EventType.HistoricHaarlem)
                             {
-                                foreach (Historic historic in Model.Historics)
-                                {
-                                    if (historic.ActivityId == besteldeactiviteit.Activiteit.ActivityId)
-                                    {
-                                        <div class="activities" id="@historic.ActivityId" hidden>
+                                Historic historic = Model.Historics.Find(x => x.ActivityId == besteldeactiviteit.Activiteit.ActivityId);
+
+                                <div class="activities" id="@historic.ActivityId" hidden>
                                             <img src="/images/Historic/Locaties/3.jpg" />
                                             <h4>Historic Tour in @historic.Guide.LanguageName by @historic.Guide.GuideName</h4>
                                             <table>
@@ -240,9 +199,6 @@
                                                 </tr>
                                             </table>
                                         </div>
-                                        break;
-                                    }
-                                }
                             }
                         }
                     </div>

@@ -125,6 +125,9 @@
             <h3>You could also:</h3>
             @{
                 List<Activity> AllActivities = new List<Activity>();
+
+                Model.Jazzs.RemoveRange()
+
                 AllActivities.AddRange(Model.Jazzs);
                 AllActivities.AddRange(Model.Dinners);
                 AllActivities.AddRange(Model.Talks);
@@ -237,7 +240,7 @@
                                 </tr>
                             </table>
 
-                            AllActivities.RemoveAll(x => x.EventType == EventType.JazzPatronaat);
+                            AllActivities.RemoveAll(x => x.EventType == EventType.HistoricHaarlem);
                         }
                     </div>
                 }
