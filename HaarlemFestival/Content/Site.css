@@ -230,11 +230,13 @@ footer {
 /** AGENDA **/
 /************/
 
+.event-header.agenda-header {
+    background-image: url('/images/Agenda/agenda.png');
+}
 
 /************/
 /** BASKET **/
 /************/
-
 .event-section-1-basket {
     min-height: 140px;
     overflow-wrap: break-word;

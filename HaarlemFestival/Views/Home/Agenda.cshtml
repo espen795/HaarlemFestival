@@ -1,9 +1,24 @@
 ﻿@using HaarlemFestival.Models;
 @using System.Collections.Generic;
 @using System.Data.Entity;
+@model AgendaView
+
 @{
     ViewBag.Title = "Agenda";
 }
+
+<script>
+    function SwitchActivity(id) {
+        var element = document.getElementById(id);
+        var otherElements = document.getElementsByClassName("activities");
+
+        for (var i = 0; i < otherElements.length; i++) {
+            otherElements[i].style.display = "none";
+        }
+
+        element.style.display = "block";
+    }
+</script>
 
 <div class="event-banner"></div>
 
@@ -32,7 +47,7 @@
 
         <div class=" event-section-2">
             <hr class="title-hr title-line-left">
-            <div class="event-header contact-header">
+            <div class="event-header agenda-header">
                 <div class="overlay">
                     <span class="header_tekst">Personal agenda</span>
                 </div>
@@ -50,25 +65,167 @@
 
             <div class="tab-content">
                 <div id="agenda-thursday" class="tab-pane fade in active">
-                    <div class="table table-hover table-responsive ticket-table">
-                        <table>
-                            <tr>
-                                <th>Time</th>
-                                <th>Activity</th>
-                            </tr>
-                            @{
-                                DateTime StartTime = new DateTime(1997, 4, 7, 10, 0, 0, 0);
-                                DateTime EndTime = new DateTime(1997, 4, 7, 22, 0, 0, 0);
-                                while (StartTime < EndTime)
+                    <div class="col-md-6">
+                        <div class="table table-hover table-responsive ticket-table">
+                            <table>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Activity</th>
+                                </tr>
+                                @{
+                                    DateTime StartTime = new DateTime(2018, 7, 26, 10, 0, 0, 0);
+                                    DateTime EndTime = new DateTime(2018, 7, 26, 22, 0, 0, 0);
+                                    while (StartTime < EndTime)
+                                    {
+                                        <tr>
+                                            <td>@StartTime.TimeOfDay.ToString(@"hh\:mm") - @StartTime.AddMinutes(30).TimeOfDay.ToString(@"hh\:mm") </td>
+                                            <td>
+                                                @foreach (BesteldeActiviteit besteldeactiviteit in Model.Day1)
+                                                {
+                                                    if (besteldeactiviteit.Activiteit.StartSession.TimeOfDay <= StartTime.TimeOfDay && besteldeactiviteit.Activiteit.EndSession.TimeOfDay >= StartTime.AddMinutes(30).TimeOfDay)
+                                                    {
+                                                        if (besteldeactiviteit.Activiteit.EventType == EventType.JazzPatronaat)
+                                                        {
+                                                            foreach (Jazz jazz in Model.Jazzs)
+                                                            {
+                                                                if (jazz.ActivityId == besteldeactiviteit.Activiteit.ActivityId)
+                                                                {
+                                                                    <div class="agenda-activity @besteldeactiviteit.Activiteit.EventType">@jazz.artist.ArtistName</div>
+                                                                    break;
+                                                                }
+                                                            }
+                                                        }
+
+                                                        else if (besteldeactiviteit.Activiteit.EventType == EventType.DinnerInHaarlem)
+                                                        {
+                                                            foreach (Dinner dinner in Model.Dinners)
+                                                            {
+                                                                if (dinner.ActivityId == besteldeactiviteit.Activiteit.ActivityId)
+                                                                {
+                                                                    <div class="agenda-activity @besteldeactiviteit.Activiteit.EventType">@dinner.Restaurant.Naam</div>
+                                                                    break;
+                                                                }
+                                                            }
+                                                        }
+                                                        else if (besteldeactiviteit.Activiteit.EventType == EventType.TalkingHaarlem)
+                                                        {
+                                                            foreach (Talking talk in Model.Talks)
+                                                            {
+                                                                if (talk.ActivityId == besteldeactiviteit.Activiteit.ActivityId)
+                                                                {
+                                                                    <div class="agenda-activity @besteldeactiviteit.Activiteit.EventType">@talk.Talk.Naam</div>
+                                                                    break;
+                                                                }
+                                                            }
+                                                        }
+                                                        else if (besteldeactiviteit.Activiteit.EventType == EventType.HistoricHaarlem)
+                                                        {
+                                                            foreach (Historic historic in Model.Historics)
+                                                            {
+                                                                if (historic.ActivityId == besteldeactiviteit.Activiteit.ActivityId)
+                                                                {
+                                                                    <div class="agenda-activity @historic.EventType" onclick="SwitchActivity(@historic.ActivityId)">Historic Tour in @historic.Guide.LanguageName by @historic.Guide.GuideName</div>
+                                                                    break;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+
+                                                    }
+
+                                                }
+                                            </td>
+                                        </tr>
+                                        StartTime = StartTime.AddMinutes(30);
+                                    }
+                                }
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6 agenda-right">
+                        <h3>Activity information</h3>
+
+                        <div class="activities" id="0">
+                            <h4>Click on an activity for more information</h4>
+                        </div>
+
+                        @foreach (BesteldeActiviteit besteldeactiviteit in Model.Day1)
+                        {
+                            if (besteldeactiviteit.Activiteit.EventType == EventType.JazzPatronaat)
+                            {
+                                foreach (Jazz jazz in Model.Jazzs)
                                 {
-                                    <tr>
-                                        <td>@StartTime.TimeOfDay.ToString(@"hh\:mm")</td>
-                                        <td></td>
-                                    </tr>
-                                    StartTime = StartTime.AddMinutes(30);
+                                    if (jazz.ActivityId == besteldeactiviteit.Activiteit.ActivityId)
+                                    {
+                                        <div class="activities" id="@besteldeactiviteit.Activiteit.ActivityId" hidden>
+                                            
+                                        </div>
+                                        break;
+                                    }
                                 }
                             }
-                        </table>
+
+                            else if (besteldeactiviteit.Activiteit.EventType == EventType.DinnerInHaarlem)
+                            {
+                                foreach (Dinner dinner in Model.Dinners)
+                                {
+                                    if (dinner.ActivityId == besteldeactiviteit.Activiteit.ActivityId)
+                                    {
+                                        <div class="activities" id="@besteldeactiviteit.Activiteit.ActivityId" hidden>
+
+                                        </div>
+                                        break;
+                                    }
+                                }
+                            }
+                            else if (besteldeactiviteit.Activiteit.EventType == EventType.TalkingHaarlem)
+                            {
+                                foreach (Talking talk in Model.Talks)
+                                {
+                                    if (talk.ActivityId == besteldeactiviteit.Activiteit.ActivityId)
+                                    {
+                                        <div class="activities" id="@besteldeactiviteit.Activiteit.ActivityId" hidden>
+
+                                        </div>
+                                        break;
+                                    }
+                                }
+                            }
+                            else if (besteldeactiviteit.Activiteit.EventType == EventType.HistoricHaarlem)
+                            {
+                                foreach (Historic historic in Model.Historics)
+                                {
+                                    if (historic.ActivityId == besteldeactiviteit.Activiteit.ActivityId)
+                                    {
+                                        <div class="activities" id="@historic.ActivityId" hidden>
+                                            <img src="/images/Historic/Locaties/3.jpg" />
+                                            <h4>Historic Tour in @historic.Guide.LanguageName by @historic.Guide.GuideName</h4>
+                                            <table>
+                                                <tr>
+                                                    <td>Start-time:</td>
+                                                    <td>@historic.StartSession.TimeOfDay.ToString(@"hh\:mm")</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>End-time:</td>
+                                                    <td>@historic.EndSession.TimeOfDay.ToString(@"hh\:mm")</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Contact:</td>
+                                                    <td>@historic.Phonenumber</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Location:</td>
+                                                    <td>@historic.Address</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        break;
+                                    }
+                                }
+                            }
+                        }
                     </div>
                 </div>
 

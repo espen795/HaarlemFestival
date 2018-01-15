@@ -86,9 +86,33 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Agenda()
         {
-            ViewBag.Message = "Your personal agenda.";
+            AgendaView agendaView = new AgendaView();
+            agendaView.Day1 = new List<BesteldeActiviteit>();
+            agendaView.Day2 = new List<BesteldeActiviteit>();
+            agendaView.Day3 = new List<BesteldeActiviteit>();
+            agendaView.Day4 = new List<BesteldeActiviteit>();
 
-            return View();
+            List<BesteldeActiviteit> Bestelling = new List<BesteldeActiviteit>();
+
+            if ((List<BesteldeActiviteit>)Session["current_order"] != null)
+            {
+                Bestelling = (List<BesteldeActiviteit>)Session["current_order"];
+            }
+
+            if(Bestelling.Count != 0)
+            {
+                agendaView.Day1.AddRange(Bestelling.Where(b => b.Activiteit.Day.DayId == 1));
+                agendaView.Day2.AddRange(Bestelling.Where(b => b.Activiteit.Day.DayId == 2));
+                agendaView.Day3.AddRange(Bestelling.Where(b => b.Activiteit.Day.DayId == 3));
+                agendaView.Day4.AddRange(Bestelling.Where(b => b.Activiteit.Day.DayId == 4));
+            }
+
+            agendaView.Jazzs = jazzRepository.GetAllJazzs();
+            agendaView.Dinners = dinnerRepository.GetAllDinners();
+            agendaView.Talks = talkingRepository.GetAllTalks();
+            agendaView.Historics = historicRepository.GetAllTours();
+
+            return View(agendaView);
         }
 
         public ActionResult Reservation()
