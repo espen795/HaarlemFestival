@@ -29,29 +29,35 @@ body {
     background-color: #92140C;
 }
 
-    .navbar .navbar-nav {
-        width: 100%;
-    }
+.navbar .navbar-nav {
+    width: 100%;
+}
 
-        .navbar .navbar-nav > li {
-            width: 14%;
-            text-align: center;
-        }
+.navbar .navbar-nav > li {
+    width: 14%;
+    text-align: center;
+}
 
-            .navbar .navbar-nav > li > a {
-                font-family: 'Arial', sans-serif;
-                color: #fff;
-                text-shadow: none;
-                font-size: 15px;
-            }
+.navbar .navbar-nav > li > a {
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    text-shadow: none;
+    font-size: 15px;
+}
 
-                .navbar .navbar-nav > li > a:hover {
-                    background-color: #BE7C4D;
-                }
+.navbar .navbar-nav > li > a:hover {
+    background-color: #BE7C4D;
+}
 
-    .navbar .right {
-        float: right;
-    }
+.navbar .right {
+    float: right;
+}
+
+.navbar li:last-child a::before {
+    content: '\f291 ';
+    font-family: FontAwesome;
+    margin-right: 16px;   
+}
 
 /* FOOTER */
 footer {
@@ -234,6 +240,85 @@ footer {
     background-image: url('/images/Agenda/agenda.png');
 }
 
+.agenda .ticket-table table {
+    width: 100%;
+
+}
+.agenda .ticket-table table tr td {
+    padding: 0;
+}
+
+.agenda .ticket-table table tr td:first-child {
+    padding: 6px 12px
+}
+
+.agenda .ticket-table .agenda-activity {
+    background: #fff;
+    width:100%;
+    display: block;
+    padding: 6px
+}
+
+.agenda .ticket-table .agenda-activity:hover {
+    cursor: pointer;
+}
+
+.agenda .ticket-table .agenda-activity.HistoricHaarlem {
+    background: #38a038;
+}
+
+.agenda .ticket-table .agenda-activity.DinnerInHaarlem {
+    background: #cc8a11;
+}
+
+.agenda .ticket-table .agenda-activity.JazzPatronaat {
+    background: #da58da;
+}
+
+.agenda .ticket-table .agenda-activity.TalkingHaarlem {
+    background: #c5c522;
+}
+
+.agenda .ticket-table td .agenda-activity:nth-child(2) {
+    margin-top: 1px;
+}
+
+.agenda .agenda-image-container {
+    width: 550px;
+    height: 250px;
+    overflow: hidden;
+}
+
+.agenda  .agenda-image-container img {
+    width: 100%;
+
+}
+
+.agenda  .agenda-image-container img.agenda-image-historic {
+    margin: -75px 0 0 0;
+} 
+
+.agenda .activities {
+    text-align: center;
+}
+
+.agenda .agenda-right table {
+    width: 100%
+}
+
+.agenda .agenda-right table td {
+    width: 50%;
+}
+
+.agenda .agenda-right table td:first-child {
+    text-align: right;
+    font-weight: bold;
+    padding-right: 10px;
+}
+
+.agenda .agenda-right table td:last-child {
+    text-align: left;
+}
 /************/
 /** BASKET **/
 /************/
@@ -450,6 +535,10 @@ footer {
         .jazz .event-section-3 p b:nth-child(3) {
             padding-left: 17px;
         }
+
+        .jazz-overview .event-section-3 .col-md-6:nth-child(1n+7) {
+    display: none
+}
 
 
 /* ------------------------------Dinner in Haarlem-----------------------------*/
