@@ -234,6 +234,49 @@ footer {
     background-image: url('/images/Agenda/agenda.png');
 }
 
+.ticket-table table {
+    width: 100%;
+
+}
+.ticket-table table tr td {
+    padding: 0;
+}
+
+.ticket-table table tr td:first-child {
+    padding: 6px 12px
+}
+
+.ticket-table .agenda-activity {
+    background: #fff;
+    width:100%;
+    display: block;
+    padding: 6px
+}
+
+.ticket-table .agenda-activity:hover {
+    cursor: pointer;
+}
+
+.ticket-table .agenda-activity.HistoricHaarlem {
+    background: #38a038;
+}
+
+.ticket-table .agenda-activity.DinnerInHaarlem {
+    background: #cc8a11;
+}
+
+.ticket-table .agenda-activity.JazzPatronaat {
+    background: #da58da;
+}
+
+.ticket-table .agenda-activity.TalkingHaarlem {
+    background: #c5c522;
+}
+
+.ticket-table td .agenda-activity:nth-child(2) {
+    margin-top: 1px;
+}
+
 /************/
 /** BASKET **/
 /************/
