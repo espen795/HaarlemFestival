@@ -81,7 +81,16 @@ namespace HaarlemFestival.Controllers
 
             Session["current_order"] = Bestelling;
 
-            return View("Basket");
+            BasketModel basketModel = new BasketModel
+            {
+                Order = Bestelling,
+                Jazzs = jazzRepository.GetAllJazzs(),
+                Dinners = dinnerRepository.GetAllDinners(),
+                Talks = talkingRepository.GetAllTalks(),
+                Historics = historicRepository.GetAllTours()
+            };
+
+            return View("Basket", basketModel);
         }
 
         public ActionResult Agenda()
