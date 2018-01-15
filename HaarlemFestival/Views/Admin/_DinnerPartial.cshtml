@@ -1,66 +1,79 @@
 ﻿@using HaarlemFestival.Models
 @model Dinner
 
-    @if (ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Count() > 0)
-    {
-        <div id="bootstrapAlert" class="alert alert-danger alert-dismissible">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <span class="loginErrors">@Html.ValidationSummary()</span>
-        </div>
-    }
+@if (ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Count() > 0)
+{
+    <div id="bootstrapAlert" class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <span class="loginErrors">@Html.ValidationSummary()</span>
+    </div>
+}
 
-    @Html.HiddenFor(d => d.ActivityId)
-    @Html.HiddenFor(h => h.EventType, new { @Value = EventType.DinnerInHaarlem })
+@Html.HiddenFor(d => d.ActivityId)
+@Html.HiddenFor(h => h.EventType, new { @Value = EventType.DinnerInHaarlem })
 
-    <div class="form-group">
-        <div class="input-group">
+<div class="form-group row">
+    <div class="input-group">
+        <div class="col-md-12">
             @Html.Label("Restaurant")<i class="required red">*</i>
             @Html.DropDownListFor(d => d.RestaurantId, new SelectList((List<Restaurant>)ViewData["Restaurants"], "RestaurantId", "Naam", Model.RestaurantId), new { @name = "RestaurantId" })
         </div>
     </div>
+</div>
 
-    <div class="form-group">
-        <div class="input-group">
+<div class="form-group row">
+    <div class="input-group">
+        <div class="col-md-6">
             @Html.Label("Day")<i class="required red">*</i>
             @Html.DropDownListFor(d => d.Day.DayId, new SelectList((List<DateModel>)ViewData["Dates"], "DayId", "DateDisplay"), new { @name = "Day" })
+        </div>
+        <div class="col-md-3">
             @Html.Label("Start")<i class="required red">*</i>
-            @Html.TextBoxFor(d => d.StartSession, new { @Value = Model.StartSession.ToString("HH:mm"), @name = "startTime" , @type = "time" })
+            @Html.TextBoxFor(d => d.StartSession, new { @Value = Model.StartSession.ToString("HH:mm"), @name = "startTime", @type = "time" })
+        </div>
+        <div class="col-md-3">
             @Html.Label("End")<i class="required red">*</i>
-            @Html.TextBoxFor(d => d.EndSession, new { @Value = Model.EndSession.ToString("HH:mm"), @name = "endTime" , @type = "time" })
+            @Html.TextBoxFor(d => d.EndSession, new { @Value = Model.EndSession.ToString("HH:mm"), @name = "endTime", @type = "time" })
         </div>
     </div>
-    <div class="form-group">
-        <div class="input-group">
-            @Html.Label("Price")<i class="required red">*</i>
-            @Html.TextBoxFor(d => d.Price, new { @placeholder = "0.00", @Value = String.Format("{0:0.00}", Model.Price) })
+</div>
+
+<div class="form-group row">
+    <div class="input-group">
+        <div class="col-md-6">
+            @Html.LabelFor(j => j.Price)<i class="required red">*</i>
+            @Html.TextBoxFor(j => j.Price, new { @placeholder = "0.00", @Value = String.Format("{0:0.00}", Model.Price) })
+        </div>
+        <div class="col-md-6">
+            @Html.Label("Price (12-)")<i class="required" red>*</i>
+            @Html.TextBoxFor(j => j.AlternativePrice, new { @placeholder = "0.00", @Value = String.Format("{0:0.00}", Model.AlternativePrice) })
         </div>
     </div>
-    <div class="form-group">
-        <div class="input-group">
-            @Html.Label("Price (12-)")<i class="required red">*</i>
-            @Html.TextBoxFor(d => d.AlternativePrice, new { @placeholder = "0.00", @Value = String.Format("{0:0.00}", Model.AlternativePrice) })
+</div>
+
+<div class="form-group row">
+    <div class="input-group">
+        <div class="col-md-6">
+            @Html.LabelFor(j => j.Address)<i class="required red">*</i>
+            @Html.TextBoxFor(j => j.Address, new { @placeholder = "Address" })
+        </div>
+        <div class="col-md-6">
+            @Html.LabelFor(j => j.Phonenumber)<i class="required red">*</i>
+            @Html.TextBoxFor(j => j.Phonenumber, new { @Value = "Phone Number" })
         </div>
     </div>
-    <div class="form-group">
-        <div class="input-group">
+</div>
+
+<div class="form-group row">
+    <div class="input-group">
+        <div class="col-md-6">
             @Html.Label("Seats ")<i class="required red">*</i>
             @Html.TextBoxFor(d => d.TotalTickets, new { @type = "number", @placeholder = 0, @min = 0 })
         </div>
     </div>
-    <div class="form-group">
-        <div class="input-group">
-            @Html.Label("Phonenumber ")<i class="required red">*</i>
-            @Html.TextBoxFor(d => d.Phonenumber, new { @placeholder = "Phonenumber" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="input-group">
-            @Html.Label("Address ")<i class="required red">*</i>
-            @Html.TextBoxFor(d => d.Address, new { @placeholder = "Address" })
-        </div>
-    </div>
+</div>
 
-    <div class="modal-footer">
-        <input type="submit" class="btn btn-success" value="Save Dinner" />
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-    </div>
+<div class="modal-footer">
+    <input type="submit" class="btn btn-success" value="Save Dinner" />
+    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+</div>

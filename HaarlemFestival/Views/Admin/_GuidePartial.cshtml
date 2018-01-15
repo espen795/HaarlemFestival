@@ -11,24 +11,25 @@
 
     @Html.HiddenFor(g => g.GuideId)
 
-    <div class="form-group">
+    <div class="form-group row">
         <div class="input-group">
-            @Html.Label("Name")<i class="required red">*</i>
-            @Html.TextBoxFor(g => g.GuideName, new { @placeholder = "Guide Name" })
+            <div class="col-md-12">
+                @Html.Label("Name")<i class="required red">*</i>
+                @Html.TextBoxFor(g => g.GuideName, new { @placeholder = "Guide Name" })
+            </div>
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group row">
         <div class="input-group">
-            @Html.Label("Language")<i class="required red">*</i>
-            @Html.TextBoxFor(g => g.LanguageName, new { @placeholder = "Language" });
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="input-group">
-            @Html.Label("Language Abbreviation")<i class="required red">*</i>
-            @Html.TextBoxFor(g => g.LanguageAbbr, new { @placeholder = "Language Abbreviation" });
+            <div class="col-md-6">
+                @Html.Label("Language")<i class="required red">*</i>
+                @Html.TextBoxFor(g => g.LanguageName, new { @placeholder = "Language" })
+            </div>
+            <div class="col-md-6">
+                @Html.Label("Language Abbreviation")<i class="required red">*</i>
+                @Html.TextBoxFor(g => g.LanguageAbbr, new { @placeholder = "Language Abbreviation" })
+            </div>
         </div>
     </div>
 
