@@ -29,29 +29,35 @@ body {
     background-color: #92140C;
 }
 
-    .navbar .navbar-nav {
-        width: 100%;
-    }
+.navbar .navbar-nav {
+    width: 100%;
+}
 
-        .navbar .navbar-nav > li {
-            width: 14%;
-            text-align: center;
-        }
+.navbar .navbar-nav > li {
+    width: 14%;
+    text-align: center;
+}
 
-            .navbar .navbar-nav > li > a {
-                font-family: 'Arial', sans-serif;
-                color: #fff;
-                text-shadow: none;
-                font-size: 15px;
-            }
+.navbar .navbar-nav > li > a {
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    text-shadow: none;
+    font-size: 15px;
+}
 
-                .navbar .navbar-nav > li > a:hover {
-                    background-color: #BE7C4D;
-                }
+.navbar .navbar-nav > li > a:hover {
+    background-color: #BE7C4D;
+}
 
-    .navbar .right {
-        float: right;
-    }
+.navbar .right {
+    float: right;
+}
+
+.navbar li:last-child a::before {
+    content: '\f291 ';
+    font-family: FontAwesome;
+    margin-right: 16px;   
+}
 
 /* FOOTER */
 footer {
@@ -234,6 +240,85 @@ footer {
     background-image: url('/images/Agenda/agenda.png');
 }
 
+.agenda .ticket-table table {
+    width: 100%;
+
+}
+.agenda .ticket-table table tr td {
+    padding: 0;
+}
+
+.agenda .ticket-table table tr td:first-child {
+    padding: 6px 12px
+}
+
+.agenda .ticket-table .agenda-activity {
+    background: #fff;
+    width:100%;
+    display: block;
+    padding: 6px
+}
+
+.agenda .ticket-table .agenda-activity:hover {
+    cursor: pointer;
+}
+
+.agenda .ticket-table .agenda-activity.HistoricHaarlem {
+    background: #38a038;
+}
+
+.agenda .ticket-table .agenda-activity.DinnerInHaarlem {
+    background: #cc8a11;
+}
+
+.agenda .ticket-table .agenda-activity.JazzPatronaat {
+    background: #da58da;
+}
+
+.agenda .ticket-table .agenda-activity.TalkingHaarlem {
+    background: #c5c522;
+}
+
+.agenda .ticket-table td .agenda-activity:nth-child(2) {
+    margin-top: 1px;
+}
+
+.agenda .agenda-image-container {
+    width: 550px;
+    height: 250px;
+    overflow: hidden;
+}
+
+.agenda  .agenda-image-container img {
+    width: 100%;
+
+}
+
+.agenda  .agenda-image-container img.agenda-image-historic {
+    margin: -75px 0 0 0;
+} 
+
+.agenda .activities {
+    text-align: center;
+}
+
+.agenda .agenda-right table {
+    width: 100%
+}
+
+.agenda .agenda-right table td {
+    width: 50%;
+}
+
+.agenda .agenda-right table td:first-child {
+    text-align: right;
+    font-weight: bold;
+    padding-right: 10px;
+}
+
+.agenda .agenda-right table td:last-child {
+    text-align: left;
+}
 /************/
 /** BASKET **/
 /************/
@@ -261,24 +346,24 @@ footer {
     border-color: #000000;
 }
 
-.basket-table th {
-    background-color: #CCCCCC;
-    border: solid !important;
-    border-width: 2px;
-    border-color: #000000;
-}
+    .basket-table th {
+        background-color: #CCCCCC;
+        border: solid !important;
+        border-width: 2px;
+        border-color: #000000;
+    }
 
-.basket-table tr {
-    border: solid;
-    border-width: 1px;
-    border-color: #000000;
-}
+    .basket-table tr {
+        border: solid;
+        border-width: 1px;
+        border-color: #000000;
+    }
 
-.basket-table tr:nth-child(odd) {
-    background-color: #CCCCCC !important;    
-}
+        .basket-table tr:nth-child(odd) {
+            background-color: #CCCCCC !important;
+        }
 
-.basket-table-tickets-head{
+.basket-table-tickets-head {
     max-width: 40px;
 }
 
@@ -309,10 +394,10 @@ footer {
     text-align: center;
 }
 
-.basket-table-remove a {
-    font-size: 17px;
-    color: #92140C;
-}
+    .basket-table-remove a {
+        font-size: 17px;
+        color: #92140C;
+    }
 
 .basket-button {
     float: right;
@@ -326,6 +411,14 @@ footer {
     text-align: center;
 }
 
+.basket-crossselling {
+}
+
+.basket-crossselling img{
+    max-width: 332px;
+
+
+}
 /*****************************/
 /** EVENT PAGE STANDARD CSS **/
 /*****************************/
@@ -442,6 +535,10 @@ footer {
         .jazz .event-section-3 p b:nth-child(3) {
             padding-left: 17px;
         }
+
+        .jazz-overview .event-section-3 .col-md-6:nth-child(1n+7) {
+    display: none
+}
 
 
 /* ------------------------------Dinner in Haarlem-----------------------------*/
@@ -1143,9 +1240,9 @@ input[type='text']:focus, input[type='password']:focus {
     padding-bottom: 5px;
 }
 
-#manageEventSelection button {
-    width: 150px;
-}
+    #manageEventSelection button {
+        width: 150px;
+    }
 
 .required {
     font-size: 18px;
@@ -1189,6 +1286,7 @@ input[type='text']:focus, input[type='password']:focus {
 #selectEvent, #filterSystem {
     height: 100%;
 }
+
 .errorAlert {
     text-align: center;
     display: none;
@@ -1208,9 +1306,9 @@ input[type='text']:focus, input[type='password']:focus {
     position: relative;
 }
 
-#topFilterBar select option {
-    height: 25px;
-}
+    #topFilterBar select option {
+        height: 25px;
+    }
 
 #newDataDiv {
     margin-top: 10px;
@@ -1259,9 +1357,9 @@ input[type='text']:focus, input[type='password']:focus {
     text-align: center;
 }
 
-.eventData tr td .glyphicon-remove, .eventData tr td .glyphicon-pencil {
-    cursor: pointer;
-}
+    .eventData tr td .glyphicon-remove, .eventData tr td .glyphicon-pencil {
+        cursor: pointer;
+    }
 
 /* MODAL VOOR IMAGE POPUP */
 /* De Modal (Achtergrond) */
@@ -1358,11 +1456,9 @@ div.eventData {
 /* MEDIA QUERYS VOOR RESPONSIVE */
 /********************************/
 @media (max-width: 1199px) {
-
 }
 
 @media (max-width: 991px) {
-
 }
 
 /* Start mobile navigatie/view */

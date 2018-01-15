@@ -46,17 +46,44 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Basket()
         {
-            BasketModel basketModel = new BasketModel();
+            BasketModel basketModel = new BasketModel
+            {
+                Jazzs = jazzRepository.GetAllJazzs(),
+                Dinners = dinnerRepository.GetAllDinners(),
+                Talks = talkingRepository.GetAllTalks(),
+                Historics = historicRepository.GetAllTours()
+            };
 
             List<BesteldeActiviteit> Bestelling = new List<BesteldeActiviteit>();
             Bestelling = (List<BesteldeActiviteit>)Session["current_order"];
+            List<BesteldeActiviteit> Order = new List<BesteldeActiviteit>();
+            if (Bestelling.Count > 0)
+            {
+                Bestelling = Bestelling.OrderBy(x => x.Activiteit.ActivityId).ToList();
 
-            basketModel.Order = Bestelling;
-            basketModel.Jazzs = jazzRepository.GetAllJazzs();
-            basketModel.Dinners = dinnerRepository.GetAllDinners();
-            basketModel.Talks = talkingRepository.GetAllTalks();
-            basketModel.Historics = historicRepository.GetAllTours();
                 
+                Order.Add(Bestelling[0]);
+                for (int i = 1; i < Bestelling.Count; i++)
+                {                    
+                    if (Bestelling[i].Activiteit.ActivityId == Bestelling[i - 1].Activiteit.ActivityId)
+                    {
+                        BesteldeActiviteit besteldeActiviteit = Order.Where(x => x.Activiteit.ActivityId == Bestelling[i].Activiteit.ActivityId).FirstOrDefault();
+                        Order.RemoveAll(x => x.Activiteit.ActivityId == Bestelling[i].Activiteit.ActivityId);
+                        besteldeActiviteit.Aantal += Bestelling[i].Aantal;
+                        besteldeActiviteit.AantalAlternatief += Bestelling[i].AantalAlternatief;
+                        besteldeActiviteit.TotalBoughtTickets += Bestelling[i].TotalBoughtTickets;
+                        besteldeActiviteit.Price += Bestelling[i].Price;
+                        besteldeActiviteit.Opmerking += " \n " + Bestelling[i].Opmerking;
+                        Order.Add(besteldeActiviteit);
+                    }
+                    else
+                        Order.Add(Bestelling[i]);
+                }
+
+            }
+
+            basketModel.Order = Order;
+
             return View(basketModel);
         }
 
@@ -70,18 +97,19 @@ namespace HaarlemFestival.Controllers
 
             List<BesteldeActiviteit> Bestelling = (List<BesteldeActiviteit>)Session["current_order"];
 
-            foreach(BesteldeActiviteit besteldeActiviteit in Bestelling)
-            {
-                if(besteldeActiviteit.Activiteit.ActivityId == Id)
-                {
-                    Bestelling.Remove(besteldeActiviteit);
-                    break;
-                }
-            }
-
+            Bestelling.RemoveAll(x => x.Activiteit.ActivityId == Id);
             Session["current_order"] = Bestelling;
 
-            return View("Basket");
+            BasketModel basketModel = new BasketModel
+            {
+                Order = Bestelling,
+                Jazzs = jazzRepository.GetAllJazzs(),
+                Dinners = dinnerRepository.GetAllDinners(),
+                Talks = talkingRepository.GetAllTalks(),
+                Historics = historicRepository.GetAllTours()
+            };
+
+            return View("Basket", basketModel);
         }
 
         public ActionResult Agenda()
@@ -99,7 +127,7 @@ namespace HaarlemFestival.Controllers
                 Bestelling = (List<BesteldeActiviteit>)Session["current_order"];
             }
 
-            if(Bestelling.Count != 0)
+            if (Bestelling.Count != 0)
             {
                 agendaView.Day1.AddRange(Bestelling.Where(b => b.Activiteit.Day.DayId == 1));
                 agendaView.Day2.AddRange(Bestelling.Where(b => b.Activiteit.Day.DayId == 2));

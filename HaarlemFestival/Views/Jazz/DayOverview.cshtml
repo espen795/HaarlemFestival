@@ -44,7 +44,8 @@
             <hr class="title-hr title-line-right">
         </div>
 
-        <!-- Section 3-->                   
+        <!-- Section 3-->
+        <div class="event-section-3">                   
             @foreach (Jazz j in Model)
             {
                 int i = ViewBag.Id;
@@ -64,7 +65,7 @@
                             
                             <p>
                                 <b>Time: </b> @j.StartSession.ToShortTimeString() - @j.EndSession.ToShortTimeString()<br />
-                                <b>Price: </b> @if (j.Price != 0)
+                                <b>Price: </b> &euro;@if (j.Price != 0)
                                 {
                                     @j.Price
                                 }
@@ -86,7 +87,7 @@
                 }
             }
 
-
+            </div>
 
         </div>
         

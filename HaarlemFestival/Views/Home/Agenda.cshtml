@@ -22,7 +22,7 @@
 
 <div class="event-banner"></div>
 
-<div class="event container">
+<div class="event container agenda">
     <div class="row">
         <!-- Section 1 -->
         <div class="event-section-1">
@@ -90,25 +90,25 @@
 
                                                             <div class="agenda-activity @besteldeactiviteit.Activiteit.EventType">@jazz.artist.ArtistName</div>
                                                         }
-                                                    }
 
-                                                    else if (besteldeactiviteit.Activiteit.EventType == EventType.DinnerInHaarlem)
-                                                    {
-                                                        Dinner dinner = Model.Dinners.Find(x => x.ActivityId == besteldeactiviteit.Activiteit.ActivityId);
+                                                        else if (besteldeactiviteit.Activiteit.EventType == EventType.DinnerInHaarlem)
+                                                        {
+                                                            Dinner dinner = Model.Dinners.Find(x => x.ActivityId == besteldeactiviteit.Activiteit.ActivityId);
 
-                                                        <div class="agenda-activity @besteldeactiviteit.Activiteit.EventType">@dinner.Restaurant.Naam</div>
-                                                    }
-                                                    else if (besteldeactiviteit.Activiteit.EventType == EventType.TalkingHaarlem)
-                                                    {
-                                                        Talking talk = Model.Talks.Find(x => x.ActivityId == besteldeactiviteit.Activiteit.ActivityId);
+                                                            <div class="agenda-activity @besteldeactiviteit.Activiteit.EventType" onclick="SwitchActivity(@dinner.ActivityId)">@dinner.Restaurant.Naam</div>
+                                                        }
+                                                        else if (besteldeactiviteit.Activiteit.EventType == EventType.TalkingHaarlem)
+                                                        {
+                                                            Talking talk = Model.Talks.Find(x => x.ActivityId == besteldeactiviteit.Activiteit.ActivityId);
 
-                                                        <div class="agenda-activity @besteldeactiviteit.Activiteit.EventType">@talk.Talk.Naam</div>
-                                                    }
-                                                    else if (besteldeactiviteit.Activiteit.EventType == EventType.HistoricHaarlem)
-                                                    {
-                                                        Historic historic = Model.Historics.Find(x => x.ActivityId == besteldeactiviteit.Activiteit.ActivityId);
+                                                            <div class="agenda-activity @besteldeactiviteit.Activiteit.EventType">@talk.Talk.Naam</div>
+                                                        }
+                                                        else if (besteldeactiviteit.Activiteit.EventType == EventType.HistoricHaarlem)
+                                                        {
+                                                            Historic historic = Model.Historics.Find(x => x.ActivityId == besteldeactiviteit.Activiteit.ActivityId);
 
-                                                        <div class="agenda-activity @historic.EventType" onclick="SwitchActivity(@historic.ActivityId)">Historic Tour in @historic.Guide.LanguageName by @historic.Guide.GuideName</div>
+                                                            <div class="agenda-activity @historic.EventType" onclick="SwitchActivity(@historic.ActivityId)">Historic Tour in @historic.Guide.LanguageName by @historic.Guide.GuideName</div>
+                                                        }
                                                     }
                                                 }
                                             </td>
@@ -142,27 +142,29 @@
                                 Dinner Dinner = Model.Dinners.Find(x => x.ActivityId == besteldeactiviteit.Activiteit.ActivityId);
 
                                 <div class="activities" id="@Dinner.ActivityId" hidden>
-                                            <img src="/images/Dinner/restaurants/@Dinner.Restaurant.LocationIMG" />
-                                            <h4>@Dinner.Restaurant.Naam</h4>
-                                            <table>
-                                                <tr>
-                                                    <td>Start-time:</td>
-                                                    <td>@Dinner.StartSession.TimeOfDay.ToString(@"hh\:mm")</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>End-time:</td>
-                                                    <td>@Dinner.EndSession.TimeOfDay.ToString(@"hh\:mm")</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Contact:</td>
-                                                    <td>@Dinner.Phonenumber</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Location:</td>
-                                                    <td>@Dinner.Address</td>
-                                                </tr>
-                                            </table>
-                                        </div>
+                                    <div class="agenda-image-container">
+                                        <img src="/images/Dinner/restaurants/@Dinner.Restaurant.LocationIMG"/>
+                                    </div>
+                                        <h4>@Dinner.Restaurant.Naam</h4>
+                                        <table>
+                                            <tr>
+                                                <td>Start-time:</td>
+                                                <td>@Dinner.StartSession.TimeOfDay.ToString(@"hh\:mm")</td>
+                                            </tr>
+                                            <tr>
+                                                <td>End-time:</td>
+                                                <td>@Dinner.EndSession.TimeOfDay.ToString(@"hh\:mm")</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Contact:</td>
+                                                <td>@Dinner.Phonenumber</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Location:</td>
+                                                <td>@Dinner.Address</td>
+                                            </tr>
+                                        </table>
+                                    </div>
                             }
                             else if (besteldeactiviteit.Activiteit.EventType == EventType.TalkingHaarlem)
                             {
@@ -171,34 +173,36 @@
 
                                 <div class="activities" id="@besteldeactiviteit.Activiteit.ActivityId" hidden>
 
-                                        </div>
+                                </div>
                             }
                             else if (besteldeactiviteit.Activiteit.EventType == EventType.HistoricHaarlem)
                             {
                                 Historic historic = Model.Historics.Find(x => x.ActivityId == besteldeactiviteit.Activiteit.ActivityId);
 
                                 <div class="activities" id="@historic.ActivityId" hidden>
-                                            <img src="/images/Historic/Locaties/3.jpg" />
-                                            <h4>Historic Tour in @historic.Guide.LanguageName by @historic.Guide.GuideName</h4>
-                                            <table>
-                                                <tr>
-                                                    <td>Start-time:</td>
-                                                    <td>@historic.StartSession.TimeOfDay.ToString(@"hh\:mm")</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>End-time:</td>
-                                                    <td>@historic.EndSession.TimeOfDay.ToString(@"hh\:mm")</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Contact:</td>
-                                                    <td>@historic.Phonenumber</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Location:</td>
-                                                    <td>@historic.Address</td>
-                                                </tr>
-                                            </table>
-                                        </div>
+                                    <div class="agenda-image-container">
+                                        <img src="/images/Historic/Locaties/3.jpg" class="agenda-image-historic"/>
+                                    </div>
+                                    <h4>Historic Tour in @historic.Guide.LanguageName by @historic.Guide.GuideName</h4>
+                                    <table>
+                                        <tr>
+                                            <td>Start-time:</td>
+                                            <td>@historic.StartSession.TimeOfDay.ToString(@"hh\:mm")</td>
+                                        </tr>
+                                        <tr>
+                                            <td>End-time:</td>
+                                            <td>@historic.EndSession.TimeOfDay.ToString(@"hh\:mm")</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Contact:</td>
+                                            <td>@historic.Phonenumber</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Location:</td>
+                                            <td>@historic.Address</td>
+                                        </tr>
+                                    </table>
+                                </div>
                             }
                         }
                     </div>
