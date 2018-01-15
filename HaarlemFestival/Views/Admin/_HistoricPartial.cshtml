@@ -1,75 +1,85 @@
 ﻿@using HaarlemFestival.Models
 @model Historic
 
-    @if (ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Count() > 0)
-    {
-        <div id="bootstrapAlert" class="alert alert-danger alert-dismissible">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <span class="loginErrors">@Html.ValidationSummary()</span>
-        </div>
-    }
+@if (ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Count() > 0)
+{
+    <div id="bootstrapAlert" class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <span class="loginErrors">@Html.ValidationSummary()</span>
+    </div>
+}
 
-    @Html.HiddenFor(h => h.ActivityId)
-    @Html.HiddenFor(h => h.EventType, new { @Value = EventType.HistoricHaarlem })
+@Html.HiddenFor(h => h.ActivityId)
+@Html.HiddenFor(h => h.EventType, new { @Value = EventType.HistoricHaarlem })
 
-    @if (Model.GuideId != 0)
-    {
-        @Html.HiddenFor(h => h.GuideId, new { @Value = Model.GuideId })
-        @Html.HiddenFor(h => h.Guide.GuideId, new { @Value = Model.Guide.GuideId })
-    }
+@if (Model.GuideId != 0)
+{
+    @Html.HiddenFor(h => h.GuideId, new { @Value = Model.GuideId })
+    @Html.HiddenFor(h => h.Guide.GuideId, new { @Value = Model.Guide.GuideId })
+}
 
-    <div class="form-group">
-        <div class="input-group">
+<div class="form-group row">
+    <div class="input-group">
+        <div class="col-md-6">
             @Html.Label("Day")<i class="required red">*</i>
-            @Html.DropDownListFor(h => h.Day.DayId, new SelectList((List<DateModel>)ViewData["Dates"], "DayId", "DateDisplay"), new { @name = "Day" })
+            @Html.DropDownListFor(d => d.Day.DayId, new SelectList((List<DateModel>)ViewData["Dates"], "DayId", "DateDisplay"), new { @name = "Day" })
+        </div>
+        <div class="col-md-3">
             @Html.Label("Start")<i class="required red">*</i>
-            @Html.TextBoxFor(h => h.StartSession, new { @Value = Model.StartSession.ToString("HH:mm"), @name = "startTime", @type = "time" })
+            @Html.TextBoxFor(d => d.StartSession, new { @Value = Model.StartSession.ToString("HH:mm"), @name = "startTime", @type = "time" })
+        </div>
+        <div class="col-md-3">
+            @Html.Label("End")<i class="required red">*</i>
+            @Html.TextBoxFor(d => d.EndSession, new { @Value = Model.EndSession.ToString("HH:mm"), @name = "endTime", @type = "time" })
         </div>
     </div>
+</div>
 
-    <div class="form-group">
-        <div class="input-group">
-            @Html.Label("Start Location")<i class="required red">*</i>
-            @Html.TextBoxFor(h => h.Address, new { @Value = "Grote Markt (At the giant \"walking the ages\" flag)" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="input-group">
-            @Html.Label("Guide")<i class="required red">*</i>
-            @Html.DropDownListFor(h => h.GuideId, new SelectList((List<Guide>)ViewData["Guides"], "GuideId", "GuideName"), new { @name = "GuideId" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="input-group">
+<div class="form-group row">
+    <div class="input-group">
+        <div class="col-md-6">
             @Html.Label("Total Tickets")<i class="required red">*</i>
             @Html.EditorFor(h => h.TotalTickets, new { @placeholder = 0, @min = 0 })
         </div>
-    </div>
-
-    <div class="form-group">
-        <div class="input-group">
-            @Html.Label("Price")<i class="required red">*</i>
-            @Html.TextBoxFor(h => h.Price, new { @placeholder = "0.00", @Value = String.Format("{0:0.00}", Model.Price) })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="input-group">
-            @Html.Label("Group Ticket Price")<i class="required red">*</i>
-            @Html.TextBoxFor(h => h.AlternativePrice, new { @placeholder = "0.00", @Value = String.Format("{0:0.00}", Model.AlternativePrice) })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="input-group">
+        <div class="col-md-6">
             @Html.Label("Phonenumber")<i class="required red">*</i>
             @Html.TextBoxFor(h => h.Phonenumber, new { @Value = "+31 023 - 5241020" })
         </div>
     </div>
+</div>
 
-    <div class="modal-footer">
-        <input type="submit" class="btn btn-success" value="Save Tour" />
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+<div class="form-group row">
+    <div class="input-group">
+        <div class="col-md-12">
+            @Html.Label("Guide")<i class="required red">*</i>
+            @Html.DropDownListFor(h => h.GuideId, new SelectList((List<Guide>)ViewData["Guides"], "GuideId", "GuideName"), new { @name = "GuideId" })
+        </div>
     </div>
+</div>
+
+<div class="form-group row">
+    <div class="input-group">
+        <div class="col-md-6">
+            @Html.Label("Price")<i class="required red">*</i>
+            @Html.TextBoxFor(h => h.Price, new { @placeholder = "0.00", @Value = String.Format("{0:0.00}", Model.Price) })
+        </div>
+        <div class="col-md-6">
+            @Html.Label("Group Ticket Price")<i class="required red">*</i>
+            @Html.TextBoxFor(h => h.AlternativePrice, new { @placeholder = "0.00", @Value = String.Format("{0:0.00}", Model.AlternativePrice) })
+        </div>
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="input-group">
+        <div class="col-md-12">
+            @Html.Label("Start Location")<i class="required red">*</i>
+            @Html.TextBoxFor(h => h.Address, new { @Value = "Grote Markt (At the giant \"walking the ages\" flag)" })
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <input type="submit" class="btn btn-success" value="Save Tour" />
+    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+</div>

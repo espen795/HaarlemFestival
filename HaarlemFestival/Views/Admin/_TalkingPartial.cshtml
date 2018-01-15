@@ -1,121 +1,144 @@
 ﻿@using HaarlemFestival.Models
 @model Talking
 
-    @if (ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Count() > 0)
-    {
-        <div id="bootstrapAlert" class="alert alert-danger alert-dismissible">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <span class="loginErrors">@Html.ValidationSummary()</span>
-        </div>
-    }
+@if (ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Count() > 0)
+{
+    <div id="bootstrapAlert" class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <span class="loginErrors">@Html.ValidationSummary()</span>
+    </div>
+}
 
-    @Html.HiddenFor(t => t.ActivityId)
-    @Html.HiddenFor(h => h.EventType, new { @Value = EventType.TalkingHaarlem })
+@Html.HiddenFor(t => t.ActivityId)
+@Html.HiddenFor(h => h.EventType, new { @Value = EventType.TalkingHaarlem })
 
-    @if(Model.TalkId != 0)
-    {
-        @Html.HiddenFor(t => t.TalkId, new { @Value = Model.TalkId })
-        @Html.HiddenFor(t => t.Talk.TalkId, new { @Value = Model.Talk.TalkId })
-    }
+@if (Model.TalkId != 0)
+{
+    @Html.HiddenFor(t => t.TalkId, new { @Value = Model.TalkId })
+    @Html.HiddenFor(t => t.Talk.TalkId, new { @Value = Model.Talk.TalkId })
+}
 
-    @try
-    {
-        @Html.HiddenFor(t => t.Talk.Person1IMG)
-    }
-    catch (Exception) { }
+@try
+{
+    @Html.HiddenFor(t => t.Talk.Person1IMG)
+}
+catch (Exception) { }
 
-    @try
-    {
-        @Html.HiddenFor(t => t.Talk.Person1AltIMG)
-    }
-    catch (Exception) { }
+@try
+{
+    @Html.HiddenFor(t => t.Talk.Person1AltIMG)
+}
+catch (Exception) { }
 
-    @try
-    {
-        @Html.HiddenFor(t => t.Talk.Person2IMG)
-    }
-    catch (Exception) { }
+@try
+{
+    @Html.HiddenFor(t => t.Talk.Person2IMG)
+}
+catch (Exception) { }
 
-    @try
-    {
-        @Html.HiddenFor(t => t.Talk.Person2AltIMG)
-    }
-    catch (Exception) { }
+@try
+{
+    @Html.HiddenFor(t => t.Talk.Person2AltIMG)
+}
+catch (Exception) { }
 
-    <div class="form-group">
-        <div class="input-group">
+<div class="form-group row">
+    <div class="input-group">
+        <div class="col-md-12">
             @Html.Label("Name")<i class="required red">*</i>
             @Html.TextBoxFor(t => t.Talk.Naam, new { @placeholder = "Name" })
         </div>
     </div>
-    <div class="form-group">
-        <div class="input-group">
+</div>
+
+<div class="form-group row">
+    <div class="input-group">
+        <div class="col-md-12">
             @Html.Label("Description")
             @Html.TextAreaFor(t => t.Talk.Description, new { @placeholder = "Description" })
         </div>
     </div>
-    <div class="form-group">
-        <div class="input-group">
+</div>
+
+<div class="form-group row">
+    <div class="input-group">
+        <div class="col-md-6">
             @Html.Label("Day")<i class="required red">*</i>
-            @Html.DropDownListFor(t => t.Day.DayId, new SelectList((List<DateModel>)ViewData["Dates"], "DayId", "DateDisplay"), new { @name = "Day" })
+            @Html.DropDownListFor(d => d.Day.DayId, new SelectList((List<DateModel>)ViewData["Dates"], "DayId", "DateDisplay"), new { @name = "Day" })
+        </div>
+        <div class="col-md-3">
             @Html.Label("Start")<i class="required red">*</i>
-            @Html.TextBoxFor(t => t.StartSession, new { @Value = Model.StartSession.ToString("HH:mm"), @name = "startTime", @type = "time" })
+            @Html.TextBoxFor(d => d.StartSession, new { @Value = Model.StartSession.ToString("HH:mm"), @name = "startTime", @type = "time" })
+        </div>
+        <div class="col-md-3">
             @Html.Label("End")<i class="required red">*</i>
-            @Html.TextBoxFor(t => t.EndSession, new { @Value = Model.EndSession.ToString("HH:mm"), @name = "endTime", @type = "time" })
+            @Html.TextBoxFor(d => d.EndSession, new { @Value = Model.EndSession.ToString("HH:mm"), @name = "endTime", @type = "time" })
         </div>
     </div>
-    <div class="form-group">
-        <div class="input-group">
-            @Html.Label("Name Person 1 ")<i class="required red">*</i>
+</div>
+
+<div class="form-group row">
+    <div class="input-group">
+        <div class="col-md-4">
+            @Html.Label("Name Participant 1 ")<i class="required red">*</i>
             @Html.TextBoxFor(t => t.Talk.Person1, new { @placeholder = "Name" })
-            <br />
-            @Html.Label("Images Person 1")
-            <input type="file" name="Person1"/>
+        </div>
+        <div class="col-md-8">
+            @Html.Label("Images Participant 1")
+            <input type="file" name="Person1" />
             <input type="file" name="Person1Alt" />
         </div>
     </div>
-    <div class="form-group">
-        <div class="input-group">
-            @Html.Label("Name Person 2")<i class="required red">*</i>
-            @Html.TextBoxFor(t => t.Talk.Person2 , new { @placeholder = "Name" })
-            <br />
-            @Html.Label("Images Person 2")
+</div>
+<div class="form-group row">
+    <div class="input-group">
+        <div class="col-md-4">
+            @Html.Label("Name Participant 2")<i class="required red">*</i>
+            @Html.TextBoxFor(t => t.Talk.Person2, new { @placeholder = "Name" })
+        </div>
+        <div class="col-md-8">
+            @Html.Label("Images Participant 2")
             <input type="file" name="Person2" />
             <input type="file" name="Person2Alt" />
         </div>
     </div>
-    <div class="form-group">
-        <div class="input-group">
+</div>
+<div class="form-group">
+    <div class="input-group">
+        <div class="col-md-5">
             @Html.Label("Total Seats")<i class="required red">*</i>
-            @Html.TextBoxFor(t => t.TotalTickets, new { @type = "number",  @placeholder = "0", @min = 0 })
+            @Html.TextBoxFor(t => t.TotalTickets, new { @type = "number", @placeholder = "0", @min = 0 })
         </div>
-    </div>
-    <div class="form-group">
-        <div class="input-group">
-            @Html.Label("Price")<i class="required red">*</i>
-            @Html.TextBoxFor(t => t.Price, new { @placeholder ="0.00", @Value = String.Format("{0:0.00}", Model.Price) })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="input-group">
+        <div class="col-md-7">
             @Html.Label("Maximum Tickets per reservation")<i class="required red">*</i>
             @Html.TextBoxFor(t => t.Talk.MaxTickets, new { @type = "number", @placeholder = 0, @min = 0 })
         </div>
     </div>
-    <div class="form-group">
-        <div class="input-group">
+</div>
+
+<div class="form-group row">
+    <div class="input-group">
+        <div class="col-md-6">
             @Html.Label("Phonenumber")<i class="required red">*</i>
             @Html.TextBoxFor(t => t.Phonenumber, new { @Value = "+31 023 - 5241020", @readonly = "readonly" })
         </div>
-    </div>
-    <div class="form-group">
-        <div class="input-group">
+        <div class="col-md-6">
             @Html.Label("Address")<i class="required red">*</i>
             @Html.TextBoxFor(t => t.Address, new { @Value = "Lange Begijnestraat 9, 2011 HH Haarlem", @readonly = "readonly" })
         </div>
     </div>
+</div>
 
-    <div class="modal-footer">
-        <input type="submit" class="btn btn-success" value="Save Interview" />
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+<div class="form-group row">
+    <div class="input-group">
+        <div class="col-md-6">
+            @Html.Label("Price")<i class="required red">*</i>
+            @Html.TextBoxFor(t => t.Price, new { @placeholder = "0.00", @Value = String.Format("{0:0.00}", Model.Price) })
+        </div>
     </div>
+</div>
+
+<div class="modal-footer">
+    <input type="submit" class="btn btn-success" value="Save Interview" />
+    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+</div>
