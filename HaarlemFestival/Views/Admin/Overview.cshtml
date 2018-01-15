@@ -4,28 +4,69 @@
     ViewBag.Account = (Account)Session["loggedin_account"];
 }
 
-<script>
-    
+<script type="text/javascript">
+
     $(document).ready(function () {
 
         // Elke seconde de locale tijd opnieuw ophalen en neerzetten.
-        setInterval(function ()
-        {
+        setInterval(function () {
             dateTime = new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString() + " ";
             $("#currentTime").text(dateTime);
         }, 1000
         );
 
+
+        $("#downloadComplete").on('hide', function () {
+            $("$downloadComplete .modal-title").text("Download in progress...");
+            $("#downloadLocation").text("Please be patient while the file is being created.");
+            $("#closeDownloadButton").attr("disabled", true);
+        })
+
         // Tooltips maken.
-        $('[data-toggle="tooltip"]').tooltip(); 
-    })
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    function DownloadInformation()
+    {
+        $.ajax({
+                type: 'post',
+                url: '@Url.Action("DownloadTicketSalesInformation", "Admin")',
+                complete: function (data) {
+                    $("#downloadComplete").show();
+                    $("#downloadComplete .modal-title").text("Download Complete!");
+                    $("#downloadLocation").html("The File has been saved to: <strong>" + data.responseJSON.location + "</strong>");
+                    $("#closeDownloadButton").removeAttr("disabled");
+                }
+            });
+
+    }
 </script>
 
-<div class="container body-content">  
-    
+<div id="downloadComplete" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Download in progress...</h4>
+            </div>
+            <div class="modal-body">
+                <p id="downloadLocation">Please be patient while the file is being created.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closeDownloadButton" class="btn btn-primary" disabled data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container body-content">
+
     <div id="welcomeArea" class="panel panel-primary col-md-6 col-md-offset-3">
         <div data-toggle="collapse" data-target="#welcomeInformation" class="panel-heading">
-            Welcome, @ViewBag.Account.Naam
+            Welcome, <!-- ViewBag.Account.Naam -->
         </div>
 
         <div id="welcomeInformation" class="in">
@@ -34,7 +75,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4 col-md-offset-1 overviewContent" id="ManageEvent">
+    <div class="col-md-3 col-md-offset-1 overviewContent" id="ManageEvent">
         <!-- INTRO TEXT -->
         <p class="introText">
             By clicking on one of these buttons you will be navigated to another page where you can Add, Update and Delete data of the chosen event.
@@ -42,21 +83,27 @@
 
         <!-- MANAGE EVENT BUTTONS -->
         <div id="manageEventSelection">
-            <div class="col-sm-5"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin", new { selectedEvent = "Jazz@Patronaat" }, null)'">Jazz@Patronaat</button></div>
-            <div class="col-sm-5 col-md-offset-1"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin", new { selectedEvent = "DinnerInHaarlem" }, null)'">Dinner In Haalrem</button></div>
-            <div class="col-sm-5"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin", new { selectedEvent = "TalkingHaarlem" }, null)'">Talking Haarlem</button></div>
-            <div class="col-sm-5 col-md-offset-1"><button class="btn btn-black" onclick="location.href='@Url.Action("ManageEvent", "Admin", new { selectedEvent = "HistoricHaarlem" }, null)'">Historic Haarlem</button></div>
+            <div class="col-sm-12 middle"><button class="btn btn-black">@Html.ActionLink("Jazz@Patronaat", "ManageEvent", "Admin", new { selectedEvent = "Jazz@Patronaat" }, new { @class = "white" })</button></div>
+            <div class="col-sm-12 middle"><button class="btn btn-black">@Html.ActionLink("Dinner in Haarlem", "ManageEvent", "Admin", new { selectedEvent = "DinnerInHaarlem" }, new { @class = "white" })</button></div>
+            <div class="col-sm-12 middle"><button class="btn btn-black">@Html.ActionLink("Talking Haarlem", "ManageEvent", "Admin", new { selectedEvent = "TalkingHaarlem" }, new { @class = "white" })</button></div>
+            <div class="col-sm-12 middle"><button class="btn btn-black">@Html.ActionLink("Historic Haarlem", "ManageEvent", "Admin", new { selectedEvent = "HistoricHaarlem" }, new { @class = "white" })</button></div>
         </div>
     </div>
 
-        <div class="col-md-4 col-md-offset-2 overviewContent" id="TicketSalesInformation">
-            <!-- INTROTEXT -->
-            <p class="introText">
-                By clicking the Download button you will download an excel file which contains all information about tickets availability and sales. The information per event is distributed over different sheets.
-            </p>
+    <div class="col-md-3 col-md-offset-1 overviewContent" id="TicketSalesInformation">
+        <!-- INTROTEXT -->
+        <p class="introText">
+            By clicking the Download button you will download an excel file which contains all information about tickets availability and sales. The information per event is distributed over different sheets.
+			You can also check the Information on the website.
+        </p>
 
-            <!-- BUTTON -->           
-            <div class="col-sm-3 col-sm-offset-4"><button class="btn btn-black" onclick="location.href='@Url.Action("TicketAvailability", "Admin")'">Check Ticket Availability</button></div>
-            
-        </div>
+        <!-- BUTTON -->
+        <div class="col-sm-12 middle"><button class="btn btn-black">@Html.ActionLink("Show Information", "TicketSalesInformation", "AdminController", null, new { @class = "white" })</button></div>
+        <div class="col-sm-12 middle"><button class="btn btn-black" onclick="DownloadInformation()" data-toggle="modal" data-target="#downloadComplete">Download Excel File</button></div>
+    </div>
+
+    <div class="col-md-3 col-md-offset-1 overviewContent" id="ContactMessages">
+        [Introduction Contact Messages]
+        <div class="col-sm-12 middle"><button class="btn btn-black">@Html.ActionLink("Contact Messages", "AnswerContactmessage", "AdminController", null, new { @class="white" })</button></div>
+    </div>
 </div>

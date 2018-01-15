@@ -163,16 +163,27 @@ namespace HaarlemFestival.Repository.Admin
             return db.Days.Where(d => d.DayId == id).FirstOrDefault();
         }
 
+        public Filters GetFilters()
+        {
+            Filters filters = new Filters
+            {
+                restaurantFilter = db.Restaurants.ToList(),
+                guideFilter = db.Guides.ToList(),
+                days = db.Days.ToList(),
+                cuisineFilter = db.Cuisines.ToList()
+            };
+
+            return filters;
+        }
+
         public EventData GetEventData()
         {
             EventData data = new EventData
             {
                 Activities = db.Activities.ToList(),
-
-                Days = db.Days.ToList(),
-                Cuisines = db.Cuisines.ToList(),
+                Restaurants = db.Restaurants.ToList(),
                 Guides = db.Guides.ToList(),
-                Restaurants = db.Restaurants.ToList()
+                Filters = GetFilters()
             };
 
             return data;
@@ -201,6 +212,23 @@ namespace HaarlemFestival.Repository.Admin
         public List<Day> GetDates()
         {
             return db.Days.ToList();
+        }
+
+        public List<BesteldeActiviteit> GetBesteldeActivities()
+        {
+            return db.BesteldeActiviteiten.ToList();
+        }
+
+        public float GetIncomeById(int activityId)
+        {
+            List<BesteldeActiviteit> activities = db.BesteldeActiviteiten.Where(b => b.Activiteit.ActivityId == activityId).ToList();
+            return activities.Sum(a => a.Price);
+        }
+
+        public float GetIncomeByType(EventType type)
+        {
+            List<BesteldeActiviteit> activities = db.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == type).ToList();
+            return activities.Sum(a => a.Price);
         }
 
     }

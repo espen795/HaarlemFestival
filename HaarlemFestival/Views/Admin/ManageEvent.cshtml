@@ -70,6 +70,11 @@
                 <h4 class="modal-title" id="myModalLabel">Update Data</h4>
             </div>
 
+            <br />
+            <div class="alert alert-info col-md-8 col-md-offset-2">
+                Essential information is marked with an asterisk(<i class="required red">*</i>)
+            </div>
+
             <div class="errorAlert">
                 <div id="bootstrapAlert" class="alert alert-danger alert-dismissible">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -165,12 +170,22 @@
                 $(this).hide();
             })
 
+			// Alle Event Headers verbergen.
+			$('.eventImage').each(function ()
+			{
+				$(this).hide();
+			})
+
+            $('#newDataDiv').hide();
+
             // Aan de hand van een evenement de data en filters tonen.
             switch ($('#selectedEvent').val())
             {
                 case "Jazz@Patronaat":
                     $('#jazzTable').show();
                     $('#dateFilter').show();
+                    $('#jazzImage').show();
+                    $('#newDataDiv').show();
                     break;
 
                 case "DinnerInHaarlem":
@@ -179,11 +194,16 @@
                     $('#restaurantTable').show();
                     $('#cuisineFilter').show();
                     $('#restaurantFilter').show();
+					$('#restaurantImage').show();
+                    $('#dinnerImage').show();
+                    $('#newDataDiv').show();
                     break;
 
                 case "TalkingHaarlem":
                     $('#dateFilter').show();
                     $('#talkingTable').show();
+                    $('#talkingImage').show();
+                    $('#newDataDiv').show();
                     break;
 
                 case "HistoricHaarlem":
@@ -192,6 +212,9 @@
                     $('#dateFilter').show();
                     $('#guideFilter').show();
                     $('#languageFilter').show();
+					$('#guideImage').show();
+                    $('#historicImage').show();
+                    $('#newDataDiv').show();
                     break;
             }
         }
@@ -313,9 +336,9 @@
 
     </script>
 
-    <section id="topFilterBar">
-        <div id="selectEvent">
-            
+    <section id="topFilterBar" class="col-md-12">
+        <div id="selectEvent" class="col-md-3">
+
             <select id="selectedEvent" name="selectedEvent" onchange="SelectedEventChanged()">
                 <option value="">Select an event.</option>
                 <option value="Jazz@Patronaat">Jazz@Patronaat</option>
@@ -325,16 +348,31 @@
             </select>
         </div>
 
-        <div id="filterSystem">
-            @Html.DropDownListFor(m => m.Dates, new SelectList(Model.Dates, "DateDisplay", "DateDisplay"), "Select a Date.", new { @id = "dateFilter", @class = "eventFilter", @onchange = "FilterData()" })
-            @Html.DropDownListFor(m => m.Guides, new SelectList(Model.Guides, "GuideName", "GuideName"), "Select a Guide.", new { @id = "guideFilter", @class = "eventFilter", @onchange = "FilterData()" }) 
-            @Html.DropDownListFor(m => m.Restaurants, new SelectList(Model.Restaurants, "Naam", "Naam"), "Select a Restaurant", new { @id = "restaurantFilter", @class = "eventFilter", @onchange = "FilterData()" })
-            @Html.DropDownListFor(m => m.Cuisines, new SelectList(Model.Cuisines, "Naam", "Naam"), "Select a Cuisine.", new { @id = "cuisineFilter", @class = "eventFilter", @onchange = "FilterData()" })       
+        <div id="filterSystem" class="col-md-9">
+            @Html.DropDownListFor(m => m.Filters.dateFilter, new SelectList(Model.Filters.dateFilter, "DateDisplay", "DateDisplay"), "Select a Date.", new { @id = "dateFilter", @class = "eventFilter", @onchange = "FilterData()" })
+            @Html.DropDownListFor(m => m.Filters.guideFilter, new SelectList(Model.Filters.guideFilter, "GuideName", "GuideName"), "Select a Guide.", new { @id = "guideFilter", @class = "eventFilter", @onchange = "FilterData()" })
+            @Html.DropDownListFor(m => m.Filters.restaurantFilter, new SelectList(Model.Filters.restaurantFilter, "Naam", "Naam"), "Select a Restaurant", new { @id = "restaurantFilter", @class = "eventFilter", @onchange = "FilterData()" })
+            @Html.DropDownListFor(m => m.Filters.cuisineFilter, new SelectList(Model.Filters.cuisineFilter, "Naam", "Naam"), "Select a Cuisine.", new { @id = "cuisineFilter", @class = "eventFilter", @onchange = "FilterData()" })
         </div>
     </section>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4" id="newDataDiv">
+            <div class="col-md-12 middle">Couldn't find the data you were looking for, or have you found new data? You can add them over here!</div>
+            <div class="col-md-12 middle"><button class="btn btn-black" data-toggle="modal" data-target="#newPopup" href="#">Add new data.</button></div>
+        </div>
+    </div>
 
     <section>
-        <button data-toggle="modal" data-target="#newPopup" href="#">Add new data.</button>
+            <div class="event-section-2 eventImage" id="jazzImage">
+                <hr class="title-hr title-line-left">
+                <div class="event-header">
+                    <div class="overlay">
+                        <span class="header_tekst">Jazz@Patronaat</span>
+                    </div>
+                </div>
+                <hr class="title-hr title-line-right">
+            </div>
+
         <table id="jazzTable" class="eventTable table table-striped table-responsive">
             <thead>
                 <tr>
@@ -360,13 +398,23 @@
                         <td>@activity.ConcertHall</td>
                         <td>@String.Format("{0:0.00}", activity.Price)</td>
                         <td>@activity.TotalTickets</td>
-                        <td><i onclick='ShowEventImage("Jazz/@activity.artist.ArtistImage")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
+                        <td><i onclick='ShowEventImage("Jazz/Artiesten/@activity.artist.ArtistImage")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Jazz')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
                 }
             </tbody>
         </table>
+
+        <div class="event-section-2 eventImage" id="restaurantImage">
+            <hr class="title-hr title-line-left">
+            <div class="event-header restaurantinfo">
+                <div class="overlay">
+                    <span class="header_tekst">Restaurants</span>
+                </div>
+            </div>
+            <hr class="title-hr title-line-right">
+        </div>
 
         <table id="restaurantTable" class="eventTable table table-striped table-responsive">
             <thead>
@@ -404,6 +452,15 @@
             </tbody>
         </table>
 
+        <div class="event-section-2 eventImage" id="dinnerImage">
+            <hr class="title-hr title-line-left">
+            <div class="event-header restaurantinfo">
+                <div class="overlay">
+                    <span class="header_tekst">Dinner in Haarlem</span>
+                </div>
+            </div>
+            <hr class="title-hr title-line-right">
+        </div>
 
         <table id="dinnerTable" class="eventTable table table-striped table-responsive">
             <thead>
@@ -430,17 +487,27 @@
                     <tr>
                         <td>@activity.Restaurant.Naam</td>
                         <td>@activity.Address</td>
-                        <td>@activity.StartSession.ToString("dddd dd-MM-yy H:mm") - @activity.EndSession.ToString("H:mm")</td>
+                        <td>@activity.StartSession.ToString("dddd dd-MM-yyyy H:mm") - @activity.EndSession.ToString("H:mm")</td>
                         <td>@activity.TotalTickets</td>
                         <td>@builder</td>
                         <td>@String.Format("{0:0.00}", activity.Price)</td>
-                        <td>@String.Format("{0:0.00}", activity.AlternativePrice)</td>                       
+                        <td>@String.Format("{0:0.00}", activity.AlternativePrice)</td>
                         <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Dinner')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
                 }
             </tbody>
         </table>
+
+        <section class="event-section-2 eventImage" id="talkingImage">
+            <hr class="title-hr title-line-left">
+            <section class="event-header talking-haarlem">
+                <section class="overlay">
+                    <span class="header_tekst">Talking Haarlem</span>
+                </section>
+            </section>
+            <hr class="title-hr title-line-right">
+        </section> <!-- Section 2 -->
 
         <table id="talkingTable" class="eventTable table table-striped table-responsive">
             <thead>
@@ -463,7 +530,7 @@
                     <tr>
                         <td>@activity.Talk.Naam</td>
                         <td>@activity.Talk.Description</td>
-                        <td>@activity.StartSession.ToString("dddd dd-MM-yy H:mm") - @activity.EndSession.ToString("H:mm")</td>
+                        <td>@activity.StartSession.ToString("dddd dd-MM-yyyy H:mm") - @activity.EndSession.ToString("H:mm")</td>
                         <td>@activity.TotalTickets</td>
                         <td>@activity.Address</td>
                         <td>@String.Format("{0:0.00}", activity.Price)</td>
@@ -477,6 +544,16 @@
             </tbody>
         </table>
 
+        <div class="event-section-2 eventImage" id="guideImage">
+            <hr class="title-hr title-line-left">
+            <div class="event-header historicLocations">
+                <div class="overlay">
+                    <span class="header_tekst">Guides</span>
+                </div>
+            </div>
+            <hr class="title-hr title-line-right">
+        </div>
+
         <table id="guideTable" class="eventTable table table-striped table-responsive">
             <thead>
                 <tr>
@@ -489,35 +566,45 @@
             <tbody class="eventData">
                 @foreach (Guide g in Model.Guides)
                 {
-                <tr>
-                    <td>@g.GuideName</td>
-                    <td>@g.LanguageName</td>
-                    <td>@g.LanguageAbbr</td>
-                    <td><i onclick="OpenUpdateForm(@g.GuideId, 'Guide')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
-                    <td><i onclick="OpenDeleteConfirm(@g.GuideId, 'Guide')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
-                </tr>
+                    <tr>
+                        <td>@g.GuideName</td>
+                        <td>@g.LanguageName</td>
+                        <td>@g.LanguageAbbr</td>
+                        <td><i onclick="OpenUpdateForm(@g.GuideId, 'Guide')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
+                        <td><i onclick="OpenDeleteConfirm(@g.GuideId, 'Guide')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                    </tr>
                 }
             </tbody>
         </table>
 
+        <div class="event-section-2 eventImage" id="historicImage">
+            <hr class="title-hr title-line-left">
+            <div class="event-header historicLocations">
+                <div class="overlay">
+                    <span class="header_tekst">Tours</span>
+                </div>
+            </div>
+            <hr class="title-hr title-line-right">
+        </div>
+
         <table id="historicTable" class="eventTable table table-striped table-responsive">
             <thead>
-            <tr>
-                <th>Date & Time</th>
-                <th>Start Location</th>
-                <th>Language</th>
-                <th>Guide</th>
-                <th>Seats</th>
-                <th>Price</th>
-                <th>Group Ticket</th>
-                <th colspan="2"></th>
-            </tr>
+                <tr>
+                    <th>Date & Time</th>
+                    <th>Start Location</th>
+                    <th>Language</th>
+                    <th>Guide</th>
+                    <th>Seats</th>
+                    <th>Price</th>
+                    <th>Group Ticket</th>
+                    <th colspan="2"></th>
+                </tr>
             </thead>
             <tbody class="eventData">
                 @foreach (Historic activity in Model.Activities.OfType<Historic>())
                 {
                     <tr>
-                        <td>@activity.StartSession.ToString("dddd dd-MM-yy H:mm")</td>
+                        <td>@activity.StartSession.ToString("dddd dd-MM-yyyy H:mm")</td>
                         <td>@activity.Address</td>
                         <td>@activity.Guide.LanguageName</td>
                         <td>@activity.Guide.GuideName</td>

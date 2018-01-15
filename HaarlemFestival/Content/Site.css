@@ -1132,14 +1132,25 @@ input[type='text']:focus, input[type='password']:focus {
 .overviewContent {
     margin-top: 10px;
     margin-bottom: 10px;
+    border: 1px solid black;
+    background-color: #F0FFF0;
 }
 
-#manageEventSelection button {
-    margin-top: 10px;
+#manageEventSelection {
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 #manageEventSelection button {
     width: 150px;
+}
+
+.required {
+    font-size: 18px;
+}
+
+.red {
+    color: red;
 }
 
 .introText {
@@ -1150,16 +1161,32 @@ input[type='text']:focus, input[type='password']:focus {
     text-align: center;
 }
 
+#downloadComplete {
+    display: none;
+}
+
+.middle {
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* Manage Event Pagina */
 #topFilterBar {
-    padding-top: 100px;
+    margin-top: 75px;
+    padding-top: 50px;
+    padding-bottom: 50px;
     display: inline-block;
+    background-color: #F0FFF0;
+    border: 1px solid black;
 }
 
-#selectEvent {
-    width: auto;
+#selectEvent, #filterSystem {
+    height: 100%;
 }
-
 .errorAlert {
     text-align: center;
     display: none;
@@ -1173,14 +1200,23 @@ input[type='text']:focus, input[type='password']:focus {
     width: 200px;
     height: 25px;
     border: 1px solid #000000;
+    background-color: #F0FFF0;
     border-style: none none solid none;
     outline: none;
     position: relative;
 }
 
-    #topFilterBar select option {
-        height: 25px;
-    }
+#topFilterBar select option {
+    height: 25px;
+}
+
+#newDataDiv {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #000000;
+    background-color: #F0FFF0;
+    padding: 5px 0;
+}
 
 #filterSystem .eventFilter:focus {
     border-color: #6495ed;
@@ -1201,9 +1237,9 @@ input[type='text']:focus, input[type='password']:focus {
     text-align: center;
 }
 
-    .eventData tr td .glyphicon-remove, .eventData tr td .glyphicon-pencil {
-        cursor: pointer;
-    }
+.eventData tr td .glyphicon-remove, .eventData tr td .glyphicon-pencil {
+    cursor: pointer;
+}
 
 /* MODAL VOOR IMAGE POPUP */
 /* De Modal (Achtergrond) */
@@ -1287,13 +1323,24 @@ div.eventData {
     margin-bottom: 5px;
 }
 
+.progressMargin {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.priceMargin {
+    margin-top: 10px;
+}
+
 /********************************/
 /* MEDIA QUERYS VOOR RESPONSIVE */
 /********************************/
 @media (max-width: 1199px) {
+
 }
 
 @media (max-width: 991px) {
+
 }
 
 /* Start mobile navigatie/view */
