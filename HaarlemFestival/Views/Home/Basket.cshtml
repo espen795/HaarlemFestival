@@ -126,7 +126,7 @@
             @{
                 List<Activity> AllActivities = new List<Activity>();
 
-                Model.Jazzs.RemoveRange()
+                Model.Jazzs.RemoveAll(x => x.TotalTickets == 0);
 
                 AllActivities.AddRange(Model.Jazzs);
                 AllActivities.AddRange(Model.Dinners);
@@ -139,7 +139,7 @@
                 {
                     int random = rnd.Next(1, AllActivities.Count);
 
-                    <div class="col-md-4">
+                    <div class="col-md-4 basket-crossselling">
                         @if (AllActivities[random].EventType == EventType.JazzPatronaat)
                         {
                             Jazz jazz = Model.Jazzs.Find(x => x.ActivityId == AllActivities[random].ActivityId);
