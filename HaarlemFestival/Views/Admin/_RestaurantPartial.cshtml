@@ -3,100 +3,102 @@
 
 <script>
     $(document).ready(function () {
-        $("#Rating").keypress(function (key)
-        {
+        $("#Rating").keypress(function (key) {
             key.preventDefault();
         });
     });
 </script>
 
-    @if (ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Count() > 0)
-    {
-        <div id="bootstrapAlert" class="alert alert-danger alert-dismissible">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <span class="loginErrors">@Html.ValidationSummary()</span>
-        </div>
-    }
+@if (ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Count() > 0)
+{
+    <div id="bootstrapAlert" class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <span class="loginErrors">@Html.ValidationSummary()</span>
+    </div>
+}
 
-    @if (Model.RestaurantId != 0)
-    {
-        @Html.HiddenFor(r => r.RestaurantId, new { @Value = Model.RestaurantId})
-    }
+@if (Model.RestaurantId != 0)
+{
+    @Html.HiddenFor(r => r.RestaurantId, new { @Value = Model.RestaurantId })
+}
 
-    @try
-    {
-        @Html.HiddenFor(r => r.LocationIMG, new { @Value = Model.LocationIMG })
-    }
-    catch (Exception) { }
+@try
+{
+    @Html.HiddenFor(r => r.LocationIMG, new { @Value = Model.LocationIMG })
+}
+catch (Exception) { }
 
-    @try
-    {
-        @Html.HiddenFor(r => r.FoodIMG, new { @Value = Model.FoodIMG })
-    }
-    catch (Exception) { }    
-    
+@try
+{
+    @Html.HiddenFor(r => r.FoodIMG, new { @Value = Model.FoodIMG })
+}
+catch (Exception) { }
 
-    <div class="form-group">
-        <div class="input-group">
+
+<div class="form-group row">
+    <div class="input-group">
+        <div class="col-md-12">
             @Html.Label("Name")<i class="required red">*</i>
             @Html.TextBoxFor(r => r.Naam, new { @placeholder = "Restaurant Name" })
         </div>
     </div>
+</div>
 
-    <div class="form-group">
-        <div class="input-group">
+<div class="form-group row">
+    <div class="input-group">
+        <div class="col-md-12">
             @Html.Label("Description")
             @Html.TextAreaFor(r => r.Description, new { @placeholder = "Restaurant Description" })
         </div>
     </div>
+</div>
+
+<div class="form-group row">
+    <div class="input-group">
+        <div class="col-md-6">
+            @Html.Label("Standard Price")<i class="required red">*</i>
+            @Html.TextBoxFor(r => r.DisplayPrice, new { @placeholder = "0.00", @Value = String.Format("{0:0.00}", Model.DisplayPrice) })
+        </div>
+        <div class="col-md-6">
+                @Html.Label("Rating out of 5")<i class="required red">*</i>
+                @Html.TextBoxFor(r => r.Rating, new { @placeholder = 0, @min = 0, @max = 5, @type = "number" }) 
+        </div>
+    </div>
+</div>
 
 <div class="form-group">
     <div class="input-group">
-        @Html.Label("Standard Price")<i class="required red">*</i>
-        @Html.TextBoxFor(r => r.DisplayPrice, new { @placeholder = "0.00", @Value = String.Format("{0:0.00}", Model.DisplayPrice) })
+        @Html.Label("Cuisines") <br />
+
+        @if (Model.Cuisines != null)
+        {
+
+            foreach (Cuisine c in Model.Cuisines)
+            {
+                @Html.DropDownList("Cuisine", new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam", c.CuisineId), "[Select a Cuisine]", new { @Value = c.CuisineId, @class = "Cuisines" }) <br />
+            }
+        }
+
+        @Html.DropDownList("Cuisine", new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam"), "[Select a Cuisine]", new { @class = "Cuisines" }) <br />
+
     </div>
 </div>
-    <div class="form-group">
-        <div class="input-group">
-            @Html.Label("Rating")<i class="required red">*</i>
-            @Html.TextBoxFor(r => r.Rating, new { @placeholder = 0, @min = 0, @max = 5, @type = "number" }) / 5
-        </div>
-    </div>
 
-    <div class="form-group">
-        <div class="input-group">
-            @Html.Label("Cuisines") <br />
-
-            @if (Model.Cuisines != null)
-            {
-
-                foreach (Cuisine c in Model.Cuisines)
-                {
-                    @Html.DropDownList("Cuisine", new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam", c.CuisineId), "[Select a Cuisine]", new { @Value = c.CuisineId , @class = "Cuisines"}) <br />
-                }
-            }
-
-            @Html.DropDownList("Cuisine", new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam"), "[Select a Cuisine]", new { @class = "Cuisines" }) <br />
-            
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="input-group">
+<div class="form-group row">
+    <div class="input-group">
+        <div class="col-md-6">
             @Html.Label("Food Image")
             <input type="file" name="foodIamge" />
         </div>
-    </div>
-
-    <div class="form-group">
-        <div class="input-group">
+        <div class="col-md-6">
             @Html.Label("Restaurant Image")
             <input type="file" name="restaurantIamge" />
         </div>
     </div>
+</div>
 
-    <div class="modal-footer">
-        <input type="submit" class="btn btn-success" value="Save Restaurant" />
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-    </div>
+<div class="modal-footer">
+    <input type="submit" class="btn btn-success" value="Save Restaurant" />
+    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+</div>
 
