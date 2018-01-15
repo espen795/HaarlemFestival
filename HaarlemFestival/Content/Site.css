@@ -411,14 +411,49 @@ footer {
     text-align: center;
 }
 
+.event-section-4 {
+    margin-left: 5px;
+    width: 100%;
+}
+
 .basket-crossselling {
+    margin: auto;
 }
 
-.basket-crossselling img{
-    max-width: 332px;
-
-
+.basket-crossselling-item {
+    padding: 0px;
+    max-width: 350px;
+    min-height: 335px;
+    border:solid;
+    border-color: #000000;
+    border-width: 1px;
+    margin-left: 10px;
+    margin-bottom: 10px;
 }
+
+.basket-crossselling-item-image-container {
+    margin: auto;
+    width: 332px;
+    height: 187px;
+    overflow: hidden;
+}
+
+.basket-crossselling-item-image-container img {
+    min-width: 100%;
+}
+
+.basket-crossselling-item table td:first-child {
+    vertical-align: top;
+    text-align: right;
+    font-weight: bold;
+    padding-right: 10px;
+    min-width: 100px;
+}
+
+.basket-crossselling-item table td:last-child {
+    text-align: left;
+}
+
 /*****************************/
 /** EVENT PAGE STANDARD CSS **/
 /*****************************/

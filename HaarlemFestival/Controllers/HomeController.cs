@@ -55,7 +55,9 @@ namespace HaarlemFestival.Controllers
             };
 
             List<BesteldeActiviteit> Bestelling = new List<BesteldeActiviteit>();
-            Bestelling = (List<BesteldeActiviteit>)Session["current_order"];
+            if(Session["current_order"] != null)
+                Bestelling.AddRange((List<BesteldeActiviteit>)Session["current_order"]);
+
             List<BesteldeActiviteit> Order = new List<BesteldeActiviteit>();
             if (Bestelling.Count > 0)
             {

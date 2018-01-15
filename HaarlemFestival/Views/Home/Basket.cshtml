@@ -123,128 +123,138 @@
         </div>
         <div class="event-section-4">
             <h3>You could also:</h3>
-            @{
-                List<Activity> AllActivities = new List<Activity>();
+            <div class="basket-crossselling">
+                @{
+                    List<Activity> AllActivities = new List<Activity>();
 
-                Model.Jazzs.RemoveAll(x => x.TotalTickets == 0);
+                    Model.Jazzs.RemoveAll(x => x.TotalTickets == 0);
 
-                AllActivities.AddRange(Model.Jazzs);
-                AllActivities.AddRange(Model.Dinners);
-                AllActivities.AddRange(Model.Talks);
-                AllActivities.AddRange(Model.Historics);
+                    AllActivities.AddRange(Model.Jazzs);
+                    AllActivities.AddRange(Model.Dinners);
+                    AllActivities.AddRange(Model.Talks);
+                    AllActivities.AddRange(Model.Historics);
 
-                Random rnd = new Random();
+                    Random rnd = new Random();
 
-                for (int i = 0; i < 3; i++)
-                {
-                    int random = rnd.Next(1, AllActivities.Count);
+                    for (int i = 0; i < 3; i++)
+                    {
+                        int random = rnd.Next(1, AllActivities.Count);
 
-                    <div class="col-md-4 basket-crossselling">
-                        @if (AllActivities[random].EventType == EventType.JazzPatronaat)
-                        {
-                            Jazz jazz = Model.Jazzs.Find(x => x.ActivityId == AllActivities[random].ActivityId);
-                            <h4>Go to a concert</h4>
-                            <a href="@Url.Action("Reservation", "Jazz")"><img src="/images/Jazz/artiesten/@jazz.artist.ArtistImage" /></a>
-                            <table>
-                                <tr>
-                                    <td>Bands:</td>
-                                    <td>@jazz.artist.ArtistName</td>
-                                </tr>
-                                <tr>
-                                    <td>Price:</td>
-                                    <td>@jazz.Price</td>
-                                </tr>
-                                <tr>
-                                    <td>Start:</td>
-                                    <td>@jazz.StartSession.ToString("HH:mm")</td>
-                                </tr>
-                                <tr>
-                                    <td>Location:</td>
-                                    <td>@jazz.Address</td>
-                                </tr>
-                            </table>
-                            AllActivities.RemoveAll(x => x.EventType == EventType.JazzPatronaat);
-                        }
-                        else if (AllActivities[random].EventType == EventType.DinnerInHaarlem)
-                        {
-                            Dinner dinner = Model.Dinners.Find(x => x.ActivityId == AllActivities[random].ActivityId);
-                            <h4>Get dinner</h4>
-                            <a href="@Url.Action("Reservation", "Dinner", new { id = dinner.Restaurant.RestaurantId})"><img src="/images/Dinner/restaurants/@dinner.Restaurant.FoodIMG" alt="Picture not found" /></a>
-                            <table>
-                                <tr>
-                                    <td>Restaurant:</td>
-                                    <td>@dinner.Restaurant.Naam</td>
-                                </tr>
-                                <tr>
-                                    <td>Price:</td>
-                                    <td>@dinner.Restaurant.DisplayPrice</td>
-                                </tr>
-                                <tr>
-                                    <td>Start:</td>
-                                    <td>@dinner.StartSession.ToString("HH:mm")</td>
-                                </tr>
-                                <tr>
-                                    <td>Location:</td>
-                                    <td>@dinner.Address</td>
-                                </tr>
-                            </table>
-                            AllActivities.RemoveAll(x => x.EventType == EventType.DinnerInHaarlem);
-                        }
-                        else if (AllActivities[random].EventType == EventType.TalkingHaarlem)
-                        {
-                            Talking talking = Model.Talks.Find(x => x.ActivityId == AllActivities[random].ActivityId);
-                            <h4>Get dinner</h4>
-                            <a href="@Url.Action("Reservation", "Talking", new { id = talking.Talk.TalkId })"><img src="/images/Talking/@talking.Talk.Person1AltIMG" /></a>
-                            <table>
-                                <tr>
-                                    <td>Talk:</td>
-                                    <td>@talking.Talk.Naam</td>
-                                </tr>
-                                <tr>
-                                    <td>Price:</td>
-                                    <td>Free</td>
-                                </tr>
-                                <tr>
-                                    <td>Start:</td>
-                                    <td>@talking.StartSession.ToString("HH:mm")</td>
-                                </tr>
-                                <tr>
-                                    <td>Location:</td>
-                                    <td>@talking.Address</td>
-                                </tr>
-                            </table>
+                        <div class="col-md-4 basket-crossselling-item">
+                            @if (AllActivities[random].EventType == EventType.JazzPatronaat)
+                            {
+                                Jazz jazz = Model.Jazzs.Find(x => x.ActivityId == AllActivities[random].ActivityId);
+                                <h4>Go to a concert</h4>
+                                <div class="basket-crossselling-item-image-container">
+                                    <a href="@Url.Action("Reservation", "Jazz")"><img src="/images/Jazz/artiesten/@jazz.artist.ArtistImage" /></a>
+                                </div>
+                                <table>
+                                    <tr>
+                                        <td>Bands:</td>
+                                        <td>@jazz.artist.ArtistName</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Price:</td>
+                                        <td>@jazz.Price</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Start:</td>
+                                        <td>@jazz.StartSession.ToString("HH:mm")</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Location:</td>
+                                        <td>@jazz.Address</td>
+                                    </tr>
+                                </table>
+                                AllActivities.RemoveAll(x => x.EventType == EventType.JazzPatronaat);
+                            }
+                            else if (AllActivities[random].EventType == EventType.DinnerInHaarlem)
+                            {
+                                Dinner dinner = Model.Dinners.Find(x => x.ActivityId == AllActivities[random].ActivityId);
+                                <h4>Get dinner</h4>
+                                <div class="basket-crossselling-item-image-container">
+                                    <a href="@Url.Action("Reservation", "Dinner", new { id = dinner.Restaurant.RestaurantId})"><img class="basket-crossselling-item-dinnerimage" src="/images/Dinner/restaurants/@dinner.Restaurant.FoodIMG" alt="Picture not found" /></a>
+                                </div>
+                                <table>
+                                    <tr>
+                                        <td>Restaurant:</td>
+                                        <td>@dinner.Restaurant.Naam</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Price:</td>
+                                        <td>@dinner.Restaurant.DisplayPrice</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Start:</td>
+                                        <td>@dinner.StartSession.ToString("HH:mm")</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Location:</td>
+                                        <td>@dinner.Address</td>
+                                    </tr>
+                                </table>
+                                AllActivities.RemoveAll(x => x.EventType == EventType.DinnerInHaarlem);
+                            }
+                            else if (AllActivities[random].EventType == EventType.TalkingHaarlem)
+                            {
+                                Talking talking = Model.Talks.Find(x => x.ActivityId == AllActivities[random].ActivityId);
+                                <h4>Get dinner</h4>
+                                <div class="basket-crossselling-item-image-container">
+                                    <a href="@Url.Action("Reservation", "Talking", new { id = talking.Talk.TalkId })"><img src="/images/Talking/@talking.Talk.Person1AltIMG" /></a>
+                                </div>
+                                <table>
+                                    <tr>
+                                        <td>Talk:</td>
+                                        <td>@talking.Talk.Naam</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Price:</td>
+                                        <td>Free</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Start:</td>
+                                        <td>@talking.StartSession.ToString("HH:mm")</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Location:</td>
+                                        <td>@talking.Address</td>
+                                    </tr>
+                                </table>
 
-                            AllActivities.RemoveAll(x => x.EventType == EventType.TalkingHaarlem);
-                        }
-                        else if (AllActivities[random].EventType == EventType.HistoricHaarlem)
-                        {
-                            Historic historic = Model.Historics.Find(x => x.ActivityId == AllActivities[random].ActivityId);
-                            <h4>Go on a walk</h4>
-                            <a><img src="/images/Historic/Locaties/3.jpg" /></a>
-                            <table>
-                                <tr>
-                                    <td>Language:</td>
-                                    <td>@historic.Guide.LanguageName</td>
-                                </tr>
-                                <tr>
-                                    <td>Price:</td>
-                                    <td>@historic.Price</td>
-                                </tr>
-                                <tr>
-                                    <td>Start:</td>
-                                    <td>@historic.StartSession.ToString("HH:mm")</td>
-                                </tr>
-                                <tr>
-                                    <td>Start point:</td>
-                                    <td>@historic.Address</td>
-                                </tr>
-                            </table>
+                                AllActivities.RemoveAll(x => x.EventType == EventType.TalkingHaarlem);
+                            }
+                            else if (AllActivities[random].EventType == EventType.HistoricHaarlem)
+                            {
+                                Historic historic = Model.Historics.Find(x => x.ActivityId == AllActivities[random].ActivityId);
+                                <h4>Go on a walk</h4>
+                                <div class="basket-crossselling-item-image-container">
+                                    <a><img src="/images/Historic/Locaties/3.jpg" /></a>
+                                </div>
+                                <table>
+                                    <tr>
+                                        <td>Language:</td>
+                                        <td>@historic.Guide.LanguageName</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Price:</td>
+                                        <td>@historic.Price</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Start:</td>
+                                        <td>@historic.StartSession.ToString("HH:mm")</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Start point:</td>
+                                        <td>@historic.Address</td>
+                                    </tr>
+                                </table>
 
-                            AllActivities.RemoveAll(x => x.EventType == EventType.HistoricHaarlem);
-                        }
-                    </div>
+                                AllActivities.RemoveAll(x => x.EventType == EventType.HistoricHaarlem);
+                            }
+                        </div>
+                    }
                 }
-            }
+            </div>
         </div>
     </div>
 </div>
