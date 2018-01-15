@@ -41,14 +41,14 @@
 
                 <div class="restaurant-reservation-day">
                     <label for="dinnerdatefilter">Select your day</label>
-                    @Html.DropDownList("Date", new SelectList(Model.Days, "", "Naam"), "Select a date", new { @id = "dinnerdatefilter", @onchange = "FilterData()" })
+                    @Html.DropDownList("Date", new SelectList(Model.Days, "", "Naam"), "Select a date", new { @id = "dinnerdatefilter", @onchange = "FilterData()", @required = ""})
                 </div>
 
                 <div class="restaurant-reservation-time">
                     <label for="dinnertimefilter">Select your starttime</label>
-                    <select id="dinnertimefilter" name="Activity">
-                        <option class="dinnertimeselect">Select a date first</option>
-                        <option class="dinnertimeselect" id="standard" hidden>Select a time</option>
+                    <select id="dinnertimefilter" name="Activity" required>
+                        <option class="dinnertimeselect" value="">Select a date first</option>
+                        <option class="dinnertimeselect" id="standard" value="">Select a time</option>
                         @foreach (Dinner dinner in Model.Dinners)
                         {
                             <option class="@dinner.Day.Naam dinnertimeselect" value="@dinner.ActivityId" hidden>@dinner.TimeString</option>
