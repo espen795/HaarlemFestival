@@ -234,49 +234,85 @@ footer {
     background-image: url('/images/Agenda/agenda.png');
 }
 
-.ticket-table table {
+.agenda .ticket-table table {
     width: 100%;
 
 }
-.ticket-table table tr td {
+.agenda .ticket-table table tr td {
     padding: 0;
 }
 
-.ticket-table table tr td:first-child {
+.agenda .ticket-table table tr td:first-child {
     padding: 6px 12px
 }
 
-.ticket-table .agenda-activity {
+.agenda .ticket-table .agenda-activity {
     background: #fff;
     width:100%;
     display: block;
     padding: 6px
 }
 
-.ticket-table .agenda-activity:hover {
+.agenda .ticket-table .agenda-activity:hover {
     cursor: pointer;
 }
 
-.ticket-table .agenda-activity.HistoricHaarlem {
+.agenda .ticket-table .agenda-activity.HistoricHaarlem {
     background: #38a038;
 }
 
-.ticket-table .agenda-activity.DinnerInHaarlem {
+.agenda .ticket-table .agenda-activity.DinnerInHaarlem {
     background: #cc8a11;
 }
 
-.ticket-table .agenda-activity.JazzPatronaat {
+.agenda .ticket-table .agenda-activity.JazzPatronaat {
     background: #da58da;
 }
 
-.ticket-table .agenda-activity.TalkingHaarlem {
+.agenda .ticket-table .agenda-activity.TalkingHaarlem {
     background: #c5c522;
 }
 
-.ticket-table td .agenda-activity:nth-child(2) {
+.agenda .ticket-table td .agenda-activity:nth-child(2) {
     margin-top: 1px;
 }
 
+.agenda .agenda-image-container {
+    width: 550px;
+    height: 250px;
+    overflow: hidden;
+}
+
+.agenda  .agenda-image-container img {
+    width: 100%;
+
+}
+
+.agenda  .agenda-image-container img.agenda-image-historic {
+    margin: -75px 0 0 0;
+} 
+
+.agenda .activities {
+    text-align: center;
+}
+
+.agenda .agenda-right table {
+    width: 100%
+}
+
+.agenda .agenda-right table td {
+    width: 50%;
+}
+
+.agenda .agenda-right table td:first-child {
+    text-align: right;
+    font-weight: bold;
+    padding-right: 10px;
+}
+
+.agenda .agenda-right table td:last-child {
+    text-align: left;
+}
 /************/
 /** BASKET **/
 /************/
