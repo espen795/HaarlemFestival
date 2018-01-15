@@ -169,12 +169,31 @@
 
                             else if (besteldeactiviteit.Activiteit.EventType == EventType.DinnerInHaarlem)
                             {
-                                foreach (Dinner dinner in Model.Dinners)
+                                foreach (Dinner Dinner in Model.Dinners)
                                 {
-                                    if (dinner.ActivityId == besteldeactiviteit.Activiteit.ActivityId)
+                                    if (Dinner.ActivityId == besteldeactiviteit.Activiteit.ActivityId)
                                     {
-                                        <div class="activities" id="@besteldeactiviteit.Activiteit.ActivityId" hidden>
-
+                                        <div class="activities" id="@Dinner.ActivityId" hidden>
+                                            <img src="/images/Dinner/restaurants/@Dinner.Restaurant.LocationIMG" />
+                                            <h4>@Dinner.Restaurant.Naam</h4>
+                                            <table>
+                                                <tr>
+                                                    <td>Start-time:</td>
+                                                    <td>@Dinner.StartSession.TimeOfDay.ToString(@"hh\:mm")</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>End-time:</td>
+                                                    <td>@Dinner.EndSession.TimeOfDay.ToString(@"hh\:mm")</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Contact:</td>
+                                                    <td>@Dinner.Phonenumber</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Location:</td>
+                                                    <td>@Dinner.Address</td>
+                                                </tr>
+                                            </table>
                                         </div>
                                         break;
                                     }
