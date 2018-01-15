@@ -50,12 +50,23 @@ namespace HaarlemFestival.Controllers
         [HttpPost]
         public ActionResult Reservation(TalkViewModel viewModel)
         {
+            List<BesteldeActiviteit> orderedActivity = new List<BesteldeActiviteit>();
+
+            // Session existing?
+            if (Session["current_order"] != null)
+            {
+                orderedActivity.AddRange((List<BesteldeActiviteit>)Session["current_order"]);
+            }
+
             if (ModelState.IsValid)
             {
                 InterviewQuestion question = new InterviewQuestion();
                 question.Content = viewModel.Question.Content;
                 question.Receiver = viewModel.Question.Receiver;
-                talkingRepository.SaveQuestionToDB(question);
+                // Sla vraag op in sessie
+                Session["interview_question_list"] = question;
+                // Dit moet pas na de bestelling
+                //talkingRepository.SaveQuestionToDB(question);
             }
 
             return RedirectToAction("Index");
