@@ -94,8 +94,8 @@
 
     </script>
 
-    <section id="topFilterBar">
-        <div id="selectEvent">
+    <section id="topFilterBar" class="col-md-12">
+        <div id="selectEvent" class="col-md-3">
 
             <select id="selectedEvent" name="selectedEvent" onchange="SelectedEventChanged()">
                 <option value="">Select an event.</option>
@@ -106,9 +106,9 @@
             </select>
         </div>
 
-        <div id="filterSystem">
-            @Html.DropDownList("Dates", new SelectList(Model.Filters.dateFilter, "DateDisplay", "DateDisplay"), "Select a Date.", new { @id = "dateFilter", @class = "eventFilter", @onchange = "FilterData()" })
-            @Html.DropDownList("Restaurants", new SelectList(Model.Filters.restaurantFilter, "Naam", "Naam"), "Select a Restaurant", new { @id = "restaurantFilter", @class = "eventFilter", @onchange = "FilterData()" })
+        <div id="filterSystem" class="col-md-9">
+            @Html.DropDownListFor(m => m.Filters.dateFilter, new SelectList(Model.Filters.dateFilter, "DateDisplay", "DateDisplay"), "Select a Date.", new { @id = "dateFilter", @class = "eventFilter", @onchange = "FilterData()" })
+            @Html.DropDownListFor(m => m.Filters.restaurantFilter, new SelectList(Model.Filters.restaurantFilter, "Naam", "Naam"), "Select a Restaurant", new { @id = "restaurantFilter", @class = "eventFilter", @onchange = "FilterData()" })
         </div>
     </section>
 
