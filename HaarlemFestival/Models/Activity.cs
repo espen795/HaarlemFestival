@@ -31,7 +31,6 @@ namespace HaarlemFestival.Models
 
         [Required(ErrorMessage = "Please enter the total amount of tickets.")]
         [Display(Name = "Total Tickets")]
-        [Range(1, Int32.MaxValue, ErrorMessage = "There has to be atleast 1 ticket")]
         public int TotalTickets { get; set; }
 
         [Display(Name = "Bought Tickets")]
