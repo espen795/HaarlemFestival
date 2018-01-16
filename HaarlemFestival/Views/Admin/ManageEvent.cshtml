@@ -142,7 +142,7 @@
         {
             var modal = document.getElementById('imagePopup');
             var modalImg = document.getElementById("eventImage");
-
+            
             modal.style.display = "block";
             modalImg.src = "../images/" + path;
 
@@ -535,8 +535,8 @@
                         <td>@activity.Address</td>
                         <td>@String.Format("{0:0.00}", activity.Price)</td>
                         <td>@activity.Talk.MaxTickets</td>
-                        <td><i onclick='ShowEventImage("Talking/@activity.Talk.Person1")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
-                        <td><i onclick='ShowEventImage("Talking/@activity.Talk.Person2")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
+                        <td><i onclick='ShowEventImage("Talking/@activity.Talk.Person1IMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
+                        <td><i onclick='ShowEventImage("Talking/@activity.Talk.Person2IMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Talking')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
