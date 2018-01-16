@@ -80,7 +80,6 @@
 
         @using (Html.BeginForm("Book", "Historic", FormMethod.Post))
         {
-
             <div class="tab-content">
                 <div id="day1" class="tab-pane fade in active historic-tickets">
                     <div class="table table-hover table-responsive ticket-table">
@@ -127,9 +126,9 @@
 
                         <br />
                         @foreach (Historic tour in Model.Tours)
-                {
-                    if (tour.Day.DayId == 1)
-                    {
+                        {
+                            if (tour.Day.DayId == 1)
+                            {
                                 <p>These are the available tours on @tour.Day.Naam (@tour.Day.Date.ToString("dd/MM/yyyy"))</p>
                                 break;
                             }
@@ -182,9 +181,9 @@
 
                         <br />
                         @foreach (Historic tour in Model.Tours)
-                {
-                    if (tour.Day.DayId == 2)
-                    {
+                        {
+                            if (tour.Day.DayId == 2)
+                            {
                                 <p>These are the available tours on @tour.Day.Naam (@tour.Day.Date.ToString("dd/MM/yyyy"))</p>
                                 break;
                             }
@@ -237,9 +236,9 @@
 
                         <br />
                         @foreach (Historic tour in Model.Tours)
-                {
-                    if (tour.Day.DayId == 3)
-                    {
+                        {
+                            if (tour.Day.DayId == 3)
+                            {
                                 <p>These are the available tours on @tour.Day.Naam (@tour.Day.Date.ToString("dd/MM/yyyy"))</p>
                                 break;
                             }
@@ -258,8 +257,6 @@
             </div>
 
             <input type="submit" value="Book" class="btn btn-book btn-reservation" />
-            @*Submit knop, hier eindigd de form *@
-                        @*Html.ActionLink("Order your tickets", new { @class = "btn btn-book btn-reservation", type = "submit" })*@
                         }
 
     </div>
