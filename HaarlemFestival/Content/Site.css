@@ -340,7 +340,9 @@ footer {
 .agenda .agenda-right table {
     width: 100%
 }
-
+.agenda .ticket-table tr td:first-child {
+    width: 25%
+}
 .agenda .agenda-right table td {
     width: 50%;
 }
