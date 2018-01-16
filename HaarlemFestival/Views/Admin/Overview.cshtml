@@ -16,11 +16,14 @@
         );
 
 
-        $("#downloadComplete").on('hide', function () {
-            $("$downloadComplete .modal-title").text("Download in progress...");
+        $("#downloadComplete").on('hidden.bs.modal', function () {
+            console.log("hidden Modal");
+            $("#downloadComplete .modal-title").text("Download in progress...");
+            $("#downloadComplete .loadingCircle").show();
             $("#downloadLocation").text("Please be patient while the file is being created.");
             $("#closeDownloadButton").attr("disabled", true);
-        })
+            $("#downloadComplete").css("display", "none");
+        });
 
         // Tooltips maken.
         $('[data-toggle="tooltip"]').tooltip();
@@ -33,6 +36,7 @@
                 url: '@Url.Action("DownloadTicketSalesInformation", "Admin")',
                 complete: function (data) {
                     $("#downloadComplete").show();
+                    $("#downloadComplete .loadingCircle").hide();
                     $("#downloadComplete .modal-title").text("Download Complete!");
                     $("#downloadLocation").html("The File has been saved to: <strong>" + data.responseJSON.location + "</strong>");
                     $("#closeDownloadButton").removeAttr("disabled");
@@ -52,7 +56,25 @@
                 <h4 class="modal-title">Download in progress...</h4>
             </div>
             <div class="modal-body">
-                <p id="downloadLocation">Please be patient while the file is being created.</p>
+                <div class="col-md-12 middle">
+                    <p id="downloadLocation">Please be patient while the file is being created.</p>
+                </div>
+                <div class="col-md-12 middle loadingCircle">
+                    <div class="sk-circle">
+                        <div class="sk-circle1 sk-child"></div>
+                        <div class="sk-circle2 sk-child"></div>
+                        <div class="sk-circle3 sk-child"></div>
+                        <div class="sk-circle4 sk-child"></div>
+                        <div class="sk-circle5 sk-child"></div>
+                        <div class="sk-circle6 sk-child"></div>
+                        <div class="sk-circle7 sk-child"></div>
+                        <div class="sk-circle8 sk-child"></div>
+                        <div class="sk-circle9 sk-child"></div>
+                        <div class="sk-circle10 sk-child"></div>
+                        <div class="sk-circle11 sk-child"></div>
+                        <div class="sk-circle12 sk-child"></div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" id="closeDownloadButton" class="btn btn-primary" disabled data-dismiss="modal">Close</button>
@@ -75,35 +97,41 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3 col-md-offset-1 overviewContent" id="ManageEvent">
-        <!-- INTRO TEXT -->
-        <p class="introText">
-            By clicking on one of these buttons you will be navigated to another page where you can Add, Update and Delete data of the chosen event.
-        </p>
+    <div class="row">
+        <div class="col-md-5 col-md-offset-1 overviewContent" id="ManageEvent">
+            <!-- INTRO TEXT -->
+            <p class="introText">
+                By clicking on one of these buttons you will be navigated to another page where you can Add, Update and Delete data of the chosen event.
+            </p>
 
-        <!-- MANAGE EVENT BUTTONS -->
-        <div id="manageEventSelection">
-            <div class="col-sm-12 middle"><button class="btn btn-black">@Html.ActionLink("Jazz@Patronaat", "ManageEvent", "Admin", new { selectedEvent = "Jazz@Patronaat" }, new { @class = "white" })</button></div>
-            <div class="col-sm-12 middle"><button class="btn btn-black">@Html.ActionLink("Dinner in Haarlem", "ManageEvent", "Admin", new { selectedEvent = "DinnerInHaarlem" }, new { @class = "white" })</button></div>
-            <div class="col-sm-12 middle"><button class="btn btn-black">@Html.ActionLink("Talking Haarlem", "ManageEvent", "Admin", new { selectedEvent = "TalkingHaarlem" }, new { @class = "white" })</button></div>
-            <div class="col-sm-12 middle"><button class="btn btn-black">@Html.ActionLink("Historic Haarlem", "ManageEvent", "Admin", new { selectedEvent = "HistoricHaarlem" }, new { @class = "white" })</button></div>
+            <!-- MANAGE EVENT BUTTONS -->
+            <div id="manageEventSelection">
+                <div class="col-sm-12 middle"><button class="btn btn-black">@Html.ActionLink("Jazz@Patronaat", "ManageEvent", "Admin", new { selectedEvent = "Jazz@Patronaat" }, new { @class = "white" })</button></div>
+                <div class="col-sm-12 middle"><button class="btn btn-black">@Html.ActionLink("Dinner in Haarlem", "ManageEvent", "Admin", new { selectedEvent = "DinnerInHaarlem" }, new { @class = "white" })</button></div>
+                <div class="col-sm-12 middle"><button class="btn btn-black">@Html.ActionLink("Talking Haarlem", "ManageEvent", "Admin", new { selectedEvent = "TalkingHaarlem" }, new { @class = "white" })</button></div>
+                <div class="col-sm-12 middle"><button class="btn btn-black">@Html.ActionLink("Historic Haarlem", "ManageEvent", "Admin", new { selectedEvent = "HistoricHaarlem" }, new { @class = "white" })</button></div>
+            </div>
+        </div>
+
+        <div class="col-md-5 overviewContent" id="TicketSalesInformation">
+            <!-- INTROTEXT -->
+            <p class="introText">
+                By clicking the Download button you will download an excel file which contains all information about tickets availability and sales. The information per event is distributed over different sheets.
+                You can also check the Information on the website.
+            </p>
+
+            <!-- BUTTON -->
+            <div class="col-sm-12 middle"><button class="btn btn-black">@Html.ActionLink("Show Information", "TicketSalesInformation", "AdminController", null, new { @class = "white" })</button></div>
+            <div class="col-sm-12 middle"><button class="btn btn-black" onclick="DownloadInformation()" data-toggle="modal" data-target="#downloadComplete">Download Excel File</button></div>
         </div>
     </div>
-
-    <div class="col-md-3 col-md-offset-1 overviewContent" id="TicketSalesInformation">
-        <!-- INTROTEXT -->
-        <p class="introText">
-            By clicking the Download button you will download an excel file which contains all information about tickets availability and sales. The information per event is distributed over different sheets.
-			You can also check the Information on the website.
-        </p>
-
-        <!-- BUTTON -->
-        <div class="col-sm-12 middle"><button class="btn btn-black">@Html.ActionLink("Show Information", "TicketSalesInformation", "AdminController", null, new { @class = "white" })</button></div>
-        <div class="col-sm-12 middle"><button class="btn btn-black" onclick="DownloadInformation()" data-toggle="modal" data-target="#downloadComplete">Download Excel File</button></div>
-    </div>
-
-    <div class="col-md-3 col-md-offset-1 overviewContent" id="ContactMessages">
-        [Introduction Contact Messages]
-        <div class="col-sm-12 middle"><button class="btn btn-black">@Html.ActionLink("Contact Messages", "AnswerContactmessage", "AdminController", null, new { @class="white" })</button></div>
+    <div class="row">
+        <div class="col-md-5 col-md-offset-1 overviewContent" id="ContactMessages">
+            <p class="introText">
+                [Introduction Contact Messages] 
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </p>
+            <div class="col-sm-12 middle"><button class="btn btn-black">@Html.ActionLink("Contact Messages", "AnswerContactmessage", "AdminController", null, new { @class = "white" })</button></div>
+        </div>
     </div>
 </div>
