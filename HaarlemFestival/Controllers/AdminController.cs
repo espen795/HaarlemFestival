@@ -1107,12 +1107,17 @@ namespace HaarlemFestival.Controllers
             }
         }
 
-        private List<DateModel> GetDateModel(List<Day> days)
+        private List<DateModel> GetDateModel(List<Day> dayList)
         {
             List<DateModel> dates = new List<DateModel>();
-            foreach (Day day in days) // Voor elke opgehaalde dag.
+            List<string> days = new List<string>();
+            foreach (Day day in dayList) // Voor elke opgehaalde dag.
             {
-                dates.Add(new DateModel { DayId = day.DayId, DateDisplay = day.Date.ToString("dddd dd-MM-yyyy") }); // Nieuwe DatumModel toevoegen aan de lijst.
+                if (!days.Contains(day.Date.ToString("dddd dd-MM-yyyy")))
+                {
+                    days.Add(day.Date.ToString("dddd dd-MM-yyyy"));
+                    dates.Add(new DateModel { DayId = day.DayId, DateDisplay = day.Date.ToString("dddd dd-MM-yyyy") }); // Nieuwe DatumModel toevoegen aan de lijst.
+                }
             }
 
             return dates;
