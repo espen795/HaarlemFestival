@@ -1565,6 +1565,10 @@ input[type='text']:focus, input[type='password']:focus {
     padding: 5px 0;
 }
 
+#filterSystem .eventFilter {
+    margin-left: 10px;
+}
+
 #filterSystem .eventFilter:focus {
     border-color: #6495ed;
 }
@@ -1796,4 +1800,14 @@ div.eventData {
     .jazz .keuze_blok img {
         width: 100%;
     }
+    
+    /* EVENT ADMIN */
+    #filterSystem {
+        margin-top: 20px;
+    }
+
+    #filterSystem .eventFilter {
+        margin-left: -15px;
+    }
+
 }
