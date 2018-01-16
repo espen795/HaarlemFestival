@@ -4,9 +4,27 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Haarlem Festival</title>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkHM97URmE3DZBPfRAA74F6x7cqhuDB6E&callback=initMap"></script>
+
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+
+    <script>
+        var map;
+
+        google.maps.event.addDomListener(window, "load", function () {
+
+            var map = new google.maps.Map(document.getElementById("map_div"), {
+                center: new google.maps.LatLng(52.3813693, 4.636010299999953),
+                zoom: 14,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+
+        });
+    </script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -34,12 +52,13 @@
 							Admin
 							<span class="caret"></span>
 						</a>
-						<ul class="dropdown-menu">
-							<li>@Html.ActionLink("Overview", "Overview", "Admin")</li>
-							<li>@Html.ActionLink("Manage Event", "ManageEvent", "Admin")</li>
-							<li>@Html.ActionLink("Ticket & Sales Information", "TicketSalesInformation", "Admin")</li>
-							<li>@Html.ActionLink("Log off", "LogOff", "Admin")</li>
-						</ul>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Overview", "Overview", "Admin", null, new { @id = "adminOverview" })</li>
+                                <li>@Html.ActionLink("Manage Event", "ManageEvent", "Admin", null, new { @id = "adminManage" })</li>
+                                <li>@Html.ActionLink("Ticket & Sales Information", "TicketSalesInformation", "Admin", null, new { @id = "adminSales" })</li>
+                                <li>@Html.ActionLink("Contact Messages", "AnswerContactmessage", "Admin", null, new { @id = "adminContact" })</li>
+                                <li>@Html.ActionLink("Log off", "LogOff", "Admin", null, new { @id = "adminLogout" })</li>
+                            </ul>
 						</li>
 				   }
 				   else
@@ -91,6 +110,7 @@
 
                 <div class="col-md-6">
                     <p class="title">Location</p>
+                    <div id="map_div" style="height: 165px;"></div>
                 </div>
             </div>
         </div>

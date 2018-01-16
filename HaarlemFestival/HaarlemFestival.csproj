@@ -252,6 +252,7 @@
     <Compile Include="Models\HFDB.cs" />
     <Compile Include="Models\HistoricView.cs" />
     <Compile Include="Models\InterviewQuestion.cs" />
+    <Compile Include="Models\JazzView.cs" />
     <Compile Include="Models\JazzViewModels.cs" />
     <Compile Include="Models\Locations.cs" />
     <Compile Include="Models\Talk.cs" />
