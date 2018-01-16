@@ -1597,6 +1597,10 @@ input[type='text']:focus, input[type='password']:focus {
     display: none;
 }
 
+#downloadLocation {
+    text-align: center;
+}
+
 .middle {
     margin-top: 5px;
     margin-left: auto;
