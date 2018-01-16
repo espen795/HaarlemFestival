@@ -19,23 +19,23 @@
             switch ($('#selectedEvent').val()) {
                 case "Jazz@Patronaat":
                     $('#jazzData').show();
-                    $('#dateFilter').show();
+                    $('#dates').show();
                     break;
 
                 case "DinnerInHaarlem":
                     $('#dinnerData').show();
-                    $('#dateFilter').show();
-                    $('#restaurantFilter').show();
+                    $('#dates').show();
+                    $('#restaurants').show();
                     break;
 
                 case "TalkingHaarlem":
                     $('#talkingData').show();
-                    $('#dateFilter').show();
+                    $('#dates').show();
                     break;
 
                 case "HistoricHaarlem":
                     $('#historicData').show();
-                    $('#dateFilter').show();
+                    $('#dates').show();
                     break;
 
                 default:
@@ -43,7 +43,7 @@
                     $('#dinnerData').show();
                     $('#talkingData').show();
                     $('#historicData').show();
-                    $('#dateFilter').show();
+                    $('#dates').show();
                     break;
             }
         }
@@ -95,8 +95,9 @@
     </script>
 
     <section id="topFilterBar" class="col-md-12">
-        <div id="selectEvent" class="col-md-3">
-
+        <div id="selectEvent" class="col-md-3 col-sm-12">
+            <b>Select an event</b>
+            <br />
             <select id="selectedEvent" name="selectedEvent" onchange="SelectedEventChanged()">
                 <option value="">Select an event.</option>
                 <option value="Jazz@Patronaat">Jazz@Patronaat</option>
@@ -106,9 +107,17 @@
             </select>
         </div>
 
-        <div id="filterSystem" class="col-md-9">
-            @Html.DropDownListFor(m => m.Filters.dateFilter, new SelectList(Model.Filters.dateFilter, "DateDisplay", "DateDisplay"), "Select a Date.", new { @id = "dateFilter", @class = "eventFilter", @onchange = "FilterData()" })
-            @Html.DropDownListFor(m => m.Filters.restaurantFilter, new SelectList(Model.Filters.restaurantFilter, "Naam", "Naam"), "Select a Restaurant", new { @id = "restaurantFilter", @class = "eventFilter", @onchange = "FilterData()" })
+        <div id="filterSystem" class="col-md-9 col-sm-12">
+            <div class="col-md-3 eventFilter" id="dates">
+                <b>Select a date.</b>
+                <br />
+                @Html.DropDownListFor(m => m.Filters.dateFilter, new SelectList(Model.Filters.dateFilter, "DateDisplay", "DateDisplay"), "Select a Date.", new { @id = "dateFilter", @class = "filters", @onchange = "FilterData()" })
+            </div>
+            <div class="col-md-3 eventFilter" id="restaurants">
+                <b>Select a restaurant.</b>
+                <br />
+                @Html.DropDownListFor(m => m.Filters.restaurantFilter, new SelectList(Model.Filters.restaurantFilter, "Naam", "Naam"), "Select a Restaurant", new { @id = "restaurantFilter", @class = "filters", @onchange = "FilterData()" })
+            </div>
         </div>
     </section>
 
@@ -140,7 +149,7 @@
                         <strong>Hall: </strong> @activity.ConcertHall
                         <br />
                         <strong>Price: </strong>€ @String.Format("{0:0.00}", activity.Price)
-                        
+
                     </div>
                     <div class="col-sm-6">
                         <div class="col-sm-12">
@@ -169,7 +178,7 @@
     <div id="dinnerData" class="eventView">
         @foreach (Dinner activity in Model.Activities.OfType<Dinner>())
         {
-            if(activity.TotalTickets == 0)
+            if (activity.TotalTickets == 0)
             {
                 continue;
             }
@@ -243,7 +252,7 @@
                         <strong>Price: </strong>€ @String.Format("{0:0.00}", activity.Price)
                         <br />
                     </div>
-                    <div class="col-sm-6">    
+                    <div class="col-sm-6">
                         <div class="col-sm-6"><img src="../images/Talking/@activity.Talk.Person1IMG" style="max-width:100%" onError="this.src = '../images/no_image.jpg'" /></div>
                         <div class="col-sm-6"><img src="../images/Talking/@activity.Talk.Person2IMG" style="max-width:100%" onError="this.src = '../images/no_image.jpg'" /></div>
                         <br />
@@ -313,4 +322,4 @@
             </div>
         }
     </div>
-    </div>
+</div>
