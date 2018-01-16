@@ -117,13 +117,13 @@
                             </tr>
                         }
                     </table>
-                    <button class="basket-button" type="button" onclick="location.href='@Url.Action("Method", "Controller")'">Next step</button>
+                    <button class="btn btn-black basket-button" type="button" onclick="location.href='@Url.Action("Reservation", "Home")'">Next step</button>
                 </div>
             }
         </div>
         <div class="event-section-4">
-            <h3>You could also:</h3>
             <div class="basket-crossselling">
+                <h3>You could also:</h3>
                 @{
                     List<Activity> AllActivities = new List<Activity>();
 

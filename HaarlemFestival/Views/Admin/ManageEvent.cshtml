@@ -183,24 +183,24 @@
             {
                 case "Jazz@Patronaat":
                     $('#jazzTable').show();
-                    $('#dateFilter').show();
+                    $('#dates').show();
                     $('#jazzImage').show();
                     $('#newDataDiv').show();
                     break;
 
                 case "DinnerInHaarlem":
-                    $('#dateFilter').show();
+                    $('#dates').show();
                     $('#dinnerTable').show();
                     $('#restaurantTable').show();
-                    $('#cuisineFilter').show();
-                    $('#restaurantFilter').show();
+                    $('#cuisines').show();
+                    $('#restaurants').show();
 					$('#restaurantImage').show();
                     $('#dinnerImage').show();
                     $('#newDataDiv').show();
                     break;
 
                 case "TalkingHaarlem":
-                    $('#dateFilter').show();
+                    $('#ddates').show();
                     $('#talkingTable').show();
                     $('#talkingImage').show();
                     $('#newDataDiv').show();
@@ -209,9 +209,8 @@
                 case "HistoricHaarlem":
                     $('#guideTable').show();
                     $('#historicTable').show();
-                    $('#dateFilter').show();
-                    $('#guideFilter').show();
-                    $('#languageFilter').show();
+                    $('#dates').show();
+                    $('#guides').show();
 					$('#guideImage').show();
                     $('#historicImage').show();
                     $('#newDataDiv').show();
@@ -226,7 +225,7 @@
 
 
             // Voor elke filter
-            $('.eventFilter').each(function () {
+            $('.filters').each(function () {
 
                 if ($(this).val() != "") // Als de filter is geselecteerd.
                 {
@@ -337,8 +336,9 @@
     </script>
 
     <section id="topFilterBar" class="col-md-12">
-        <div id="selectEvent" class="col-md-3">
-
+        <div id="selectEvent" class="col-md-3 col-sm-12">
+            <b>Select an event</b>
+            <br />
             <select id="selectedEvent" name="selectedEvent" onchange="SelectedEventChanged()">
                 <option value="">Select an event.</option>
                 <option value="Jazz@Patronaat">Jazz@Patronaat</option>
@@ -348,11 +348,27 @@
             </select>
         </div>
 
-        <div id="filterSystem" class="col-md-9">
-            @Html.DropDownListFor(m => m.Filters.dateFilter, new SelectList(Model.Filters.dateFilter, "DateDisplay", "DateDisplay"), "Select a Date.", new { @id = "dateFilter", @class = "eventFilter", @onchange = "FilterData()" })
-            @Html.DropDownListFor(m => m.Filters.guideFilter, new SelectList(Model.Filters.guideFilter, "GuideName", "GuideName"), "Select a Guide.", new { @id = "guideFilter", @class = "eventFilter", @onchange = "FilterData()" })
-            @Html.DropDownListFor(m => m.Filters.restaurantFilter, new SelectList(Model.Filters.restaurantFilter, "Naam", "Naam"), "Select a Restaurant", new { @id = "restaurantFilter", @class = "eventFilter", @onchange = "FilterData()" })
-            @Html.DropDownListFor(m => m.Filters.cuisineFilter, new SelectList(Model.Filters.cuisineFilter, "Naam", "Naam"), "Select a Cuisine.", new { @id = "cuisineFilter", @class = "eventFilter", @onchange = "FilterData()" })
+        <div id="filterSystem" class="col-md-9 col-sm-12">
+            <div class="col-md-3 eventFilter" id="dates">
+                <b>Select a date.</b>
+                <br />
+                @Html.DropDownListFor(m => m.Filters.dateFilter, new SelectList(Model.Filters.dateFilter, "DateDisplay", "DateDisplay"), "Select a Date.", new { @id = "dateFilter", @class = "filters", @onchange = "FilterData()" })
+            </div>
+            <div class="col-md-3 eventFilter" id="guides">
+                <b>Select a guide.</b>
+                <br />
+                @Html.DropDownListFor(m => m.Filters.guideFilter, new SelectList(Model.Filters.guideFilter, "GuideName", "GuideName"), "Select a Guide.", new { @id = "guideFilter", @class = "filters", @onchange = "FilterData()" })
+            </div>
+            <div class="col-md-3 eventFilter" id="restaurants">
+                <b>Select a restaurant.</b>
+                <br />
+                @Html.DropDownListFor(m => m.Filters.restaurantFilter, new SelectList(Model.Filters.restaurantFilter, "Naam", "Naam"), "Select a Restaurant", new { @id = "restaurantFilter", @class = "filters", @onchange = "FilterData()" })
+            </div>
+            <div class="col-md-3 eventFilter" id="cuisines">
+                <b>Select a cuisine.</b>
+                <br />
+                @Html.DropDownListFor(m => m.Filters.cuisineFilter, new SelectList(Model.Filters.cuisineFilter, "Naam", "Naam"), "Select a Cuisine.", new { @id = "cuisineFilter", @class = "filters", @onchange = "FilterData()" })
+            </div>
         </div>
     </section>
     <div class="row">

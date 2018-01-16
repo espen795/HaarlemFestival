@@ -55,7 +55,7 @@ namespace HaarlemFestival.Controllers
             };
 
             List<BesteldeActiviteit> Bestelling = new List<BesteldeActiviteit>();
-            if(Session["current_order"] != null)
+            if (Session["current_order"] != null)
                 Bestelling.AddRange((List<BesteldeActiviteit>)Session["current_order"]);
 
             List<BesteldeActiviteit> Order = new List<BesteldeActiviteit>();
@@ -63,10 +63,10 @@ namespace HaarlemFestival.Controllers
             {
                 Bestelling = Bestelling.OrderBy(x => x.Activiteit.ActivityId).ToList();
 
-                
+
                 Order.Add(Bestelling[0]);
                 for (int i = 1; i < Bestelling.Count; i++)
-                {                    
+                {
                     if (Bestelling[i].Activiteit.ActivityId == Bestelling[i - 1].Activiteit.ActivityId)
                     {
                         BesteldeActiviteit besteldeActiviteit = Order.Where(x => x.Activiteit.ActivityId == Bestelling[i].Activiteit.ActivityId).FirstOrDefault();
@@ -148,6 +148,19 @@ namespace HaarlemFestival.Controllers
         public ActionResult Reservation()
         {
             ViewBag.Message = "Your reservation.";
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult MakeReservation(Reservering order)
+        {
+            return RedirectToAction("Completed");
+        }
+
+        public ActionResult Completed()
+        {
+            ViewBag.Message = "Thanks for booking.";
 
             return View();
         }
