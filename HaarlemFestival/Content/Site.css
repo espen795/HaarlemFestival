@@ -1290,9 +1290,9 @@ input[type='text']:focus, input[type='password']:focus {
     color: red;
 }
 
-/*#region LoadingAnimation*/
+/*#region Loading Animation*/
 .sk-circle {
-    margin: 100px auto;
+    margin: 50px auto;
     width: 40px;
     height: 40px;
     position: relative;
