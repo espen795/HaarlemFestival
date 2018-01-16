@@ -34,11 +34,50 @@ namespace HaarlemFestival.Controllers
             return View(allJazz);
         }
 
+
         public ActionResult Reservation()
         {
-            List<Jazz> allJazz = jazzRepository.GetAllJazzs();
+            JazzView jazzview = new JazzView();
+            jazzview.Jazzs = jazzRepository.GetAllJazzs();
+            jazzview.Reservering = new List<BesteldeActiviteit>();
 
-            return View(allJazz);
+            return View(jazzview);
+        }
+
+        [HttpPost]
+        public ActionResult Book(JazzView activiteit)
+        {
+            List<BesteldeActiviteit> orderedActivity = new List<BesteldeActiviteit>();
+
+            // Session existing?
+            if (Session["current_order"] != null)
+            {
+                orderedActivity.AddRange((List<BesteldeActiviteit>)Session["current_order"]);
+            }
+
+
+            // In the session
+            foreach (BesteldeActiviteit activity in activiteit.Reservering)
+            {
+                if (activity.Aantal != 0)
+                {
+                    // Totaal aantal tickets berekenen (alternatief telt voor 4 plekken in een tour)
+                    activity.TotalBoughtTickets = activity.Aantal;
+
+                    // Tour ophalen gebaseerd op het id
+                    activity.Activiteit = jazzRepository.GetId(activity.Activiteit.ActivityId);
+
+                    // Prijs berekenen voor in het basket model
+                    activity.Price = activity.Aantal * (float)activity.Activiteit.Price;
+
+                    orderedActivity.Add(activity);
+                }
+            }
+
+            Session["current_order"] = orderedActivity;
+
+            // Partial view continue or basket
+            return RedirectToAction("Reservation", "Jazz");
         }
     }
 }

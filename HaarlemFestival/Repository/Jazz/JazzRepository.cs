@@ -11,15 +11,16 @@ namespace HaarlemFestival.Repository.Jazz
     {
         private HFDB db = new HFDB();
 
-  
-
         public List<Models.Jazz> GetAllJazzs()
         {
             List<Models.Jazz> jazzs = db.Jazzs.ToList();
             return jazzs;
         }
 
-
+        public Models.Jazz GetId(int id)
+        {
+            return db.Jazzs.Find(id);
+        }
 
     }
 }
