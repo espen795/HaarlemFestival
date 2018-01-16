@@ -1,5 +1,51 @@
-﻿@{
+﻿@using HaarlemFestival.Models;
+@using System.Collections.Generic;
+@using System.Globalization;
+@using System;
+@using System.Linq;
+@model Reservering
+
+@{
     ViewBag.Title = "Reservation";
 }
 
-<h2>Reservation</h2>
+<div class="event-banner"></div>
+
+<div class="event container">
+    <div class="row">
+        <div class="event-section-3">
+            @using (Html.BeginForm("MakeReservation", "Home", FormMethod.Post, new { @class = "home-reservation-form" }))
+            {
+                List<string> PaymentMethod = new List<string>();
+                PaymentMethod.Add("Select an option...");
+                PaymentMethod.Add("iDeal");
+                PaymentMethod.Add("PayPal");
+                PaymentMethod.Add("Mastercard");
+
+                // Personal information
+                <div class="col-md-6 reservation">
+                    <h4>Please fill in the fields below</h4>
+                    <p>Please provide the following information so we can book the ticket on your name and mail them to your e-mail address.</p>
+
+                    @Html.LabelFor(m => Model.Klant.Naam)
+                    @Html.TextBoxFor(m => Model.Klant.Naam, new { @type = "text" })
+                    @Html.LabelFor(m => Model.Klant.Email)
+                    @Html.TextBoxFor(m => Model.Klant.Email, new { @type = "email" })
+
+                    <button class="btn btn-black r back" type="button" onclick="location.href='@Url.Action("Basket", "Home")'">Back to basket</button>
+                </div>
+
+                // Payment information
+                <div class="col-md-6 reservation right">
+                    <h4>Payment</h4>
+                    <p>Select a payment method</p>
+
+                    @Html.LabelFor(m => Model.Klant.BetaalMethode)
+                    @Html.DropDownListFor(m => Model.Klant.BetaalMethode, new SelectList(PaymentMethod))
+
+                    <button class="btn btn-black r" type="submit"> Confirm reservation</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
