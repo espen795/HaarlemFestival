@@ -45,13 +45,13 @@
                     <li>@Html.ActionLink("Talking Haarlem", "Index", "Talking")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
 
-					@if (Session["loggedin_account"] != null)
-					{
-						<li class="dropdown right adminDropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-							Admin
-							<span class="caret"></span>
-						</a>
+                    @if (Session["loggedin_account"] != null)
+                    {
+                        <li class="dropdown right adminDropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Admin
+                                <span class="caret"></span>
+                            </a>
                             <ul class="dropdown-menu">
                                 <li>@Html.ActionLink("Overview", "Overview", "Admin", null, new { @id = "adminOverview" })</li>
                                 <li>@Html.ActionLink("Manage Event", "ManageEvent", "Admin", null, new { @id = "adminManage" })</li>
@@ -59,12 +59,14 @@
                                 <li>@Html.ActionLink("Contact Messages", "AnswerContactmessage", "Admin", null, new { @id = "adminContact" })</li>
                                 <li>@Html.ActionLink("Log off", "LogOff", "Admin", null, new { @id = "adminLogout" })</li>
                             </ul>
-						</li>
-				   }
-				   else
-				   {
-				        <li>@Html.ActionLink("Basket", "Basket", "Home")</li>
-				   }
+                        </li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Basket", "Basket", "Home")</li>
+
+
+                    }
                 </ul>
             </div>
         </div>
@@ -77,23 +79,23 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
-                    <p class="title">Navigation</p>  
-                        <p class="links">
-                            @Html.ActionLink("- Home", "Index", "Home")<br />
-                            @Html.ActionLink("- Jazz@Patronaat", "Index", "Jazz")<br />
-                            @Html.ActionLink("- Talking Haarlem", "Index", "Talking")<br />
-                            @Html.ActionLink("- Dinner in Haarlem", "Index", "Dinner")<br />
-                            @Html.ActionLink("- Historic Haarlem", "Index", "Historic")<br />
-                            @Html.ActionLink("- Contact", "Contact", "Home")<br />
-                            @if (Session["loggedin_account"] != null)
-                            {
-                                @Html.ActionLink("- Admin", "Overview", "Admin");
-                            }
-                            @if (Session["loggedin_account"] == null)
-                            {
-                                @Html.ActionLink("- Admin", "Login", "Admin");
-                            }
-                        </p>          
+                    <p class="title">Navigation</p>
+                    <p class="links">
+                        @Html.ActionLink("- Home", "Index", "Home")<br />
+                        @Html.ActionLink("- Jazz@Patronaat", "Index", "Jazz")<br />
+                        @Html.ActionLink("- Talking Haarlem", "Index", "Talking")<br />
+                        @Html.ActionLink("- Dinner in Haarlem", "Index", "Dinner")<br />
+                        @Html.ActionLink("- Historic Haarlem", "Index", "Historic")<br />
+                        @Html.ActionLink("- Contact", "Contact", "Home")<br />
+                        @if (Session["loggedin_account"] != null)
+                        {
+                            @Html.ActionLink("- Admin", "Overview", "Admin");
+                        }
+                        @if (Session["loggedin_account"] == null)
+                        {
+                            @Html.ActionLink("- Admin", "Login", "Admin");
+                        }
+                    </p>
                 </div>
 
                 <div class="col-md-3">

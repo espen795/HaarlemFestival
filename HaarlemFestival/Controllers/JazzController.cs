@@ -63,8 +63,7 @@ namespace HaarlemFestival.Controllers
                 {
                     // Totaal aantal tickets berekenen (alternatief telt voor 4 plekken in een tour)
                     activity.TotalBoughtTickets = activity.Aantal;
-
-                    // Tour ophalen gebaseerd op het id
+           
                     activity.Activiteit = jazzRepository.GetId(activity.Activiteit.ActivityId);
 
                     // Prijs berekenen voor in het basket model
@@ -77,6 +76,8 @@ namespace HaarlemFestival.Controllers
             Session["current_order"] = orderedActivity;
 
             // Partial view continue or basket
+            Session["added_to_basket"] = true;
+
             return RedirectToAction("Reservation", "Jazz");
         }
     }

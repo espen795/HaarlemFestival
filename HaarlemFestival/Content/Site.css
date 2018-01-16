@@ -58,6 +58,18 @@ body {
     font-family: FontAwesome;
     margin-right: 16px;   
 }
+/* Basket alert */
+.basket-alert {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    width: 320px
+}
+
+.basket-alert h3{
+    margin-top: 0px;
+}
 
 
 /* #region Admin dropdown in navbar */
