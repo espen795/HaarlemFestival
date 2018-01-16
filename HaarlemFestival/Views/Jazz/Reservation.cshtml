@@ -48,6 +48,7 @@
             <li class="active"><a data-toggle="tab" href="#day1">On Thursday</a></li>
             <li><a data-toggle="tab" href="#day2">On Friday</a></li>
             <li><a data-toggle="tab" href="#day3">On Saturday</a></li>
+            <li><a data-toggle="tab" href="#passepartout">Passe Partout</a></li>
         </ul>
         <script type="text/javascript">
 
@@ -207,6 +208,42 @@
                     </div>
                 </div>
 
+                <!-- Day 4 -->
+                <div id="passepartout" class="tab-pane fade jazz-tickets">
+                    <div class="table table-hover table-responsive ticket-table">
+                        <table>
+                            <tr>
+                                <th>Type Passe Partout</th>
+                                <th>Amount</th>
+                                <th>Concert location</th>
+                                <th>Total price</th>
+                            </tr>
+
+                            @foreach (Jazz j in Model.Jazzs)
+                            {
+                                if (j.Day.DayId == 6)
+                                {
+                                    Model.Reservering.Add(new BesteldeActiviteit());
+
+                                    // De unieke id's aanmaken per rij
+                                    idtickets = String.Format("ticket{0}", i);
+                                    totalprice = String.Format("totalprice{0}", i);
+
+                                    // De tabel aanmaken
+                                    <tr>
+                                        <td class="hidden"><input name="Reservering[@i].Activiteit.ActivityId" value="@j.ActivityId" class="hidden" /></td>
+                                        <td>@j.artist.ArtistName</td>
+                                        <td class="ticketsInput" onchange="CalcPrice(@i, @j.Price);">@Html.TextBoxFor(m => Model.Reservering[i].Aantal, new { @type = "number", @min = 0, @id = idtickets })</td>
+                                        <td>@j.ConcertLocation</td>
+                                        <td><p id=@totalprice>€ -</p></td>
+                                    </tr>
+                                    i++;
+                                }
+                            }
+                        </table>
+
+                    </div>
+                </div>
 
 
                 <input type="submit" value="Order your tickets" class="btn btn-book btn-reservation" />

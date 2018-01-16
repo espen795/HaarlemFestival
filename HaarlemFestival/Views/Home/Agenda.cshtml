@@ -88,7 +88,7 @@
                                                         {
                                                             Jazz jazz = Model.Jazzs.Find(x => x.ActivityId == besteldeactiviteit.Activiteit.ActivityId);
 
-                                                            <div class="agenda-activity @besteldeactiviteit.Activiteit.EventType">@jazz.artist.ArtistName</div>
+                                                            <div class="agenda-activity @besteldeactiviteit.Activiteit.EventType" onclick="SwitchActivity(@jazz.ActivityId)">@jazz.artist.ArtistName</div>
                                                         }
 
                                                         else if (besteldeactiviteit.Activiteit.EventType == EventType.DinnerInHaarlem)
@@ -133,7 +133,28 @@
                                 Jazz jazz = Model.Jazzs.Find(x => x.ActivityId == besteldeactiviteit.Activiteit.ActivityId);
 
                                 <div class="activities" id="@besteldeactiviteit.Activiteit.ActivityId" hidden>
-
+                                    <div class="agenda-image-container">
+                                        <img src="/images/Jazz/artiesten/@jazz.artist.ArtistImage" />
+                                    </div>
+                                    <h4>@jazz.artist.ArtistName</h4>
+                                    <table>
+                                        <tr>
+                                            <td>Start-time:</td>
+                                            <td>@jazz.StartSession.TimeOfDay.ToString(@"hh\:mm")</td>
+                                        </tr>
+                                        <tr>
+                                            <td>End-time:</td>
+                                            <td>@jazz.EndSession.TimeOfDay.ToString(@"hh\:mm")</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Contact:</td>
+                                            <td>@jazz.Phonenumber</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Location:</td>
+                                            <td>@jazz.Address</td>
+                                        </tr>
+                                    </table>
                                 </div>
                             }
 
