@@ -1352,6 +1352,14 @@ input[type='text']:focus, input[type='password']:focus {
     background-color: #F0FFF0;
 }
 
+.overviewContent:nth-child(odd) {
+    margin-right: 5px;
+}
+
+.overviewContent:nth-child(even) {
+    margin-left: 5px;
+}
+
 #manageEventSelection {
     padding-top: 5px;
     padding-bottom: 5px;
