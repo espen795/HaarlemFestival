@@ -19,6 +19,7 @@
         $("#downloadComplete").on('hidden.bs.modal', function () {
             console.log("hidden Modal");
             $("#downloadComplete .modal-title").text("Download in progress...");
+            $("#downloadComplete .checkmark").hide();
             $("#downloadComplete .loadingCircle").show();
             $("#downloadLocation").text("Please be patient while the file is being created.");
             $("#closeDownloadButton").attr("disabled", true);
@@ -37,6 +38,7 @@
                 complete: function (data) {
                     $("#downloadComplete").show();
                     $("#downloadComplete .loadingCircle").hide();
+                    $("#downloadComplete .checkmark").show();
                     $("#downloadComplete .modal-title").text("Download Complete!");
                     $("#downloadLocation").html("The File has been saved to: <strong>" + data.responseJSON.location + "</strong>");
                     $("#closeDownloadButton").removeAttr("disabled");
@@ -75,6 +77,13 @@
                         <div class="sk-circle12 sk-child"></div>
                     </div>
                 </div>
+                <div class="col-md-12 middle">
+                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                    </svg>
+                </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" id="closeDownloadButton" class="btn btn-primary" disabled data-dismiss="modal">Close</button>
