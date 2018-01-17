@@ -55,7 +55,11 @@ namespace HaarlemFestival.Controllers
 
             int Id = (int)id;
 
-            DinnerView dinnerView = FillDinnerView(Id);
+            DinnerView dinnerView;
+            if (TempData["DinnerView"] != null)
+                dinnerView = TempData["DinnerView"] as DinnerView;
+            else
+                dinnerView = FillDinnerView(Id);
 
             if (dinnerView.Dinners.Count == 0)
             {
@@ -82,7 +86,9 @@ namespace HaarlemFestival.Controllers
                 view.BesteldeActiviteit.Aantal = dinnerView.BesteldeActiviteit.Aantal;
                 view.BesteldeActiviteit.AantalAlternatief = dinnerView.BesteldeActiviteit.AantalAlternatief;
                 view.BesteldeActiviteit.Opmerking = dinnerView.BesteldeActiviteit.Opmerking;
-                return View("~/Views/Dinner/Reservation/" + id, view);
+
+                TempData["DinnerView"] = view;
+                return RedirectToAction("Reservation", "Dinner", new { id = id });
             }
 
             List<BesteldeActiviteit> Bestelling = new List<BesteldeActiviteit>();
