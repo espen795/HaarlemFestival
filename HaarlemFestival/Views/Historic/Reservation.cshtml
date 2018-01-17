@@ -6,6 +6,23 @@
     ViewBag.Title = "Historic Haarlem - Reservation";
 }
 
+@{
+    if (Session["added_to_basket"] != null)
+    {
+        if ((bool)Session["added_to_basket"])
+        {
+            <div class="basket-alert">
+                <div class="alert alert-success alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <h3>Added!</h3> The item has been added to your basket.
+                </div>
+            </div>
+        }
+
+        Session["added_to_basket"] = false;
+    }
+}
+
 <script type="text/javascript">
     function CalcPrice(nummer) {
         // Krijg de waardes van de input boxes
@@ -257,7 +274,7 @@
             </div>
 
             <input type="submit" value="Book" class="btn btn-book btn-reservation" />
-                        }
+        }
 
     </div>
 </div>
