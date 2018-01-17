@@ -30,6 +30,10 @@ namespace HaarlemFestival
                       "~/Content/site.css",
                       "~/Content/font-awesome.css",
                       "~/Content/font-awesome.min.css"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/ChartJS").Include(
+                      "~/Scripts/Chart.min.js",
+                      "~/Scripts/ChartFunctions.js"));
         }
     }
 }
