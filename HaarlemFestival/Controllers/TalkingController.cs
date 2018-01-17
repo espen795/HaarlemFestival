@@ -60,15 +60,18 @@ namespace HaarlemFestival.Controllers
 
             if (ModelState.IsValid)
             {
-                InterviewQuestion question = new InterviewQuestion();
-                question.Content = viewModel.Question.Content;
-                question.Receiver = viewModel.Question.Receiver;
-                // Sla vraag op in sessie
-                Session["interview_question_list"] = question;
+                List<InterviewQuestion> questions = new List<InterviewQuestion>();
+
+                // Sla lijst van vragen op in sessie
+                foreach(Talking talk in viewModel.Talkings)
+                {
+                    questions.Add(talk.Question);
+                }
+                Session["interview_question_list"] = questions;
                 // Dit moet pas na de bestelling
                 //talkingRepository.SaveQuestionToDB(question);
             }
-
+            // Partial view continue or basket
             return RedirectToAction("Index");
         }
 

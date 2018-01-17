@@ -77,21 +77,21 @@
              </section> <!-- Question info-->
              
              <section class="talk-questions">
-             @foreach (Talking talk in Model.Talkings)
+             @for (int i = 0; i < Model.Talkings.Count; i++)
              {
                 <section class="talk-question" id="question1">
-                     <p>@talk.Talk.Naam</p>
-                     <section class="talk-question-receiver">
-                         <p>Question For: </p>
-                         @Html.DropDownListFor(
-                         m => m.Question.Receiver, new SelectList(new List<Object> { talk.Talk.Person1, talk.Talk.Person2 }),
-                         "[Select a person..]"
-                         )
-                      </section> <!-- Receiver -->
-                      
-                      @Html.TextAreaFor(m => m.Question.Content, new { @class = "talk-questionbox", placeholder = "You can type your question here." });
+                    <p>@Model.Talkings[i].Talk.Naam</p>
+                    <section class="talk-question-receiver">
+                        <p>Question For: </p>
 
-                 </section> <!-- Talk question -->
+                        @Html.DropDownListFor(
+                             m => m.Talkings[i].Question, new SelectList(new List<Object> { Model.Talkings[i].Talk.Person1, Model.Talkings[i].Talk.Person2 }),
+                             "[Select a person..]"
+                             )
+                    </section> <!-- Receiver -->
+
+                    @Html.TextAreaFor(m => m.Talkings[i].Question, new { @class = "talk-questionbox", placeholder = "You can type your question here." });
+                </section> <!-- Talk question -->
              }
             </section> <!-- Questions section -->
             <section>
