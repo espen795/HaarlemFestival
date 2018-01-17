@@ -1,10 +1,9 @@
-﻿@{
+﻿@using HaarlemFestival.Models;
+@{
     ViewBag.Title = "AnswerContactmessage";
 }
+@model AnswerContactViewModel
 
 <div class="container">
-    <!-- Dropdownlist voor vragen van bepaalde categorieën -->
-    <!-- Vraag neerzetten -->
-    <!-- Textvak om te antwoorden -->
-    <!-- Knoppen om naar de vorige en volgende vraag te gaan-->
+    @Html.EnumDropDownListFor(v => v.Category, "Select a Category.")
 </div>

@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = "Contact";
 }
-
+@model ContactMessage
 <div class="event-banner"></div>
 
 <div class="event container">
@@ -50,32 +50,25 @@
                 {
                     <div class="contact-form-name">
                         <label for="name">Name: *</label>
-                        @Html.TextBox("name")
+                        @Html.TextBoxFor(c => c.Name)
                     </div>
                     <div class="contact-form-email">
                         <label for="email">E-mail: *</label>
-                        @Html.TextBox("email")
+                        @Html.TextBoxFor(c => c.Email)
                     </div>
                     <div class="contact-form-subject">
                         <label for="subject">Subject:</label>
-                        @Html.TextBox("subject")
+                        @Html.TextBoxFor(c => c.Subject)
                     </div>
 
                     <div class="contact-form-regarding">
                         <label for="regarding">Regarding: *</label>
-                        <select name="regarding" required>
-                            <option value="">[Select an option]</option>
-                            <option value="jazz">Jazz@Patronaat</option>
-                            <option value="dinner">Dinner in Haarlem</option>
-                            <option value="talking">Talking Haarlem</option>
-                            <option value="historic">Historic Haarlem</option>
-                            <option value="other">Others</option>
-                        </select>
+                        @Html.EnumDropDownListFor(c => c.Regarding, "Select a Category.")
                     </div>
 
                     <div class="contact-form-question">
                         <label for="question">Question: *</label>
-                        @Html.TextArea("question", new { @required = "required" })
+                        @Html.TextAreaFor(c => c.Question)
                     </div>
 
                     <button class="contact-form-button" type="submit"> Send</button>

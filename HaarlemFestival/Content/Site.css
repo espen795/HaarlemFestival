@@ -71,6 +71,11 @@ body {
     margin-top: 0px;
 }
 
+hr.divide {
+    height: 10px;
+    border: 0;
+    box-shadow: 0 10px 10px -10px #8c8b8b inset;
+}
 
 /* #region Admin dropdown in navbar */
 .navbar li.adminDropdown a::before { /* Ervoor zorgen dat de basket content niet bij de admin dropdown komt*/

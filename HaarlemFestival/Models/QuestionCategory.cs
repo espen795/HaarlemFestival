@@ -1,0 +1,12 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace HaarlemFestival.Models
+{
+    public enum QuestionCategory
+    {
+        JazzPatronaat, DinnerInHaarlem, TalkingHaarlem, HistoricHaarlem, Other
+    }
+}
