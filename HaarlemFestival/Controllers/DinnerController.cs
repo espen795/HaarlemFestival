@@ -88,9 +88,10 @@ namespace HaarlemFestival.Controllers
             {
                 Session["sold_out"] = true;
                 DinnerView view = FillDinnerView(id);
-                view.BesteldeActiviteit.Aantal = dinnerView.BesteldeActiviteit.Aantal;
-                view.BesteldeActiviteit.AantalAlternatief = dinnerView.BesteldeActiviteit.AantalAlternatief;
-                view.BesteldeActiviteit.Opmerking = dinnerView.BesteldeActiviteit.Opmerking;
+                view.BesteldeActiviteit = new BesteldeActiviteit();
+                view.BesteldeActiviteit.Aantal = besteldeActiviteit.Aantal;
+                view.BesteldeActiviteit.AantalAlternatief = besteldeActiviteit.AantalAlternatief;
+                view.BesteldeActiviteit.Opmerking = besteldeActiviteit.Opmerking;
                 view.BesteldeActiviteit.Activiteit = besteldeActiviteit.Activiteit;
                 TempData["DinnerView"] = view;
                 return RedirectToAction("Reservation", "Dinner", new { id });
