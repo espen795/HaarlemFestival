@@ -31,48 +31,13 @@ namespace HaarlemFestival.Controllers
             return View(talk);
         }
 
-        public ActionResult Reservation(int? id)
+        public ActionResult Reservation()
         {
-            if (id == null)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
-            List<Talking> allTalks = talkingRepository.GetAllTalks();
-
-            ViewBag.OrderId = id;
-
             TalkViewModel allTalksAndQuestion = new TalkViewModel();
-
-            allTalksAndQuestion.Talkings = allTalks;
+            allTalksAndQuestion.Talkings = talkingRepository.GetAllTalks();
+            allTalksAndQuestion.BesteldeActiviteiten = new List<BesteldeActiviteit>();
 
             return View(allTalksAndQuestion);
-        }
-
-        [HttpPost]
-        public ActionResult Reservation(TalkViewModel viewModel)
-        {
-            List<BesteldeActiviteit> orderedActivity = new List<BesteldeActiviteit>();
-
-            // Session existing?
-            if (Session["current_order"] != null)
-            {
-                orderedActivity.AddRange((List<BesteldeActiviteit>)Session["current_order"]);
-            }
-
-            if (ModelState.IsValid)
-            {
-                List<InterviewQuestion> questions = new List<InterviewQuestion>();
-
-                // Sla lijst van vragen op in sessie
-                foreach(Talking talk in viewModel.Talkings)
-                {
-                    questions.Add(talk.Question);
-                }
-                Session["interview_question_list"] = questions;
-                // Dit moet pas na de bestelling
-                //talkingRepository.SaveQuestionToDB(question);
-            }
-            // Partial view continue or basket
-            return RedirectToAction("Index");
         }
 
         private bool CheckInterviewQuestion(InterviewQuestion question)
@@ -82,6 +47,42 @@ namespace HaarlemFestival.Controllers
             else if (question.Receiver == null)
                 return false;
             return true;
+        }
+
+
+        [HttpPost]
+        public ActionResult Book(TalkViewModel activiteit)
+        {
+            List<BesteldeActiviteit> orderedActivity = new List<BesteldeActiviteit>();
+
+            // Session existing?
+            if (Session["current_order"] != null)
+            {
+                orderedActivity.AddRange((List<BesteldeActiviteit>)Session["current_order"]);
+            }
+
+            int i = 0;
+            // In the session
+            foreach (BesteldeActiviteit activity in activiteit.BesteldeActiviteiten)
+            {
+                if (activity.Aantal != 0 || activity.AantalAlternatief != 0)
+                {
+                    activity.TotalBoughtTickets = activity.Aantal;
+
+                    // talk ophalen gebaseerd op het id
+                    activity.Activiteit = talkingRepository.GetTalkById(activity.Activiteit.ActivityId);
+                    
+                    orderedActivity.Add(activity);
+                }
+            }
+
+            Session["current_order"] = orderedActivity;
+
+            // Partial view continue or basket
+            Session["added_to_basket"] = true;
+
+            // Partial view continue or basket
+            return RedirectToAction("Reservation", "Historic");
         }
     }
 }
