@@ -243,6 +243,7 @@
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\AgendaView.cs" />
+    <Compile Include="Models\AnswerContactViewModel.cs" />
     <Compile Include="Models\BasketModel.cs" />
     <Compile Include="Models\BesteldeActiviteit.cs" />
     <Compile Include="Models\Artist.cs" />

@@ -75,7 +75,10 @@ namespace HaarlemFestival.Controllers
         [Authorize]
         public ActionResult AnswerContactmessage()
         {
-            //List<ContactMessage> messages = adminrepository.GetContactMessages();
+            AnswerContactViewModel viewModel = new AnswerContactViewModel()
+            {
+                Messages = adminRepository.GetContactMessages()
+            };
 
             return View(/*messages*/);
         }

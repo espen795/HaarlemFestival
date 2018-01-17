@@ -231,6 +231,11 @@ namespace HaarlemFestival.Repository.Admin
             return activities.Sum(a => a.Price);
         }
 
+        public List<ContactMessage> GetContactMessages()
+        {
+            return null;
+        }
+
         public List<InterviewQuestion> GetInterviewQuestions()
         {
             return db.InterviewQuestions.ToList();
