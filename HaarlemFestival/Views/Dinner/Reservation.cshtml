@@ -12,7 +12,8 @@
         $('.dinnertimeselect').hide();
         $('#standard').show();
         document.getElementById("standard").selected = true;
-        $(document.getElementsByClassName(date)).show();
+        $(
+            document.getElementsByClassName(date)).show();
     }
 </script>
 
@@ -34,12 +35,6 @@
     }
 }
 
-            <div class="soldout-alert">
-                <div class="alert alert-danger alert-dismissable">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                    <h3>Sold-out!</h3> Unfortunately the time you selected (@Model.BesteldeActiviteit.Activiteit.Day.Naam at @Model.BesteldeActiviteit.Activiteit.StartSession.ToString("HH:mm")
-                </div>
-            </div>
 <div class="event container">
     <div class="row">
         <!-- Section 1 -->
@@ -49,16 +44,35 @@
             </div>
             <h1 class="restaurant-reservation-title">@Model.Dinners[0].Restaurant.Naam</h1>
             <p class="restaurant-reservation-intro">Order your tickets for @Model.Dinners[0].Restaurant.Naam below. The price for people over 12 years old is €@Model.Dinners[0].Price.ToString() and for childeren under 12 years it is €@Model.Dinners[0].AlternativePrice.ToString()</p>
+
+            @{
+                if (Session["sold_out"] != null)
+                {
+                    if ((bool)Session["sold_out"])
+                    {
+                            <div class="alert alert-danger alert-dismissable soldout-alert">
+                                <a href="#" class="close" id="soldout-x" data-dismiss="alert" aria-label="close"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                <h3>Sold-out!</h3>
+                                <p>
+                                    Unfortunately the time you selected (@Model.BesteldeActiviteit.Activiteit.Day.Naam at @Model.BesteldeActiviteit.Activiteit.StartSession.ToString("HH:mm")-@Model.BesteldeActiviteit.Activiteit.EndSession.ToString("HH:mm")) does not have enough free seats.
+                                </p>
+                                <a href="#" class="close" id="soldout-button" data-dismiss="alert" aria-label="close">Close</a>
+                            </div>
+                    }
+                    Model.BesteldeActiviteit.Activiteit = new Dinner();
+                    Session["sold_out"] = false;
+                }
+            }
             @using (Html.BeginForm("AddReservation", "Dinner", new { id = Model.Dinners[0].Restaurant.RestaurantId }, FormMethod.Post, new { @class = "restaurant-reservation-form" }))
             {
                 <div class="restaurant-reservation-tickets">
                     <label for="BesteldeActiviteit_Aantal">Tickets (&gt;12 Y/O)</label>
-                    @Html.TextBoxFor(m => Model.BesteldeActiviteit.Aantal, new { @type = "number", @min = 0})
+                    @Html.TextBoxFor(m => Model.BesteldeActiviteit.Aantal, new { @type = "number", @min = 0 })
                 </div>
 
                 <div class="restaurant-reservation-alternativetickets">
                     <label for="BesteldeActiviteit_AantalAlternatief">Tickets (&lt;12 Y/O)</label>
-                    @Html.TextBoxFor(m => Model.BesteldeActiviteit.AantalAlternatief, new { @type = "number", @min = 0})
+                    @Html.TextBoxFor(m => Model.BesteldeActiviteit.AantalAlternatief, new { @type = "number", @min = 0 })
                 </div>
 
                 <div class="restaurant-reservation-day">

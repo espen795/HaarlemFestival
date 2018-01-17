@@ -69,26 +69,22 @@
                                 {
                                     Jazz jazz = Model.Jazzs.Find(x => x.ActivityId == ordered.Activiteit.ActivityId);
                                     <td class="basket-table-name">@jazz.artist.ArtistName</td>
-                                    break;
                                 }
                                 else if (ordered.Activiteit.EventType == EventType.DinnerInHaarlem)
                                 {
                                     Dinner dinner = Model.Dinners.Find(x => x.ActivityId == ordered.Activiteit.ActivityId);
                                     <td class="basket-table-name">@dinner.Restaurant.Naam</td>
-                                    break;
                                 }
                                 else if (ordered.Activiteit.EventType == EventType.TalkingHaarlem)
                                 {
                                     Talking talking = Model.Talks.Find(x => x.ActivityId == ordered.Activiteit.ActivityId);
                                     <td class="basket-table-name">@talking.Talk.Naam</td>
-                                    break;
                                 }
                                 else if (ordered.Activiteit.EventType == EventType.HistoricHaarlem)
                                 {
                                     Historic historic = Model.Historics.Find(x => x.ActivityId == ordered.Activiteit.ActivityId);
                                     // Moet nog checken en weergeven of het een groepsticket is
                                     <td class="basket-table-name">Historic Tour in @historic.Guide.LanguageName by @historic.Guide.GuideName</td>
-                                    break;
                                 }
 
                                 <td class="basket-table-time">@ordered.Activiteit.StartSession.ToString("ddd dd/MM/yyyy HH:mm") - @ordered.Activiteit.EndSession.ToString("ddd dd/MM/yyyy HH:mm")</td>
