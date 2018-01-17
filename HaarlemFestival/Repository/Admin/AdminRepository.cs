@@ -231,5 +231,9 @@ namespace HaarlemFestival.Repository.Admin
             return activities.Sum(a => a.Price);
         }
 
+        public List<InterviewQuestion> GetInterviewQuestions()
+        {
+            return db.InterviewQuestions.ToList();
+        }
     }
 }

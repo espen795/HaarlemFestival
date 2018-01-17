@@ -9,6 +9,7 @@ namespace HaarlemFestival.Models
     {
         public int TalkId { get; set; }
         public virtual Talk Talk { get; set; }
+        public InterviewQuestion Question;
 
         public Talking() 
         {

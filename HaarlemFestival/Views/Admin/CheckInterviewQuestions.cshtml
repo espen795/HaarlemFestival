@@ -1,0 +1,83 @@
+﻿@using HaarlemFestival.Models;
+@{
+    ViewBag.Title = "CheckInterviewQuestions";
+}
+
+@model List<InterviewQuestion>
+
+<h2>CheckInterviewQuestions</h2>
+
+
+<div class="container">
+    <script type="text/javascript">
+            // Data uit de tabel filteren.
+            function FilterData() {
+                var filters = [];
+
+
+                // Voor elke filter
+                $('.filters').each(function () {
+
+                    if ($(this).val() != "") // Als de filter is geselecteerd.
+                    {
+                        filters.push($(this).val()) // Filter toevoegen.
+                    }
+                })
+
+
+                // TEST: Alle Filters in de console neerzetten.
+                console.log(filters);
+
+                // Alle rows van de table vinden.
+                var tr = $(".eventData").find("tr");
+                tr.hide(); // Alle rows van de table verbergen.
+
+                // Als er geen filter is geselecteerd.
+                if (filters.length == 0) {
+                    tr.show(); // Alle rijen laten zien.
+                    return; // Uit de functie gaan.
+                }
+
+                // Elke rij filteren.
+                tr.filter(function () {
+                    var $t = $(this);
+                    for (var index = 0; index < filters.length; ++index) {
+
+                        if ($t.is(":not(:contains('" + filters[index] + "'))")) // Als de rij niet voldoet aan de filters
+                        {
+                            return false; // Rij verbergen.
+                        }
+                    }
+
+                    return true; // Rij laten zien.
+                })
+                    .show();
+            }
+    </script>
+
+    <section id="topFilterBar" class="col-md-12">
+        <div id="selectEvent" class="col-md-12 col-sm-12">
+            <b>Select a participant</b>
+            <br />
+            @Html.DropDownList("Receivers", new SelectList(Model.Select(q => new { Value = q.Receiver, Text = q.Receiver }), "Value", "Text"), "Select a Participant.", new { @id = "participantFilter", @class = "filters", @onchange = "FilterData()" })
+        </div>
+    </section>
+
+    <table id="questionTable" class="eventTable table table-striped table-responsive">
+        <thead>
+            <tr>
+                <th>Participant</th>
+                <th>Question</th>
+            </tr>
+        </thead>
+        <tbody class="eventData">
+            @foreach (InterviewQuestion question in Model)
+            {
+                <tr>
+                    <td>@question.Receiver</td>
+                    <td>@question.Content</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
