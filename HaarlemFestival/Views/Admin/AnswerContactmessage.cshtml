@@ -7,10 +7,33 @@
 <div class="container">
     @Html.EnumDropDownListFor(v => v.Category, "Select a Category.")
 
-    @foreach(ContactMessage message in Model.Messages)
+    @foreach (ContactMessage message in Model.Messages)
     {
-        <div class="category-@((int)message.Regarding)">
-            <div class=""
+        <div class="category-@((int)message.Regarding) manageEvent formStyle">
+            <div class="col-md-6">
+                @Html.Label("Name")
+                @Html.TextBox("Name", new { @class = "" })
+            </div>
+            <div class="col-md-6">
+                @Html.Label("Email")
+                @Html.TextBox("Email", new { @class = "" })
+            </div>
+            <div class="col-md-12">
+                @Html.Label("Subject")
+                @Html.TextBox("Subject", new { @class = "" })
+            </div>
+            <div class="col-md-12">
+                @Html.Label("Question")
+                @Html.TextArea("Question", new { @class = "" })
+            </div>
+        </div>
+    }
+
+    @Html.BeginForm("AnswerMessage", "Admin")
+    {
+        <div class="answer-question col-md-12">
+            @Html.TextArea("Answer", "Admin", FormMethod.Post)
+            <input type="submit" class="btn btn-black" />
         </div>
     }
 </div>
