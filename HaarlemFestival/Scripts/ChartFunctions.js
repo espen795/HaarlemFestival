@@ -1,10 +1,8 @@
-﻿
-
-function CreateIncomeChart(id, jazzIncome, dinnerIncome, talkingIncome, historicIncome)
+﻿function CreateIncomeChart(id, jazzIncome, dinnerIncome, talkingIncome, historicIncome)
 {
-    var ctx = document.getElementById(id).getContext("2d");
+    var chart = document.getElementById(id).getContext("2d");
 
-    var myDoughnutChart = new Chart(ctx, {
+    var myDoughnutChart = new Chart(chart, {
         type: 'doughnut',
         data: {
             labels: ["Jazz@Patronaat", "Dinner in Haarlem", "Talking Haarlem", "Historic Haarlem"],
@@ -30,9 +28,9 @@ function CreateIncomeChart(id, jazzIncome, dinnerIncome, talkingIncome, historic
 }
 
 function CreateTicketAvailabilityChart(id, availableTickets, soldTickets) {
-    var ctx = document.getElementById(id).getContext("2d");
+    var chart = document.getElementById(id).getContext("2d");
 
-    var myDoughnutChart = new Chart(ctx, {
+    var myDoughnutChart = new Chart(chart, {
         type: 'doughnut',
         data: {
             labels: ["Available Tickets", "Sold Tickets"],
@@ -40,13 +38,60 @@ function CreateTicketAvailabilityChart(id, availableTickets, soldTickets) {
                 label: 'Available tickets (spread over all events)',
                 data: [availableTickets, soldTickets],
                 backgroundColor: [
+                    'rgba(178, 210, 153, 0.2)',
                     'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)'
                 ],
                 borderColor: [
-                    'rgba(255,99,132,1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)'
+                    'rgba(53, 159, 43, 1)',
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderWidth: 1
+            }]
+        }
+    });
+}
+
+function CreateIncomePerDayChart(id, data) {
+    var chart = document.getElementById(id).getContext("2d");
+
+    var myDoughnutChart = new Chart(chart, {
+        type: 'doughnut',
+        data: {
+            labels: ["Available Tickets", "Sold Tickets"],
+            datasets: [{
+                label: 'Available tickets (spread over all events)',
+                data: [availableTickets, soldTickets],
+                backgroundColor: [
+                    'rgba(178, 210, 153, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(53, 159, 43, 1)',
+                    'rgba(255, 99, 132, 1)',
+                ],
+                borderWidth: 1
+            }]
+        }
+    });
+}
+
+function CreateAvailabilityPerDayChart(id, data) {
+    var chart = document.getElementById(id).getContext("2d");
+
+    var myDoughnutChart = new Chart(chart, {
+        type: 'doughnut',
+        data: {
+            labels: ["Available Tickets", "Sold Tickets"],
+            datasets: [{
+                label: 'Available tickets (spread over all events)',
+                data: [availableTickets, soldTickets],
+                backgroundColor: [
+                    'rgba(178, 210, 153, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(53, 159, 43, 1)',
+                    'rgba(255, 99, 132, 1)',
                 ],
                 borderWidth: 1
             }]
