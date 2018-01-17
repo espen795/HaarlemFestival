@@ -246,6 +246,7 @@
     <Compile Include="Models\BasketModel.cs" />
     <Compile Include="Models\BesteldeActiviteit.cs" />
     <Compile Include="Models\Artist.cs" />
+    <Compile Include="Models\ContactMessage.cs" />
     <Compile Include="Models\Cuisine.cs" />
     <Compile Include="Models\DateModel.cs" />
     <Compile Include="Models\Day.cs" />
@@ -259,6 +260,7 @@
     <Compile Include="Models\JazzView.cs" />
     <Compile Include="Models\JazzViewModels.cs" />
     <Compile Include="Models\Locations.cs" />
+    <Compile Include="Models\QuestionCategory.cs" />
     <Compile Include="Models\Talk.cs" />
     <Compile Include="Models\Talking.cs" />
     <Compile Include="Models\Jazz.cs" />

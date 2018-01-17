@@ -41,6 +41,7 @@ namespace HaarlemFestival.Controllers
         [HttpPost]
         public ActionResult SendContactForm()
         {
+            // TODO: Vraag aan de DB toevoegen.
             return PartialView("_ContactSent");
         }
 
