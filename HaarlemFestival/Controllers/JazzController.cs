@@ -75,7 +75,6 @@ namespace HaarlemFestival.Controllers
 
             Session["current_order"] = orderedActivity;
 
-            // Partial view continue or basket
             Session["added_to_basket"] = true;
 
             return RedirectToAction("Reservation", "Jazz");

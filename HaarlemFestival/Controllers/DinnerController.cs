@@ -47,19 +47,65 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Reservation(int? id)
         {
-            if (id == null)
+
+            if (id == null )
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            DinnerView dinnerView = new DinnerView();
+            int Id = (int)id;
 
-            dinnerView.Dinners = dinnerRepository.DinnersPerRestaurant((int)id);
+            DinnerView dinnerView = FillDinnerView(Id);
 
             if (dinnerView.Dinners.Count == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            return View(dinnerView);
+        }
+
+        [HttpPost]
+        public ActionResult AddReservation(DinnerView dinnerView, FormCollection collection, int id)
+        {
+            BesteldeActiviteit besteldeActiviteit = dinnerView.BesteldeActiviteit;
+            besteldeActiviteit.Activiteit = dinnerRepository.GetDinnerById(Convert.ToInt32(collection["Activity"]));
+
+            besteldeActiviteit.Price = besteldeActiviteit.Aantal * (float)besteldeActiviteit.Activiteit.Price + besteldeActiviteit.AantalAlternatief * (float)besteldeActiviteit.Activiteit.AlternativePrice;
+
+            besteldeActiviteit.TotalBoughtTickets = besteldeActiviteit.Aantal + besteldeActiviteit.AantalAlternatief;
+
+            if(besteldeActiviteit.TotalBoughtTickets > (besteldeActiviteit.Activiteit.TotalTickets- besteldeActiviteit.Activiteit.BoughtTickets))
+            {
+                Session["sold_out"] = true;
+                DinnerView view = FillDinnerView(id);
+                view.BesteldeActiviteit.Aantal = dinnerView.BesteldeActiviteit.Aantal;
+                view.BesteldeActiviteit.AantalAlternatief = dinnerView.BesteldeActiviteit.AantalAlternatief;
+                view.BesteldeActiviteit.Opmerking = dinnerView.BesteldeActiviteit.Opmerking;
+                return View("~/Views/Dinner/Reservation/" + id, view);
+            }
+
+            List<BesteldeActiviteit> Bestelling = new List<BesteldeActiviteit>();
+
+            if (Session["current_order"] != null)
+            {
+                Bestelling.AddRange((List<BesteldeActiviteit>)Session["current_order"]);
+            }
+
+            Bestelling.Add(besteldeActiviteit);
+
+            Session["added_to_basket"] = true;
+
+            Session["current_order"] = Bestelling;
+            return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
+        }
+
+        private DinnerView FillDinnerView(int id)
+        {
+            DinnerView dinnerView = new DinnerView
+            {
+                Dinners = dinnerRepository.DinnersPerRestaurant(id)
+            };
 
             List<Day> days = new List<Day>();
             for (int i = 0; i < dinnerView.Dinners.Count; i++)
@@ -78,35 +124,8 @@ namespace HaarlemFestival.Controllers
             }
             dinnerView.BesteldeActiviteit = new BesteldeActiviteit();
             dinnerView.Days = days;
-            return View(dinnerView);
-        }
 
-        [HttpPost]
-        public ActionResult AddReservation(DinnerView dinnerView, FormCollection collection)
-        {
-            BesteldeActiviteit besteldeActiviteit = dinnerView.BesteldeActiviteit;
-            besteldeActiviteit.Activiteit = dinnerRepository.GetDinnerById(Convert.ToInt32(collection["Activity"]));
-
-            besteldeActiviteit.Price = besteldeActiviteit.Aantal * (float)besteldeActiviteit.Activiteit.Price + besteldeActiviteit.AantalAlternatief * (float)besteldeActiviteit.Activiteit.AlternativePrice;
-
-            besteldeActiviteit.TotalBoughtTickets = besteldeActiviteit.Aantal + besteldeActiviteit.AantalAlternatief;
-
-            if(besteldeActiviteit.TotalBoughtTickets > (besteldeActiviteit.Activiteit.TotalTickets- besteldeActiviteit.Activiteit.BoughtTickets))
-            {
-                //geef melding uitverkocht
-            }
-
-            List<BesteldeActiviteit> Bestelling = new List<BesteldeActiviteit>();
-
-            if (Session["current_order"] != null)
-            {
-                Bestelling.AddRange((List<BesteldeActiviteit>)Session["current_order"]);
-            }
-
-            Bestelling.Add(besteldeActiviteit);
-
-            Session["current_order"] = Bestelling;
-            return RedirectToAction("Index");
+            return dinnerView;
         }
     }
 }

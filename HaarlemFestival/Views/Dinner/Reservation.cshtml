@@ -17,7 +17,22 @@
 </script>
 
 <div class="event-banner dinner"></div>
+@{
+    if (Session["added_to_basket"] != null)
+    {
+        if ((bool)Session["added_to_basket"])
+        {
+            <div class="basket-alert">
+                <div class="alert alert-success alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <h3>Added!</h3> The item has been added to your basket.
+                </div>
+            </div>
+        }
 
+        Session["added_to_basket"] = false;
+    }
+}
 <div class="event container">
     <div class="row">
         <!-- Section 1 -->
@@ -27,21 +42,21 @@
             </div>
             <h1 class="restaurant-reservation-title">@Model.Dinners[0].Restaurant.Naam</h1>
             <p class="restaurant-reservation-intro">Order your tickets for @Model.Dinners[0].Restaurant.Naam below. The price for people over 12 years old is €@Model.Dinners[0].Price.ToString() and for childeren under 12 years it is €@Model.Dinners[0].AlternativePrice.ToString()</p>
-            @using (Html.BeginForm("AddReservation", "Dinner", FormMethod.Post, new { @class = "restaurant-reservation-form" }))
+            @using (Html.BeginForm("AddReservation", "Dinner", new { id = Model.Dinners[0].Restaurant.RestaurantId }, FormMethod.Post, new { @class = "restaurant-reservation-form" }))
             {
                 <div class="restaurant-reservation-tickets">
                     <label for="BesteldeActiviteit_Aantal">Tickets (&gt;12 Y/O)</label>
-                    @Html.TextBoxFor(m => Model.BesteldeActiviteit.Aantal, new { @type = "number", @min = 0, @value = "0" })
+                    @Html.TextBoxFor(m => Model.BesteldeActiviteit.Aantal, new { @type = "number", @min = 0})
                 </div>
 
                 <div class="restaurant-reservation-alternativetickets">
                     <label for="BesteldeActiviteit_AantalAlternatief">Tickets (&lt;12 Y/O)</label>
-                    @Html.TextBoxFor(m => Model.BesteldeActiviteit.AantalAlternatief, new { @type = "number", @min = 0, @value = "0" })
+                    @Html.TextBoxFor(m => Model.BesteldeActiviteit.AantalAlternatief, new { @type = "number", @min = 0})
                 </div>
 
                 <div class="restaurant-reservation-day">
                     <label for="dinnerdatefilter">Select your day</label>
-                    @Html.DropDownList("Date", new SelectList(Model.Days, "", "Naam"), "Select a date", new { @id = "dinnerdatefilter", @onchange = "FilterData()", @required = ""})
+                    @Html.DropDownList("Date", new SelectList(Model.Days, "", "Naam"), "Select a date", new { @id = "dinnerdatefilter", @onchange = "FilterData()", @required = "" })
                 </div>
 
                 <div class="restaurant-reservation-time">
