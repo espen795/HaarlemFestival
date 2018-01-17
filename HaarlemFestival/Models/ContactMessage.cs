@@ -22,5 +22,9 @@ namespace HaarlemFestival.Models
 
         [Required(ErrorMessage = "Please enter a question.")]
         public string Question { get; set; }
+
+        public bool Answered { get; set; }
+
+        public string Answer { get; set; }
     }
 }
