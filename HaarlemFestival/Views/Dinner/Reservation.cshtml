@@ -33,6 +33,13 @@
         Session["added_to_basket"] = false;
     }
 }
+
+            <div class="soldout-alert">
+                <div class="alert alert-danger alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <h3>Sold-out!</h3> Unfortunately the time you selected (@Model.BesteldeActiviteit.Activiteit.Day.Naam at @Model.BesteldeActiviteit.Activiteit.StartSession.ToString("HH:mm")
+                </div>
+            </div>
 <div class="event container">
     <div class="row">
         <!-- Section 1 -->
@@ -66,7 +73,7 @@
                         <option class="dinnertimeselect" id="standard" value="">Select a time</option>
                         @foreach (Dinner dinner in Model.Dinners)
                         {
-                            <option class="@dinner.Day.Naam dinnertimeselect" value="@dinner.ActivityId" hidden>@dinner.TimeString</option>
+                            <option class="@dinner.Day.Naam dinnertimeselect" value="@dinner.ActivityId" hidden>@dinner.StartSession.ToString("HH:mm")</option>
                         }
                     </select>
                 </div>

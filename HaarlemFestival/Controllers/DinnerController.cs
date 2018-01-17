@@ -48,7 +48,7 @@ namespace HaarlemFestival.Controllers
         public ActionResult Reservation(int? id)
         {
 
-            if (id == null )
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -57,11 +57,14 @@ namespace HaarlemFestival.Controllers
 
             DinnerView dinnerView;
 
-            // Als de tijdelijk aangemaakte DinnerView niet leeg is.
+
             if (TempData["DinnerView"] != null)
-                dinnerView = TempData["DinnerView"] as DinnerView; // Vul DinnerView met de tijdelijke data.
+                dinnerView = (DinnerView)TempData["DinnerView"];
             else
-                dinnerView = FillDinnerView(Id); // Anders haal je een nieuwe DinnerView op.
+            {
+                dinnerView = FillDinnerView(Id);
+                dinnerView.BesteldeActiviteit = new BesteldeActiviteit();
+            }
 
             if (dinnerView.Dinners.Count == 0)
             {
@@ -81,15 +84,15 @@ namespace HaarlemFestival.Controllers
 
             besteldeActiviteit.TotalBoughtTickets = besteldeActiviteit.Aantal + besteldeActiviteit.AantalAlternatief;
 
-            if(besteldeActiviteit.TotalBoughtTickets > (besteldeActiviteit.Activiteit.TotalTickets- besteldeActiviteit.Activiteit.BoughtTickets))
+            if (besteldeActiviteit.TotalBoughtTickets > (besteldeActiviteit.Activiteit.TotalTickets - besteldeActiviteit.Activiteit.BoughtTickets))
             {
                 Session["sold_out"] = true;
                 DinnerView view = FillDinnerView(id);
                 view.BesteldeActiviteit.Aantal = dinnerView.BesteldeActiviteit.Aantal;
                 view.BesteldeActiviteit.AantalAlternatief = dinnerView.BesteldeActiviteit.AantalAlternatief;
                 view.BesteldeActiviteit.Opmerking = dinnerView.BesteldeActiviteit.Opmerking;
-
-                TempData["DinnerView"] = view; // Zet de DinnerView in de TempData (Deze wordt verwijderd zodra het is aangeroepen).
+                view.BesteldeActiviteit.Activiteit = besteldeActiviteit.Activiteit;
+                TempData["DinnerView"] = view;
                 return RedirectToAction("Reservation", "Dinner", new { id });
             }
 
@@ -130,7 +133,6 @@ namespace HaarlemFestival.Controllers
                     }
                 }
             }
-            dinnerView.BesteldeActiviteit = new BesteldeActiviteit();
             dinnerView.Days = days;
 
             return dinnerView;

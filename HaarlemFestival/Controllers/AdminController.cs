@@ -231,7 +231,6 @@ namespace HaarlemFestival.Controllers
                 activity.Day = adminRepository.GetDay(activity.Day.DayId);
                 activity.StartSession = activity.Day.Date.Add(TimeSpan.Parse(collector["StartSession"]));
                 activity.EndSession = activity.Day.Date.Add(TimeSpan.Parse(collector["EndSession"]));
-                activity.TimeString = activity.StartSession.ToString("H:mm") + " - " + activity.EndSession.ToString("H:mm");
 
                 // Dinner evenement toevoegen
                 adminRepository.AddEvent(activity);
@@ -478,7 +477,6 @@ namespace HaarlemFestival.Controllers
                 activity.Day = adminRepository.GetDay(activity.Day.DayId);
                 activity.StartSession = activity.Day.Date.Add(TimeSpan.Parse(collector["StartSession"]));
                 activity.EndSession = activity.Day.Date.Add(TimeSpan.Parse(collector["EndSession"]));
-                activity.TimeString = activity.StartSession.ToString("H:mm") + " - " + activity.EndSession.ToString("H:mm");
 
                 // Dinner data ophalen.
                 adminRepository.UpdateEvent(activity);
