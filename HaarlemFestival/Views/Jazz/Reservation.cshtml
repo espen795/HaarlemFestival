@@ -67,7 +67,8 @@
         </ul>
         <script type="text/javascript">
 
-            function CalcPrice(nummer, price) {
+
+            function CalcPriceAndTicketCheck(nummer, price, availableTickets) {
                 // Krijg de waardes van de input boxes
                 var tickets = document.getElementById("ticket" + nummer).value;
 
@@ -90,12 +91,14 @@
             int i = 0;
             string idtickets;
             string totalprice;
+            int availableTickets = 0;
         }
 
 
         @using (Html.BeginForm("Book", "Jazz", FormMethod.Post))
         {
             <div class="tab-content">
+                <!-- Day 1 -->
                 <div id="day1" class="tab-pane fade in active jazz-tickets">
                     <div class="table table-hover table-responsive ticket-table">
                         <table>
@@ -119,11 +122,22 @@
                                     idtickets = String.Format("ticket{0}", i);
                                     totalprice = String.Format("totalprice{0}", i);
 
+                                    // availableTickets berekenen
+                                    if (j.AlternativePrice != 1)
+                                    {
+                                        availableTickets = j.TotalTickets - j.BoughtTickets;
+                                    }
+                                    else
+                                    {
+                                        
+                                    }
+
+
                                     // De tabel aanmaken
                                     <tr>
                                         <td class="hidden"><input name="Reservering[@i].Activiteit.ActivityId" value="@j.ActivityId" class="hidden" /></td>
                                         <td>@j.StartSession.ToShortDateString()</td>
-                                        <td class="ticketsInput" onchange="CalcPrice(@i, @j.Price);">@Html.TextBoxFor(m => Model.Reservering[i].Aantal, new { @type = "number", @min = 0, @id = idtickets })</td>
+                                        <td class="ticketsInput" onchange="CalcPriceAndTicketCheck(@i, @j.Price, @availableTickets>@Html.TextBoxFor(m => Model.Reservering[i].Aantal, new { @type = "number", @min = 0, @id = idtickets })</td>
                                         <td>@j.artist.ArtistName</td>
                                         <td>@j.ConcertLocation</td>
                                         <td>@j.ConcertHall</td>
@@ -223,7 +237,7 @@
                     </div>
                 </div>
 
-                <!-- Day 4 -->
+                <!-- Passe-Partout -->
                 <div id="passepartout" class="tab-pane fade jazz-tickets">
                     <div class="table table-hover table-responsive ticket-table">
                         <table>
