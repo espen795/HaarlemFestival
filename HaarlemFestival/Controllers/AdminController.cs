@@ -79,6 +79,14 @@ namespace HaarlemFestival.Controllers
 
             return View(/*messages*/);
         }
+
+        [Authorize]
+        public ActionResult CheckInterviewQuestions()
+        {
+            List<InterviewQuestion> interviewQuestions = adminRepository.GetInterviewQuestions();
+
+            return View(interviewQuestions);
+        }
         #endregion
 
         #region Login/Logout
