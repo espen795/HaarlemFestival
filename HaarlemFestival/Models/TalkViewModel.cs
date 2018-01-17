@@ -8,6 +8,6 @@ namespace HaarlemFestival.Models
     public class TalkViewModel
     {
         public List<Talking> Talkings { get; set; }
-        public List<BesteldeActiviteit> Reservering { get; set; }
+        public List<BesteldeActiviteit> BesteldeActiviteiten { get; set; }
     }
 }
