@@ -43,5 +43,7 @@ namespace HaarlemFestival.Repository.Admin
 
         float GetIncomeById(int id);
         float GetIncomeByType(EventType type);
+
+        List<InterviewQuestion> GetInterviewQuestions();
     }
 }

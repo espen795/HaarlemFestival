@@ -101,6 +101,11 @@ body {
     }
 
     .navbar li.adminDropdown #adminContact::before {
+        content: "\f128";
+        font-family: FontAwesome;
+    }
+
+    .navbar li.adminDropdown #adminInterviewQuestions::before {
         content: "\f0e6";
         font-family: FontAwesome;
     }
