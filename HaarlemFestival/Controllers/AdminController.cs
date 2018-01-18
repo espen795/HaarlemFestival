@@ -829,6 +829,13 @@ namespace HaarlemFestival.Controllers
 
             return PartialView(historic); // Historic data terugsturen.
         }
+
+        [Authorize]
+        public ActionResult _AnswerQuestionPartial(int id)
+        {
+            ContactMessage message = adminRepository.GetContactMessage(id);
+            return PartialView(message);
+        }
         #endregion
 
         #region ExcelBestand
@@ -1153,7 +1160,7 @@ namespace HaarlemFestival.Controllers
             if (ModelState.IsValid)
             {
                 ContactMessage message = adminRepository.GetContactMessage(id);
-                message.Answer = collector["AnswerArea"].ToString();
+                message.Answer = collector["Answer"].ToString();
                 message.Answered = true;
                 Session["Question_Answered"] = true;
                 adminRepository.UpdateContactMessage(message);
