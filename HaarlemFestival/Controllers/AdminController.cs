@@ -161,6 +161,7 @@ namespace HaarlemFestival.Controllers
 
                 // Evenement toevoegen
                 adminRepository.AddEvent(activity);
+                Session["Data_Added"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
 
@@ -207,6 +208,7 @@ namespace HaarlemFestival.Controllers
 
                 // Restaurant toevoegen
                 adminRepository.AddRestaurant(restaurant);
+                Session["Data_Added"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
 
@@ -237,6 +239,7 @@ namespace HaarlemFestival.Controllers
 
                 // Dinner evenement toevoegen
                 adminRepository.AddEvent(activity);
+                Session["Data_Added"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
 
@@ -293,6 +296,7 @@ namespace HaarlemFestival.Controllers
 
                 //Talking evenement toevoegen.
                 adminRepository.AddEvent(activity);
+                Session["Data_Added"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
 
@@ -308,6 +312,7 @@ namespace HaarlemFestival.Controllers
             {
                 // Guide toevoegen.
                 adminRepository.AddGuide(guide);
+                Session["Data_Added"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
 
@@ -336,6 +341,7 @@ namespace HaarlemFestival.Controllers
 
                 // Historic evenement toevoegen.
                 adminRepository.AddEvent(activity);
+                Session["Data_Added"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
 
@@ -414,6 +420,7 @@ namespace HaarlemFestival.Controllers
 
                 // Jazz Evenement Updaten.
                 adminRepository.UpdateEvent(activity);
+                Session["Data_Updated"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
 
@@ -459,6 +466,7 @@ namespace HaarlemFestival.Controllers
 
                 // Restaurant data updaten.
                 adminRepository.UpdateRestaurant(restaurant);
+                Session["Data_Updated"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
 
@@ -483,6 +491,7 @@ namespace HaarlemFestival.Controllers
 
                 // Dinner data ophalen.
                 adminRepository.UpdateEvent(activity);
+                Session["Data_Updated"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
 
@@ -547,6 +556,7 @@ namespace HaarlemFestival.Controllers
 
                 // Talking data updaten.
                 adminRepository.UpdateEvent(activity);
+                Session["Data_Updated"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
 
@@ -562,6 +572,7 @@ namespace HaarlemFestival.Controllers
             {
                 // Guide updaten.
                 adminRepository.UpdateGuide(guide);
+                Session["Data_Updated"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
 
@@ -598,6 +609,7 @@ namespace HaarlemFestival.Controllers
 
                 // Historic data updaten.
                 adminRepository.UpdateEvent(activity);
+                Session["Data_Updated"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
 
