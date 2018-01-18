@@ -46,5 +46,6 @@ namespace HaarlemFestival.Models
         public DbSet<Talk> Talks { get; set; }
         public DbSet<Talking> Talkings { get; set; }
         public DbSet<Location> Locations { get; set; }
+        public DbSet<ContactMessage> ContactMessages { get; set; }
     }
 }
