@@ -68,7 +68,7 @@ namespace HaarlemFestival.Controllers
                 if (activity.Aantal != 0 || activity.AantalAlternatief != 0)
                 {
                     activity.TotalBoughtTickets = activity.Aantal;
-                    activity.Opmerking = string.Format($"{activiteit.Talkings[1].Question.Receiver}: {activity.Opmerking}");
+                    //activity.Opmerking = string.Format($"{activiteit.Talkings[1].Question.Receiver}: {activity.Opmerking}");
                     // talk ophalen gebaseerd op het id
                     activity.Activiteit = talkingRepository.GetTalkById(activity.Activiteit.ActivityId);
                     
@@ -82,7 +82,7 @@ namespace HaarlemFestival.Controllers
             Session["added_to_basket"] = true;
 
             // Partial view continue or basket
-            return RedirectToAction("Reservation", "Historic");
+            return RedirectToAction("Reservation", "Talking");
         }
     }
 }

@@ -95,7 +95,7 @@
                                     <p>Question For: </p>
                                 @* Fix om persoon mee te geven aan opmering *@
                                     @Html.DropDownListFor(
-                                                         /*??*/m => Model.Talkings[x].Question.Receiver , new SelectList(new List<Object> { Model.Talkings[x].Talk.Person1, Model.Talkings[x].Talk.Person2 }),
+                                                         /*??*/m => Model.BesteldeActiviteiten[x].Opmerking , new SelectList(new List<Object> { Model.Talkings[x].Talk.Person1, Model.Talkings[x].Talk.Person2 }),
                                                          "[Select a person..]"
                                                          )
                                 </section> <!-- Receiver -->
@@ -110,7 +110,7 @@
                     @Html.ActionLink("Back to Talking Haarlem", "Index", "Talking", new { }, new { @class = "btn btn-black talk-back-btn" })
 
                     @*@Html.ActionLink("Add to basket", "Book", "Talking", new { }, new { type = "submit", @class = "btn btn-black talk-order-btn"})*@
-                    <input type="submit" value="Book" class="btn btn-book btn-reservation" />
+                    <input type="submit" value="Add to basket" class="btn btn-black talk-order-btn" />
 
                 </section> <!-- Buttons -->
             </section> <!-- Section 1 Reservation Container -->
