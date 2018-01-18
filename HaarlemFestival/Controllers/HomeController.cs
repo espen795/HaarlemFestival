@@ -42,9 +42,18 @@ namespace HaarlemFestival.Controllers
         }
 
         [HttpPost]
-        public ActionResult SendContactForm(ContactMessage message, FormCollection collector)
+        public ActionResult Contact(ContactMessage message, FormCollection collector)
         {
-            message.Regarding = (QuestionCategory)Convert.ToInt32(collector["RegardingSelect"]);
+            int regardingint;
+            if (int.TryParse(collector["RegardingSelect"], out regardingint))
+            {
+                message.Regarding = (QuestionCategory)regardingint;
+            }
+            else
+            {
+                ModelState.AddModelError("RegardingError", "Please select a category.");
+            }
+
 
             if (ModelState.IsValid)
             {
@@ -53,7 +62,8 @@ namespace HaarlemFestival.Controllers
 
                 adminRepository.SendContactMessage(message);
             }
-            return RedirectToAction("Contact");
+
+            return View(message);
         }
 
         public ActionResult Basket()
@@ -128,11 +138,13 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Agenda()
         {
-            AgendaView agendaView = new AgendaView();
-            agendaView.Day1 = new List<BesteldeActiviteit>();
-            agendaView.Day2 = new List<BesteldeActiviteit>();
-            agendaView.Day3 = new List<BesteldeActiviteit>();
-            agendaView.Day4 = new List<BesteldeActiviteit>();
+            AgendaView agendaView = new AgendaView
+            {
+                Day1 = new List<BesteldeActiviteit>(),
+                Day2 = new List<BesteldeActiviteit>(),
+                Day3 = new List<BesteldeActiviteit>(),
+                Day4 = new List<BesteldeActiviteit>()
+            };
 
             List<BesteldeActiviteit> Bestelling = new List<BesteldeActiviteit>();
 

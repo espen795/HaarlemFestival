@@ -23,6 +23,7 @@ namespace HaarlemFestival.Models
         public string Email { get; set; }
 
         [Display(Name = "Subject")]
+        [Required(ErrorMessage = "Please enter a subject")]
         public string Subject { get; set; }
 
         [Display(Name = "Regarding")]
