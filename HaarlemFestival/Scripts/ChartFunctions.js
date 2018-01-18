@@ -52,39 +52,16 @@ function CreateTicketAvailabilityChart(id, availableTickets, soldTickets) {
 }
 
 function CreateIncomePerDayChart(id, data) {
+
     var chart = document.getElementById(id).getContext("2d");
 
-    var myDoughnutChart = new Chart(chart, {
-        type: 'doughnut',
+    var myBarChart = new Chart(chart, {
+        type: 'bar',
         data: {
-            labels: ["Available Tickets", "Sold Tickets"],
+            labels: ["Monday", "Tuesday", "Wednessday", "Thursday", "Friday", "Saturday", "Sunday"],
             datasets: [{
-                label: 'Available tickets (spread over all events)',
-                data: [availableTickets, soldTickets],
-                backgroundColor: [
-                    'rgba(178, 210, 153, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(53, 159, 43, 1)',
-                    'rgba(255, 99, 132, 1)',
-                ],
-                borderWidth: 1
-            }]
-        }
-    });
-}
-
-function CreateAvailabilityPerDayChart(id, data) {
-    var chart = document.getElementById(id).getContext("2d");
-
-    var myDoughnutChart = new Chart(chart, {
-        type: 'doughnut',
-        data: {
-            labels: ["Available Tickets", "Sold Tickets"],
-            datasets: [{
-                label: 'Available tickets (spread over all events)',
-                data: [availableTickets, soldTickets],
+                label: 'Income Per Day',
+                data: [data[0], data[1], data[2], data[3], data[4], data[5], data[6]],
                 backgroundColor: [
                     'rgba(178, 210, 153, 0.2)',
                     'rgba(255, 99, 132, 0.2)',

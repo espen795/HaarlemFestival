@@ -22,18 +22,76 @@
                 CreateTicketAvailabilityChart("dinnerAvailabilityChart", @Model.Activities.Where(a => a.EventType == EventType.DinnerInHaarlem).Sum(a => a.TotalTickets), @Model.Activities.Where(a => a.EventType == EventType.DinnerInHaarlem).Sum(a => a.BoughtTickets));
                 CreateTicketAvailabilityChart("talkingAvailabilityChart", @Model.Activities.Where(a => a.EventType == EventType.TalkingHaarlem).Sum(a => a.TotalTickets), @Model.Activities.Where(a => a.EventType == EventType.TalkingHaarlem).Sum(a => a.BoughtTickets));
                 CreateTicketAvailabilityChart("historicAvailabilityChart", @Model.Activities.Where(a => a.EventType == EventType.HistoricHaarlem).Sum(a => a.TotalTickets), @Model.Activities.Where(a => a.EventType == EventType.HistoricHaarlem).Sum(a => a.BoughtTickets));
+
+                CreateJazzIncomeChart("jazzIncomeChart");
+                CreateDinnerIncomeChart("dinnerIncomeChart");
+                CreateTalkingIncomeChart("talkingIncomeChart");
+                CreateHistoricIncomeChart("historicIncomeChart");
         });
+
+
+        function CreateJazzIncomeChart(id) {
+            var jazzData;
+            jazzData += [@Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Monday).Sum(b => b.Price),
+                         @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Tuesday).Sum(b => b.Price),
+                         @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Wednesday).Sum(b => b.Price),
+                         @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Thursday).Sum(b => b.Price),
+                         @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Friday).Sum(b => b.Price),
+                         @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Saturday).Sum(b => b.Price),
+                         @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Sunday).Sum(b => b.Price)];
+
+            CreateIncomePerDayChart(id, jazzData)
+        }
+
+        function CreateDinnerIncomeChart(id) {
+            var dinnerData;
+            dinnerData += [@Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Monday).Sum(b => b.Price),
+                           @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Tuesday).Sum(b => b.Price),
+                           @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Wednesday).Sum(b => b.Price),
+                           @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Thursday).Sum(b => b.Price),
+                           @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Friday).Sum(b => b.Price),
+                           @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Saturday).Sum(b => b.Price),
+                           @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Sunday).Sum(b => b.Price)];
+
+            CreateIncomePerDayChart(id, dinnerData)
+        }
+
+        function CreateTalkingIncomeChart(id) {
+            var talkingData;
+            talkingData += [@Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Monday).Sum(b => b.Price),
+                            @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Tuesday).Sum(b => b.Price),
+                            @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Wednesday).Sum(b => b.Price),
+                            @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Thursday).Sum(b => b.Price),
+                            @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Friday).Sum(b => b.Price),
+                            @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Saturday).Sum(b => b.Price),
+                            @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Sunday).Sum(b => b.Price)];
+
+            CreateIncomePerDayChart(id, talkingData)
+        }
+
+        function CreateHistoricIncomeChart(id) {
+            var historicData;
+            historicData += [@Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Monday).Sum(b => b.Price),
+                             @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Tuesday).Sum(b => b.Price),
+                             @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Wednesday).Sum(b => b.Price),
+                             @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Thursday).Sum(b => b.Price),
+                             @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Friday).Sum(b => b.Price),
+                             @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Saturday).Sum(b => b.Price),
+                             @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Sunday).Sum(b => b.Price)];
+
+            CreateIncomePerDayChart(id, historicdata)
+        }
 
         function SelectedEventChanged() {
             // Alle Data Tabellen verbergen.
             $('.eventView').each(function () {
                 $(this).hide();
-            })
+                })
 
             // Alle filters verbergen.
             $('.eventFilter').each(function () {
                 $(this).hide();
-            })
+                })
 
             // Aan de hand van een evenement de data en filters tonen.
             switch ($('#selectedEvent').val()) {
@@ -58,15 +116,15 @@
                     $('#dates').show();
                     break;
 
-                default:
+                    default:
                     $('#jazzData').show();
                     $('#dinnerData').show();
                     $('#talkingData').show();
                     $('#historicData').show();
                     $('#dates').show();
                     break;
+                }
             }
-        }
 
         // Data uit de tabel filteren.
         function FilterData() {
@@ -165,7 +223,7 @@
             <canvas id="jazzAvailabilityChart" width="800" height="450"></canvas>
         </div>
         <div class="col-md-6 col-sm-6">
-            <canvas id="jazzAvailabilityPerDayChart" width="800" height="450"></canvas>
+            <canvas id="jazzIncomeChart" width="800" height="450"></canvas>
         </div>
     </div>
 
@@ -233,6 +291,9 @@
         <div class="col-md-6 col-sm-6">
             <canvas id="dinnerAvailabilityChart" width="800" height="450"></canvas>
         </div>
+        <div class="col-md-6 col-sm-6">
+            <canvas id="dinnerIncomeChart" width="800" height="450"></canvas>
+        </div>
     </div>
 
     <div id="dinnerData" class="eventView">
@@ -295,6 +356,9 @@
         <div class="col-md-6 col-sm-6">
             <canvas id="talkingAvailabilityChart" width="800" height="450"></canvas>
         </div>
+        <div class="col-md-6 col-sm-6">
+            <canvas id="talkingIncomeChart" width="800" height="450"></canvas>
+        </div>
     </div>
 
     <div id="talkingData" class="eventView">
@@ -347,7 +411,7 @@
             </div>
         }
     </div>
-    
+
     <hr class="divide" />
 
     <!-- Charts over het Historic evenement.-->
@@ -357,6 +421,9 @@
         </div>
         <div class="col-md-6 col-sm-6">
             <canvas id="historicAvailabilityChart" width="800" height="450"></canvas>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <canvas id="historicIncomeChart" width="800" height="450"></canvas>
         </div>
     </div>
 
