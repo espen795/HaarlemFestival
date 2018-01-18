@@ -11,6 +11,7 @@ using HaarlemFestival.Repository.Jazz;
 using HaarlemFestival.Repository.Dinner;
 using HaarlemFestival.Repository.Talking;
 using HaarlemFestival.Repository.Historic;
+using HaarlemFestival.Repository.Admin;
 
 namespace HaarlemFestival.Controllers
 {
@@ -20,6 +21,7 @@ namespace HaarlemFestival.Controllers
         private IDinnerRepository dinnerRepository = new DinnerRepository();
         private ITalkingRepository talkingRepository = new TalkingRepository();
         private IHistoricRepository historicRepository = new HistoricRepository();
+        private IAdminRepository adminRepository = new AdminRepository();
 
         public ActionResult Index()
         {
@@ -35,14 +37,23 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Contact()
         {
-            return View();
+            ContactMessage message = new ContactMessage();
+            return View(message);
         }
 
         [HttpPost]
-        public ActionResult SendContactForm(ContactMessage message)
+        public ActionResult SendContactForm(ContactMessage message, FormCollection collector)
         {
-            // TODO: Vraag aan de DB toevoegen.
-            return PartialView("_ContactSent");
+            message.Regarding = (QuestionCategory)Convert.ToInt32(collector["RegardingSelect"]);
+
+            if (ModelState.IsValid)
+            {
+
+                Session["send_contact_form"] = true;
+
+                adminRepository.SendContactMessage(message);
+            }
+            return RedirectToAction("Contact");
         }
 
         public ActionResult Basket()

@@ -18,6 +18,12 @@ namespace HaarlemFestival.Repository.Admin
             return account;
         }
 
+        public void SendContactMessage(ContactMessage message)
+        {
+            db.ContactMessages.Add(message);
+            db.SaveChanges();
+        }
+
         public void AddEvent(Activity activity)
         {
             if (activity.GetType() == typeof(Models.Jazz))
@@ -233,7 +239,7 @@ namespace HaarlemFestival.Repository.Admin
 
         public List<ContactMessage> GetContactMessages()
         {
-            return null;
+            return db.ContactMessages.ToList();
         }
 
         public List<InterviewQuestion> GetInterviewQuestions()

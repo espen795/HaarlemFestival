@@ -80,7 +80,7 @@ namespace HaarlemFestival.Controllers
                 Messages = adminRepository.GetContactMessages()
             };
 
-            return View(/*messages*/);
+            return View(viewModel);
         }
 
         [Authorize]

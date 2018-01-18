@@ -7,6 +7,6 @@ namespace HaarlemFestival.Models
 {
     public enum QuestionCategory
     {
-        JazzPatronaat, DinnerInHaarlem, TalkingHaarlem, HistoricHaarlem, Other
+        JazzPatronaat, DinnerInHaarlem, TalkingHaarlem, HistoricHaarlem, Orders, Other
     }
 }
