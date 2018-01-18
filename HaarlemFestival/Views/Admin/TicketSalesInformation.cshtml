@@ -79,7 +79,7 @@
                              @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Saturday).Sum(b => b.Price),
                              @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Sunday).Sum(b => b.Price)];
 
-            CreateIncomePerDayChart(id, historicdata)
+            CreateIncomePerDayChart(id, historicData)
         }
 
         function SelectedEventChanged() {
@@ -93,27 +93,36 @@
                 $(this).hide();
                 })
 
+            // Alle Event Gerelateerde charts verbergen.
+            $('.charts').each(function () {
+                $(this).hide();
+            })
+
             // Aan de hand van een evenement de data en filters tonen.
             switch ($('#selectedEvent').val()) {
                 case "Jazz@Patronaat":
                     $('#jazzData').show();
                     $('#dates').show();
+                    $('#jazzCharts').show();
                     break;
 
                 case "DinnerInHaarlem":
                     $('#dinnerData').show();
                     $('#dates').show();
                     $('#restaurants').show();
+                    $('#dinnerCharts').show();
                     break;
 
                 case "TalkingHaarlem":
                     $('#talkingData').show();
                     $('#dates').show();
+                    $('#talkingCharts').show();
                     break;
 
                 case "HistoricHaarlem":
                     $('#historicData').show();
                     $('#dates').show();
+                    $('#historicCharts').show();
                     break;
 
                     default:
@@ -122,6 +131,10 @@
                     $('#talkingData').show();
                     $('#historicData').show();
                     $('#dates').show();
+                    $('#jazzCharts').show();
+                    $('#dinnerCharts').show();
+                    $('#talkingCharts').show();
+                    $('#historicCharts').show();
                     break;
                 }
             }
@@ -132,7 +145,7 @@
 
 
             // Voor elke filter
-            $('.eventFilter').each(function () {
+            $('.filters').each(function () {
 
                 if ($(this).val() != "") // Als de filter is geselecteerd.
                 {
@@ -215,7 +228,7 @@
     <hr class="divide" />
 
     <!-- Charts over het Jazz evenement.-->
-    <div class="row col-md-12">
+    <div class="row col-md-12 charts" id="jazzCharts">
         <div class="col-md-12 col-sm-12 text-center">
             <h2>Jazz@Patronaat</h2>
         </div>
@@ -279,12 +292,11 @@
                 </div>
             </div>
         }
+        <hr class="divide" />
     </div>
 
-    <hr class="divide" />
-
     <!-- Charts over het Dinner in Haarlem evenement.-->
-    <div class="row col-md-12">
+    <div class="row col-md-12 charts" id="dinnerCharts">
         <div class="col-md-12 col-sm-12 text-center">
             <h2>Dinner in Haarlem</h2>
         </div>
@@ -344,12 +356,11 @@
                 </div>
             </div>
         }
+        <hr class="divide" />
     </div>
 
-    <hr class="divide" />
-
     <!-- Charts over het Talking evenement.-->
-    <div class="row col-md-12">
+    <div class="row col-md-12 charts" id="talkingCharts">
         <div class="col-md-12 col-sm-12 text-center">
             <h2>Talking Haarlem</h2>
         </div>
@@ -410,12 +421,11 @@
                 </div>
             </div>
         }
+        <hr class="divide" />
     </div>
 
-    <hr class="divide" />
-
     <!-- Charts over het Historic evenement.-->
-    <div class="row col-md-12">
+    <div class="row col-md-12 charts" id="historicCharts">
         <div class="col-md-12 col-sm-12 text-center">
             <h2>Historic Haarlem</h2>
         </div>
