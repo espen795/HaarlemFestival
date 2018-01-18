@@ -27,14 +27,14 @@ namespace HaarlemFestival.Controllers
         public ActionResult Overview()
         {
             return View();
-        } 
+        }
 
         [Authorize]
         public ActionResult ManageEvent()
         {
             EventData data = adminRepository.GetEventData();
-            data.Filters.dateFilter = GetDateModel(data.Filters.days);            
-            
+            data.Filters.dateFilter = GetDateModel(data.Filters.days);
+
             string selectedEvent = this.Request.QueryString["selectedEvent"]; // Geselecteerde evenement uit de URL halen
 
             switch (selectedEvent)
@@ -863,7 +863,7 @@ namespace HaarlemFestival.Controllers
             data = GetHistoricWorksheet(data, activities);
 
             // Bestand Opslaan.
-            
+
             data.SaveAs("Ticket_Sales_Information.xlsx");
 
             string saveLocation = data.FullNameURLEncoded;
@@ -894,7 +894,7 @@ namespace HaarlemFestival.Controllers
             foreach (EventType type in enums)
             {
                 string eventType = "";
-                switch(type)
+                switch (type)
                 {
                     case EventType.JazzPatronaat:
                         eventType = "Jazz@Patronaat";
@@ -1144,6 +1144,22 @@ namespace HaarlemFestival.Controllers
             }
 
             return errors; // String met errors terugsturen.
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult AnswerContactmessage(int id, FormCollection collector)
+        {
+            if (ModelState.IsValid)
+            {
+                ContactMessage message = adminRepository.GetContactMessage(id);
+                message.Answer = collector["AnswerArea"].ToString();
+                message.Answered = true;
+                Session["Question_Answered"] = true;
+                adminRepository.UpdateContactMessage(message);
+            }
+
+            return RedirectToAction("AnswerContactMessage");
         }
         #endregion
     }

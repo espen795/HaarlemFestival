@@ -1,0 +1,30 @@
+﻿@using HaarlemFestival.Models;
+@model ContactMessage
+<div class="question category-@Model.Id">
+    @using (Html.BeginForm("AnswerContactMessage", "Admin", new { Id = Model.Id }, FormMethod.Post, new { @class = "manageEvent formStyle" }))
+    {
+
+        <div class="col-md-6">
+            @Html.Label("Name")
+            @Html.TextBox("Name", Model.Name, new { @class = "" })
+        </div>
+        <div class="col-md-6">
+            @Html.Label("Email")
+            @Html.TextBox("Email", Model.Email, new { @class = "" })
+        </div>
+        <div class="col-md-12">
+            @Html.Label("Subject")
+            @Html.TextBox("Subject", Model.Subject, new { @class = "" })
+        </div>
+        <div class="col-md-12">
+            @Html.Label("Question")
+            @Html.TextArea("Question", Model.Question, new { @class = "" })
+        </div>
+        <hr class="divide" />
+
+        <div class="answer-question col-md-12">
+            @Html.TextArea("Answer", new { @name = "AnswerArea" })
+            <input type="submit" class="btn btn-black" />
+        </div>
+    }
+</div>

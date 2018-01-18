@@ -48,6 +48,9 @@ namespace HaarlemFestival.Repository.Admin
         float GetIncomeByType(EventType type);
 
         List<ContactMessage> GetContactMessages();
+        ContactMessage GetContactMessage(int id);
+        void UpdateContactMessage(ContactMessage message);
+
         List<InterviewQuestion> GetInterviewQuestions();
     }
 }
