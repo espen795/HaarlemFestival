@@ -68,7 +68,7 @@ namespace HaarlemFestival.Controllers
                 if (activity.Aantal != 0 || activity.AantalAlternatief != 0)
                 {
                     activity.TotalBoughtTickets = activity.Aantal;
-
+                    activity.Opmerking = string.Format($"{activiteit.Talkings[1].Question.Receiver}: {activity.Opmerking}");
                     // talk ophalen gebaseerd op het id
                     activity.Activiteit = talkingRepository.GetTalkById(activity.Activiteit.ActivityId);
                     

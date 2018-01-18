@@ -93,10 +93,9 @@
                                 <p>@Model.Talkings[x].Talk.Naam</p>
                                 <section class="talk-question-receiver">
                                     <p>Question For: </p>
-
                                 @* Fix om persoon mee te geven aan opmering *@
                                     @Html.DropDownListFor(
-                                                         /*??*/ , new SelectList(new List<Object> { Model.Talkings[x].Talk.Person1, Model.Talkings[x].Talk.Person2 }),
+                                                         /*??*/m => Model.Talkings[x].Question.Receiver , new SelectList(new List<Object> { Model.Talkings[x].Talk.Person1, Model.Talkings[x].Talk.Person2 }),
                                                          "[Select a person..]"
                                                          )
                                 </section> <!-- Receiver -->
