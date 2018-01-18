@@ -239,7 +239,7 @@ namespace HaarlemFestival.Repository.Admin
 
         public List<ContactMessage> GetContactMessages()
         {
-            return db.ContactMessages.Where(c => c.Answered == false).ToList();
+            return db.ContactMessages.ToList();
         }
 
         public ContactMessage GetContactMessage(int id)

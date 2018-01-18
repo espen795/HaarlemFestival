@@ -74,7 +74,7 @@ body {
 hr.divide {
     height: 10px;
     border: 0;
-    box-shadow: 0 10px 10px -10px #8c8b8b inset;
+    box-shadow: 0 10px 10px -10px #aaa inset;
 }
 
 /* #region Admin dropdown in navbar */
@@ -1681,7 +1681,7 @@ input[type='text']:focus, input[type='password']:focus {
 
 /*#region ManageEvent Pagina */
 #topFilterBar {
-    margin-top: 75px;
+    margin-top: 5px;
     padding-top: 50px;
     padding-bottom: 50px;
     display: inline-block;
@@ -1752,7 +1752,7 @@ input[type='text']:focus, input[type='password']:focus {
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
-    box-shadow: inset 0 1px 3px #ddd;
+    box-shadow: inset 0 1px 3px #aaa;
     border-radius: 4px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -1864,6 +1864,10 @@ div.eventData {
 
 .priceMargin {
     margin-top: 10px;
+}
+
+.eventView {
+    margin-top: 20px;
 }
 /* #endregion */
 

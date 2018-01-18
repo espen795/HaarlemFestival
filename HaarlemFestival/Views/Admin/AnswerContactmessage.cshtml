@@ -91,7 +91,7 @@
 </script>
 
 <div class="container">
-    <section class="">
+    <section id="topFilterBar" class="col-md-12">
         <div id="selectEvent" class="col-md-3 col-sm-12">
             <b>Select a Category</b>
             <br />
@@ -130,8 +130,8 @@
                 <th>Email</th>
                 <th>Subject</th>
                 <th>Question</th>
-                <th>Answered</th>
-                <th></th>
+                <th>Reviewed</th>
+                <th>Answer</th>
             </tr>
         </thead>
         <tbody class="data text-center">
@@ -144,7 +144,7 @@
                 <td>@message.Subject</td>
                 <td>@message.Question</td>
                 <td>@(message.Answered ? "Yes" : "No")</td>
-                <td><a onclick="ShowQuestionForm(@message.Id);" data-toggle="modal" data-target="#messagePopup">Q</a></td>
+                <td><a onclick="ShowQuestionForm(@message.Id);" data-toggle="modal" data-target="#messagePopup"><i class="fa fa-reply" aria-hidden="true"></i></a></td>
             </tr>
             }
         </tbody>
