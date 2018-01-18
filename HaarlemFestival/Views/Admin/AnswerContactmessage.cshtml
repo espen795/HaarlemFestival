@@ -4,23 +4,51 @@
 }
 @model AnswerContactViewModel
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".question").each(function () {
+            $(this).hide();
+        })
+    })
+
+    function FilterCategory() {
+        var category = $("#RegardingSelect").val();
+
+        $(".question").each(function () {
+            $(this).hide();
+        })
+
+        $(".category-" + category).each(function () {
+            $(this).show();
+        })
+    }
+</script>
+
 <div class="container">
-    @Html.EnumDropDownListFor(v => v.Category, "Select a Category.")
+    <select id="RegardingSelect" name="RegardingSelect" onchange="FilterCategory()">
+        <option>Select a Category.</option>
+        <option value="0">Jazz@Patronaat</option>
+        <option value="1">Dinner In Haarlem</option>
+        <option value="2">Talking Haarlem</option>
+        <option value="3">Historic Haarlem</option>
+        <option value="4">Orders</option>
+        <option value="5">Other</option>
+    </select>
 
     @foreach (ContactMessage message in Model.Messages)
     {
-        <div class="category-@((int)message.Regarding) manageEvent formStyle">
+        <div class="category-@((int)message.Regarding) question manageEvent formStyle">
             <div class="col-md-6">
                 @Html.Label("Name")
-                @Html.TextBox("Name", new { @class = "" })
+                @Html.TextBox("Name", message.Name, new { @class = "" })
             </div>
             <div class="col-md-6">
                 @Html.Label("Email")
-                @Html.TextBox("Email", new { @class = "" })
+                @Html.TextBox("Email", message.Email, new { @class = "" })
             </div>
             <div class="col-md-12">
                 @Html.Label("Subject")
-                @Html.TextBox("Subject", new { @class = "" })
+                @Html.TextBox("Subject", message.Subject, new { @class = "" })
             </div>
             <div class="col-md-12">
                 @Html.Label("Question")
@@ -31,9 +59,9 @@
 
     @Html.BeginForm("AnswerMessage", "Admin")
     {
-        <div class="answer-question col-md-12">
-            @Html.TextArea("Answer", "Admin", FormMethod.Post)
-            <input type="submit" class="btn btn-black" />
-        </div>
+    <div class="answer-question col-md-12">
+        @Html.TextArea("Answer", "Admin", FormMethod.Post)
+        <input type="submit" class="btn btn-black" />
+    </div>
     }
 </div>

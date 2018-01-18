@@ -12,6 +12,9 @@ namespace HaarlemFestival.Repository.Admin
         // Login
         Account GetAccount(string username, string password);
 
+        // Contactformulier
+        void SendContactMessage(ContactMessage message);
+
         // ManageEvent
         void AddEvent(Activity activity);
         void AddRestaurant(Restaurant restaurant);

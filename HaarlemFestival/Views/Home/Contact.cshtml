@@ -6,7 +6,22 @@
 }
 @model ContactMessage
 <div class="event-banner"></div>
+@{
+    if (Session["send_contact_form"] != null)
+    {
+        if ((bool)Session["send_contact_form"])
+        {
+            <div class="basket-alert">
+                <div class="alert alert-success alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <h3>Sent!</h3> Your questions has been sent.
+                </div>
+            </div>
+        }
 
+        Session["send_contact_form"] = false;
+    }
+}
 <div class="event container">
     <div class="row">
         <!-- Section 1 -->
@@ -63,7 +78,15 @@
 
                     <div class="contact-form-regarding">
                         <label for="regarding">Regarding: *</label>
-                        @Html.EnumDropDownListFor(c => c.Regarding, "Select a Category.")
+                        <select id="RegardingSelect" name="RegardingSelect">
+                            <option>Select a Category.</option>
+                            <option value="0">Jazz@Patronaat</option>
+                            <option value="1">Dinner In Haarlem</option>
+                            <option value="2">Talking Haarlem</option>
+                            <option value="3">Historic Haarlem</option>
+                            <option value="4">Orders</option>
+                            <option value="5">Other</option>
+                        </select>
                     </div>
 
                     <div class="contact-form-question">
