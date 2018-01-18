@@ -30,6 +30,7 @@
         });
 
 
+        // Jazz informatie ophalen en een Chart maken
         function CreateJazzIncomeChart(id) {
             var jazzData;
             jazzData += [@Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Monday).Sum(b => b.Price),
@@ -43,6 +44,7 @@
             CreateIncomePerDayChart(id, jazzData)
         }
 
+        // Dinner informatie ophalen en een Chart maken
         function CreateDinnerIncomeChart(id) {
             var dinnerData;
             dinnerData += [@Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Monday).Sum(b => b.Price),
@@ -56,6 +58,7 @@
             CreateIncomePerDayChart(id, dinnerData)
         }
 
+        // Talking informatie ophalen en een Chart maken
         function CreateTalkingIncomeChart(id) {
             var talkingData;
             talkingData += [@Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Monday).Sum(b => b.Price),
@@ -69,6 +72,7 @@
             CreateIncomePerDayChart(id, talkingData)
         }
 
+        // Historic informatie ophalen en een Chart maken
         function CreateHistoricIncomeChart(id) {
             var historicData;
             historicData += [@Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Monday).Sum(b => b.Price),

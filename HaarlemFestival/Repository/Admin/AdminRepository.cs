@@ -255,7 +255,7 @@ namespace HaarlemFestival.Repository.Admin
 
         public List<InterviewQuestion> GetInterviewQuestions()
         {
-            return db.InterviewQuestions.Where(q => q.Content != null || q.Receiver != null).ToList();
+            return db.InterviewQuestions.Where(q => q.Content != null && q.Receiver != null).ToList();
         }
     }
 }
