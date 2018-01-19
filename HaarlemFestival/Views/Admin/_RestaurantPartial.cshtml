@@ -6,7 +6,31 @@
         $("#Rating").keypress(function (key) {
             key.preventDefault();
         });
+
+        CheckCuisineSelectors();
     });
+
+    function CheckCuisineSelectors() {
+        var noCuisineSelected = 0;
+
+        $("#CuisineSelector select.Cuisines").each(function () {
+            var selectedValue = $(this).find('option:selected').val().toString();
+            console.log(this);
+            console.log("Value: " + selectedValue);
+            if (selectedValue == "") {
+                if (noCuisineSelected >= 1) {
+                    $(this).remove();
+                }
+                noCuisineSelected++;
+            }
+
+        });
+
+        if (noCuisineSelected == 0) {
+            console.log("Add New Select");
+            // TODO: Nieuwe Dropdown Toevoegen
+        }
+    }
 </script>
 
 @if (ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Count() > 0)
@@ -67,7 +91,7 @@ catch (Exception) { }
 </div>
 
 <div class="form-group">
-    <div class="input-group">
+    <div class="input-group" id="CuisineSelector">
         @Html.Label("Cuisines") <br />
 
         @if (Model.Cuisines != null)
@@ -75,11 +99,9 @@ catch (Exception) { }
 
             foreach (Cuisine c in Model.Cuisines)
             {
-                @Html.DropDownList("Cuisine", new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam", c.CuisineId), "[Select a Cuisine]", new { @Value = c.CuisineId, @class = "Cuisines" }) <br />
+                @Html.DropDownList("Cuisine" + c.CuisineId, new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam", c.CuisineId), "[Select a Cuisine]", new { @Value = c.CuisineId, @class = "Cuisines", @onchange = "CheckCuisineSelectors();" }) <br />
             }
         }
-
-        @Html.DropDownList("Cuisine", new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam"), "[Select a Cuisine]", new { @class = "Cuisines" }) <br />
 
     </div>
 </div>
