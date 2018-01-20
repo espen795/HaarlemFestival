@@ -1396,16 +1396,6 @@ input[type='text']:focus, input[type='password']:focus {
 .overviewContent {
     margin-top: 10px;
     margin-bottom: 10px;
-    border: 1px solid black;
-    background-color: #F0FFF0;
-}
-
-.overviewContent:nth-child(odd) {
-    margin-right: 5px;
-}
-
-.overviewContent:nth-child(even) {
-    margin-left: 5px;
 }
 
 #manageEventSelection {
@@ -1655,10 +1645,9 @@ input[type='text']:focus, input[type='password']:focus {
 
 .introText {
     width: 95%;
-    font-weight: bold;
     margin-left: auto;
     margin-right: auto;
-    text-align: center;
+    text-align: left;
 }
 
 #downloadComplete {
