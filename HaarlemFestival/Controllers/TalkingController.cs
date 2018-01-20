@@ -40,16 +40,6 @@ namespace HaarlemFestival.Controllers
             return View(allTalksAndQuestion);
         }
 
-        private bool CheckInterviewQuestion(InterviewQuestion question)
-        {
-            if (question.Content == null)
-                return false;
-            else if (question.Receiver == null)
-                return false;
-            return true;
-        }
-
-
         [HttpPost]
         public ActionResult Book(TalkViewModel activiteit)
         {
@@ -83,6 +73,15 @@ namespace HaarlemFestival.Controllers
 
             // Partial view continue or basket
             return RedirectToAction("Reservation", "Talking");
+        }
+
+        private bool CheckInterviewQuestion(InterviewQuestion question)
+        {
+            if (question.Content == null)
+                return false;
+            else if (question.Receiver == null)
+                return false;
+            return true;
         }
     }
 }
