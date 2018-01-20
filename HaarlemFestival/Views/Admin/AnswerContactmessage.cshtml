@@ -1,67 +1,152 @@
 ﻿@using HaarlemFestival.Models;
 @{
-    ViewBag.Title = "AnswerContactmessage";
+    ViewBag.Title = "Answer Contactmessages";
 }
 @model AnswerContactViewModel
 
+<div class="event-banner"></div>
+@{
+    if (Session["Question_Answered"] != null)
+    {
+        if ((bool)Session["Question_Answered"])
+        {
+            <div class="basket-alert">
+                <div class="alert alert-success alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <h3>Success!</h3> The questions has been answered.
+                </div>
+            </div>
+        }
+
+        Session["Question_Answered"] = false;
+    }
+}
+
+<div class="modal fade" id="messagePopup" tabindex="-1" role="dialog" aria-labelledby="deletePopup">
+    <div class="modal-dialog modal-lg" role="document">
+
+        <!-- CONTENT -->
+        <div class="modal-content">
+
+
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".question").each(function () {
-            $(this).hide();
-        })
-    })
 
-    function FilterCategory() {
-        var category = $("#RegardingSelect").val();
+    });
 
-        $(".question").each(function () {
-            $(this).hide();
+    // Data uit de tabel filteren.
+    function FilterData() {
+        var filters = [];
+
+
+        // Voor elke filter
+        $('.filters').each(function () {
+
+            if ($(this).val() != "") // Als de filter is geselecteerd.
+            {
+                filters.push($(this).val()) // Filter toevoegen.
+            }
         })
 
-        $(".category-" + category).each(function () {
-            $(this).show();
+
+        // TEST: Alle Filters in de console neerzetten.
+        console.log(filters);
+
+        // Alle rows van de table vinden.
+        var tr = $(".data").find("tr");
+        tr.hide(); // Alle rows van de table verbergen.
+
+        // Als er geen filter is geselecteerd.
+        if (filters.length == 0) {
+            tr.show(); // Alle rijen laten zien.
+            return; // Uit de functie gaan.
+        }
+
+        // Elke rij filteren.
+        tr.filter(function () {
+            var $t = $(this);
+            for (var index = 0; index < filters.length; ++index) {
+
+                if ($t.is(":not(:contains('" + filters[index] + "'))")) // Als de rij niet voldoet aan de filters
+                {
+                    return false; // Rij verbergen.
+                }
+            }
+
+            return true; // Rij laten zien.
         })
+            .show();
+    }
+
+    function ShowQuestionForm(id) {
+        $.get('@Url.Action("_AnswerQuestionPartial", "Admin")', { id: id }, function (form) {
+            $("#messagePopup .modal-content").html(form);
+                $(".errorAlert").css("display", "none");
+        });
     }
 </script>
 
 <div class="container">
-    <select id="RegardingSelect" name="RegardingSelect" onchange="FilterCategory()">
-        <option>Select a Category.</option>
-        <option value="0">Jazz@Patronaat</option>
-        <option value="1">Dinner In Haarlem</option>
-        <option value="2">Talking Haarlem</option>
-        <option value="3">Historic Haarlem</option>
-        <option value="4">Orders</option>
-        <option value="5">Other</option>
-    </select>
-
-    @foreach (ContactMessage message in Model.Messages)
-    {
-        <div class="category-@((int)message.Regarding) question manageEvent formStyle">
-            <div class="col-md-6">
-                @Html.Label("Name")
-                @Html.TextBox("Name", message.Name, new { @class = "" })
+    <section id="topFilterBar" class="col-md-12">
+        <div id="selectEvent" class="col-md-3 col-sm-12">
+            <b>Select a Category</b>
+            <br />
+            <select id="RegardingSelect" class="filters" name="RegardingSelect" onchange="FilterData()">
+                <option value="">Select a Category.</option>
+                <option value="0">Jazz@Patronaat</option>
+                <option value="1">Dinner In Haarlem</option>
+                <option value="2">Talking Haarlem</option>
+                <option value="3">Historic Haarlem</option>
+                <option value="4">Orders</option>
+                <option value="5">Other</option>
+            </select>
+        </div>
+        <div id="filterSystem" class="col-md-9 col-sm-12">
+            <div class="col-md-3">
+                <b>Answered</b>
+                <br />
+                <select id="AnsweredSelect" class="filters" name="RegardingSelect" onchange="FilterData()">
+                    <option value="">Both</option>
+                    <option value="Yes">Answered</option>
+                    <option value="No">Not Answered</option>
+                </select>
             </div>
-            <div class="col-md-6">
-                @Html.Label("Email")
-                @Html.TextBox("Email", message.Email, new { @class = "" })
-            </div>
-            <div class="col-md-12">
-                @Html.Label("Subject")
-                @Html.TextBox("Subject", message.Subject, new { @class = "" })
-            </div>
-            <div class="col-md-12">
-                @Html.Label("Question")
-                @Html.TextArea("Question", new { @class = "" })
+            <div class="col-md-3">
+                <b>Search</b>
+                <br />
+                <input type="text" class="filters" onkeyup="FilterData()" />
             </div>
         </div>
-    }
-
-    @Html.BeginForm("AnswerMessage", "Admin")
-    {
-    <div class="answer-question col-md-12">
-        @Html.TextArea("Answer", "Admin", FormMethod.Post)
-        <input type="submit" class="btn btn-black" />
-    </div>
-    }
+    </section>
+    <table class="questionArea eventTable table table-striped table-responsive">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Question</th>
+                <th>Reviewed</th>
+                <th>Answer</th>
+            </tr>
+        </thead>
+        <tbody class="data text-center">
+            @foreach (ContactMessage message in Model.Messages)
+            {
+            <tr>
+                <td>@message.Regarding</td>
+                <td>@message.Name</td>
+                <td>@message.Email</td>
+                <td>@message.Subject</td>
+                <td>@message.Question</td>
+                <td>@(message.Answered ? "Yes" : "No")</td>
+                <td><a onclick="ShowQuestionForm(@message.Id);" data-toggle="modal" data-target="#messagePopup"><i class="fa fa-reply" aria-hidden="true"></i></a></td>
+            </tr>
+            }
+        </tbody>
+    </table>
 </div>

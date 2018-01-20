@@ -1,0 +1,29 @@
+﻿@using HaarlemFestival.Models;
+@model Account
+
+<!-- HEADER -->
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="myModalLabel">Update Account</h4>
+</div>
+
+<!-- BODY -->
+<div class="modal-body">
+    @Html.LabelFor(a => a.Naam)
+    @Html.TextBoxFor(a => a.Naam)
+
+    @Html.LabelFor(a => a.Username)
+    @Html.TextBoxFor(a => a.Username)
+
+    @Html.LabelFor(a => a.Password)
+    @Html.TextBoxFor(a => a.Password)
+
+    <!-- LabelFor Role -->
+    <!-- DropDownListFor Role -->
+</div>
+
+<!-- FOOTER -->
+<div class="modal-footer">
+    <button type="button" class="btn btn-success" onclick="DeleteConfirmed()"><i class="fa fa-check"></i> Yes, I am sure</button>
+    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> No, Take me back</button>
+</div>

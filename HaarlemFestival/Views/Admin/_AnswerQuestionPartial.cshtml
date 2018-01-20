@@ -1,0 +1,44 @@
+﻿@using HaarlemFestival.Models;
+@model ContactMessage
+
+<!-- HEADER -->
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="myModalLabel">Answer Question</h4>
+</div>
+
+<!-- BODY -->
+@using (Html.BeginForm("AnswerContactMessage", "Admin", new { Id = Model.Id }, FormMethod.Post, new { @class = "manageEvent formStyle" }))
+{
+    <div class="modal-body">
+        <div class="col-md-6">
+            @Html.Label("Name")
+            @Html.TextBox("Name", Model.Name, new { @class = "" })
+        </div>
+        <div class="col-md-6">
+            @Html.Label("Email")
+            @Html.TextBox("Email", Model.Email, new { @class = "" })
+        </div>
+        <div class="col-md-12">
+            @Html.Label("Subject")
+            @Html.TextBox("Subject", Model.Subject, new { @class = "" })
+        </div>
+        <div class="col-md-12">
+            @Html.Label("Question")
+            @Html.TextArea("Question", Model.Question, new { @class = "" })
+        </div>
+        <hr class="divide" />
+
+        <div class="answer-question col-md-12">
+            @Html.Label("Answer")
+            @Html.TextArea("Answer")
+        </div>
+        
+    </div>
+
+    <!-- FOOTER -->
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Confirm</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+    </div>
+}

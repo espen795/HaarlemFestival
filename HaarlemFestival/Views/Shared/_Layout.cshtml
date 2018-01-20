@@ -49,6 +49,7 @@
 
                     @if (Session["loggedin_account"] != null)
                     {
+                        HaarlemFestival.Models.Account account = (HaarlemFestival.Models.Account)Session["loggedin_account"];
                         <li class="dropdown right adminDropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 Admin
@@ -60,6 +61,10 @@
                                 <li>@Html.ActionLink("Ticket & Sales Information", "TicketSalesInformation", "Admin", null, new { @id = "adminSales" })</li>
                                 <li>@Html.ActionLink("Contact Messages", "AnswerContactmessage", "Admin", null, new { @id = "adminContact" })</li>
                                 <li>@Html.ActionLink("Interview Questions", "CheckInterviewQuestions", "Admin", null, new { @id = "adminInterviewQuestions" })</li>
+                                @if (account.Role.RoleName == "Owner")
+                                {
+                                    <li>@Html.ActionLink("Manage Accounts", "ManageAccounts", "Admin", null, new { @id = "adminAccounts" })</li>
+                                }
                                 <li>@Html.ActionLink("Log off", "LogOff", "Admin", null, new { @id = "adminLogout" })</li>
                             </ul>
                         </li>

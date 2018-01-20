@@ -9,8 +9,13 @@ namespace HaarlemFestival.Repository.Admin
 {
     public interface IAdminRepository
     {
-        // Login
+        // Account
+        List<Account> GetAccounts();
         Account GetAccount(string username, string password);
+        Account GetAccountById(int id);
+        void AddAccount(Account account);
+        void UpdateAccount(Account account);
+        void DeleteAccount(int id);
 
         // Contactformulier
         void SendContactMessage(ContactMessage message);
@@ -48,6 +53,9 @@ namespace HaarlemFestival.Repository.Admin
         float GetIncomeByType(EventType type);
 
         List<ContactMessage> GetContactMessages();
+        ContactMessage GetContactMessage(int id);
+        void UpdateContactMessage(ContactMessage message);
+
         List<InterviewQuestion> GetInterviewQuestions();
     }
 }

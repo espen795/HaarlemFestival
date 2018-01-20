@@ -61,19 +61,17 @@
                 <p class="content">
                     Please fill in the fields below. The fields with a * are required. These fields are required so we can get in contact with you to answer your question.
                 </p>
-                @using (Html.BeginForm("SendContactForm", "Home", FormMethod.Post, new { @class = "contact-form" }))
+                @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { @class = "contact-form" }))
                 {
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                     <div class="contact-form-name">
                         <label for="name">Name: *</label>
                         @Html.TextBoxFor(c => c.Name)
                     </div>
+
                     <div class="contact-form-email">
                         <label for="email">E-mail: *</label>
                         @Html.TextBoxFor(c => c.Email)
-                    </div>
-                    <div class="contact-form-subject">
-                        <label for="subject">Subject:</label>
-                        @Html.TextBoxFor(c => c.Subject)
                     </div>
 
                     <div class="contact-form-regarding">
@@ -87,6 +85,11 @@
                             <option value="4">Orders</option>
                             <option value="5">Other</option>
                         </select>
+                    </div>
+
+                    <div class="contact-form-subject">
+                        <label for="subject">Subject: *</label>
+                        @Html.TextBoxFor(c => c.Subject)
                     </div>
 
                     <div class="contact-form-question">

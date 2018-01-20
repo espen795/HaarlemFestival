@@ -6,6 +6,54 @@
     ViewBag.Title = "Manage";
     StringBuilder builder = new StringBuilder();
 }
+<div class="event-banner"></div>
+@{
+    if (Session["Data_Added"] != null)
+    {
+        if ((bool)Session["Data_Added"])
+        {
+            <div class="basket-alert">
+                <div class="alert alert-success alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <h3>Success!</h3> The event has sucessfully been added.
+                </div>
+            </div>
+        }
+
+        Session["Data_Added"] = false;
+    }
+
+    if (Session["Data_Updated"] != null)
+    {
+        if ((bool)Session["Data_Updated"])
+        {
+            <div class="basket-alert">
+                <div class="alert alert-success alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <h3>Success!</h3> The event has sucessfully been updated.
+                </div>
+            </div>
+        }
+
+        Session["Data_Updated"] = false;
+    }
+
+    if (Session["Data_Deleted"] != null)
+    {
+        if ((bool)Session["Data_Deleted"])
+        {
+            <div class="basket-alert">
+                <div class="alert alert-success alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <h3>Success!</h3> The event has sucessfully been deleted.
+                </div>
+            </div>
+        }
+
+        Session["Data_Deleted"] = false;
+    }
+}
+
 
 <!-- Modal Delete Data -->
 <div class="modal fade" id="deletePopup" tabindex="-1" role="dialog" aria-labelledby="deletePopup">
@@ -92,9 +140,9 @@
 
 <!-- Modal Image -->
 <div class="modal fade" id="imagePopup" tabindex="-1" role="dialog" aria-labelledby="imagePopup">
-        <span id="closeImage" class="close">&times;</span>
-        <!-- CONTENT -->
-       <img id="eventImage" class="modal-content showEventImage" src="" onError="this.src = '../images/no_image.jpg'"/>
+    <span id="closeImage" class="close">&times;</span>
+    <!-- CONTENT -->
+    <img id="eventImage" class="modal-content showEventImage" src="" onError="this.src = '../images/no_image.jpg'" />
 </div>
 
 
@@ -142,7 +190,7 @@
         {
             var modal = document.getElementById('imagePopup');
             var modalImg = document.getElementById("eventImage");
-            
+
             modal.style.display = "block";
             modalImg.src = "../images/" + path;
 
@@ -379,15 +427,15 @@
     </div>
 
     <section>
-            <div class="event-section-2 eventImage" id="jazzImage">
-                <hr class="title-hr title-line-left">
-                <div class="event-header">
-                    <div class="overlay">
-                        <span class="header_tekst">Jazz@Patronaat</span>
-                    </div>
+        <div class="event-section-2 eventImage" id="jazzImage">
+            <hr class="title-hr title-line-left">
+            <div class="event-header">
+                <div class="overlay">
+                    <span class="header_tekst">Jazz@Patronaat</span>
                 </div>
-                <hr class="title-hr title-line-right">
             </div>
+            <hr class="title-hr title-line-right">
+        </div>
 
         <table id="jazzTable" class="eventTable table table-striped table-responsive">
             <thead>

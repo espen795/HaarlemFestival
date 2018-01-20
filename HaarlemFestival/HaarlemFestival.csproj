@@ -243,9 +243,18 @@
     <Compile Include="Migrations\201801181131506_mig24.Designer.cs">
       <DependentUpon>201801181131506_mig24.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801181340565_mig25.cs" />
+    <Compile Include="Migrations\201801181340565_mig25.Designer.cs">
+      <DependentUpon>201801181340565_mig25.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801201709527_mig26.cs" />
+    <Compile Include="Migrations\201801201709527_mig26.Designer.cs">
+      <DependentUpon>201801201709527_mig26.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Activity.cs" />
+    <Compile Include="Models\AdminAuthorize.cs" />
     <Compile Include="Models\AgendaView.cs" />
     <Compile Include="Models\AnswerContactViewModel.cs" />
     <Compile Include="Models\BasketModel.cs" />
@@ -266,6 +275,7 @@
     <Compile Include="Models\JazzViewModels.cs" />
     <Compile Include="Models\Locations.cs" />
     <Compile Include="Models\QuestionCategory.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Talk.cs" />
     <Compile Include="Models\Talking.cs" />
     <Compile Include="Models\Jazz.cs" />
@@ -367,6 +377,11 @@
     <Content Include="Views\Admin\AnswerContactmessage.cshtml" />
     <Content Include="Views\Home\Completed.cshtml" />
     <Content Include="Views\Admin\CheckInterviewQuestions.cshtml" />
+    <Content Include="Views\Admin\_AnswerQuestionPartial.cshtml" />
+    <Content Include="Views\Admin\_AccountPartial.cshtml" />
+    <Content Include="Views\Admin\_AddAccountPartial.cshtml" />
+    <Content Include="Views\Admin\_UpdateAccountPartial.cshtml" />
+    <Content Include="Views\Admin\ManageAccounts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -454,6 +469,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801181131506_mig24.resx">
       <DependentUpon>201801181131506_mig24.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801181340565_mig25.resx">
+      <DependentUpon>201801181340565_mig25.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801201709527_mig26.resx">
+      <DependentUpon>201801201709527_mig26.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
