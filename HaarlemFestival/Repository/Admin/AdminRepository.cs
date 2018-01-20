@@ -12,10 +12,38 @@ namespace HaarlemFestival.Repository.Admin
     {
         private HFDB db = new HFDB();
 
+        public List<Account> GetAccounts()
+        {
+            return db.Accounts.ToList();
+        }
+
         public Account GetAccount(string username, string password)
         {
             Account account = db.Accounts.Where(a => (a.Username == username) && (a.Password == password)).FirstOrDefault();
             return account;
+        }
+
+        public Account GetAccountById(int id)
+        {
+            return db.Accounts.Find(id);
+        }
+
+        public void AddAccount(Account account)
+        {
+            db.Accounts.Add(account);
+        }
+
+        public void UpdateAccount(Account account)
+        {
+            db.Entry(account).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+
+        public void DeleteAccount(int id)
+        {
+            Account account = GetAccountById(id);
+            db.Accounts.Remove(account);
+            db.SaveChanges();
         }
 
         public void SendContactMessage(ContactMessage message)

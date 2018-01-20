@@ -37,6 +37,21 @@
 
         Session["Data_Updated"] = false;
     }
+
+    if (Session["Data_Deleted"] != null)
+    {
+        if ((bool)Session["Data_Deleted"])
+        {
+            <div class="basket-alert">
+                <div class="alert alert-success alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <h3>Success!</h3> The event has sucessfully been deleted.
+                </div>
+            </div>
+        }
+
+        Session["Data_Deleted"] = false;
+    }
 }
 
 

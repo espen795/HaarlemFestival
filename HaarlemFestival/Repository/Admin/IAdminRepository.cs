@@ -9,8 +9,13 @@ namespace HaarlemFestival.Repository.Admin
 {
     public interface IAdminRepository
     {
-        // Login
+        // Account
+        List<Account> GetAccounts();
         Account GetAccount(string username, string password);
+        Account GetAccountById(int id);
+        void AddAccount(Account account);
+        void UpdateAccount(Account account);
+        void DeleteAccount(int id);
 
         // Contactformulier
         void SendContactMessage(ContactMessage message);

@@ -4,8 +4,23 @@
     ViewBag.Account = (Account)Session["loggedin_account"];
 }
 <div class="event-banner"></div>
-<script type="text/javascript">
+@{
+    if (Session["NotAuthorized"] != null)
+    {
+        if ((bool)Session["NotAuthorized"])
+        {
+            <div class="basket-alert">
+                <div class="alert alert-danger alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <h3>Failure!</h3> You do not have permission to access this page.
+                </div>
+            </div>
+        }
 
+        Session["NotAuthorized"] = false;
+    }
+}
+<script type="text/javascript">
     $(document).ready(function () {
 
         AddRows();
@@ -54,7 +69,7 @@
     function DownloadInformation()
     {
         $.ajax({
-                type: 'post',
+            type: 'post',
                 url: '@Url.Action("DownloadTicketSalesInformation", "Admin")',
                 complete: function (data) {
                     $("#downloadComplete").show();
@@ -63,8 +78,8 @@
                     $("#downloadComplete .modal-title").text("Download Complete!");
                     $("#downloadLocation").html("The File has been saved to: <strong>" + data.responseJSON.location + "</strong>");
                     $("#closeDownloadButton").removeAttr("disabled");
-                }
-            });
+            }
+        });
 
     }
 </script>
@@ -190,4 +205,18 @@
             </div>
         </div>
     </div>
+    @if (ViewBag.Account.Role.RoleName == "Owner")
+    {
+        <div class="col-md-6 overviewContent col-sm-12" id="Accounts">
+            <div class="panel panel-default">
+                <div class="panel-heading"><b>Talking Haarlem - Interview Questions</b></div>
+                <div class="panel-body">
+                    [Accounts Introduction]
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    <div class="col-sm-12 middle">@Html.ActionLink("Manage Accounts", "ManageAccounts", "Admin", null, new { @class = "white btn btn-black" })</div>
+                </div>
+            </div>
+        </div>
+    }
+
 </div>

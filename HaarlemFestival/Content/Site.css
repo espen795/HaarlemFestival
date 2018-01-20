@@ -114,6 +114,11 @@ hr.divide {
         content: "\f0e6";
         font-family: FontAwesome;
     }
+
+    .navbar li.adminDropdown #adminAccounts::before {
+        content: "\f2be";
+        font-family: FontAwesome;
+    }
 /* #endregion */
 
 /* FOOTER */
