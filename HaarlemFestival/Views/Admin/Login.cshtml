@@ -29,6 +29,8 @@
             sessionStorage.setItem("failedLogins", 0);
         }
 
+        $('[data-toggle="tooltip"]').tooltip();
+
         var badLogins = sessionStorage.getItem("failedLogins");
         GetModelErrors("@ViewData.ModelState.IsValid", badLogins)
 
@@ -110,6 +112,9 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <a href="#" data-toggle="tooltip" data-placement="right" title="If you forgot your password, please contact the owner of the website." aria-hidden="true">Forgot your password?</a>
+                </div>
+                <div class="form-group middle">
                     <input id="loginButton" class="form-control" type="submit" value="Log in >>" />
                 </div>
             }
