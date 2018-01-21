@@ -3,6 +3,7 @@
     /**/
 
     ViewBag.Title = "ManageAccounts";
+    Account loggedin_account = (Account)Session["loggedin_account"];
 }
 @model List<Account>
 
@@ -105,14 +106,23 @@
 </div>
 
 <script type="text/javascript">
+    $(document).ready(function () {
+        $("form").on("submit", function (form) {
+            form.preventDefault();
+        })
+
+        // Als een form gesubmit wordt
+        $("form").submit(function () {
+            SubmitForm(this);
+        });
+    });
+
      function OpenUpdateForm(id) {
-            $.get('@Url.Action("_UpdateData", "Admin")', { id: id, type: type }, function (form) {
+            $.get('@Url.Action("_UpdateData", "Admin")', { id: id, type: 'Account' }, function (form) {
                 $("#updatePopup .modal-content").html(form);
                 $(".errorAlert").css("display", "none");
-                SetFormOptions();
             });
      }
-
 
      function OpenDeleteConfirm(id) {
             $("#deletePopup").attr("accountId", id);
@@ -126,6 +136,25 @@
             $.post(url, { id: accountId });
 
             window.location.href = '@Url.Action("ManageAccounts", "Admin")';
+     }
+
+    function SubmitForm(form) {
+            $.ajax({
+                type: 'post',
+                url: $(form).attr("action"),
+                data: $(form).serialize(),
+                complete: function (data) {
+                    console.log(data);
+
+                    if (data.responseJSON.success == true) {
+                        window.location.href = '@Url.Action("ManageAccounts", "Admin")';
+                    }
+                    else {
+                        $(".errorAlert").css("display", "block");
+                        $(".errorList").html(data.responseJSON.errorList);
+                    }
+                }
+            });
         }
 
 </script>
@@ -146,9 +175,18 @@
                 <tr>
                     <td>@account.Naam</td>
                     <td>@account.Username</td>
-                    <td>Role</td>
-                    <td><i onclick="OpenUpdateForm(@account.Id)" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
-                    <td><i onclick="OpenDeleteConfirm(@account.Id)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                    <td>@account.Role.RoleName</td>
+
+                    @if (account.Id != loggedin_account.Id)
+                    {
+                        <td><i onclick="OpenUpdateForm(@account.Id)" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
+                        <td><i onclick="OpenDeleteConfirm(@account.Id)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                    }
+                    else
+                    {
+                        <td></td>
+                        <td></td>
+                    }
                 </tr>
             }
         </tbody>

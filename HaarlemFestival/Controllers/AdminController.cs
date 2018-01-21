@@ -360,11 +360,11 @@ namespace HaarlemFestival.Controllers
         }
 
         [HttpPost]
-        public JsonResult AddAccount(Models.Account account)
+        public JsonResult AddAccount(Models.ManageAccountViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                adminRepository.AddAccount(account);
+                adminRepository.AddAccount(viewModel.Account);
                 Session["Data_Added"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
@@ -409,6 +409,9 @@ namespace HaarlemFestival.Controllers
 
                 case "historic":
                     return PartialView("_UpdateHistoricPartial", id);
+
+                case "account":
+                    return PartialView("_UpdateAccountPartial", id);
 
                 default:
                     return RedirectToAction("ManageEvent", "Admin");
@@ -636,11 +639,11 @@ namespace HaarlemFestival.Controllers
 
 
         [HttpPost]
-        public JsonResult UpdateAccount(Models.Account account)
+        public JsonResult UpdateAccount(Models.ManageAccountViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                adminRepository.UpdateAccount(account);
+                adminRepository.UpdateAccount(viewModel.Account);
                 Session["Data_Updated"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
@@ -890,7 +893,14 @@ namespace HaarlemFestival.Controllers
             else
                 account = new Account();
 
-            return PartialView(account);
+            ManageAccountViewModel viewModel = new ManageAccountViewModel
+            {
+                Account = account,
+                Roles = adminRepository.GetRoles()
+            };
+
+
+            return PartialView(viewModel);
         }
 
         public ActionResult _AddAccountPartial()

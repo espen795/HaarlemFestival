@@ -45,6 +45,11 @@ namespace HaarlemFestival.Repository.Admin
             db.Accounts.Remove(account);
             db.SaveChanges();
         }
+        
+        public List<Role> GetRoles()
+        {
+            return db.Roles.ToList();
+        }
 
         public void SendContactMessage(ContactMessage message)
         {

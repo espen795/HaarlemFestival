@@ -274,6 +274,7 @@
     <Compile Include="Models\JazzView.cs" />
     <Compile Include="Models\JazzViewModels.cs" />
     <Compile Include="Models\Locations.cs" />
+    <Compile Include="Models\ManageAccountViewModel.cs" />
     <Compile Include="Models\QuestionCategory.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Talk.cs" />

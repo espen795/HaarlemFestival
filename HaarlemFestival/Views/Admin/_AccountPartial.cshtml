@@ -1,5 +1,5 @@
 ﻿@using HaarlemFestival.Models;
-@model Account
+@model ManageAccountViewModel
 
 <!-- HEADER -->
 <div class="modal-header">
@@ -9,17 +9,28 @@
 
 <!-- BODY -->
 <div class="modal-body">
-    @Html.LabelFor(a => a.Naam)
-    @Html.TextBoxFor(a => a.Naam)
-
-    @Html.LabelFor(a => a.Username)
-    @Html.TextBoxFor(a => a.Username)
-
-    @Html.LabelFor(a => a.Password)
-    @Html.TextBoxFor(a => a.Password)
-
-    <!-- LabelFor Role -->
-    <!-- DropDownListFor Role -->
+    <div class="row">
+        <div class="col-md-12">
+            @Html.Label("Name")
+            @Html.TextBoxFor(a => a.Account.Naam, new { @type = "text" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            @Html.Label("Username")
+            @Html.TextBoxFor(a => a.Account.Username, new { @type = "text" })
+        </div>
+        <div class="col-md-6">
+            @Html.Label("Password")
+            @Html.TextBoxFor(a => a.Account.Password, new { @type = "text" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @Html.LabelFor(a => a.Account.RoleId)
+            @Html.DropDownListFor(a => a.Account.RoleId, new SelectList(Model.Roles, "Id", "RoleName"))
+        </div>
+    </div>
 </div>
 
 <!-- FOOTER -->

@@ -16,6 +16,7 @@ namespace HaarlemFestival.Repository.Admin
         void AddAccount(Account account);
         void UpdateAccount(Account account);
         void DeleteAccount(int id);
+        List<Role> GetRoles();
 
         // Contactformulier
         void SendContactMessage(ContactMessage message);
