@@ -13,19 +13,19 @@
     <div class="modal-body">
         <div class="col-md-6">
             @Html.Label("Name")
-            @Html.TextBox("Name", Model.Name, new { @class = "" })
+            @Html.TextBox("Name", Model.Name, new { @class = "", @readonly = "readonly" })
         </div>
         <div class="col-md-6">
             @Html.Label("Email")
-            @Html.TextBox("Email", Model.Email, new { @class = "" })
+            @Html.TextBox("Email", Model.Email, new { @class = "", @readonly = "readonly" })
         </div>
         <div class="col-md-12">
             @Html.Label("Subject")
-            @Html.TextBox("Subject", Model.Subject, new { @class = "" })
+            @Html.TextBox("Subject", Model.Subject, new { @class = "", @readonly = "readonly" })
         </div>
         <div class="col-md-12">
             @Html.Label("Question")
-            @Html.TextArea("Question", Model.Question, new { @class = "" })
+            @Html.TextArea("Question", Model.Question, new { @class = "", @readonly = "readonly" })
         </div>
         <hr class="divide" />
 

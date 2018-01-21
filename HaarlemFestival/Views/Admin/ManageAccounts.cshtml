@@ -5,7 +5,7 @@
     ViewBag.Title = "ManageAccounts";
     Account loggedin_account = (Account)Session["loggedin_account"];
 }
-@model List<Account>
+@model ManageAccountViewModel
 
 <div class="event-banner"></div>
 @{
@@ -54,20 +54,10 @@
         Session["Data_Deleted"] = false;
     }
 }
-            <script type="text/javascript">
 
-     function SetFormOptions() {
-         // Ervoor zorgen dat de form niet de actie uitvoerd.
-         $("form").on("submit", function (form) {
-             form.preventDefault();
-         });
-
-         // Als een form gesubmit wordt
-         $("form").submit(function () {
-             SubmitForm(this);
-         });
-     }
-
+<script type="text/javascript" src="~/Scripts/SetFormOptions.js"></script>
+<script type="text/javascript" src="~/Scripts/FilterTableData.js"></script>
+<script type="text/javascript">
      function OpenUpdateForm(id) {
             $.get('@Url.Action("_UpdateData", "Admin")', { id: id, type: 'Account' }, function (form) {
                 $("#updatePopup .modal-content").html(form);
@@ -88,29 +78,6 @@
             $.post(url, { id: accountId });
 
             window.location.href = '@Url.Action("ManageAccounts", "Admin")';
-
-
-            function SubmitForm(form) {
-            $.ajax({
-                type: 'post',
-                url: $(form).attr("action"),
-                data: $(form).serialize(),
-                complete: function (data) {
-                    console.log(data);
-                    console.log();
-
-                    if (data.responseJSON.success == true) {
-                        console.log("Successful");
-                        var selectedEvent = $('#selectedEvent').val();
-                        window.location.href = '@Url.Action("ManageEvent", "Admin")?selectedEvent=' + selectedEvent;
-                    }
-                    else {
-                        $(".errorAlert").css("display", "block");
-                        $(".errorList").html(data.responseJSON.errorList);
-                    }
-                }
-            });
-            }
      }
 
     function SubmitForm(form) {
@@ -177,7 +144,7 @@
 <div class="modal fade" id="updatePopup" tabindex="-1" role="dialog" aria-labelledby="newPopup">
     <div class="modal-dialog modal-lg" role="document">
 
-        <!-- CONTENT -->
+        <!-- CONTENT WORDT INGELADEN VIA JS FUNCTIE DIE EEN PARTIALVIEW LAAD -->
         <div class="modal-content">
 
         </div>
@@ -185,6 +152,23 @@
 </div>
 
 <div class="container body-content">
+
+
+    <section id="topFilterBar" class="col-md-12">
+        <div id="selectEvent" class="col-md-3 col-sm-12">
+            <b>Select a Category</b>
+            <br />
+            @Html.DropDownList("RoleSelection", new SelectList(Model.Roles, "RoleName", "RoleName" ), new { })
+        </div>
+        <div id="filterSystem" class="col-md-9 col-sm-12">
+            <div class="col-md-3 searchBox">
+                <b>Search</b>
+                <br />
+                <input id="searchData" class="filters" type="text" name="search" placeholder="&#xF002 Search.." onkeyup="FilterData()">
+            </div>
+        </div>
+    </section>
+
     <table class="eventTable table table-striped table-responsive">
         <thead>
             <tr>
@@ -194,8 +178,8 @@
                 <th colspan="2"></th>
             </tr>
         </thead>
-        <tbody class="eventData">
-            @foreach (Account account in Model)
+        <tbody class="data">
+            @foreach (Account account in Model.AccountList)
             {
                 <tr>
                     <td>@account.Naam</td>

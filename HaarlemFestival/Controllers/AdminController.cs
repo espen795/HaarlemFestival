@@ -101,9 +101,13 @@ namespace HaarlemFestival.Controllers
             if(!UserAuthorized(allowedRoles))
                 return RedirectToAction("Overview", "Admin");
 
-            List<Account> accounts = adminRepository.GetAccounts();
+            ManageAccountViewModel viewModel = new ManageAccountViewModel()
+            {
+                AccountList = adminRepository.GetAccounts(),
+                Roles = adminRepository.GetRoles()
+            };
 
-            return View(accounts);
+            return View(viewModel);
         }
         #endregion
 
@@ -1229,7 +1233,7 @@ namespace HaarlemFestival.Controllers
             return errors; // String met errors terugsturen.
         }
 
-
+        [HttpPost]
         public ActionResult AnswerContactmessage(int id, FormCollection collector)
         {
             if (ModelState.IsValid)
