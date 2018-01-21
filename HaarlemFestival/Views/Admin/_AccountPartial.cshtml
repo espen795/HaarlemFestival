@@ -11,6 +11,7 @@
 <div class="modal-body">
     <div class="row">
         <div class="col-md-12">
+            @Html.HiddenFor(a => a.Account.Id)
             @Html.Label("Name")
             @Html.TextBoxFor(a => a.Account.Naam, new { @type = "text" })
         </div>
@@ -35,6 +36,6 @@
 
 <!-- FOOTER -->
 <div class="modal-footer">
-    <button type="button" class="btn btn-success" onclick="DeleteConfirmed()"><i class="fa fa-check"></i> Yes, I am sure</button>
-    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> No, Take me back</button>
+    <input type="submit" class="btn btn-success" value="Save" />
+    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 </div>

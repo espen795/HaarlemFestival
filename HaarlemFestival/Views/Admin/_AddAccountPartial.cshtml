@@ -1,4 +1,4 @@
-﻿@using (Html.BeginForm("AddAccount", "Admin", FormMethod.Post, new { @class = "manageEvent formStyle" }))
+﻿@using (Ajax.BeginForm("AddAccount", "Admin", new AjaxOptions { HttpMethod = "POST", OnComplete = "$(this).preventDefault();"}, new { @class = "manageEvent formStyle" }))
 {
     Html.RenderAction("_AccountPartial", "Admin");
 }

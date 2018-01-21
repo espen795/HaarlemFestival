@@ -107,14 +107,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("form").on("submit", function (form) {
-            form.preventDefault();
-        })
-
-        // Als een form gesubmit wordt
-        $("form").submit(function () {
-            SubmitForm(this);
-        });
+        SetFormOptions();
     });
 
      function OpenUpdateForm(id) {
@@ -137,6 +130,18 @@
 
             window.location.href = '@Url.Action("ManageAccounts", "Admin")';
      }
+
+    function SetFormOptions() {
+        // Ervoor zorgen dat de form niet de actie uitvoerd.
+        $("form").on("submit", function (form) {
+            form.preventDefault();
+        })
+
+        // Als een form gesubmit wordt
+        $("form").submit(function () {
+            SubmitForm(this);
+        });
+    }
 
     function SubmitForm(form) {
             $.ajax({
