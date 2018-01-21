@@ -31,6 +31,7 @@ namespace HaarlemFestival.Repository.Admin
         public void AddAccount(Account account)
         {
             db.Accounts.Add(account);
+            db.SaveChanges();
         }
 
         public void UpdateAccount(Account account)

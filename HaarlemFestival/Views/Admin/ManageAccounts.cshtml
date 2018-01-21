@@ -158,7 +158,7 @@
         <div id="selectEvent" class="col-md-3 col-sm-12">
             <b>Select a Category</b>
             <br />
-            @Html.DropDownList("RoleSelection", new SelectList(Model.Roles, "RoleName", "RoleName" ), new { })
+            @Html.DropDownList("RoleSelection", new SelectList(Model.Roles, "RoleName", "RoleName"), new { })
         </div>
         <div id="filterSystem" class="col-md-9 col-sm-12">
             <div class="col-md-3 searchBox">
@@ -168,6 +168,13 @@
             </div>
         </div>
     </section>
+
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4" id="newDataDiv">
+            <div class="col-md-12 middle">In need of a new account? You can add it over here!</div>
+            <div class="col-md-12 middle"><button class="btn btn-black" data-toggle="modal" data-target="#addPopup" onclick="SetFormOptions();" href="#">Add new data.</button></div>
+        </div>
+    </div>
 
     <table class="eventTable table table-striped table-responsive">
         <thead>
