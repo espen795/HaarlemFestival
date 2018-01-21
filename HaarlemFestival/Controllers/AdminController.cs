@@ -95,9 +95,12 @@ namespace HaarlemFestival.Controllers
             return View(interviewQuestions);
         }
 
-        [AdminAuthorize(Roles = "Owner")]
         public ActionResult ManageAccounts()
         {
+            string[] allowedRoles = new string[] { "Owner" };
+            if(!UserAuthorized(allowedRoles))
+                return RedirectToAction("Overview", "Admin");
+
             List<Account> accounts = adminRepository.GetAccounts();
 
             return View(accounts);
@@ -887,12 +890,12 @@ namespace HaarlemFestival.Controllers
             else
                 account = new Account();
 
-            return PartialView();
+            return PartialView(account);
         }
 
-        public ActionResult _AddAccountPartial(int id)
+        public ActionResult _AddAccountPartial()
         {
-            return PartialView(id);
+            return PartialView();
         }
 
         public ActionResult _UpdateAccountPartial(int id)
@@ -1216,7 +1219,7 @@ namespace HaarlemFestival.Controllers
             return errors; // String met errors terugsturen.
         }
 
-        [Authorize]
+
         public ActionResult AnswerContactmessage(int id, FormCollection collector)
         {
             if (ModelState.IsValid)
@@ -1229,6 +1232,24 @@ namespace HaarlemFestival.Controllers
             }
 
             return RedirectToAction("AnswerContactMessage");
+        }
+
+        private bool UserAuthorized(string[] roles)
+        {
+            bool authorized = false;
+            Account account = (Account)Session["loggedin_account"];
+
+            foreach(string role in roles)
+            {
+                if (role.ToLower() == account.Role.RoleName.ToLower())
+                    authorized = true;
+            }
+
+            if (!authorized)
+            {
+                Session["NotAuthorized"] = true;
+            }
+            return authorized;
         }
         #endregion
     }
