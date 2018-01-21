@@ -54,7 +54,86 @@
         Session["Data_Deleted"] = false;
     }
 }
+            <script type="text/javascript">
 
+     function SetFormOptions() {
+         // Ervoor zorgen dat de form niet de actie uitvoerd.
+         $("form").on("submit", function (form) {
+             form.preventDefault();
+         });
+
+         // Als een form gesubmit wordt
+         $("form").submit(function () {
+             SubmitForm(this);
+         });
+     }
+
+     function OpenUpdateForm(id) {
+            $.get('@Url.Action("_UpdateData", "Admin")', { id: id, type: 'Account' }, function (form) {
+                $("#updatePopup .modal-content").html(form);
+                $(".errorAlert").css("display", "none");
+                SetFormOptions();
+            });
+     }
+
+     function OpenDeleteConfirm(id) {
+            $("#deletePopup").attr("accountId", id);
+     }
+
+    function DeleteConfirmed() {
+            var type = sessionStorage.getItem("type");
+            var url = '@Url.Action("DeleteAccount", "Admin")';
+            var accountId = $("#deletePopup").attr("accountId");
+
+            $.post(url, { id: accountId });
+
+            window.location.href = '@Url.Action("ManageAccounts", "Admin")';
+
+
+            function SubmitForm(form) {
+            $.ajax({
+                type: 'post',
+                url: $(form).attr("action"),
+                data: $(form).serialize(),
+                complete: function (data) {
+                    console.log(data);
+                    console.log();
+
+                    if (data.responseJSON.success == true) {
+                        console.log("Successful");
+                        var selectedEvent = $('#selectedEvent').val();
+                        window.location.href = '@Url.Action("ManageEvent", "Admin")?selectedEvent=' + selectedEvent;
+                    }
+                    else {
+                        $(".errorAlert").css("display", "block");
+                        $(".errorList").html(data.responseJSON.errorList);
+                    }
+                }
+            });
+            }
+     }
+
+    function SubmitForm(form) {
+            $.ajax({
+                type: 'post',
+                url: $(form).attr("action"),
+                data: $(form).serialize(),
+                complete: function (data) {
+                    console.log(data);
+                    console.log();
+
+                    if (data.responseJSON.success == true) {
+                        console.log("Successful");
+                        window.location.href = '@Url.Action("ManageAccounts", "Admin")';
+                    }
+                    else {
+                        $(".errorAlert").css("display", "block");
+                        $(".errorList").html(data.responseJSON.errorList);
+                    }
+                }
+            });
+        }
+            </script>
 
 <!-- Modal Delete Data -->
 <div class="modal fade" id="deletePopup" tabindex="-1" role="dialog" aria-labelledby="deletePopup">
@@ -104,65 +183,6 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        SetFormOptions();
-    });
-
-     function OpenUpdateForm(id) {
-            $.get('@Url.Action("_UpdateData", "Admin")', { id: id, type: 'Account' }, function (form) {
-                $("#updatePopup .modal-content").html(form);
-                $(".errorAlert").css("display", "none");
-            });
-     }
-
-     function OpenDeleteConfirm(id) {
-            $("#deletePopup").attr("accountId", id);
-     }
-
-    function DeleteConfirmed() {
-            var type = sessionStorage.getItem("type");
-            var url = '@Url.Action("DeleteAccount", "Admin")';
-            var accountId = $("#deletePopup").attr("accountId");
-
-            $.post(url, { id: accountId });
-
-            window.location.href = '@Url.Action("ManageAccounts", "Admin")';
-     }
-
-    function SetFormOptions() {
-        // Ervoor zorgen dat de form niet de actie uitvoerd.
-        $("form").on("submit", function (form) {
-            form.preventDefault();
-        })
-
-        // Als een form gesubmit wordt
-        $("form").submit(function () {
-            SubmitForm(this);
-        });
-    }
-
-    function SubmitForm(form) {
-            $.ajax({
-                type: 'post',
-                url: $(form).attr("action"),
-                data: $(form).serialize(),
-                complete: function (data) {
-                    console.log(data);
-
-                    if (data.responseJSON.success == true) {
-                        window.location.href = '@Url.Action("ManageAccounts", "Admin")';
-                    }
-                    else {
-                        $(".errorAlert").css("display", "block");
-                        $(".errorList").html(data.responseJSON.errorList);
-                    }
-                }
-            });
-        }
-
-</script>
 
 <div class="container body-content">
     <table class="eventTable table table-striped table-responsive">

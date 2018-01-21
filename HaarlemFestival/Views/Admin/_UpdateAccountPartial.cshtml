@@ -1,7 +1,7 @@
 ﻿@using HaarlemFestival.Models;
 @model int
 
-@using (Ajax.BeginForm("UpdateAccount", "Admin", new AjaxOptions { HttpMethod = "POST" }, new { @class = "manageEvent formStyle" }))
+@using (Ajax.BeginForm("UpdateAccount", "Admin", null, new AjaxOptions { HttpMethod = "POST" }, new { @class = "manageEvent formStyle" }))
 {
     Html.RenderAction("_AccountPartial", "Admin", new { id = Model });
 }
