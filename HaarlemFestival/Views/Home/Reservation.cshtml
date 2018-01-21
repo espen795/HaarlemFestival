@@ -18,9 +18,11 @@
             {
                 List<string> PaymentMethod = new List<string>();
                 PaymentMethod.Add("Select an option...");
+                PaymentMethod.Add("Cash");
+                PaymentMethod.Add("Pin");
                 PaymentMethod.Add("iDeal");
                 PaymentMethod.Add("PayPal");
-                PaymentMethod.Add("Mastercard");
+                PaymentMethod.Add("Mastercard / Visa");
 
                 // Personal information
                 <div class="col-md-6 reservation">
@@ -42,6 +44,8 @@
 
                     @Html.LabelFor(m => Model.Klant.BetaalMethode)
                     @Html.DropDownListFor(m => Model.Klant.BetaalMethode, new SelectList(PaymentMethod))
+
+                    <p>Both the cash and pin options will be payed later, at the location.</p>
 
                     <button class="btn btn-black r" type="submit"> Confirm reservation</button>
                 </div>
