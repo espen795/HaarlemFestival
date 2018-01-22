@@ -28,5 +28,11 @@ namespace HaarlemFestival.Repository.Dinner
             db.Entry(activity).State = EntityState.Modified;
             db.SaveChanges();
         }
+
+        public void SendContactMessage(ContactMessage message)
+        {
+            db.ContactMessages.Add(message);
+            db.SaveChanges();
+        }
     }
 }
