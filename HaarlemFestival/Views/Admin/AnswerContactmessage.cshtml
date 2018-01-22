@@ -33,7 +33,8 @@
     </div>
 </div>
 <script type="text/javascript" src="~/Scripts/FilterTableData.js"></script>
-<script type="text/javascript"> 
+<script type="text/javascript">
+
     function ShowQuestionForm(id) {
         $.get('@Url.Action("_AnswerQuestionPartial", "Admin")', { id: id }, function (form) {
             $("#messagePopup .modal-content").html(form);
@@ -43,8 +44,8 @@
 </script>
 
 <div class="container">
-    <section id="topFilterBar" class="col-md-12">
-        <div id="selectEvent" class="col-md-3 col-sm-12">
+    <section id="topFilterBar" class="col-md-12 col-sm-12 col-xs-12">
+        <div id="selectEvent" class="col-md-3 col-sm-12 xol-xs-12">
             <b>Select a Category</b>
             <br />
             <select id="RegardingSelect" class="filters" name="RegardingSelect" onchange="FilterData()">
@@ -56,9 +57,10 @@
                 <option value="4">Orders</option>
                 <option value="5">Other</option>
             </select>
+
         </div>
         <div id="filterSystem" class="col-md-9 col-sm-12">
-            <div class="col-md-3">
+            <div class="col-md-3 eventFilter">
                 <b>Answered</b>
                 <br />
                 <select id="AnsweredSelect" class="filters" name="RegardingSelect" onchange="FilterData()">
@@ -67,37 +69,38 @@
                     <option value="No">Not Answered</option>
                 </select>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 eventFilter">
                 <b>Search</b>
                 <br />
                 <input id="searchData" class="filters" type="text" name="search" placeholder="&#xF002 Search.." onkeyup="FilterData()">
             </div>
         </div>
     </section>
+
     <table class="questionArea eventTable table table-striped table-responsive">
         <thead>
             <tr>
-                <th>Category</th>
+                <th class="mobile-hidden">Category</th>
                 <th>Name</th>
-                <th>Email</th>
-                <th>Subject</th>
-                <th>Question</th>
-                <th>Reviewed</th>
+                <th class="mobile-hidden">Email</th>
+                <th class="mobile-hidden">Subject</th>
+                <th class="mobile-hidden">Question</th>
+                <th class="mobile-hidden">Reviewed</th>
                 <th>Answer</th>
             </tr>
         </thead>
         <tbody class="data text-center">
             @foreach (ContactMessage message in Model.Messages)
             {
-            <tr>
-                <td>@message.Regarding</td>
-                <td>@message.Name</td>
-                <td>@message.Email</td>
-                <td>@message.Subject</td>
-                <td>@message.Question</td>
-                <td>@(message.Answered ? "Yes" : "No")</td>
-                <td><a onclick="ShowQuestionForm(@message.Id);" data-toggle="modal" data-target="#messagePopup"><i class="fa fa-reply" aria-hidden="true"></i></a></td>
-            </tr>
+                <tr>
+                    <td class="mobile-hidden">@message.Regarding</td>
+                    <td>@message.Name</td>
+                    <td class="mobile-hidden">@message.Email</td>
+                    <td class="mobile-hidden">@message.Subject</td>
+                    <td class="mobile-hidden">@message.Question</td>
+                    <td class="mobile-hidden">@(message.Answered ? "Yes" : "No")</td>
+                    <td><a onclick="ShowQuestionForm(@message.Id);" data-toggle="modal" data-target="#messagePopup"><i class="fa fa-reply" aria-hidden="true"></i></a></td>
+                </tr>
             }
         </tbody>
     </table>

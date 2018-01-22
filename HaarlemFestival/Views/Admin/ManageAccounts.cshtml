@@ -154,14 +154,14 @@
 <div class="container body-content">
 
 
-    <section id="topFilterBar" class="col-md-12">
-        <div id="selectEvent" class="col-md-3 col-sm-12">
+    <section id="topFilterBar" class="col-md-12 col-sm-12 col-xs-12">
+        <div id="selectEvent" class="col-md-3 col-sm-12 col-xs-12">
             <b>Select a Category</b>
             <br />
             @Html.DropDownList("RoleSelection", new SelectList(Model.Roles, "RoleName", "RoleName"), new { })
         </div>
-        <div id="filterSystem" class="col-md-9 col-sm-12">
-            <div class="col-md-3 searchBox">
+        <div id="filterSystem" class="col-md-9 col-sm-12 col-xs-12">
+            <div class="col-md-3 eventFilter">
                 <b>Search</b>
                 <br />
                 <input id="searchData" class="filters" type="text" name="search" placeholder="&#xF002 Search.." onkeyup="FilterData()">

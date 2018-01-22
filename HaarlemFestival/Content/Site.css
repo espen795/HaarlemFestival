@@ -1892,6 +1892,15 @@ div.eventData {
 }
 
 @media (max-width: 991px) {
+    #searchData {
+        width: 100%;
+    }
+
+    #filterSystem .eventFilter {
+        margin-top: 10px;
+        margin-left: 0px;
+        padding: 0;
+    }
 }
 
 /* Start mobile navigatie/view */
@@ -1984,8 +1993,11 @@ div.eventData {
     }
 
     #filterSystem .eventFilter {
-        margin-left: -15px;
+        margin-top: 10px;
+        margin-left: 0px;
+        padding: 0;
     }
+
 
     .mobile-hidden {
         display: none;
