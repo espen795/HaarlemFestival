@@ -32,7 +32,7 @@ namespace HaarlemFestival.Controllers
             {
                 foreach(Restaurant restaurant in cuisine.Restaurants)
                 {
-                    if(Dinners.Contains.)
+                    //Nog naar kijken
                 }
             }
 
