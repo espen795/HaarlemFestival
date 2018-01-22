@@ -74,7 +74,7 @@ body {
 hr.divide {
     height: 10px;
     border: 0;
-    box-shadow: 0 10px 10px -10px #8c8b8b inset;
+    box-shadow: 0 10px 10px -10px #aaa inset;
 }
 
 /* #region Admin dropdown in navbar */
@@ -112,6 +112,11 @@ hr.divide {
 
     .navbar li.adminDropdown #adminInterviewQuestions::before {
         content: "\f0e6";
+        font-family: FontAwesome;
+    }
+
+    .navbar li.adminDropdown #adminAccounts::before {
+        content: "\f2be";
         font-family: FontAwesome;
     }
 /* #endregion */
@@ -1364,6 +1369,7 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
     height: 50px;
     font-size: 20px;
     border: 1px solid silver;
+    padding-left: 10px;
 }
 
 input[type='text']:focus, input[type='password']:focus {
@@ -1390,7 +1396,7 @@ input[type='text']:focus, input[type='password']:focus {
 
 /* #region Overview Pagina */
 #welcomeArea {
-    margin-top: 100px;
+    margin-top: 30px;
     font-size: 15px;
     text-align: center;
     padding: 0;
@@ -1399,16 +1405,6 @@ input[type='text']:focus, input[type='password']:focus {
 .overviewContent {
     margin-top: 10px;
     margin-bottom: 10px;
-    border: 1px solid black;
-    background-color: #F0FFF0;
-}
-
-.overviewContent:nth-child(odd) {
-    margin-right: 5px;
-}
-
-.overviewContent:nth-child(even) {
-    margin-left: 5px;
 }
 
 #manageEventSelection {
@@ -1658,10 +1654,9 @@ input[type='text']:focus, input[type='password']:focus {
 
 .introText {
     width: 95%;
-    font-weight: bold;
     margin-left: auto;
     margin-right: auto;
-    text-align: center;
+    text-align: left;
 }
 
 #downloadComplete {
@@ -1684,12 +1679,28 @@ input[type='text']:focus, input[type='password']:focus {
 
 /*#region ManageEvent Pagina */
 #topFilterBar {
-    margin-top: 75px;
+    margin-top: 5px;
     padding-top: 50px;
     padding-bottom: 50px;
     display: inline-block;
     background-color: #F0FFF0;
     border: 1px solid black;
+}
+
+tbody.data {
+    text-align: center;
+}
+
+#searchData {
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: 400;
+    text-decoration: inherit;
+    padding: 5px;
+    font-size: 22px;
+    line-height: 24px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
 #selectEvent, #filterSystem {
@@ -1706,7 +1717,7 @@ input[type='text']:focus, input[type='password']:focus {
 }
 
 #topFilterBar select {
-    width: 200px;
+    width: 100%;
     height: 25px;
     border: 1px solid #000000;
     background-color: #F0FFF0;
@@ -1755,7 +1766,7 @@ input[type='text']:focus, input[type='password']:focus {
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
-    box-shadow: inset 0 1px 3px #ddd;
+    box-shadow: inset 0 1px 3px #aaa;
     border-radius: 4px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -1867,6 +1878,10 @@ div.eventData {
 
 .priceMargin {
     margin-top: 10px;
+}
+
+.eventView {
+    margin-top: 20px;
 }
 /* #endregion */
 
