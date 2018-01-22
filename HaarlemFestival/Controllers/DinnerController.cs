@@ -25,6 +25,17 @@ namespace HaarlemFestival.Controllers
             };
             Cuisines.Add(c);
             Cuisines.AddRange(dinnerRepository.GetAllCuisines());
+
+            List<Dinner> Dinners = dinnerRepository.GetAllDinners();
+
+            foreach(Cuisine cuisine in Cuisines)
+            {
+                foreach(Restaurant restaurant in cuisine.Restaurants)
+                {
+                    if(Dinners.Contains.)
+                }
+            }
+
             return View(Cuisines);
         }
 
