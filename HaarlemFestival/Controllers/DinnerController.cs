@@ -25,33 +25,39 @@ namespace HaarlemFestival.Controllers
             });
             Cuisines.AddRange(dinnerRepository.GetAllCuisines());
 
+            OnlyGetUsedRestaurants(Cuisines);
+
+            return View(Cuisines);
+        }
+
+        private void OnlyGetUsedRestaurants(List<Cuisine> Cuisines)
+        {
             List<Dinner> Dinners = dinnerRepository.GetAllDinners();
 
             List<int> UsedRestaurantIds = new List<int>();
 
             List<int> AllRestaurantIds = new List<int>();
-            foreach(Restaurant restaurant in Cuisines[0].Restaurants)
+
+            foreach (Restaurant restaurant in Cuisines[0].Restaurants)
             {
                 AllRestaurantIds.Add(restaurant.RestaurantId);
             }
 
             foreach (Dinner dinner in Dinners)
             {
-                if(AllRestaurantIds.Contains(dinner.Restaurant.RestaurantId))
+                if (AllRestaurantIds.Contains(dinner.Restaurant.RestaurantId))
                 {
                     AllRestaurantIds.Remove(dinner.Restaurant.RestaurantId);
                 }
             }
 
-            foreach( int Id in AllRestaurantIds)
+            foreach (int Id in AllRestaurantIds)
             {
                 for (int i = 0; i < Cuisines.Count; i++)
                 {
                     Cuisines[i].Restaurants.RemoveAll(r => r.RestaurantId == Id);
                 }
             }
-
-            return View(Cuisines);
         }
 
         public ActionResult Info(int? id)
