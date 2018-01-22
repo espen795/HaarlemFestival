@@ -428,10 +428,10 @@
                 <tr>
                     <th>Name</th>
                     <th class="mobile-hidden">Description</th>
-                    <th>Rating</th>
+                    <th class="mobile-hidden">Rating</th>
                     <th class="mobile-hidden">Cuisines</th>
                     <th class="mobile-hidden">Standard Price</th>
-                    <th>Food Image</th>
+                    <th class="mobile-hidden">Food Image</th>
                     <th>Restaurant Image</th>
                     <th colspan="2"></th>
                 </tr>
@@ -447,10 +447,10 @@
                     <tr>
                         <td>@r.Naam</td>
                         <td class="mobile-hidden">@r.Description</td>
-                        <td>@r.Rating</td>
+                        <td class="mobile-hidden">@r.Rating</td>
                         <td class="mobile-hidden">@builder</td>
                         <td class="mobile-hidden">@String.Format("{0:0.00}", r.DisplayPrice)</td>
-                        <td><i onclick='ShowEventImage("Dinner/restaurants/@r.FoodIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
+                        <td class="mobile-hidden"><i onclick='ShowEventImage("Dinner/restaurants/@r.FoodIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick='ShowEventImage("Dinner/restaurants/@r.LocationIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick="OpenUpdateForm(@r.RestaurantId, 'Restaurant')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@r.RestaurantId, 'Restaurant')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
@@ -526,8 +526,8 @@
                     <th class="mobile-hidden">Location</th>
                     <th class="mobile-hidden">Price</th>
                     <th class="mobile-hidden">Maximum Tickets</th>
-                    <th>First Person</th>
-                    <th>Second Person</th>
+                    <th class="mobile-hidden">First Person</th>
+                    <th class="mobile-hidden">Second Person</th>
                     <th colspan="2"></th>
                 </tr>
             </thead>
@@ -542,8 +542,8 @@
                         <td class="mobile-hidden">@activity.Address</td>
                         <td class="mobile-hidden">@String.Format("{0:0.00}", activity.Price)</td>
                         <td class="mobile-hidden">@activity.Talk.MaxTickets</td>
-                        <td><i onclick='ShowEventImage("Talking/@activity.Talk.Person1IMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
-                        <td><i onclick='ShowEventImage("Talking/@activity.Talk.Person2IMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
+                        <td class="mobile-hidden"><i onclick='ShowEventImage("Talking/@activity.Talk.Person1IMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
+                        <td class="mobile-hidden"><i onclick='ShowEventImage("Talking/@activity.Talk.Person2IMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Talking')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
@@ -566,7 +566,7 @@
                 <tr>
                     <th>Guide Name</th>
                     <th>Language</th>
-                    <th>Language Abbreviation</th>
+                    <th class="mobile-hidden">Language Abbreviation</th>
                     <th colspan="2"></th>
                 </tr>
             </thead>
@@ -576,7 +576,7 @@
                     <tr>
                         <td>@g.GuideName</td>
                         <td>@g.LanguageName</td>
-                        <td>@g.LanguageAbbr</td>
+                        <td class="mobile-hidden">@g.LanguageAbbr</td>
                         <td><i onclick="OpenUpdateForm(@g.GuideId, 'Guide')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@g.GuideId, 'Guide')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
@@ -599,7 +599,7 @@
                 <tr>
                     <th>Date & Time</th>
                     <th class="mobile-hidden">Start Location</th>
-                    <th>Language</th>
+                    <th class="mobile-hidden">Language</th>
                     <th>Guide</th>
                     <th class="mobile-hidden">Seats</th>
                     <th class="mobile-hidden">Price</th>
@@ -613,7 +613,7 @@
                     <tr>
                         <td>@activity.StartSession.ToString("dddd dd-MM-yyyy H:mm")</td>
                         <td class="mobile-hidden">@activity.Address</td>
-                        <td>@activity.Guide.LanguageName</td>
+                        <td class="mobile-hidden">@activity.Guide.LanguageName</td>
                         <td>@activity.Guide.GuideName</td>
                         <td class="mobile-hidden">@activity.TotalTickets</td>
                         <td class="mobile-hidden">@String.Format("{0:0.00}", activity.Price)</td>
