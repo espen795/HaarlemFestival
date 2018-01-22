@@ -12,5 +12,6 @@ namespace HaarlemFestival.Repository.Dinner
         void AddKlant(Klant klant);
         void AddReservation(Reservering reservation);
         void ChangeTickets(Activity activity);
+        void SendContactMessage(ContactMessage message);
     }
 }

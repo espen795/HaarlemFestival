@@ -52,12 +52,6 @@ namespace HaarlemFestival.Repository.Admin
             return db.Roles.ToList();
         }
 
-        public void SendContactMessage(ContactMessage message)
-        {
-            db.ContactMessages.Add(message);
-            db.SaveChanges();
-        }
-
         public void AddEvent(Activity activity)
         {
             if (activity.GetType() == typeof(Models.Jazz))

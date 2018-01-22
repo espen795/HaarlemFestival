@@ -61,7 +61,7 @@ namespace HaarlemFestival.Controllers
 
                 Session["send_contact_form"] = true;
 
-                adminRepository.SendContactMessage(message);
+                homerepository.SendContactMessage(message);
             }
 
             return View(message);

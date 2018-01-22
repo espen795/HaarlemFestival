@@ -326,8 +326,8 @@
 
     </script>
 
-    <section id="topFilterBar" class="col-md-12">
-        <div id="selectEvent" class="col-md-3 col-sm-12">
+    <section id="topFilterBar" class="col-md-12 col-sm-12 col-xs-12">
+        <div id="selectEvent" class="col-md-3 col-sm-12 col-xs-12">
             <b>Select an event</b>
             <br />
             <select id="selectedEvent" name="selectedEvent" onchange="SelectedEventChanged()">
@@ -338,8 +338,7 @@
                 <option value="HistoricHaarlem">Historic Haarlem</option>
             </select>
         </div>
-
-        <div id="filterSystem" class="col-md-9 col-sm-12">
+        <div id="filterSystem" class="col-md-9 col-sm-12 col-xs-12">
             <div class="col-md-3 eventFilter" id="dates">
                 <b>Select a date.</b>
                 <br />
@@ -384,12 +383,12 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Description</th>
-                    <th>Date & Time</th>
-                    <th>Location</th>
-                    <th>Hall</th>
-                    <th>Price</th>
-                    <th>Seats</th>
+                    <th class="mobile-hidden">Description</th>
+                    <th class="mobile-hidden">Date & Time</th>
+                    <th class="mobile-hidden">Location</th>
+                    <th class="mobile-hidden">Hall</th>
+                    <th class="mobile-hidden">Price</th>
+                    <th class="mobile-hidden">Seats</th>
                     <th>Image</th>
                     <th colspan="2"></th>
                 </tr>
@@ -399,12 +398,12 @@
                 {
                     <tr>
                         <td>@activity.artist.ArtistName</td>
-                        <td>@Regex.Replace(activity.artist.ArtistInformation, @"<(.|\n)*?>", string.Empty)</td>
-                        <td>@activity.StartSession.ToString("dddd dd-MM-yyyy H:mm") - @activity.EndSession.ToString("H:mm")</td>
-                        <td>@activity.ConcertLocation</td>
-                        <td>@activity.ConcertHall</td>
-                        <td>@String.Format("{0:0.00}", activity.Price)</td>
-                        <td>@activity.TotalTickets</td>
+                        <td class="mobile-hidden">@Regex.Replace(activity.artist.ArtistInformation, @"<(.|\n)*?>", string.Empty)</td>
+                        <td class="mobile-hidden">@activity.StartSession.ToString("dddd dd-MM-yyyy H:mm") - @activity.EndSession.ToString("H:mm")</td>
+                        <td class="mobile-hidden">@activity.ConcertLocation</td>
+                        <td class="mobile-hidden">@activity.ConcertHall</td>
+                        <td class="mobile-hidden">@String.Format("{0:0.00}", activity.Price)</td>
+                        <td class="mobile-hidden">@activity.TotalTickets</td>
                         <td><i onclick='ShowEventImage("Jazz/Artiesten/@activity.artist.ArtistImage")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Jazz')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
@@ -427,11 +426,11 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Description</th>
-                    <th>Rating</th>
-                    <th>Cuisines</th>
-                    <th>Standard Price</th>
-                    <th>Food Image</th>
+                    <th class="mobile-hidden">Description</th>
+                    <th class="mobile-hidden">Rating</th>
+                    <th class="mobile-hidden">Cuisines</th>
+                    <th class="mobile-hidden">Standard Price</th>
+                    <th class="mobile-hidden">Food Image</th>
                     <th>Restaurant Image</th>
                     <th colspan="2"></th>
                 </tr>
@@ -446,11 +445,11 @@
                     }
                     <tr>
                         <td>@r.Naam</td>
-                        <td>@r.Description</td>
-                        <td>@r.Rating</td>
-                        <td>@builder</td>
-                        <td>@String.Format("{0:0.00}", r.DisplayPrice)</td>
-                        <td><i onclick='ShowEventImage("Dinner/restaurants/@r.FoodIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
+                        <td class="mobile-hidden">@r.Description</td>
+                        <td class="mobile-hidden">@r.Rating</td>
+                        <td class="mobile-hidden">@builder</td>
+                        <td class="mobile-hidden">@String.Format("{0:0.00}", r.DisplayPrice)</td>
+                        <td class="mobile-hidden"><i onclick='ShowEventImage("Dinner/restaurants/@r.FoodIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick='ShowEventImage("Dinner/restaurants/@r.LocationIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick="OpenUpdateForm(@r.RestaurantId, 'Restaurant')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@r.RestaurantId, 'Restaurant')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
@@ -473,12 +472,12 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Adress</th>
+                    <th class="mobile-hidden">Adress</th>
                     <th>Session</th>
-                    <th>Seats</th>
-                    <th>Cuisines</th>
-                    <th>Price</th>
-                    <th>Price (12-)</th>
+                    <th class="mobile-hidden">Seats</th>
+                    <th class="mobile-hidden">Cuisines</th>
+                    <th class="mobile-hidden">Price</th>
+                    <th class="mobile-hidden">Price (12-)</th>
                     <th colspan="2"></th>
                 </tr>
             </thead>
@@ -493,12 +492,12 @@
 
                     <tr>
                         <td>@activity.Restaurant.Naam</td>
-                        <td>@activity.Address</td>
+                        <td class="mobile-hidden">@activity.Address</td>
                         <td>@activity.StartSession.ToString("dddd dd-MM-yyyy H:mm") - @activity.EndSession.ToString("H:mm")</td>
-                        <td>@activity.TotalTickets</td>
-                        <td>@builder</td>
-                        <td>@String.Format("{0:0.00}", activity.Price)</td>
-                        <td>@String.Format("{0:0.00}", activity.AlternativePrice)</td>
+                        <td class="mobile-hidden">@activity.TotalTickets</td>
+                        <td class="mobile-hidden">@builder</td>
+                        <td class="mobile-hidden">@String.Format("{0:0.00}", activity.Price)</td>
+                        <td class="mobile-hidden">@String.Format("{0:0.00}", activity.AlternativePrice)</td>
                         <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Dinner')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
@@ -520,14 +519,14 @@
             <thead>
                 <tr>
                     <th>Interview</th>
-                    <th>Description</th>
+                    <th class="mobile-hidden">Description</th>
                     <th>Date & Time</th>
-                    <th>Seats</th>
-                    <th>Location</th>
-                    <th>Price</th>
-                    <th>Maximum Tickets</th>
-                    <th>First Person</th>
-                    <th>Second Person</th>
+                    <th class="mobile-hidden">Seats</th>
+                    <th class="mobile-hidden">Location</th>
+                    <th class="mobile-hidden">Price</th>
+                    <th class="mobile-hidden">Maximum Tickets</th>
+                    <th class="mobile-hidden">First Person</th>
+                    <th class="mobile-hidden">Second Person</th>
                     <th colspan="2"></th>
                 </tr>
             </thead>
@@ -536,14 +535,14 @@
                 {
                     <tr>
                         <td>@activity.Talk.Naam</td>
-                        <td>@activity.Talk.Description</td>
+                        <td class="mobile-hidden">@activity.Talk.Description</td>
                         <td>@activity.StartSession.ToString("dddd dd-MM-yyyy H:mm") - @activity.EndSession.ToString("H:mm")</td>
-                        <td>@activity.TotalTickets</td>
-                        <td>@activity.Address</td>
-                        <td>@String.Format("{0:0.00}", activity.Price)</td>
-                        <td>@activity.Talk.MaxTickets</td>
-                        <td><i onclick='ShowEventImage("Talking/@activity.Talk.Person1IMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
-                        <td><i onclick='ShowEventImage("Talking/@activity.Talk.Person2IMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
+                        <td class="mobile-hidden">@activity.TotalTickets</td>
+                        <td class="mobile-hidden">@activity.Address</td>
+                        <td class="mobile-hidden">@String.Format("{0:0.00}", activity.Price)</td>
+                        <td class="mobile-hidden">@activity.Talk.MaxTickets</td>
+                        <td class="mobile-hidden"><i onclick='ShowEventImage("Talking/@activity.Talk.Person1IMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
+                        <td class="mobile-hidden"><i onclick='ShowEventImage("Talking/@activity.Talk.Person2IMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Talking')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
@@ -566,7 +565,7 @@
                 <tr>
                     <th>Guide Name</th>
                     <th>Language</th>
-                    <th>Language Abbreviation</th>
+                    <th class="mobile-hidden">Language Abbreviation</th>
                     <th colspan="2"></th>
                 </tr>
             </thead>
@@ -576,7 +575,7 @@
                     <tr>
                         <td>@g.GuideName</td>
                         <td>@g.LanguageName</td>
-                        <td>@g.LanguageAbbr</td>
+                        <td class="mobile-hidden">@g.LanguageAbbr</td>
                         <td><i onclick="OpenUpdateForm(@g.GuideId, 'Guide')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@g.GuideId, 'Guide')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
@@ -598,12 +597,12 @@
             <thead>
                 <tr>
                     <th>Date & Time</th>
-                    <th>Start Location</th>
-                    <th>Language</th>
+                    <th class="mobile-hidden">Start Location</th>
+                    <th class="mobile-hidden">Language</th>
                     <th>Guide</th>
-                    <th>Seats</th>
-                    <th>Price</th>
-                    <th>Group Ticket</th>
+                    <th class="mobile-hidden">Seats</th>
+                    <th class="mobile-hidden">Price</th>
+                    <th class="mobile-hidden">Group Ticket</th>
                     <th colspan="2"></th>
                 </tr>
             </thead>
@@ -612,12 +611,12 @@
                 {
                     <tr>
                         <td>@activity.StartSession.ToString("dddd dd-MM-yyyy H:mm")</td>
-                        <td>@activity.Address</td>
-                        <td>@activity.Guide.LanguageName</td>
+                        <td class="mobile-hidden">@activity.Address</td>
+                        <td class="mobile-hidden">@activity.Guide.LanguageName</td>
                         <td>@activity.Guide.GuideName</td>
-                        <td>@activity.TotalTickets</td>
-                        <td>@String.Format("{0:0.00}", activity.Price)</td>
-                        <td>@String.Format("{0:0.00}", activity.AlternativePrice)</td>
+                        <td class="mobile-hidden">@activity.TotalTickets</td>
+                        <td class="mobile-hidden">@String.Format("{0:0.00}", activity.Price)</td>
+                        <td class="mobile-hidden">@String.Format("{0:0.00}", activity.AlternativePrice)</td>
                         <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Historic')" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
                     </tr>
