@@ -28,10 +28,5 @@ namespace HaarlemFestival.Repository.Dinner
             db.Entry(activity).State = EntityState.Modified;
             db.SaveChanges();
         }
-
-        public Klant GetKlantByEmail(string email)
-        {
-            return db.Klanten.Where(k => k.Email == email).LastOrDefault();
-        }
     }
 }

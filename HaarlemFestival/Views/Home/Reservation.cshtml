@@ -3,7 +3,7 @@
 @using System.Globalization;
 @using System;
 @using System.Linq;
-@model Reservering
+@model Klant
 
 @{
     ViewBag.Title = "Reservation";
@@ -29,10 +29,10 @@
                     <h4>Please fill in the fields below</h4>
                     <p>Please provide the following information so we can book the ticket on your name and mail them to your e-mail address.</p>
 
-                    @Html.LabelFor(m => Model.Klant.Naam)
-                    @Html.TextBoxFor(m => Model.Klant.Naam, new { @type = "text" })
-                    @Html.LabelFor(m => Model.Klant.Email)
-                    @Html.TextBoxFor(m => Model.Klant.Email, new { @type = "email" })
+                    @Html.LabelFor(m => Model.Naam)
+                    @Html.TextBoxFor(m => Model.Naam, new { @type = "text" })
+                    @Html.LabelFor(m => Model.Email)
+                    @Html.TextBoxFor(m => Model.Email, new { @type = "email" })
 
                     <button class="btn btn-black r back" type="button" onclick="location.href='@Url.Action("Basket", "Home")'">Back to basket</button>
                 </div>
@@ -42,8 +42,8 @@
                     <h4>Payment</h4>
                     <p>Select a payment method</p>
 
-                    @Html.LabelFor(m => Model.Klant.BetaalMethode)
-                    @Html.DropDownListFor(m => Model.Klant.BetaalMethode, new SelectList(PaymentMethod))
+                    @Html.LabelFor(m => Model.BetaalMethode)
+                    @Html.DropDownListFor(m => Model.BetaalMethode, new SelectList(PaymentMethod))
 
                     <p>Both the cash and pin options will be payed later, at the location.</p>
 

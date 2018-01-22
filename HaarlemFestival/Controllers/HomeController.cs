@@ -172,6 +172,12 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Reservation()
         {
+            return View(new Klant());
+        }
+
+        [HttpPost]
+        public ActionResult MakeReservation(Klant klant)
+        {
             Reservering reservation = new Reservering();
 
             if ((List<BesteldeActiviteit>)Session["current_order"] != null)
@@ -179,15 +185,17 @@ namespace HaarlemFestival.Controllers
                 reservation.BesteldeActiviteiten = (List<BesteldeActiviteit>)Session["current_order"];
             }
 
-            return View(reservation);
-        }
+            reservation.Klant = klant;
 
-        [HttpPost]
-        public ActionResult MakeReservation(Reservering reservation)
-        {
             homerepository.AddKlant(reservation.Klant);
 
+            homerepository.AddReservation(reservation);
 
+            foreach(BesteldeActiviteit besteldeactiviteit in reservation.BesteldeActiviteiten)
+            {
+                besteldeactiviteit.Activiteit.BoughtTickets += besteldeactiviteit.TotalBoughtTickets;
+                homerepository.ChangeTickets(besteldeactiviteit.Activiteit);
+            }
 
             return RedirectToAction("Completed");
         }
