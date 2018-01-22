@@ -84,7 +84,7 @@
                     <label for="dinnertimefilter">Select your starttime</label>
                     <select id="dinnertimefilter" name="Activity" required>
                         <option class="dinnertimeselect" value="">Select a date first</option>
-                        <option class="dinnertimeselect" id="standard" value="">Select a time</option>
+                        <option class="dinnertimeselect" id="standard" value="" hidden>Select a time</option>
                         @foreach (Dinner dinner in Model.Dinners)
                         {
                             <option class="@dinner.Day.Naam dinnertimeselect" value="@dinner.ActivityId" hidden>@dinner.StartSession.ToString("HH:mm")</option>
@@ -99,7 +99,7 @@
 
                 <div class="restaurant-reservation-buttons">
                     <button class="restaurant-reservation-button-back" type="button" onclick="location.href='@Url.Action("Index", "Dinner")'">Back to overview</button>
-                    <button class="restaurant-reservation-button-reservation" type="submit" )> Add to basket</button>
+                    <button class="restaurant-reservation-button-reservation" type="submit"> Add to basket</button>
                 </div>
             }
         </div>
