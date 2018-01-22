@@ -188,22 +188,21 @@
         <tbody class="data">
             @foreach (Account account in Model.AccountList)
             {
-                <tr>
-                    <td>@account.Naam</td>
-                    <td>@account.Username</td>
-                    <td>@account.Role.RoleName</td>
-
-                    @if (account.Id != loggedin_account.Id)
-                    {
-                        <td><i onclick="OpenUpdateForm(@account.Id)" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
-                        <td><i onclick="OpenDeleteConfirm(@account.Id)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
-                    }
-                    else
-                    {
-                        <td></td>
-                        <td></td>
-                    }
-                </tr>
+            <tr>
+                <td>@account.Naam</td>
+                <td>@account.Username</td>
+                <td>@account.Role.RoleName</td>
+                <td><i onclick="OpenUpdateForm(@account.Id)" class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
+                
+                @if (account.Id != loggedin_account.Id)
+                {
+                    <td><i onclick="OpenDeleteConfirm(@account.Id)" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon glyphicon-remove"></i></td>
+                }
+                else
+                {
+                    <td></td>
+                }
+            </tr>
             }
         </tbody>
     </table>

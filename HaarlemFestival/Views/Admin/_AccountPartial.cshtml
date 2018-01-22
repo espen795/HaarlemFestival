@@ -1,4 +1,7 @@
 ﻿@using HaarlemFestival.Models;
+@{ 
+    Account loggedin_account = (Account)Session["loggedin_account"];
+}
 @model ManageAccountViewModel
 
 <!-- HEADER -->
@@ -28,8 +31,17 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            @if (Model.Account.Id != loggedin_account.Id)
+            {
             @Html.LabelFor(a => a.Account.RoleId)
             @Html.DropDownListFor(a => a.Account.RoleId, new SelectList(Model.Roles.OrderByDescending(r => r.Id), "Id", "RoleName"))
+            }
+            else
+            {
+                @Html.LabelFor(a => a.Account.RoleId)
+                @Html.HiddenFor(a => a.Account.RoleId)
+                @Html.DisplayFor(a => a.Account.Role.RoleName)
+            }
         </div>
     </div>
 </div>
