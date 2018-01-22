@@ -143,7 +143,7 @@
         </div>
     </div>
 
-    <div class="col-md-6 col-sm-12 overviewContent" id="ManageEvent">
+    <div class="col-md-6 overviewContent col-sm-6 col-xs-12" id="ManageEvent">
         <div class="panel panel-default">
             <div class="panel-heading"><b>Manage Event Data</b></div>
             <div class="panel-body">
@@ -154,17 +154,17 @@
 
                 <!-- MANAGE EVENT BUTTONS -->
                 <div id="manageEventSelection">
-                    <div class="col-sm-12 middle">@Html.ActionLink("Jazz@Patronaat", "ManageEvent", "Admin", new { selectedEvent = "Jazz@Patronaat" }, new { @class = "white btn btn-black" })</div>
-                    <div class="col-sm-12 middle">@Html.ActionLink("Dinner in Haarlem", "ManageEvent", "Admin", new { selectedEvent = "DinnerInHaarlem" }, new { @class = "white btn btn-black" })</div>
-                    <div class="col-sm-12 middle">@Html.ActionLink("Talking Haarlem", "ManageEvent", "Admin", new { selectedEvent = "TalkingHaarlem" }, new { @class = "white btn btn-black" })</div>
-                    <div class="col-sm-12 middle">@Html.ActionLink("Historic Haarlem", "ManageEvent", "Admin", new { selectedEvent = "HistoricHaarlem" }, new { @class = "white btn btn-black" })</div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 middle">@Html.ActionLink("Jazz@Patronaat", "ManageEvent", "Admin", new { selectedEvent = "Jazz@Patronaat" }, new { @class = "white btn btn-black" })</div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 middle">@Html.ActionLink("Dinner in Haarlem", "ManageEvent", "Admin", new { selectedEvent = "DinnerInHaarlem" }, new { @class = "white btn btn-black" })</div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 middle">@Html.ActionLink("Talking Haarlem", "ManageEvent", "Admin", new { selectedEvent = "TalkingHaarlem" }, new { @class = "white btn btn-black" })</div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 middle">@Html.ActionLink("Historic Haarlem", "ManageEvent", "Admin", new { selectedEvent = "HistoricHaarlem" }, new { @class = "white btn btn-black" })</div>
                 </div>
 
             </div>
         </div>
     </div>
 
-    <div class="col-md-6 overviewContent col-sm-12" id="TicketSalesInformation">
+    <div class="col-md-6 overviewContent col-sm-6 col-xs-12" id="TicketSalesInformation">
         <div class="panel panel-default">
             <!-- INTROTEXT -->
             <div class="panel-heading"><b>Ticket & Sales Information</b></div>
@@ -181,7 +181,7 @@
         </div>
     </div>
 
-    <div class="col-md-6 col-sm-12 overviewContent" id="ContactMessages">
+    <div class="col-md-6 overviewContent col-sm-6 col-xs-12" id="ContactMessages">
         <div class="panel panel-default">
             <div class="panel-heading"><b>Contact Messages</b></div>
             <div class="panel-body">
@@ -193,13 +193,12 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 overviewContent col-sm-12" id="InterviewQuestions">
+    <div class="col-md-6 overviewContent col-sm-6 col-xs-12" id="InterviewQuestions">
         <div class="panel panel-default">
             <div class="panel-heading"><b>Talking Haarlem - Interview Questions</b></div>
             <div class="panel-body">
                 <p class="introText">
-                    [Introduction Interview Questions]
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    For Talking Haarlem Users are able to ask questions to the participants, You are able to see the questions on this page.
                 </p>
                 <div class="col-sm-12 middle">@Html.ActionLink("Interview Questions", "CheckInterviewQuestions", "Admin", null, new { @class = "white btn btn-black" })</div>
             </div>
@@ -207,12 +206,11 @@
     </div>
     @if (ViewBag.Account.Role.RoleName == "Owner")
     {
-        <div class="col-md-6 overviewContent col-sm-12" id="Accounts">
+        <div class="col-md-6 overviewContent col-sm-6 col-xs-12" id="Accounts">
             <div class="panel panel-default">
                 <div class="panel-heading"><b>Manage Accounts</b></div>
                 <div class="panel-body">
-                    [Accounts Introduction]
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    As an owner you are able to manage accounts, on this page you are able to Add, Update and Delete accounts of your choice.
                     <div class="col-sm-12 middle">@Html.ActionLink("Manage Accounts", "ManageAccounts", "Admin", null, new { @class = "white btn btn-black" })</div>
                 </div>
             </div>

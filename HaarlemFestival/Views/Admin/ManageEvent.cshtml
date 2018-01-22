@@ -381,7 +381,7 @@
 
         <table id="jazzTable" class="eventTable table table-striped table-responsive">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th>Name</th>
                     <th class="mobile-hidden">Description</th>
                     <th class="mobile-hidden">Date & Time</th>
@@ -393,7 +393,7 @@
                     <th colspan="2"></th>
                 </tr>
             </thead>
-            <tbody class="data">
+            <tbody class="data text-center">
                 @foreach (Jazz activity in Model.Activities.OfType<Jazz>())
                 {
                     <tr>
@@ -424,7 +424,7 @@
 
         <table id="restaurantTable" class="eventTable table table-striped table-responsive">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th>Name</th>
                     <th class="mobile-hidden">Description</th>
                     <th class="mobile-hidden">Rating</th>
@@ -435,7 +435,7 @@
                     <th colspan="2"></th>
                 </tr>
             </thead>
-            <tbody class="data">
+            <tbody class="data text-center">
                 @foreach (Restaurant r in Model.Restaurants)
                 {
                     builder.Clear();
@@ -470,7 +470,7 @@
 
         <table id="dinnerTable" class="eventTable table table-striped table-responsive">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th>Name</th>
                     <th class="mobile-hidden">Adress</th>
                     <th>Session</th>
@@ -481,7 +481,7 @@
                     <th colspan="2"></th>
                 </tr>
             </thead>
-            <tbody class="data">
+            <tbody class="data text-center">
                 @foreach (Dinner activity in Model.Activities.OfType<Dinner>())
                 {
                     builder.Clear();
@@ -517,7 +517,7 @@
 
         <table id="talkingTable" class="eventTable table table-striped table-responsive">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th>Interview</th>
                     <th class="mobile-hidden">Description</th>
                     <th>Date & Time</th>
@@ -530,7 +530,7 @@
                     <th colspan="2"></th>
                 </tr>
             </thead>
-            <tbody class="data">
+            <tbody class="data text-center">
                 @foreach (Talking activity in Model.Activities.OfType<Talking>())
                 {
                     <tr>
@@ -562,14 +562,14 @@
 
         <table id="guideTable" class="eventTable table table-striped table-responsive">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th>Guide Name</th>
                     <th>Language</th>
                     <th class="mobile-hidden">Language Abbreviation</th>
                     <th colspan="2"></th>
                 </tr>
             </thead>
-            <tbody class="data">
+            <tbody class="data text-center">
                 @foreach (Guide g in Model.Guides)
                 {
                     <tr>
@@ -595,7 +595,7 @@
 
         <table id="historicTable" class="eventTable table table-striped table-responsive">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th>Date & Time</th>
                     <th class="mobile-hidden">Start Location</th>
                     <th class="mobile-hidden">Language</th>
@@ -606,7 +606,7 @@
                     <th colspan="2"></th>
                 </tr>
             </thead>
-            <tbody class="data">
+            <tbody class="data text-center">
                 @foreach (Historic activity in Model.Activities.OfType<Historic>())
                 {
                     <tr>

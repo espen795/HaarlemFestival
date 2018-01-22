@@ -79,7 +79,7 @@
 
     <table class="questionArea eventTable table table-striped table-responsive">
         <thead>
-            <tr>
+            <tr class="text-left">
                 <th class="mobile-hidden">Category</th>
                 <th>Name</th>
                 <th class="mobile-hidden">Email</th>
@@ -89,7 +89,7 @@
                 <th>Answer</th>
             </tr>
         </thead>
-        <tbody class="data text-center">
+        <tbody class="data text-left">
             @foreach (ContactMessage message in Model.Messages)
             {
                 <tr>
