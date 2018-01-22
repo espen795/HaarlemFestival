@@ -696,12 +696,6 @@ footer {
 
 .event-section-3-dinner {
     display: inline-block;
-    width: 100%;
-}
-
-.restaurant-index-select-label {
-    margin-right: 5px;
-    margin-top: 7px;
 }
 
 #cuisineselect {
@@ -752,7 +746,6 @@ footer {
 
 .restaurant-index-select {
     margin: auto;
-    width: 100%;
     margin-bottom: 10px;
 }
 
@@ -760,6 +753,8 @@ footer {
     float: left;
     font-weight: bold;
     display: inline-block;
+    margin-right: 5px;
+    margin-top: 7px;
 }
 
 .restaurant-index-select {
@@ -812,6 +807,7 @@ footer {
 
 .restaurant-info-img img, .restaurant-reservation-img img {
     margin-top: 10px;
+    margin-bottom: 10px;
     border-style: solid;
     border-width: 2px;
     border-color: #353238;
@@ -1982,6 +1978,12 @@ div.eventData {
     /* EVENT JAZZ */
     .jazz .keuze_blok img {
         width: 100%;
+    }
+
+    /* EVENT DINNER*/
+
+    .event-section-3-dinner {
+        margin: auto;
     }
 
     /* EVENT ADMIN */
