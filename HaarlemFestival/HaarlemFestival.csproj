@@ -251,6 +251,10 @@
     <Compile Include="Migrations\201801201709527_mig26.Designer.cs">
       <DependentUpon>201801201709527_mig26.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801221127012_mig27.cs" />
+    <Compile Include="Migrations\201801221127012_mig27.Designer.cs">
+      <DependentUpon>201801221127012_mig27.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -297,6 +301,8 @@
     <Compile Include="Repository\Dinner\IDinnerRepository.cs" />
     <Compile Include="Repository\Historic\HistoricRepository.cs" />
     <Compile Include="Repository\Historic\IHistoricRepository.cs" />
+    <Compile Include="Repository\Home\HomeRepository.cs" />
+    <Compile Include="Repository\Home\IHomeRepository.cs" />
     <Compile Include="Repository\Jazz\IJazzRepository.cs" />
     <Compile Include="Repository\Jazz\JazzRepository.cs" />
     <Compile Include="Repository\Talking\ITalkingRepository.cs" />
@@ -478,6 +484,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801201709527_mig26.resx">
       <DependentUpon>201801201709527_mig26.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801221127012_mig27.resx">
+      <DependentUpon>201801221127012_mig27.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

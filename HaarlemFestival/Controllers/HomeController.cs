@@ -22,6 +22,7 @@ namespace HaarlemFestival.Controllers
         private ITalkingRepository talkingRepository = new TalkingRepository();
         private IHistoricRepository historicRepository = new HistoricRepository();
         private IAdminRepository adminRepository = new AdminRepository();
+        private IHomeRepository homerepository = new HomeRepository();
 
         public ActionResult Index()
         {
@@ -60,7 +61,7 @@ namespace HaarlemFestival.Controllers
 
                 Session["send_contact_form"] = true;
 
-                adminRepository.SendContactMessage(message);
+                homerepository.SendContactMessage(message);
             }
 
             return View(message);
@@ -171,14 +172,31 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Reservation()
         {
-            ViewBag.Message = "Your reservation.";
-
-            return View();
+            return View(new Klant());
         }
 
         [HttpPost]
-        public ActionResult MakeReservation(Reservering order)
+        public ActionResult MakeReservation(Klant klant)
         {
+            Reservering reservation = new Reservering();
+
+            if ((List<BesteldeActiviteit>)Session["current_order"] != null)
+            {
+                reservation.BesteldeActiviteiten = (List<BesteldeActiviteit>)Session["current_order"];
+            }
+
+            reservation.Klant = klant;
+
+            homerepository.AddKlant(reservation.Klant);
+
+            homerepository.AddReservation(reservation);
+
+            foreach(BesteldeActiviteit besteldeactiviteit in reservation.BesteldeActiviteiten)
+            {
+                besteldeactiviteit.Activiteit.BoughtTickets += besteldeactiviteit.TotalBoughtTickets;
+                homerepository.ChangeTickets(besteldeactiviteit.Activiteit);
+            }
+
             return RedirectToAction("Completed");
         }
 

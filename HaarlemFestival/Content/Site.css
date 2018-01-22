@@ -781,10 +781,6 @@ display: none
     font-size: 20px;
 }
 
-.restaurant-info-title, .restaurant-reservation-title {
-    margin-left: 10px;
-}
-
 .restaurant-info-table {
     display: inline-block;
     float: left;
@@ -804,9 +800,16 @@ display: none
     text-align: left;
 }
 
+.restaurant-info-img, .restaurant-reservation-img {
+    height: 100%;
+}
+
 .restaurant-info-img img, .restaurant-reservation-img img {
-    margin: 10px;
-    float: right;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #353238;
+    width: 100%;
+    vertical-align: central;
 }
 
 .restaurant-info-buttons, .restaurant-reservation-buttons {
@@ -815,8 +818,8 @@ display: none
 }
 
 .restaurant-info-button-reservation, .restaurant-info-button-back, .restaurant-reservation-button-back, .restaurant-reservation-button-reservation {
-    margin: 10px;
-    margin-left: 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     color: #FFFFFF;
     background-color: #353238;
     height: 32px;
@@ -830,24 +833,21 @@ display: none
 }
 
 .restaurant-reservation-intro {
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 .restaurant-reservation-form {
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 .restaurant-reservation-form label {
     display: block;
 }
 
-.restaurant-reservation-tickets label, .restaurant-reservation-alternativetickets label {
-    width: 115px;
-}
 
 .restaurant-reservation-tickets input, .restaurant-reservation-alternativetickets input {
-    width: 115px;
     text-align: right;
+    width: 100%;
 }
 
 .restaurant-reservation-day select, .restaurant-reservation-time select {
@@ -855,8 +855,7 @@ display: none
 }
 
 .restaurant-reservation-tickets, .restaurant-reservation-alternativetickets, .restaurant-reservation-day, .restaurant-reservation-time {
-    float: left;
-    margin-right: 15px;
+    padding: 5px;
     margin-bottom: 10px;
 }
 
@@ -864,8 +863,12 @@ display: none
     display: block;
 }
 
+.restaurant-reservation-comment label {
+    text-align: left;
+}
+
 .restaurant-reservation-comment textarea {
-    width: 545px;
+    width: 100%;
     height: 100px;
     resize: none;
 }
@@ -1889,6 +1892,15 @@ div.eventData {
 }
 
 @media (max-width: 991px) {
+    #searchData {
+        width: 100%;
+    }
+
+    #filterSystem .eventFilter {
+        margin-top: 10px;
+        margin-left: 0px;
+        padding: 0;
+    }
 }
 
 /* Start mobile navigatie/view */
@@ -1981,7 +1993,13 @@ div.eventData {
     }
 
     #filterSystem .eventFilter {
-        margin-left: -15px;
+        margin-top: 10px;
+        margin-left: 0px;
+        padding: 0;
     }
 
+
+    .mobile-hidden {
+        display: none;
+    }
 }
