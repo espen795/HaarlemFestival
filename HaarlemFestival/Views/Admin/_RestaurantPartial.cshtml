@@ -6,7 +6,31 @@
         $("#Rating").keypress(function (key) {
             key.preventDefault();
         });
+
+        CheckCuisineSelectors();
     });
+
+    function CheckCuisineSelectors() {
+        var noCuisineSelected = 0;
+
+        $("div.modal.in #CuisineSelector select.Cuisines").each(function () {
+            var selectedValue = $(this).find('option:selected').val().toString();
+            console.log(this);
+            console.log("Value: " + selectedValue);
+            if (selectedValue == "") {
+                if (noCuisineSelected >= 1) {
+                    $(this).remove();
+                }
+                noCuisineSelected++;
+            }
+
+        });
+
+        if (noCuisineSelected == 0) {
+            console.log("Add New Select");
+            $("div.modal.in #CuisineSelector select.Cuisines").first().clone().val("").appendTo("div.modal.in #CuisineSelector");
+        }
+    }
 </script>
 
 @if (ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Count() > 0)
@@ -60,14 +84,14 @@ catch (Exception) { }
             @Html.TextBoxFor(r => r.DisplayPrice, new { @placeholder = "0.00", @Value = String.Format("{0:0.00}", Model.DisplayPrice) })
         </div>
         <div class="col-md-6">
-                @Html.Label("Rating out of 5")<i class="required red">*</i>
-                @Html.TextBoxFor(r => r.Rating, new { @placeholder = 0, @min = 0, @max = 5, @type = "number" }) 
+            @Html.Label("Rating out of 5")<i class="required red">*</i>
+            @Html.TextBoxFor(r => r.Rating, new { @placeholder = 0, @min = 0, @max = 5, @type = "number" })
         </div>
     </div>
 </div>
 
 <div class="form-group">
-    <div class="input-group">
+    <div class="input-group" id="CuisineSelector">
         @Html.Label("Cuisines") <br />
 
         @if (Model.Cuisines != null)
@@ -75,11 +99,12 @@ catch (Exception) { }
 
             foreach (Cuisine c in Model.Cuisines)
             {
-                @Html.DropDownList("Cuisine", new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam", c.CuisineId), "[Select a Cuisine]", new { @Value = c.CuisineId, @class = "Cuisines" }) <br />
+                @Html.DropDownList("Cuisine" + c.CuisineId, new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam", c.CuisineId), "[Select a Cuisine]", new { @Value = c.CuisineId, @class = "Cuisines", @onchange = "CheckCuisineSelectors();" }) <br />
             }
         }
 
-        @Html.DropDownList("Cuisine", new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam"), "[Select a Cuisine]", new { @class = "Cuisines" }) <br />
+        @Html.DropDownList("Cuisine", new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam"), "[Select a Cuisine]", new { @class = "Cuisines", @onchange = "CheckCuisineSelectors();" }) <br />
+
 
     </div>
 </div>

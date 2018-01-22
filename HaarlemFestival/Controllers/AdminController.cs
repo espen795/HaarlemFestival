@@ -9,32 +9,39 @@ using HaarlemFestival.Repository.Admin;
 using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Excel;
 using System.Drawing;
+using System.Security.Principal;
 
 namespace HaarlemFestival.Controllers
 {
+    [AdminAuthorize]
     public class AdminController : Controller
     {
         IAdminRepository adminRepository = new AdminRepository();
 
         #region Views
+        [AllowAnonymous]
+        public ActionResult Index()
+        {
+            return RedirectToAction("Login", "Admin");
+        }
+
+        [AllowAnonymous]
         public ActionResult Login()
         {
             // Als de sessie met het aantal verkeerde logins nog niet bestaat.
             return View();
         }
 
-        [Authorize]
         public ActionResult Overview()
         {
             return View();
-        } 
+        }
 
-        [Authorize]
         public ActionResult ManageEvent()
         {
             EventData data = adminRepository.GetEventData();
-            data.Filters.dateFilter = GetDateModel(data.Filters.days);            
-            
+            data.Filters.dateFilter = GetDateModel(data.Filters.days);
+
             string selectedEvent = this.Request.QueryString["selectedEvent"]; // Geselecteerde evenement uit de URL halen
 
             switch (selectedEvent)
@@ -55,7 +62,6 @@ namespace HaarlemFestival.Controllers
             return View(data);
         }
 
-        [Authorize]
         public ActionResult TicketSalesInformation()
         {
             Models.Filters filters = adminRepository.GetFilters();
@@ -72,17 +78,42 @@ namespace HaarlemFestival.Controllers
             return View(viewModel);
         }
 
-        [Authorize]
         public ActionResult AnswerContactmessage()
         {
-            //List<ContactMessage> messages = adminrepository.GetContactMessages();
+            AnswerContactViewModel viewModel = new AnswerContactViewModel()
+            {
+                Messages = adminRepository.GetContactMessages()
+            };
 
-            return View(/*messages*/);
+            return View(viewModel);
+        }
+
+        public ActionResult CheckInterviewQuestions()
+        {
+            List<InterviewQuestion> interviewQuestions = adminRepository.GetInterviewQuestions();
+
+            return View(interviewQuestions);
+        }
+
+        public ActionResult ManageAccounts()
+        {
+            string[] allowedRoles = new string[] { "Owner" };
+            if(!UserAuthorized(allowedRoles))
+                return RedirectToAction("Overview", "Admin");
+
+            ManageAccountViewModel viewModel = new ManageAccountViewModel()
+            {
+                AccountList = adminRepository.GetAccounts(),
+                Roles = adminRepository.GetRoles()
+            };
+
+            return View(viewModel);
         }
         #endregion
 
         #region Login/Logout
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Login([Bind(Include = "Username,Password")] LoginModel model)
         {
             if (ModelState.IsValid)
@@ -92,6 +123,9 @@ namespace HaarlemFestival.Controllers
                 if (account != null) // Als het account bestaat.
                 {
                     FormsAuthentication.SetAuthCookie(account.Username, false);
+                    string[] role = new string[1] { account.Role.RoleName };
+
+                    HttpContext.User = new GenericPrincipal(new GenericIdentity(account.Username, "Forms"), role);
 
                     Session["loggedin_account"] = account; // Account toevoegen aan de session.
 
@@ -106,11 +140,8 @@ namespace HaarlemFestival.Controllers
             return View(model);
         }
 
-
-
-
         // Uitloggen
-        [Authorize]
+        [AllowAnonymous]
         public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
@@ -121,7 +152,6 @@ namespace HaarlemFestival.Controllers
 
         #region AddRegion
         [HttpPost]
-        [Authorize]
         public JsonResult AddJazz(HaarlemFestival.Models.Jazz activity, FormCollection collector)
         {
             // Standaard informatie van activity
@@ -150,6 +180,7 @@ namespace HaarlemFestival.Controllers
 
                 // Evenement toevoegen
                 adminRepository.AddEvent(activity);
+                Session["Data_Added"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
 
@@ -158,7 +189,6 @@ namespace HaarlemFestival.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public JsonResult AddRestaurant(Models.Restaurant restaurant, FormCollection collector)
         {
             // Proberen om de rating op te halen (Kan leeggemaakt worden in formulier)
@@ -196,6 +226,7 @@ namespace HaarlemFestival.Controllers
 
                 // Restaurant toevoegen
                 adminRepository.AddRestaurant(restaurant);
+                Session["Data_Added"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
 
@@ -204,7 +235,6 @@ namespace HaarlemFestival.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public JsonResult AddDinner(Models.Dinner activity, FormCollection collector)
         {
             // Standaard informatie van activity
@@ -223,10 +253,10 @@ namespace HaarlemFestival.Controllers
                 activity.Day = adminRepository.GetDay(activity.Day.DayId);
                 activity.StartSession = activity.Day.Date.Add(TimeSpan.Parse(collector["StartSession"]));
                 activity.EndSession = activity.Day.Date.Add(TimeSpan.Parse(collector["EndSession"]));
-                activity.TimeString = activity.StartSession.ToString("H:mm") + " - " + activity.EndSession.ToString("H:mm");
 
                 // Dinner evenement toevoegen
                 adminRepository.AddEvent(activity);
+                Session["Data_Added"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
 
@@ -235,7 +265,6 @@ namespace HaarlemFestival.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public JsonResult AddTalking(Models.Talking activity, FormCollection collector)
         {
             // Standaard informatie van activity
@@ -283,6 +312,7 @@ namespace HaarlemFestival.Controllers
 
                 //Talking evenement toevoegen.
                 adminRepository.AddEvent(activity);
+                Session["Data_Added"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
 
@@ -291,13 +321,13 @@ namespace HaarlemFestival.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public JsonResult AddGuide(Models.Guide guide, FormCollection collector)
         {
             if (ModelState.IsValid)
             {
                 // Guide toevoegen.
                 adminRepository.AddGuide(guide);
+                Session["Data_Added"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
 
@@ -306,7 +336,6 @@ namespace HaarlemFestival.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public JsonResult AddHistoric(Models.Historic activity, FormCollection collector)
         {
             // Standaard informatie van activity
@@ -326,18 +355,33 @@ namespace HaarlemFestival.Controllers
 
                 // Historic evenement toevoegen.
                 adminRepository.AddEvent(activity);
+                Session["Data_Added"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
 
             var errors = GetModelErrors(); // ModelState errors ophalen.
             return Json(new { success = false, errorList = errors }, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public JsonResult AddAccount(Models.ManageAccountViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                adminRepository.AddAccount(viewModel.Account);
+                Session["Data_Added"] = true;
+                return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            }
+
+            var errors = GetModelErrors(); // ModelState errors ophalen.
+            return Json(new { success = false, errorList = errors }, JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
 
         #region UpdateRegion
 
         [HttpPost]
-        [Authorize]
         public ActionResult UpdateEvent(Activity activity)
         {
             // Evenement updaten.
@@ -345,7 +389,6 @@ namespace HaarlemFestival.Controllers
             return RedirectToAction("ManageEvent", "Admin");
         }
 
-        [Authorize]
         public ActionResult _UpdateData(int id)
         {
             string type = this.Request["type"].ToLower(); // Type ophalen.
@@ -371,13 +414,15 @@ namespace HaarlemFestival.Controllers
                 case "historic":
                     return PartialView("_UpdateHistoricPartial", id);
 
+                case "account":
+                    return PartialView("_UpdateAccountPartial", id);
+
                 default:
                     return RedirectToAction("ManageEvent", "Admin");
             }
         }
 
         [HttpPost]
-        [Authorize]
         public JsonResult UpdateJazz(Models.Jazz activity, FormCollection collector)
         {
             // Prijs en Alternatieve prijs ophalen.
@@ -404,6 +449,7 @@ namespace HaarlemFestival.Controllers
 
                 // Jazz Evenement Updaten.
                 adminRepository.UpdateEvent(activity);
+                Session["Data_Updated"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
 
@@ -412,7 +458,6 @@ namespace HaarlemFestival.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public JsonResult UpdateRestaurant(Models.Restaurant restaurant, FormCollection collector)
         {
             //Proberen om de rating op te halen.
@@ -449,6 +494,7 @@ namespace HaarlemFestival.Controllers
 
                 // Restaurant data updaten.
                 adminRepository.UpdateRestaurant(restaurant);
+                Session["Data_Updated"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
 
@@ -457,7 +503,6 @@ namespace HaarlemFestival.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public JsonResult UpdateDinner(Models.Dinner activity, FormCollection collector)
         {
             // Prijs en Alternatieve prijs ophalen.
@@ -470,10 +515,10 @@ namespace HaarlemFestival.Controllers
                 activity.Day = adminRepository.GetDay(activity.Day.DayId);
                 activity.StartSession = activity.Day.Date.Add(TimeSpan.Parse(collector["StartSession"]));
                 activity.EndSession = activity.Day.Date.Add(TimeSpan.Parse(collector["EndSession"]));
-                activity.TimeString = activity.StartSession.ToString("H:mm") + " - " + activity.EndSession.ToString("H:mm");
 
                 // Dinner data ophalen.
                 adminRepository.UpdateEvent(activity);
+                Session["Data_Updated"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
 
@@ -482,7 +527,6 @@ namespace HaarlemFestival.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public JsonResult UpdateTalking(Models.Talking activity, FormCollection collector)
         {
             // Prijs ophalen.
@@ -538,6 +582,7 @@ namespace HaarlemFestival.Controllers
 
                 // Talking data updaten.
                 adminRepository.UpdateEvent(activity);
+                Session["Data_Updated"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
 
@@ -546,13 +591,13 @@ namespace HaarlemFestival.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public JsonResult UpdateGuide(Models.Guide guide, FormCollection collector)
         {
             if (ModelState.IsValid)
             {
                 // Guide updaten.
                 adminRepository.UpdateGuide(guide);
+                Session["Data_Updated"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
 
@@ -561,7 +606,6 @@ namespace HaarlemFestival.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public JsonResult UpdateHistoric(Models.Historic activity, FormCollection collector)
         {
             // Prijs en Alternatieve prijs ophalen.
@@ -589,6 +633,22 @@ namespace HaarlemFestival.Controllers
 
                 // Historic data updaten.
                 adminRepository.UpdateEvent(activity);
+                Session["Data_Updated"] = true;
+                return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            }
+
+            var errors = GetModelErrors(); // ModelState errors ophalen.
+            return Json(new { success = false, errorList = errors }, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpPost]
+        public JsonResult UpdateAccount(Models.ManageAccountViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                adminRepository.UpdateAccount(viewModel.Account);
+                Session["Data_Updated"] = true;
                 return Json(new { success = true }, JsonRequestBehavior.AllowGet);
             }
 
@@ -673,35 +733,42 @@ namespace HaarlemFestival.Controllers
 
         #region DeleteRegion
         [HttpPost]
-        [Authorize]
         public ActionResult DeleteEvent(int id)
         {
             // Evenement verwijderen.
             adminRepository.DeleteEvent(id);
+            Session["Data_Deleted"] = true;
             return RedirectToAction("ManageEvent", "Admin");
         }
 
         [HttpPost]
-        [Authorize]
         public ActionResult DeleteRestaurant(int id)
         {
             // Restaurant verwijderen.
             adminRepository.DeleteRestaurant(id);
+            Session["Data_Deleted"] = true;
             return RedirectToAction("ManageEvent", "Admin");
         }
 
         [HttpPost]
-        [Authorize]
         public ActionResult DeleteGuide(int id)
         {
             // Guide verwijderen.
             adminRepository.DeleteGuide(id);
+            Session["Data_Deleted"] = true;
             return RedirectToAction("ManageEvent", "Admin");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteAccount(int id)
+        {
+            adminRepository.DeleteAccount(id);
+            Session["Data_Deleted"] = true;
+            return RedirectToAction("ManageAccounts", "Admin");
         }
         #endregion
 
         #region PartialViews
-        [Authorize]
         public ActionResult _JazzPartial(int? id)
         {
             ViewData["Dates"] = GetDateModel(adminRepository.GetDates()); // Datums ophalen.
@@ -721,7 +788,6 @@ namespace HaarlemFestival.Controllers
             return PartialView(jazz); // Jazz data terugsturen.
         }
 
-        [Authorize]
         public ActionResult _RestaurantPartial(int? id)
         {
             // Cuisines ophalen.
@@ -742,7 +808,6 @@ namespace HaarlemFestival.Controllers
             return PartialView(restaurant); // Restaurant data terugsturen.
         }
 
-        [Authorize]
         public ActionResult _DinnerPartial(int? id)
         {
             // Restaurants en Datums ophalen.
@@ -763,7 +828,6 @@ namespace HaarlemFestival.Controllers
             return PartialView(dinner); // Dinner Data terugsturen
         }
 
-        [Authorize]
         public ActionResult _TalkingPartial(int? id)
         {
             // Datums ophalen.
@@ -783,7 +847,6 @@ namespace HaarlemFestival.Controllers
             return PartialView(talking); // Talking data terugsturen.
         }
 
-        [Authorize]
         public ActionResult _GuidePartial(int? id)
         {
             Guide guide;
@@ -800,7 +863,6 @@ namespace HaarlemFestival.Controllers
             return PartialView(guide); // Guide data terugsturen.
         }
 
-        [Authorize]
         public ActionResult _HistoricPartial(int? id)
         {
             // Guides en Datums ophalen.
@@ -819,6 +881,40 @@ namespace HaarlemFestival.Controllers
             }
 
             return PartialView(historic); // Historic data terugsturen.
+        }
+
+        public ActionResult _AnswerQuestionPartial(int id)
+        {
+            ContactMessage message = adminRepository.GetContactMessage(id);
+            return PartialView(message);
+        }
+
+        public ActionResult _AccountPartial(int? id)
+        {
+            Account account;
+            if (id != null)
+                account = adminRepository.GetAccountById((int)id);
+            else
+                account = new Account();
+
+            ManageAccountViewModel viewModel = new ManageAccountViewModel
+            {
+                Account = account,
+                Roles = adminRepository.GetRoles()
+            };
+
+
+            return PartialView(viewModel);
+        }
+
+        public ActionResult _AddAccountPartial()
+        {
+            return PartialView();
+        }
+
+        public ActionResult _UpdateAccountPartial(int id)
+        {
+            return PartialView(id);
         }
         #endregion
 
@@ -854,7 +950,7 @@ namespace HaarlemFestival.Controllers
             data = GetHistoricWorksheet(data, activities);
 
             // Bestand Opslaan.
-            
+
             data.SaveAs("Ticket_Sales_Information.xlsx");
 
             string saveLocation = data.FullNameURLEncoded;
@@ -885,7 +981,7 @@ namespace HaarlemFestival.Controllers
             foreach (EventType type in enums)
             {
                 string eventType = "";
-                switch(type)
+                switch (type)
                 {
                     case EventType.JazzPatronaat:
                         eventType = "Jazz@Patronaat";
@@ -1135,6 +1231,39 @@ namespace HaarlemFestival.Controllers
             }
 
             return errors; // String met errors terugsturen.
+        }
+
+        [HttpPost]
+        public ActionResult AnswerContactmessage(int id, FormCollection collector)
+        {
+            if (ModelState.IsValid)
+            {
+                ContactMessage message = adminRepository.GetContactMessage(id);
+                message.Answer = collector["Answer"].ToString();
+                message.Answered = true;
+                Session["Question_Answered"] = true;
+                adminRepository.UpdateContactMessage(message);
+            }
+
+            return RedirectToAction("AnswerContactMessage");
+        }
+
+        private bool UserAuthorized(string[] roles)
+        {
+            bool authorized = false;
+            Account account = (Account)Session["loggedin_account"];
+
+            foreach(string role in roles)
+            {
+                if (role.ToLower() == account.Role.RoleName.ToLower())
+                    authorized = true;
+            }
+
+            if (!authorized)
+            {
+                Session["NotAuthorized"] = true;
+            }
+            return authorized;
         }
         #endregion
     }

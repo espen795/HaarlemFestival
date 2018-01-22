@@ -17,7 +17,7 @@ namespace HaarlemFestival.Repository.Talking
 
         public Models.Talking GetTalkById(int id)
         {
-            return db.Talkings.FirstOrDefault(t => t.TalkId == id);
+            return db.Talkings.Find(id);
         }
 
         public void SaveQuestionToDB(InterviewQuestion question)

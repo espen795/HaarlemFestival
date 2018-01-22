@@ -12,10 +12,50 @@ namespace HaarlemFestival.Repository.Admin
     {
         private HFDB db = new HFDB();
 
+        public List<Account> GetAccounts()
+        {
+            return db.Accounts.ToList();
+        }
+
         public Account GetAccount(string username, string password)
         {
             Account account = db.Accounts.Where(a => (a.Username == username) && (a.Password == password)).FirstOrDefault();
             return account;
+        }
+
+        public Account GetAccountById(int id)
+        {
+            return db.Accounts.Find(id);
+        }
+
+        public void AddAccount(Account account)
+        {
+            db.Accounts.Add(account);
+            db.SaveChanges();
+        }
+
+        public void UpdateAccount(Account account)
+        {
+            db.Entry(account).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+
+        public void DeleteAccount(int id)
+        {
+            Account account = GetAccountById(id);
+            db.Accounts.Remove(account);
+            db.SaveChanges();
+        }
+        
+        public List<Role> GetRoles()
+        {
+            return db.Roles.ToList();
+        }
+
+        public void SendContactMessage(ContactMessage message)
+        {
+            db.ContactMessages.Add(message);
+            db.SaveChanges();
         }
 
         public void AddEvent(Activity activity)
@@ -231,5 +271,25 @@ namespace HaarlemFestival.Repository.Admin
             return activities.Sum(a => a.Price);
         }
 
+        public List<ContactMessage> GetContactMessages()
+        {
+            return db.ContactMessages.ToList();
+        }
+
+        public ContactMessage GetContactMessage(int id)
+        {
+            return db.ContactMessages.Find(id);
+        }
+
+        public void UpdateContactMessage(ContactMessage message)
+        {
+            db.Entry(message).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+
+        public List<InterviewQuestion> GetInterviewQuestions()
+        {
+            return db.InterviewQuestions.Where(q => q.Content != null && q.Receiver != null).ToList();
+        }
     }
 }

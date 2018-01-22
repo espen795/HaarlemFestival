@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Haarlem Festival</title>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkHM97URmE3DZBPfRAA74F6x7cqhuDB6E&callback=initMap"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js" type="text/javascript"></script>
 
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/ChartJS")
 
     <script>
         var map;
@@ -47,6 +49,7 @@
 
                     @if (Session["loggedin_account"] != null)
                     {
+                        HaarlemFestival.Models.Account account = (HaarlemFestival.Models.Account)Session["loggedin_account"];
                         <li class="dropdown right adminDropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 Admin
@@ -57,6 +60,11 @@
                                 <li>@Html.ActionLink("Manage Event", "ManageEvent", "Admin", null, new { @id = "adminManage" })</li>
                                 <li>@Html.ActionLink("Ticket & Sales Information", "TicketSalesInformation", "Admin", null, new { @id = "adminSales" })</li>
                                 <li>@Html.ActionLink("Contact Messages", "AnswerContactmessage", "Admin", null, new { @id = "adminContact" })</li>
+                                <li>@Html.ActionLink("Interview Questions", "CheckInterviewQuestions", "Admin", null, new { @id = "adminInterviewQuestions" })</li>
+                                @if (account.Role.RoleName == "Owner")
+                                {
+                                    <li>@Html.ActionLink("Manage Accounts", "ManageAccounts", "Admin", null, new { @id = "adminAccounts" })</li>
+                                }
                                 <li>@Html.ActionLink("Log off", "LogOff", "Admin", null, new { @id = "adminLogout" })</li>
                             </ul>
                         </li>

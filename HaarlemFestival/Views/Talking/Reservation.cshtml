@@ -8,13 +8,11 @@
 }
 
 <script type="text/javascript">
-    function UpdateQuestions()
-    {
+    function UpdateQuestions() {
         var ticketAmounts = document.getElementsByClassName("talk-ticket-amount");
         var questions = document.getElementsByClassName("talk-question");
 
-        for (var i = 0; i < ticketAmounts.length; i++)
-        {
+        for (var i = 0; i < ticketAmounts.length; i++) {
             if (ticketAmounts[i].value > 0)
                 questions[i].style.display = "block";
             else
@@ -26,81 +24,96 @@
 <section class="event-banner talking"></section>
 
 <main class="event container talking">
-@Html.ValidationSummary()
-@using (Html.BeginForm())
-{
-    <section class="row">
-        <!-- Section 1 -->
-        <section class="talk-reservation-container">
-            <!-- Header -->
-            <section>
-                <h1>
-                    Order your amount of tickets <span class="talk-bold">(max 2 tickets per talk)</span>
-                </h1>
-            </section>
+    @{
+        List<BesteldeActiviteit> activiteit = new List<BesteldeActiviteit>();
+    }
+    @Html.ValidationSummary()
+    @using (Html.BeginForm("Book", "Talking", FormMethod.Post))
+    {
+        <section class="row">
+            <!-- Section 1 -->
+            <section class="talk-reservation-container">
+                <!-- Header -->
+                <section>
+                    <h1>
+                        Order your amount of tickets <span class="talk-bold">(max 2 tickets per talk)</span>
+                    </h1>
+                </section>
 
-            <!-- Table -->
-            <section>
-                <table class="talking-reservation-table">
-                    <tr>
-                        <th>Ticket Amount</th>
-                        <th>Talk</th>
-                        <th>Price</th>
-                        <th>Date & Time (DD-MM-YYYY)</th>
-                        <th>Location</th>
-                    </tr>
-                    @foreach (Talking talk in Model.Talkings)
-                    {
-                    <tr>
-                        @if (talk.TalkId == ViewBag.OrderId)
-                        {
-                            <td><input value="1" onchange="UpdateQuestions()" id="ticket-amount@(talk.TalkId)" class="talk-ticket-amount" min="0" max="2" type="number" /></td>
+                <!-- Table -->
+                <section>
+                    <table class="talking-reservation-table">
+                        <tr>
+                            <th>Ticket Amount</th>
+                            <th>Talk</th>
+                            <th>Price</th>
+                            <th>Date & Time (DD-MM-YYYY)</th>
+                            <th>Location</th>
+                        </tr>
+                        @{
+                            int i = 0;
+                            foreach (Talking talk in Model.Talkings)
+                            {
+                                Model.BesteldeActiviteiten.Add(new BesteldeActiviteit());
+
+                                <tr>
+                                    <td class="hidden"><input name="BesteldeActiviteiten[@i].Activiteit.ActivityId" value="@talk.ActivityId" class="hidden" /></td>
+                                    @*<td><input value="" onchange="UpdateQuestions()" id="ticket-amount@(Model.Talkings[i].TalkId)" class="talk-ticket-amount" min="0" max="2" type="number" /></td>*@
+                                    <td onchange="UpdateQuestions();">@Html.TextBoxFor(m => Model.BesteldeActiviteiten[i].Aantal, new { @type = "number", @min = 0, @max = 2, @class = "talk-ticket-amount" })</td>
+
+                                    <td>@Model.Talkings[i].Talk.Naam</td>
+                                    <td>Free</td>
+                                    <td>@Model.Talkings[i].Day.Naam @talk.Day.Date.ToShortDateString() | @talk.StartSession.ToShortTimeString() - @talk.EndSession.ToShortTimeString()</td>
+                                    <td>Toneelschuur</td>
+                                </tr>
+
+                                Model.BesteldeActiviteiten[i].Activiteit = new Activity();
+                                Model.BesteldeActiviteiten[i].Activiteit.ActivityId = talk.ActivityId;
+                                i++;
+                            }
                         }
-                        else
+                    </table>
+                </section> <!-- Table -->
+
+                <section class="">
+                    <p>
+                        Fill in an optional question (Dutch or English) below for one of the interviewees and it might
+                        be used for the interview <span class="talk-bold">(only if you ordered one or two tickets for that specific talk)</span>
+                    </p>
+                </section> <!-- Question info-->
+
+                <section class="talk-questions">
+                    @{
+                        int x = 0;
+                        foreach (Talking talk in Model.Talkings)
                         {
-                            <td><input value="" onchange="UpdateQuestions()" id="ticket-amount@(talk.TalkId)" class="talk-ticket-amount" min="0" max="2" type="number" /></td>
-                        }                     
-                        <td>@talk.Talk.Naam</td>
-                        <td>Free</td>
-                        <td>@talk.Day.Naam @talk.Day.Date.ToShortDateString() | @talk.StartSession.ToShortTimeString() - @talk.EndSession.ToShortTimeString()</td>
-                        <td>Toneelschuur</td>
-                    </tr>
+                            Talking talking = Model.Talkings.Find(m => m.ActivityId == Model.BesteldeActiviteiten[x].Activiteit.ActivityId);
+
+                            <section class="talk-question" id="question1">
+                                <p>@Model.Talkings[x].Talk.Naam</p>
+                                <section class="talk-question-receiver">
+                                    <p>Question For: </p>
+                                @* Fix om persoon mee te geven aan opmering *@
+                                    @Html.DropDownListFor(
+                                                         /*??*/m => Model.BesteldeActiviteiten[x].Opmerking , new SelectList(new List<Object> { Model.Talkings[x].Talk.Person1, Model.Talkings[x].Talk.Person2 }),
+                                                         "[Select a person..]"
+                                                         )
+                                </section> <!-- Receiver -->
+
+                                @Html.TextAreaFor(m => Model.BesteldeActiviteiten[x].Opmerking, new { @class = "talk-questionbox", placeholder = "You can type your question here." });
+                            </section> <!-- Talk question -->
+                            x++;
+                        }
                     }
-                </table>
-            </section> <!-- Table -->
+                </section> <!-- Questions section -->
+                <section>
+                    @Html.ActionLink("Back to Talking Haarlem", "Index", "Talking", new { }, new { @class = "btn btn-black talk-back-btn" })
 
-            <section class="">
-                <p>
-                    Fill in an optional question (Dutch or English) below for one of the interviewees and it might
-                    be used for the interview <span class="talk-bold">(only if you ordered one or two tickets for that specific talk)</span>
-                </p>
-             </section> <!-- Question info-->
-             
-             <section class="talk-questions">
-             @foreach (Talking talk in Model.Talkings)
-             {
-                <section class="talk-question" id="question1">
-                     <p>@talk.Talk.Naam</p>
-                     <section class="talk-question-receiver">
-                         <p>Question For: </p>
-                         @Html.DropDownListFor(
-                         m => m.Question.Receiver, new SelectList(new List<Object> { talk.Talk.Person1, talk.Talk.Person2 }),
-                         "[Select a person..]"
-                         )
-                      </section> <!-- Receiver -->
-                      
-                      @Html.TextAreaFor(m => m.Question.Content, new { @class = "talk-questionbox", placeholder = "You can type your question here." });
+                    @*@Html.ActionLink("Add to basket", "Book", "Talking", new { }, new { type = "submit", @class = "btn btn-black talk-order-btn"})*@
+                    <input type="submit" value="Add to basket" class="btn btn-black talk-order-btn" />
 
-                 </section> <!-- Talk question -->
-             }
-            </section> <!-- Questions section -->
-            <section>
-                @Html.ActionLink("Back to Talking Haarlem", "Index", "Talking", new { }, new { @class = "btn btn-black talk-back-btn" })
-                
-                @Html.ActionLink("Add to basket", "Index", "Talking", new { }, new { type = "submit", @class = "btn btn-black talk-order-btn"})
-                
-            </section> <!-- Buttons -->
-        </section> <!-- Section 1 Reservation Container -->
-    </section> <!-- row -->
-}
+                </section> <!-- Buttons -->
+            </section> <!-- Section 1 Reservation Container -->
+        </section> <!-- row -->
+    }
 </main>

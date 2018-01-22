@@ -67,48 +67,24 @@
                                 <td class="basket-table-tickets">@ordered.TotalBoughtTickets</td>
                                 @if (ordered.Activiteit.EventType == EventType.JazzPatronaat)
                                 {
-                                    foreach (Jazz jazz in Model.Jazzs)
-                                    {
-                                        if (jazz.ActivityId == ordered.Activiteit.ActivityId)
-                                        {
-                                            <td class="basket-table-name">@jazz.artist.ArtistName</td>
-                                            break;
-                                        }
-                                    }
+                                    Jazz jazz = Model.Jazzs.Find(x => x.ActivityId == ordered.Activiteit.ActivityId);
+                                    <td class="basket-table-name">@jazz.artist.ArtistName</td>
                                 }
                                 else if (ordered.Activiteit.EventType == EventType.DinnerInHaarlem)
                                 {
-                                    foreach (Dinner dinner in Model.Dinners)
-                                    {
-                                        if (dinner.ActivityId == ordered.Activiteit.ActivityId)
-                                        {
-                                            <td class="basket-table-name">@dinner.Restaurant.Naam</td>
-                                            break;
-                                        }
-                                    }
+                                    Dinner dinner = Model.Dinners.Find(x => x.ActivityId == ordered.Activiteit.ActivityId);
+                                    <td class="basket-table-name">@dinner.Restaurant.Naam</td>
                                 }
                                 else if (ordered.Activiteit.EventType == EventType.TalkingHaarlem)
                                 {
-                                    foreach (Talking talk in Model.Talks)
-                                    {
-                                        if (talk.ActivityId == ordered.Activiteit.ActivityId)
-                                        {
-                                            <td class="basket-table-name">@talk.Talk.Naam</td>
-                                            break;
-                                        }
-                                    }
+                                    Talking talking = Model.Talks.Find(x => x.ActivityId == ordered.Activiteit.ActivityId);
+                                    <td class="basket-table-name">@talking.Talk.Naam</td>
                                 }
                                 else if (ordered.Activiteit.EventType == EventType.HistoricHaarlem)
                                 {
-                                    foreach (Historic historic in Model.Historics)
-                                    {
-                                        if (historic.ActivityId == ordered.Activiteit.ActivityId)
-                                        {
-                                            // Moet nog checken en weergeven of het een groepsticket is
-                                            <td class="basket-table-name">Historic Tour in @historic.Guide.LanguageName by @historic.Guide.GuideName</td>
-                                            break;
-                                        }
-                                    }
+                                    Historic historic = Model.Historics.Find(x => x.ActivityId == ordered.Activiteit.ActivityId);
+                                    // Moet nog checken en weergeven of het een groepsticket is
+                                    <td class="basket-table-name">Historic Tour in @historic.Guide.LanguageName by @historic.Guide.GuideName</td>
                                 }
 
                                 <td class="basket-table-time">@ordered.Activiteit.StartSession.ToString("ddd dd/MM/yyyy HH:mm") - @ordered.Activiteit.EndSession.ToString("ddd dd/MM/yyyy HH:mm")</td>

@@ -4,9 +4,24 @@
 @{
     ViewBag.Title = "Contact";
 }
-
+@model ContactMessage
 <div class="event-banner"></div>
+@{
+    if (Session["send_contact_form"] != null)
+    {
+        if ((bool)Session["send_contact_form"])
+        {
+            <div class="basket-alert">
+                <div class="alert alert-success alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <h3>Sent!</h3> Your questions has been sent.
+                </div>
+            </div>
+        }
 
+        Session["send_contact_form"] = false;
+    }
+}
 <div class="event container">
     <div class="row">
         <!-- Section 1 -->
@@ -46,36 +61,40 @@
                 <p class="content">
                     Please fill in the fields below. The fields with a * are required. These fields are required so we can get in contact with you to answer your question.
                 </p>
-                @using (Html.BeginForm("SendContactForm", "Home", FormMethod.Post, new { @class = "contact-form" }))
+                @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { @class = "contact-form" }))
                 {
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                     <div class="contact-form-name">
                         <label for="name">Name: *</label>
-                        @Html.TextBox("name")
+                        @Html.TextBoxFor(c => c.Name)
                     </div>
+
                     <div class="contact-form-email">
                         <label for="email">E-mail: *</label>
-                        @Html.TextBox("email")
-                    </div>
-                    <div class="contact-form-subject">
-                        <label for="subject">Subject:</label>
-                        @Html.TextBox("subject")
+                        @Html.TextBoxFor(c => c.Email)
                     </div>
 
                     <div class="contact-form-regarding">
                         <label for="regarding">Regarding: *</label>
-                        <select name="regarding" required>
-                            <option value="">[Select an option]</option>
-                            <option value="jazz">Jazz@Patronaat</option>
-                            <option value="dinner">Dinner in Haarlem</option>
-                            <option value="talking">Talking Haarlem</option>
-                            <option value="historic">Historic Haarlem</option>
-                            <option value="other">Others</option>
+                        <select id="RegardingSelect" name="RegardingSelect">
+                            <option>Select a Category.</option>
+                            <option value="0">Jazz@Patronaat</option>
+                            <option value="1">Dinner In Haarlem</option>
+                            <option value="2">Talking Haarlem</option>
+                            <option value="3">Historic Haarlem</option>
+                            <option value="4">Orders</option>
+                            <option value="5">Other</option>
                         </select>
+                    </div>
+
+                    <div class="contact-form-subject">
+                        <label for="subject">Subject: *</label>
+                        @Html.TextBoxFor(c => c.Subject)
                     </div>
 
                     <div class="contact-form-question">
                         <label for="question">Question: *</label>
-                        @Html.TextArea("question", new { @required = "required" })
+                        @Html.TextAreaFor(c => c.Question)
                     </div>
 
                     <button class="contact-form-button" type="submit"> Send</button>

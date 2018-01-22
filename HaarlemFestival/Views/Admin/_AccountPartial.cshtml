@@ -1,0 +1,41 @@
+﻿@using HaarlemFestival.Models;
+@model ManageAccountViewModel
+
+<!-- HEADER -->
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="myModalLabel">Update Account</h4>
+</div>
+
+<!-- BODY -->
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-12">
+            @Html.HiddenFor(a => a.Account.Id)
+            @Html.Label("Name")
+            @Html.TextBoxFor(a => a.Account.Naam, new { @type = "text" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            @Html.Label("Username")
+            @Html.TextBoxFor(a => a.Account.Username, new { @type = "text" })
+        </div>
+        <div class="col-md-6">
+            @Html.Label("Password")
+            @Html.TextBoxFor(a => a.Account.Password, new { @type = "text" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @Html.LabelFor(a => a.Account.RoleId)
+            @Html.DropDownListFor(a => a.Account.RoleId, new SelectList(Model.Roles.OrderByDescending(r => r.Id), "Id", "RoleName"))
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="modal-footer">
+    <input type="submit" class="btn btn-success" value="Save" />
+    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+</div>

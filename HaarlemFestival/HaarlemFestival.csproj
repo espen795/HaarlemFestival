@@ -235,13 +235,32 @@
     <Compile Include="Migrations\201801091834436_mig22.Designer.cs">
       <DependentUpon>201801091834436_mig22.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801171814045_mig23.cs" />
+    <Compile Include="Migrations\201801171814045_mig23.Designer.cs">
+      <DependentUpon>201801171814045_mig23.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801181131506_mig24.cs" />
+    <Compile Include="Migrations\201801181131506_mig24.Designer.cs">
+      <DependentUpon>201801181131506_mig24.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801181340565_mig25.cs" />
+    <Compile Include="Migrations\201801181340565_mig25.Designer.cs">
+      <DependentUpon>201801181340565_mig25.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801201709527_mig26.cs" />
+    <Compile Include="Migrations\201801201709527_mig26.Designer.cs">
+      <DependentUpon>201801201709527_mig26.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Activity.cs" />
+    <Compile Include="Models\AdminAuthorize.cs" />
     <Compile Include="Models\AgendaView.cs" />
+    <Compile Include="Models\AnswerContactViewModel.cs" />
     <Compile Include="Models\BasketModel.cs" />
     <Compile Include="Models\BesteldeActiviteit.cs" />
     <Compile Include="Models\Artist.cs" />
+    <Compile Include="Models\ContactMessage.cs" />
     <Compile Include="Models\Cuisine.cs" />
     <Compile Include="Models\DateModel.cs" />
     <Compile Include="Models\Day.cs" />
@@ -255,6 +274,9 @@
     <Compile Include="Models\JazzView.cs" />
     <Compile Include="Models\JazzViewModels.cs" />
     <Compile Include="Models\Locations.cs" />
+    <Compile Include="Models\ManageAccountViewModel.cs" />
+    <Compile Include="Models\QuestionCategory.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Talk.cs" />
     <Compile Include="Models\Talking.cs" />
     <Compile Include="Models\Jazz.cs" />
@@ -290,6 +312,10 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\Chart.min.js" />
+    <Content Include="Scripts\ChartFunctions.js" />
+    <Content Include="Scripts\FilterTableData.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -300,6 +326,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\SetFormOptions.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -352,6 +379,12 @@
     <Content Include="Views\Home\_ContactSent.cshtml" />
     <Content Include="Views\Admin\AnswerContactmessage.cshtml" />
     <Content Include="Views\Home\Completed.cshtml" />
+    <Content Include="Views\Admin\CheckInterviewQuestions.cshtml" />
+    <Content Include="Views\Admin\_AnswerQuestionPartial.cshtml" />
+    <Content Include="Views\Admin\_AccountPartial.cshtml" />
+    <Content Include="Views\Admin\_AddAccountPartial.cshtml" />
+    <Content Include="Views\Admin\_UpdateAccountPartial.cshtml" />
+    <Content Include="Views\Admin\ManageAccounts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -433,6 +466,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801091834436_mig22.resx">
       <DependentUpon>201801091834436_mig22.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801171814045_mig23.resx">
+      <DependentUpon>201801171814045_mig23.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801181131506_mig24.resx">
+      <DependentUpon>201801181131506_mig24.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801181340565_mig25.resx">
+      <DependentUpon>201801181340565_mig25.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801201709527_mig26.resx">
+      <DependentUpon>201801201709527_mig26.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -11,6 +11,7 @@ using HaarlemFestival.Repository.Jazz;
 using HaarlemFestival.Repository.Dinner;
 using HaarlemFestival.Repository.Talking;
 using HaarlemFestival.Repository.Historic;
+using HaarlemFestival.Repository.Admin;
 
 namespace HaarlemFestival.Controllers
 {
@@ -20,6 +21,7 @@ namespace HaarlemFestival.Controllers
         private IDinnerRepository dinnerRepository = new DinnerRepository();
         private ITalkingRepository talkingRepository = new TalkingRepository();
         private IHistoricRepository historicRepository = new HistoricRepository();
+        private IAdminRepository adminRepository = new AdminRepository();
 
         public ActionResult Index()
         {
@@ -35,13 +37,33 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Contact()
         {
-            return View();
+            ContactMessage message = new ContactMessage();
+            return View(message);
         }
 
         [HttpPost]
-        public ActionResult SendContactForm()
+        public ActionResult Contact(ContactMessage message, FormCollection collector)
         {
-            return PartialView("_ContactSent");
+            int regardingint;
+            if (int.TryParse(collector["RegardingSelect"], out regardingint))
+            {
+                message.Regarding = (QuestionCategory)regardingint;
+            }
+            else
+            {
+                ModelState.AddModelError("RegardingError", "Please select a category.");
+            }
+
+
+            if (ModelState.IsValid)
+            {
+
+                Session["send_contact_form"] = true;
+
+                adminRepository.SendContactMessage(message);
+            }
+
+            return View(message);
         }
 
         public ActionResult Basket()
@@ -116,11 +138,13 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Agenda()
         {
-            AgendaView agendaView = new AgendaView();
-            agendaView.Day1 = new List<BesteldeActiviteit>();
-            agendaView.Day2 = new List<BesteldeActiviteit>();
-            agendaView.Day3 = new List<BesteldeActiviteit>();
-            agendaView.Day4 = new List<BesteldeActiviteit>();
+            AgendaView agendaView = new AgendaView
+            {
+                Day1 = new List<BesteldeActiviteit>(),
+                Day2 = new List<BesteldeActiviteit>(),
+                Day3 = new List<BesteldeActiviteit>(),
+                Day4 = new List<BesteldeActiviteit>()
+            };
 
             List<BesteldeActiviteit> Bestelling = new List<BesteldeActiviteit>();
 

@@ -15,7 +15,7 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Index()
         {
-            List<Jazz> allJazz = jazzRepository.GetAllJazzs();     
+            List<Jazz> allJazz = jazzRepository.GetAllJazzs();
             return View(allJazz);
         }
 
@@ -24,7 +24,8 @@ namespace HaarlemFestival.Controllers
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            } else
+            }
+            else
             {
                 ViewBag.Id = id;
             }
@@ -48,6 +49,7 @@ namespace HaarlemFestival.Controllers
         public ActionResult Book(JazzView activiteit)
         {
             List<BesteldeActiviteit> orderedActivity = new List<BesteldeActiviteit>();
+            int availableTickets;
 
             // Session existing?
             if (Session["current_order"] != null)
@@ -61,21 +63,28 @@ namespace HaarlemFestival.Controllers
             {
                 if (activity.Aantal != 0)
                 {
-                    // Totaal aantal tickets berekenen (alternatief telt voor 4 plekken in een tour)
-                    activity.TotalBoughtTickets = activity.Aantal;
-           
+                    //Jazz j = jazzRepository.GetId(activity.Activiteit.ActivityId);
                     activity.Activiteit = jazzRepository.GetId(activity.Activiteit.ActivityId);
 
-                    // Prijs berekenen voor in het basket model
-                    activity.Price = activity.Aantal * (float)activity.Activiteit.Price;
+                    // Beschikbare tickets berekenen
+                    availableTickets = activity.Activiteit.TotalTickets - activity.Activiteit.BoughtTickets;
 
-                    orderedActivity.Add(activity);
+                    if (activity.Aantal < availableTickets)
+                    {
+                        activity.TotalBoughtTickets = activity.Aantal;    
+                                           
+                        // Prijs berekenen voor in het basket model
+                        activity.Price = activity.Aantal * (float)activity.Activiteit.Price;
+
+                        // Activity in de lijst zetten die later in de Session komt
+                        orderedActivity.Add(activity);
+                    }
                 }
             }
 
             Session["current_order"] = orderedActivity;
 
-            // Partial view continue or basket
+            // Session op true zetten om de alert te laten zien
             Session["added_to_basket"] = true;
 
             return RedirectToAction("Reservation", "Jazz");

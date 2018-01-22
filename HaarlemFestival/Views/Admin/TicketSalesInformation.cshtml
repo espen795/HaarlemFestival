@@ -1,17 +1,104 @@
 ﻿@using HaarlemFestival.Models
 @using System.Text.RegularExpressions
 @model TicketSalesViewModel
-
+<div class="event-banner"></div>
 <div class="container">
+    <script src="http://www.chartjs.org/dist/2.7.1/Chart.bundle.js"></script>
     <script type="text/javascript">
+
+        $(document).ready(function () {
+                // Inkomen ophalen en chart met inkomen aanmaken
+                var jazzIncome = @Model.BesteldeActiviteiten.Where(a => a.Activiteit.EventType == EventType.JazzPatronaat).Sum(a => a.Price);
+                var dinnerIncome = @Model.BesteldeActiviteiten.Where(a => a.Activiteit.EventType == EventType.DinnerInHaarlem).Sum(a => a.Price);
+                var talkingIncome = @Model.BesteldeActiviteiten.Where(a => a.Activiteit.EventType == EventType.TalkingHaarlem).Sum(a => a.Price);
+                var historicIncome = @Model.BesteldeActiviteiten.Where(a => a.Activiteit.EventType == EventType.HistoricHaarlem).Sum(a => a.Price);
+                CreateIncomeChart("incomeChart", jazzIncome, dinnerIncome, talkingIncome, historicIncome);
+
+                // De Beschikbare en Verkochte tickets over het gehele evenement in een Doughnut Chart zetten.
+                CreateTicketAvailabilityChart("availabilityChart", @Model.Activities.Sum(a => a.TotalTickets), @Model.Activities.Sum(a => a.BoughtTickets));
+
+                // Per evenement de Beschikbare en Verkochte tickets in een Doughnut Chart zetten.
+                CreateTicketAvailabilityChart("jazzAvailabilityChart", @Model.Activities.Where(a => a.EventType == EventType.JazzPatronaat).Sum(a => a.TotalTickets), @Model.Activities.Where(a => a.EventType == EventType.JazzPatronaat).Sum(a => a.BoughtTickets));
+                CreateTicketAvailabilityChart("dinnerAvailabilityChart", @Model.Activities.Where(a => a.EventType == EventType.DinnerInHaarlem).Sum(a => a.TotalTickets), @Model.Activities.Where(a => a.EventType == EventType.DinnerInHaarlem).Sum(a => a.BoughtTickets));
+                CreateTicketAvailabilityChart("talkingAvailabilityChart", @Model.Activities.Where(a => a.EventType == EventType.TalkingHaarlem).Sum(a => a.TotalTickets), @Model.Activities.Where(a => a.EventType == EventType.TalkingHaarlem).Sum(a => a.BoughtTickets));
+                CreateTicketAvailabilityChart("historicAvailabilityChart", @Model.Activities.Where(a => a.EventType == EventType.HistoricHaarlem).Sum(a => a.TotalTickets), @Model.Activities.Where(a => a.EventType == EventType.HistoricHaarlem).Sum(a => a.BoughtTickets));
+
+                CreateJazzIncomeChart("jazzIncomeChart");
+                CreateDinnerIncomeChart("dinnerIncomeChart");
+                CreateTalkingIncomeChart("talkingIncomeChart");
+                CreateHistoricIncomeChart("historicIncomeChart");
+        });
+
+
+        // Jazz informatie ophalen en een Chart maken
+        function CreateJazzIncomeChart(id) {
+            var jazzData;
+            jazzData += [@Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Monday).Sum(b => b.Price),
+                         @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Tuesday).Sum(b => b.Price),
+                         @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Wednesday).Sum(b => b.Price),
+                         @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Thursday).Sum(b => b.Price),
+                         @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Friday).Sum(b => b.Price),
+                         @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Saturday).Sum(b => b.Price),
+                         @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Sunday).Sum(b => b.Price)];
+
+            CreateIncomePerDayChart(id, jazzData)
+        }
+
+        // Dinner informatie ophalen en een Chart maken
+        function CreateDinnerIncomeChart(id) {
+            var dinnerData;
+            dinnerData += [@Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Monday).Sum(b => b.Price),
+                           @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Tuesday).Sum(b => b.Price),
+                           @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Wednesday).Sum(b => b.Price),
+                           @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Thursday).Sum(b => b.Price),
+                           @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Friday).Sum(b => b.Price),
+                           @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Saturday).Sum(b => b.Price),
+                           @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Sunday).Sum(b => b.Price)];
+
+            CreateIncomePerDayChart(id, dinnerData)
+        }
+
+        // Talking informatie ophalen en een Chart maken
+        function CreateTalkingIncomeChart(id) {
+            var talkingData;
+            talkingData += [@Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Monday).Sum(b => b.Price),
+                            @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Tuesday).Sum(b => b.Price),
+                            @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Wednesday).Sum(b => b.Price),
+                            @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Thursday).Sum(b => b.Price),
+                            @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Friday).Sum(b => b.Price),
+                            @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Saturday).Sum(b => b.Price),
+                            @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Sunday).Sum(b => b.Price)];
+
+            CreateIncomePerDayChart(id, talkingData)
+        }
+
+        // Historic informatie ophalen en een Chart maken
+        function CreateHistoricIncomeChart(id) {
+            var historicData;
+            historicData += [@Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Monday).Sum(b => b.Price),
+                             @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Tuesday).Sum(b => b.Price),
+                             @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Wednesday).Sum(b => b.Price),
+                             @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Thursday).Sum(b => b.Price),
+                             @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Friday).Sum(b => b.Price),
+                             @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Saturday).Sum(b => b.Price),
+                             @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Sunday).Sum(b => b.Price)];
+
+            CreateIncomePerDayChart(id, historicData)
+        }
+
         function SelectedEventChanged() {
             // Alle Data Tabellen verbergen.
             $('.eventView').each(function () {
                 $(this).hide();
-            })
+                })
 
             // Alle filters verbergen.
             $('.eventFilter').each(function () {
+                $(this).hide();
+                })
+
+            // Alle Event Gerelateerde charts verbergen.
+            $('.charts').each(function () {
                 $(this).hide();
             })
 
@@ -20,33 +107,41 @@
                 case "Jazz@Patronaat":
                     $('#jazzData').show();
                     $('#dates').show();
+                    $('#jazzCharts').show();
                     break;
 
                 case "DinnerInHaarlem":
                     $('#dinnerData').show();
                     $('#dates').show();
                     $('#restaurants').show();
+                    $('#dinnerCharts').show();
                     break;
 
                 case "TalkingHaarlem":
                     $('#talkingData').show();
                     $('#dates').show();
+                    $('#talkingCharts').show();
                     break;
 
                 case "HistoricHaarlem":
                     $('#historicData').show();
                     $('#dates').show();
+                    $('#historicCharts').show();
                     break;
 
-                default:
+                    default:
                     $('#jazzData').show();
                     $('#dinnerData').show();
                     $('#talkingData').show();
                     $('#historicData').show();
                     $('#dates').show();
+                    $('#jazzCharts').show();
+                    $('#dinnerCharts').show();
+                    $('#talkingCharts').show();
+                    $('#historicCharts').show();
                     break;
+                }
             }
-        }
 
         // Data uit de tabel filteren.
         function FilterData() {
@@ -54,7 +149,7 @@
 
 
             // Voor elke filter
-            $('.eventFilter').each(function () {
+            $('.filters').each(function () {
 
                 if ($(this).val() != "") // Als de filter is geselecteerd.
                 {
@@ -121,6 +216,34 @@
         </div>
     </section>
 
+    <!-- Charts over het gehele evenement.-->
+    <div class="row col-md-12">
+        <div class="col-md-12 col-sm-12 text-center">
+            <h2>General Information</h2>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <canvas id="incomeChart" width="800" height="450"></canvas>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <canvas id="availabilityChart" width="800" height="450"></canvas>
+        </div>
+    </div>
+
+    <hr class="divide" />
+
+    <!-- Charts over het Jazz evenement.-->
+    <div class="row col-md-12 charts" id="jazzCharts">
+        <div class="col-md-12 col-sm-12 text-center">
+            <h2>Jazz@Patronaat</h2>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <canvas id="jazzAvailabilityChart" width="800" height="450"></canvas>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <canvas id="jazzIncomeChart" width="800" height="450"></canvas>
+        </div>
+    </div>
+
     <div id="jazzData" class="eventView">
         @foreach (Jazz activity in Model.Activities.OfType<Jazz>())
         {
@@ -173,6 +296,20 @@
                 </div>
             </div>
         }
+        <hr class="divide" />
+    </div>
+
+    <!-- Charts over het Dinner in Haarlem evenement.-->
+    <div class="row col-md-12 charts" id="dinnerCharts">
+        <div class="col-md-12 col-sm-12 text-center">
+            <h2>Dinner in Haarlem</h2>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <canvas id="dinnerAvailabilityChart" width="800" height="450"></canvas>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <canvas id="dinnerIncomeChart" width="800" height="450"></canvas>
+        </div>
     </div>
 
     <div id="dinnerData" class="eventView">
@@ -223,6 +360,20 @@
                 </div>
             </div>
         }
+        <hr class="divide" />
+    </div>
+
+    <!-- Charts over het Talking evenement.-->
+    <div class="row col-md-12 charts" id="talkingCharts">
+        <div class="col-md-12 col-sm-12 text-center">
+            <h2>Talking Haarlem</h2>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <canvas id="talkingAvailabilityChart" width="800" height="450"></canvas>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <canvas id="talkingIncomeChart" width="800" height="450"></canvas>
+        </div>
     </div>
 
     <div id="talkingData" class="eventView">
@@ -237,43 +388,57 @@
             decimal boughtPercentage = Math.Round((decimal)activity.BoughtTickets, 2) / Math.Round((decimal)activity.TotalTickets, 2) * 100;
             boughtPercentage = Math.Floor(boughtPercentage);
 
-        <div class="col-md-12 eventData" id="@activity.ActivityId">
-            <div class="row">
-                <div class="col-md-6">
-                    <h3>@activity.Talk.Naam</h3>
-                    <br />
-                    <strong>Participants: </strong>@activity.Talk.Person1 and @activity.Talk.Person2
-                    <br />
-                    <strong>Description: </strong>@activity.Talk.Description
-                    <br />
-                    <strong>Date: </strong>@activity.StartSession.ToString("dddd dd-MM-yyyy H:mm") - @activity.EndSession.ToString("H:mm")
-                    <br />
-                    <strong>Price: </strong>€ @String.Format("{0:0.00}", activity.Price)
-                    <br />
-                </div>
-                <div class="col-md-6">
-                    <div class="col-md-6"><img src="../images/Talking/@activity.Talk.Person1IMG" style="max-width:100%" onError="this.src = '../images/no_image.jpg'" /></div>
-                    <div class="col-md-6"><img src="../images/Talking/@activity.Talk.Person2IMG" style="max-width:100%" onError="this.src = '../images/no_image.jpg'" /></div>
-                    <br />
-                </div>
-                <div class="col-md-6">
-                    <div class="col-md-12 priceMargin">
-                        <div class="alert alert-info">
-                            <strong>Total Income: </strong>€ @String.Format("{0:0.00}", totalIncome)
+            <div class="col-md-12 eventData" id="@activity.ActivityId">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3>@activity.Talk.Naam</h3>
+                        <br />
+                        <strong>Participants: </strong>@activity.Talk.Person1 and @activity.Talk.Person2
+                        <br />
+                        <strong>Description: </strong>@activity.Talk.Description
+                        <br />
+                        <strong>Date: </strong>@activity.StartSession.ToString("dddd dd-MM-yyyy H:mm") - @activity.EndSession.ToString("H:mm")
+                        <br />
+                        <strong>Price: </strong>€ @String.Format("{0:0.00}", activity.Price)
+                        <br />
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-6"><img src="../images/Talking/@activity.Talk.Person1IMG" style="max-width:100%" onError="this.src = '../images/no_image.jpg'" /></div>
+                        <div class="col-md-6"><img src="../images/Talking/@activity.Talk.Person2IMG" style="max-width:100%" onError="this.src = '../images/no_image.jpg'" /></div>
+                        <br />
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-12 priceMargin">
+                            <div class="alert alert-info">
+                                <strong>Total Income: </strong>€ @String.Format("{0:0.00}", totalIncome)
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="progress progressMargin">
-                <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" style="width:@(boughtPercentage)%">
-                    Bought Tickets: @activity.BoughtTickets
+                <div class="progress progressMargin">
+                    <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" style="width:@(boughtPercentage)%">
+                        Bought Tickets: @activity.BoughtTickets
+                    </div>
+                    <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:@(100 - boughtPercentage)%">
+                        Available Tickets: @(activity.TotalTickets - activity.BoughtTickets)
+                    </div>
                 </div>
-                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:@(100 - boughtPercentage)%">
-                    Available Tickets: @(activity.TotalTickets - activity.BoughtTickets)
-                </div>
             </div>
+        }
+        <hr class="divide" />
+    </div>
+
+    <!-- Charts over het Historic evenement.-->
+    <div class="row col-md-12 charts" id="historicCharts">
+        <div class="col-md-12 col-sm-12 text-center">
+            <h2>Historic Haarlem</h2>
         </div>
-    }
+        <div class="col-md-6 col-sm-6">
+            <canvas id="historicAvailabilityChart" width="800" height="450"></canvas>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <canvas id="historicIncomeChart" width="800" height="450"></canvas>
+        </div>
     </div>
 
     <div id="historicData" class="eventView">
@@ -322,4 +487,4 @@
             </div>
         }
     </div>
-    </div>
+</div>
