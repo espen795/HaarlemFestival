@@ -99,7 +99,7 @@ catch (Exception) { }
 
             foreach (Cuisine c in Model.Cuisines)
             {
-                @Html.DropDownList("Cuisine" + c.CuisineId, new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam", c.CuisineId), "[Select a Cuisine]", new { @Value = c.CuisineId, @class = "Cuisines", @onchange = "CheckCuisineSelectors();" }) <br />
+                @Html.DropDownList("Cuisine", new SelectList((List<Cuisine>)ViewData["Cuisines"], "CuisineId", "Naam", c.CuisineId), "[Select a Cuisine]", new { @Value = c.CuisineId, @class = "Cuisines", @onchange = "CheckCuisineSelectors();" }) <br />
             }
         }
 

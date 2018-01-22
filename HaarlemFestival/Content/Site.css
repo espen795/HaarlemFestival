@@ -1680,18 +1680,14 @@ input[type='text']:focus, input[type='password']:focus {
     border: 1px solid black;
 }
 
-tbody.data {
-    text-align: center;
-}
-
 #searchData {
     font-family: FontAwesome;
     font-style: normal;
     font-weight: 400;
     text-decoration: inherit;
     padding: 5px;
-    font-size: 22px;
-    line-height: 24px;
+    font-size: 15px;
+    line-height: 17px;
     border: 1px solid #ddd;
     border-radius: 4px;
 }
@@ -1770,8 +1766,8 @@ tbody.data {
     padding-bottom: 12px;
 }
 
-.eventData tr td, .eventTable thead th {
-    text-align: center;
+tr.text-center th {
+    text-align:center;
 }
 
     .eventData tr td .glyphicon-remove, .eventData tr td .glyphicon-pencil {

@@ -119,6 +119,7 @@ namespace HaarlemFestival.Repository.Admin
         public void UpdateRestaurantCuisine(int restaurantId, int cuisineId)
         {
             db.Database.ExecuteSqlCommand("INSERT INTO CuisineRestaurants (Cuisine_CuisineId, Restaurant_RestaurantId) values ({0}, {1})", cuisineId, restaurantId);
+            db.SaveChanges();
         }
 
         public void UpdateGuide(Guide guide)
