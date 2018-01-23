@@ -75,6 +75,7 @@
         <script type="text/javascript">
 
 
+
             function CalcPriceAndTicketCheck(nummer, price, availableTickets) {
                 // Krijg de waardes van de input boxes
                 var tickets = document.getElementById("ticket" + nummer).value;
@@ -90,15 +91,19 @@
                         $("#TicketAlert").modal();
                         document.getElementById("text").innerHTML = ("<p>You inserted <b> " + tickets + " </b> tickets but there are only <b>" + availableTickets + "</b> left.</p><p>Please insert <b>" + availableTickets + "</b> or lower.</p>");
                     }
+
                     tickets = 0;
                     document.getElementById("ticket" + nummer).value = ("0");
                 }
 
-                var totalprice = (tickets * price);
-
-                var titalPriceAll = document.getElementById("ticket" + nummer).value;
+                var totalprice = (tickets * price);                    
                 document.getElementById("totalprice" + nummer).innerHTML = ("€ " + (totalprice.toFixed(2)).replace(".", ","));
 
+                //
+                var test = document.getElementById("totaalprijsAlles").value;
+
+               // var hoi = +
+                document.getElementById("totaalprijsAlles").value = (hoi);
 
             }
         </script>
@@ -115,6 +120,7 @@
 
         @using (Html.BeginForm("Book", "Jazz", FormMethod.Post))
         {
+            <input type="number" id="totaalprijsAlles" value="0" />
             <div class="tab-content">
                 <!-- Day 1 -->
                 <div id="day1" class="tab-pane fade in active jazz-tickets">
