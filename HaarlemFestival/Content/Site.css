@@ -1023,6 +1023,7 @@ footer {
 
 .talk-back-btn {
     float: left;
+    margin-bottom: 20px;
 }
 
 .talk-date {
@@ -1094,13 +1095,21 @@ footer {
         margin-bottom: 10px;
     }
 
-table.talking-reservation-table, .talking-reservation-table td, .talking-reservation-table th {
-    border: 1px solid silver;
-    background-color: white;
+.talking-reservation-table {
+    width: 100%;
 }
 
-.talking-reservation-table td, .talking-reservation-table th {
-    padding-right: 50px;
+.talking-reservation-table tr th {
+    background-color: #be7c4d;
+    font-size: 1.12em;
+    color: #fff;
+    padding-right: 35px;
+    padding-left: 10px;
+}
+
+.talking-reservation-table tr td {
+    padding-right: 40px;
+    padding-left: 10px;
 }
 
 .talk-ticket-amount {
