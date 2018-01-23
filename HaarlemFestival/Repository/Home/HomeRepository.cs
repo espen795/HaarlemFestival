@@ -25,10 +25,10 @@ namespace HaarlemFestival.Repository.Dinner
             return reservation;
         }
 
-        public void ChangeTickets(BesteldeActiviteit besteldeActiviteit)
+        public void ChangeTickets(Activity activity)
         {
-            Activity dbActivity = db.Activities.Find(besteldeActiviteit.Activiteit.ActivityId);
-            dbActivity.BoughtTickets += besteldeActiviteit.TotalBoughtTickets;
+            Activity dbActivity = db.Activities.Find(activity.ActivityId);
+            dbActivity.BoughtTickets = activity.BoughtTickets;
             db.Entry(dbActivity).State = EntityState.Modified;
             db.SaveChanges();
         }
