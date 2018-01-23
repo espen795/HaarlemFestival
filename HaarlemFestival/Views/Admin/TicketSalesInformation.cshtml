@@ -258,9 +258,9 @@
             boughtPercentage = Math.Round((decimal)activity.BoughtTickets, 2) / Math.Round((decimal)activity.TotalTickets, 2) * 100;
             boughtPercentage = Math.Floor(boughtPercentage);
 
-            <div class="col-md-12 eventData" id="@activity.ActivityId">
+            <div class="col-md-12 col-sm-12 eventData" id="@activity.ActivityId">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-md-6 col-sm-12">
                         <h3>@activity.artist.ArtistName</h3>
                         <br />
                         <strong>Date: </strong> @activity.StartSession.ToString("dddd dd-MM-yyyy H:mm") - @activity.EndSession.ToString("H:mm")
@@ -274,7 +274,7 @@
                         <strong>Price: </strong>€ @String.Format("{0:0.00}", activity.Price)
 
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-md-6 col-sm-12 ticketSalesImage">
                         <div class="col-sm-12">
                             <img src="../images/Jazz/Artiesten/@activity.artist.ArtistImage" style="max-width:100%; border:1px solid black;" onError="this.src = '../images/no_image.jpg'" />
                         </div>
@@ -324,9 +324,9 @@
             decimal boughtPercentage = Math.Round((decimal)activity.BoughtTickets, 2) / Math.Round((decimal)activity.TotalTickets, 2) * 100;
             boughtPercentage = Math.Floor(boughtPercentage);
 
-            <div class="col-md-12 eventData" id="@activity.ActivityId">
+            <div class="col-md-12 col-sm-12 eventData" id="@activity.ActivityId">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-12">
                         <h3>@activity.Restaurant.Naam</h3>
                         <br />
                         <strong>Description: </strong>@activity.Restaurant.Description
@@ -339,16 +339,16 @@
                         <br />
                         <strong>Children Price:</strong>€ @String.Format("{0:0.00}", activity.AlternativePrice)
                     </div>
-                    <div class="col-md-6">
-                        <div class="col-md-12">
-                            <img src="../images/Dinner/restaurants/@activity.Restaurant.LocationIMG" style="max-width:100%; border:1px solid black;" onError="this.src = '../images/no_image.jpg'" />
-                        </div>
-                        <div class="col-md-12 priceMargin">
-                            <div class="alert alert-info">
-                                <strong>Total Income: </strong>€ @String.Format("{0:0.00}", totalIncome)
+                    <div class="col-md-6 col-sm-12 ticketSalesImage">
+                            <div class="col-md-12 ">
+                                <img src="../images/Dinner/restaurants/@activity.Restaurant.LocationIMG" style="max-width:100%; border:1px solid black;" onError="this.src = '../images/no_image.jpg'" />
+                            </div>
+                            <div class="col-md-12 priceMargin">
+                                <div class="alert alert-info">
+                                    <strong>Total Income: </strong>€ @String.Format("{0:0.00}", totalIncome)
+                                </div>
                             </div>
                         </div>
-                    </div>
                 </div>
                 <div class="progress progressMargin">
                     <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" style="width:@(boughtPercentage)%">
@@ -390,7 +390,7 @@
 
             <div class="col-md-12 eventData" id="@activity.ActivityId">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-12">
                         <h3>@activity.Talk.Naam</h3>
                         <br />
                         <strong>Participants: </strong>@activity.Talk.Person1 and @activity.Talk.Person2
@@ -402,12 +402,12 @@
                         <strong>Price: </strong>€ @String.Format("{0:0.00}", activity.Price)
                         <br />
                     </div>
-                    <div class="col-md-6">
-                        <div class="col-md-6"><img src="../images/Talking/@activity.Talk.Person1IMG" style="max-width:100%; border:1px solid black;" onError="this.src = '../images/no_image.jpg'" /></div>
-                        <div class="col-md-6"><img src="../images/Talking/@activity.Talk.Person2IMG" style="max-width:100%; border:1px solid black;" onError="this.src = '../images/no_image.jpg'" /></div>
+                    <div class="col-md-6 col-sm-12ticketSalesImage">
+                        <div class="col-md-6 col-sm-6"><img src="../images/Talking/@activity.Talk.Person1IMG" style="max-width:100%; border:1px solid black;" onError="this.src = '../images/no_image.jpg'" /></div>
+                        <div class="col-md-6 col-sm-6"><img src="../images/Talking/@activity.Talk.Person2IMG" style="max-width:100%; border:1px solid black;" onError="this.src = '../images/no_image.jpg'" /></div>
                         <br />
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-12 ticketSalesImage">
                         <div class="col-md-12 priceMargin">
                             <div class="alert alert-info">
                                 <strong>Total Income: </strong>€ @String.Format("{0:0.00}", totalIncome)

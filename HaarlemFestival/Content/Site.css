@@ -1692,6 +1692,10 @@ input[type='text']:focus, input[type='password']:focus {
     border-radius: 4px;
 }
 
+.ticketSalesImage {
+    margin-top: 25px;
+}
+
 #selectEvent, #filterSystem {
     height: 100%;
 }
@@ -1863,10 +1867,6 @@ div.eventData {
 .progressMargin {
     margin-top: 10px;
     margin-bottom: 10px;
-}
-
-.priceMargin {
-    margin-top: 10px;
 }
 
 .eventView {
