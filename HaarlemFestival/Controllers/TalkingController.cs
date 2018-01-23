@@ -18,7 +18,6 @@ namespace HaarlemFestival.Controllers
             List<Talking> allTalks = talkingRepository.GetAllTalks();
 
             return View(allTalks);
-            //return View();
         }
 
         public ActionResult Info(int? id)
