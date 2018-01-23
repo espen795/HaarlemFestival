@@ -13,6 +13,6 @@ namespace HaarlemFestival.Repository.Dinner
         Reservering AddReservation(Reservering reservation);
         void ChangeTickets(BesteldeActiviteit activity);
         void SendContactMessage(ContactMessage message);
-        void AddBesteldeActiviteiten(BesteldeActiviteit besteldeActiviteit);
+        void AddBesteldeActiviteit(BesteldeActiviteit besteldeActiviteit);
     }
 }
