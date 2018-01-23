@@ -39,9 +39,13 @@ namespace HaarlemFestival.Repository.Dinner
             db.SaveChanges();
         }
 
-        public void AddBesteldeActiviteiten(List<BesteldeActiviteit> besteldeActiviteiten)
+        public void AddBesteldeActiviteit(BesteldeActiviteit besteldeActiviteit)
         {
-            db.BesteldeActiviteiten.AddRange(besteldeActiviteiten);
+            Activity dbActivity = db.Activities.Find(besteldeActiviteit.Activiteit.ActivityId);
+
+            besteldeActiviteit.Activiteit = dbActivity;
+
+            db.BesteldeActiviteiten.Add(besteldeActiviteit);
             db.SaveChanges();
         }
     }
