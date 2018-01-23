@@ -674,6 +674,9 @@ footer {
     display: none
 }
 
+.artist-image img {
+    border: 1px solid #333;
+}
 
 /* ------------------------------Dinner in Haarlem-----------------------------*/
 .restaurant-button:hover {
@@ -1894,6 +1897,10 @@ div.eventData {
 
 /* Start mobile navigatie/view */
 @media (max-width: 767px) {
+
+    .artist-image img {
+    width: 100%;
+}
 
     /* NAVBAR */
     .navbar-toggle {
