@@ -1644,6 +1644,9 @@ input[type='text']:focus, input[type='password']:focus {
     }
 }
 /* #endregion*/
+.updateIcon:hover, .deleteIcon:hover {
+    color: #D3D3D3;
+}
 
 .introText {
     width: 95%;
