@@ -1083,11 +1083,14 @@ footer {
 }
 
 /* Reservation */
-.talk-reservation-container {
+.talking-reservation-header {
+    font-size: 33px;
+}
+.talking-reservation-container {
     padding-left: 15px;
 }
 
-    .talk-reservation-container > section {
+    .talking-reservation-container > section {
         margin-bottom: 10px;
     }
 
@@ -1130,7 +1133,7 @@ table.talking-reservation-table, .talking-reservation-table td, .talking-reserva
     height: 100px;
 }
 
-.talk-bold {
+.talking-bold {
     font-weight: bold;
 }
 

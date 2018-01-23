@@ -32,11 +32,11 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Reservation()
         {
-            TalkViewModel allTalksAndQuestion = new TalkViewModel();
-            allTalksAndQuestion.Talkings = talkingRepository.GetAllTalks();
-            allTalksAndQuestion.BesteldeActiviteiten = new List<BesteldeActiviteit>();
+            TalkViewModel talkView = new TalkViewModel();
+            talkView.Talkings = talkingRepository.GetAllTalks();
+            talkView.BesteldeActiviteiten = new List<BesteldeActiviteit>();
 
-            return View(allTalksAndQuestion);
+            return View(talkView);
         }
 
         [HttpPost]
