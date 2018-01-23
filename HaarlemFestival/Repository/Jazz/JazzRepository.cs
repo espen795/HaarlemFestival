@@ -22,5 +22,11 @@ namespace HaarlemFestival.Repository.Jazz
             return db.Jazzs.Find(id);
         }
 
+        public List<Activity> getJazz(BesteldeActiviteit besteldeActiviteit)
+        {
+            List<Activity> dbActivity = db.Activities.Where(a => (a.Day.DayId == besteldeActiviteit.Activiteit.Day.DayId) && (a.EventType == besteldeActiviteit.Activiteit.EventType)).ToList();
+            return dbActivity;
+        }
+
     }
 }

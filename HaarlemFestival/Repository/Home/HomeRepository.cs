@@ -33,6 +33,14 @@ namespace HaarlemFestival.Repository.Dinner
             db.SaveChanges();
         }
 
+        public void ChangeTicketsJazz(Activity activity, BesteldeActiviteit besteldeActiviteit)
+        {
+            Activity dbActivity = db.Activities.Find(activity.ActivityId);
+            dbActivity.BoughtTickets += besteldeActiviteit.TotalBoughtTickets;
+            db.Entry(dbActivity).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+
         public void SendContactMessage(ContactMessage message)
         {
             db.ContactMessages.Add(message);

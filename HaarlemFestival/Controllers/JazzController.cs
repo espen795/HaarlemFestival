@@ -66,19 +66,19 @@ namespace HaarlemFestival.Controllers
                     //Jazz j = jazzRepository.GetId(activity.Activiteit.ActivityId);
                     activity.Activiteit = jazzRepository.GetId(activity.Activiteit.ActivityId);
 
+                    
                     // Beschikbare tickets berekenen
                     availableTickets = activity.Activiteit.TotalTickets - activity.Activiteit.BoughtTickets;
 
-                    if (activity.Aantal < availableTickets)
-                    {
-                        activity.TotalBoughtTickets = activity.Aantal;    
-                                           
-                        // Prijs berekenen voor in het basket model
-                        activity.Price = activity.Aantal * (float)activity.Activiteit.Price;
 
-                        // Activity in de lijst zetten die later in de Session komt
-                        orderedActivity.Add(activity);
-                    }
+                    activity.TotalBoughtTickets = activity.Aantal;    
+                                           
+                    // Prijs berekenen voor in het basket model
+                    activity.Price = activity.Aantal * (float)activity.Activiteit.Price;
+
+                    // Activity in de lijst zetten die later in de Session komt
+                    orderedActivity.Add(activity);
+               
                 }
             }
 

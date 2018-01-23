@@ -192,9 +192,22 @@ namespace HaarlemFestival.Controllers
             {
                 besteldeactiviteit.Reservering_ReserveringId = reservation.ReserveringId;
 
-                besteldeactiviteit.Activiteit.BoughtTickets += besteldeactiviteit.TotalBoughtTickets;
+                if (besteldeactiviteit.Activiteit.EventType == 0 && besteldeactiviteit.Activiteit.AlternativePrice == 1 || besteldeactiviteit.Activiteit.AlternativePrice == 2)
+                {
+                    List<Activity> allJazzDay = jazzRepository.getJazz(besteldeactiviteit);
 
-                homerepository.ChangeTickets(besteldeactiviteit);
+                    foreach (Activity activity in allJazzDay)
+                    {
+                        homerepository.ChangeTicketsJazz(activity, besteldeactiviteit);
+                    }
+                }
+                else
+                {
+                    besteldeactiviteit.Activiteit.BoughtTickets += besteldeactiviteit.TotalBoughtTickets;
+                    homerepository.ChangeTickets(besteldeactiviteit);
+                }
+                
+
                 homerepository.AddBesteldeActiviteit(besteldeactiviteit);
             }
 

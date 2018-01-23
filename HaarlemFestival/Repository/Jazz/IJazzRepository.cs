@@ -12,6 +12,7 @@ namespace HaarlemFestival.Repository.Jazz
 
         List<Models.Jazz> GetAllJazzs();
         Models.Jazz GetId(int id);
+        List<Activity> getJazz(BesteldeActiviteit besteldeActiviteit);
 
     }
 }
