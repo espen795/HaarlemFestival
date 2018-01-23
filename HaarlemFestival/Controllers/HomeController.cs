@@ -194,14 +194,12 @@ namespace HaarlemFestival.Controllers
                 besteldeactiviteit.Reservering_ReserveringId = reservation.ReserveringId;
                                 
                 besteldeactiviteit.Activiteit.BoughtTickets += besteldeactiviteit.TotalBoughtTickets;
-                Historic activiteit = (Historic)besteldeactiviteit.Activiteit;
-                homerepository.ChangeTickets(activiteit);
+                
+                homerepository.ChangeTickets(besteldeactiviteit);
+                homerepository.AddBesteldeActiviteit(besteldeactiviteit);
             }
 
-            reservation.BesteldeActiviteiten = new List<BesteldeActiviteit>();
-            reservation.BesteldeActiviteiten.AddRange(Bestelling);
-
-            homerepository.AddBesteldeActiviteiten(reservation.BesteldeActiviteiten);
+            
 
             return RedirectToAction("Completed");
         }

@@ -674,6 +674,9 @@ footer {
     display: none
 }
 
+.artist-image img {
+    border: 1px solid #333;
+}
 
 /* ------------------------------Dinner in Haarlem-----------------------------*/
 .restaurant-button:hover {
@@ -1644,6 +1647,9 @@ input[type='text']:focus, input[type='password']:focus {
     }
 }
 /* #endregion*/
+.updateIcon:hover, .deleteIcon:hover {
+    color: #D3D3D3;
+}
 
 .introText {
     width: 95%;
@@ -1894,6 +1900,10 @@ div.eventData {
 
 /* Start mobile navigatie/view */
 @media (max-width: 767px) {
+
+    .artist-image img {
+        width: 100%;
+    }
 
     /* NAVBAR */
     .navbar-toggle {

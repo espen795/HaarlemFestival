@@ -75,6 +75,7 @@
         <script type="text/javascript">
 
 
+
             function CalcPriceAndTicketCheck(nummer, price, availableTickets) {
                 // Krijg de waardes van de input boxes
                 var tickets = document.getElementById("ticket" + nummer).value;
@@ -90,13 +91,19 @@
                         $("#TicketAlert").modal();
                         document.getElementById("text").innerHTML = ("<p>You inserted <b> " + tickets + " </b> tickets but there are only <b>" + availableTickets + "</b> left.</p><p>Please insert <b>" + availableTickets + "</b> or lower.</p>");
                     }
+
                     tickets = 0;
                     document.getElementById("ticket" + nummer).value = ("0");
                 }
 
-                var totalprice = (tickets * price);
+                var totalprice = (tickets * price);                    
                 document.getElementById("totalprice" + nummer).innerHTML = ("€ " + (totalprice.toFixed(2)).replace(".", ","));
 
+                //
+                var test = document.getElementById("totaalprijsAlles").value;
+
+               // var hoi = +
+                document.getElementById("totaalprijsAlles").value = (hoi);
 
             }
         </script>
@@ -113,58 +120,63 @@
 
         @using (Html.BeginForm("Book", "Jazz", FormMethod.Post))
         {
+            <input type="number" id="totaalprijsAlles" value="0" />
             <div class="tab-content">
                 <!-- Day 1 -->
                 <div id="day1" class="tab-pane fade in active jazz-tickets">
                     <div class="table table-hover table-responsive ticket-table">
                         <table>
-                            <tr>
-                                <th>Date</th>
-                                <th>Tickets</th>
-                                <th>Available</th>
-                                <th>Artist</th>
-                                <th>Concert location</th>
-                                <th>Hall</th>
-                                <th>Time</th>
-                                <th>Total price</th>
-                            </tr>
-
-                            @foreach (Jazz j in Model.Jazzs)
-                            {
-                                if (j.Day.DayId == 1)
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Tickets</th>
+                                    <th>Available</th>
+                                    <th>Artist</th>
+                                    <th>Concert location</th>
+                                    <th>Hall</th>
+                                    <th>Time</th>
+                                    <th>Total price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (Jazz j in Model.Jazzs)
                                 {
-                                    Model.Reservering.Add(new BesteldeActiviteit());
-
-                                    // De unieke id's aanmaken per rij
-                                    idtickets = String.Format("ticket{0}", i);
-                                    totalprice = String.Format("totalprice{0}", i);
-
-                                    // availableTickets berekenen
-                                    if (j.AlternativePrice != 1)
+                                    if (j.Day.DayId == 1)
                                     {
-                                        availableTickets = j.TotalTickets - j.BoughtTickets;
-                                    }
-                                    else
-                                    {
-                                        availableTickets = Model.Jazzs.Where(x => x.Day.DayId == 1 && x.AlternativePrice != 1).Min(x => (x.TotalTickets - x.BoughtTickets));
-                                    }
+                                        Model.Reservering.Add(new BesteldeActiviteit());
+
+                                        // De unieke id's aanmaken per rij
+                                        idtickets = String.Format("ticket{0}", i);
+                                        totalprice = String.Format("totalprice{0}", i);
+
+                                        // availableTickets berekenen
+                                        if (j.AlternativePrice != 1)
+                                        {
+                                            availableTickets = j.TotalTickets - j.BoughtTickets;
+                                        }
+                                        else
+                                        {
+                                            availableTickets = Model.Jazzs.Where(x => x.Day.DayId == 1 && x.AlternativePrice != 1).Min(x => (x.TotalTickets - x.BoughtTickets));
+                                        }
 
 
-                                    // De tabel aanmaken
-                                    <tr>
-                                        <td class="hidden"><input name="Reservering[@i].Activiteit.ActivityId" value="@j.ActivityId" class="hidden" /></td>
-                                        <td>@j.StartSession.ToShortDateString()</td>
-                                        <td class="ticketsInput" onchange="CalcPriceAndTicketCheck(@i, @j.Price, @availableTickets)">@Html.TextBoxFor(m => Model.Reservering[i].Aantal, new { @type = "number", @min = 0, @id = idtickets })</td>
-                                        <td>@availableTickets</td>
-                                        <td>@j.artist.ArtistName</td>
-                                        <td>@j.ConcertLocation</td>
-                                        <td>@j.ConcertHall</td>
-                                        <td>@j.StartSession.ToShortTimeString() - @j.EndSession.ToShortTimeString()</td>
-                                        <td><p id=@totalprice>€ 0,00</p></td>
-                                    </tr>
-                                    i++;
+                                        // De tabel aanmaken
+                                        <tr>
+                                            <td class="hidden"><input name="Reservering[@i].Activiteit.ActivityId" value="@j.ActivityId" class="hidden" /></td>
+                                            <td>@j.StartSession.ToShortDateString()</td>
+                                            <td class="ticketsInput" onchange="CalcPriceAndTicketCheck(@i, @j.Price, @availableTickets)">@Html.TextBoxFor(m => Model.Reservering[i].Aantal, new { @type = "number", @min = 0, @id = idtickets })</td>
+                                            <td>@availableTickets</td>
+                                            <td>@j.artist.ArtistName</td>
+                                            <td>@j.ConcertLocation</td>
+                                            <td>@j.ConcertHall</td>
+                                            <td>@j.StartSession.ToShortTimeString() - @j.EndSession.ToShortTimeString()</td>
+                                            <td><p id=@totalprice>€ 0,00</p></td>
+                                        </tr>
+                                        i++;
+                                    }
                                 }
-                            }
+                            </tbody>
+                           
                         </table>
 
                     </div>
@@ -322,7 +334,7 @@
                     </div>
                 </div>
 
-
+                <span id="test">0</span>
                 <input type="submit" value="Order your tickets" class="btn btn-book btn-reservation" />
 
                 <br /><br />
