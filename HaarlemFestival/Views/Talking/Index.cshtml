@@ -106,7 +106,7 @@
 
                 <section class="talk-btns">
                     <a href="@Url.Action("Info", new { id = talk.TalkId })"><img class="talk-info-btn" src="/images/info_button.png" /></a>
-                    @Html.ActionLink("Order Ticket", "Reservation", "Talking", new { @class = "btn btn-black talk-order-btn" })
+                    @Html.ActionLink("Order Ticket", "Reservation", "Talking", new { }, new { @class = "btn btn-black talk-order-btn" })
                 </section>
                 <p class="talk-date">@talk.StartSession.DayOfWeek @String.Format(talk.StartSession.ToString("m", new CultureInfo("en-US"))+GetSuffix(talk.StartSession))</p> 
             </article>
