@@ -11,7 +11,7 @@ namespace HaarlemFestival.Repository.Dinner
     {
         void AddKlant(Klant klant);
         Reservering AddReservation(Reservering reservation);
-        void ChangeTickets(BesteldeActiviteit activity);
+        void ChangeTickets(Activity activity);
         void SendContactMessage(ContactMessage message);
         void AddBesteldeActiviteiten(List<BesteldeActiviteit> besteldeActiviteiten);
     }
