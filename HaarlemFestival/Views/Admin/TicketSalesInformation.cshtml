@@ -225,7 +225,7 @@
         <div class="col-md-6 col-sm-6">
             <canvas id="availabilityChart" width="800" height="450"></canvas>
         </div>
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-6 chartMargin col-sm-6">
             <canvas id="incomeChart" width="800" height="450"></canvas>
         </div>
     </div>
@@ -240,11 +240,11 @@
         <div class="col-md-6 col-sm-6">
             <canvas id="jazzAvailabilityChart" width="800" height="450"></canvas>
         </div>
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-6 chartMargin col-sm-6">
             <canvas id="jazzIncomeChart" width="800" height="450"></canvas>
         </div>
     </div>
-
+    <hr class="divide" />
     <div id="jazzData" class="eventView">
         @foreach (Jazz activity in Model.Activities.OfType<Jazz>())
         {
@@ -308,11 +308,11 @@
         <div class="col-md-6 col-sm-6">
             <canvas id="dinnerAvailabilityChart" width="800" height="450"></canvas>
         </div>
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-6 chartMargin col-sm-6">
             <canvas id="dinnerIncomeChart" width="800" height="450"></canvas>
         </div>
     </div>
-
+    <hr class="divide" />
     <div id="dinnerData" class="eventView">
         @foreach (Dinner activity in Model.Activities.OfType<Dinner>())
         {
@@ -372,11 +372,11 @@
         <div class="col-md-6 col-sm-6">
             <canvas id="talkingAvailabilityChart" width="800" height="450"></canvas>
         </div>
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-6 chartMargin col-sm-6">
             <canvas id="talkingIncomeChart" width="800" height="450"></canvas>
         </div>
     </div>
-
+    <hr class="divide" />
     <div id="talkingData" class="eventView">
         @foreach (Talking activity in Model.Activities.OfType<Talking>())
         {
@@ -437,11 +437,11 @@
         <div class="col-md-6 col-sm-6">
             <canvas id="historicAvailabilityChart" width="800" height="450"></canvas>
         </div>
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-6 chartMargin col-sm-6">
             <canvas id="historicIncomeChart" width="800" height="450"></canvas>
         </div>
     </div>
-
+    <hr class="divide" />
     <div id="historicData" class="eventView">
         @foreach (Historic activity in Model.Activities.OfType<Historic>())
         {

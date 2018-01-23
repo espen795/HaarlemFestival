@@ -1900,6 +1900,9 @@ div.eventData {
 
 /* Start mobile navigatie/view */
 @media (max-width: 767px) {
+    .chartMargin {
+        margin-top: 20px;
+    }
 
     .artist-image img {
     width: 100%;
