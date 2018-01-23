@@ -7,6 +7,23 @@
     ViewBag.Title = "Talking Haarlem - Reservation";
 }
 
+@{
+    if (Session["added_to_basket"] != null)
+    {
+        if ((bool)Session["added_to_basket"])
+        {
+            <div class="basket-alert">
+                <div class="alert alert-success alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <h3>Added!</h3> The item has been added to your basket.
+                </div>
+            </div>
+        }
+
+        Session["added_to_basket"] = false;
+    }
+}
+
 <script type="text/javascript">
     // Laat de vragen zien als ticket aantal > 0 is
     function UpdateQuestions() {
@@ -43,34 +60,38 @@
 
                 <!-- Table -->
                 <section>
-                    <table class="talking-reservation-table">
-                        <tr>
-                            <th>Ticket Amount</th>
-                            <th>Talk</th>
-                            <th>Price</th>
-                            <th>Date & Time (DD-MM-YYYY)</th>
-                            <th>Location</th>
-                        </tr>
-                        @{
-                            int i = 0;
-                            foreach (Talking talk in Model.Talkings)
-                            {
-                                Model.BesteldeActiviteiten.Add(new BesteldeActiviteit());
+                    <table class="talking-reservation-table table-hover table-responsive ticket-table">
+                        <thead>
+                            <tr>
+                                <th>Tickets</th>
+                                <th>Talk</th>
+                                <th>Price</th>
+                                <th>Date & Time (DD-MM-YYYY)</th>
+                                <th>Location</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int i = 0;
+                                foreach (Talking talk in Model.Talkings)
+                                {
+                                    Model.BesteldeActiviteiten.Add(new BesteldeActiviteit());
 
-                                <tr>
-                                    <td class="hidden"><input name="BesteldeActiviteiten[@i].Activiteit.ActivityId" value="@talk.ActivityId" class="hidden" /></td>
-                                    <td onchange="UpdateQuestions()">@Html.TextBoxFor(m => Model.BesteldeActiviteiten[i].Aantal, new { @type = "number", @min = 0, @max = 2, @class = "talk-ticket-amount" })</td>
-                                    <td>@talk.Talk.Naam</td>
-                                    <td>Free</td>
-                                    <td>@talk.Day.Naam @talk.Day.Date.ToShortDateString() | @talk.StartSession.ToShortTimeString() - @talk.EndSession.ToShortTimeString()</td>
-                                    <td>Toneelschuur</td>
-                                </tr>
+                                    <tr>
+                                        <td class="hidden"><input name="BesteldeActiviteiten[@i].Activiteit.ActivityId" value="@talk.ActivityId" class="hidden" /></td>
+                                        <td onchange="UpdateQuestions()">@Html.TextBoxFor(m => Model.BesteldeActiviteiten[i].Aantal, new { @type = "number", @min = 0, @max = 2, @class = "talk-ticket-amount" })</td>
+                                        <td>@talk.Talk.Naam</td>
+                                        <td>Free</td>
+                                        <td>@talk.Day.Naam @talk.Day.Date.ToShortDateString() | @talk.StartSession.ToShortTimeString() - @talk.EndSession.ToShortTimeString()</td>
+                                        <td>Toneelschuur</td>
+                                    </tr>
 
-                                Model.BesteldeActiviteiten[i].Activiteit = new Activity();
-                                Model.BesteldeActiviteiten[i].Activiteit.ActivityId = talk.ActivityId;
-                                i++;
+                                    Model.BesteldeActiviteiten[i].Activiteit = new Activity();
+                                    Model.BesteldeActiviteiten[i].Activiteit.ActivityId = talk.ActivityId;
+                                    i++;
+                                }
                             }
-                        }
+                        </tbody>
                     </table>
                 </section> <!-- Table -->
 
@@ -108,7 +129,7 @@
                     @Html.ActionLink("Back to Talking Haarlem", "Index", "Talking", new { }, new { @class = "btn btn-black talk-back-btn" })
 
                     @*@Html.ActionLink("Add to basket", "Book", "Talking", new { }, new { type = "submit", @class = "btn btn-black talk-order-btn"})*@
-                    <input type="submit" value="Add to basket" class="btn btn-black talk-order-btn" />
+                    <input type="submit" value="Add to basket" class="btn btn-book talk-order-btn" />
 
                 </section> <!-- Buttons -->
             </section> <!-- Section 1 Reservation Container -->
