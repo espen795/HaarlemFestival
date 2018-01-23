@@ -1,9 +1,8 @@
 ﻿function CreateIncomeChart(id, jazzIncome, dinnerIncome, talkingIncome, historicIncome)
 {
     var chart = document.getElementById(id).getContext("2d");
-
-    var myDoughnutChart = new Chart(chart, {
-        type: 'doughnut',
+    var myBarChart = new Chart(chart, {
+        type: 'bar',
         data: {
             labels: ["Jazz@Patronaat", "Dinner in Haarlem", "Talking Haarlem", "Historic Haarlem"],
             datasets: [{
@@ -61,14 +60,12 @@ function CreateIncomePerDayChart(id, data) {
             labels: ["Monday", "Tuesday", "Wednessday", "Thursday", "Friday", "Saturday", "Sunday"],
             datasets: [{
                 label: 'Income Per Day',
-                data: [data[0], data[1], data[2], data[3], data[4], data[5], data[6]],
+                data: [data[1], data[2], data[3], data[4], data[5], data[6], data[7]],
                 backgroundColor: [
-                    'rgba(178, 210, 153, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
+                    '#F0F6EB'
                 ],
                 borderColor: [
-                    'rgba(53, 159, 43, 1)',
-                    'rgba(255, 99, 132, 1)',
+                    '#99CE94'
                 ],
                 borderWidth: 1
             }]
