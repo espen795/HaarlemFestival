@@ -362,7 +362,6 @@
     <Content Include="Views\Jazz\Index.cshtml" />
     <Content Include="Views\Talking\Index.cshtml" />
     <Content Include="Views\Home\Basket.cshtml" />
-    <Content Include="Views\Home\Agenda.cshtml" />
     <Content Include="Views\Home\Reservation.cshtml" />
     <Content Include="Views\Historic\Reservation.cshtml" />
     <Content Include="Views\Jazz\Reservation.cshtml" />
@@ -386,7 +385,6 @@
     <Content Include="Views\Admin\_UpdateRestaurantPartial.cshtml" />
     <Content Include="Views\Admin\_UpdateGuidePartial.cshtml" />
     <Content Include="Views\Admin\TicketSalesInformation.cshtml" />
-    <Content Include="Views\Home\_ContactSent.cshtml" />
     <Content Include="Views\Admin\AnswerContactmessage.cshtml" />
     <Content Include="Views\Home\Completed.cshtml" />
     <Content Include="Views\Admin\CheckInterviewQuestions.cshtml" />
@@ -395,6 +393,7 @@
     <Content Include="Views\Admin\_AddAccountPartial.cshtml" />
     <Content Include="Views\Admin\_UpdateAccountPartial.cshtml" />
     <Content Include="Views\Admin\ManageAccounts.cshtml" />
+    <Content Include="Views\Home\Agenda.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

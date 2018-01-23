@@ -151,22 +151,15 @@ namespace HaarlemFestival.Controllers
                 Dinners = dinnerRepository.DinnersPerRestaurant(id)
             };
 
-            List<Day> days = new List<Day>();
-            for (int i = 0; i < dinnerView.Dinners.Count; i++)
+            dinnerView.Days = new List<Day>();
+
+            foreach (Dinner dinner in dinnerView.Dinners)
             {
-                if (i == 0)
+                if (!dinnerView.Days.Contains(dinner.Day))
                 {
-                    days.Add(dinnerView.Dinners[i].Day);
-                }
-                else
-                {
-                    if (dinnerView.Dinners[i].Day != dinnerView.Dinners[i - 1].Day)
-                    {
-                        days.Add(dinnerView.Dinners[i].Day);
-                    }
+                    dinnerView.Days.Add(dinner.Day);
                 }
             }
-            dinnerView.Days = days;
 
             return dinnerView;
         }

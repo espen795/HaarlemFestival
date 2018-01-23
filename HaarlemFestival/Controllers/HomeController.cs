@@ -141,10 +141,10 @@ namespace HaarlemFestival.Controllers
         {
             AgendaView agendaView = new AgendaView
             {
-                Day1 = new List<BesteldeActiviteit>(),
-                Day2 = new List<BesteldeActiviteit>(),
-                Day3 = new List<BesteldeActiviteit>(),
-                Day4 = new List<BesteldeActiviteit>()
+                Jazzs = jazzRepository.GetAllJazzs(),
+                Dinners = dinnerRepository.GetAllDinners(),
+                Talks = talkingRepository.GetAllTalks(),
+                Historics = historicRepository.GetAllTours()
             };
 
             List<BesteldeActiviteit> Bestelling = new List<BesteldeActiviteit>();
@@ -154,18 +154,17 @@ namespace HaarlemFestival.Controllers
                 Bestelling = (List<BesteldeActiviteit>)Session["current_order"];
             }
 
-            if (Bestelling.Count != 0)
+            agendaView.Days = new List<Day>();
+
+            foreach (BesteldeActiviteit besteldeActiviteit in Bestelling)
             {
-                agendaView.Day1.AddRange(Bestelling.Where(b => b.Activiteit.Day.DayId == 1));
-                agendaView.Day2.AddRange(Bestelling.Where(b => b.Activiteit.Day.DayId == 2));
-                agendaView.Day3.AddRange(Bestelling.Where(b => b.Activiteit.Day.DayId == 3));
-                agendaView.Day4.AddRange(Bestelling.Where(b => b.Activiteit.Day.DayId == 4));
+                if (!agendaView.Days.Contains(besteldeActiviteit.Activiteit.Day))
+                {
+                    agendaView.Days.Add(besteldeActiviteit.Activiteit.Day);
+                }
             }
 
-            agendaView.Jazzs = jazzRepository.GetAllJazzs();
-            agendaView.Dinners = dinnerRepository.GetAllDinners();
-            agendaView.Talks = talkingRepository.GetAllTalks();
-            agendaView.Historics = historicRepository.GetAllTours();
+            agendaView.Activities = Bestelling;
 
             return View(agendaView);
         }
@@ -192,14 +191,14 @@ namespace HaarlemFestival.Controllers
             foreach (BesteldeActiviteit besteldeactiviteit in Bestelling)
             {
                 besteldeactiviteit.Reservering_ReserveringId = reservation.ReserveringId;
-                                
+
                 besteldeactiviteit.Activiteit.BoughtTickets += besteldeactiviteit.TotalBoughtTickets;
-                
+
                 homerepository.ChangeTickets(besteldeactiviteit);
                 homerepository.AddBesteldeActiviteit(besteldeactiviteit);
             }
 
-            
+
 
             return RedirectToAction("Completed");
         }
