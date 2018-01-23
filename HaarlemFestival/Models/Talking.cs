@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HaarlemFestival.Models
 {
@@ -9,7 +10,9 @@ namespace HaarlemFestival.Models
     {
         public int TalkId { get; set; }
         public virtual Talk Talk { get; set; }
-        public InterviewQuestion Question;
+
+        [NotMapped]
+        public string QuestionReceiver { get; set; }
 
         public Talking() 
         {
