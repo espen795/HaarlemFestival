@@ -59,12 +59,10 @@
 
                                 <tr>
                                     <td class="hidden"><input name="BesteldeActiviteiten[@i].Activiteit.ActivityId" value="@talk.ActivityId" class="hidden" /></td>
-                                    @*<td><input value="" onchange="UpdateQuestions()" id="ticket-amount@(Model.Talkings[i].TalkId)" class="talk-ticket-amount" min="0" max="2" type="number" /></td>*@
-                                    <td onchange="UpdateQuestions();">@Html.TextBoxFor(m => Model.BesteldeActiviteiten[i].Aantal, new { @type = "number", @min = 0, @max = 2, @class = "talk-ticket-amount" })</td>
-
-                                    <td>@Model.Talkings[i].Talk.Naam</td>
+                                    <td onchange="UpdateQuestions()">@Html.TextBoxFor(m => Model.BesteldeActiviteiten[i].Aantal, new { @type = "number", @min = 0, @max = 2, @class = "talk-ticket-amount" })</td>
+                                    <td>@talk.Talk.Naam</td>
                                     <td>Free</td>
-                                    <td>@Model.Talkings[i].Day.Naam @talk.Day.Date.ToShortDateString() | @talk.StartSession.ToShortTimeString() - @talk.EndSession.ToShortTimeString()</td>
+                                    <td>@talk.Day.Naam @talk.Day.Date.ToShortDateString() | @talk.StartSession.ToShortTimeString() - @talk.EndSession.ToShortTimeString()</td>
                                     <td>Toneelschuur</td>
                                 </tr>
 
@@ -94,9 +92,8 @@
                                 <p>@Model.Talkings[x].Talk.Naam</p>
                                 <section class="talk-question-receiver">
                                     <p>Question For: </p>
-                                @* Fix om persoon mee te geven aan opmering *@
                                     @Html.DropDownListFor(
-                                                         /*??*/m => Model.Talkings[x].QuestionReceiver, new SelectList(new List<Object> { Model.Talkings[x].Talk.Person1, Model.Talkings[x].Talk.Person2 }),
+                                                         m => Model.Talkings[x].QuestionReceiver, new SelectList(new List<Object> { Model.Talkings[x].Talk.Person1, Model.Talkings[x].Talk.Person2 }),
                                                          "[Select a person..]"
                                                          )
                                 </section> <!-- Receiver -->
