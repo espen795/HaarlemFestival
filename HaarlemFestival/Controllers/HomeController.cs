@@ -195,13 +195,14 @@ namespace HaarlemFestival.Controllers
                                 
                 besteldeactiviteit.Activiteit.BoughtTickets += besteldeactiviteit.TotalBoughtTickets;
                 
-                homerepository.ChangeTickets(besteldeactiviteit.Activiteit);
+                homerepository.ChangeTickets(besteldeactiviteit);
+                homerepository.AddBesteldeActiviteiten(besteldeactiviteit);
             }
 
             reservation.BesteldeActiviteiten = new List<BesteldeActiviteit>();
             reservation.BesteldeActiviteiten.AddRange(Bestelling);
 
-            homerepository.AddBesteldeActiviteiten(reservation.BesteldeActiviteiten);
+            
 
             return RedirectToAction("Completed");
         }

@@ -25,10 +25,10 @@ namespace HaarlemFestival.Repository.Dinner
             return reservation;
         }
 
-        public void ChangeTickets(Activity activity)
+        public void ChangeTickets(BesteldeActiviteit besteldeActiviteit)
         {
-            Activity dbActivity = db.Activities.Find(activity.ActivityId);
-            dbActivity.BoughtTickets = activity.BoughtTickets;
+            Activity dbActivity = db.Activities.Find(besteldeActiviteit.Activiteit.ActivityId);
+            dbActivity.BoughtTickets += besteldeActiviteit.TotalBoughtTickets;
             db.Entry(dbActivity).State = EntityState.Modified;
             db.SaveChanges();
         }
@@ -39,9 +39,9 @@ namespace HaarlemFestival.Repository.Dinner
             db.SaveChanges();
         }
 
-        public void AddBesteldeActiviteiten(List<BesteldeActiviteit> besteldeActiviteiten)
+        public void AddBesteldeActiviteiten(BesteldeActiviteit besteldeActiviteit)
         {
-            db.BesteldeActiviteiten.AddRange(besteldeActiviteiten);
+            db.BesteldeActiviteiten.Add(besteldeActiviteit);
             db.SaveChanges();
         }
     }
