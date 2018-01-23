@@ -170,6 +170,38 @@ namespace HaarlemFestival.Controllers
             return View(agendaView);
         }
 
+        public ActionResult Agenda2()
+        {
+            AgendaView2 agendaView = new AgendaView2
+            {
+                Jazzs = jazzRepository.GetAllJazzs(),
+                Dinners = dinnerRepository.GetAllDinners(),
+                Talks = talkingRepository.GetAllTalks(),
+                Historics = historicRepository.GetAllTours()
+            };
+
+            List<BesteldeActiviteit> Bestelling = new List<BesteldeActiviteit>();
+
+            if ((List<BesteldeActiviteit>)Session["current_order"] != null)
+            {
+                Bestelling = (List<BesteldeActiviteit>)Session["current_order"];
+            }
+
+            agendaView.Days = new List<Day>();
+
+            foreach(BesteldeActiviteit besteldeActiviteit in Bestelling)
+            {
+                if(!agendaView.Days.Contains(besteldeActiviteit.Activiteit.Day))
+                {
+                    agendaView.Days.Add(besteldeActiviteit.Activiteit.Day);
+                }
+            }
+
+            agendaView.Activities = Bestelling;
+
+            return View(agendaView);
+        }
+
         public ActionResult Reservation()
         {
             return View(new Reservering());
@@ -192,14 +224,14 @@ namespace HaarlemFestival.Controllers
             foreach (BesteldeActiviteit besteldeactiviteit in Bestelling)
             {
                 besteldeactiviteit.Reservering_ReserveringId = reservation.ReserveringId;
-                                
+
                 besteldeactiviteit.Activiteit.BoughtTickets += besteldeactiviteit.TotalBoughtTickets;
-                
+
                 homerepository.ChangeTickets(besteldeactiviteit);
                 homerepository.AddBesteldeActiviteit(besteldeactiviteit);
             }
 
-            
+
 
             return RedirectToAction("Completed");
         }

@@ -19,7 +19,7 @@ body {
     transition: 300ms;
 }
 
-    .btn-black:hover {
+    .btn-black:hover, .button:hover {
         color: #fff;
         background: #736e6e;
     }

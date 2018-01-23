@@ -263,6 +263,7 @@
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\AdminAuthorize.cs" />
+    <Compile Include="Models\AgendaView2.cs" />
     <Compile Include="Models\AgendaView.cs" />
     <Compile Include="Models\AnswerContactViewModel.cs" />
     <Compile Include="Models\BasketModel.cs" />
@@ -386,7 +387,6 @@
     <Content Include="Views\Admin\_UpdateRestaurantPartial.cshtml" />
     <Content Include="Views\Admin\_UpdateGuidePartial.cshtml" />
     <Content Include="Views\Admin\TicketSalesInformation.cshtml" />
-    <Content Include="Views\Home\_ContactSent.cshtml" />
     <Content Include="Views\Admin\AnswerContactmessage.cshtml" />
     <Content Include="Views\Home\Completed.cshtml" />
     <Content Include="Views\Admin\CheckInterviewQuestions.cshtml" />
@@ -395,6 +395,7 @@
     <Content Include="Views\Admin\_AddAccountPartial.cshtml" />
     <Content Include="Views\Admin\_UpdateAccountPartial.cshtml" />
     <Content Include="Views\Admin\ManageAccounts.cshtml" />
+    <Content Include="Views\Home\Agenda2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
