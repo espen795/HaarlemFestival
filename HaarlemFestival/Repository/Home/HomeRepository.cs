@@ -17,13 +17,15 @@ namespace HaarlemFestival.Repository.Dinner
             db.SaveChanges();
         }
 
-        public void AddReservation(Reservering reservation)
+        public Reservering AddReservation(Reservering reservation)
         {
             db.Reserveringen.Add(reservation);
             db.SaveChanges();
+
+            return reservation;
         }
 
-        public void ChangeTickets(Activity activity)
+        public void ChangeTickets(Models.Historic activity)
         {
             db.Entry(activity).State = EntityState.Modified;
             db.SaveChanges();
@@ -32,6 +34,12 @@ namespace HaarlemFestival.Repository.Dinner
         public void SendContactMessage(ContactMessage message)
         {
             db.ContactMessages.Add(message);
+            db.SaveChanges();
+        }
+
+        public void AddBesteldeActiviteiten(List<BesteldeActiviteit> besteldeActiviteiten)
+        {
+            db.BesteldeActiviteiten.AddRange(besteldeActiviteiten);
             db.SaveChanges();
         }
     }

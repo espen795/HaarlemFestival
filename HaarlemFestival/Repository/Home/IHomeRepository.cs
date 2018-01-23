@@ -10,8 +10,9 @@ namespace HaarlemFestival.Repository.Dinner
     interface IHomeRepository
     {
         void AddKlant(Klant klant);
-        void AddReservation(Reservering reservation);
-        void ChangeTickets(Activity activity);
+        Reservering AddReservation(Reservering reservation);
+        void ChangeTickets(Models.Historic activity);
         void SendContactMessage(ContactMessage message);
+        void AddBesteldeActiviteiten(List<BesteldeActiviteit> besteldeActiviteiten);
     }
 }

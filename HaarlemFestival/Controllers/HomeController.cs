@@ -172,30 +172,36 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Reservation()
         {
-            return View(new Klant());
+            return View(new Reservering());
         }
 
         [HttpPost]
-        public ActionResult MakeReservation(Klant klant)
+        public ActionResult MakeReservation(Reservering reservation)
         {
-            Reservering reservation = new Reservering();
+            homerepository.AddKlant(reservation.Klant);
+
+            reservation = homerepository.AddReservation(reservation);
+
+            List<BesteldeActiviteit> Bestelling = new List<BesteldeActiviteit>();
 
             if ((List<BesteldeActiviteit>)Session["current_order"] != null)
             {
-                reservation.BesteldeActiviteiten = (List<BesteldeActiviteit>)Session["current_order"];
+                Bestelling = (List<BesteldeActiviteit>)Session["current_order"];
             }
 
-            reservation.Klant = klant;
-
-            homerepository.AddKlant(reservation.Klant);
-
-            homerepository.AddReservation(reservation);
-
-            foreach(BesteldeActiviteit besteldeactiviteit in reservation.BesteldeActiviteiten)
+            foreach (BesteldeActiviteit besteldeactiviteit in Bestelling)
             {
+                besteldeactiviteit.Reservering_ReserveringId = reservation.ReserveringId;
+                                
                 besteldeactiviteit.Activiteit.BoughtTickets += besteldeactiviteit.TotalBoughtTickets;
-                homerepository.ChangeTickets(besteldeactiviteit.Activiteit);
+                Historic activiteit = (Historic)besteldeactiviteit.Activiteit;
+                homerepository.ChangeTickets(activiteit);
             }
+
+            reservation.BesteldeActiviteiten = new List<BesteldeActiviteit>();
+            reservation.BesteldeActiviteiten.AddRange(Bestelling);
+
+            homerepository.AddBesteldeActiviteiten(reservation.BesteldeActiviteiten);
 
             return RedirectToAction("Completed");
         }
