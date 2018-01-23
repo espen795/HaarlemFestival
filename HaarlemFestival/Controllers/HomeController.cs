@@ -182,27 +182,24 @@ namespace HaarlemFestival.Controllers
 
             reservation = homerepository.AddReservation(reservation);
 
-            List<BesteldeActiviteit> Bestelling = new List<BesteldeActiviteit>();
+            reservation.BesteldeActiviteiten = new List<BesteldeActiviteit>();
 
             if ((List<BesteldeActiviteit>)Session["current_order"] != null)
             {
-                Bestelling = (List<BesteldeActiviteit>)Session["current_order"];
+                reservation.BesteldeActiviteiten = (List<BesteldeActiviteit>)Session["current_order"];
             }
 
-            foreach (BesteldeActiviteit besteldeactiviteit in Bestelling)
+            foreach (BesteldeActiviteit besteldeactiviteit in reservation.BesteldeActiviteiten)
             {
                 besteldeactiviteit.Reservering_ReserveringId = reservation.ReserveringId;
                                 
                 besteldeactiviteit.Activiteit.BoughtTickets += besteldeactiviteit.TotalBoughtTickets;
                 
                 homerepository.ChangeTickets(besteldeactiviteit);
+
+                homerepository.AddBesteldeActiviteit(besteldeactiviteit);
             }
-
-            reservation.BesteldeActiviteiten = new List<BesteldeActiviteit>();
-            reservation.BesteldeActiviteiten.AddRange(Bestelling);
-
-            homerepository.AddBesteldeActiviteiten(reservation.BesteldeActiviteiten);
-
+           
             return RedirectToAction("Completed");
         }
 
