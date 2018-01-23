@@ -24,7 +24,7 @@
 }
 
 <script type="text/javascript">
-    function CalcPrice(nummer) {
+    function CalcPriceAndTicketCheck(nummer, availableTickets) {
         // Krijg de waardes van de input boxes
         var tickets = document.getElementById("ticket" + nummer).value;
         var grouptickets = document.getElementById("groupticket" + nummer).value;
@@ -32,6 +32,27 @@
         // De prijs ophalen uit het model en omzetten naar een JS format
         var price = parseFloat("@Model.Tours[0].Price".replace(",", "."));
         var groupprice = parseFloat("@Model.Tours[0].AlternativePrice".replace(",", "."));
+        
+        // Controleren of er niet te veel of te weinig tickets gekocht worden
+        // Dit is het totaal van zowel de groepstickets als de normale tickets
+        if (tickets < 0 || tickets > (availableTickets - (grouptickets * 4)) || grouptickets < 0 || grouptickets > Math.floor((availableTickets - tickets) / 4)) {
+            if (tickets < 0 || grouptickets < 0) {
+                $("#TicketAlert").modal();
+                document.getElementById("text").innerHTML = ("<p>You inserted <b> " + tickets + " </b> tickets.</p><p>Please insert a number above 0.</p>");
+            }
+            else if (tickets > (availableTickets - (grouptickets * 4))) {
+                $("#TicketAlert").modal();
+                document.getElementById("text").innerHTML = ("<p>You inserted <b> " + (+tickets + (grouptickets * 4)) + " </b> tickets but there are only <b>" + availableTickets + "</b> left.</p><p>Please insert <b>" + availableTickets + "</b> or lower.</p>");
+            }
+            else if (grouptickets > Math.floor((availableTickets - tickets) / 4)) {
+                $("#TicketAlert").modal();
+                document.getElementById("text").innerHTML = ("<p>You inserted <b> " + (+tickets + (grouptickets * 4)) + " </b> tickets but there are only <b>" + Math.floor((availableTickets - tickets) / 4) + "</b> left.</p><p>Please insert <b>" + availableGroupTickets + "</b> or lower.</p>");
+            }
+            tickets = 0;
+            grouptickets = 0;
+            document.getElementById("ticket" + nummer).value = ("0");
+            document.getElementById("groupticket" + nummer).value = ("0");
+        }
 
         // Nieuwe totaal prijs berekenen
         var totalprice = ((tickets * price) + (grouptickets * groupprice));
@@ -39,6 +60,7 @@
         // De waarde in de totalprice kolom vervangen door de berekende waarde
         document.getElementById("totalprice" + nummer).innerHTML = ("€ " + (totalprice.toFixed(2)).replace(".", ","));
     }
+
 </script>
 
 <div class="event-banner historic"></div>
@@ -128,8 +150,8 @@
                                     // De tabel aanmaken
                                     <tr>
                                         <td class="hidden"><input name="Reservering[@i].Activiteit.ActivityId" value="@tour.ActivityId" class="hidden" /></td>
-                                        <td class="ticketsInput" onchange="CalcPrice(@i);">@Html.TextBoxFor(m => Model.Reservering[i].Aantal, new { @type = "number", @min = 0, @id = idtickets })</td>
-                                        <td class="ticketsInput" onchange="CalcPrice(@i);">@Html.TextBoxFor(m => Model.Reservering[i].AantalAlternatief, new { @type = "number", @min = 0, @id = idgrouptickets })</td>
+                                        <td class="ticketsInput" onchange="CalcPriceAndTicketCheck(@i, @availableTickets);">@Html.TextBoxFor(m => Model.Reservering[i].Aantal, new { @type = "number", @min = 0, @id = idtickets })</td>
+                                        <td class="ticketsInput" onchange="CalcPriceAndTicketCheck(@i, @availableTickets);">@Html.TextBoxFor(m => Model.Reservering[i].AantalAlternatief, new { @type = "number", @min = 0, @id = idgrouptickets })</td>
                                         <td>@availableTickets tickets</td>
                                         <td>@tour.Guide.LanguageName</td>
                                         <td>@tour.Guide.GuideName</td>
@@ -183,8 +205,8 @@
                                     // De tabel aanmaken
                                     <tr>
                                         <td class="hidden"><input name="Reservering[@i].Activiteit.ActivityId" value="@tour.ActivityId" class="hidden" /></td>
-                                        <td class="ticketsInput" onchange="CalcPrice(@i);">@Html.TextBoxFor(m => Model.Reservering[i].Aantal, new { @type = "number", @min = 0, @id = idtickets })</td>
-                                        <td class="ticketsInput" onchange="CalcPrice(@i);">@Html.TextBoxFor(m => Model.Reservering[i].AantalAlternatief, new { @type = "number", @min = 0, @id = idgrouptickets })</td>
+                                        <td class="ticketsInput" onchange="CalcPriceAndTicketCheck(@i, @availableTickets);">@Html.TextBoxFor(m => Model.Reservering[i].Aantal, new { @type = "number", @min = 0, @id = idtickets })</td>
+                                        <td class="ticketsInput" onchange="CalcPriceAndTicketCheck(@i, @availableTickets);">@Html.TextBoxFor(m => Model.Reservering[i].AantalAlternatief, new { @type = "number", @min = 0, @id = idgrouptickets })</td>
                                         <td>@availableTickets tickets</td>
                                         <td>@tour.Guide.LanguageName</td>
                                         <td>@tour.Guide.GuideName</td>
@@ -238,8 +260,8 @@
                                     // De tabel aanmaken
                                     <tr>
                                         <td class="hidden"><input name="Reservering[@i].Activiteit.ActivityId" value="@tour.ActivityId" class="hidden" /></td>
-                                        <td class="ticketsInput" onchange="CalcPrice(@i);">@Html.TextBoxFor(m => Model.Reservering[i].Aantal, new { @type = "number", @min = 0, @id = idtickets })</td>
-                                        <td class="ticketsInput" onchange="CalcPrice(@i);">@Html.TextBoxFor(m => Model.Reservering[i].AantalAlternatief, new { @type = "number", @min = 0, @id = idgrouptickets })</td>
+                                        <td class="ticketsInput" onchange="CalcPriceAndTicketCheck(@i, @availableTickets);">@Html.TextBoxFor(m => Model.Reservering[i].Aantal, new { @type = "number", @min = 0, @id = idtickets })</td>
+                                        <td class="ticketsInput" onchange="CalcPriceAndTicketCheck(@i, @availableTickets);">@Html.TextBoxFor(m => Model.Reservering[i].AantalAlternatief, new { @type = "number", @min = 0, @id = idgrouptickets })</td>
                                         <td>@availableTickets tickets</td>
                                         <td>@tour.Guide.LanguageName</td>
                                         <td>@tour.Guide.GuideName</td>
@@ -275,6 +297,26 @@
 
             <input type="submit" value="Book" class="btn btn-book btn-reservation" />
         }
+
+    </div>
+</div>
+
+<!-- BOOTSTRAP MODALS VOOR BESCHIKBARE TICKETS EN NEGATIEVE AANTALLEN -->
+<div class="modal fade" id="TicketAlert" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Error</h4>
+            </div>
+            <div class="modal-body">
+                <div id="text"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Sluiten</button>
+            </div>
+        </div>
 
     </div>
 </div>

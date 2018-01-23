@@ -59,13 +59,25 @@ function CreateIncomePerDayChart(id, data) {
         data: {
             labels: ["Monday", "Tuesday", "Wednessday", "Thursday", "Friday", "Saturday", "Sunday"],
             datasets: [{
-                label: 'Income Per Day',
+                label: 'Income (in euros)',
                 data: [data[1], data[2], data[3], data[4], data[5], data[6], data[7]],
                 backgroundColor: [
-                    '#F0F6EB'
+                    'rgba(178, 210, 153, 0.2)',
+                    'rgba(178, 210, 153, 0.2)',
+                    'rgba(178, 210, 153, 0.2)',
+                    'rgba(178, 210, 153, 0.2)',
+                    'rgba(178, 210, 153, 0.2)',
+                    'rgba(178, 210, 153, 0.2)',
+                    'rgba(178, 210, 153, 0.2)'
                 ],
                 borderColor: [
-                    '#99CE94'
+                    'rgba(153, 206, 148, 1)',
+                    'rgba(153, 206, 148, 1)',
+                    'rgba(153, 206, 148, 1)',
+                    'rgba(153, 206, 148, 1)',
+                    'rgba(153, 206, 148, 1)',
+                    'rgba(153, 206, 148, 1)',
+                    'rgba(153, 206, 148, 1)'
                 ],
                 borderWidth: 1
             }]
