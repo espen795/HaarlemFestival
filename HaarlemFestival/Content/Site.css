@@ -1902,8 +1902,8 @@ div.eventData {
 @media (max-width: 767px) {
 
     .artist-image img {
-    width: 100%;
-}
+        width: 100%;
+    }
 
     /* NAVBAR */
     .navbar-toggle {
