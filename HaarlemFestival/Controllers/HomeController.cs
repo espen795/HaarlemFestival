@@ -192,13 +192,31 @@ namespace HaarlemFestival.Controllers
             {
                 besteldeactiviteit.Reservering_ReserveringId = reservation.ReserveringId;
 
+                // Kijken of een bestelde activiteit een Jazz Passe- partout is
                 if (besteldeactiviteit.Activiteit.EventType == 0 && besteldeactiviteit.Activiteit.AlternativePrice == 1 || besteldeactiviteit.Activiteit.AlternativePrice == 2)
                 {
-                    List<Activity> allJazzDay = jazzRepository.getJazz(besteldeactiviteit);
+                    // Zoja kijken of het een single of all days is, Single is 1 en All days is 2
+                    if (besteldeactiviteit.Activiteit.AlternativePrice == 1) {
+                        // Alle jazz events ophalen met het dag ID van de single passe partout
+                        List<Activity> allJazzDay = jazzRepository.GetJazzByDay(besteldeactiviteit);
 
-                    foreach (Activity activity in allJazzDay)
+                        // voor elke jazz in de allJazzDay de tickets wijzigen in de DB
+                        foreach (Activity activity in allJazzDay)
+                        {
+                            homerepository.ChangeTicketsJazz(activity, besteldeactiviteit);
+                        }
+                    }
+                    else
                     {
-                        homerepository.ChangeTicketsJazz(activity, besteldeactiviteit);
+                        // Is een AllDaysPass, van elk jazz event moet er dus een ticket af
+                        // Onderstaande lijst bevat alle events van Jazz
+                        List<Activity> allJazzDay = jazzRepository.GetJazzAllDays(besteldeactiviteit);
+
+                        // voor elke jazz in de allJazzDay de tickets wijzigen in de DB
+                        foreach (Activity activity in allJazzDay)
+                        {
+                            homerepository.ChangeTicketsJazz(activity, besteldeactiviteit);
+                        }
                     }
                 }
                 else
