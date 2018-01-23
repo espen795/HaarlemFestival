@@ -141,39 +141,6 @@ namespace HaarlemFestival.Controllers
         {
             AgendaView agendaView = new AgendaView
             {
-                Day1 = new List<BesteldeActiviteit>(),
-                Day2 = new List<BesteldeActiviteit>(),
-                Day3 = new List<BesteldeActiviteit>(),
-                Day4 = new List<BesteldeActiviteit>()
-            };
-
-            List<BesteldeActiviteit> Bestelling = new List<BesteldeActiviteit>();
-
-            if ((List<BesteldeActiviteit>)Session["current_order"] != null)
-            {
-                Bestelling = (List<BesteldeActiviteit>)Session["current_order"];
-            }
-
-            if (Bestelling.Count != 0)
-            {
-                agendaView.Day1.AddRange(Bestelling.Where(b => b.Activiteit.Day.DayId == 1));
-                agendaView.Day2.AddRange(Bestelling.Where(b => b.Activiteit.Day.DayId == 2));
-                agendaView.Day3.AddRange(Bestelling.Where(b => b.Activiteit.Day.DayId == 3));
-                agendaView.Day4.AddRange(Bestelling.Where(b => b.Activiteit.Day.DayId == 4));
-            }
-
-            agendaView.Jazzs = jazzRepository.GetAllJazzs();
-            agendaView.Dinners = dinnerRepository.GetAllDinners();
-            agendaView.Talks = talkingRepository.GetAllTalks();
-            agendaView.Historics = historicRepository.GetAllTours();
-
-            return View(agendaView);
-        }
-
-        public ActionResult Agenda2()
-        {
-            AgendaView2 agendaView = new AgendaView2
-            {
                 Jazzs = jazzRepository.GetAllJazzs(),
                 Dinners = dinnerRepository.GetAllDinners(),
                 Talks = talkingRepository.GetAllTalks(),
@@ -189,9 +156,9 @@ namespace HaarlemFestival.Controllers
 
             agendaView.Days = new List<Day>();
 
-            foreach(BesteldeActiviteit besteldeActiviteit in Bestelling)
+            foreach (BesteldeActiviteit besteldeActiviteit in Bestelling)
             {
-                if(!agendaView.Days.Contains(besteldeActiviteit.Activiteit.Day))
+                if (!agendaView.Days.Contains(besteldeActiviteit.Activiteit.Day))
                 {
                     agendaView.Days.Add(besteldeActiviteit.Activiteit.Day);
                 }
