@@ -192,10 +192,10 @@ namespace HaarlemFestival.Controllers
             foreach (BesteldeActiviteit besteldeactiviteit in reservation.BesteldeActiviteiten)
             {
                 besteldeactiviteit.Reservering_ReserveringId = reservation.ReserveringId;
-                                
-                besteldeactiviteit.Activiteit.BoughtTickets += besteldeactiviteit.TotalBoughtTickets;
                 
                 homerepository.ChangeTickets(besteldeactiviteit);
+
+                homerepository.AddBesteldeActiviteit(besteldeactiviteit);
             }
            
             return RedirectToAction("Completed");
