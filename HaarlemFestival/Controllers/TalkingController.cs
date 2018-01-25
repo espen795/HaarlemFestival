@@ -78,14 +78,5 @@ namespace HaarlemFestival.Controllers
             // Partial view continue or basket
             return RedirectToAction("Reservation", "Talking");
         }
-
-        private bool CheckInterviewQuestion(InterviewQuestion question)
-        {
-            if (question.Content == null)
-                return false;
-            else if (question.Receiver == null)
-                return false;
-            return true;
-        }
     }
 }
