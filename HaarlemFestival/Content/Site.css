@@ -699,7 +699,9 @@ footer {
 .artist-image img {
     border: 1px solid #333;
 }
-
+.jazz-tickets tfoot tr td {
+    border-color: #333;
+}
 /* ------------------------------Dinner in Haarlem-----------------------------*/
 .restaurant-button:hover {
     background-color: #736e6e;
