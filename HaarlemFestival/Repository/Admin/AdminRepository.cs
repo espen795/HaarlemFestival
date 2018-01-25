@@ -12,6 +12,7 @@ namespace HaarlemFestival.Repository.Admin
     {
         private HFDB db = new HFDB();
 
+        #region Login + ManageAccounts
         public List<Account> GetAccounts()
         {
             return db.Accounts.ToList();
@@ -51,7 +52,9 @@ namespace HaarlemFestival.Repository.Admin
         {
             return db.Roles.ToList();
         }
+        #endregion
 
+        #region ManageEvent - Add
         public void AddEvent(Activity activity)
         {
             if (activity.GetType() == typeof(Models.Jazz))
@@ -89,7 +92,9 @@ namespace HaarlemFestival.Repository.Admin
             db.Guides.Add(guide);
             db.SaveChanges();
         }
+        #endregion
 
+        #region ManageEvent - Update
         public void UpdateEvent(Activity activity)
         {
             db.Entry(activity).State = EntityState.Modified;
@@ -127,7 +132,9 @@ namespace HaarlemFestival.Repository.Admin
             db.Entry(guide).State = EntityState.Modified;
             db.SaveChanges();
         }
+        #endregion
 
+        #region ManageEvent - Delete
         public void DeleteEvent(int id)
         {
             Activity activity = db.Activities.Find(id);
@@ -172,7 +179,9 @@ namespace HaarlemFestival.Repository.Admin
             db.Guides.Remove(guide);
             db.SaveChanges();
         }
+        #endregion
 
+        #region ManageEvent - Get Single Data
         public Activity GetActivity(int id)
         {
             return db.Activities.Find(id);
@@ -197,7 +206,9 @@ namespace HaarlemFestival.Repository.Admin
         {
             return db.Days.Where(d => d.DayId == id).FirstOrDefault();
         }
+        #endregion
 
+        #region FilterSystem
         public Filters GetFilters()
         {
             Filters filters = new Filters
@@ -210,7 +221,9 @@ namespace HaarlemFestival.Repository.Admin
 
             return filters;
         }
+        #endregion
 
+        #region ManageEvent - Get All Data
         public EventData GetEventData()
         {
             EventData data = new EventData
@@ -248,7 +261,9 @@ namespace HaarlemFestival.Repository.Admin
         {
             return db.Days.ToList();
         }
+        #endregion
 
+        #region Ticket & Sales Information
         public List<BesteldeActiviteit> GetBesteldeActivities()
         {
             return db.BesteldeActiviteiten.ToList();
@@ -265,7 +280,9 @@ namespace HaarlemFestival.Repository.Admin
             List<BesteldeActiviteit> activities = db.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == type).ToList();
             return activities.Sum(a => a.Price);
         }
+        #endregion
 
+        #region AnswerContactMessages
         public List<ContactMessage> GetContactMessages()
         {
             return db.ContactMessages.ToList();
@@ -281,10 +298,13 @@ namespace HaarlemFestival.Repository.Admin
             db.Entry(message).State = EntityState.Modified;
             db.SaveChanges();
         }
+        #endregion
 
+        #region CheckInterviewQuestions
         public List<InterviewQuestion> GetInterviewQuestions()
         {
             return db.InterviewQuestions.Where(q => q.Content != null && q.Receiver != null).ToList();
         }
+        #endregion
     }
 }

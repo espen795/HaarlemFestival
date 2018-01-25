@@ -177,61 +177,65 @@ namespace HaarlemFestival.Controllers
         [HttpPost]
         public ActionResult MakeReservation(Reservering reservation)
         {
-            homerepository.AddKlant(reservation.Klant);
-
-            reservation = homerepository.AddReservation(reservation);
-
-            List<BesteldeActiviteit> Bestelling = new List<BesteldeActiviteit>();
-
-            if ((List<BesteldeActiviteit>)Session["current_order"] != null)
+            if (ModelState.IsValid)
             {
-                Bestelling = (List<BesteldeActiviteit>)Session["current_order"];
-            }
+                homerepository.AddKlant(reservation.Klant);
 
-            foreach (BesteldeActiviteit besteldeactiviteit in Bestelling)
-            {
-                besteldeactiviteit.Reservering_ReserveringId = reservation.ReserveringId;
+                reservation = homerepository.AddReservation(reservation);
 
-                // Kijken of een bestelde activiteit een Jazz Passe- partout is
-                if (besteldeactiviteit.Activiteit.EventType == 0 && besteldeactiviteit.Activiteit.AlternativePrice == 1 || besteldeactiviteit.Activiteit.AlternativePrice == 2)
+                List<BesteldeActiviteit> Bestelling = new List<BesteldeActiviteit>();
+
+                if ((List<BesteldeActiviteit>)Session["current_order"] != null)
                 {
-                    // Zoja kijken of het een single of all days is, Single is 1 en All days is 2
-                    if (besteldeactiviteit.Activiteit.AlternativePrice == 1) {
-                        // Alle jazz events ophalen met het dag ID van de single passe partout
-                        List<Activity> allJazzDay = jazzRepository.GetJazzByDay(besteldeactiviteit);
+                    Bestelling = (List<BesteldeActiviteit>)Session["current_order"];
+                }
 
-                        // voor elke jazz in de allJazzDay de tickets wijzigen in de DB
-                        foreach (Activity activity in allJazzDay)
+                foreach (BesteldeActiviteit besteldeactiviteit in Bestelling)
+                {
+
+                    besteldeactiviteit.Reservering_ReserveringId = reservation.ReserveringId;
+
+                    // Kijken of een bestelde activiteit een Jazz Passe- partout is
+                    if (besteldeactiviteit.Activiteit.EventType == 0 && besteldeactiviteit.Activiteit.AlternativePrice == 1 || besteldeactiviteit.Activiteit.AlternativePrice == 2)
+                    {
+                        // Zoja kijken of het een single of all days is, Single is 1 en All days is 2
+                        if (besteldeactiviteit.Activiteit.AlternativePrice == 1)
                         {
-                            homerepository.ChangeTicketsJazz(activity, besteldeactiviteit);
+                            // Alle jazz events ophalen met het dag ID van de single passe partout
+                            List<Activity> allJazzDay = jazzRepository.GetJazzByDay(besteldeactiviteit);
+
+                            // voor elke jazz in de allJazzDay de tickets wijzigen in de DB
+                            foreach (Activity activity in allJazzDay)
+                            {
+                                homerepository.ChangeTicketsJazz(activity, besteldeactiviteit);
+                            }
+                        }
+                        else
+                        {
+                            // Is een AllDaysPass, van elk jazz event moet er dus een ticket af
+                            // Onderstaande lijst bevat alle events van Jazz
+                            List<Activity> allJazzDay = jazzRepository.GetJazzAllDays(besteldeactiviteit);
+
+                            // voor elke jazz in de allJazzDay de tickets wijzigen in de DB
+                            foreach (Activity activity in allJazzDay)
+                            {
+                                homerepository.ChangeTicketsJazz(activity, besteldeactiviteit);
+                            }
                         }
                     }
                     else
                     {
-                        // Is een AllDaysPass, van elk jazz event moet er dus een ticket af
-                        // Onderstaande lijst bevat alle events van Jazz
-                        List<Activity> allJazzDay = jazzRepository.GetJazzAllDays(besteldeactiviteit);
-
-                        // voor elke jazz in de allJazzDay de tickets wijzigen in de DB
-                        foreach (Activity activity in allJazzDay)
-                        {
-                            homerepository.ChangeTicketsJazz(activity, besteldeactiviteit);
-                        }
+                        besteldeactiviteit.Activiteit.BoughtTickets += besteldeactiviteit.TotalBoughtTickets;
+                        homerepository.ChangeTickets(besteldeactiviteit);
                     }
-                }
-                else
-                {
-                    besteldeactiviteit.Activiteit.BoughtTickets += besteldeactiviteit.TotalBoughtTickets;
-                    homerepository.ChangeTickets(besteldeactiviteit);
-                }
-                
 
-                homerepository.AddBesteldeActiviteit(besteldeactiviteit);
+
+                    homerepository.AddBesteldeActiviteit(besteldeactiviteit);
+                    return RedirectToAction("Completed");
+                }
             }
 
-
-
-            return RedirectToAction("Completed");
+            return View("Reservation", reservation);
         }
 
         public ActionResult Completed()
