@@ -32,7 +32,6 @@
             @using (Html.BeginForm("MakeReservation", "Home", FormMethod.Post, new { @class = "home-reservation-form" }))
             {
                 List<string> PaymentMethod = new List<string>();
-                PaymentMethod.Add("Select an option...");
                 PaymentMethod.Add("Cash");
                 PaymentMethod.Add("Pin");
                 PaymentMethod.Add("iDeal");
@@ -68,7 +67,7 @@
                     <p>Select a payment method</p>
 
                     @Html.LabelFor(m => Model.Klant.BetaalMethode)
-                    @Html.DropDownListFor(m => Model.Klant.BetaalMethode, new SelectList(PaymentMethod))
+                    @Html.DropDownListFor(m => Model.Klant.BetaalMethode, new SelectList(PaymentMethod), "Select an option...")
 
                     <p>Both the cash and pin options will be paid later, at the location.</p>
 

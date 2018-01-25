@@ -13,7 +13,7 @@ namespace HaarlemFestival.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201801231547498_mig29"; }
+            get { return "201801252139534_mig29"; }
         }
         
         string IMigrationMetadata.Source

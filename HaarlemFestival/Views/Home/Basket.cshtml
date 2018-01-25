@@ -61,37 +61,48 @@
                             <th class="basket-table-price-head">Price</th>
                             <th class="basket-table-remove-head">Remove</th>
                         </tr>
-                        @foreach (BesteldeActiviteit ordered in Model.Order)
-                        {
-                            <tr>
-                                <td class="basket-table-tickets">@ordered.TotalBoughtTickets</td>
-                                @if (ordered.Activiteit.EventType == EventType.JazzPatronaat)
-                                {
-                                    Jazz jazz = Model.Jazzs.Find(x => x.ActivityId == ordered.Activiteit.ActivityId);
-                                    <td class="basket-table-name">@jazz.artist.ArtistName</td>
-                                }
-                                else if (ordered.Activiteit.EventType == EventType.DinnerInHaarlem)
-                                {
-                                    Dinner dinner = Model.Dinners.Find(x => x.ActivityId == ordered.Activiteit.ActivityId);
-                                    <td class="basket-table-name">@dinner.Restaurant.Naam</td>
-                                }
-                                else if (ordered.Activiteit.EventType == EventType.TalkingHaarlem)
-                                {
-                                    Talking talking = Model.Talks.Find(x => x.ActivityId == ordered.Activiteit.ActivityId);
-                                    <td class="basket-table-name">@talking.Talk.Naam</td>
-                                }
-                                else if (ordered.Activiteit.EventType == EventType.HistoricHaarlem)
-                                {
-                                    Historic historic = Model.Historics.Find(x => x.ActivityId == ordered.Activiteit.ActivityId);
-                                    // Moet nog checken en weergeven of het een groepsticket is
-                                    <td class="basket-table-name">Historic Tour in @historic.Guide.LanguageName by @historic.Guide.GuideName</td>
-                                }
+                        @{
+                            float totalPrice = 0;
+                            foreach (BesteldeActiviteit ordered in Model.Order)
+                            {
+                                totalPrice += ordered.Price;
+                                <tr>
+                                    <td class="basket-table-tickets">@ordered.TotalBoughtTickets</td>
+                                    @if (ordered.Activiteit.EventType == EventType.JazzPatronaat)
+                                    {
+                                        Jazz jazz = Model.Jazzs.Find(x => x.ActivityId == ordered.Activiteit.ActivityId);
+                                        <td class="basket-table-name">@jazz.artist.ArtistName</td>
+                                    }
+                                    else if (ordered.Activiteit.EventType == EventType.DinnerInHaarlem)
+                                    {
+                                        Dinner dinner = Model.Dinners.Find(x => x.ActivityId == ordered.Activiteit.ActivityId);
+                                        <td class="basket-table-name">@dinner.Restaurant.Naam</td>
+                                    }
+                                    else if (ordered.Activiteit.EventType == EventType.TalkingHaarlem)
+                                    {
+                                        Talking talking = Model.Talks.Find(x => x.ActivityId == ordered.Activiteit.ActivityId);
+                                        <td class="basket-table-name">@talking.Talk.Naam</td>
+                                    }
+                                    else if (ordered.Activiteit.EventType == EventType.HistoricHaarlem)
+                                    {
+                                        Historic historic = Model.Historics.Find(x => x.ActivityId == ordered.Activiteit.ActivityId);
+                                        // Moet nog checken en weergeven of het een groepsticket is
+                                        <td class="basket-table-name">Historic Tour in @historic.Guide.LanguageName by @historic.Guide.GuideName</td>
+                                    }
 
-                                <td class="basket-table-time">@ordered.Activiteit.StartSession.ToString("ddd dd/MM/yyyy HH:mm") - @ordered.Activiteit.EndSession.ToString("ddd dd/MM/yyyy HH:mm")</td>
-                                <td class="basket-table-price">€@ordered.Price.ToString("0.00")</td>
-                                <td class="basket-table-remove"><a href=@Url.Action("RemoveFromBasketById", "Home", new { id = ordered.Activiteit.ActivityId })><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
-                            </tr>
+                                    <td class="basket-table-time">@ordered.Activiteit.StartSession.ToString("ddd dd/MM/yyyy HH:mm") - @ordered.Activiteit.EndSession.ToString("ddd dd/MM/yyyy HH:mm")</td>
+                                    <td class="basket-table-price">€@ordered.Price.ToString("0.00")</td>
+                                    <td class="basket-table-remove"><a href=@Url.Action("RemoveFromBasketById", "Home", new { id = ordered.Activiteit.ActivityId })><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                                </tr>
+                            }
                         }
+                        <tr>
+                            <td class="basket-table-tickets"></td>
+                            <td class="basket-table-name"></td>
+                            <td class="basket-table-totalprice">Total:</td>
+                            <td class="basket-table-price">€@totalPrice.ToString("0.00")</td>
+                            <td class="basket-table-remove"></td>
+                        </tr>
                     </table>
                     <button class="btn btn-black basket-button" type="button" onclick="location.href='@Url.Action("Reservation", "Home")'">Next step</button>
                 </div>

@@ -259,9 +259,9 @@
     <Compile Include="Migrations\201801231027574_mig28.Designer.cs">
       <DependentUpon>201801231027574_mig28.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801231547498_mig29.cs" />
-    <Compile Include="Migrations\201801231547498_mig29.Designer.cs">
-      <DependentUpon>201801231547498_mig29.cs</DependentUpon>
+    <Compile Include="Migrations\201801252139534_mig29.cs" />
+    <Compile Include="Migrations\201801252139534_mig29.Designer.cs">
+      <DependentUpon>201801252139534_mig29.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
@@ -390,7 +390,6 @@
     <Content Include="Views\Admin\_UpdateGuidePartial.cshtml" />
     <Content Include="Views\Admin\TicketSalesInformation.cshtml" />
     <Content Include="Views\Admin\AnswerContactmessage.cshtml" />
-    <Content Include="Views\Home\Completed.cshtml" />
     <Content Include="Views\Admin\CheckInterviewQuestions.cshtml" />
     <Content Include="Views\Admin\_AnswerQuestionPartial.cshtml" />
     <Content Include="Views\Admin\_AccountPartial.cshtml" />
@@ -498,8 +497,8 @@
     <EmbeddedResource Include="Migrations\201801231027574_mig28.resx">
       <DependentUpon>201801231027574_mig28.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801231547498_mig29.resx">
-      <DependentUpon>201801231547498_mig29.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801252139534_mig29.resx">
+      <DependentUpon>201801252139534_mig29.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

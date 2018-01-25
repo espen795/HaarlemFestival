@@ -152,6 +152,7 @@ namespace HaarlemFestival.Controllers
             if ((List<BesteldeActiviteit>)Session["current_order"] != null)
             {
                 Bestelling = (List<BesteldeActiviteit>)Session["current_order"];
+                Session["current_order"] = null;
             }
 
             agendaView.Days = new List<Day>();
@@ -179,10 +180,6 @@ namespace HaarlemFestival.Controllers
         {
             if (ModelState.IsValid)
             {
-                homerepository.AddKlant(reservation.Klant);
-
-                reservation = homerepository.AddReservation(reservation);
-
                 List<BesteldeActiviteit> Bestelling = new List<BesteldeActiviteit>();
 
                 if ((List<BesteldeActiviteit>)Session["current_order"] != null)
@@ -190,10 +187,18 @@ namespace HaarlemFestival.Controllers
                     Bestelling = (List<BesteldeActiviteit>)Session["current_order"];
                 }
 
+                foreach( BesteldeActiviteit besteldeactiviteit in Bestelling)
+                {
+                    reservation.TotaalPrijs += besteldeactiviteit.Price;
+                }
+
+                homerepository.AddKlant(reservation.Klant);
+
+                reservation = homerepository.AddReservation(reservation);
+                
                 foreach (BesteldeActiviteit besteldeactiviteit in Bestelling)
                 {
-
-                    besteldeactiviteit.Reservering_ReserveringId = reservation.ReserveringId;
+                    besteldeactiviteit.Reservering = reservation;
 
                     // Kijken of een bestelde activiteit een Jazz Passe- partout is
                     if (besteldeactiviteit.Activiteit.EventType == 0 && besteldeactiviteit.Activiteit.AlternativePrice == 1 || besteldeactiviteit.Activiteit.AlternativePrice == 2)
@@ -247,17 +252,10 @@ namespace HaarlemFestival.Controllers
 
                     homerepository.AddBesteldeActiviteit(besteldeactiviteit);
                 }
-                return RedirectToAction("Completed");
+                return RedirectToAction("Agenda");
             }
 
             return View("Reservation", reservation);
-        }
-
-        public ActionResult Completed()
-        {
-            ViewBag.Message = "Thanks for booking.";
-
-            return View();
         }
     }
 }
