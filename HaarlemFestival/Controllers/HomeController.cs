@@ -229,10 +229,25 @@ namespace HaarlemFestival.Controllers
                         homerepository.ChangeTickets(besteldeactiviteit);
                     }
 
+                    // Kijken of activiteit TalkingHaarlem is en of er een vraag is ingevuld
+                    if (besteldeactiviteit.Activiteit.EventType == EventType.TalkingHaarlem && besteldeactiviteit.Opmerking != null)
+                    {
+                        // Split de opmerking in een array twee substrings. Vooraan staat de receiver. Daarna de vraag.
+                        String[] questionSubstrings = besteldeactiviteit.Opmerking.Split(new char[] { ':' }, 2);
+
+                        // Maak vraag aan en vul in
+                        InterviewQuestion question = new InterviewQuestion()
+                        {
+                            Receiver = questionSubstrings[0],
+                            Content = questionSubstrings[1]
+                        };
+                        // Opslaan in db
+                        talkingRepository.SaveQuestionToDB(question);
+                    }
 
                     homerepository.AddBesteldeActiviteit(besteldeactiviteit);
-                    return RedirectToAction("Completed");
                 }
+                return RedirectToAction("Completed");
             }
 
             return View("Reservation", reservation);

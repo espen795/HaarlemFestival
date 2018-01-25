@@ -58,7 +58,10 @@ namespace HaarlemFestival.Controllers
                 {
                     activity.TotalBoughtTickets = activity.Aantal;
                     // Interviewvraag in opmerking stoppen
-                    activity.Opmerking = string.Format($"{activiteit.Talkings[i].QuestionReceiver}: {activity.Opmerking}");
+                    if (activiteit.Talkings[i].QuestionReceiver != null && activity.Opmerking != null)
+                        activity.Opmerking = string.Format($"{activiteit.Talkings[i].QuestionReceiver}: {activity.Opmerking}");
+                    else
+                        activity.Opmerking = null;
                     // talk ophalen gebaseerd op het id
                     activity.Activiteit = talkingRepository.GetOrderTalkById(activity.Activiteit.ActivityId);
                     
