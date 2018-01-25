@@ -922,9 +922,9 @@ namespace HaarlemFestival.Controllers
 
         public JsonResult DownloadTicketSalesInformation()
         {
-            string saveLocation = CreateExcelFile();
+            string saveLocation = CreateExcelFile(); // Actie om een Excel Bestand aan te maken en de locatie van het bestand terug te sturen
 
-            return Json(new { location = saveLocation });
+            return Json(new { location = saveLocation }); // De locatie van het aangemaakte bestand terugsturen
         }
 
         private string CreateExcelFile()
@@ -934,7 +934,7 @@ namespace HaarlemFestival.Controllers
 
             Application excel = new Application
             {
-                // for making Excel visible
+                // Excel niet zichtbaar maken
                 Visible = false,
                 DisplayAlerts = false
             };
@@ -957,18 +957,19 @@ namespace HaarlemFestival.Controllers
             // Bestand sluiten.
             data.Close();
 
-            return saveLocation;
+            return saveLocation; // De bestandslocatie terugsturen
         }
 
         private Workbook GetGeneralWorksheet(Workbook data, List<Activity> activities)
         {
-            Worksheet generalSheet = (Worksheet)data.Worksheets.Add();
-            generalSheet.Name = "General Information";
+            Worksheet generalSheet = (Worksheet)data.Worksheets.Add(); // Nieuwe Sheet aan het bestand toevoegen
+            generalSheet.Name = "General Information"; // Naam aan de sheet geven
 
-            var heading = generalSheet.Range[generalSheet.Cells[1, 1], generalSheet.Cells[1, 5]];
-            heading.Interior.Color = Color.Red;
-            heading.Font.Color = Color.White;
+            var heading = generalSheet.Range[generalSheet.Cells[1, 1], generalSheet.Cells[1, 5]]; // De headers van het document selecteren
+            heading.Interior.Color = Color.Red; // Rode achtergrondkleur aan de header geven
+            heading.Font.Color = Color.White; // Witte tekstkleur aan de header geven
 
+            // Heading text neerzetten
             generalSheet.Cells[1, 1] = "Event";
             generalSheet.Cells[1, 2] = "Total Tickets/Seats";
             generalSheet.Cells[1, 3] = "Available Tickets/Seats";
@@ -977,7 +978,9 @@ namespace HaarlemFestival.Controllers
 
             var enums = Enum.GetValues(typeof(EventType)).Cast<EventType>();
 
-            int rowCount = 2;
+            int rowCount = 2; // int om aan te geven vanaf welke rij de data moet beginnen
+
+            // Data per evenement neerzetten
             foreach (EventType type in enums)
             {
                 string eventType = "";
@@ -1030,20 +1033,21 @@ namespace HaarlemFestival.Controllers
                 rowCount++;
             }
 
-            generalSheet.Columns.AutoFit();
+            generalSheet.Columns.AutoFit(); // Ervoor zorgen dat de informatie in de sheet goed past in de vakjes
 
-            return data;
+            return data; // Excelbestand terugsturen
         }
 
         private Workbook GetJazzWorksheet(Workbook data, List<Activity> activities)
         {
-            Worksheet jazzSheet = (Worksheet)data.Worksheets.Add();
-            jazzSheet.Name = "Jazz@Patronaat";
+            Worksheet jazzSheet = (Worksheet)data.Worksheets.Add(); // Nieuwe Sheet aan het bestand toevoegen
+            jazzSheet.Name = "Jazz@Patronaat"; // Naam aan de sheet geven
 
-            var heading = jazzSheet.Range[jazzSheet.Cells[1, 1], jazzSheet.Cells[1, 8]];
-            heading.Interior.Color = Color.Red;
-            heading.Font.Color = Color.White;
+            var heading = jazzSheet.Range[jazzSheet.Cells[1, 1], jazzSheet.Cells[1, 8]]; // De headers van het document selecteren
+            heading.Interior.Color = Color.Red; // Rode achtergrondkleur aan de header geven
+            heading.Font.Color = Color.White; // Witte tekstkleur aan de header geven
 
+            // Heading text neerzetten
             jazzSheet.Cells[1, 1] = "Band Name";
             jazzSheet.Cells[1, 2] = "Date";
             jazzSheet.Cells[1, 3] = "Time";
@@ -1053,7 +1057,9 @@ namespace HaarlemFestival.Controllers
             jazzSheet.Cells[1, 7] = "Price";
             jazzSheet.Cells[1, 8] = "Income";
 
-            int rowCount = 2;
+            int rowCount = 2; // int om aan te geven vanaf welke rij de data moet beginnen
+
+            // Data toevoegen aan de sheet
             foreach (Jazz activity in activities.OfType<Jazz>())
             {
                 jazzSheet.Cells[rowCount, 1] = activity.artist.ArtistName;
@@ -1067,20 +1073,21 @@ namespace HaarlemFestival.Controllers
                 rowCount++;
             }
 
-            jazzSheet.Columns.AutoFit();
+            jazzSheet.Columns.AutoFit(); // Ervoor zorgen dat de informatie in de sheet goed past in de vakjes
 
-            return data;
+            return data; // Excelbestand terugsturen
         }
 
         private Workbook GetDinnerWorksheet(Workbook data, List<Activity> activities)
         {
-            Worksheet dinnerSheet = (Worksheet)data.Worksheets.Add();
-            dinnerSheet.Name = "Dinner in Haarlem";
+            Worksheet dinnerSheet = (Worksheet)data.Worksheets.Add(); // Nieuwe Sheet aan het bestand toevoegen
+            dinnerSheet.Name = "Dinner in Haarlem"; // Naam aan de sheet geven
 
-            var heading = dinnerSheet.Range[dinnerSheet.Cells[1, 1], dinnerSheet.Cells[1, 8]];
-            heading.Interior.Color = Color.Red;
-            heading.Font.Color = Color.White;
+            var heading = dinnerSheet.Range[dinnerSheet.Cells[1, 1], dinnerSheet.Cells[1, 8]]; // De headers van het document selecteren
+            heading.Interior.Color = Color.Red; // Rode achtergrondkleur aan de header geven
+            heading.Font.Color = Color.White; // Witte tekstkleur aan de header geven
 
+            // Heading text neerzetten
             dinnerSheet.Cells[1, 1] = "Restaurant";
             dinnerSheet.Cells[1, 2] = "Date";
             dinnerSheet.Cells[1, 3] = "Time";
@@ -1090,7 +1097,9 @@ namespace HaarlemFestival.Controllers
             dinnerSheet.Cells[1, 7] = "Price";
             dinnerSheet.Cells[1, 8] = "Income";
 
-            int rowCount = 2;
+            int rowCount = 2; // int om aan te geven vanaf welke rij de data moet beginnen
+
+            // Data toevoegen aan de sheet
             foreach (Dinner activity in activities.OfType<Dinner>())
             {
                 dinnerSheet.Cells[rowCount, 1] = activity.Restaurant.Naam;
@@ -1104,20 +1113,21 @@ namespace HaarlemFestival.Controllers
                 rowCount++;
             }
 
-            dinnerSheet.Columns.AutoFit();
+            dinnerSheet.Columns.AutoFit(); // Ervoor zorgen dat de informatie in de sheet goed past in de vakjes
 
-            return data;
+            return data; // Excelbestand terugsturen
         }
 
         private Workbook GetTalkingWorksheet(Workbook data, List<Activity> activities)
         {
-            Worksheet talkingSheet = (Worksheet)data.Worksheets.Add();
-            talkingSheet.Name = "Talking Haarlem";
+            Worksheet talkingSheet = (Worksheet)data.Worksheets.Add(); // Nieuwe Sheet aan het bestand toevoegen
+            talkingSheet.Name = "Talking Haarlem"; // Naam aan de sheet geven
 
-            var heading = talkingSheet.Range[talkingSheet.Cells[1, 1], talkingSheet.Cells[1, 8]];
-            heading.Interior.Color = Color.Red;
-            heading.Font.Color = Color.White;
+            var heading = talkingSheet.Range[talkingSheet.Cells[1, 1], talkingSheet.Cells[1, 8]]; // De headers van het document selecteren
+            heading.Interior.Color = Color.Red; // Rode achtergrondkleur aan de header geven
+            heading.Font.Color = Color.White; // Witte tekstkleur aan de header geven
 
+            // Heading text neerzetten
             talkingSheet.Cells[1, 1] = "Name";
             talkingSheet.Cells[1, 2] = "Date";
             talkingSheet.Cells[1, 3] = "Time";
@@ -1127,7 +1137,9 @@ namespace HaarlemFestival.Controllers
             talkingSheet.Cells[1, 7] = "Price";
             talkingSheet.Cells[1, 8] = "Income";
 
-            int rowCount = 2;
+            int rowCount = 2; // int om aan te geven vanaf welke rij de data moet beginnen
+
+            // Data toevoegen aan de sheet
             foreach (Talking activity in activities.OfType<Talking>())
             {
                 talkingSheet.Cells[rowCount, 1] = activity.Talk.Naam;
@@ -1141,20 +1153,21 @@ namespace HaarlemFestival.Controllers
                 rowCount++;
             }
 
-            talkingSheet.Columns.AutoFit();
+            talkingSheet.Columns.AutoFit(); // Ervoor zorgen dat de informatie in de sheet goed past in de vakjes
 
-            return data;
+            return data; // Excelbestand terugsturen
         }
 
         private Workbook GetHistoricWorksheet(Workbook data, List<Activity> activities)
         {
-            Worksheet historicSheet = (Worksheet)data.Worksheets.Add();
-            historicSheet.Name = "Historic Haarlem";
+            Worksheet historicSheet = (Worksheet)data.Worksheets.Add(); // Nieuwe Sheet aan het bestand toevoegen
+            historicSheet.Name = "Historic Haarlem"; // Naam aan de sheet geven
 
-            var heading = historicSheet.Range[historicSheet.Cells[1, 1], historicSheet.Cells[1, 10]];
-            heading.Interior.Color = Color.Red;
-            heading.Font.Color = Color.White;
+            var heading = historicSheet.Range[historicSheet.Cells[1, 1], historicSheet.Cells[1, 10]]; // De headers van het document selecteren
+            heading.Interior.Color = Color.Red; // Rode achtergrondkleur aan de header geven
+            heading.Font.Color = Color.White; // Witte tekstkleur aan de header geven
 
+            // Heading text neerzetten
             historicSheet.Cells[1, 1] = "Date";
             historicSheet.Cells[1, 2] = "Time";
             historicSheet.Cells[1, 3] = "Guide";
@@ -1166,7 +1179,9 @@ namespace HaarlemFestival.Controllers
             historicSheet.Cells[1, 9] = "Group Price";
             historicSheet.Cells[1, 10] = "Income";
 
-            int rowCount = 2;
+            int rowCount = 2; // int om aan te geven vanaf welke rij de data moet beginnen
+
+            // Data toevoegen aan de sheet
             foreach (Historic activity in activities.OfType<Historic>())
             {
                 historicSheet.Cells[rowCount, 1] = activity.StartSession.ToString("dddd dd-MM-yyyy");
@@ -1182,9 +1197,9 @@ namespace HaarlemFestival.Controllers
                 rowCount++;
             }
 
-            historicSheet.Columns.AutoFit();
+            historicSheet.Columns.AutoFit(); // Ervoor zorgen dat de informatie in de sheet goed past in de vakjes
 
-            return data;
+            return data; // Excelbestand terugsturen
         }
         #endregion
 
@@ -1238,11 +1253,11 @@ namespace HaarlemFestival.Controllers
         {
             if (ModelState.IsValid)
             {
-                ContactMessage message = adminRepository.GetContactMessage(id);
-                message.Answer = collector["Answer"].ToString();
-                message.Answered = true;
+                ContactMessage message = adminRepository.GetContactMessage(id); // Het ingestuurde bericht uit de database halen
+                message.Answer = collector["Answer"].ToString(); // Het antwoord aan het ingestuurde bericht koppelen
+                message.Answered = true; // Neerzetten dat het bericht beantwoord is.
                 Session["Question_Answered"] = true;
-                adminRepository.UpdateContactMessage(message);
+                adminRepository.UpdateContactMessage(message); // Het bericht in de Database updaten.
             }
 
             return RedirectToAction("AnswerContactMessage");
@@ -1253,13 +1268,14 @@ namespace HaarlemFestival.Controllers
             bool authorized = false;
             Account account = (Account)Session["loggedin_account"];
 
+            // Voor elke rol die een bepaalde actie mag uitvoeren
             foreach(string role in roles)
             {
-                if (role.ToLower() == account.Role.RoleName.ToLower())
+                if (role.ToLower() == account.Role.RoleName.ToLower()) // Als de ingelogde gebruiker de rol heeft
                     authorized = true;
             }
 
-            if (!authorized)
+            if (!authorized) // Als de gebruiker niet Geautoriseerd is.
             {
                 Session["NotAuthorized"] = true;
             }
