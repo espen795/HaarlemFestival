@@ -9,6 +9,7 @@ namespace HaarlemFestival.Models
     {
         public int KlantId { get; set; }
 
+        [Display(Name = "Name")]
         [Required(ErrorMessage = "Please enter your full name.")]
         public string Naam { get; set; }
 
@@ -16,6 +17,7 @@ namespace HaarlemFestival.Models
         [RegularExpression("(^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$)", ErrorMessage = "Please enter a valid email address.")]
         public string Email { get; set; }
 
+        [Display(Name = "Payment Method")]
         [Required(ErrorMessage = "Please select a payment method.")]
         public string BetaalMethode { get; set; }
     }
