@@ -128,7 +128,7 @@
                                                                 {
                                                                     Talking talk = Model.Talks.Find(x => x.ActivityId == besteldeactiviteit.Activiteit.ActivityId);
 
-                                                                    <div class="agenda-activity @besteldeactiviteit.Activiteit.EventType">@talk.Talk.Naam</div>
+                                                                    <div class="agenda-activity @besteldeactiviteit.Activiteit.EventType" onclick="SwitchActivity(@talk.ActivityId)">@talk.Talk.Naam</div>
                                                                 }
                                                                 else if (besteldeactiviteit.Activiteit.EventType == EventType.HistoricHaarlem)
                                                                 {
@@ -214,13 +214,42 @@
                                             </table>
                                         </div>
                                     }
+                                    // Talking Haarlem
                                     else if (besteldeactiviteit.Activiteit.EventType == EventType.TalkingHaarlem)
                                     {
-
                                         Talking talk = Model.Talks.Find(x => x.ActivityId == besteldeactiviteit.Activiteit.ActivityId);
 
-                                        <div class="activities" id="@besteldeactiviteit.Activiteit.ActivityId" hidden>
-
+                                        <div class="activities" id="@talk.ActivityId" hidden>
+                                            <div class="agenda-image-container">
+                                                <img src="/images/Talking/@talk.Talk.Person1IMG" />
+                                            </div>
+                                            <h4>@talk.Talk.Naam</h4>
+                                            <table>
+                                                <tr>
+                                                    <td>Start-time:</td>
+                                                    <td>@talk.StartSession.TimeOfDay.ToString(@"hh\:mm")</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>End-time:</td>
+                                                    <td>@talk.EndSession.TimeOfDay.ToString(@"hh\:mm")</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Contact:</td>
+                                                    <td>@talk.Phonenumber</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Location:</td>
+                                                    <td>@talk.Address</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Your question: </td>
+                                                    @{ 
+                                                        // Split de opmerking op in substrings. De ontvanger staat sws vooraan vanwege formatting, dus gezet op [0]. De new char[] is zodat hij de goede constructor pakt volgens mij.
+                                                        String[] questionSubstrings = besteldeactiviteit.Opmerking.Split(new char[] { ':' }, 2 );
+                                                     }
+                                                    <td>@questionSubstrings[0], @questionSubstrings[1]</td>
+                                                </tr>
+                                            </table>
                                         </div>
                                     }
                                     else if (besteldeactiviteit.Activiteit.EventType == EventType.HistoricHaarlem)
