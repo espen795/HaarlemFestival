@@ -10,7 +10,22 @@
 }
 
 <div class="event-banner"></div>
+@{
+    if (Session["ReservationError"] != null)
+    {
+        if ((bool)Session["ReservationError"])
+        {
+            <div class="basket-alert">
+                <div class="alert alert-danger alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <h3>Failure!</h3>You have entered wrong details.
+                </div>
+            </div>
+        }
 
+        Session["ReservationError"] = false;
+    }
+}
 <div class="event container">
     <div class="row">
         <div class="event-section-3">
@@ -25,17 +40,27 @@
                 PaymentMethod.Add("Mastercard / Visa");
 
                 // Personal information
-                <div class="col-md-6 reservation">
-                    <h4>Please fill in the fields below</h4>
-                    <p>Please provide the following information so we can book the ticket on your name and mail them to your e-mail address.</p>
+            <div class="col-md-6 reservation">
+                <h4>Please fill in the fields below</h4>
+                <p>Please provide the following information so we can book the ticket on your name and mail them to your e-mail address.</p>
 
-                    @Html.LabelFor(m => Model.Klant.Naam)
-                    @Html.TextBoxFor(m => Model.Klant.Naam, new { @type = "text" })
-                    @Html.LabelFor(m => Model.Klant.Email)
-                    @Html.TextBoxFor(m => Model.Klant.Email, new { @type = "email" })
-
-                    <button class="btn btn-black r back" type="button" onclick="location.href='@Url.Action("Basket", "Home")'">Back to basket</button>
+                
+                @if (ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Count() != 0) // Als de ModelState Invalid is.
+                {
+                <div class="col-md-12">
+                    <div id="bootstrapAlert" class="alert alert-danger alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <span class="klantError">@Html.ValidationSummary()</span>
+                    </div>
                 </div>
+                }
+
+                @Html.LabelFor(m => Model.Klant.Naam)
+                @Html.TextBoxFor(m => Model.Klant.Naam, new { @type = "text" })
+                @Html.LabelFor(m => Model.Klant.Email)
+                @Html.TextBoxFor(m => Model.Klant.Email, new { @type = "email" })
+                <button class="btn btn-black r back" type="button" onclick="location.href='@Url.Action("Basket", "Home")'">Back to basket</button>
+            </div>
 
                 // Payment information
                 <div class="col-md-6 reservation right">
