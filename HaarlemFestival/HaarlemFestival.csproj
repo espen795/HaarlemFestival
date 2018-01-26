@@ -330,6 +330,7 @@
     <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\ChartFunctions.js" />
     <Content Include="Scripts\FilterTableData.js" />
+    <Content Include="Scripts\AlertTimeout.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
