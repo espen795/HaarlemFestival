@@ -9,6 +9,7 @@
 @{
     if (Session["added_to_basket"] != null)
     {
+        // Added to basket popup
         if ((bool)Session["added_to_basket"])
         {
             <div class="basket-alert">
@@ -24,22 +25,25 @@
 }
 
 <script type="text/javascript">
-    function CalcPriceAndTicketCheck(nummer, availableTickets) {
-        // Krijg de waardes van de input boxes
-        var tickets = document.getElementById("ticket" + nummer).value;
-        var grouptickets = document.getElementById("groupticket" + nummer).value;
+    function CalcPriceAndTicketCheck(number, availableTickets) {
+        // Getting the values from the input boxes
+        var tickets = document.getElementById("ticket" + number).value;
+        var grouptickets = document.getElementById("groupticket" + number).value;
 
-        // De prijs ophalen uit het model en omzetten naar een JS format
+        // Getting the price, and converting to JS format
         var price = parseFloat("@Model.Tours[0].Price".replace(",", "."));
         var groupprice = parseFloat("@Model.Tours[0].AlternativePrice".replace(",", "."));
-        
-        // Controleren of er niet te veel of te weinig tickets gekocht worden
-        // Dit is het totaal van zowel de groepstickets als de normale tickets
+
+        // Checking if ordered tickets not to high or to low
+        // This activates the bootstrap popup
         if (tickets < 0 || tickets > (availableTickets - (grouptickets * 4)) || grouptickets < 0 || grouptickets > Math.floor((availableTickets - tickets) / 4)) {
+            // Ordering more than 0 tickets?
             if (tickets < 0 || grouptickets < 0) {
                 $("#TicketAlert").modal();
                 document.getElementById("text").innerHTML = ("<p>You inserted <b> " + tickets + " </b> tickets.</p><p>Please insert a number above 0.</p>");
             }
+
+                // Cant order more than total available tickets
             else if (tickets > (availableTickets - (grouptickets * 4))) {
                 $("#TicketAlert").modal();
                 document.getElementById("text").innerHTML = ("<p>You inserted <b> " + (+tickets + (grouptickets * 4)) + " </b> tickets, but there are only <b>" + availableTickets + "</b> left.</p><p>Please insert <b>" + availableTickets + "</b> or lower.</p>");
@@ -50,20 +54,39 @@
             }
             tickets = 0;
             grouptickets = 0;
-            document.getElementById("ticket" + nummer).value = ("0");
-            document.getElementById("groupticket" + nummer).value = ("0");
+            document.getElementById("ticket" + number).value = ("0");
+            document.getElementById("groupticket" + number).value = ("0");
         }
 
-        // Nieuwe totaal prijs berekenen
+        // Calculating new total price
         var totalprice = ((tickets * price) + (grouptickets * groupprice));
 
-        // De waarde in de totalprice kolom vervangen door de berekende waarde
-        document.getElementById("totalprice" + nummer).innerHTML = ("€ " + (totalprice.toFixed(2)).replace(".", ","));
+        // Replacing the total price with the new value
+        document.getElementById("totalprice" + number).innerHTML = ("€ " + (totalprice.toFixed(2)).replace(".", ","));
+        // Total price in hidden input, used for total price
+        $("input#totalprice" + number).val(totalprice);
+
+        CalcTotalPrice();
     }
 
+    // Fadeout for "added to basket"
     setTimeout(function () {
         $('.basket-alert').fadeOut();
     }, 15000);
+
+    function CalcTotalPrice() {
+        // Getting total amount of events
+        var items = $(".priceAllHistoric").length;
+        var prijs = 0;
+
+        // Loop through all hidden inputs
+        for (var p = 0; p < items; p++) {
+            prijs = +prijs + +$("input#totalprice" + p).val();
+        }
+
+        // Updating new total price
+        $("p#priceAllHistoric").html("€ " + (prijs.toFixed(2)).replace(".", ","));
+    }
 
 </script>
 
@@ -105,7 +128,6 @@
         </div>
 
         <!-- Content -->
-
         <ul class="nav nav-tabs">
             @foreach (Day day in Model.Days)
             {
@@ -120,12 +142,13 @@
             }
         </ul>
 
-        @{ int i = 0;
-            List<BesteldeActiviteit> activiteit = new List<BesteldeActiviteit>();
+        @{
+            // Declaring variables
+            int i = 0;
             string idtickets;
             string idgrouptickets;
             string totalprice;
-
+            string tabclass;
             int availableTickets;
         }
 
@@ -135,11 +158,13 @@
                 @{
                     foreach (Day day in Model.Days)
                     {
-                        string tabclass = "tab-pane fade historic-tickets";
-
                         if (day == Model.Days[0])
                         {
                             tabclass = "tab-pane fade in active historic-tickets";
+                        }
+                        else
+                        {
+                            tabclass = "tab-pane fade historic-tickets";
                         }
                         <div id="Day-@day.DayId" class="@tabclass">
                             <div class="table table-hover table-responsive ticket-table">
@@ -155,50 +180,57 @@
                                         <th>Total price</th>
                                     </tr>
 
-                                    @foreach (Historic tour in Model.Tours)
-                                    {
-                                        if (tour.Day == day)
+                                    <tbody>
+                                        @foreach (Historic tour in Model.Tours)
                                         {
-                                            Model.Reservering.Add(new BesteldeActiviteit());
+                                            if (tour.Day == day)
+                                            {
+                                                Model.Reservering.Add(new BesteldeActiviteit());
 
-                                            // De unieke id's aanmaken per rij
-                                            idtickets = String.Format("ticket{0}", i);
-                                            idgrouptickets = String.Format("groupticket{0}", i);
-                                            totalprice = String.Format("totalprice{0}", i);
+                                                // Creating unieke id's per row
+                                                idtickets = String.Format("ticket{0}", i);
+                                                idgrouptickets = String.Format("groupticket{0}", i);
+                                                totalprice = String.Format("totalprice{0}", i);
 
-                                            availableTickets = tour.TotalTickets - tour.BoughtTickets;
+                                                availableTickets = tour.TotalTickets - tour.BoughtTickets;
 
-                                            // De tabel aanmaken
-                                            <tr>
-                                                <td class="hidden"><input name="Reservering[@i].Activiteit.ActivityId" value="@tour.ActivityId" class="hidden" /></td>
-                                                <td class="ticketsInput" onchange="CalcPriceAndTicketCheck(@i, @availableTickets);">@Html.TextBoxFor(m => Model.Reservering[i].Aantal, new { @type = "number", @min = 0, @id = idtickets })</td>
-                                                <td class="ticketsInput" onchange="CalcPriceAndTicketCheck(@i, @availableTickets);">@Html.TextBoxFor(m => Model.Reservering[i].AantalAlternatief, new { @type = "number", @min = 0, @id = idgrouptickets })</td>
-                                                <td>@availableTickets tickets</td>
-                                                <td>@tour.Guide.LanguageName</td>
-                                                <td>@tour.Guide.GuideName</td>
-                                                <td>@tour.StartSession.TimeOfDay.ToString(@"hh\:mm")</td>
-                                                <td><p id=@totalprice>€ -</p></td>
-                                            </tr>
-                                            i++;
+                                                // Filling the table
+                                                <tr>
+                                                    <td class="hidden"><input name="Reservering[@i].Activiteit.ActivityId" value="@tour.ActivityId" class="hidden" /></td>
+                                                    <td class="ticketsInput" onchange="CalcPriceAndTicketCheck(@i, @availableTickets);">@Html.TextBoxFor(m => Model.Reservering[i].Aantal, new { @type = "number", @min = 0, @id = idtickets })</td>
+                                                    <td class="ticketsInput" onchange="CalcPriceAndTicketCheck(@i, @availableTickets);">@Html.TextBoxFor(m => Model.Reservering[i].AantalAlternatief, new { @type = "number", @min = 0, @id = idgrouptickets })</td>
+                                                    <td>@availableTickets tickets</td>
+                                                    <td>@tour.Guide.LanguageName</td>
+                                                    <td>@tour.Guide.GuideName</td>
+                                                    <td>@tour.StartSession.TimeOfDay.ToString(@"hh\:mm")</td>
+                                                    <td><p id=@totalprice>€ 0,00</p><input type="hidden" id="@totalprice" class="priceAllHistoric" /></td>
+                                                </tr>
+                                                i++;
+                                            }
                                         }
-                                    }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><p id="priceAllHistoric">€ 0,00</p></td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
 
-                                <br />
-                                @foreach (Historic tour in Model.Tours)
-                                {
-                                    if (tour.Day == day)
-                                    {
-                                        <p>These are the available tours on @tour.Day.Naam</p>
-                                        break;
-                                    }
-                                }
+                                <p>These are the available tours on @day.Naam</p>
                             </div>
                         </div>
                     }
                 }
 
-                <br /><br />
+                <input type="submit" value="Book" class="btn btn-book btn-reservation" />
+
+                <br />
                 <div class="historic extra-info">
                     <h3>Ticket information</h3>
                     <p>The group will consist of 12 participants and one guide. Participants must at least be 12 years old and must be able to walk the entire route (no strollers are allowed).</p>
@@ -207,14 +239,11 @@
                     <br />
                 </div>
             </div>
-
-            <input type="submit" value="Book" class="btn btn-book btn-reservation" />
         }
-
     </div>
 </div>
 
-<!-- BOOTSTRAP MODALS VOOR BESCHIKBARE TICKETS EN NEGATIEVE AANTALLEN -->
+<!-- BOOTSTRAP MODALS FOR NEGATIVE OR TO MUCH TICKETS -->
 <div class="modal fade" id="TicketAlert" role="dialog">
     <div class="modal-dialog">
 

@@ -52,8 +52,8 @@
 
             else
             {
-                <div class="basket-content">
-                    <table class="table table-hover table-responsive basket-table">
+                <div class="basket-content ticket-table">
+                    <table class="table table-hover table-responsive">
                         <tr>
                             <th class="basket-table-tickets-head">Tickets</th>
                             <th class="basket-table-name-head">Event</th>
@@ -86,11 +86,18 @@
                                     else if (ordered.Activiteit.EventType == EventType.HistoricHaarlem)
                                     {
                                         Historic historic = Model.Historics.Find(x => x.ActivityId == ordered.Activiteit.ActivityId);
-                                        // Moet nog checken en weergeven of het een groepsticket is
                                         <td class="basket-table-name">Historic Tour in @historic.Guide.LanguageName by @historic.Guide.GuideName</td>
                                     }
 
-                                    <td class="basket-table-time">@ordered.Activiteit.StartSession.ToString("ddd dd/MM/yyyy HH:mm") - @ordered.Activiteit.EndSession.ToString("ddd dd/MM/yyyy HH:mm")</td>
+                                    @if (ordered.Activiteit.StartSession.Day != ordered.Activiteit.EndSession.Day)
+                                    {
+                                        <td class="basket-table-time">@ordered.Activiteit.StartSession.ToString("ddd dd/MM/yyyy") - @ordered.Activiteit.EndSession.ToString("ddd dd/MM/yyyy")</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="basket-table-time">@ordered.Activiteit.StartSession.ToString("ddd dd/MM/yyyy HH:mm") - @ordered.Activiteit.EndSession.ToString("HH:mm")</td>
+                                    }
+
                                     <td class="basket-table-price">€@ordered.Price.ToString("0.00")</td>
                                     <td class="basket-table-remove"><a href=@Url.Action("RemoveFromBasketById", "Home", new { id = ordered.Activiteit.ActivityId })><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
                                 </tr>
@@ -106,7 +113,7 @@
                     </table>
                     <button class="btn btn-black basket-button" type="button" onclick="location.href='@Url.Action("Reservation", "Home")'">Next step</button>
                 </div>
-            }
+                            }
         </div>
         <div class="event-section-4">
             <div class="basket-crossselling">
