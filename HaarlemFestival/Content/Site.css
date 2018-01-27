@@ -29,35 +29,35 @@ body {
     background-color: #92140C;
 }
 
-    .navbar .navbar-nav {
-        width: 100%;
-    }
+.navbar .navbar-nav {
+    width: 100%;
+}
 
-        .navbar .navbar-nav > li {
-            width: 14%;
-            text-align: center;
-        }
+.navbar .navbar-nav > li {
+    width: 14%;
+    text-align: center;
+}
 
-            .navbar .navbar-nav > li > a {
-                font-family: 'Arial', sans-serif;
-                color: #fff;
-                text-shadow: none;
-                font-size: 15px;
-            }
+.navbar .navbar-nav > li > a {
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    text-shadow: none;
+    font-size: 15px;
+}
 
-                .navbar .navbar-nav > li > a:hover {
-                    background-color: #BE7C4D;
-                }
+.navbar .navbar-nav > li > a:hover {
+    background-color: #BE7C4D;
+}
 
-    .navbar .right {
-        float: right;
-    }
+.navbar .right {
+    float: right;
+}
 
-    .navbar li:last-child a::before {
-        content: '\f291 ';
-        font-family: FontAwesome;
-        margin-right: 16px;
-    }
+.navbar li:last-child a::before {
+    content: '\f291 ';
+    font-family: FontAwesome;
+    margin-right: 16px;
+}
 
 
 /* Basket alert */
@@ -69,9 +69,9 @@ body {
     width: 320px
 }
 
-    .basket-alert h3 {
-        margin-top: 0px;
-    }
+.basket-alert h3 {
+    margin-top: 0px;
+}
 
 hr.divide {
     height: 10px;
@@ -142,25 +142,25 @@ footer {
     margin-top: 20px;
 }
 
-    footer .container {
-        background-color: #fff;
-        border: 1px solid #353237;
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
+footer .container {
+    background-color: #fff;
+    border: 1px solid #353237;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 
-    footer p.title {
-        font-size: 25px
-    }
+footer p.title {
+    font-size: 25px
+}
 
-    footer a {
-        color: #353237;
-    }
+footer a {
+    color: #353237;
+}
 
-        footer a:hover {
-            color: #666269;
-            text-decoration: none;
-        }
+footer a:hover {
+    color: #666269;
+    text-decoration: none;
+}
 
 .white {
     color: white;
@@ -287,10 +287,10 @@ footer {
     margin-right: 10px;
 }
 
-    .contact-form-name input, .contact-form-email input, .contact-form-subject input, .contact-form-regarding select {
-        width: 100%;
-        height: 32px;
-    }
+.contact-form-name input, .contact-form-email input, .contact-form-subject input, .contact-form-regarding select {
+    width: 100%;
+    height: 32px;
+}
 
 .contact-form-question textarea {
     width: 98%;
@@ -322,13 +322,13 @@ footer {
     width: 100%;
 }
 
-    .agenda .ticket-table table tr td {
-        padding: 0;
-    }
+.agenda .ticket-table table tr td {
+    padding: 0;
+}
 
-        .agenda .ticket-table table tr td:first-child {
-            padding: 6px 12px
-        }
+.agenda .ticket-table table tr td:first-child {
+    padding: 6px 12px
+}
 
 .agenda .ticket-table .agenda-activity {
     background: #fff;
@@ -337,25 +337,25 @@ footer {
     padding: 6px
 }
 
-    .agenda .ticket-table .agenda-activity:hover {
-        cursor: pointer;
-    }
+.agenda .ticket-table .agenda-activity:hover {
+    cursor: pointer;
+}
 
-    .agenda .ticket-table .agenda-activity.HistoricHaarlem {
-        background: #38a038;
-    }
+.agenda .ticket-table .agenda-activity.HistoricHaarlem {
+    background: #38a038;
+}
 
-    .agenda .ticket-table .agenda-activity.DinnerInHaarlem {
-        background: #cc8a11;
-    }
+.agenda .ticket-table .agenda-activity.DinnerInHaarlem {
+    background: #cc8a11;
+}
 
-    .agenda .ticket-table .agenda-activity.JazzPatronaat {
-        background: #da58da;
-    }
+.agenda .ticket-table .agenda-activity.JazzPatronaat {
+    background: #da58da;
+}
 
-    .agenda .ticket-table .agenda-activity.TalkingHaarlem {
-        background: #c5c522;
-    }
+.agenda .ticket-table .agenda-activity.TalkingHaarlem {
+    background: #c5c522;
+}
 
 .agenda .ticket-table td .agenda-activity:nth-child(2) {
     margin-top: 1px;
@@ -367,13 +367,13 @@ footer {
     overflow: hidden;
 }
 
-    .agenda .agenda-image-container img {
-        width: 100%;
-    }
+.agenda .agenda-image-container img {
+    width: 100%;
+}
 
-        .agenda .agenda-image-container img.agenda-image-historic {
-            margin: -75px 0 0 0;
-        }
+.agenda .agenda-image-container img.agenda-image-historic {
+    margin: -75px 0 0 0;
+}
 
 .agenda .activities {
     text-align: center;
@@ -391,15 +391,15 @@ footer {
     width: 50%;
 }
 
-    .agenda .agenda-right table td:first-child {
-        text-align: right;
-        font-weight: bold;
-        padding-right: 10px;
-    }
+.agenda .agenda-right table td:first-child {
+    text-align: right;
+    font-weight: bold;
+    padding-right: 10px;
+}
 
-    .agenda .agenda-right table td:last-child {
-        text-align: left;
-    }
+.agenda .agenda-right table td:last-child {
+    text-align: left;
+}
 
 /************/
 /** BASKET **/
@@ -428,22 +428,22 @@ footer {
     border-color: #000000;
 }
 
-    .basket-table th {
-        background-color: #CCCCCC;
-        border: solid !important;
-        border-width: 2px;
-        border-color: #000000;
-    }
+.basket-table th {
+    background-color: #CCCCCC;
+    border: solid !important;
+    border-width: 2px;
+    border-color: #000000;
+}
 
-    .basket-table tr {
-        border: solid;
-        border-width: 1px;
-        border-color: #000000;
-    }
+.basket-table tr {
+    border: solid;
+    border-width: 1px;
+    border-color: #000000;
+}
 
-        .basket-table tr:nth-child(odd) {
-            background-color: #CCCCCC !important;
-        }
+.basket-table tr:nth-child(odd) {
+    background-color: #CCCCCC !important;
+}
 
 .basket-table-tickets-head {
     max-width: 40px;
@@ -479,10 +479,10 @@ footer {
     text-align: center;
 }
 
-    .basket-table-remove a {
-        font-size: 17px;
-        color: #92140C;
-    }
+.basket-table-remove a {
+    font-size: 17px;
+    color: #92140C;
+}
 
 .basket-button {
     float: right;
@@ -499,9 +499,9 @@ footer {
     margin: auto;
 }
 
-    .basket-crossselling h4 {
-        margin-left: 10px;
-    }
+.basket-crossselling h4 {
+    margin-left: 10px;
+}
 
 .basket-crossselling-item {
     padding: 0px;
@@ -521,9 +521,9 @@ footer {
     overflow: hidden;
 }
 
-    .basket-crossselling-item-image-container img {
-        min-width: 100%;
-    }
+.basket-crossselling-item-image-container img {
+    min-width: 100%;
+}
 
 .basket-crossselling-item table td:first-child {
     vertical-align: top;
@@ -547,10 +547,10 @@ footer {
     height: 300px;
 }
 
-    .reservation.right {
-        border-left: thin solid #000;
-        padding-left: 20px;
-    }
+.reservation.right {
+    border-left: thin solid #000;
+    padding-left: 20px;
+}
 
 .btn-black.r {
     position: absolute;
@@ -558,9 +558,9 @@ footer {
     left: 20px;
 }
 
-    .btn-black.r.back {
-        left: 15px;
-    }
+.btn-black.r.back {
+    left: 15px;
+}
 
 .completed {
     height: 160px;
@@ -610,13 +610,13 @@ footer {
     margin-left: 24px;
 }
 
-    .event .sfeer-image:first-child {
-        margin-left: 62px;
-    }
+.event .sfeer-image:first-child {
+    margin-left: 62px;
+}
 
-    .event .sfeer-image img {
-        border: 1px solid #fff;
-    }
+.event .sfeer-image img {
+    border: 1px solid #fff;
+}
 
 /* Section 2 */
 .event-header {
@@ -637,15 +637,15 @@ footer {
     margin-right: 15px;
 }
 
-    .title-hr.title-line-left {
-        margin-top: 35px;
-        float: left;
-    }
+.title-hr.title-line-left {
+    margin-top: 35px;
+    float: left;
+}
 
-    .title-hr.title-line-right {
-        margin-top: -35px;
-        float: right;
-    }
+.title-hr.title-line-right {
+    margin-top: -35px;
+    float: right;
+}
 
 .event-section-2 {
     margin-bottom: 20px;
@@ -674,26 +674,26 @@ footer {
     overflow: hidden;
 }
 
-    .jazz .event-section-3 .keuze_blok img {
-        border: 1px solid #353237;
-    }
+.jazz .event-section-3 .keuze_blok img {
+    border: 1px solid #353237;
+}
 
-    .jazz .event-section-3 .keuze_blok h2 {
-        font-size: 23px;
-        margin-bottom: 5px;
-    }
+.jazz .event-section-3 .keuze_blok h2 {
+    font-size: 23px;
+    margin-bottom: 5px;
+}
 
-    .jazz .event-section-3 p {
-        font-size: 14px;
-    }
+.jazz .event-section-3 p {
+    font-size: 14px;
+}
 
-        .jazz .event-section-3 p b:first-child {
-            padding-left: 46px;
-        }
+.jazz .event-section-3 p b:first-child {
+    padding-left: 46px;
+}
 
-        .jazz .event-section-3 p b:nth-child(3) {
-            padding-left: 17px;
-        }
+.jazz .event-section-3 p b:nth-child(3) {
+    padding-left: 17px;
+}
 
 .jazz-overview .event-section-3 .col-md-6:nth-child(1n+7) {
     display: none
@@ -887,15 +887,15 @@ footer {
     display: block;
 }
 
-    .restaurant-reservation-comment label {
-        text-align: left;
-    }
+.restaurant-reservation-comment label {
+    text-align: left;
+}
 
-    .restaurant-reservation-comment textarea {
-        width: 100%;
-        height: 100px;
-        resize: none;
-    }
+.restaurant-reservation-comment textarea {
+    width: 100%;
+    height: 100px;
+    resize: none;
+}
 
 .soldout-alert {
     position: absolute;
@@ -904,14 +904,14 @@ footer {
     z-index: 999;
 }
 
-    .soldout-alert h3 {
-        margin-top: 0px;
-        font-weight: 800;
-    }
+.soldout-alert h3 {
+    margin-top: 0px;
+    font-weight: 800;
+}
 
-    .soldout-alert p {
-        margin-bottom: 10px;
-    }
+.soldout-alert p {
+    margin-bottom: 10px;
+}
 
 #soldout-button {
     position: relative;
@@ -964,8 +964,8 @@ footer {
     margin-left: 15px;
 }
 
-    .talking-info * {
-    }
+.talking-info * {
+}
 
 .talking-place-time {
     width: 200px;
@@ -1098,26 +1098,26 @@ footer {
     padding-left: 15px;
 }
 
-    .talking-reservation-container > section {
-        margin-bottom: 10px;
-    }
+.talking-reservation-container > section {
+    margin-bottom: 10px;
+}
 
 .talking-reservation-table {
     width: 100%;
 }
 
-    .talking-reservation-table tr th {
-        background-color: #be7c4d;
-        font-size: 1.12em;
-        color: #fff;
-        padding-right: 35px;
-        padding-left: 10px;
-    }
+.talking-reservation-table tr th {
+    background-color: #be7c4d;
+    font-size: 1.12em;
+    color: #fff;
+    padding-right: 35px;
+    padding-left: 10px;
+}
 
-    .talking-reservation-table tr td {
-        padding-right: 40px;
-        padding-left: 10px;
-    }
+.talking-reservation-table tr td {
+    padding-right: 40px;
+    padding-left: 10px;
+}
 
 .talk-ticket-amount {
     width: 40%;
@@ -1190,12 +1190,12 @@ footer {
     padding-left: 10px;
 }
 
-    .img-map-location img {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        float: left;
-    }
+.img-map-location img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    float: left;
+}
 
 .text-map-location {
     width: 40%;
@@ -1203,18 +1203,18 @@ footer {
     padding-left: 20px;
 }
 
-    .text-map-location h3 {
-        margin-top: 15px;
-    }
+.text-map-location h3 {
+    margin-top: 15px;
+}
 
 .map-img {
     display: inline-block;
     width: 100%;
 }
 
-    .map-img img {
-        width: 100%;
-    }
+.map-img img {
+    width: 100%;
+}
 
 .img-map-location .number-map {
     position: absolute;
@@ -1332,42 +1332,42 @@ footer {
 .ticket-table {
 }
 
-    .ticket-table table {
-        margin-left: auto;
-        margin-right: auto;
-    }
+.ticket-table table {
+    margin-left: auto;
+    margin-right: auto;
+}
 
-        .ticket-table table tr th {
-            background-color: #be7c4d;
-            font-size: 1.12em;
-            color: #fff;
-            padding-right: 35px;
-            padding-left: 10px;
-        }
+.ticket-table table tr th {
+    background-color: #be7c4d;
+    font-size: 1.12em;
+    color: #fff;
+    padding-right: 35px;
+    padding-left: 10px;
+}
 
-        .ticket-table table tr td {
-            padding-right: 40px;
-            padding-left: 10px;
-        }
+.ticket-table table tr td {
+    padding-right: 40px;
+    padding-left: 10px;
+}
 
-    .ticket-table tr:nth-child(even) {
-        background-color: #eee;
-    }
+.ticket-table tr:nth-child(even) {
+    background-color: #eee;
+}
 
-    .ticket-table .ticketsInput input {
-        width: 40px;
-        text-align: center;
-        margin-left: 5%;
-        margin-right: auto;
-    }
+.ticket-table .ticketsInput input {
+    width: 40px;
+    text-align: center;
+    margin-left: 5%;
+    margin-right: auto;
+}
 
-    .ticket-table .ticketsInput {
-        width: 138px;
-    }
+.ticket-table .ticketsInput {
+    width: 138px;
+}
 
-        .ticket-table .ticketsInput:first-child {
-            width: 105px;
-        }
+.ticket-table .ticketsInput:first-child {
+    width: 105px;
+}
 
 .btn.btn-book.btn-reservation {
     right: 14%;

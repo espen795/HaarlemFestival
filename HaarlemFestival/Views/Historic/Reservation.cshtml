@@ -42,11 +42,11 @@
             }
             else if (tickets > (availableTickets - (grouptickets * 4))) {
                 $("#TicketAlert").modal();
-                document.getElementById("text").innerHTML = ("<p>You inserted <b> " + (+tickets + (grouptickets * 4)) + " </b> tickets but there are only <b>" + availableTickets + "</b> left.</p><p>Please insert <b>" + availableTickets + "</b> or lower.</p>");
+                document.getElementById("text").innerHTML = ("<p>You inserted <b> " + (+tickets + (grouptickets * 4)) + " </b> tickets, but there are only <b>" + availableTickets + "</b> left.</p><p>Please insert <b>" + availableTickets + "</b> or lower.</p>");
             }
             else if (grouptickets > Math.floor((availableTickets - tickets) / 4)) {
                 $("#TicketAlert").modal();
-                document.getElementById("text").innerHTML = ("<p>You inserted <b> " + (+tickets + (grouptickets * 4)) + " </b> tickets but there are only <b>" + Math.floor((availableTickets - tickets) / 4) + "</b> left.</p><p>Please insert <b>" + availableGroupTickets + "</b> or lower.</p>");
+                document.getElementById("text").innerHTML = ("<p>You inserted <b> " + (+tickets + (grouptickets * 4)) + " </b> tickets, but there are only <b>" + Math.floor((availableTickets - tickets) / 4) + "</b> left.</p><p>Please insert <b>" + availableGroupTickets + "</b> or lower.</p>");
             }
             tickets = 0;
             grouptickets = 0;
@@ -60,6 +60,10 @@
         // De waarde in de totalprice kolom vervangen door de berekende waarde
         document.getElementById("totalprice" + nummer).innerHTML = ("€ " + (totalprice.toFixed(2)).replace(".", ","));
     }
+
+    setTimeout(function () {
+        $('.basket-alert').fadeOut();
+    }, 15000);
 
 </script>
 
@@ -103,9 +107,17 @@
         <!-- Content -->
 
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#day1">On Thursday</a></li>
-            <li><a data-toggle="tab" href="#day2">On Friday</a></li>
-            <li><a data-toggle="tab" href="#day3">On Saturday</a></li>
+            @foreach (Day day in Model.Days)
+            {
+                if (day == Model.Days[0])
+                {
+                    <li class="active"><a data-toggle="tab" href="#Day-@day.DayId">@day.Naam</a></li>
+                }
+                else
+                {
+                    <li><a data-toggle="tab" href="#Day-@day.DayId">@day.Naam</a></li>
+                }
+            }
         </ul>
 
         @{ int i = 0;
@@ -120,170 +132,71 @@
         @using (Html.BeginForm("Book", "Historic", FormMethod.Post))
         {
             <div class="tab-content">
-                <div id="day1" class="tab-pane fade in active historic-tickets">
-                    <div class="table table-hover table-responsive ticket-table">
-                        <table>
-                            <tr>
-                                <th class="hidden">id</th>
-                                <th>Tickets</th>
-                                <th>Group ticket</th>
-                                <th>Available</th>
-                                <th>Language</th>
-                                <th>Guide</th>
-                                <th>Time</th>
-                                <th>Total price</th>
-                            </tr>
+                @{
+                    foreach (Day day in Model.Days)
+                    {
+                        string tabclass = "tab-pane fade historic-tickets";
 
-                            @foreach (Historic tour in Model.Tours)
-                            {
-                                if (tour.Day.DayId == 1)
-                                {
-                                    Model.Reservering.Add(new BesteldeActiviteit());
-
-                                    // De unieke id's aanmaken per rij
-                                    idtickets = String.Format("ticket{0}", i);
-                                    idgrouptickets = String.Format("groupticket{0}", i);
-                                    totalprice = String.Format("totalprice{0}", i);
-
-                                    availableTickets = tour.TotalTickets - tour.BoughtTickets;
-
-                                    // De tabel aanmaken
-                                    <tr>
-                                        <td class="hidden"><input name="Reservering[@i].Activiteit.ActivityId" value="@tour.ActivityId" class="hidden" /></td>
-                                        <td class="ticketsInput" onchange="CalcPriceAndTicketCheck(@i, @availableTickets);">@Html.TextBoxFor(m => Model.Reservering[i].Aantal, new { @type = "number", @min = 0, @id = idtickets })</td>
-                                        <td class="ticketsInput" onchange="CalcPriceAndTicketCheck(@i, @availableTickets);">@Html.TextBoxFor(m => Model.Reservering[i].AantalAlternatief, new { @type = "number", @min = 0, @id = idgrouptickets })</td>
-                                        <td>@availableTickets tickets</td>
-                                        <td>@tour.Guide.LanguageName</td>
-                                        <td>@tour.Guide.GuideName</td>
-                                        <td>@tour.StartSession.TimeOfDay.ToString(@"hh\:mm")</td>
-                                        <td><p id=@totalprice>€ -</p></td>
-                                    </tr>
-                                    i++;
-                                }
-                            }
-                        </table>
-
-                        <br />
-                        @foreach (Historic tour in Model.Tours)
+                        if (day == Model.Days[0])
                         {
-                            if (tour.Day.DayId == 1)
-                            {
-                                <p>These are the available tours on @tour.Day.Naam (@tour.Day.Date.ToString("dd/MM/yyyy"))</p>
-                                break;
-                            }
+                            tabclass = "tab-pane fade in active historic-tickets";
                         }
-                    </div>
-                </div>
-
-                <div id="day2" class="tab-pane fade in historic-tickets">
-                    <div class="table table-hover table-responsive ticket-table">
-                        <table>
-                            <tr>
-                                <th class="hidden">id</th>
-                                <th>Tickets</th>
-                                <th>Group ticket</th>
-                                <th>Available</th>
-                                <th>Language</th>
-                                <th>Guide</th>
-                                <th>Time</th>
-                                <th>Total price</th>
-                            </tr>
-
-                            @foreach (Historic tour in Model.Tours)
-                            {
-                                if (tour.Day.DayId == 2)
-                                {
-                                    Model.Reservering.Add(new BesteldeActiviteit());
-
-                                    // De unieke id's aanmaken per rij
-                                    idtickets = String.Format("ticket{0}", i);
-                                    idgrouptickets = String.Format("groupticket{0}", i);
-                                    totalprice = String.Format("totalprice{0}", i);
-
-                                    availableTickets = tour.TotalTickets - tour.BoughtTickets;
-
-                                    // De tabel aanmaken
+                        <div id="Day-@day.DayId" class="@tabclass">
+                            <div class="table table-hover table-responsive ticket-table">
+                                <table>
                                     <tr>
-                                        <td class="hidden"><input name="Reservering[@i].Activiteit.ActivityId" value="@tour.ActivityId" class="hidden" /></td>
-                                        <td class="ticketsInput" onchange="CalcPriceAndTicketCheck(@i, @availableTickets);">@Html.TextBoxFor(m => Model.Reservering[i].Aantal, new { @type = "number", @min = 0, @id = idtickets })</td>
-                                        <td class="ticketsInput" onchange="CalcPriceAndTicketCheck(@i, @availableTickets);">@Html.TextBoxFor(m => Model.Reservering[i].AantalAlternatief, new { @type = "number", @min = 0, @id = idgrouptickets })</td>
-                                        <td>@availableTickets tickets</td>
-                                        <td>@tour.Guide.LanguageName</td>
-                                        <td>@tour.Guide.GuideName</td>
-                                        <td>@tour.StartSession.TimeOfDay.ToString(@"hh\:mm")</td>
-                                        <td><p id=@totalprice>€ -</p></td>
+                                        <th class="hidden">id</th>
+                                        <th>Tickets</th>
+                                        <th>Group ticket</th>
+                                        <th>Available</th>
+                                        <th>Language</th>
+                                        <th>Guide</th>
+                                        <th>Time</th>
+                                        <th>Total price</th>
                                     </tr>
-                                    i++;
-                                }
-                            }
-                        </table>
 
-                        <br />
-                        @foreach (Historic tour in Model.Tours)
-                        {
-                            if (tour.Day.DayId == 2)
-                            {
-                                <p>These are the available tours on @tour.Day.Naam (@tour.Day.Date.ToString("dd/MM/yyyy"))</p>
-                                break;
-                            }
-                        }
-                    </div>
-                </div>
+                                    @foreach (Historic tour in Model.Tours)
+                                    {
+                                        if (tour.Day == day)
+                                        {
+                                            Model.Reservering.Add(new BesteldeActiviteit());
 
-                <div id="day3" class="tab-pane fade historic-tickets">
-                    <div class="table table-hover table-responsive ticket-table">
-                        <table>
-                            <tr>
-                                <th class="hidden">id</th>
-                                <th>Tickets</th>
-                                <th>Group ticket</th>
-                                <th>Available</th>
-                                <th>Language</th>
-                                <th>Guide</th>
-                                <th>Time</th>
-                                <th>Total price</th>
-                            </tr>
+                                            // De unieke id's aanmaken per rij
+                                            idtickets = String.Format("ticket{0}", i);
+                                            idgrouptickets = String.Format("groupticket{0}", i);
+                                            totalprice = String.Format("totalprice{0}", i);
 
-                            @foreach (Historic tour in Model.Tours)
-                            {
-                                if (tour.Day.DayId == 3)
+                                            availableTickets = tour.TotalTickets - tour.BoughtTickets;
+
+                                            // De tabel aanmaken
+                                            <tr>
+                                                <td class="hidden"><input name="Reservering[@i].Activiteit.ActivityId" value="@tour.ActivityId" class="hidden" /></td>
+                                                <td class="ticketsInput" onchange="CalcPriceAndTicketCheck(@i, @availableTickets);">@Html.TextBoxFor(m => Model.Reservering[i].Aantal, new { @type = "number", @min = 0, @id = idtickets })</td>
+                                                <td class="ticketsInput" onchange="CalcPriceAndTicketCheck(@i, @availableTickets);">@Html.TextBoxFor(m => Model.Reservering[i].AantalAlternatief, new { @type = "number", @min = 0, @id = idgrouptickets })</td>
+                                                <td>@availableTickets tickets</td>
+                                                <td>@tour.Guide.LanguageName</td>
+                                                <td>@tour.Guide.GuideName</td>
+                                                <td>@tour.StartSession.TimeOfDay.ToString(@"hh\:mm")</td>
+                                                <td><p id=@totalprice>€ -</p></td>
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                </table>
+
+                                <br />
+                                @foreach (Historic tour in Model.Tours)
                                 {
-                                    Model.Reservering.Add(new BesteldeActiviteit());
-
-                                    // De unieke id's aanmaken per rij
-                                    idtickets = String.Format("ticket{0}", i);
-                                    idgrouptickets = String.Format("groupticket{0}", i);
-                                    totalprice = String.Format("totalprice{0}", i);
-
-                                    availableTickets = tour.TotalTickets - tour.BoughtTickets;
-
-                                    // De tabel aanmaken
-                                    <tr>
-                                        <td class="hidden"><input name="Reservering[@i].Activiteit.ActivityId" value="@tour.ActivityId" class="hidden" /></td>
-                                        <td class="ticketsInput" onchange="CalcPriceAndTicketCheck(@i, @availableTickets);">@Html.TextBoxFor(m => Model.Reservering[i].Aantal, new { @type = "number", @min = 0, @id = idtickets })</td>
-                                        <td class="ticketsInput" onchange="CalcPriceAndTicketCheck(@i, @availableTickets);">@Html.TextBoxFor(m => Model.Reservering[i].AantalAlternatief, new { @type = "number", @min = 0, @id = idgrouptickets })</td>
-                                        <td>@availableTickets tickets</td>
-                                        <td>@tour.Guide.LanguageName</td>
-                                        <td>@tour.Guide.GuideName</td>
-                                        <td>@tour.StartSession.TimeOfDay.ToString(@"hh\:mm")</td>
-                                        <td><p id=@totalprice>€ -</p></td>
-                                    </tr>
-                                    i++;
+                                    if (tour.Day == day)
+                                    {
+                                        <p>These are the available tours on @tour.Day.Naam</p>
+                                        break;
+                                    }
                                 }
-                            }
-                        </table>
-
-                        <br />
-                        @foreach (Historic tour in Model.Tours)
-                        {
-                            if (tour.Day.DayId == 3)
-                            {
-                                <p>These are the available tours on @tour.Day.Naam (@tour.Day.Date.ToString("dd/MM/yyyy"))</p>
-                                break;
-                            }
-                        }
-                    </div>
-                </div>
+                            </div>
+                        </div>
+                    }
+                }
 
                 <br /><br />
                 <div class="historic extra-info">
@@ -314,7 +227,7 @@
                 <div id="text"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Sluiten</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
             </div>
         </div>
 

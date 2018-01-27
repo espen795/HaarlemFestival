@@ -86,7 +86,7 @@
                     }
                     else if (tickets > availableTickets) {
                         $("#TicketAlert").modal();
-                        $("#text").html("<p>You inserted <b> " + tickets + " </b> tickets but there are only <b>" + availableTickets + "</b> left.</p><p>Please insert <b>" + availableTickets + "</b> or lower.</p>");
+                        $("#text").html("<p>You inserted <b> " + tickets + " </b> tickets, but there are only <b>" + availableTickets + "</b> left.</p><p>Please insert <b>" + availableTickets + "</b> or lower.</p>");
                     }
 
                     // Tickets op 0 zetten ivm berekening
@@ -421,7 +421,7 @@
                 <div id="text"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Sluiten</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
             </div>
         </div>
 

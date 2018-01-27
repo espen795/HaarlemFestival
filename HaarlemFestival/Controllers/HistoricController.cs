@@ -21,9 +21,22 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Reservation()
         {
+            // Getting all available tours
             HistoricView toursview = new HistoricView();
             toursview.Tours = historicRepository.GetAllTours();
             toursview.Reservering = new List<BesteldeActiviteit>();
+
+            // List with days
+            toursview.Days = new List<Day>();
+
+            // Adding the days
+            foreach (Historic tour in toursview.Tours)
+            {
+                if (!toursview.Days.Contains(tour.Day))
+                {
+                    toursview.Days.Add(tour.Day);
+                }
+            }
 
             return View(toursview);
         }
