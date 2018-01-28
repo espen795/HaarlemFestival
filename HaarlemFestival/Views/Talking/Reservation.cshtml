@@ -48,9 +48,6 @@
 <section class="event-banner talking"></section>
 
 <main class="event container talking">
-    @{
-        List<BesteldeActiviteit> activiteit = new List<BesteldeActiviteit>();
-    }
     @Html.ValidationSummary()
     @using (Html.BeginForm("Book", "Talking", FormMethod.Post))
     {

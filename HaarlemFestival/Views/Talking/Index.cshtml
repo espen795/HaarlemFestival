@@ -3,6 +3,7 @@
 @using System.Globalization;
 @model List<Talking>
 
+@* Voor achtervoegsel bij de datum *@
 @functions { private string GetSuffix(DateTime dt)
     {
         if (new[] { 11, 12, 13 }.Contains(dt.Day))
