@@ -47,11 +47,7 @@
         <!-- Section 3-->
         <div class="event-section-3">                   
             @foreach (Jazz j in Model)
-            {
-                int i = ViewBag.Id;
-
-                if (j.Day.DayId == i)
-                {
+            {                      
                 <div class="col-md-6">
 
                     <div class="artist-info">
@@ -65,9 +61,9 @@
                             
                             <p>
                                 <b>Time: </b> @j.StartSession.ToShortTimeString() - @j.EndSession.ToShortTimeString()<br />
-                                <b>Price: </b> &euro;@if (j.Price != 0)
+                                <b>Price: </b> @if (j.Price != 0)
                                 {
-                                    @j.Price
+                                    <span>&euro;@j.Price,-</span>
                                 }
                                 else
                                 {
@@ -84,7 +80,7 @@
                             
                 </div>
 
-                }
+                
             }
 
             </div>
@@ -92,4 +88,3 @@
         </div>
         
     </div>
-</div>

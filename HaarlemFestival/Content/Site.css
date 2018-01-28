@@ -80,6 +80,11 @@ hr.divide {
 }
 
 /* #region Admin dropdown in navbar */
+
+.navbar li.adminDropdown a:hover {
+    color: black;
+    background-color: white;
+}
 .navbar li.adminDropdown a::before { /* Ervoor zorgen dat de basket content niet bij de admin dropdown komt*/
     content: none;
 }
@@ -668,14 +673,6 @@ footer a:hover {
 
 .jazz .event-section-3 p {
     font-size: 14px;
-}
-
-.jazz .event-section-3 p b:first-child {
-    padding-left: 46px;
-}
-
-.jazz .event-section-3 p b:nth-child(3) {
-    padding-left: 17px;
 }
 
 .jazz-overview .event-section-3 .col-md-6:nth-child(1n+7) {
