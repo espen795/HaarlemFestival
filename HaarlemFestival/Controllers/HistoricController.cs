@@ -45,6 +45,7 @@ namespace HaarlemFestival.Controllers
         public ActionResult Book(HistoricView activiteit)
         {
             List<BesteldeActiviteit> orderedActivity = new List<BesteldeActiviteit>();
+            int inSession = 0;
 
             // Session existing?
             if (Session["current_order"] != null)
@@ -52,22 +53,36 @@ namespace HaarlemFestival.Controllers
                 orderedActivity.AddRange((List<BesteldeActiviteit>)Session["current_order"]);
             }
 
-            int i = 0;
+
             // In the session
             foreach (BesteldeActiviteit activity in activiteit.Reservering)
             {
-                if (activity.Aantal != 0 || activity.AantalAlternatief != 0)
+                // Getting bought tickets from session
+                foreach (BesteldeActiviteit session in orderedActivity)
                 {
-                    // Totaal aantal tickets berekenen (alternatief telt voor 4 plekken in een tour)
-                    activity.TotalBoughtTickets = activity.Aantal + (activity.AantalAlternatief * 4);
+                    if (session.Activiteit.ActivityId == activity.Activiteit.ActivityId)
+                    {
+                        inSession += session.TotalBoughtTickets;
+                    }
+                }
 
-                    // Tour ophalen gebaseerd op het id
+                // Prevent ordering negative amount
+                if (activity.Aantal > 0 || activity.AantalAlternatief > 0)
+                {
+                    // Get tour based on id
                     activity.Activiteit = historicRepository.GetTourForId(activity.Activiteit.ActivityId);
 
-                    // Prijs berekenen voor in het basket model
+                    // Calculate total ordered tickets (alternative ticket counts as 4)
+                    activity.TotalBoughtTickets = activity.Aantal + (activity.AantalAlternatief * 4);
+
+                    // Calculating price for the basket
                     activity.Price = activity.Aantal * (float)activity.Activiteit.Price + activity.AantalAlternatief * (float)activity.Activiteit.AlternativePrice;
 
-                    orderedActivity.Add(activity);
+                    // Prevent ordering more tickets then available
+                    if (inSession + activity.TotalBoughtTickets <= (activity.Activiteit.TotalTickets - activity.Activiteit.BoughtTickets))
+                    {
+                        orderedActivity.Add(activity);
+                    }
                 }
             }
 
