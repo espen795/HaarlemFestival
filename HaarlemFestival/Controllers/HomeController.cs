@@ -29,13 +29,6 @@ namespace HaarlemFestival.Controllers
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
         public ActionResult Contact()
         {
             ContactMessage message = new ContactMessage();
@@ -45,6 +38,7 @@ namespace HaarlemFestival.Controllers
         [HttpPost]
         public ActionResult Contact(ContactMessage message, FormCollection collector)
         {
+            //regarding vullen (int word los aangemaakt, omdat die het in de tryparse niet werkte)
             int regardingint;
             if (int.TryParse(collector["RegardingSelect"], out regardingint))
             {
@@ -69,6 +63,7 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Basket()
         {
+            //basket model vullen voor info in de basket en cross-selling
             BasketModel basketModel = new BasketModel
             {
                 Jazzs = jazzRepository.GetAllJazzs(),
@@ -77,15 +72,16 @@ namespace HaarlemFestival.Controllers
                 Historics = historicRepository.GetAllTours()
             };
 
+            //bestelling ophalen
             List<BesteldeActiviteit> Bestelling = new List<BesteldeActiviteit>();
             if (Session["current_order"] != null)
                 Bestelling.AddRange((List<BesteldeActiviteit>)Session["current_order"]);
 
+            //Kijken of een bestelde activiteit 2 keer voorkomt in de bestelling
             List<BesteldeActiviteit> Order = new List<BesteldeActiviteit>();
             if (Bestelling.Count > 0)
             {
                 Bestelling = Bestelling.OrderBy(x => x.Activiteit.ActivityId).ToList();
-
 
                 Order.Add(Bestelling[0]);
                 for (int i = 1; i < Bestelling.Count; i++)
@@ -104,7 +100,7 @@ namespace HaarlemFestival.Controllers
                     else
                         Order.Add(Bestelling[i]);
                 }
-
+                Session["current_order"] = Order;
             }
 
             basketModel.Order = Order;
@@ -114,17 +110,21 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult RemoveFromBasketById(int? id)
         {
+            //als het activiteit id niet bestaat
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             int Id = (int)id;
 
             List<BesteldeActiviteit> Bestelling = (List<BesteldeActiviteit>)Session["current_order"];
 
+            //verwijderen van de activiteit
             Bestelling.RemoveAll(x => x.Activiteit.ActivityId == Id);
             Session["current_order"] = Bestelling;
 
+            //basketmodel opnieuw vullen voor de basket 
             BasketModel basketModel = new BasketModel
             {
                 Order = Bestelling,
@@ -139,6 +139,7 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Agenda()
         {
+            //agenda view voor bestellingen laden 
             AgendaView agendaView = new AgendaView
             {
                 Jazzs = jazzRepository.GetAllJazzs(),
@@ -187,15 +188,16 @@ namespace HaarlemFestival.Controllers
                     Bestelling = (List<BesteldeActiviteit>)Session["current_order"];
                 }
 
+                //Totale prijs van de bestelling berekenen
                 foreach( BesteldeActiviteit besteldeactiviteit in Bestelling)
                 {
                     reservation.TotaalPrijs += besteldeactiviteit.Price;
                 }
-
+                //klant toevoegen aan DB
                 homerepository.AddKlant(reservation.Klant);
-
+                //Bestelling toevoegen aan DB
                 reservation = homerepository.AddReservation(reservation);
-                
+                //Bestelde activiteiten toevoegen aan DB
                 foreach (BesteldeActiviteit besteldeactiviteit in Bestelling)
                 {
                     besteldeactiviteit.Reservering = reservation;

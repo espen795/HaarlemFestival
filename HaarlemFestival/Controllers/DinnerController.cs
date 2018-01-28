@@ -30,6 +30,7 @@ namespace HaarlemFestival.Controllers
             return View(Cuisines);
         }
 
+        //een check voor de algemene pagina of elk restaurant wel een dinner heeft. Zo niet, dan haalt hij hem eruit.
         private void OnlyGetUsedRestaurants(List<Cuisine> Cuisines)
         {
             List<Dinner> Dinners = dinnerRepository.GetAllDinners();
@@ -62,13 +63,15 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Info(int? id)
         {
+            //Voor als het restaurant niet bestaat
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
+            //alle dinners per restaurant ophalen
             List<Dinner> DinnersPerRestaurant = dinnerRepository.DinnersPerRestaurant((int)id);
 
+            //als er geen dinners voor het restaurant bestaan
             if (DinnersPerRestaurant.Count == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -79,7 +82,7 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Reservation(int? id)
         {
-
+            //als het restaurant niet bestaat
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -89,7 +92,7 @@ namespace HaarlemFestival.Controllers
 
             DinnerView dinnerView;
 
-
+            //voor als de bestelling al eerder mislukt was doordat hij uitverkocht was
             if (TempData["DinnerView"] != null)
                 dinnerView = (DinnerView)TempData["DinnerView"];
             else
@@ -98,6 +101,7 @@ namespace HaarlemFestival.Controllers
                 dinnerView.BesteldeActiviteit = new BesteldeActiviteit();
             }
 
+            //Als er geen dinners voor het restaurant zijn
             if (dinnerView.Dinners.Count == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -116,19 +120,6 @@ namespace HaarlemFestival.Controllers
 
             besteldeActiviteit.TotalBoughtTickets = besteldeActiviteit.Aantal + besteldeActiviteit.AantalAlternatief;
 
-            if (besteldeActiviteit.TotalBoughtTickets > (besteldeActiviteit.Activiteit.TotalTickets - besteldeActiviteit.Activiteit.BoughtTickets))
-            {
-                Session["sold_out"] = true;
-                DinnerView view = FillDinnerView(id);
-                view.BesteldeActiviteit = new BesteldeActiviteit();
-                view.BesteldeActiviteit.Aantal = besteldeActiviteit.Aantal;
-                view.BesteldeActiviteit.AantalAlternatief = besteldeActiviteit.AantalAlternatief;
-                view.BesteldeActiviteit.Opmerking = besteldeActiviteit.Opmerking;
-                view.BesteldeActiviteit.Activiteit = besteldeActiviteit.Activiteit;
-                TempData["DinnerView"] = view;
-                return RedirectToAction("Reservation", "Dinner", new { id });
-            }
-
             List<BesteldeActiviteit> Bestelling = new List<BesteldeActiviteit>();
 
             if (Session["current_order"] != null)
@@ -136,14 +127,44 @@ namespace HaarlemFestival.Controllers
                 Bestelling.AddRange((List<BesteldeActiviteit>)Session["current_order"]);
             }
 
+            //Kijkt of de tickets nog wel beschikbaar zijn
+            int inSession = 0;
+
+            foreach (BesteldeActiviteit session in Bestelling)
+            {
+                if (session.Activiteit.ActivityId == besteldeActiviteit.Activiteit.ActivityId)
+                {
+                    inSession += session.TotalBoughtTickets;
+                }
+            }
+
+            if (inSession + besteldeActiviteit.TotalBoughtTickets > (besteldeActiviteit.Activiteit.TotalTickets - besteldeActiviteit.Activiteit.BoughtTickets))
+            {
+                Session["sold_out"] = true;
+                DinnerView view = FillDinnerView(id);
+                view.BesteldeActiviteit = new BesteldeActiviteit
+                {
+                    Aantal = besteldeActiviteit.Aantal,
+                    AantalAlternatief = besteldeActiviteit.AantalAlternatief,
+                    Opmerking = besteldeActiviteit.Opmerking,
+                    Activiteit = besteldeActiviteit.Activiteit
+                };
+                TempData["DinnerView"] = view;
+                return RedirectToAction("Reservation", "Dinner", new { id });
+            }
+
             Bestelling.Add(besteldeActiviteit);
 
+            //Melding voor basket aanzetten
             Session["added_to_basket"] = true;
-
+            
+            //Update je bestelling sessie
             Session["current_order"] = Bestelling;
+
             return Redirect(HttpContext.Request.UrlReferrer.AbsoluteUri);
         }
 
+        //Vullen van Dinnerview voor Reservation
         private DinnerView FillDinnerView(int id)
         {
             DinnerView dinnerView = new DinnerView
