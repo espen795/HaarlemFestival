@@ -28,7 +28,6 @@ namespace HaarlemFestival.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
-            // Als de sessie met het aantal verkeerde logins nog niet bestaat.
             return View();
         }
 
@@ -39,8 +38,9 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult ManageEvent()
         {
+            // Evenementdata ophalen uit de database
             EventData data = adminRepository.GetEventData();
-            data.Filters.dateFilter = GetDateModel(data.Filters.days);
+            data.Filters.dateFilter = GetDateModel(data.Filters.days); // DateFilter aanmaken aan de hand van de lijst met days
 
             string selectedEvent = this.Request.QueryString["selectedEvent"]; // Geselecteerde evenement uit de URL halen
 
@@ -80,9 +80,9 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult AnswerContactmessage()
         {
-            AnswerContactViewModel viewModel = new AnswerContactViewModel()
+            AnswerContactViewModel viewModel = new AnswerContactViewModel() // ViewModel aanmaken
             {
-                Messages = adminRepository.GetContactMessages()
+                Messages = adminRepository.GetContactMessages() // Ingestuurde Contact Berichten ophalen.
             };
 
             return View(viewModel);
@@ -90,18 +90,18 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult CheckInterviewQuestions()
         {
-            List<InterviewQuestion> interviewQuestions = adminRepository.GetInterviewQuestions();
+            List<InterviewQuestion> interviewQuestions = adminRepository.GetInterviewQuestions(); // Interview Berichten ophalen.
 
             return View(interviewQuestions);
         }
 
         public ActionResult ManageAccounts()
         {
-            string[] allowedRoles = new string[] { "Owner" };
-            if(!UserAuthorized(allowedRoles))
-                return RedirectToAction("Overview", "Admin");
+            string[] allowedRoles = new string[] { "Owner" }; // Array met de rollen die deze pagina mogen bezoeken
+            if(!UserAuthorized(allowedRoles)) // Kijken of de gebruiker naar de pagina mag navigeren
+                return RedirectToAction("Overview", "Admin"); // Als de gebruiker niet naar de pagina mag navigeren wordt hij teruggestuurd naar de overview pagina
 
-            ManageAccountViewModel viewModel = new ManageAccountViewModel()
+            ManageAccountViewModel viewModel = new ManageAccountViewModel() // ViewModel aanmaken
             {
                 AccountList = adminRepository.GetAccounts(),
                 Roles = adminRepository.GetRoles()
