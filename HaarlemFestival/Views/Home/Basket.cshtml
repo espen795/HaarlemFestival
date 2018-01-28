@@ -192,7 +192,7 @@
                             else if (AllActivities[random].EventType == EventType.TalkingHaarlem)
                             {
                                 Talking talking = Model.Talks.Find(x => x.ActivityId == AllActivities[random].ActivityId);
-                                <h4>Get dinner</h4>
+                                <h4>Go to talk</h4>
                                 <div class="basket-crossselling-item-image-container">
                                     <a href="@Url.Action("Reservation", "Talking", new { id = talking.Talk.TalkId })"><img src="/images/Talking/@talking.Talk.Person1AltIMG" /></a>
                                 </div>
