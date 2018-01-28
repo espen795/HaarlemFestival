@@ -498,6 +498,12 @@ footer a:hover {
     overflow: hidden;
 }
 
+@media (max-width: 767px) {
+    .basket-crossselling-item-image-container {
+        width: 260px;
+    }
+}
+
 .basket-crossselling-item-image-container img {
     min-width: 100%;
 }
@@ -1291,13 +1297,24 @@ footer a:hover {
         margin-bottom: 50px;
     }
 
+    .map-img{
+        margin-left: -10px;
+        width: 100%;
+    }
+
     .img-map-location .number-map {
         position: relative;
         float: left;
         top: initial;
         bottom: initial;
         left: initial;
-        margin-right: 12px;
+        margin-right: 0px;
+        width: 30px;
+        height: 30px;
+    }
+
+    #backimage{
+        display: none;
     }
 }
 
