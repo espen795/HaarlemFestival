@@ -41,6 +41,15 @@ namespace HaarlemFestival.Controllers
             JazzView jazzview = new JazzView();
             jazzview.Jazzs = jazzRepository.GetAllJazzs();
             jazzview.Reservering = new List<BesteldeActiviteit>();
+            jazzview.Days = new List<Day>();
+
+            foreach (Jazz jazz in jazzview.Jazzs)
+            {
+                if (!jazzview.Days.Contains(jazz.Day))
+                {
+                    jazzview.Days.Add(jazz.Day);
+                }
+            }
 
             return View(jazzview);
         }
