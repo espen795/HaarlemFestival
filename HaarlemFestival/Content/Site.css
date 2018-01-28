@@ -1461,6 +1461,10 @@ input[type='text']:focus, input[type='password']:focus {
     color: red;
 }
 
+.showEventImage:hover {
+    cursor: pointer;
+    color: darkred;
+}
 /*#region Loading Animation*/
 .sk-circle {
     margin: 50px auto;
