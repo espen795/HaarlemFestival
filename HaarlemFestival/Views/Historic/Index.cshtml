@@ -102,7 +102,7 @@
                         string url = String.Format("{0}.png", y);
                         string className = String.Format("number{0}", y);
 
-                        <img class="number-map @className" src="/images/Historic/Map/b.png" />
+                        <img class="number-map @className" id="backimage" src="/images/Historic/Map/b.png" />
                         <img class="number-map @className" src="/images/Historic/Map/@url.ToString()" onclick="SwitchLocation(@y);" />
 
                         y++;

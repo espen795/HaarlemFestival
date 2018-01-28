@@ -167,6 +167,15 @@ footer a:hover {
     text-decoration: none;
 }
 
+footer a:active {
+    color: initial;
+}
+
+footer i {
+    width: 14px;
+    margin-right: 5px;
+}
+
 .white {
     color: white;
 }
@@ -501,6 +510,12 @@ footer a:hover {
     width: 310px;
     height: 160px;
     overflow: hidden;
+}
+
+@media (max-width: 767px) {
+    .basket-crossselling-item-image-container {
+        width: 260px;
+    }
 }
 
 .basket-crossselling-item-image-container img {
@@ -1288,13 +1303,24 @@ footer a:hover {
         margin-bottom: 50px;
     }
 
+    .map-img{
+        margin-left: -10px;
+        width: 100%;
+    }
+
     .img-map-location .number-map {
         position: relative;
         float: left;
         top: initial;
         bottom: initial;
         left: initial;
-        margin-right: 12px;
+        margin-right: 0px;
+        width: 30px;
+        height: 30px;
+    }
+
+    #backimage{
+        display: none;
     }
 }
 
@@ -1444,6 +1470,10 @@ input[type='text']:focus, input[type='password']:focus {
     color: red;
 }
 
+.showEventImage:hover {
+    cursor: pointer;
+    color: darkred;
+}
 /*#region Loading Animation*/
 .sk-circle {
     margin: 50px auto;
