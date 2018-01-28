@@ -56,18 +56,19 @@
             grouptickets = 0;
             document.getElementById("ticket" + number).value = ("0");
             document.getElementById("groupticket" + number).value = ("0");
-        }
+        };
 
         // Calculating new total price
         var totalprice = ((tickets * price) + (grouptickets * groupprice));
 
-        // Replacing the total price with the new value
+        // Replacing the total price with the new value and updating available tickets
         document.getElementById("totalprice" + number).innerHTML = ("€ " + (totalprice.toFixed(2)).replace(".", ","));
+        document.getElementById("idavailable" + number).innerHTML = (+availableTickets - tickets - (grouptickets * 4) + " tickets");
         // Total price in hidden input, used for total price
         $("input#totalprice" + number).val(totalprice);
 
         CalcTotalPrice();
-    }
+    };
 
     // Fadeout for "added to basket"
     setTimeout(function () {
@@ -86,8 +87,7 @@
 
         // Updating new total price
         $("p#priceAllHistoric").html("€ " + (prijs.toFixed(2)).replace(".", ","));
-    }
-
+    };
 </script>
 
 <div class="event-banner historic"></div>
@@ -147,6 +147,7 @@
             int i = 0;
             string idtickets;
             string idgrouptickets;
+            string idavailable;
             string totalprice;
             string tabclass;
             int availableTickets;
@@ -191,6 +192,7 @@
                                                 idtickets = String.Format("ticket{0}", i);
                                                 idgrouptickets = String.Format("groupticket{0}", i);
                                                 totalprice = String.Format("totalprice{0}", i);
+                                                idavailable = String.Format("idavailable{0}", i);
 
                                                 availableTickets = tour.TotalTickets - tour.BoughtTickets;
 
@@ -199,7 +201,7 @@
                                                     <td class="hidden"><input name="Reservering[@i].Activiteit.ActivityId" value="@tour.ActivityId" class="hidden" /></td>
                                                     <td class="ticketsInput" onchange="CalcPriceAndTicketCheck(@i, @availableTickets);">@Html.TextBoxFor(m => Model.Reservering[i].Aantal, new { @type = "number", @min = 0, @id = idtickets })</td>
                                                     <td class="ticketsInput" onchange="CalcPriceAndTicketCheck(@i, @availableTickets);">@Html.TextBoxFor(m => Model.Reservering[i].AantalAlternatief, new { @type = "number", @min = 0, @id = idgrouptickets })</td>
-                                                    <td>@availableTickets tickets</td>
+                                                    <td id="@idavailable">@availableTickets tickets</td>
                                                     <td>@tour.Guide.LanguageName</td>
                                                     <td>@tour.Guide.GuideName</td>
                                                     <td>@tour.StartSession.TimeOfDay.ToString(@"hh\:mm")</td>

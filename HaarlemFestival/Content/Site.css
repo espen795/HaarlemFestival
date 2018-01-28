@@ -167,6 +167,15 @@ footer a:hover {
     text-decoration: none;
 }
 
+footer a:active {
+    color: initial;
+}
+
+footer i {
+    width: 14px;
+    margin-right: 5px;
+}
+
 .white {
     color: white;
 }
