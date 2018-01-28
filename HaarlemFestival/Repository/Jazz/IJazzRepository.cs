@@ -11,6 +11,7 @@ namespace HaarlemFestival.Repository.Jazz
     {
 
         List<Models.Jazz> GetAllJazzs();
+        List<Models.Jazz> GetAllJazzsByDay(int dayid);
         Models.Jazz GetId(int id); //GetJazzAllDays
         List<Activity> GetJazzByDay(BesteldeActiviteit besteldeActiviteit);
         List<Activity> GetJazzAllDays(BesteldeActiviteit besteldeActiviteit);

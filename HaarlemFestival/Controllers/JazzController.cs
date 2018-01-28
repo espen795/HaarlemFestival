@@ -15,8 +15,19 @@ namespace HaarlemFestival.Controllers
 
         public ActionResult Index()
         {
-            List<Jazz> allJazz = jazzRepository.GetAllJazzs();
-            return View(allJazz);
+            JazzView jazzview = new JazzView();
+            jazzview.Jazzs = jazzRepository.GetAllJazzs();
+            jazzview.Days = new List<Day>();
+
+            foreach (Jazz jazz in jazzview.Jazzs)
+            {
+                if (!jazzview.Days.Contains(jazz.Day))
+                {
+                    jazzview.Days.Add(jazz.Day);
+                }
+            }
+
+            return View(jazzview);
         }
 
         public ActionResult DayOverview(int? id)
@@ -25,12 +36,12 @@ namespace HaarlemFestival.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            else
-            {
-                ViewBag.Id = id;
-            }
+            
+            ViewBag.Id = id;
+            int dayId = id.GetValueOrDefault();
+            
 
-            List<Jazz> allJazz = jazzRepository.GetAllJazzs();
+            List<Jazz> allJazz = jazzRepository.GetAllJazzsByDay(dayId);
 
             return View(allJazz);
         }
