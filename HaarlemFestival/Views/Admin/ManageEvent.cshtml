@@ -404,7 +404,7 @@
                         <td class="mobile-hidden">@activity.ConcertHall</td>
                         <td class="mobile-hidden">@String.Format("{0:0.00}", activity.Price)</td>
                         <td class="mobile-hidden">@activity.TotalTickets</td>
-                        <td><i onclick='ShowEventImage("Jazz/Artiesten/@activity.artist.ArtistImage")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
+                        <td><i onclick='ShowEventImage("Jazz/Artiesten/@activity.artist.ArtistImage")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon showEventImage glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Jazz')" class="glyphicon updateIcon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon deleteIcon glyphicon-remove"></i></td>
                     </tr>
@@ -449,7 +449,7 @@
                         <td class="mobile-hidden">@r.Rating</td>
                         <td class="mobile-hidden">@builder</td>
                         <td class="mobile-hidden">@String.Format("{0:0.00}", r.DisplayPrice)</td>
-                        <td class="mobile-hidden"><i onclick='ShowEventImage("Dinner/restaurants/@r.FoodIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
+                        <td class="mobile-hidden"><i onclick='ShowEventImage("Dinner/restaurants/@r.FoodIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon showEventImage glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick='ShowEventImage("Dinner/restaurants/@r.LocationIMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick="OpenUpdateForm(@r.RestaurantId, 'Restaurant')" class="glyphicon updateIcon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@r.RestaurantId, 'Restaurant')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon deleteIcon glyphicon-remove"></i></td>
@@ -541,8 +541,8 @@
                         <td class="mobile-hidden">@activity.Address</td>
                         <td class="mobile-hidden">@String.Format("{0:0.00}", activity.Price)</td>
                         <td class="mobile-hidden">@activity.Talk.MaxTickets</td>
-                        <td class="mobile-hidden"><i onclick='ShowEventImage("Talking/@activity.Talk.Person1IMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
-                        <td class="mobile-hidden"><i onclick='ShowEventImage("Talking/@activity.Talk.Person2IMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon glyphicon-picture" aria-hidden="true"></i></td>
+                        <td class="mobile-hidden"><i onclick='ShowEventImage("Talking/@activity.Talk.Person1IMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon showEventImage glyphicon-picture" aria-hidden="true"></i></td>
+                        <td class="mobile-hidden"><i onclick='ShowEventImage("Talking/@activity.Talk.Person2IMG")' data-toggle="modal" data-target="#imagePopup" href="#" class="glyphicon showEventImage glyphicon-picture" aria-hidden="true"></i></td>
                         <td><i onclick="OpenUpdateForm(@activity.ActivityId, 'Talking')" class="glyphicon updateIcon glyphicon-pencil" data-toggle="modal" data-target="#updatePopup" href="#"></i></td>
                         <td><i onclick="OpenDeleteConfirm(@activity.ActivityId, 'Activity')" data-toggle="modal" data-target="#deletePopup" href="#" class="glyphicon deleteIcon glyphicon-remove"></i></td>
                     </tr>

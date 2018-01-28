@@ -98,6 +98,7 @@
 
                 // Methode aanroepen die de totaal prijs berekend
                 prijsAllesBerkenen();
+                availableTicketsChange(availableTickets, nummer)
             }
 
             function prijsAllesBerkenen() {
@@ -113,6 +114,12 @@
 
                 $("p#priceAllJazz").html("€ " + (prijs.toFixed(2)).replace(".", ","));
             }
+
+            function availableTicketsChange(availableTickets, nummer){
+                var tickets = document.getElementById("ticket" + nummer).value;
+                $("#idavailable"+nummer).html(+availableTickets - +tickets);
+            }
+
         </script>
 
 
@@ -121,6 +128,7 @@
             int i = 0;
             string idtickets;
             string totalprice;
+            string idavailable;
             string tabclass = "";
             int availableTickets = 0;
         }
@@ -190,6 +198,8 @@
                                                 // Creating unieke id's per row
                                                 idtickets = String.Format("ticket{0}", i);
                                                 totalprice = String.Format("totalprice{0}", i);
+                                                idavailable = String.Format("idavailable{0}", i);
+
 
                                                 // availableTickets berekenen
                                                 if (j.AlternativePrice == 1) // AlternativePrice 1 is de single day passepartout voor Donderdag, Vrijdag en zaterdag
@@ -210,7 +220,7 @@
                                                     <td class="hidden"><input name="Reservering[@i].Activiteit.ActivityId" value="@j.ActivityId" class="hidden" /></td>
                                                     <td>@j.StartSession.ToShortDateString()</td>
                                                     <td class="ticketsInput" onchange="CalcPriceAndTicketCheck(@i, @j.Price, @availableTickets)">@Html.TextBoxFor(m => Model.Reservering[i].Aantal, new { @type = "number", @min = 0, @id = idtickets })</td>
-                                                    <td>@availableTickets</td>
+                                                    <td id="@idavailable">@availableTickets</td>
                                                     <td>@j.artist.ArtistName</td>
                                                     <td>@j.ConcertLocation</td>
                                                     <td>@j.ConcertHall</td>
