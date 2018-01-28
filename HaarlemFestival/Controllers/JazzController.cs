@@ -69,7 +69,6 @@ namespace HaarlemFestival.Controllers
         public ActionResult Book(JazzView activiteit)
         {
             List<BesteldeActiviteit> orderedActivity = new List<BesteldeActiviteit>();
-            int availableTickets;
 
             // Session existing?
             if (Session["current_order"] != null)
@@ -81,24 +80,19 @@ namespace HaarlemFestival.Controllers
             // In the session
             foreach (BesteldeActiviteit activity in activiteit.Reservering)
             {
-                if (activity.Aantal != 0)
+
+                if (activity.Aantal > 0)
                 {
-                    //Jazz j = jazzRepository.GetId(activity.Activiteit.ActivityId);
                     activity.Activiteit = jazzRepository.GetId(activity.Activiteit.ActivityId);
-
-                    
-                    // Beschikbare tickets berekenen
-                    availableTickets = activity.Activiteit.TotalTickets - activity.Activiteit.BoughtTickets;
-
-
+                   
                     activity.TotalBoughtTickets = activity.Aantal;    
                                            
                     // Prijs berekenen voor in het basket model
                     activity.Price = activity.Aantal * (float)activity.Activiteit.Price;
 
-                    // Activity in de lijst zetten die later in de Session komt
+                    // Prevent ordering more tickets then available
                     orderedActivity.Add(activity);
-               
+
                 }
             }
 
