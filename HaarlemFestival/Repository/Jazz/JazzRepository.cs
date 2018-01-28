@@ -17,6 +17,13 @@ namespace HaarlemFestival.Repository.Jazz
             return jazzs;
         }
 
+        public List<Models.Jazz> GetAllJazzsByDay(int dayid)
+        {
+            List<Models.Jazz> jazzs = db.Jazzs.Where(a =>(a.Day.DayId == dayid)).ToList();
+            //List<Activity> dbActivity = db.Activities.Where(a => (a.Day.DayId == besteldeActiviteit.Activiteit.Day.DayId) && (a.EventType == besteldeActiviteit.Activiteit.EventType)).ToList();
+            return jazzs;
+        }
+
         public Models.Jazz GetId(int id)
         {
             return db.Jazzs.Find(id);

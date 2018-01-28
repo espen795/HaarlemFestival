@@ -1,7 +1,7 @@
 ﻿@using HaarlemFestival.Models;
 @using System.Collections.Generic;
 
-@model List<Jazz>
+@model JazzView
 
 @{
     ViewBag.Title = "Jazz@Patronaat";
@@ -46,94 +46,37 @@
         
         <!-- Section 3 -->
         <div class="event-section-3">
+        @{ 
+            string naam;
+        }
+        @foreach (Day d in Model.Days)
+        {
+            if (d.DayId != 6) // 6 is het ID van de All Days Passepartout. Die heeft een rij in de dag tabel. Deze moet niet getoond worden
+            {
 
-            <!-- Artiest donderdag -->
-            <div class="col-md-3 keuze_blok">
-                <img src="/images/Jazz/donderdag_artiest.png" />
-                <h2>@Model[0].Day.Naam</h2>
-                <p>
-                    <b>Date:</b>  @Model[0].Day.Naam - @Model[0].Day.Date.ToShortDateString()<br />
-                    <b>Location:</b>  @Model[0].ConcertLocation<br />
-                    <b>Performing:</b>  
-                    @foreach (Jazz j in Model)
-                    {
-                        if (j.Day.DayId == 1)
+                naam = d.Naam.Substring(0, d.Naam.IndexOf("(")); // Datum uit titel verwijdern
+
+                <div class="col-md-3 keuze_blok">
+                    <img src="/images/Jazz/@d.DayId-artiest.png" />  
+                    <h2>@naam</h2>  
+                    <p>
+                        <b>Date: </b> @d.Date.ToShortDateString() <br />
+                        <b>Performing: </b>
+                        @foreach (Jazz j in Model.Jazzs)
                         {
-                            @j.artist.ArtistName<text>; </text>
-
+                            if (j.Day.DayId == d.DayId && j.AlternativePrice != 1 && j.AlternativePrice != 2) // Passepartous eruit filteren
+                            {
+                                @j.artist.ArtistName<text>; </text>
+                            }
                         }
-                    }
-                </p>
-                <p>
-                    @Html.ActionLink("More information about Thursday", "DayOverview", "Jazz", new { id = "1" }, new { @class = "btn btn-black" })
-                </p>
-            </div>
+                    </p>     
+                    <p>
+                        @Html.ActionLink("More information about " + naam, "DayOverview", "Jazz", new { id = @d.DayId }, new { @class = "btn btn-black" })
+                    </p>         
+                </div>
+            }
+        }
 
-            <!-- Artiest Vrijdag -->
-            <div class="col-md-3 keuze_blok">
-                <img src="/images/Jazz/vrijdag_artiest.png" />
-                <h2>@Model[6].Day.Naam</h2>
-                <p>
-                    <b>Date:</b>  @Model[6].Day.Naam - @Model[6].Day.Date.ToShortDateString()<br />
-                    <b>Location:</b>  @Model[6].ConcertLocation<br />
-                    <b>Performing:</b>
-                    @foreach (Jazz j in Model)
-                    {
-                        if (j.Day.DayId == 2)
-                        {
-                            @j.artist.ArtistName<text>; </text>
-
-                        }
-                    }
-                </p>
-                <p>
-                    @Html.ActionLink("More information about Friday", "DayOverview", "Jazz", new { id = "2" }, new { @class = "btn btn-black" })
-                </p>
-            </div>
-
-            <!-- Artiest Zaterdag -->
-            <div class="col-md-3 keuze_blok">
-                <img src="/images/Jazz/zaterdag_artiest.png" />
-                <h2>@Model[12].Day.Naam</h2>
-                <p>
-                    <b>Date:</b>  @Model[12].Day.Naam - @Model[12].Day.Date.ToShortDateString()<br />
-                    <b>Location:</b>  @Model[12].ConcertLocation<br />
-                    <b>Performing:</b>
-                    @foreach (Jazz j in Model)
-                    {
-                        if (j.Day.DayId == 3)
-                        {
-                            @j.artist.ArtistName<text>; </text>
-
-                        }
-                    }
-                </p>
-                <p>
-                    @Html.ActionLink("More information about Saturday", "DayOverview", "Jazz", new { id = "3" }, new { @class = "btn btn-black" })
-                </p>
-            </div>
-            
-            <!-- Artiest Zondag -->
-            <div class="col-md-3 keuze_blok">
-                <img src="/images/Jazz/zondag_artiest.png" />
-                <h2>@Model[18].Day.Naam</h2>
-                <p>
-                    <b>Date:</b>  @Model[18].Day.Naam - @Model[18].Day.Date.ToShortDateString()<br />
-                    <b>Location:</b>  @Model[18].ConcertLocation<br />
-                    <b>Performing:</b>
-                    @foreach (Jazz j in Model)
-                    {
-                        if (j.Day.DayId == 4)
-                        {
-                            @j.artist.ArtistName<text>; </text>
-
-                        }
-                    }
-                </p>
-                <p>
-                    @Html.ActionLink("More information about Sunday", "DayOverview", "Jazz", new { id = "4" }, new { @class = "btn btn-black" })
-                </p>
-            </div>
         </div><!-- // Event section 3-->
 
     </div>
