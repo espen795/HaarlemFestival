@@ -80,6 +80,11 @@ hr.divide {
 }
 
 /* #region Admin dropdown in navbar */
+
+.navbar li.adminDropdown a:hover {
+    color: black;
+    background-color: white;
+}
 .navbar li.adminDropdown a::before { /* Ervoor zorgen dat de basket content niet bij de admin dropdown komt*/
     content: none;
 }

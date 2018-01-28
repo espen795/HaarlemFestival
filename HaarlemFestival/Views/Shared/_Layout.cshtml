@@ -51,7 +51,7 @@
                     {
                         HaarlemFestival.Models.Account account = (HaarlemFestival.Models.Account)Session["loggedin_account"];
 
-                        <li class="dropdown right adminDropdown">
+                        <li class="dropdown adminDropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 Admin
                                 <span class="caret"></span>
@@ -83,11 +83,16 @@
     @if (Session["loggedin_account"] != null)
     {
         <script type="text/javascript">
-            $(document).ready(function () {
-                $(".nav li").each(function () {
-                    $(this).width("12.5%");
-                })
-            });
+            var isMobile = window.matchMedia("only screen and (max-width: 760px)"); // Kijken of je op mobiel bent
+
+            if (!isMobile.matches) { // Als je niet op mobiel bent
+                $(document).ready(function () {
+                    $(".nav li").each(function () {
+                        $(this).width("12.5%");
+                    })
+                });
+            }
+            
         </script>
     }
 
