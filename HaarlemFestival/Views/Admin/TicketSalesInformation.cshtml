@@ -11,10 +11,10 @@
 
         $(document).ready(function () {
                 // Inkomen ophalen en chart met inkomen aanmaken
-                var jazzIncome = @Model.BesteldeActiviteiten.Where(a => a.Activiteit.EventType == EventType.JazzPatronaat).Sum(a => a.Price);
-                var dinnerIncome = @Model.BesteldeActiviteiten.Where(a => a.Activiteit.EventType == EventType.DinnerInHaarlem).Sum(a => a.Price);
-                var talkingIncome = @Model.BesteldeActiviteiten.Where(a => a.Activiteit.EventType == EventType.TalkingHaarlem).Sum(a => a.Price);
-                var historicIncome = @Model.BesteldeActiviteiten.Where(a => a.Activiteit.EventType == EventType.HistoricHaarlem).Sum(a => a.Price);
+                var jazzIncome = @Model.BesteldeActiviteiten.Where(a => a.Activiteit.EventType == EventType.JazzPatronaat).Sum(a => a.Price).ToString().Replace(',','.');
+                var dinnerIncome = @Model.BesteldeActiviteiten.Where(a => a.Activiteit.EventType == EventType.DinnerInHaarlem).Sum(a => a.Price).ToString().Replace(',', '.');
+                var talkingIncome = @Model.BesteldeActiviteiten.Where(a => a.Activiteit.EventType == EventType.TalkingHaarlem).Sum(a => a.Price).ToString().Replace(',', '.');
+                var historicIncome = @Model.BesteldeActiviteiten.Where(a => a.Activiteit.EventType == EventType.HistoricHaarlem).Sum(a => a.Price).ToString().Replace(',', '.');
                 
                 CreateIncomeChart("incomeChart", jazzIncome, dinnerIncome, talkingIncome, historicIncome);
 
@@ -37,13 +37,13 @@
         // Jazz informatie ophalen en een Chart maken
         function CreateJazzIncomeChart(id) {
             var jazzData;
-            jazzData = [@Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Monday).Sum(b => b.Price),
-                         @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Tuesday).Sum(b => b.Price),
-                         @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Wednesday).Sum(b => b.Price),
-                         @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Thursday).Sum(b => b.Price),
-                         @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Friday).Sum(b => b.Price),
-                         @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Saturday).Sum(b => b.Price),
-                         @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Sunday).Sum(b => b.Price)];
+            jazzData = [@Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Monday).Sum(b => b.Price).ToString().Replace(',', '.'),
+                         @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Tuesday).Sum(b => b.Price).ToString().Replace(',', '.'),
+                         @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Wednesday).Sum(b => b.Price).ToString().Replace(',', '.'),
+                         @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Thursday).Sum(b => b.Price).ToString().Replace(',', '.'),
+                         @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Friday).Sum(b => b.Price).ToString().Replace(',', '.'),
+                         @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Saturday).Sum(b => b.Price).ToString().Replace(',', '.'),
+                         @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.JazzPatronaat && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Sunday).Sum(b => b.Price).ToString().Replace(',', '.')];
 
             CreateIncomePerDayChart(id, jazzData)
         }
@@ -51,13 +51,13 @@
         // Dinner informatie ophalen en een Chart maken
         function CreateDinnerIncomeChart(id) {
             var dinnerData;
-            dinnerData = [@Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Monday).Sum(b => b.Price),
-                           @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Tuesday).Sum(b => b.Price),
-                           @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Wednesday).Sum(b => b.Price),
-                           @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Thursday).Sum(b => b.Price),
-                           @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Friday).Sum(b => b.Price),
-                           @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Saturday).Sum(b => b.Price),
-                           @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Sunday).Sum(b => b.Price)];
+            dinnerData = [@Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Monday).Sum(b => b.Price).ToString().Replace(',', '.'),
+                           @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Tuesday).Sum(b => b.Price).ToString().Replace(',', '.'),
+                           @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Wednesday).Sum(b => b.Price).ToString().Replace(',', '.'),
+                           @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Thursday).Sum(b => b.Price).ToString().Replace(',', '.'),
+                           @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Friday).Sum(b => b.Price).ToString().Replace(',', '.'),
+                           @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Saturday).Sum(b => b.Price).ToString().Replace(',', '.'),
+                           @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.DinnerInHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Sunday).Sum(b => b.Price).ToString().Replace(',', '.')];
 
             CreateIncomePerDayChart(id, dinnerData)
         }
@@ -65,13 +65,13 @@
         // Talking informatie ophalen en een Chart maken
         function CreateTalkingIncomeChart(id) {
             var talkingData;
-            talkingData = [@Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Monday).Sum(b => b.Price),
-                            @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Tuesday).Sum(b => b.Price),
-                            @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Wednesday).Sum(b => b.Price),
-                            @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Thursday).Sum(b => b.Price),
-                            @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Friday).Sum(b => b.Price),
-                            @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Saturday).Sum(b => b.Price),
-                            @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Sunday).Sum(b => b.Price)];
+            talkingData = [@Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Monday).Sum(b => b.Price).ToString().Replace(',', '.'),
+                            @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Tuesday).Sum(b => b.Price).ToString().Replace(',', '.'),
+                            @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Wednesday).Sum(b => b.Price).ToString().Replace(',', '.'),
+                            @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Thursday).Sum(b => b.Price).ToString().Replace(',', '.'),
+                            @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Friday).Sum(b => b.Price).ToString().Replace(',', '.'),
+                            @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Saturday).Sum(b => b.Price).ToString().Replace(',', '.'),
+                            @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.TalkingHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Sunday).Sum(b => b.Price).ToString().Replace(',', '.')];
 
             CreateIncomePerDayChart(id, talkingData)
         }
@@ -79,13 +79,13 @@
         // Historic informatie ophalen en een Chart maken
         function CreateHistoricIncomeChart(id) {
             var historicData;
-            historicData = [@Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Monday).Sum(b => b.Price),
-                             @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Tuesday).Sum(b => b.Price),
-                             @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Wednesday).Sum(b => b.Price),
-                             @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Thursday).Sum(b => b.Price),
-                             @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Friday).Sum(b => b.Price),
-                             @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Saturday).Sum(b => b.Price),
-                             @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Sunday).Sum(b => b.Price)];
+            historicData = [@Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Monday).Sum(b => b.Price).ToString().Replace(',', '.'),
+                             @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Tuesday).Sum(b => b.Price).ToString().Replace(',', '.'),
+                             @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Wednesday).Sum(b => b.Price).ToString().Replace(',', '.'),
+                             @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Thursday).Sum(b => b.Price).ToString().Replace(',', '.'),
+                             @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Friday).Sum(b => b.Price).ToString().Replace(',', '.'),
+                             @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Saturday).Sum(b => b.Price).ToString().Replace(',', '.'),
+                             @Model.BesteldeActiviteiten.Where(b => b.Activiteit.EventType == EventType.HistoricHaarlem && b.Activiteit.StartSession.DayOfWeek == DayOfWeek.Sunday).Sum(b => b.Price).ToString().Replace(',', '.')];
             console.log(historicData);
             CreateIncomePerDayChart(id, historicData)
         }
