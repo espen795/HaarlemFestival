@@ -42,12 +42,12 @@ namespace HaarlemFestival.Controllers
         [HttpPost]
         public ActionResult Book(TalkViewModel activiteit)
         {
-            List<BesteldeActiviteit> orderedActivity = new List<BesteldeActiviteit>();
+            List<BesteldeActiviteit> orderedActivities = new List<BesteldeActiviteit>();
 
             // Session existing?
             if (Session["current_order"] != null)
             {
-                orderedActivity.AddRange((List<BesteldeActiviteit>)Session["current_order"]);
+                orderedActivities.AddRange((List<BesteldeActiviteit>)Session["current_order"]);
             }
 
             int i = 0;
@@ -65,12 +65,12 @@ namespace HaarlemFestival.Controllers
                     // talk ophalen gebaseerd op het id
                     activity.Activiteit = talkingRepository.GetOrderTalkById(activity.Activiteit.ActivityId);
                     
-                    orderedActivity.Add(activity);
+                    orderedActivities.Add(activity);
                 }
                 i++;
             }
 
-            Session["current_order"] = orderedActivity;
+            Session["current_order"] = orderedActivities;
 
             // Partial view continue or basket
             Session["added_to_basket"] = true;
