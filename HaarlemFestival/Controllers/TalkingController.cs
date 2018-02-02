@@ -34,6 +34,7 @@ namespace HaarlemFestival.Controllers
         {
             TalkViewModel talkView = new TalkViewModel();
             talkView.Talkings = talkingRepository.GetAllTalks();
+            // Geeft een lege lijst mee omdat deze gevuld wordt in de view
             talkView.BesteldeActiviteiten = new List<BesteldeActiviteit>();
 
             return View(talkView);
