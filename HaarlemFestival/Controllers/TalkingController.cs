@@ -41,7 +41,7 @@ namespace HaarlemFestival.Controllers
         }
 
         [HttpPost]
-        public ActionResult Book(TalkViewModel activiteit)
+        public ActionResult Book(TalkViewModel orderedActivitiesAndTalks)
         {
             List<BesteldeActiviteit> orderedActivities = new List<BesteldeActiviteit>();
 
@@ -51,22 +51,24 @@ namespace HaarlemFestival.Controllers
                 orderedActivities.AddRange((List<BesteldeActiviteit>)Session["current_order"]);
             }
 
+            // activity = besteldeactiviteit
             int i = 0;
             // In the session
-            foreach (BesteldeActiviteit activity in activiteit.BesteldeActiviteiten)
+            foreach (BesteldeActiviteit orderedActivity in orderedActivitiesAndTalks.BesteldeActiviteiten)
             {
-                if (activity.Aantal != 0 || activity.AantalAlternatief != 0)
+                if (orderedActivity.Aantal != 0 || orderedActivity.AantalAlternatief != 0)
                 {
-                    activity.TotalBoughtTickets = activity.Aantal;
+                    orderedActivity.TotalBoughtTickets = orderedActivity.Aantal;
                     // Interviewvraag in opmerking stoppen
-                    if (activiteit.Talkings[i].QuestionReceiver != null && activity.Opmerking != null)
-                        activity.Opmerking = string.Format($"{activiteit.Talkings[i].QuestionReceiver}: {activity.Opmerking}");
+                    if (orderedActivitiesAndTalks.Talkings[i].QuestionReceiver != null && orderedActivity.Opmerking != null)
+                        orderedActivity.Opmerking = string.Format($"{orderedActivitiesAndTalks.Talkings[i].QuestionReceiver}: {orderedActivity.Opmerking}");
                     else
-                        activity.Opmerking = null;
+                        orderedActivity.Opmerking = null;
                     // talk ophalen gebaseerd op het id
-                    activity.Activiteit = talkingRepository.GetOrderTalkById(activity.Activiteit.ActivityId);
+                    //orderedActivity.Activiteit = talkingRepository.GetOrderTalkById(orderedActivity.Activiteit.ActivityId);
+                    orderedActivity.Activiteit = orderedActivitiesAndTalks.Talkings[i];
                     
-                    orderedActivities.Add(activity);
+                    orderedActivities.Add(orderedActivity);
                 }
                 i++;
             }

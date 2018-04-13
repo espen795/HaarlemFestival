@@ -6,6 +6,7 @@
 @* Voor achtervoegsel bij de datum *@
 @functions { private string GetSuffix(DateTime dt)
     {
+        // 11th, 12th, 13th
         if (new[] { 11, 12, 13 }.Contains(dt.Day))
         {
             return "th";
